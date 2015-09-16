@@ -1,0 +1,10 @@
+4211968:fillbuf:INT(0),INT(0),ADDR(1)
+4213392:print_filename:VOID,
+4214240:prline:VOID,ADDR(1),ADDR(1),INT(0)
+4236368:using_utf8:INT(0)
+4245872:dfasuperset:INT(0),ADDR(1)
+4245888:dfaisfast:INT(0),ADDR(1)
+4256672:kwsexec:INT(0),ADDR(1),ADDR(1),INT(0),ADDR(1)
+4283360:safe_read:INT(0),INT(0),ADDR(1),INT(0)
+140737016277696:strlen:INT(0),ADDR(0.74)
+140737016987760:_dl_mcount_wrapper_check:VOID,

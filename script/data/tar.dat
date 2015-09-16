@@ -1,0 +1,6026 @@
+(dp0
+S''
+p1
+(lp2
+sS'excluded_name'
+p3
+(lp4
+S'const char *'
+p5
+aS'struct tar_stat_info *'
+p6
+asS'iscntrl_l'
+p7
+(lp8
+S'int'
+p9
+aS'struct __locale_struct *'
+p10
+asS'fclose'
+p11
+(lp12
+S'struct _IO_FILE *'
+p13
+asS'guess_seekable_archive'
+p14
+(lp15
+sS'close_diag'
+p16
+(lp17
+S'const char *'
+p18
+asS'dirlist_replace_prefix'
+p19
+(lp20
+S'const char *'
+p21
+aS'const char *'
+p22
+asS'pthread_sigmask'
+p23
+(lp24
+S'int'
+p25
+aS'const __sigset_t *restrict'
+p26
+aS'__sigset_t *restrict'
+p27
+asS'sys_compare_links'
+p28
+(lp29
+S'struct stat *'
+p30
+aS'struct stat *'
+p31
+asS'isxdigit'
+p32
+(lp33
+S'int'
+p34
+asS'close_archive'
+p35
+(lp36
+sS'name_add_file'
+p37
+(lp38
+S'const char *'
+p39
+aS'int'
+p40
+asS'file_count_links'
+p41
+(lp42
+S'struct tar_stat_info *'
+p43
+asS'add_exclusion_tag'
+p44
+(lp45
+S'const char *'
+p46
+aS'enum exclusion_tag_type'
+p47
+aS'int (int *)'
+p48
+asS'uid_decoder'
+p49
+(lp50
+S'struct tar_stat_info *'
+p51
+aS'const char *'
+p52
+aS'const char *'
+p53
+aS'unsigned long'
+p54
+asS'stat_diag'
+p55
+(lp56
+S'const char *'
+p57
+asS'xheader_read'
+p58
+(lp59
+S'struct xheader *'
+p60
+aS'union block *'
+p61
+aS'int'
+p62
+asS'tar_timespec_cmp'
+p63
+(lp64
+S'struct timespec'
+p65
+aS'struct timespec'
+p66
+asS'__bzero'
+p67
+(lp68
+S'void *'
+p69
+aS'unsigned long'
+p70
+asS'sys_exec_command'
+p71
+(lp72
+S'char *'
+p73
+aS'int'
+p74
+aS'struct tar_stat_info *'
+p75
+asS'getc_unlocked'
+p76
+(lp77
+S'struct _IO_FILE *'
+p78
+asS'sys_file_is_archive'
+p79
+(lp80
+S'struct tar_stat_info *'
+p81
+asS'add_case_ctl_segment'
+p82
+(lp83
+S'struct transform *'
+p84
+aS'enum case_ctl_type'
+p85
+asS'find_compression_program'
+p86
+(lp87
+S'const char *'
+p88
+aS'const char *'
+p89
+asS'safer_rmdir'
+p90
+(lp91
+S'const char *'
+p92
+asS'diff_dumpdir'
+p93
+(lp94
+S'struct tar_stat_info *'
+p95
+asS'new_name'
+p96
+(lp97
+S'const char *'
+p98
+aS'const char *'
+p99
+asS'strnlen'
+p100
+(lp101
+S'const char *'
+p102
+aS'unsigned long'
+p103
+asS'oldgnu_sparse_member_p'
+p104
+(lp105
+S'struct tar_sparse_file *'
+p106
+asS'xattr_acls_d_coder'
+p107
+(lp108
+S'const struct tar_stat_info *'
+p109
+aS'const char *'
+p110
+aS'struct xheader *'
+p111
+aS'const void *'
+p112
+asS'read_obstack'
+p113
+(lp114
+S'int *'
+p115
+aS'struct obstack *'
+p116
+aS'unsigned long *'
+p117
+asS'tar_sparse_fixup_header'
+p118
+(lp119
+S'struct tar_sparse_file *'
+p120
+asS'copy_name'
+p121
+(lp122
+S'struct name_elt *'
+p123
+asS'dump_regular_file'
+p124
+(lp125
+S'int'
+p126
+aS'struct tar_stat_info *'
+p127
+asS'get_gnu_dumpdir'
+p128
+(lp129
+S'struct tar_stat_info *'
+p130
+asS'rename_directory'
+p131
+(lp132
+S'char *'
+p133
+aS'char *'
+p134
+asS'set_xattr_option'
+p135
+(lp136
+S'int'
+p137
+asS'write_eot'
+p138
+(lp139
+sS'fputc_unlocked'
+p140
+(lp141
+S'int'
+p142
+aS'struct _IO_FILE *'
+p143
+asS'base64_init'
+p144
+(lp145
+sS'write_long_link'
+p146
+(lp147
+S'struct tar_stat_info *'
+p148
+asS'snprintf'
+p149
+(lp150
+S'char *restrict'
+p151
+aS'unsigned long'
+p152
+aS'const char *restrict'
+p153
+asS'memset'
+p154
+(lp155
+S'void *'
+p156
+aS'int'
+p157
+aS'unsigned long'
+p158
+asS'obstack_free'
+p159
+(lp160
+S'struct obstack *'
+p161
+aS'void *'
+p162
+asS'__stpcpy'
+p163
+(lp164
+S'char *restrict'
+p165
+aS'const char *restrict'
+p166
+asS'oldgnu_dump_header'
+p167
+(lp168
+S'struct tar_sparse_file *'
+p169
+asS'xheader_list_append'
+p170
+(lp171
+S'struct keyword_list **'
+p172
+aS'const char *'
+p173
+aS'const char *'
+p174
+asS'compare_directory_canonical_names'
+p175
+(lp176
+S'const void *'
+p177
+aS'const void *'
+p178
+asS'maketagdumpdir'
+p179
+(lp180
+S'struct directory *'
+p181
+asS'info_attach_exclist'
+p182
+(lp183
+S'struct tar_stat_info *'
+p184
+asS'next_decompress_program'
+p185
+(lp186
+S'int *'
+p187
+asS'sparse_major_decoder'
+p188
+(lp189
+S'struct tar_stat_info *'
+p190
+aS'const char *'
+p191
+aS'const char *'
+p192
+aS'unsigned long'
+p193
+asS'index'
+p194
+(lp195
+S'const char *'
+p196
+aS'int'
+p197
+asS'getchar_unlocked'
+p198
+(lp199
+sS'compare_dirnames'
+p200
+(lp201
+S'const void *'
+p202
+aS'const void *'
+p203
+asS'create_placeholder_file'
+p204
+(lp205
+S'char *'
+p206
+aS'int'
+p207
+aS'int *'
+p208
+asS'write_error_details'
+p209
+(lp210
+S'const char *'
+p211
+aS'unsigned long'
+p212
+aS'unsigned long'
+p213
+asS'stat_on_signal'
+p214
+(lp215
+S'int'
+p216
+asS'mode_to_chars'
+p217
+(lp218
+S'int'
+p219
+aS'char *'
+p220
+aS'unsigned long'
+p221
+asS'xheader_xattr_copy'
+p222
+(lp223
+S'const struct tar_stat_info *'
+p224
+aS'struct xattr_array **'
+p225
+aS'unsigned long *'
+p226
+asS'sys_wait_command'
+p227
+(lp228
+sS'tar_list_quoting_styles'
+p229
+(lp230
+S'struct obstack *'
+p231
+aS'const char *'
+p232
+asS'xdup2'
+p233
+(lp234
+S'int'
+p235
+aS'int'
+p236
+asS'flush_read'
+p237
+(lp238
+sS'archive_write_error'
+p239
+(lp240
+S'int'
+p241
+asS'fputc'
+p242
+(lp243
+S'int'
+p244
+aS'struct _IO_FILE *'
+p245
+asS'tar_copy_str'
+p246
+(lp247
+S'char *'
+p248
+aS'const char *'
+p249
+aS'unsigned long'
+p250
+asS'alloc_action'
+p251
+(lp252
+S'enum checkpoint_opcode'
+p253
+asS'gnu_add_multi_volume_header'
+p254
+(lp255
+S'struct bufmap *'
+p256
+asS'open_diag'
+p257
+(lp258
+S'const char *'
+p259
+asS'open_memstream'
+p260
+(lp261
+S'char **'
+p262
+aS'unsigned long *'
+p263
+asS'add_backref_segment'
+p264
+(lp265
+S'struct transform *'
+p266
+aS'unsigned long'
+p267
+asS'dumpdir_cmp'
+p268
+(lp269
+S'const char *'
+p270
+aS'const char *'
+p271
+asS'stpncpy'
+p272
+(lp273
+S'char *restrict'
+p274
+aS'const char *restrict'
+p275
+aS'unsigned long'
+p276
+asS'store_rename'
+p277
+(lp278
+S'struct directory *'
+p279
+aS'struct obstack *'
+p280
+asS'dummy_decoder'
+p281
+(lp282
+S'struct tar_stat_info *'
+p283
+aS'const char *'
+p284
+aS'const char *'
+p285
+aS'unsigned long'
+p286
+asS'fopen'
+p287
+(lp288
+S'const char *restrict'
+p289
+aS'const char *restrict'
+p290
+asS'parse_opt'
+p291
+(lp292
+S'int'
+p293
+aS'char *'
+p294
+aS'struct argp_state *'
+p295
+asS'popen'
+p296
+(lp297
+S'const char *'
+p298
+aS'const char *'
+p299
+asS'name_add_dir'
+p300
+(lp301
+S'const char *'
+p302
+asS'_IO_ferror'
+p303
+(lp304
+S'struct _IO_FILE *'
+p305
+asS'xheader_protected_keyword_p'
+p306
+(lp307
+S'const char *'
+p308
+asS'isspace_l'
+p309
+(lp310
+S'int'
+p311
+aS'struct __locale_struct *'
+p312
+asS'xattrs_selinux_get'
+p313
+(lp314
+S'int'
+p315
+aS'const char *'
+p316
+aS'struct tar_stat_info *'
+p317
+aS'int'
+p318
+asS'sigstat'
+p319
+(lp320
+S'int'
+p321
+asS'psignal'
+p322
+(lp323
+S'int'
+p324
+aS'const char *'
+p325
+asS'increase_volume_number'
+p326
+(lp327
+sS'sparse_numblocks_decoder'
+p328
+(lp329
+S'struct tar_stat_info *'
+p330
+aS'const char *'
+p331
+aS'const char *'
+p332
+aS'unsigned long'
+p333
+asS'transform_program_p'
+p334
+(lp335
+sS'ispunct_l'
+p336
+(lp337
+S'int'
+p338
+aS'struct __locale_struct *'
+p339
+asS'checkpoint_finish'
+p340
+(lp341
+sS'transform_name'
+p342
+(lp343
+S'char **'
+p344
+aS'int'
+p345
+asS'bzero'
+p346
+(lp347
+S'void *'
+p348
+aS'unsigned long'
+p349
+asS'extract_failure'
+p350
+(lp351
+S'char *'
+p352
+aS'int'
+p353
+asS'start_private_header'
+p354
+(lp355
+S'const char *'
+p356
+aS'unsigned long'
+p357
+aS'int'
+p358
+asS'compare_directory_meta'
+p359
+(lp360
+S'const void *'
+p361
+aS'const void *'
+p362
+asS'set_warning_option'
+p363
+(lp364
+S'const char *'
+p365
+asS'tcgetattr'
+p366
+(lp367
+S'int'
+p368
+aS'struct termios *'
+p369
+asS'printf'
+p370
+(lp371
+S'const char *restrict'
+p372
+asS'fmemopen'
+p373
+(lp374
+S'void *'
+p375
+aS'unsigned long'
+p376
+aS'const char *'
+p377
+asS'select'
+p378
+(lp379
+S'int'
+p380
+aS'fd_set *restrict'
+p381
+aS'fd_set *restrict'
+p382
+aS'fd_set *restrict'
+p383
+aS'struct timeval *restrict'
+p384
+asS'getchar'
+p385
+(lp386
+sS'dumpdir_size'
+p387
+(lp388
+S'const char *'
+p389
+asS'uname_to_uid'
+p390
+(lp391
+S'const char *'
+p392
+aS'int *'
+p393
+asS'name_hash'
+p394
+(lp395
+S'const void *'
+p396
+aS'unsigned long'
+p397
+asS'xheader_decode_global'
+p398
+(lp399
+S'struct xheader *'
+p400
+asS'rindex'
+p401
+(lp402
+S'const char *'
+p403
+aS'int'
+p404
+asS'attach_directory'
+p405
+(lp406
+S'const char *'
+p407
+asS'print_total_stats'
+p408
+(lp409
+sS'uid_to_chars'
+p410
+(lp411
+S'int'
+p412
+aS'char *'
+p413
+aS'unsigned long'
+p414
+asS'xheader_xattr__add'
+p415
+(lp416
+S'struct xattr_array **'
+p417
+aS'unsigned long *'
+p418
+aS'const char *'
+p419
+aS'const char *'
+p420
+aS'unsigned long'
+p421
+asS'isblank_l'
+p422
+(lp423
+S'int'
+p424
+aS'struct __locale_struct *'
+p425
+asS'add_exclude_array'
+p426
+(lp427
+S'const char *const *'
+p428
+aS'int'
+p429
+asS'strdup'
+p430
+(lp431
+S'const char *'
+p432
+asS'islower_l'
+p433
+(lp434
+S'int'
+p435
+aS'struct __locale_struct *'
+p436
+asS'dump_hard_link'
+p437
+(lp438
+S'struct tar_stat_info *'
+p439
+asS'gnu_flush_write'
+p440
+(lp441
+S'unsigned long'
+p442
+asS'__libc_current_sigrtmax'
+p443
+(lp444
+sS'isgraph_l'
+p445
+(lp446
+S'int'
+p447
+aS'struct __locale_struct *'
+p448
+asS'sigaddset'
+p449
+(lp450
+S'__sigset_t *'
+p451
+aS'int'
+p452
+asS'xattrs_print_char'
+p453
+(lp454
+S'const struct tar_stat_info *'
+p455
+aS'char *'
+p456
+asS'obstack_code_rename'
+p457
+(lp458
+S'struct obstack *'
+p459
+aS'const char *'
+p460
+aS'const char *'
+p461
+asS'fwrite_unlocked'
+p462
+(lp463
+S'const void *restrict'
+p464
+aS'unsigned long'
+p465
+aS'unsigned long'
+p466
+aS'struct _IO_FILE *restrict'
+p467
+asS'xattr_decode_keyword'
+p468
+(lp469
+S'char *'
+p470
+asS'file_newer_p'
+p471
+(lp472
+S'const char *'
+p473
+aS'const struct stat *'
+p474
+aS'struct tar_stat_info *'
+p475
+asS'xheader_set_option'
+p476
+(lp477
+S'char *'
+p478
+asS'putchar'
+p479
+(lp480
+S'int'
+p481
+asS'sparse_minor_decoder'
+p482
+(lp483
+S'struct tar_stat_info *'
+p484
+aS'const char *'
+p485
+aS'const char *'
+p486
+aS'unsigned long'
+p487
+asS'sigstack'
+p488
+(lp489
+S'struct sigstack *'
+p490
+aS'struct sigstack *'
+p491
+asS'path_coder'
+p492
+(lp493
+S'const struct tar_stat_info *'
+p494
+aS'const char *'
+p495
+aS'struct xheader *'
+p496
+aS'const void *'
+p497
+asS'dumpdir_coder'
+p498
+(lp499
+S'const struct tar_stat_info *'
+p500
+aS'const char *'
+p501
+aS'struct xheader *'
+p502
+aS'const void *'
+p503
+asS'add_hierarchy_to_namelist'
+p504
+(lp505
+S'struct tar_stat_info *'
+p506
+aS'struct name *'
+p507
+asS'extract_skip'
+p508
+(lp509
+S'char *'
+p510
+aS'int'
+p511
+asS'ftrylockfile'
+p512
+(lp513
+S'struct _IO_FILE *'
+p514
+asS'__errno_location'
+p515
+(lp516
+sS'strerror'
+p517
+(lp518
+S'int'
+p519
+asS'code_time'
+p520
+(lp521
+S'struct timespec'
+p522
+aS'const char *'
+p523
+aS'struct xheader *'
+p524
+asS'getline'
+p525
+(lp526
+S'char **restrict'
+p527
+aS'unsigned long *restrict'
+p528
+aS'struct _IO_FILE *restrict'
+p529
+asS'cvs_addfn'
+p530
+(lp531
+S'struct exclude *'
+p532
+aS'const char *'
+p533
+aS'int'
+p534
+aS'void *'
+p535
+asS'bzr_addfn'
+p536
+(lp537
+S'struct exclude *'
+p538
+aS'const char *'
+p539
+aS'int'
+p540
+aS'void *'
+p541
+asS'fnmatch'
+p542
+(lp543
+S'const char *'
+p544
+aS'const char *'
+p545
+aS'int'
+p546
+asS'fprintf'
+p547
+(lp548
+S'struct _IO_FILE *restrict'
+p549
+aS'const char *restrict'
+p550
+asS'to_chars'
+p551
+(lp552
+S'int'
+p553
+aS'int'
+p554
+aS'unsigned long'
+p555
+aS'int (int *)'
+p556
+aS'char *'
+p557
+aS'unsigned long'
+p558
+aS'const char *'
+p559
+asS'tcdrain'
+p560
+(lp561
+S'int'
+p562
+asS'_argp_input'
+p563
+(lp564
+S'const struct argp *restrict'
+p565
+aS'const struct argp_state *restrict'
+p566
+asS'check_exclusion_tags'
+p567
+(lp568
+S'const struct tar_stat_info *'
+p569
+aS'const char **'
+p570
+asS'__sysv_signal'
+p571
+(lp572
+S'int'
+p573
+aS'void (*)(int)'
+p574
+asS'gid_to_gname'
+p575
+(lp576
+S'int'
+p577
+aS'char **'
+p578
+asS'siginterrupt'
+p579
+(lp580
+S'int'
+p581
+aS'int'
+p582
+asS'decode_options'
+p583
+(lp584
+S'int'
+p585
+aS'char **'
+p586
+asS'check_links'
+p587
+(lp588
+sS'procdir'
+p589
+(lp590
+S'const char *'
+p591
+aS'struct tar_stat_info *'
+p592
+aS'int'
+p593
+aS'char *'
+p594
+asS'abort'
+p595
+(lp596
+sS'decode_timespec'
+p597
+(lp598
+S'const char *'
+p599
+aS'char **'
+p600
+aS'int'
+p601
+asS'undo_last_backup'
+p602
+(lp603
+sS'bufmap_free'
+p604
+(lp605
+S'struct bufmap *'
+p606
+asS'tar_savedir'
+p607
+(lp608
+S'const char *'
+p609
+aS'int'
+p610
+asS'strlen'
+p611
+(lp612
+S'const char *'
+p613
+asS'sparse_fixup_header'
+p614
+(lp615
+S'struct tar_stat_info *'
+p616
+asS'size_coder'
+p617
+(lp618
+S'const struct tar_stat_info *'
+p619
+aS'const char *'
+p620
+aS'struct xheader *'
+p621
+aS'const void *'
+p622
+asS'strncat'
+p623
+(lp624
+S'char *restrict'
+p625
+aS'const char *restrict'
+p626
+aS'unsigned long'
+p627
+asS'subfile_open'
+p628
+(lp629
+S'const struct tar_stat_info *'
+p630
+aS'const char *'
+p631
+aS'int'
+p632
+asS'clearerr'
+p633
+(lp634
+S'struct _IO_FILE *'
+p635
+asS'feof'
+p636
+(lp637
+S'struct _IO_FILE *'
+p638
+asS'buffer_write_global_xheader'
+p639
+(lp640
+sS'addname'
+p641
+(lp642
+S'const char *'
+p643
+aS'int'
+p644
+aS'int'
+p645
+aS'struct name *'
+p646
+asS'rewind'
+p647
+(lp648
+S'struct _IO_FILE *'
+p649
+asS'archive_format_string'
+p650
+(lp651
+S'enum archive_format'
+p652
+asS'hash_directory_canonical_name'
+p653
+(lp654
+S'const void *'
+p655
+aS'unsigned long'
+p656
+asS'putc_unlocked'
+p657
+(lp658
+S'int'
+p659
+aS'struct _IO_FILE *'
+p660
+asS'tar_checksum'
+p661
+(lp662
+S'union block *'
+p663
+aS'int'
+p664
+asS'purge_directory'
+p665
+(lp666
+S'const char *'
+p667
+asS'flockfile'
+p668
+(lp669
+S'struct _IO_FILE *'
+p670
+asS'info_free_exclist'
+p671
+(lp672
+S'struct tar_stat_info *'
+p673
+asS'add_file_id'
+p674
+(lp675
+S'const char *'
+p676
+asS'_IO_free_backup_area'
+p677
+(lp678
+S'struct _IO_FILE *'
+p679
+asS'xattr_acls_d_decoder'
+p680
+(lp681
+S'struct tar_stat_info *'
+p682
+aS'const char *'
+p683
+aS'const char *'
+p684
+aS'unsigned long'
+p685
+asS'xheader_protected_pattern_p'
+p686
+(lp687
+S'const char *'
+p688
+asS'ctime_decoder'
+p689
+(lp690
+S'struct tar_stat_info *'
+p691
+aS'const char *'
+p692
+aS'const char *'
+p693
+aS'unsigned long'
+p694
+asS'ioctl'
+p695
+(lp696
+S'int'
+p697
+aS'unsigned long'
+p698
+asS'set_start_time'
+p699
+(lp700
+sS'getopt_long'
+p701
+(lp702
+S'int'
+p703
+aS'char *const *'
+p704
+aS'const char *'
+p705
+aS'const struct option *'
+p706
+aS'int *'
+p707
+asS'gid_coder'
+p708
+(lp709
+S'const struct tar_stat_info *'
+p710
+aS'const char *'
+p711
+aS'struct xheader *'
+p712
+aS'const void *'
+p713
+asS'strcasecmp'
+p714
+(lp715
+S'const char *'
+p716
+aS'const char *'
+p717
+asS'move_archive'
+p718
+(lp719
+S'int'
+p720
+asS'tar_sparse_dump_header'
+p721
+(lp722
+S'struct tar_sparse_file *'
+p723
+asS'transform_name_fp'
+p724
+(lp725
+S'char **'
+p726
+aS'int'
+p727
+aS'char *(*)(char *, void *)'
+p728
+aS'void *'
+p729
+asS'funlockfile'
+p730
+(lp731
+S'struct _IO_FILE *'
+p732
+asS'tar_dirname'
+p733
+(lp734
+sS'strerror_r'
+p735
+(lp736
+S'int'
+p737
+aS'char *'
+p738
+aS'unsigned long'
+p739
+asS'strtosysint'
+p740
+(lp741
+S'const char *'
+p742
+aS'char **'
+p743
+aS'int'
+p744
+aS'int'
+p745
+asS'compare_names'
+p746
+(lp747
+S'const struct name *'
+p748
+aS'const struct name *'
+p749
+asS'iscntrl'
+p750
+(lp751
+S'int'
+p752
+asS'linkpath_coder'
+p753
+(lp754
+S'const struct tar_stat_info *'
+p755
+aS'const char *'
+p756
+aS'struct xheader *'
+p757
+aS'const void *'
+p758
+asS'scan_directory'
+p759
+(lp760
+S'struct tar_stat_info *'
+p761
+asS'strerror_l'
+p762
+(lp763
+S'int'
+p764
+aS'struct __locale_struct *'
+p765
+asS'xheader_xhdr_name'
+p766
+(lp767
+S'struct tar_stat_info *'
+p768
+asS'gname_coder'
+p769
+(lp770
+S'const struct tar_stat_info *'
+p771
+aS'const char *'
+p772
+aS'struct xheader *'
+p773
+aS'const void *'
+p774
+asS'note_directory'
+p775
+(lp776
+S'const char *'
+p777
+aS'struct timespec'
+p778
+aS'int'
+p779
+aS'int'
+p780
+aS'int'
+p781
+aS'int'
+p782
+aS'const char *'
+p783
+asS'_option_is_end'
+p784
+(lp785
+S'const struct argp_option *'
+p786
+asS'write_volume_label'
+p787
+(lp788
+sS'clear_mask_map'
+p789
+(lp790
+S'struct xattrs_mask_map *'
+p791
+asS'decg'
+p792
+(lp793
+S'void *'
+p794
+aS'const char *'
+p795
+aS'const char *'
+p796
+aS'unsigned long'
+p797
+asS'ffs'
+p798
+(lp799
+S'int'
+p800
+asS'create_archive'
+p801
+(lp802
+sS'parse_owner_group'
+p803
+(lp804
+S'char *'
+p805
+aS'int'
+p806
+aS'const char **'
+p807
+asS'mark_after_links'
+p808
+(lp809
+S'struct delayed_set_stat *'
+p810
+asS'find_directory'
+p811
+(lp812
+S'const char *'
+p813
+asS'decx'
+p814
+(lp815
+S'void *'
+p816
+aS'const char *'
+p817
+aS'const char *'
+p818
+aS'unsigned long'
+p819
+asS'ferror_unlocked'
+p820
+(lp821
+S'struct _IO_FILE *'
+p822
+asS'tar_stat_destroy'
+p823
+(lp824
+S'struct tar_stat_info *'
+p825
+asS'extract_archive'
+p826
+(lp827
+sS'available_space_after'
+p828
+(lp829
+S'union block *'
+p830
+asS'checkpoint_run'
+p831
+(lp832
+S'int'
+p833
+asS'star_sparse_member_p'
+p834
+(lp835
+S'struct tar_sparse_file *'
+p836
+asS'write_gnu_long_link'
+p837
+(lp838
+S'struct tar_stat_info *'
+p839
+aS'const char *'
+p840
+aS'char'
+p841
+asS'exclude_vcs_ignores'
+p842
+(lp843
+sS'tcflush'
+p844
+(lp845
+S'int'
+p846
+aS'int'
+p847
+asS'dumpdir_next'
+p848
+(lp849
+S'struct dumpdir_iter *'
+p850
+asS'extract_volhdr'
+p851
+(lp852
+S'char *'
+p853
+aS'int'
+p854
+asS'feof_unlocked'
+p855
+(lp856
+S'struct _IO_FILE *'
+p857
+asS'xattrs_clear_setup'
+p858
+(lp859
+sS'main'
+p860
+(lp861
+S'int'
+p862
+aS'char **'
+p863
+asS'reset_eof'
+p864
+(lp865
+sS'minor_to_chars'
+p866
+(lp867
+S'int'
+p868
+aS'char *'
+p869
+aS'unsigned long'
+p870
+asS'bcopy'
+p871
+(lp872
+S'const void *'
+p873
+aS'void *'
+p874
+aS'unsigned long'
+p875
+asS'_option_is_short'
+p876
+(lp877
+S'const struct argp_option *'
+p878
+asS'simple_print_header'
+p879
+(lp880
+S'struct tar_stat_info *'
+p881
+aS'union block *'
+p882
+aS'int'
+p883
+asS'name_list_adjust'
+p884
+(lp885
+sS'strcoll_l'
+p886
+(lp887
+S'const char *'
+p888
+aS'const char *'
+p889
+aS'struct __locale_struct *'
+p890
+asS'namebuf_free'
+p891
+(lp892
+S'struct namebuf *'
+p893
+asS'readlink_diag'
+p894
+(lp895
+S'const char *'
+p896
+asS'checkpoint_compile_action'
+p897
+(lp898
+S'const char *'
+p899
+asS'all_names_found'
+p900
+(lp901
+S'struct tar_stat_info *'
+p902
+asS'clear_read_error_count'
+p903
+(lp904
+sS'isxdigit_l'
+p905
+(lp906
+S'int'
+p907
+aS'struct __locale_struct *'
+p908
+asS'xpipe'
+p909
+(lp910
+S'int [2]'
+p911
+asS'strcoll'
+p912
+(lp913
+S'const char *'
+p914
+aS'const char *'
+p915
+asS'decode_string'
+p916
+(lp917
+S'char **'
+p918
+aS'const char *'
+p919
+asS'hash_link'
+p920
+(lp921
+S'const void *'
+p922
+aS'unsigned long'
+p923
+asS'siggetmask'
+p924
+(lp925
+sS'add_segment'
+p926
+(lp927
+S'struct transform *'
+p928
+asS'delay_set_stat'
+p929
+(lp930
+S'const char *'
+p931
+aS'const struct tar_stat_info *'
+p932
+aS'int'
+p933
+aS'int'
+p934
+aS'int'
+p935
+aS'int'
+p936
+asS'getdelim'
+p937
+(lp938
+S'char **restrict'
+p939
+aS'unsigned long *restrict'
+p940
+aS'int'
+p941
+aS'struct _IO_FILE *restrict'
+p942
+asS'tar_sparse_scan'
+p943
+(lp944
+S'struct tar_sparse_file *'
+p945
+aS'enum sparse_scan_state'
+p946
+aS'void *'
+p947
+asS'get_stat_data'
+p948
+(lp949
+S'const char *'
+p950
+aS'struct stat *'
+p951
+asS'cfgetospeed'
+p952
+(lp953
+S'const struct termios *'
+p954
+asS'getarg'
+p955
+(lp956
+S'const char *'
+p957
+aS'const char **'
+p958
+aS'char **'
+p959
+aS'unsigned long *'
+p960
+asS'read_and'
+p961
+(lp962
+S'void (*)(void)'
+p963
+asS'__argp_error'
+p964
+(lp965
+S'const struct argp_state *restrict'
+p966
+aS'const char *restrict'
+p967
+asS'to_chars_subst'
+p968
+(lp969
+S'int'
+p970
+aS'int'
+p971
+aS'int'
+p972
+aS'unsigned long'
+p973
+aS'int (int *)'
+p974
+aS'char *'
+p975
+aS'unsigned long'
+p976
+aS'const char *'
+p977
+asS'change_tape_menu'
+p978
+(lp979
+S'int *'
+p980
+asS'xheader_xattr_init'
+p981
+(lp982
+S'struct tar_stat_info *'
+p983
+asS'memchr'
+p984
+(lp985
+S'const void *'
+p986
+aS'int'
+p987
+aS'unsigned long'
+p988
+asS'vsscanf'
+p989
+(lp990
+S'const char *restrict'
+p991
+aS'const char *restrict'
+p992
+aS'struct __va_list_tag [1]'
+p993
+asS'current_block_ordinal'
+p994
+(lp995
+sS'set_use_compress_program_option'
+p996
+(lp997
+S'const char *'
+p998
+asS'__argp_usage'
+p999
+(lp1000
+S'const struct argp_state *'
+p1001
+asS'report_difference'
+p1002
+(lp1003
+S'struct tar_stat_info *'
+p1004
+aS'const char *'
+p1005
+asS'init_buffer'
+p1006
+(lp1007
+sS'xheader_write'
+p1008
+(lp1009
+S'char'
+p1010
+aS'char *'
+p1011
+aS'int'
+p1012
+aS'struct xheader *'
+p1013
+asS'time_to_chars'
+p1014
+(lp1015
+S'int'
+p1016
+aS'char *'
+p1017
+aS'unsigned long'
+p1018
+asS'_flush_write'
+p1019
+(lp1020
+sS'killpg'
+p1021
+(lp1022
+S'int'
+p1023
+aS'int'
+p1024
+asS'star_get_sparse_info'
+p1025
+(lp1026
+S'struct tar_sparse_file *'
+p1027
+asS'set_xattr'
+p1028
+(lp1029
+S'const char *'
+p1030
+aS'const struct tar_stat_info *'
+p1031
+aS'int'
+p1032
+aS'char'
+p1033
+aS'int *'
+p1034
+asS'deref_stat'
+p1035
+(lp1036
+S'const char *'
+p1037
+aS'struct stat *'
+p1038
+asS'find_compression_suffix'
+p1039
+(lp1040
+S'const char *'
+p1041
+aS'unsigned long *'
+p1042
+asS'format_total_stats'
+p1043
+(lp1044
+S'int *'
+p1045
+aS'const char **'
+p1046
+aS'int'
+p1047
+aS'int'
+p1048
+asS'write_short_name'
+p1049
+(lp1050
+S'struct tar_stat_info *'
+p1051
+asS'sprintf'
+p1052
+(lp1053
+S'char *restrict'
+p1054
+aS'const char *restrict'
+p1055
+asS'makedumpdir'
+p1056
+(lp1057
+S'struct directory *'
+p1058
+aS'const char *'
+p1059
+asS'vscanf'
+p1060
+(lp1061
+S'const char *restrict'
+p1062
+aS'struct __va_list_tag [1]'
+p1063
+asS'__ctype_b_loc'
+p1064
+(lp1065
+sS'strrchr'
+p1066
+(lp1067
+S'const char *'
+p1068
+aS'int'
+p1069
+asS'regexec'
+p1070
+(lp1071
+S'const struct re_pattern_buffer *restrict'
+p1072
+aS'const char *restrict'
+p1073
+aS'unsigned long'
+p1074
+aS'regmatch_t []'
+p1075
+aS'int'
+p1076
+asS'argp_state_help'
+p1077
+(lp1078
+S'const struct argp_state *restrict'
+p1079
+aS'struct _IO_FILE *restrict'
+p1080
+aS'unsigned int'
+p1081
+asS'handle_option'
+p1082
+(lp1083
+S'const char *'
+p1084
+asS'is_directory_link'
+p1085
+(lp1086
+S'const char *'
+p1087
+asS'ptr_align'
+p1088
+(lp1089
+S'void *'
+p1090
+aS'unsigned long'
+p1091
+asS'strcspn'
+p1092
+(lp1093
+S'const char *'
+p1094
+aS'const char *'
+p1095
+asS'process_rawdata'
+p1096
+(lp1097
+S'unsigned long'
+p1098
+aS'char *'
+p1099
+asS'extract_finish'
+p1100
+(lp1101
+sS'ferror'
+p1102
+(lp1103
+S'struct _IO_FILE *'
+p1104
+asS'parse_xform_flags'
+p1105
+(lp1106
+S'int *'
+p1107
+aS'int'
+p1108
+asS'linkpath_decoder'
+p1109
+(lp1110
+S'struct tar_stat_info *'
+p1111
+aS'const char *'
+p1112
+aS'const char *'
+p1113
+aS'unsigned long'
+p1114
+asS'diff_file'
+p1115
+(lp1116
+sS'name_next'
+p1117
+(lp1118
+S'int'
+p1119
+asS'sigreturn'
+p1120
+(lp1121
+S'struct sigcontext *'
+p1122
+asS'decode_num'
+p1123
+(lp1124
+S'int *'
+p1125
+aS'const char *'
+p1126
+aS'int'
+p1127
+asS'toupper_l'
+p1128
+(lp1129
+S'int'
+p1130
+aS'struct __locale_struct *'
+p1131
+asS'fseeko'
+p1132
+(lp1133
+S'struct _IO_FILE *'
+p1134
+aS'long'
+p1135
+aS'int'
+p1136
+asS'__uflow'
+p1137
+(lp1138
+S'struct _IO_FILE *'
+p1139
+asS'out_of_range_header'
+p1140
+(lp1141
+S'const char *'
+p1142
+aS'const char *'
+p1143
+aS'int'
+p1144
+aS'int'
+p1145
+asS'xheader_destroy'
+p1146
+(lp1147
+S'struct xheader *'
+p1148
+asS'xattrs_selinux_set'
+p1149
+(lp1150
+S'const struct tar_stat_info *'
+p1151
+aS'const char *'
+p1152
+aS'char'
+p1153
+asS'xheader_xattr_free'
+p1154
+(lp1155
+S'struct xattr_array *'
+p1156
+aS'unsigned long'
+p1157
+asS'unquote_string'
+p1158
+(lp1159
+S'char *'
+p1160
+asS'fd_chown'
+p1161
+(lp1162
+S'int'
+p1163
+aS'const char *'
+p1164
+aS'int'
+p1165
+aS'int'
+p1166
+aS'int'
+p1167
+asS'process_noop'
+p1168
+(lp1169
+S'unsigned long'
+p1170
+aS'char *'
+p1171
+asS'update_archive'
+p1172
+(lp1173
+sS'stripped_prefix_len'
+p1174
+(lp1175
+S'const char *'
+p1176
+aS'unsigned long'
+p1177
+asS'uid_coder'
+p1178
+(lp1179
+S'const struct tar_stat_info *'
+p1180
+aS'const char *'
+p1181
+aS'struct xheader *'
+p1182
+aS'const void *'
+p1183
+asS'tcgetsid'
+p1184
+(lp1185
+S'int'
+p1186
+asS'sigsetmask'
+p1187
+(lp1188
+S'int'
+p1189
+asS'islower'
+p1190
+(lp1191
+S'int'
+p1192
+asS'remname'
+p1193
+(lp1194
+S'struct name *'
+p1195
+asS'isupper'
+p1196
+(lp1197
+S'int'
+p1198
+asS'x_obstack_grow'
+p1199
+(lp1200
+S'struct xheader *'
+p1201
+aS'const char *'
+p1202
+aS'unsigned long'
+p1203
+asS'dumpdir_create0'
+p1204
+(lp1205
+S'const char *'
+p1206
+aS'const char *'
+p1207
+asS'code_signed_num'
+p1208
+(lp1209
+S'int'
+p1210
+aS'const char *'
+p1211
+aS'int'
+p1212
+aS'int'
+p1213
+aS'struct xheader *'
+p1214
+asS'short_read'
+p1215
+(lp1216
+S'unsigned long'
+p1217
+asS'sparse_offset_coder'
+p1218
+(lp1219
+S'const struct tar_stat_info *'
+p1220
+aS'const char *'
+p1221
+aS'struct xheader *'
+p1222
+aS'const void *'
+p1223
+asS'enforce_one_top_level'
+p1224
+(lp1225
+S'char **'
+p1226
+asS'xheader_string_begin'
+p1227
+(lp1228
+S'struct xheader *'
+p1229
+asS'tar_sparse_done'
+p1230
+(lp1231
+S'struct tar_sparse_file *'
+p1232
+asS'_open_archive'
+p1233
+(lp1234
+S'enum access_mode'
+p1235
+asS'gid_decoder'
+p1236
+(lp1237
+S'struct tar_stat_info *'
+p1238
+aS'const char *'
+p1239
+aS'const char *'
+p1240
+aS'unsigned long'
+p1241
+asS'mtime_coder'
+p1242
+(lp1243
+S'const struct tar_stat_info *'
+p1244
+aS'const char *'
+p1245
+aS'struct xheader *'
+p1246
+aS'const void *'
+p1247
+asS'write_directory_file'
+p1248
+(lp1249
+sS'sparse_member_p'
+p1250
+(lp1251
+S'struct tar_stat_info *'
+p1252
+asS'add_literal_segment'
+p1253
+(lp1254
+S'struct transform *'
+p1255
+aS'char *'
+p1256
+aS'char *'
+p1257
+asS'pax_decode_header'
+p1258
+(lp1259
+S'struct tar_sparse_file *'
+p1260
+asS'_IO_seekoff'
+p1261
+(lp1262
+S'struct _IO_FILE *'
+p1263
+aS'long'
+p1264
+aS'int'
+p1265
+aS'int'
+p1266
+asS'dumpdir_create'
+p1267
+(lp1268
+S'const char *'
+p1269
+asS'set_next_block_after'
+p1270
+(lp1271
+S'union block *'
+p1272
+asS'flush_archive'
+p1273
+(lp1274
+sS'str_to_env'
+p1275
+(lp1276
+S'const char *'
+p1277
+aS'const char *'
+p1278
+asS'strncpy'
+p1279
+(lp1280
+S'char *restrict'
+p1281
+aS'const char *restrict'
+p1282
+aS'unsigned long'
+p1283
+asS'expand_pax_option'
+p1284
+(lp1285
+S'struct tar_args *'
+p1286
+aS'const char *'
+p1287
+asS'get_date_or_file'
+p1288
+(lp1289
+S'struct tar_args *'
+p1290
+aS'const char *'
+p1291
+aS'const char *'
+p1292
+aS'struct timespec *'
+p1293
+asS'isalnum'
+p1294
+(lp1295
+S'int'
+p1296
+asS'sparse_scan_file'
+p1297
+(lp1298
+S'struct tar_sparse_file *'
+p1299
+asS'scanf'
+p1300
+(lp1301
+S'const char *restrict'
+p1302
+asS'sigpending'
+p1303
+(lp1304
+S'__sigset_t *'
+p1305
+asS'find_zip_program'
+p1306
+(lp1307
+S'enum compress_type'
+p1308
+aS'int *'
+p1309
+asS'sigvec'
+p1310
+(lp1311
+S'int'
+p1312
+aS'const struct sigvec *'
+p1313
+aS'struct sigvec *'
+p1314
+asS'xheader_xattr_add'
+p1315
+(lp1316
+S'struct tar_stat_info *'
+p1317
+aS'const char *'
+p1318
+aS'const char *'
+p1319
+aS'unsigned long'
+p1320
+asS'isalpha'
+p1321
+(lp1322
+S'int'
+p1323
+asS'write_fatal'
+p1324
+(lp1325
+S'const char *'
+p1326
+asS'memcmp'
+p1327
+(lp1328
+S'const void *'
+p1329
+aS'const void *'
+p1330
+aS'unsigned long'
+p1331
+asS'uname_coder'
+p1332
+(lp1333
+S'const struct tar_stat_info *'
+p1334
+aS'const char *'
+p1335
+aS'struct xheader *'
+p1336
+aS'const void *'
+p1337
+asS'dprintf'
+p1338
+(lp1339
+S'int'
+p1340
+aS'const char *restrict'
+p1341
+asS'read_incr_db_01'
+p1342
+(lp1343
+S'int'
+p1344
+aS'const char *'
+p1345
+asS'utf8_convert'
+p1346
+(lp1347
+S'int'
+p1348
+aS'const char *'
+p1349
+aS'char **'
+p1350
+asS'setbuffer'
+p1351
+(lp1352
+S'struct _IO_FILE *restrict'
+p1353
+aS'char *restrict'
+p1354
+aS'unsigned long'
+p1355
+asS'extract_file'
+p1356
+(lp1357
+S'char *'
+p1358
+aS'int'
+p1359
+asS'format_default_settings'
+p1360
+(lp1361
+sS'to_octal'
+p1362
+(lp1363
+S'int'
+p1364
+aS'char *'
+p1365
+aS'unsigned long'
+p1366
+asS'rebase_child_list'
+p1367
+(lp1368
+S'struct name *'
+p1369
+aS'struct name *'
+p1370
+asS'chdir_do'
+p1371
+(lp1372
+S'int'
+p1373
+asS'isascii'
+p1374
+(lp1375
+S'int'
+p1376
+asS'sys_wait_for_child'
+p1377
+(lp1378
+S'int'
+p1379
+aS'int'
+p1380
+asS'xfork'
+p1381
+(lp1382
+sS'xattrs_kw_included'
+p1383
+(lp1384
+S'const char *'
+p1385
+aS'int'
+p1386
+asS'gid_from_header'
+p1387
+(lp1388
+S'const char *'
+p1389
+aS'unsigned long'
+p1390
+asS'atime_decoder'
+p1391
+(lp1392
+S'struct tar_stat_info *'
+p1393
+aS'const char *'
+p1394
+aS'const char *'
+p1395
+aS'unsigned long'
+p1396
+asS'unknown_file_error'
+p1397
+(lp1398
+S'const char *'
+p1399
+asS'strip_compression_suffix'
+p1400
+(lp1401
+S'const char *'
+p1402
+asS'sigdelset'
+p1403
+(lp1404
+S'__sigset_t *'
+p1405
+aS'int'
+p1406
+asS'xattrs_mask_add'
+p1407
+(lp1408
+S'const char *'
+p1409
+aS'int'
+p1410
+asS'__argp_parse'
+p1411
+(lp1412
+S'const struct argp *restrict'
+p1413
+aS'int'
+p1414
+aS'char **restrict'
+p1415
+aS'unsigned int'
+p1416
+aS'int *restrict'
+p1417
+aS'void *restrict'
+p1418
+asS'tar_name_copy_str'
+p1419
+(lp1420
+S'char *'
+p1421
+aS'const char *'
+p1422
+aS'unsigned long'
+p1423
+asS'sigwait'
+p1424
+(lp1425
+S'const __sigset_t *restrict'
+p1426
+aS'int *restrict'
+p1427
+asS'sys_compare_gid'
+p1428
+(lp1429
+S'struct stat *'
+p1430
+aS'struct stat *'
+p1431
+asS'sparse_skip_file'
+p1432
+(lp1433
+S'struct tar_stat_info *'
+p1434
+asS'find_directory_meta'
+p1435
+(lp1436
+S'int'
+p1437
+aS'int'
+p1438
+asS'name_compare'
+p1439
+(lp1440
+S'const void *'
+p1441
+aS'const void *'
+p1442
+asS'xheader_store'
+p1443
+(lp1444
+S'const char *'
+p1445
+aS'struct tar_stat_info *'
+p1446
+aS'const void *'
+p1447
+asS'vsnprintf'
+p1448
+(lp1449
+S'char *restrict'
+p1450
+aS'unsigned long'
+p1451
+aS'const char *restrict'
+p1452
+aS'struct __va_list_tag [1]'
+p1453
+asS'_IO_peekc_locked'
+p1454
+(lp1455
+S'struct _IO_FILE *'
+p1456
+asS'volume_size_coder'
+p1457
+(lp1458
+S'const struct tar_stat_info *'
+p1459
+aS'const char *'
+p1460
+aS'struct xheader *'
+p1461
+aS'const void *'
+p1462
+asS'strtok_r'
+p1463
+(lp1464
+S'char *restrict'
+p1465
+aS'const char *restrict'
+p1466
+aS'char **restrict'
+p1467
+asS'pselect'
+p1468
+(lp1469
+S'int'
+p1470
+aS'fd_set *restrict'
+p1471
+aS'fd_set *restrict'
+p1472
+aS'fd_set *restrict'
+p1473
+aS'const struct timespec *restrict'
+p1474
+aS'const __sigset_t *restrict'
+p1475
+asS'sigfillset'
+p1476
+(lp1477
+S'__sigset_t *'
+p1478
+asS'simple_finish_header'
+p1479
+(lp1480
+S'union block *'
+p1481
+asS'xattrs_matches_mask'
+p1482
+(lp1483
+S'const char *'
+p1484
+aS'struct xattrs_mask_map *'
+p1485
+asS'cfsetospeed'
+p1486
+(lp1487
+S'struct termios *'
+p1488
+aS'unsigned int'
+p1489
+asS'xattr_decoder'
+p1490
+(lp1491
+S'struct tar_stat_info *'
+p1492
+aS'const char *'
+p1493
+aS'const char *'
+p1494
+aS'unsigned long'
+p1495
+asS'cfsetspeed'
+p1496
+(lp1497
+S'struct termios *'
+p1498
+aS'unsigned int'
+p1499
+asS'normalize_filename'
+p1500
+(lp1501
+S'int'
+p1502
+aS'const char *'
+p1503
+asS'report_textual_dates'
+p1504
+(lp1505
+S'struct tar_args *'
+p1506
+asS'restore_parent_fd'
+p1507
+(lp1508
+S'const struct tar_stat_info *'
+p1509
+asS'cfmakeraw'
+p1510
+(lp1511
+S'struct termios *'
+p1512
+asS'set_mode'
+p1513
+(lp1514
+S'const char *'
+p1515
+aS'int'
+p1516
+aS'int'
+p1517
+aS'int'
+p1518
+aS'int'
+p1519
+aS'int'
+p1520
+aS'char'
+p1521
+aS'int'
+p1522
+asS'name_gather'
+p1523
+(lp1524
+sS'fseek'
+p1525
+(lp1526
+S'struct _IO_FILE *'
+p1527
+aS'long'
+p1528
+aS'int'
+p1529
+asS'assign_string'
+p1530
+(lp1531
+S'char **'
+p1532
+aS'const char *'
+p1533
+asS'assert_format'
+p1534
+(lp1535
+S'unsigned int'
+p1536
+asS'fatal_exit'
+p1537
+(lp1538
+sS'_tolower'
+p1539
+(lp1540
+S'int'
+p1541
+asS'getopt_long_only'
+p1542
+(lp1543
+S'int'
+p1544
+aS'char *const *'
+p1545
+aS'const char *'
+p1546
+aS'const struct option *'
+p1547
+aS'int *'
+p1548
+asS'sparse_major_coder'
+p1549
+(lp1550
+S'const struct tar_stat_info *'
+p1551
+aS'const char *'
+p1552
+aS'struct xheader *'
+p1553
+aS'const void *'
+p1554
+asS'is_dumpdir'
+p1555
+(lp1556
+S'struct tar_stat_info *'
+p1557
+asS'diff_special'
+p1558
+(lp1559
+sS'_obstack_newchunk'
+p1560
+(lp1561
+S'struct obstack *'
+p1562
+aS'int'
+p1563
+asS'skip_file'
+p1564
+(lp1565
+S'int'
+p1566
+asS'tolower'
+p1567
+(lp1568
+S'int'
+p1569
+asS'xattrs_xattrs_set'
+p1570
+(lp1571
+S'const struct tar_stat_info *'
+p1572
+aS'const char *'
+p1573
+aS'char'
+p1574
+aS'int'
+p1575
+asS'uid_substitute'
+p1576
+(lp1577
+S'int *'
+p1578
+asS'update_parent_directory'
+p1579
+(lp1580
+S'struct tar_stat_info *'
+p1581
+asS'strpbrk'
+p1582
+(lp1583
+S'const char *'
+p1584
+aS'const char *'
+p1585
+asS'volume_label_coder'
+p1586
+(lp1587
+S'const struct tar_stat_info *'
+p1588
+aS'const char *'
+p1589
+aS'struct xheader *'
+p1590
+aS'const void *'
+p1591
+asS'extract_symlink'
+p1592
+(lp1593
+S'char *'
+p1594
+aS'int'
+p1595
+asS'tar_sparse_dump_region'
+p1596
+(lp1597
+S'struct tar_sparse_file *'
+p1598
+aS'unsigned long'
+p1599
+asS'__argp_input'
+p1600
+(lp1601
+S'const struct argp *restrict'
+p1602
+aS'const struct argp_state *restrict'
+p1603
+asS'read_diag_details'
+p1604
+(lp1605
+S'const char *'
+p1606
+aS'int'
+p1607
+aS'unsigned long'
+p1608
+asS'oldgnu_fixup_header'
+p1609
+(lp1610
+S'struct tar_sparse_file *'
+p1611
+asS'diff_archive'
+p1612
+(lp1613
+sS'perror'
+p1614
+(lp1615
+S'const char *'
+p1616
+asS'from_header'
+p1617
+(lp1618
+S'const char *'
+p1619
+aS'unsigned long'
+p1620
+aS'const char *'
+p1621
+aS'int'
+p1622
+aS'int'
+p1623
+aS'int'
+p1624
+aS'int'
+p1625
+asS'verify_volume'
+p1626
+(lp1627
+sS'xattrs_acls_set'
+p1628
+(lp1629
+S'const struct tar_stat_info *'
+p1630
+aS'const char *'
+p1631
+aS'char'
+p1632
+asS'name_from_list'
+p1633
+(lp1634
+sS'oct_to_env'
+p1635
+(lp1636
+S'const char *'
+p1637
+aS'unsigned long'
+p1638
+asS'namebuf_create'
+p1639
+(lp1640
+S'const char *'
+p1641
+asS'sys_get_archive_stat'
+p1642
+(lp1643
+sS'pad_archive'
+p1644
+(lp1645
+S'int'
+p1646
+asS'safe_directory_contents'
+p1647
+(lp1648
+S'struct directory *'
+p1649
+asS'request_stdin'
+p1650
+(lp1651
+S'const char *'
+p1652
+asS'name_init'
+p1653
+(lp1654
+sS'gid_substitute'
+p1655
+(lp1656
+S'int *'
+p1657
+asS'setvbuf'
+p1658
+(lp1659
+S'struct _IO_FILE *restrict'
+p1660
+aS'char *restrict'
+p1661
+aS'int'
+p1662
+aS'unsigned long'
+p1663
+asS'vfprintf'
+p1664
+(lp1665
+S'struct _IO_FILE *restrict'
+p1666
+aS'const char *restrict'
+p1667
+aS'struct __va_list_tag [1]'
+p1668
+asS'strncasecmp'
+p1669
+(lp1670
+S'const char *'
+p1671
+aS'const char *'
+p1672
+aS'unsigned long'
+p1673
+asS'add_multi_volume_header'
+p1674
+(lp1675
+S'struct bufmap *'
+p1676
+asS'isprint_l'
+p1677
+(lp1678
+S'int'
+p1679
+aS'struct __locale_struct *'
+p1680
+asS'xheader_print_n'
+p1681
+(lp1682
+S'struct xheader *'
+p1683
+aS'const char *'
+p1684
+aS'const char *'
+p1685
+aS'unsigned long'
+p1686
+asS'_IO_putc'
+p1687
+(lp1688
+S'int'
+p1689
+aS'struct _IO_FILE *'
+p1690
+asS'regfree'
+p1691
+(lp1692
+S'struct re_pattern_buffer *'
+p1693
+asS'uid_from_header'
+p1694
+(lp1695
+S'const char *'
+p1696
+aS'unsigned long'
+p1697
+asS'sys_compare_uid'
+p1698
+(lp1699
+S'struct stat *'
+p1700
+aS'struct stat *'
+p1701
+asS'putchar_unlocked'
+p1702
+(lp1703
+S'int'
+p1704
+asS'dumpdir_ok'
+p1705
+(lp1706
+S'char *'
+p1707
+asS'dumpdir_decoder'
+p1708
+(lp1709
+S'struct tar_stat_info *'
+p1710
+aS'const char *'
+p1711
+aS'const char *'
+p1712
+aS'unsigned long'
+p1713
+asS'compare_links'
+p1714
+(lp1715
+S'const void *'
+p1716
+aS'const void *'
+p1717
+asS'x_obstack_blank'
+p1718
+(lp1719
+S'struct xheader *'
+p1720
+aS'unsigned long'
+p1721
+asS'tar_stat_close'
+p1722
+(lp1723
+S'struct tar_stat_info *'
+p1724
+asS'xalloc_die'
+p1725
+(lp1726
+sS'__underflow'
+p1727
+(lp1728
+S'struct _IO_FILE *'
+p1729
+asS'sparse_extract_region'
+p1730
+(lp1731
+S'struct tar_sparse_file *'
+p1732
+aS'unsigned long'
+p1733
+asS'read_name_from_file'
+p1734
+(lp1735
+S'struct name_elt *'
+p1736
+asS'sys_exec_checkpoint_script'
+p1737
+(lp1738
+S'const char *'
+p1739
+aS'const char *'
+p1740
+aS'int'
+p1741
+asS'strtok'
+p1742
+(lp1743
+S'char *restrict'
+p1744
+aS'const char *restrict'
+p1745
+asS'xattrs_acls_get'
+p1746
+(lp1747
+S'int'
+p1748
+aS'const char *'
+p1749
+aS'struct tar_stat_info *'
+p1750
+aS'int'
+p1751
+aS'int'
+p1752
+asS'fputs'
+p1753
+(lp1754
+S'const char *restrict'
+p1755
+aS'struct _IO_FILE *restrict'
+p1756
+asS'sparse_size_decoder'
+p1757
+(lp1758
+S'struct tar_stat_info *'
+p1759
+aS'const char *'
+p1760
+aS'const char *'
+p1761
+aS'unsigned long'
+p1762
+asS'set_stat_signal'
+p1763
+(lp1764
+S'const char *'
+p1765
+asS'rebase_directory'
+p1766
+(lp1767
+S'struct directory *'
+p1768
+aS'const char *'
+p1769
+aS'unsigned long'
+p1770
+aS'const char *'
+p1771
+aS'unsigned long'
+p1772
+asS'assign_time_option'
+p1773
+(lp1774
+S'char **'
+p1775
+aS'int *'
+p1776
+aS'const char *'
+p1777
+asS'name_next_elt'
+p1778
+(lp1779
+S'int'
+p1780
+asS'file_dumpable_p'
+p1781
+(lp1782
+S'const struct stat *'
+p1783
+asS'write_header_name'
+p1784
+(lp1785
+S'struct tar_stat_info *'
+p1786
+asS'sys_detect_dev_null_output'
+p1787
+(lp1788
+sS'__sigaddset'
+p1789
+(lp1790
+S'__sigset_t *'
+p1791
+aS'int'
+p1792
+asS'collect_and_sort_names'
+p1793
+(lp1794
+sS'flush_deferred_unlinks'
+p1795
+(lp1796
+S'int'
+p1797
+asS'apply_nonancestor_delayed_set_stat'
+p1798
+(lp1799
+S'const char *'
+p1800
+aS'int'
+p1801
+asS'time_from_header'
+p1802
+(lp1803
+S'const char *'
+p1804
+aS'unsigned long'
+p1805
+asS'more_options'
+p1806
+(lp1807
+S'int'
+p1808
+aS'char **'
+p1809
+asS'bcmp'
+p1810
+(lp1811
+S'const void *'
+p1812
+aS'const void *'
+p1813
+aS'unsigned long'
+p1814
+asS'strxfrm_l'
+p1815
+(lp1816
+S'char *'
+p1817
+aS'const char *'
+p1818
+aS'unsigned long'
+p1819
+aS'struct __locale_struct *'
+p1820
+asS'strsep'
+p1821
+(lp1822
+S'char **restrict'
+p1823
+aS'const char *restrict'
+p1824
+asS'file_removed_diag'
+p1825
+(lp1826
+S'const char *'
+p1827
+aS'int'
+p1828
+aS'void (*)(const char *)'
+p1829
+asS'tar_sparse_extract_region'
+p1830
+(lp1831
+S'struct tar_sparse_file *'
+p1832
+aS'unsigned long'
+p1833
+asS'locate_handler'
+p1834
+(lp1835
+S'const char *'
+p1836
+asS'xheader_set_keyword_equal'
+p1837
+(lp1838
+S'char *'
+p1839
+aS'char *'
+p1840
+asS'hg_addfn'
+p1841
+(lp1842
+S'struct exclude *'
+p1843
+aS'const char *'
+p1844
+aS'int'
+p1845
+aS'void *'
+p1846
+asS'memcpy'
+p1847
+(lp1848
+S'void *restrict'
+p1849
+aS'const void *restrict'
+p1850
+aS'unsigned long'
+p1851
+asS'sigwaitinfo'
+p1852
+(lp1853
+S'const __sigset_t *restrict'
+p1854
+aS'siginfo_t *restrict'
+p1855
+asS'fileno'
+p1856
+(lp1857
+S'struct _IO_FILE *'
+p1858
+asS'check_compressed_archive'
+p1859
+(lp1860
+S'int *'
+p1861
+asS'dump_zeros'
+p1862
+(lp1863
+S'struct tar_sparse_file *'
+p1864
+aS'int'
+p1865
+asS'xheader_keyword_override_p'
+p1866
+(lp1867
+S'const char *'
+p1868
+asS'_gnu_flush_write'
+p1869
+(lp1870
+S'unsigned long'
+p1871
+asS'fscanf'
+p1872
+(lp1873
+S'struct _IO_FILE *restrict'
+p1874
+aS'const char *restrict'
+p1875
+asS'__option_is_end'
+p1876
+(lp1877
+S'const struct argp_option *'
+p1878
+asS'remove'
+p1879
+(lp1880
+S'const char *'
+p1881
+asS'check_data_region'
+p1882
+(lp1883
+S'struct tar_sparse_file *'
+p1884
+aS'unsigned long'
+p1885
+asS'print_stats'
+p1886
+(lp1887
+S'int *'
+p1888
+aS'const char *'
+p1889
+aS'double'
+p1890
+asS'argp_usage'
+p1891
+(lp1892
+S'const struct argp_state *'
+p1893
+asS'code_ns_fraction'
+p1894
+(lp1895
+S'int'
+p1896
+aS'char *'
+p1897
+asS'xheader_list_destroy'
+p1898
+(lp1899
+S'struct keyword_list **'
+p1900
+asS'sigismember'
+p1901
+(lp1902
+S'const __sigset_t *'
+p1903
+aS'int'
+p1904
+asS'__argp_failure'
+p1905
+(lp1906
+S'const struct argp_state *restrict'
+p1907
+aS'int'
+p1908
+aS'int'
+p1909
+aS'const char *restrict'
+p1910
+asS'sys_truncate'
+p1911
+(lp1912
+S'int'
+p1913
+asS'code_timespec'
+p1914
+(lp1915
+S'struct timespec'
+p1916
+aS'char *'
+p1917
+asS'__argp_state_help'
+p1918
+(lp1919
+S'const struct argp_state *restrict'
+p1920
+aS'struct _IO_FILE *restrict'
+p1921
+aS'unsigned int'
+p1922
+asS'strncmp'
+p1923
+(lp1924
+S'const char *'
+p1925
+aS'const char *'
+p1926
+aS'unsigned long'
+p1927
+asS'check_tty'
+p1928
+(lp1929
+S'enum access_mode'
+p1930
+asS'label_notfound'
+p1931
+(lp1932
+sS'isalpha_l'
+p1933
+(lp1934
+S'int'
+p1935
+aS'struct __locale_struct *'
+p1936
+asS'pthread_kill'
+p1937
+(lp1938
+S'unsigned long'
+p1939
+aS'int'
+p1940
+asS'strcat'
+p1941
+(lp1942
+S'char *restrict'
+p1943
+aS'const char *restrict'
+p1944
+asS'merge_sort'
+p1945
+(lp1946
+S'struct name *'
+p1947
+aS'int'
+p1948
+aS'int (*)(const struct name *, const struct name *)'
+p1949
+asS'hg_initfn'
+p1950
+(lp1951
+S'void *'
+p1952
+asS'mode_from_header'
+p1953
+(lp1954
+S'const char *'
+p1955
+aS'unsigned long'
+p1956
+aS'int *'
+p1957
+asS'code_string'
+p1958
+(lp1959
+S'const char *'
+p1960
+aS'const char *'
+p1961
+aS'struct xheader *'
+p1962
+asS'sparse_offset_decoder'
+p1963
+(lp1964
+S'struct tar_stat_info *'
+p1965
+aS'const char *'
+p1966
+aS'const char *'
+p1967
+aS'unsigned long'
+p1968
+asS'stpcpy'
+p1969
+(lp1970
+S'char *restrict'
+p1971
+aS'const char *restrict'
+p1972
+asS'xheader_string_add'
+p1973
+(lp1974
+S'struct xheader *'
+p1975
+aS'const char *'
+p1976
+asS'set_volume_start_time'
+p1977
+(lp1978
+sS'info_cleanup_exclist'
+p1979
+(lp1980
+S'struct tar_stat_info *'
+p1981
+asS'strchr'
+p1982
+(lp1983
+S'const char *'
+p1984
+aS'int'
+p1985
+asS'blocking_read'
+p1986
+(lp1987
+S'int'
+p1988
+aS'void *'
+p1989
+aS'unsigned long'
+p1990
+asS'xattr_selinux_decoder'
+p1991
+(lp1992
+S'struct tar_stat_info *'
+p1993
+aS'const char *'
+p1994
+aS'const char *'
+p1995
+aS'unsigned long'
+p1996
+asS'tar_sparse_init'
+p1997
+(lp1998
+S'struct tar_sparse_file *'
+p1999
+asS'fgetpos'
+p2000
+(lp2001
+S'struct _IO_FILE *restrict'
+p2002
+aS'_G_fpos_t *restrict'
+p2003
+asS'diff_dir'
+p2004
+(lp2005
+sS'is_avoided_name'
+p2006
+(lp2007
+S'const char *'
+p2008
+asS'regex_usage_warning'
+p2009
+(lp2010
+S'const char *'
+p2011
+asS'name_term'
+p2012
+(lp2013
+sS'regcomp'
+p2014
+(lp2015
+S'struct re_pattern_buffer *restrict'
+p2016
+aS'const char *restrict'
+p2017
+aS'int'
+p2018
+asS'_IO_padn'
+p2019
+(lp2020
+S'struct _IO_FILE *'
+p2021
+aS'int'
+p2022
+aS'long'
+p2023
+asS'sigaltstack'
+p2024
+(lp2025
+S'const struct sigaltstack *restrict'
+p2026
+aS'struct sigaltstack *restrict'
+p2027
+asS'vdprintf'
+p2028
+(lp2029
+S'int'
+p2030
+aS'const char *restrict'
+p2031
+aS'struct __va_list_tag [1]'
+p2032
+asS'__getdelim'
+p2033
+(lp2034
+S'char **restrict'
+p2035
+aS'unsigned long *restrict'
+p2036
+aS'int'
+p2037
+aS'struct _IO_FILE *restrict'
+p2038
+asS'__overflow'
+p2039
+(lp2040
+S'struct _IO_FILE *'
+p2041
+aS'int'
+p2042
+asS'fd_stat'
+p2043
+(lp2044
+S'int'
+p2045
+aS'const char *'
+p2046
+aS'struct stat *'
+p2047
+aS'int'
+p2048
+asS'get_vcs_ignore_file'
+p2049
+(lp2050
+S'const char *'
+p2051
+asS'off_from_header'
+p2052
+(lp2053
+S'const char *'
+p2054
+aS'unsigned long'
+p2055
+asS'free_directory'
+p2056
+(lp2057
+S'struct directory *'
+p2058
+asS'implemented'
+p2059
+(lp2060
+S'int'
+p2061
+asS'namelist_match'
+p2062
+(lp2063
+S'const char *'
+p2064
+aS'unsigned long'
+p2065
+asS'fd_chmod'
+p2066
+(lp2067
+S'int'
+p2068
+aS'const char *'
+p2069
+aS'int'
+p2070
+aS'int'
+p2071
+asS'sigaction'
+p2072
+(lp2073
+S'int'
+p2074
+aS'const struct sigaction *restrict'
+p2075
+aS'struct sigaction *restrict'
+p2076
+asS'tmpnam_r'
+p2077
+(lp2078
+S'char *'
+p2079
+asS'seek_diag_details'
+p2080
+(lp2081
+S'const char *'
+p2082
+aS'int'
+p2083
+asS'queue_deferred_unlink'
+p2084
+(lp2085
+S'const char *'
+p2086
+aS'int'
+p2087
+asS'skip_member'
+p2088
+(lp2089
+sS'read_next_name'
+p2090
+(lp2091
+S'struct name_elt *'
+p2092
+aS'struct name_elt *'
+p2093
+asS'pax_start_header'
+p2094
+(lp2095
+S'struct tar_stat_info *'
+p2096
+asS'star_fixup_header'
+p2097
+(lp2098
+S'struct tar_sparse_file *'
+p2099
+asS'decode_signed_num'
+p2100
+(lp2101
+S'int *'
+p2102
+aS'const char *'
+p2103
+aS'int'
+p2104
+aS'int'
+p2105
+aS'const char *'
+p2106
+asS'free_name'
+p2107
+(lp2108
+S'struct name *'
+p2109
+asS'__sigismember'
+p2110
+(lp2111
+S'const __sigset_t *'
+p2112
+aS'int'
+p2113
+asS'compare_names_found'
+p2114
+(lp2115
+S'const struct name *'
+p2116
+aS'const struct name *'
+p2117
+asS'fwrite'
+p2118
+(lp2119
+S'const void *restrict'
+p2120
+aS'unsigned long'
+p2121
+aS'unsigned long'
+p2122
+aS'struct _IO_FILE *restrict'
+p2123
+asS'bufmap_locate'
+p2124
+(lp2125
+S'unsigned long'
+p2126
+asS'isspace'
+p2127
+(lp2128
+S'int'
+p2129
+asS'sigqueue'
+p2130
+(lp2131
+S'int'
+p2132
+aS'int'
+p2133
+aS'const union sigval'
+p2134
+asS'_IO_flockfile'
+p2135
+(lp2136
+S'struct _IO_FILE *'
+p2137
+asS'fflush_unlocked'
+p2138
+(lp2139
+S'struct _IO_FILE *'
+p2140
+asS'ensure_slash'
+p2141
+(lp2142
+S'char **'
+p2143
+asS'_IO_ftrylockfile'
+p2144
+(lp2145
+S'struct _IO_FILE *'
+p2146
+asS'strxfrm'
+p2147
+(lp2148
+S'char *restrict'
+p2149
+aS'const char *restrict'
+p2150
+aS'unsigned long'
+p2151
+asS'write_fatal_details'
+p2152
+(lp2153
+S'const char *'
+p2154
+aS'int'
+p2155
+aS'unsigned long'
+p2156
+asS'alloca'
+p2157
+(lp2158
+sS'zap_slashes'
+p2159
+(lp2160
+S'char *'
+p2161
+asS'toupper'
+p2162
+(lp2163
+S'int'
+p2164
+asS'exclusion_tag_warning'
+p2165
+(lp2166
+S'const char *'
+p2167
+aS'const char *'
+p2168
+aS'const char *'
+p2169
+asS'blocking_write'
+p2170
+(lp2171
+S'int'
+p2172
+aS'const void *'
+p2173
+aS'unsigned long'
+p2174
+asS'lseek_or_error'
+p2175
+(lp2176
+S'struct tar_sparse_file *'
+p2177
+aS'int'
+p2178
+asS'_obstack_begin_1'
+p2179
+(lp2180
+S'struct obstack *'
+p2181
+aS'int'
+p2182
+aS'int'
+p2183
+aS'void *(*)(void *, long)'
+p2184
+aS'void (*)(void *, void *)'
+p2185
+aS'void *'
+p2186
+asS'init_volume_number'
+p2187
+(lp2188
+sS'_obstack_begin'
+p2189
+(lp2190
+S'struct obstack *'
+p2191
+aS'int'
+p2192
+aS'int'
+p2193
+aS'void *(*)(long)'
+p2194
+aS'void (*)(void *)'
+p2195
+asS'getwidth'
+p2196
+(lp2197
+S'int *'
+p2198
+asS'putw'
+p2199
+(lp2200
+S'int'
+p2201
+aS'struct _IO_FILE *'
+p2202
+asS'sigprocmask'
+p2203
+(lp2204
+S'int'
+p2205
+aS'const __sigset_t *restrict'
+p2206
+aS'__sigset_t *restrict'
+p2207
+asS'raise'
+p2208
+(lp2209
+S'int'
+p2210
+asS'puts'
+p2211
+(lp2212
+S'const char *'
+p2213
+asS'parse_transform_expr'
+p2214
+(lp2215
+S'const char *'
+p2216
+asS'archive_read_error'
+p2217
+(lp2218
+sS'clearerr_unlocked'
+p2219
+(lp2220
+S'struct _IO_FILE *'
+p2221
+asS'open_failure_recover'
+p2222
+(lp2223
+S'const struct tar_stat_info *'
+p2224
+asS'gnu_dev_major'
+p2225
+(lp2226
+S'unsigned long long'
+p2227
+asS'xattrs_kw_excluded'
+p2228
+(lp2229
+S'const char *'
+p2230
+aS'int'
+p2231
+asS'putc'
+p2232
+(lp2233
+S'int'
+p2234
+aS'struct _IO_FILE *'
+p2235
+asS'xheader_keyword_deleted_p'
+p2236
+(lp2237
+S'const char *'
+p2238
+asS'split_long_name'
+p2239
+(lp2240
+S'const char *'
+p2241
+aS'unsigned long'
+p2242
+asS'uid_to_uname'
+p2243
+(lp2244
+S'int'
+p2245
+aS'char **'
+p2246
+asS'closeout_volume_number'
+p2247
+(lp2248
+sS'gid_to_chars'
+p2249
+(lp2250
+S'int'
+p2251
+aS'char *'
+p2252
+aS'unsigned long'
+p2253
+asS'__sigdelset'
+p2254
+(lp2255
+S'__sigset_t *'
+p2256
+aS'int'
+p2257
+asS'strsignal'
+p2258
+(lp2259
+S'int'
+p2260
+asS'tar_sparse_decode_header'
+p2261
+(lp2262
+S'struct tar_sparse_file *'
+p2263
+asS'append_file'
+p2264
+(lp2265
+S'char *'
+p2266
+asS'sparse_add_map'
+p2267
+(lp2268
+S'struct tar_stat_info *'
+p2269
+aS'const struct sp_array *'
+p2270
+asS'tartime'
+p2271
+(lp2272
+S'struct timespec'
+p2273
+aS'int'
+p2274
+asS'check_label_pattern'
+p2275
+(lp2276
+S'const char *'
+p2277
+asS'set_transform_expr'
+p2278
+(lp2279
+S'const char *'
+p2280
+asS'normalize_filename_x'
+p2281
+(lp2282
+S'char *'
+p2283
+asS'xattr_acls_a_decoder'
+p2284
+(lp2285
+S'struct tar_stat_info *'
+p2286
+aS'const char *'
+p2287
+aS'const char *'
+p2288
+aS'unsigned long'
+p2289
+asS'dump_file'
+p2290
+(lp2291
+S'struct tar_stat_info *'
+p2292
+aS'const char *'
+p2293
+aS'const char *'
+p2294
+asS'xattr_coder'
+p2295
+(lp2296
+S'const struct tar_stat_info *'
+p2297
+aS'const char *'
+p2298
+aS'struct xheader *'
+p2299
+aS'const void *'
+p2300
+asS'minor_from_header'
+p2301
+(lp2302
+S'const char *'
+p2303
+aS'unsigned long'
+p2304
+asS'namebuf_name'
+p2305
+(lp2306
+S'struct namebuf *'
+p2307
+aS'const char *'
+p2308
+asS'open_archive'
+p2309
+(lp2310
+S'enum access_mode'
+p2311
+asS'gname_decoder'
+p2312
+(lp2313
+S'struct tar_stat_info *'
+p2314
+aS'const char *'
+p2315
+aS'const char *'
+p2316
+aS'unsigned long'
+p2317
+asS'gname_to_gid'
+p2318
+(lp2319
+S'const char *'
+p2320
+aS'int *'
+p2321
+asS'_transform_name_to_obstack'
+p2322
+(lp2323
+S'int'
+p2324
+aS'char *'
+p2325
+aS'char **'
+p2326
+asS'vsprintf'
+p2327
+(lp2328
+S'char *restrict'
+p2329
+aS'const char *restrict'
+p2330
+aS'struct __va_list_tag [1]'
+p2331
+asS'dunlink_reclaim'
+p2332
+(lp2333
+S'struct deferred_unlink *'
+p2334
+asS'simple_flush_write'
+p2335
+(lp2336
+S'unsigned long'
+p2337
+asS'rename'
+p2338
+(lp2339
+S'const char *'
+p2340
+aS'const char *'
+p2341
+asS'read_and_process'
+p2342
+(lp2343
+S'struct tar_stat_info *'
+p2344
+aS'int (*)(unsigned long, char *)'
+p2345
+asS'ctime_coder'
+p2346
+(lp2347
+S'const struct tar_stat_info *'
+p2348
+aS'const char *'
+p2349
+aS'struct xheader *'
+p2350
+aS'const void *'
+p2351
+asS'set_subcommand_option'
+p2352
+(lp2353
+S'enum subcommand'
+p2354
+asS'argp_help'
+p2355
+(lp2356
+S'const struct argp *restrict'
+p2357
+aS'struct _IO_FILE *restrict'
+p2358
+aS'unsigned int'
+p2359
+aS'char *restrict'
+p2360
+asS'find_argp_option'
+p2361
+(lp2362
+S'struct argp_option *'
+p2363
+aS'int'
+p2364
+asS'oldgnu_add_sparse'
+p2365
+(lp2366
+S'struct tar_sparse_file *'
+p2367
+aS'struct sparse *'
+p2368
+asS'print_for_mkdir'
+p2369
+(lp2370
+S'char *'
+p2371
+aS'int'
+p2372
+aS'int'
+p2373
+asS'_single_transform_name_to_obstack'
+p2374
+(lp2375
+S'struct transform *'
+p2376
+aS'char *'
+p2377
+asS'dumpdir_free'
+p2378
+(lp2379
+S'struct dumpdir *'
+p2380
+asS'mtime_decoder'
+p2381
+(lp2382
+S'struct tar_stat_info *'
+p2383
+aS'const char *'
+p2384
+aS'const char *'
+p2385
+aS'unsigned long'
+p2386
+asS'hash_directory_meta'
+p2387
+(lp2388
+S'const void *'
+p2389
+aS'unsigned long'
+p2390
+asS'is_regular_file'
+p2391
+(lp2392
+S'const char *'
+p2393
+asS'isblank'
+p2394
+(lp2395
+S'int'
+p2396
+asS'check_sparse_region'
+p2397
+(lp2398
+S'struct tar_sparse_file *'
+p2399
+aS'int'
+p2400
+aS'int'
+p2401
+asS'major_from_header'
+p2402
+(lp2403
+S'const char *'
+p2404
+aS'unsigned long'
+p2405
+asS'volume_offset_coder'
+p2406
+(lp2407
+S'const struct tar_stat_info *'
+p2408
+aS'const char *'
+p2409
+aS'struct xheader *'
+p2410
+aS'const void *'
+p2411
+asS'ispunct'
+p2412
+(lp2413
+S'int'
+p2414
+asS'sys_exec_info_script'
+p2415
+(lp2416
+S'const char **'
+p2417
+aS'int'
+p2418
+asS'cfgetispeed'
+p2419
+(lp2420
+S'const struct termios *'
+p2421
+asS'getc'
+p2422
+(lp2423
+S'struct _IO_FILE *'
+p2424
+asS'xheader_format_name'
+p2425
+(lp2426
+S'struct tar_stat_info *'
+p2427
+aS'const char *'
+p2428
+aS'unsigned long'
+p2429
+asS'archive_is_dev'
+p2430
+(lp2431
+sS'names_notfound'
+p2432
+(lp2433
+sS'name_elt_alloc'
+p2434
+(lp2435
+sS'subcommand_string'
+p2436
+(lp2437
+S'enum subcommand'
+p2438
+asS'volume_size_decoder'
+p2439
+(lp2440
+S'struct tar_stat_info *'
+p2441
+aS'const char *'
+p2442
+aS'const char *'
+p2443
+aS'unsigned long'
+p2444
+asS'_IO_sgetn'
+p2445
+(lp2446
+S'struct _IO_FILE *'
+p2447
+aS'void *'
+p2448
+aS'unsigned long'
+p2449
+asS'dumpdir_locate'
+p2450
+(lp2451
+S'struct dumpdir *'
+p2452
+aS'const char *'
+p2453
+asS'getw'
+p2454
+(lp2455
+S'struct _IO_FILE *'
+p2456
+asS'ssignal'
+p2457
+(lp2458
+S'int'
+p2459
+aS'void (*)(int)'
+p2460
+asS'gsignal'
+p2461
+(lp2462
+S'int'
+p2463
+asS'xattrs_masked_out'
+p2464
+(lp2465
+S'const char *'
+p2466
+aS'int'
+p2467
+asS'__strtok_r'
+p2468
+(lp2469
+S'char *restrict'
+p2470
+aS'const char *restrict'
+p2471
+aS'char **restrict'
+p2472
+asS'clear_directory_table'
+p2473
+(lp2474
+sS'directory_contents'
+p2475
+(lp2476
+S'struct directory *'
+p2477
+asS'isgraph'
+p2478
+(lp2479
+S'int'
+p2480
+asS'__ctype_tolower_loc'
+p2481
+(lp2482
+sS'match_volume_label'
+p2483
+(lp2484
+sS'setbuf'
+p2485
+(lp2486
+S'struct _IO_FILE *restrict'
+p2487
+aS'char *restrict'
+p2488
+asS'xattr_acls_a_coder'
+p2489
+(lp2490
+S'const struct tar_stat_info *'
+p2491
+aS'const char *'
+p2492
+aS'struct xheader *'
+p2493
+aS'const void *'
+p2494
+asS'make_directory'
+p2495
+(lp2496
+S'const char *'
+p2497
+aS'char *'
+p2498
+asS'add_char_segment'
+p2499
+(lp2500
+S'struct transform *'
+p2501
+aS'int'
+p2502
+asS'write_ustar_long_name'
+p2503
+(lp2504
+S'const char *'
+p2505
+asS'xclose'
+p2506
+(lp2507
+S'int'
+p2508
+asS'dump_dir0'
+p2509
+(lp2510
+S'struct tar_stat_info *'
+p2511
+aS'const char *'
+p2512
+asS'option_conflict_error'
+p2513
+(lp2514
+S'const char *'
+p2515
+aS'const char *'
+p2516
+asS'gnu_flush_read'
+p2517
+(lp2518
+sS'new_transform'
+p2519
+(lp2520
+sS'seek_archive'
+p2521
+(lp2522
+S'int'
+p2523
+asS'sigblock'
+p2524
+(lp2525
+S'int'
+p2526
+asS'__libc_current_sigrtmin'
+p2527
+(lp2528
+sS'decode_header'
+p2529
+(lp2530
+S'union block *'
+p2531
+aS'struct tar_stat_info *'
+p2532
+aS'enum archive_format *'
+p2533
+aS'int'
+p2534
+asS'uname_decoder'
+p2535
+(lp2536
+S'struct tar_stat_info *'
+p2537
+aS'const char *'
+p2538
+aS'const char *'
+p2539
+aS'unsigned long'
+p2540
+asS'tcflow'
+p2541
+(lp2542
+S'int'
+p2543
+aS'int'
+p2544
+asS'bufmap_reset'
+p2545
+(lp2546
+S'struct bufmap *'
+p2547
+aS'int'
+p2548
+asS'volume_offset_decoder'
+p2549
+(lp2550
+S'struct tar_stat_info *'
+p2551
+aS'const char *'
+p2552
+aS'const char *'
+p2553
+aS'unsigned long'
+p2554
+asS'must_be_dot_or_slash'
+p2555
+(lp2556
+S'const char *'
+p2557
+asS'x_obstack_1grow'
+p2558
+(lp2559
+S'struct xheader *'
+p2560
+aS'char'
+p2561
+asS'__option_is_short'
+p2562
+(lp2563
+S'const struct argp_option *'
+p2564
+asS'sys_spawn_shell'
+p2565
+(lp2566
+sS'tcsendbreak'
+p2567
+(lp2568
+S'int'
+p2569
+aS'int'
+p2570
+asS'__argp_help'
+p2571
+(lp2572
+S'const struct argp *restrict'
+p2573
+aS'struct _IO_FILE *restrict'
+p2574
+aS'unsigned int'
+p2575
+aS'char *'
+p2576
+asS'cfsetispeed'
+p2577
+(lp2578
+S'struct termios *'
+p2579
+aS'unsigned int'
+p2580
+asS'savedir_diag'
+p2581
+(lp2582
+S'const char *'
+p2583
+asS'set_compression_program_by_suffix'
+p2584
+(lp2585
+S'const char *'
+p2586
+aS'const char *'
+p2587
+asS'namebuf_finish'
+p2588
+(lp2589
+S'struct namebuf *'
+p2590
+asS'__tolower_l'
+p2591
+(lp2592
+S'int'
+p2593
+aS'struct __locale_struct *'
+p2594
+asS'sparse_dump_region'
+p2595
+(lp2596
+S'struct tar_sparse_file *'
+p2597
+aS'unsigned long'
+p2598
+asS'try_new_volume'
+p2599
+(lp2600
+sS'transform_stat_info'
+p2601
+(lp2602
+S'int'
+p2603
+aS'struct tar_stat_info *'
+p2604
+asS'kill'
+p2605
+(lp2606
+S'int'
+p2607
+aS'int'
+p2608
+asS'write_recent_blocks'
+p2609
+(lp2610
+S'union block *'
+p2611
+aS'unsigned long'
+p2612
+asS'dump_dir'
+p2613
+(lp2614
+S'struct tar_stat_info *'
+p2615
+asS'maybe_backup_file'
+p2616
+(lp2617
+S'const char *'
+p2618
+aS'int'
+p2619
+asS'uintmax_to_chars'
+p2620
+(lp2621
+S'int'
+p2622
+aS'char *'
+p2623
+aS'unsigned long'
+p2624
+asS'fflush'
+p2625
+(lp2626
+S'struct _IO_FILE *'
+p2627
+asS'argp_failure'
+p2628
+(lp2629
+S'const struct argp_state *restrict'
+p2630
+aS'int'
+p2631
+aS'int'
+p2632
+aS'const char *restrict'
+p2633
+asS'set_file_atime'
+p2634
+(lp2635
+S'int'
+p2636
+aS'int'
+p2637
+aS'const char *'
+p2638
+aS'struct timespec'
+p2639
+asS'compress_option'
+p2640
+(lp2641
+S'enum compress_type'
+p2642
+asS'string_to_chars'
+p2643
+(lp2644
+S'const char *'
+p2645
+aS'char *'
+p2646
+aS'unsigned long'
+p2647
+asS'compute_duration'
+p2648
+(lp2649
+sS'name_scan'
+p2650
+(lp2651
+S'const char *'
+p2652
+asS'start_header'
+p2653
+(lp2654
+S'struct tar_stat_info *'
+p2655
+asS'size_decoder'
+p2656
+(lp2657
+S'struct tar_stat_info *'
+p2658
+aS'const char *'
+p2659
+aS'const char *'
+p2660
+aS'unsigned long'
+p2661
+asS'contains_dot_dot'
+p2662
+(lp2663
+S'const char *'
+p2664
+asS'xattrs_print'
+p2665
+(lp2666
+S'const struct tar_stat_info *'
+p2667
+asS'tmpnam'
+p2668
+(lp2669
+S'char *'
+p2670
+asS'usage'
+p2671
+(lp2672
+S'int'
+p2673
+asS'volume_filename_decoder'
+p2674
+(lp2675
+S'struct tar_stat_info *'
+p2676
+aS'const char *'
+p2677
+aS'const char *'
+p2678
+aS'unsigned long'
+p2679
+asS'sparse_numbytes_coder'
+p2680
+(lp2681
+S'const struct tar_stat_info *'
+p2682
+aS'const char *'
+p2683
+aS'struct xheader *'
+p2684
+aS'const void *'
+p2685
+asS'apply_delayed_links'
+p2686
+(lp2687
+sS'delete_archive_members'
+p2688
+(lp2689
+sS'argp_parse'
+p2690
+(lp2691
+S'const struct argp *restrict'
+p2692
+aS'int'
+p2693
+aS'char **restrict'
+p2694
+aS'unsigned int'
+p2695
+aS'int *restrict'
+p2696
+aS'void *restrict'
+p2697
+asS'uintmax_from_header'
+p2698
+(lp2699
+S'const char *'
+p2700
+aS'unsigned long'
+p2701
+asS'write_directory_file_entry'
+p2702
+(lp2703
+S'void *'
+p2704
+aS'void *'
+p2705
+asS'transform_member_name'
+p2706
+(lp2707
+S'char **'
+p2708
+aS'int'
+p2709
+asS'test_archive_label'
+p2710
+(lp2711
+sS'write_recent_bytes'
+p2712
+(lp2713
+S'char *'
+p2714
+aS'unsigned long'
+p2715
+asS'copy_string_unquote'
+p2716
+(lp2717
+S'const char *'
+p2718
+asS'major_to_chars'
+p2719
+(lp2720
+S'int'
+p2721
+aS'char *'
+p2722
+aS'unsigned long'
+p2723
+asS'toascii'
+p2724
+(lp2725
+S'int'
+p2726
+asS'path_decoder'
+p2727
+(lp2728
+S'struct tar_stat_info *'
+p2729
+aS'const char *'
+p2730
+aS'const char *'
+p2731
+aS'unsigned long'
+p2732
+asS'name_match'
+p2733
+(lp2734
+S'const char *'
+p2735
+asS'stat_to_env'
+p2736
+(lp2737
+S'char *'
+p2738
+aS'char'
+p2739
+aS'struct tar_stat_info *'
+p2740
+asS'pax_dump_header'
+p2741
+(lp2742
+S'struct tar_sparse_file *'
+p2743
+asS'maybe_recoverable'
+p2744
+(lp2745
+S'char *'
+p2746
+aS'int'
+p2747
+aS'int *'
+p2748
+asS'dec_to_env'
+p2749
+(lp2750
+S'const char *'
+p2751
+aS'int'
+p2752
+asS'gnu_dev_minor'
+p2753
+(lp2754
+S'unsigned long long'
+p2755
+asS'dumpdir_first'
+p2756
+(lp2757
+S'struct dumpdir *'
+p2758
+aS'int'
+p2759
+aS'struct dumpdir_iter **'
+p2760
+asS'strstr'
+p2761
+(lp2762
+S'const char *'
+p2763
+aS'const char *'
+p2764
+asS'renameat'
+p2765
+(lp2766
+S'int'
+p2767
+aS'const char *'
+p2768
+aS'int'
+p2769
+aS'const char *'
+p2770
+asS'memmove'
+p2771
+(lp2772
+S'void *'
+p2773
+aS'const void *'
+p2774
+aS'unsigned long'
+p2775
+asS'signal'
+p2776
+(lp2777
+S'int'
+p2778
+aS'void (*)(int)'
+p2779
+asS'decode_record'
+p2780
+(lp2781
+S'struct xheader *'
+p2782
+aS'char **'
+p2783
+aS'void (*)(void *, const char *, const char *, unsigned long)'
+p2784
+aS'void *'
+p2785
+asS'first_decompress_program'
+p2786
+(lp2787
+S'int *'
+p2788
+asS'off_to_chars'
+p2789
+(lp2790
+S'int'
+p2791
+aS'char *'
+p2792
+aS'unsigned long'
+p2793
+asS'mv_begin_write'
+p2794
+(lp2795
+S'const char *'
+p2796
+aS'int'
+p2797
+aS'int'
+p2798
+asS'sparse_dump_file'
+p2799
+(lp2800
+S'int'
+p2801
+aS'struct tar_stat_info *'
+p2802
+asS'_IO_vfprintf'
+p2803
+(lp2804
+S'struct _IO_FILE *restrict'
+p2805
+aS'const char *restrict'
+p2806
+aS'struct __va_list_tag [1]'
+p2807
+asS'set_archive_format'
+p2808
+(lp2809
+S'const char *'
+p2810
+asS'freopen'
+p2811
+(lp2812
+S'const char *restrict'
+p2813
+aS'const char *restrict'
+p2814
+aS'struct _IO_FILE *restrict'
+p2815
+asS'utf8_init'
+p2816
+(lp2817
+S'int'
+p2818
+asS'file_list_name'
+p2819
+(lp2820
+sS'fread_unlocked'
+p2821
+(lp2822
+S'void *restrict'
+p2823
+aS'unsigned long'
+p2824
+aS'unsigned long'
+p2825
+aS'struct _IO_FILE *restrict'
+p2826
+asS'strcmp'
+p2827
+(lp2828
+S'const char *'
+p2829
+aS'const char *'
+p2830
+asS'tempnam'
+p2831
+(lp2832
+S'const char *'
+p2833
+aS'const char *'
+p2834
+asS'tmpfile'
+p2835
+(lp2836
+sS'merge_sort_sll'
+p2837
+(lp2838
+S'struct name *'
+p2839
+aS'int'
+p2840
+aS'int (*)(const struct name *, const struct name *)'
+p2841
+asS'xheader_print'
+p2842
+(lp2843
+S'struct xheader *'
+p2844
+aS'const char *'
+p2845
+aS'const char *'
+p2846
+asS'rpmatch'
+p2847
+(lp2848
+S'const char *'
+p2849
+asS'set_exit_status'
+p2850
+(lp2851
+S'int'
+p2852
+asS'fgetc'
+p2853
+(lp2854
+S'struct _IO_FILE *'
+p2855
+asS'dummy_coder'
+p2856
+(lp2857
+S'const struct tar_stat_info *'
+p2858
+aS'const char *'
+p2859
+aS'struct xheader *'
+p2860
+aS'const void *'
+p2861
+asS'pclose'
+p2862
+(lp2863
+S'struct _IO_FILE *'
+p2864
+asS'xheader_write_global'
+p2865
+(lp2866
+S'struct xheader *'
+p2867
+asS'add_chunk_header'
+p2868
+(lp2869
+S'struct bufmap *'
+p2870
+asS'fgets'
+p2871
+(lp2872
+S'char *restrict'
+p2873
+aS'int'
+p2874
+aS'struct _IO_FILE *restrict'
+p2875
+asS'checkpoint_flush_actions'
+p2876
+(lp2877
+sS'ctermid'
+p2878
+(lp2879
+S'char *'
+p2880
+asS'sys_child_open_for_uncompress'
+p2881
+(lp2882
+sS'tar_sparse_member_p'
+p2883
+(lp2884
+S'struct tar_sparse_file *'
+p2885
+asS'_IO_feof'
+p2886
+(lp2887
+S'struct _IO_FILE *'
+p2888
+asS'sparse_size_coder'
+p2889
+(lp2890
+S'const struct tar_stat_info *'
+p2891
+aS'const char *'
+p2892
+aS'struct xheader *'
+p2893
+aS'const void *'
+p2894
+asS'mv_end'
+p2895
+(lp2896
+sS'diff_init'
+p2897
+(lp2898
+sS'fgetc_unlocked'
+p2899
+(lp2900
+S'struct _IO_FILE *'
+p2901
+asS'sparse_numblocks_coder'
+p2902
+(lp2903
+S'const struct tar_stat_info *'
+p2904
+aS'const char *'
+p2905
+aS'struct xheader *'
+p2906
+aS'const void *'
+p2907
+asS'fsetpos'
+p2908
+(lp2909
+S'struct _IO_FILE *'
+p2910
+aS'const _G_fpos_t *'
+p2911
+asS'ftell'
+p2912
+(lp2913
+S'struct _IO_FILE *'
+p2914
+asS'exit'
+p2915
+(lp2916
+sS'git_addfn'
+p2917
+(lp2918
+S'struct exclude *'
+p2919
+aS'const char *'
+p2920
+aS'int'
+p2921
+aS'void *'
+p2922
+asS'read_header0'
+p2923
+(lp2924
+S'struct tar_stat_info *'
+p2925
+asS'extract_link'
+p2926
+(lp2927
+S'char *'
+p2928
+aS'int'
+p2929
+asS'code_num'
+p2930
+(lp2931
+S'int'
+p2932
+aS'const char *'
+p2933
+aS'struct xheader *'
+p2934
+asS'xattr_encode_keyword'
+p2935
+(lp2936
+S'const char *'
+p2937
+asS'prepare_to_extract'
+p2938
+(lp2939
+S'const char *'
+p2940
+aS'int'
+p2941
+aS'int (**)(char *, int)'
+p2942
+asS'sparse_map_decoder'
+p2943
+(lp2944
+S'struct tar_stat_info *'
+p2945
+aS'const char *'
+p2946
+aS'const char *'
+p2947
+aS'unsigned long'
+p2948
+asS'time_to_env'
+p2949
+(lp2950
+S'const char *'
+p2951
+aS'struct timespec'
+p2952
+asS'backspace_output'
+p2953
+(lp2954
+sS'finish_header'
+p2955
+(lp2956
+S'struct tar_stat_info *'
+p2957
+aS'union block *'
+p2958
+aS'int'
+p2959
+asS'__ctype_toupper_loc'
+p2960
+(lp2961
+sS'wait_for_grandchild'
+p2962
+(lp2963
+S'int'
+p2964
+asS'sparse_select_optab'
+p2965
+(lp2966
+S'struct tar_sparse_file *'
+p2967
+asS'__stpncpy'
+p2968
+(lp2969
+S'char *restrict'
+p2970
+aS'const char *restrict'
+p2971
+aS'unsigned long'
+p2972
+asS'new_volume'
+p2973
+(lp2974
+S'enum access_mode'
+p2975
+asS'sigtimedwait'
+p2976
+(lp2977
+S'const __sigset_t *restrict'
+p2978
+aS'siginfo_t *restrict'
+p2979
+aS'const struct timespec *restrict'
+p2980
+asS'get_directory_entries'
+p2981
+(lp2982
+S'struct tar_stat_info *'
+p2983
+asS'read_num'
+p2984
+(lp2985
+S'int *'
+p2986
+aS'const char *'
+p2987
+aS'int'
+p2988
+aS'int'
+p2989
+aS'int *'
+p2990
+asS'write_record'
+p2991
+(lp2992
+S'int'
+p2993
+asS'check_time'
+p2994
+(lp2995
+S'const char *'
+p2996
+aS'struct timespec'
+p2997
+asS'tar_stat_init'
+p2998
+(lp2999
+S'struct tar_stat_info *'
+p3000
+asS'checkpoint_finish_compile'
+p3001
+(lp3002
+sS'read_header'
+p3003
+(lp3004
+S'union block **'
+p3005
+aS'struct tar_stat_info *'
+p3006
+aS'enum read_header_mode'
+p3007
+asS'name_add_name'
+p3008
+(lp3009
+S'const char *'
+p3010
+aS'int'
+p3011
+asS'append_incremental_renames'
+p3012
+(lp3013
+S'struct directory *'
+p3014
+asS'diff_link'
+p3015
+(lp3016
+sS'name_list_advance'
+p3017
+(lp3018
+sS'strcpy'
+p3019
+(lp3020
+S'char *restrict'
+p3021
+aS'const char *restrict'
+p3022
+asS'find_next_block'
+p3023
+(lp3024
+sS'read_timespec'
+p3025
+(lp3026
+S'int *'
+p3027
+aS'struct timespec *'
+p3028
+asS'xheader_string_end'
+p3029
+(lp3030
+S'struct xheader *'
+p3031
+aS'const char *'
+p3032
+asS'xexec'
+p3033
+(lp3034
+S'const char *'
+p3035
+asS'run_decompress_program'
+p3036
+(lp3037
+sS'isprint'
+p3038
+(lp3039
+S'int'
+p3040
+asS'sys_child_open_for_compress'
+p3041
+(lp3042
+sS'write_long_name'
+p3043
+(lp3044
+S'struct tar_stat_info *'
+p3045
+asS'page_aligned_alloc'
+p3046
+(lp3047
+S'void **'
+p3048
+aS'unsigned long'
+p3049
+asS'sigemptyset'
+p3050
+(lp3051
+S'__sigset_t *'
+p3052
+asS'namebuf_add_dir'
+p3053
+(lp3054
+S'struct namebuf *'
+p3055
+aS'const char *'
+p3056
+asS'mv_size_left'
+p3057
+(lp3058
+S'int'
+p3059
+asS'add_volume_label'
+p3060
+(lp3061
+sS'run_checkpoint_actions'
+p3062
+(lp3063
+S'int'
+p3064
+asS'memccpy'
+p3065
+(lp3066
+S'void *restrict'
+p3067
+aS'const void *restrict'
+p3068
+aS'int'
+p3069
+aS'unsigned long'
+p3070
+asS'acls_one_line'
+p3071
+(lp3072
+S'const char *'
+p3073
+aS'char'
+p3074
+aS'const char *'
+p3075
+aS'unsigned long'
+p3076
+asS'atime_coder'
+p3077
+(lp3078
+S'const struct tar_stat_info *'
+p3079
+aS'const char *'
+p3080
+aS'struct xheader *'
+p3081
+aS'const void *'
+p3082
+asS'fdopen'
+p3083
+(lp3084
+S'int'
+p3085
+aS'const char *'
+p3086
+asS'sys_save_archive_dev_ino'
+p3087
+(lp3088
+sS'blank_name_list'
+p3089
+(lp3090
+sS'chdir_arg'
+p3091
+(lp3092
+S'const char *'
+p3093
+asS'tar_help_filter'
+p3094
+(lp3095
+S'int'
+p3096
+aS'const char *'
+p3097
+aS'void *'
+p3098
+asS'chdir_count'
+p3099
+(lp3100
+sS'sparse_minor_coder'
+p3101
+(lp3102
+S'const struct tar_stat_info *'
+p3103
+aS'const char *'
+p3104
+aS'struct xheader *'
+p3105
+aS'const void *'
+p3106
+asS'open_compressed_archive'
+p3107
+(lp3108
+sS'to_base256'
+p3109
+(lp3110
+S'int'
+p3111
+aS'int'
+p3112
+aS'char *'
+p3113
+aS'unsigned long'
+p3114
+asS'diff_multivol'
+p3115
+(lp3116
+sS'remove_any_file'
+p3117
+(lp3118
+S'const char *'
+p3119
+aS'enum remove_option'
+p3120
+asS'vprintf'
+p3121
+(lp3122
+S'const char *restrict'
+p3123
+aS'struct __va_list_tag [1]'
+p3124
+asS'write_extended'
+p3125
+(lp3126
+S'int'
+p3127
+aS'struct tar_stat_info *'
+p3128
+aS'union block *'
+p3129
+asS'cachedir_file_p'
+p3130
+(lp3131
+S'int'
+p3132
+asS'decode_time'
+p3133
+(lp3134
+S'struct timespec *'
+p3135
+aS'const char *'
+p3136
+aS'const char *'
+p3137
+asS'argp_error'
+p3138
+(lp3139
+S'const struct argp_state *restrict'
+p3140
+aS'const char *restrict'
+p3141
+asS'sparse_diff_file'
+p3142
+(lp3143
+S'int'
+p3144
+aS'struct tar_stat_info *'
+p3145
+asS'_IO_funlockfile'
+p3146
+(lp3147
+S'struct _IO_FILE *'
+p3148
+asS'_obstack_memory_used'
+p3149
+(lp3150
+S'struct obstack *'
+p3151
+asS'volume_label_decoder'
+p3152
+(lp3153
+S'struct tar_stat_info *'
+p3154
+aS'const char *'
+p3155
+aS'const char *'
+p3156
+aS'unsigned long'
+p3157
+asS'string_ascii_p'
+p3158
+(lp3159
+S'const char *'
+p3160
+asS'show_snapshot_field_ranges'
+p3161
+(lp3162
+sS'xattr_selinux_coder'
+p3163
+(lp3164
+S'const struct tar_stat_info *'
+p3165
+aS'const char *'
+p3166
+aS'struct xheader *'
+p3167
+aS'const void *'
+p3168
+asS'print_volume_label'
+p3169
+(lp3170
+sS'print_header'
+p3171
+(lp3172
+S'struct tar_stat_info *'
+p3173
+aS'union block *'
+p3174
+aS'int'
+p3175
+asS'mask_map_realloc'
+p3176
+(lp3177
+S'struct xattrs_mask_map *'
+p3178
+asS'_IO_getc'
+p3179
+(lp3180
+S'struct _IO_FILE *'
+p3181
+asS'isalnum_l'
+p3182
+(lp3183
+S'int'
+p3184
+aS'struct __locale_struct *'
+p3185
+asS'simple_flush_read'
+p3186
+(lp3187
+sS'tolower_l'
+p3188
+(lp3189
+S'int'
+p3190
+aS'struct __locale_struct *'
+p3191
+asS'flush_write'
+p3192
+(lp3193
+sS'strspn'
+p3194
+(lp3195
+S'const char *'
+p3196
+aS'const char *'
+p3197
+asS'_IO_vfscanf'
+p3198
+(lp3199
+S'struct _IO_FILE *restrict'
+p3200
+aS'const char *restrict'
+p3201
+aS'struct __va_list_tag [1]'
+p3202
+aS'int *restrict'
+p3203
+asS'chr_to_env'
+p3204
+(lp3205
+S'const char *'
+p3206
+aS'char'
+p3207
+asS'ungetc'
+p3208
+(lp3209
+S'int'
+p3210
+aS'struct _IO_FILE *'
+p3211
+asS'run_case_conv'
+p3212
+(lp3213
+S'enum case_ctl_type'
+p3214
+aS'char *'
+p3215
+aS'unsigned long'
+p3216
+asS'psiginfo'
+p3217
+(lp3218
+S'const siginfo_t *'
+p3219
+aS'const char *'
+p3220
+asS'sscanf'
+p3221
+(lp3222
+S'const char *restrict'
+p3223
+aS'const char *restrict'
+p3224
+asS'fileno_unlocked'
+p3225
+(lp3226
+S'struct _IO_FILE *'
+p3227
+asS'strndup'
+p3228
+(lp3229
+S'const char *'
+p3230
+aS'unsigned long'
+p3231
+asS'pax_sparse_member_p'
+p3232
+(lp3233
+S'struct tar_sparse_file *'
+p3234
+asS'fread'
+p3235
+(lp3236
+S'void *restrict'
+p3237
+aS'unsigned long'
+p3238
+aS'unsigned long'
+p3239
+aS'struct _IO_FILE *restrict'
+p3240
+asS'ftello'
+p3241
+(lp3242
+S'struct _IO_FILE *'
+p3243
+asS'setlinebuf'
+p3244
+(lp3245
+S'struct _IO_FILE *'
+p3246
+asS'run_override_list'
+p3247
+(lp3248
+S'struct keyword_list *'
+p3249
+aS'struct tar_stat_info *'
+p3250
+asS'sparse_extract_file'
+p3251
+(lp3252
+S'int'
+p3253
+aS'struct tar_stat_info *'
+p3254
+aS'int *'
+p3255
+asS'repair_delayed_set_stat'
+p3256
+(lp3257
+S'const char *'
+p3258
+aS'const struct stat *'
+p3259
+asS'isdigit'
+p3260
+(lp3261
+S'int'
+p3262
+asS'_IO_seekpos'
+p3263
+(lp3264
+S'struct _IO_FILE *'
+p3265
+aS'long'
+p3266
+aS'int'
+p3267
+asS'format_checkpoint_string'
+p3268
+(lp3269
+S'int *'
+p3270
+aS'unsigned long'
+p3271
+aS'const char *'
+p3272
+aS'int'
+p3273
+aS'unsigned int'
+p3274
+asS'__sigpause'
+p3275
+(lp3276
+S'int'
+p3277
+aS'int'
+p3278
+asS'isupper_l'
+p3279
+(lp3280
+S'int'
+p3281
+aS'struct __locale_struct *'
+p3282
+asS'sys_write_archive_buffer'
+p3283
+(lp3284
+sS'gnu_dev_makedev'
+p3285
+(lp3286
+S'unsigned int'
+p3287
+aS'unsigned int'
+p3288
+asS'_write_volume_label'
+p3289
+(lp3290
+S'const char *'
+p3291
+asS'open_output_file'
+p3292
+(lp3293
+S'const char *'
+p3294
+aS'int'
+p3295
+aS'int'
+p3296
+aS'int'
+p3297
+aS'int *'
+p3298
+aS'int *'
+p3299
+asS'mv_begin_read'
+p3300
+(lp3301
+S'struct tar_stat_info *'
+p3302
+asS'bool'
+p3303
+(lp3304
+sS'tar_set_quoting_style'
+p3305
+(lp3306
+S'char *'
+p3307
+asS'getopt'
+p3308
+(lp3309
+S'int'
+p3310
+aS'char *const *'
+p3311
+aS'const char *'
+p3312
+asS'_gnu_flush_read'
+p3313
+(lp3314
+sS'xattrs_xattrs_get'
+p3315
+(lp3316
+S'int'
+p3317
+aS'const char *'
+p3318
+aS'struct tar_stat_info *'
+p3319
+aS'int'
+p3320
+asS'vfscanf'
+p3321
+(lp3322
+S'struct _IO_FILE *restrict'
+p3323
+aS'const char *restrict'
+p3324
+aS'struct __va_list_tag [1]'
+p3325
+asS'sparse_numbytes_decoder'
+p3326
+(lp3327
+S'struct tar_stat_info *'
+p3328
+aS'const char *'
+p3329
+aS'const char *'
+p3330
+aS'unsigned long'
+p3331
+asS'add_avoided_name'
+p3332
+(lp3333
+S'const char *'
+p3334
+asS'excfile_add'
+p3335
+(lp3336
+S'const char *'
+p3337
+aS'int'
+p3338
+asS'try_purge_directory'
+p3339
+(lp3340
+S'const char *'
+p3341
+asS'tcsetattr'
+p3342
+(lp3343
+S'int'
+p3344
+aS'int'
+p3345
+aS'const struct termios *'
+p3346
+asS'finish_deferred_unlinks'
+p3347
+(lp3348
+sS'zero_block_p'
+p3349
+(lp3350
+S'const char *'
+p3351
+aS'unsigned long'
+p3352
+asS'make_directories'
+p3353
+(lp3354
+S'char *'
+p3355
+aS'int *'
+p3356
+asS'sigsuspend'
+p3357
+(lp3358
+S'const __sigset_t *'
+p3359
+asS'regerror'
+p3360
+(lp3361
+S'int'
+p3362
+aS'const struct re_pattern_buffer *restrict'
+p3363
+aS'char *restrict'
+p3364
+aS'unsigned long'
+p3365
+asS'oldgnu_store_sparse_info'
+p3366
+(lp3367
+S'struct tar_sparse_file *'
+p3368
+aS'unsigned long *'
+p3369
+aS'struct sparse *'
+p3370
+aS'unsigned long'
+p3371
+asS'read_incr_db_2'
+p3372
+(lp3373
+sS'isdigit_l'
+p3374
+(lp3375
+S'int'
+p3376
+aS'struct __locale_struct *'
+p3377
+asS'xheader_finish'
+p3378
+(lp3379
+S'struct xheader *'
+p3380
+asS'_toupper'
+p3381
+(lp3382
+S'int'
+p3383
+asS'list_archive'
+p3384
+(lp3385
+sS'replace_prefix'
+p3386
+(lp3387
+S'char **'
+p3388
+aS'const char *'
+p3389
+aS'unsigned long'
+p3390
+aS'const char *'
+p3391
+aS'unsigned long'
+p3392
+asS'list_dumpdir'
+p3393
+(lp3394
+S'char *'
+p3395
+aS'unsigned long'
+p3396
+asS'extr_init'
+p3397
+(lp3398
+sS'pax_dump_header_0'
+p3399
+(lp3400
+S'struct tar_sparse_file *'
+p3401
+asS'pax_dump_header_1'
+p3402
+(lp3403
+S'struct tar_sparse_file *'
+p3404
+asS'xheader_set_single_keyword'
+p3405
+(lp3406
+S'char *'
+p3407
+asS'oldgnu_get_sparse_info'
+p3408
+(lp3409
+S'struct tar_sparse_file *'
+p3410
+asS'drop_volume_label_suffix'
+p3411
+(lp3412
+S'const char *'
+p3413
+asS'confirm'
+p3414
+(lp3415
+S'const char *'
+p3416
+aS'const char *'
+p3417
+asS'set_stat'
+p3418
+(lp3419
+S'const char *'
+p3420
+aS'const struct tar_stat_info *'
+p3421
+aS'int'
+p3422
+aS'int'
+p3423
+aS'int'
+p3424
+aS'char'
+p3425
+aS'int'
+p3426
+aS'int'
+p3427
+asS'xheader_decode'
+p3428
+(lp3429
+S'struct tar_stat_info *'
+p3430
+asS'extract_dir'
+p3431
+(lp3432
+S'char *'
+p3433
+aS'int'
+p3434
+asS'__toupper_l'
+p3435
+(lp3436
+S'int'
+p3437
+aS'struct __locale_struct *'
+p3438
+asS'dunlink_alloc'
+p3439
+(lp3440
+sS'decode_xform'
+p3441
+(lp3442
+S'char *'
+p3443
+aS'void *'
+p3444
+asS'xheader_ghdr_name'
+p3445
+(lp3446
+sS'dump_file0'
+p3447
+(lp3448
+S'struct tar_stat_info *'
+p3449
+aS'const char *'
+p3450
+aS'const char *'
+p3451
+asS'make_name'
+p3452
+(lp3453
+S'const char *'
+p3454
+asS'read_directory_file'
+p3455
+(lp3456
+s.

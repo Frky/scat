@@ -1,0 +1,1746 @@
+
+_build/midori/midori:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000401e28 <_init>:
+  401e28:	48 83 ec 08          	sub    $0x8,%rsp
+  401e2c:	48 8b 05 c5 31 20 00 	mov    0x2031c5(%rip),%rax        # 604ff8 <_DYNAMIC+0x250>
+  401e33:	48 85 c0             	test   %rax,%rax
+  401e36:	74 05                	je     401e3d <_init+0x15>
+  401e38:	e8 03 02 00 00       	callq  402040 <__gmon_start__@plt>
+  401e3d:	48 83 c4 08          	add    $0x8,%rsp
+  401e41:	c3                   	retq   
+
+Disassembly of section .plt:
+
+0000000000401e50 <gdk_pixbuf_save@plt-0x10>:
+  401e50:	ff 35 b2 31 20 00    	pushq  0x2031b2(%rip)        # 605008 <_GLOBAL_OFFSET_TABLE_+0x8>
+  401e56:	ff 25 b4 31 20 00    	jmpq   *0x2031b4(%rip)        # 605010 <_GLOBAL_OFFSET_TABLE_+0x10>
+  401e5c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000401e60 <gdk_pixbuf_save@plt>:
+  401e60:	ff 25 b2 31 20 00    	jmpq   *0x2031b2(%rip)        # 605018 <_GLOBAL_OFFSET_TABLE_+0x18>
+  401e66:	68 00 00 00 00       	pushq  $0x0
+  401e6b:	e9 e0 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401e70 <g_find_program_in_path@plt>:
+  401e70:	ff 25 aa 31 20 00    	jmpq   *0x2031aa(%rip)        # 605020 <_GLOBAL_OFFSET_TABLE_+0x20>
+  401e76:	68 01 00 00 00       	pushq  $0x1
+  401e7b:	e9 d0 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401e80 <midori_view_execute_script@plt>:
+  401e80:	ff 25 a2 31 20 00    	jmpq   *0x2031a2(%rip)        # 605028 <_GLOBAL_OFFSET_TABLE_+0x28>
+  401e86:	68 02 00 00 00       	pushq  $0x2
+  401e8b:	e9 c0 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401e90 <g_print@plt>:
+  401e90:	ff 25 9a 31 20 00    	jmpq   *0x20319a(%rip)        # 605030 <_GLOBAL_OFFSET_TABLE_+0x30>
+  401e96:	68 03 00 00 00       	pushq  $0x3
+  401e9b:	e9 b0 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401ea0 <g_unlink@plt>:
+  401ea0:	ff 25 92 31 20 00    	jmpq   *0x203192(%rip)        # 605038 <_GLOBAL_OFFSET_TABLE_+0x38>
+  401ea6:	68 04 00 00 00       	pushq  $0x4
+  401eab:	e9 a0 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401eb0 <g_type_check_instance_cast@plt>:
+  401eb0:	ff 25 8a 31 20 00    	jmpq   *0x20318a(%rip)        # 605040 <_GLOBAL_OFFSET_TABLE_+0x40>
+  401eb6:	68 05 00 00 00       	pushq  $0x5
+  401ebb:	e9 90 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401ec0 <g_string_free@plt>:
+  401ec0:	ff 25 82 31 20 00    	jmpq   *0x203182(%rip)        # 605048 <_GLOBAL_OFFSET_TABLE_+0x48>
+  401ec6:	68 06 00 00 00       	pushq  $0x6
+  401ecb:	e9 80 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401ed0 <g_dgettext@plt>:
+  401ed0:	ff 25 7a 31 20 00    	jmpq   *0x20317a(%rip)        # 605050 <_GLOBAL_OFFSET_TABLE_+0x50>
+  401ed6:	68 07 00 00 00       	pushq  $0x7
+  401edb:	e9 70 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401ee0 <gtk_widget_destroy@plt>:
+  401ee0:	ff 25 72 31 20 00    	jmpq   *0x203172(%rip)        # 605058 <_GLOBAL_OFFSET_TABLE_+0x58>
+  401ee6:	68 08 00 00 00       	pushq  $0x8
+  401eeb:	e9 60 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401ef0 <gtk_widget_hide@plt>:
+  401ef0:	ff 25 6a 31 20 00    	jmpq   *0x20316a(%rip)        # 605060 <_GLOBAL_OFFSET_TABLE_+0x60>
+  401ef6:	68 09 00 00 00       	pushq  $0x9
+  401efb:	e9 50 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f00 <gtk_box_pack_start@plt>:
+  401f00:	ff 25 62 31 20 00    	jmpq   *0x203162(%rip)        # 605068 <_GLOBAL_OFFSET_TABLE_+0x68>
+  401f06:	68 0a 00 00 00       	pushq  $0xa
+  401f0b:	e9 40 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f10 <g_set_application_name@plt>:
+  401f10:	ff 25 5a 31 20 00    	jmpq   *0x20315a(%rip)        # 605070 <_GLOBAL_OFFSET_TABLE_+0x70>
+  401f16:	68 0b 00 00 00       	pushq  $0xb
+  401f1b:	e9 30 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f20 <gtk_entry_new@plt>:
+  401f20:	ff 25 52 31 20 00    	jmpq   *0x203152(%rip)        # 605078 <_GLOBAL_OFFSET_TABLE_+0x78>
+  401f26:	68 0c 00 00 00       	pushq  $0xc
+  401f2b:	e9 20 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f30 <g_signal_connect_data@plt>:
+  401f30:	ff 25 4a 31 20 00    	jmpq   *0x20314a(%rip)        # 605080 <_GLOBAL_OFFSET_TABLE_+0x80>
+  401f36:	68 0d 00 00 00       	pushq  $0xd
+  401f3b:	e9 10 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f40 <gtk_main@plt>:
+  401f40:	ff 25 42 31 20 00    	jmpq   *0x203142(%rip)        # 605088 <_GLOBAL_OFFSET_TABLE_+0x88>
+  401f46:	68 0e 00 00 00       	pushq  $0xe
+  401f4b:	e9 00 ff ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f50 <close@plt>:
+  401f50:	ff 25 3a 31 20 00    	jmpq   *0x20313a(%rip)        # 605090 <_GLOBAL_OFFSET_TABLE_+0x90>
+  401f56:	68 0f 00 00 00       	pushq  $0xf
+  401f5b:	e9 f0 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f60 <g_free@plt>:
+  401f60:	ff 25 32 31 20 00    	jmpq   *0x203132(%rip)        # 605098 <_GLOBAL_OFFSET_TABLE_+0x98>
+  401f66:	68 10 00 00 00       	pushq  $0x10
+  401f6b:	e9 e0 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f70 <midori_browser_get_action_group@plt>:
+  401f70:	ff 25 2a 31 20 00    	jmpq   *0x20312a(%rip)        # 6050a0 <_GLOBAL_OFFSET_TABLE_+0xa0>
+  401f76:	68 11 00 00 00       	pushq  $0x11
+  401f7b:	e9 d0 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f80 <midori_browser_new@plt>:
+  401f80:	ff 25 22 31 20 00    	jmpq   *0x203122(%rip)        # 6050a8 <_GLOBAL_OFFSET_TABLE_+0xa8>
+  401f86:	68 12 00 00 00       	pushq  $0x12
+  401f8b:	e9 c0 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401f90 <g_set_prgname@plt>:
+  401f90:	ff 25 1a 31 20 00    	jmpq   *0x20311a(%rip)        # 6050b0 <_GLOBAL_OFFSET_TABLE_+0xb0>
+  401f96:	68 13 00 00 00       	pushq  $0x13
+  401f9b:	e9 b0 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401fa0 <midori_app_setup@plt>:
+  401fa0:	ff 25 12 31 20 00    	jmpq   *0x203112(%rip)        # 6050b8 <_GLOBAL_OFFSET_TABLE_+0xb8>
+  401fa6:	68 14 00 00 00       	pushq  $0x14
+  401fab:	e9 a0 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401fb0 <midori_browser_add_tab@plt>:
+  401fb0:	ff 25 0a 31 20 00    	jmpq   *0x20310a(%rip)        # 6050c0 <_GLOBAL_OFFSET_TABLE_+0xc0>
+  401fb6:	68 15 00 00 00       	pushq  $0x15
+  401fbb:	e9 90 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401fc0 <midori_normal_app_new@plt>:
+  401fc0:	ff 25 02 31 20 00    	jmpq   *0x203102(%rip)        # 6050c8 <_GLOBAL_OFFSET_TABLE_+0xc8>
+  401fc6:	68 16 00 00 00       	pushq  $0x16
+  401fcb:	e9 80 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401fd0 <g_strnfill@plt>:
+  401fd0:	ff 25 fa 30 20 00    	jmpq   *0x2030fa(%rip)        # 6050d0 <_GLOBAL_OFFSET_TABLE_+0xd0>
+  401fd6:	68 17 00 00 00       	pushq  $0x17
+  401fdb:	e9 70 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401fe0 <g_strndup@plt>:
+  401fe0:	ff 25 f2 30 20 00    	jmpq   *0x2030f2(%rip)        # 6050d8 <_GLOBAL_OFFSET_TABLE_+0xd8>
+  401fe6:	68 18 00 00 00       	pushq  $0x18
+  401feb:	e9 60 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000401ff0 <gtk_main_quit@plt>:
+  401ff0:	ff 25 ea 30 20 00    	jmpq   *0x2030ea(%rip)        # 6050e0 <_GLOBAL_OFFSET_TABLE_+0xe0>
+  401ff6:	68 19 00 00 00       	pushq  $0x19
+  401ffb:	e9 50 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402000 <sokoke_spawn_gdb@plt>:
+  402000:	ff 25 e2 30 20 00    	jmpq   *0x2030e2(%rip)        # 6050e8 <_GLOBAL_OFFSET_TABLE_+0xe8>
+  402006:	68 1a 00 00 00       	pushq  $0x1a
+  40200b:	e9 40 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402010 <g_string_new@plt>:
+  402010:	ff 25 da 30 20 00    	jmpq   *0x2030da(%rip)        # 6050f0 <_GLOBAL_OFFSET_TABLE_+0xf0>
+  402016:	68 1b 00 00 00       	pushq  $0x1b
+  40201b:	e9 30 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402020 <gtk_entry_get_type@plt>:
+  402020:	ff 25 d2 30 20 00    	jmpq   *0x2030d2(%rip)        # 6050f8 <_GLOBAL_OFFSET_TABLE_+0xf8>
+  402026:	68 1c 00 00 00       	pushq  $0x1c
+  40202b:	e9 20 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402030 <webkit_web_view_new@plt>:
+  402030:	ff 25 ca 30 20 00    	jmpq   *0x2030ca(%rip)        # 605100 <_GLOBAL_OFFSET_TABLE_+0x100>
+  402036:	68 1d 00 00 00       	pushq  $0x1d
+  40203b:	e9 10 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402040 <__gmon_start__@plt>:
+  402040:	ff 25 c2 30 20 00    	jmpq   *0x2030c2(%rip)        # 605108 <_GLOBAL_OFFSET_TABLE_+0x108>
+  402046:	68 1e 00 00 00       	pushq  $0x1e
+  40204b:	e9 00 fe ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402050 <strlen@plt>:
+  402050:	ff 25 ba 30 20 00    	jmpq   *0x2030ba(%rip)        # 605110 <_GLOBAL_OFFSET_TABLE_+0x110>
+  402056:	68 1f 00 00 00       	pushq  $0x1f
+  40205b:	e9 f0 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402060 <g_param_spec_get_name@plt>:
+  402060:	ff 25 b2 30 20 00    	jmpq   *0x2030b2(%rip)        # 605118 <_GLOBAL_OFFSET_TABLE_+0x118>
+  402066:	68 20 00 00 00       	pushq  $0x20
+  40206b:	e9 e0 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402070 <katze_strip_mnemonics@plt>:
+  402070:	ff 25 aa 30 20 00    	jmpq   *0x2030aa(%rip)        # 605120 <_GLOBAL_OFFSET_TABLE_+0x120>
+  402076:	68 21 00 00 00       	pushq  $0x21
+  40207b:	e9 d0 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402080 <midori_private_data_register_built_ins@plt>:
+  402080:	ff 25 a2 30 20 00    	jmpq   *0x2030a2(%rip)        # 605128 <_GLOBAL_OFFSET_TABLE_+0x128>
+  402086:	68 22 00 00 00       	pushq  $0x22
+  40208b:	e9 c0 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402090 <gtk_offscreen_window_new@plt>:
+  402090:	ff 25 9a 30 20 00    	jmpq   *0x20309a(%rip)        # 605130 <_GLOBAL_OFFSET_TABLE_+0x130>
+  402096:	68 23 00 00 00       	pushq  $0x23
+  40209b:	e9 b0 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004020a0 <sokoke_magic_uri@plt>:
+  4020a0:	ff 25 92 30 20 00    	jmpq   *0x203092(%rip)        # 605138 <_GLOBAL_OFFSET_TABLE_+0x138>
+  4020a6:	68 24 00 00 00       	pushq  $0x24
+  4020ab:	e9 a0 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004020b0 <g_list_free@plt>:
+  4020b0:	ff 25 8a 30 20 00    	jmpq   *0x20308a(%rip)        # 605140 <_GLOBAL_OFFSET_TABLE_+0x140>
+  4020b6:	68 25 00 00 00       	pushq  $0x25
+  4020bb:	e9 90 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004020c0 <g_object_set_data@plt>:
+  4020c0:	ff 25 82 30 20 00    	jmpq   *0x203082(%rip)        # 605148 <_GLOBAL_OFFSET_TABLE_+0x148>
+  4020c6:	68 26 00 00 00       	pushq  $0x26
+  4020cb:	e9 80 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004020d0 <g_object_class_list_properties@plt>:
+  4020d0:	ff 25 7a 30 20 00    	jmpq   *0x20307a(%rip)        # 605150 <_GLOBAL_OFFSET_TABLE_+0x150>
+  4020d6:	68 27 00 00 00       	pushq  $0x27
+  4020db:	e9 70 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004020e0 <gtk_widget_get_parent@plt>:
+  4020e0:	ff 25 72 30 20 00    	jmpq   *0x203072(%rip)        # 605158 <_GLOBAL_OFFSET_TABLE_+0x158>
+  4020e6:	68 28 00 00 00       	pushq  $0x28
+  4020eb:	e9 60 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004020f0 <midori_view_get_type@plt>:
+  4020f0:	ff 25 6a 30 20 00    	jmpq   *0x20306a(%rip)        # 605160 <_GLOBAL_OFFSET_TABLE_+0x160>
+  4020f6:	68 29 00 00 00       	pushq  $0x29
+  4020fb:	e9 50 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402100 <midori_load_soup_session@plt>:
+  402100:	ff 25 62 30 20 00    	jmpq   *0x203062(%rip)        # 605168 <_GLOBAL_OFFSET_TABLE_+0x168>
+  402106:	68 2a 00 00 00       	pushq  $0x2a
+  40210b:	e9 40 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402110 <g_string_append@plt>:
+  402110:	ff 25 5a 30 20 00    	jmpq   *0x20305a(%rip)        # 605170 <_GLOBAL_OFFSET_TABLE_+0x170>
+  402116:	68 2b 00 00 00       	pushq  $0x2b
+  40211b:	e9 30 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402120 <gdk_screen_get_height@plt>:
+  402120:	ff 25 52 30 20 00    	jmpq   *0x203052(%rip)        # 605178 <_GLOBAL_OFFSET_TABLE_+0x178>
+  402126:	68 2c 00 00 00       	pushq  $0x2c
+  40212b:	e9 20 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402130 <g_log@plt>:
+  402130:	ff 25 4a 30 20 00    	jmpq   *0x20304a(%rip)        # 605180 <_GLOBAL_OFFSET_TABLE_+0x180>
+  402136:	68 2d 00 00 00       	pushq  $0x2d
+  40213b:	e9 10 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402140 <midori_browser_get_settings@plt>:
+  402140:	ff 25 42 30 20 00    	jmpq   *0x203042(%rip)        # 605188 <_GLOBAL_OFFSET_TABLE_+0x188>
+  402146:	68 2e 00 00 00       	pushq  $0x2e
+  40214b:	e9 00 fd ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402150 <gtk_box_get_type@plt>:
+  402150:	ff 25 3a 30 20 00    	jmpq   *0x20303a(%rip)        # 605190 <_GLOBAL_OFFSET_TABLE_+0x190>
+  402156:	68 2f 00 00 00       	pushq  $0x2f
+  40215b:	e9 f0 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402160 <gtk_action_get_name@plt>:
+  402160:	ff 25 32 30 20 00    	jmpq   *0x203032(%rip)        # 605198 <_GLOBAL_OFFSET_TABLE_+0x198>
+  402166:	68 30 00 00 00       	pushq  $0x30
+  40216b:	e9 e0 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402170 <gtk_scrolled_window_new@plt>:
+  402170:	ff 25 2a 30 20 00    	jmpq   *0x20302a(%rip)        # 6051a0 <_GLOBAL_OFFSET_TABLE_+0x1a0>
+  402176:	68 31 00 00 00       	pushq  $0x31
+  40217b:	e9 d0 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402180 <midori_view_list_versions@plt>:
+  402180:	ff 25 22 30 20 00    	jmpq   *0x203022(%rip)        # 6051a8 <_GLOBAL_OFFSET_TABLE_+0x1a8>
+  402186:	68 32 00 00 00       	pushq  $0x32
+  40218b:	e9 c0 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402190 <gtk_container_get_type@plt>:
+  402190:	ff 25 1a 30 20 00    	jmpq   *0x20301a(%rip)        # 6051b0 <_GLOBAL_OFFSET_TABLE_+0x1b0>
+  402196:	68 33 00 00 00       	pushq  $0x33
+  40219b:	e9 b0 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004021a0 <g_type_class_peek@plt>:
+  4021a0:	ff 25 12 30 20 00    	jmpq   *0x203012(%rip)        # 6051b8 <_GLOBAL_OFFSET_TABLE_+0x1b8>
+  4021a6:	68 34 00 00 00       	pushq  $0x34
+  4021ab:	e9 a0 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004021b0 <midori_paths_init@plt>:
+  4021b0:	ff 25 0a 30 20 00    	jmpq   *0x20300a(%rip)        # 6051c0 <_GLOBAL_OFFSET_TABLE_+0x1c0>
+  4021b6:	68 35 00 00 00       	pushq  $0x35
+  4021bb:	e9 90 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004021c0 <katze_object_get_string@plt>:
+  4021c0:	ff 25 02 30 20 00    	jmpq   *0x203002(%rip)        # 6051c8 <_GLOBAL_OFFSET_TABLE_+0x1c8>
+  4021c6:	68 36 00 00 00       	pushq  $0x36
+  4021cb:	e9 80 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004021d0 <g_file_get_contents@plt>:
+  4021d0:	ff 25 fa 2f 20 00    	jmpq   *0x202ffa(%rip)        # 6051d0 <_GLOBAL_OFFSET_TABLE_+0x1d0>
+  4021d6:	68 37 00 00 00       	pushq  $0x37
+  4021db:	e9 70 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004021e0 <midori_view_new_with_item@plt>:
+  4021e0:	ff 25 f2 2f 20 00    	jmpq   *0x202ff2(%rip)        # 6051d8 <_GLOBAL_OFFSET_TABLE_+0x1d8>
+  4021e6:	68 38 00 00 00       	pushq  $0x38
+  4021eb:	e9 60 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004021f0 <g_file_open_tmp@plt>:
+  4021f0:	ff 25 ea 2f 20 00    	jmpq   *0x202fea(%rip)        # 6051e0 <_GLOBAL_OFFSET_TABLE_+0x1e0>
+  4021f6:	68 39 00 00 00       	pushq  $0x39
+  4021fb:	e9 50 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402200 <gtk_entry_set_text@plt>:
+  402200:	ff 25 e2 2f 20 00    	jmpq   *0x202fe2(%rip)        # 6051e8 <_GLOBAL_OFFSET_TABLE_+0x1e8>
+  402206:	68 3a 00 00 00       	pushq  $0x3a
+  40220b:	e9 40 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402210 <gtk_vbox_new@plt>:
+  402210:	ff 25 da 2f 20 00    	jmpq   *0x202fda(%rip)        # 6051f0 <_GLOBAL_OFFSET_TABLE_+0x1f0>
+  402216:	68 3b 00 00 00       	pushq  $0x3b
+  40221b:	e9 30 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402220 <midori_normal_app_on_quit@plt>:
+  402220:	ff 25 d2 2f 20 00    	jmpq   *0x202fd2(%rip)        # 6051f8 <_GLOBAL_OFFSET_TABLE_+0x1f8>
+  402226:	68 3c 00 00 00       	pushq  $0x3c
+  40222b:	e9 20 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402230 <gtk_widget_show_all@plt>:
+  402230:	ff 25 ca 2f 20 00    	jmpq   *0x202fca(%rip)        # 605200 <_GLOBAL_OFFSET_TABLE_+0x200>
+  402236:	68 3d 00 00 00       	pushq  $0x3d
+  40223b:	e9 10 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402240 <g_type_check_class_cast@plt>:
+  402240:	ff 25 c2 2f 20 00    	jmpq   *0x202fc2(%rip)        # 605208 <_GLOBAL_OFFSET_TABLE_+0x208>
+  402246:	68 3e 00 00 00       	pushq  $0x3e
+  40224b:	e9 00 fc ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402250 <g_string_insert_c@plt>:
+  402250:	ff 25 ba 2f 20 00    	jmpq   *0x202fba(%rip)        # 605210 <_GLOBAL_OFFSET_TABLE_+0x210>
+  402256:	68 3f 00 00 00       	pushq  $0x3f
+  40225b:	e9 f0 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402260 <__libc_start_main@plt>:
+  402260:	ff 25 b2 2f 20 00    	jmpq   *0x202fb2(%rip)        # 605218 <_GLOBAL_OFFSET_TABLE_+0x218>
+  402266:	68 40 00 00 00       	pushq  $0x40
+  40226b:	e9 e0 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402270 <webkit_web_view_load_uri@plt>:
+  402270:	ff 25 aa 2f 20 00    	jmpq   *0x202faa(%rip)        # 605220 <_GLOBAL_OFFSET_TABLE_+0x220>
+  402276:	68 41 00 00 00       	pushq  $0x41
+  40227b:	e9 d0 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402280 <__errno_location@plt>:
+  402280:	ff 25 a2 2f 20 00    	jmpq   *0x202fa2(%rip)        # 605228 <_GLOBAL_OFFSET_TABLE_+0x228>
+  402286:	68 42 00 00 00       	pushq  $0x42
+  40228b:	e9 c0 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402290 <g_object_unref@plt>:
+  402290:	ff 25 9a 2f 20 00    	jmpq   *0x202f9a(%rip)        # 605230 <_GLOBAL_OFFSET_TABLE_+0x230>
+  402296:	68 43 00 00 00       	pushq  $0x43
+  40229b:	e9 b0 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004022a0 <midori_error@plt>:
+  4022a0:	ff 25 92 2f 20 00    	jmpq   *0x202f92(%rip)        # 605238 <_GLOBAL_OFFSET_TABLE_+0x238>
+  4022a6:	68 44 00 00 00       	pushq  $0x44
+  4022ab:	e9 a0 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004022b0 <gtk_window_new@plt>:
+  4022b0:	ff 25 8a 2f 20 00    	jmpq   *0x202f8a(%rip)        # 605240 <_GLOBAL_OFFSET_TABLE_+0x240>
+  4022b6:	68 45 00 00 00       	pushq  $0x45
+  4022bb:	e9 90 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004022c0 <webkit_web_view_get_type@plt>:
+  4022c0:	ff 25 82 2f 20 00    	jmpq   *0x202f82(%rip)        # 605248 <_GLOBAL_OFFSET_TABLE_+0x248>
+  4022c6:	68 46 00 00 00       	pushq  $0x46
+  4022cb:	e9 80 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004022d0 <gtk_action_group_list_actions@plt>:
+  4022d0:	ff 25 7a 2f 20 00    	jmpq   *0x202f7a(%rip)        # 605250 <_GLOBAL_OFFSET_TABLE_+0x250>
+  4022d6:	68 47 00 00 00       	pushq  $0x47
+  4022db:	e9 70 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004022e0 <gdk_screen_get_default@plt>:
+  4022e0:	ff 25 72 2f 20 00    	jmpq   *0x202f72(%rip)        # 605258 <_GLOBAL_OFFSET_TABLE_+0x258>
+  4022e6:	68 48 00 00 00       	pushq  $0x48
+  4022eb:	e9 60 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004022f0 <gtk_offscreen_window_get_pixbuf@plt>:
+  4022f0:	ff 25 6a 2f 20 00    	jmpq   *0x202f6a(%rip)        # 605260 <_GLOBAL_OFFSET_TABLE_+0x260>
+  4022f6:	68 49 00 00 00       	pushq  $0x49
+  4022fb:	e9 50 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402300 <midori_private_app_new@plt>:
+  402300:	ff 25 62 2f 20 00    	jmpq   *0x202f62(%rip)        # 605268 <_GLOBAL_OFFSET_TABLE_+0x268>
+  402306:	68 4a 00 00 00       	pushq  $0x4a
+  40230b:	e9 40 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402310 <katze_window_set_sensible_default_size@plt>:
+  402310:	ff 25 5a 2f 20 00    	jmpq   *0x202f5a(%rip)        # 605270 <_GLOBAL_OFFSET_TABLE_+0x270>
+  402316:	68 4b 00 00 00       	pushq  $0x4b
+  40231b:	e9 30 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402320 <gtk_container_add@plt>:
+  402320:	ff 25 52 2f 20 00    	jmpq   *0x202f52(%rip)        # 605278 <_GLOBAL_OFFSET_TABLE_+0x278>
+  402326:	68 4c 00 00 00       	pushq  $0x4c
+  40232b:	e9 20 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402330 <g_object_set@plt>:
+  402330:	ff 25 4a 2f 20 00    	jmpq   *0x202f4a(%rip)        # 605280 <_GLOBAL_OFFSET_TABLE_+0x280>
+  402336:	68 4d 00 00 00       	pushq  $0x4d
+  40233b:	e9 10 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402340 <g_strerror@plt>:
+  402340:	ff 25 42 2f 20 00    	jmpq   *0x202f42(%rip)        # 605288 <_GLOBAL_OFFSET_TABLE_+0x288>
+  402346:	68 4e 00 00 00       	pushq  $0x4e
+  40234b:	e9 00 fb ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402350 <gtk_window_get_type@plt>:
+  402350:	ff 25 3a 2f 20 00    	jmpq   *0x202f3a(%rip)        # 605290 <_GLOBAL_OFFSET_TABLE_+0x290>
+  402356:	68 4f 00 00 00       	pushq  $0x4f
+  40235b:	e9 f0 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402360 <gdk_screen_get_width@plt>:
+  402360:	ff 25 32 2f 20 00    	jmpq   *0x202f32(%rip)        # 605298 <_GLOBAL_OFFSET_TABLE_+0x298>
+  402366:	68 50 00 00 00       	pushq  $0x50
+  40236b:	e9 e0 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402370 <gtk_widget_get_type@plt>:
+  402370:	ff 25 2a 2f 20 00    	jmpq   *0x202f2a(%rip)        # 6052a0 <_GLOBAL_OFFSET_TABLE_+0x2a0>
+  402376:	68 51 00 00 00       	pushq  $0x51
+  40237b:	e9 d0 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402380 <midori_web_app_new@plt>:
+  402380:	ff 25 22 2f 20 00    	jmpq   *0x202f22(%rip)        # 6052a8 <_GLOBAL_OFFSET_TABLE_+0x2a8>
+  402386:	68 52 00 00 00       	pushq  $0x52
+  40238b:	e9 c0 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+0000000000402390 <webkit_get_default_session@plt>:
+  402390:	ff 25 1a 2f 20 00    	jmpq   *0x202f1a(%rip)        # 6052b0 <_GLOBAL_OFFSET_TABLE_+0x2b0>
+  402396:	68 53 00 00 00       	pushq  $0x53
+  40239b:	e9 b0 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004023a0 <gtk_offscreen_window_get_type@plt>:
+  4023a0:	ff 25 12 2f 20 00    	jmpq   *0x202f12(%rip)        # 6052b8 <_GLOBAL_OFFSET_TABLE_+0x2b8>
+  4023a6:	68 54 00 00 00       	pushq  $0x54
+  4023ab:	e9 a0 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004023b0 <gtk_widget_set_size_request@plt>:
+  4023b0:	ff 25 0a 2f 20 00    	jmpq   *0x202f0a(%rip)        # 6052c0 <_GLOBAL_OFFSET_TABLE_+0x2c0>
+  4023b6:	68 55 00 00 00       	pushq  $0x55
+  4023bb:	e9 90 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+00000000004023c0 <gtk_entry_get_text@plt>:
+  4023c0:	ff 25 02 2f 20 00    	jmpq   *0x202f02(%rip)        # 6052c8 <_GLOBAL_OFFSET_TABLE_+0x2c8>
+  4023c6:	68 56 00 00 00       	pushq  $0x56
+  4023cb:	e9 80 fa ff ff       	jmpq   401e50 <_init+0x28>
+
+Disassembly of section .text:
+
+00000000004023d0 <_start>:
+  4023d0:	31 ed                	xor    %ebp,%ebp
+  4023d2:	49 89 d1             	mov    %rdx,%r9
+  4023d5:	5e                   	pop    %rsi
+  4023d6:	48 89 e2             	mov    %rsp,%rdx
+  4023d9:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  4023dd:	50                   	push   %rax
+  4023de:	54                   	push   %rsp
+  4023df:	49 c7 c0 90 3a 40 00 	mov    $0x403a90,%r8
+  4023e6:	48 c7 c1 20 3a 40 00 	mov    $0x403a20,%rcx
+  4023ed:	48 c7 c7 67 26 40 00 	mov    $0x402667,%rdi
+  4023f4:	e8 67 fe ff ff       	callq  402260 <__libc_start_main@plt>
+  4023f9:	f4                   	hlt    
+  4023fa:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000402400 <deregister_tm_clones>:
+  402400:	b8 e7 52 60 00       	mov    $0x6052e7,%eax
+  402405:	55                   	push   %rbp
+  402406:	48 2d e0 52 60 00    	sub    $0x6052e0,%rax
+  40240c:	48 83 f8 0e          	cmp    $0xe,%rax
+  402410:	48 89 e5             	mov    %rsp,%rbp
+  402413:	77 02                	ja     402417 <deregister_tm_clones+0x17>
+  402415:	5d                   	pop    %rbp
+  402416:	c3                   	retq   
+  402417:	b8 00 00 00 00       	mov    $0x0,%eax
+  40241c:	48 85 c0             	test   %rax,%rax
+  40241f:	74 f4                	je     402415 <deregister_tm_clones+0x15>
+  402421:	5d                   	pop    %rbp
+  402422:	bf e0 52 60 00       	mov    $0x6052e0,%edi
+  402427:	ff e0                	jmpq   *%rax
+  402429:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000402430 <register_tm_clones>:
+  402430:	b8 e0 52 60 00       	mov    $0x6052e0,%eax
+  402435:	55                   	push   %rbp
+  402436:	48 2d e0 52 60 00    	sub    $0x6052e0,%rax
+  40243c:	48 c1 f8 03          	sar    $0x3,%rax
+  402440:	48 89 e5             	mov    %rsp,%rbp
+  402443:	48 89 c2             	mov    %rax,%rdx
+  402446:	48 c1 ea 3f          	shr    $0x3f,%rdx
+  40244a:	48 01 d0             	add    %rdx,%rax
+  40244d:	48 d1 f8             	sar    %rax
+  402450:	75 02                	jne    402454 <register_tm_clones+0x24>
+  402452:	5d                   	pop    %rbp
+  402453:	c3                   	retq   
+  402454:	ba 00 00 00 00       	mov    $0x0,%edx
+  402459:	48 85 d2             	test   %rdx,%rdx
+  40245c:	74 f4                	je     402452 <register_tm_clones+0x22>
+  40245e:	5d                   	pop    %rbp
+  40245f:	48 89 c6             	mov    %rax,%rsi
+  402462:	bf e0 52 60 00       	mov    $0x6052e0,%edi
+  402467:	ff e2                	jmpq   *%rdx
+  402469:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000402470 <__do_global_dtors_aux>:
+  402470:	80 3d 71 2e 20 00 00 	cmpb   $0x0,0x202e71(%rip)        # 6052e8 <completed.6972>
+  402477:	75 11                	jne    40248a <__do_global_dtors_aux+0x1a>
+  402479:	55                   	push   %rbp
+  40247a:	48 89 e5             	mov    %rsp,%rbp
+  40247d:	e8 7e ff ff ff       	callq  402400 <deregister_tm_clones>
+  402482:	5d                   	pop    %rbp
+  402483:	c6 05 5e 2e 20 00 01 	movb   $0x1,0x202e5e(%rip)        # 6052e8 <completed.6972>
+  40248a:	f3 c3                	repz retq 
+  40248c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000402490 <frame_dummy>:
+  402490:	48 83 3d 08 29 20 00 	cmpq   $0x0,0x202908(%rip)        # 604da0 <__JCR_END__>
+  402497:	00 
+  402498:	74 1e                	je     4024b8 <frame_dummy+0x28>
+  40249a:	b8 00 00 00 00       	mov    $0x0,%eax
+  40249f:	48 85 c0             	test   %rax,%rax
+  4024a2:	74 14                	je     4024b8 <frame_dummy+0x28>
+  4024a4:	55                   	push   %rbp
+  4024a5:	bf a0 4d 60 00       	mov    $0x604da0,%edi
+  4024aa:	48 89 e5             	mov    %rsp,%rbp
+  4024ad:	ff d0                	callq  *%rax
+  4024af:	5d                   	pop    %rbp
+  4024b0:	e9 7b ff ff ff       	jmpq   402430 <register_tm_clones>
+  4024b5:	0f 1f 00             	nopl   (%rax)
+  4024b8:	e9 73 ff ff ff       	jmpq   402430 <register_tm_clones>
+
+00000000004024bd <g_string_append_c_inline>:
+  4024bd:	55                   	push   %rbp
+  4024be:	48 89 e5             	mov    %rsp,%rbp
+  4024c1:	48 83 ec 10          	sub    $0x10,%rsp
+  4024c5:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+  4024c9:	89 f0                	mov    %esi,%eax
+  4024cb:	88 45 f4             	mov    %al,-0xc(%rbp)
+  4024ce:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4024d2:	48 8b 40 08          	mov    0x8(%rax),%rax
+  4024d6:	48 8d 50 01          	lea    0x1(%rax),%rdx
+  4024da:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4024de:	48 8b 40 10          	mov    0x10(%rax),%rax
+  4024e2:	48 39 c2             	cmp    %rax,%rdx
+  4024e5:	73 3c                	jae    402523 <g_string_append_c_inline+0x66>
+  4024e7:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4024eb:	48 8b 30             	mov    (%rax),%rsi
+  4024ee:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4024f2:	48 8b 40 08          	mov    0x8(%rax),%rax
+  4024f6:	48 8d 48 01          	lea    0x1(%rax),%rcx
+  4024fa:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+  4024fe:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+  402502:	48 8d 14 06          	lea    (%rsi,%rax,1),%rdx
+  402506:	0f b6 45 f4          	movzbl -0xc(%rbp),%eax
+  40250a:	88 02                	mov    %al,(%rdx)
+  40250c:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  402510:	48 8b 10             	mov    (%rax),%rdx
+  402513:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  402517:	48 8b 40 08          	mov    0x8(%rax),%rax
+  40251b:	48 01 d0             	add    %rdx,%rax
+  40251e:	c6 00 00             	movb   $0x0,(%rax)
+  402521:	eb 17                	jmp    40253a <g_string_append_c_inline+0x7d>
+  402523:	0f be 55 f4          	movsbl -0xc(%rbp),%edx
+  402527:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  40252b:	48 c7 c6 ff ff ff ff 	mov    $0xffffffffffffffff,%rsi
+  402532:	48 89 c7             	mov    %rax,%rdi
+  402535:	e8 16 fd ff ff       	callq  402250 <g_string_insert_c@plt>
+  40253a:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  40253e:	c9                   	leaveq 
+  40253f:	c3                   	retq   
+
+0000000000402540 <plain_entry_activate_cb>:
+  402540:	55                   	push   %rbp
+  402541:	48 89 e5             	mov    %rsp,%rbp
+  402544:	48 83 ec 20          	sub    $0x20,%rsp
+  402548:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+  40254c:	48 89 75 e0          	mov    %rsi,-0x20(%rbp)
+  402550:	e8 cb fa ff ff       	callq  402020 <gtk_entry_get_type@plt>
+  402555:	48 89 c2             	mov    %rax,%rdx
+  402558:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  40255c:	48 89 d6             	mov    %rdx,%rsi
+  40255f:	48 89 c7             	mov    %rax,%rdi
+  402562:	e8 49 f9 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  402567:	48 89 c7             	mov    %rax,%rdi
+  40256a:	e8 51 fe ff ff       	callq  4023c0 <gtk_entry_get_text@plt>
+  40256f:	ba 01 00 00 00       	mov    $0x1,%edx
+  402574:	be 00 00 00 00       	mov    $0x0,%esi
+  402579:	48 89 c7             	mov    %rax,%rdi
+  40257c:	e8 1f fb ff ff       	callq  4020a0 <sokoke_magic_uri@plt>
+  402581:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  402585:	e8 36 fd ff ff       	callq  4022c0 <webkit_web_view_get_type@plt>
+  40258a:	48 89 c2             	mov    %rax,%rdx
+  40258d:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  402591:	48 89 d6             	mov    %rdx,%rsi
+  402594:	48 89 c7             	mov    %rax,%rdi
+  402597:	e8 14 f9 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40259c:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+  4025a0:	48 89 d6             	mov    %rdx,%rsi
+  4025a3:	48 89 c7             	mov    %rax,%rdi
+  4025a6:	e8 c5 fc ff ff       	callq  402270 <webkit_web_view_load_uri@plt>
+  4025ab:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4025af:	48 89 c7             	mov    %rax,%rdi
+  4025b2:	e8 a9 f9 ff ff       	callq  401f60 <g_free@plt>
+  4025b7:	c9                   	leaveq 
+  4025b8:	c3                   	retq   
+
+00000000004025b9 <snapshot_load_finished_cb>:
+  4025b9:	55                   	push   %rbp
+  4025ba:	48 89 e5             	mov    %rsp,%rbp
+  4025bd:	53                   	push   %rbx
+  4025be:	48 83 ec 38          	sub    $0x38,%rsp
+  4025c2:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+  4025c6:	48 89 75 d0          	mov    %rsi,-0x30(%rbp)
+  4025ca:	48 89 55 c8          	mov    %rdx,-0x38(%rbp)
+  4025ce:	e8 cd fd ff ff       	callq  4023a0 <gtk_offscreen_window_get_type@plt>
+  4025d3:	48 89 c3             	mov    %rax,%rbx
+  4025d6:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  4025da:	48 89 c7             	mov    %rax,%rdi
+  4025dd:	e8 fe fa ff ff       	callq  4020e0 <gtk_widget_get_parent@plt>
+  4025e2:	48 89 de             	mov    %rbx,%rsi
+  4025e5:	48 89 c7             	mov    %rax,%rdi
+  4025e8:	e8 c3 f8 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  4025ed:	48 89 c7             	mov    %rax,%rdi
+  4025f0:	e8 fb fc ff ff       	callq  4022f0 <gtk_offscreen_window_get_pixbuf@plt>
+  4025f5:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+  4025f9:	48 8b 75 c8          	mov    -0x38(%rbp),%rsi
+  4025fd:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  402601:	48 c7 04 24 00 00 00 	movq   $0x0,(%rsp)
+  402608:	00 
+  402609:	41 b9 a8 3a 40 00    	mov    $0x403aa8,%r9d
+  40260f:	41 b8 aa 3a 40 00    	mov    $0x403aaa,%r8d
+  402615:	b9 00 00 00 00       	mov    $0x0,%ecx
+  40261a:	ba b6 3a 40 00       	mov    $0x403ab6,%edx
+  40261f:	48 89 c7             	mov    %rax,%rdi
+  402622:	b8 00 00 00 00       	mov    $0x0,%eax
+  402627:	e8 34 f8 ff ff       	callq  401e60 <gdk_pixbuf_save@plt>
+  40262c:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  402630:	48 89 c7             	mov    %rax,%rdi
+  402633:	e8 58 fc ff ff       	callq  402290 <g_object_unref@plt>
+  402638:	be ba 3a 40 00       	mov    $0x403aba,%esi
+  40263d:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  402642:	e8 89 f8 ff ff       	callq  401ed0 <g_dgettext@plt>
+  402647:	48 8b 55 c8          	mov    -0x38(%rbp),%rdx
+  40264b:	48 89 d6             	mov    %rdx,%rsi
+  40264e:	48 89 c7             	mov    %rax,%rdi
+  402651:	b8 00 00 00 00       	mov    $0x0,%eax
+  402656:	e8 35 f8 ff ff       	callq  401e90 <g_print@plt>
+  40265b:	e8 90 f9 ff ff       	callq  401ff0 <gtk_main_quit@plt>
+  402660:	48 83 c4 38          	add    $0x38,%rsp
+  402664:	5b                   	pop    %rbx
+  402665:	5d                   	pop    %rbp
+  402666:	c3                   	retq   
+
+0000000000402667 <main>:
+  402667:	55                   	push   %rbp
+  402668:	48 89 e5             	mov    %rsp,%rbp
+  40266b:	53                   	push   %rbx
+  40266c:	48 81 ec 78 04 00 00 	sub    $0x478,%rsp
+  402673:	89 bd 9c fb ff ff    	mov    %edi,-0x464(%rbp)
+  402679:	48 89 b5 90 fb ff ff 	mov    %rsi,-0x470(%rbp)
+  402680:	c7 85 b4 fb ff ff 00 	movl   $0x0,-0x44c(%rbp)
+  402687:	00 00 00 
+  40268a:	c7 85 b8 fb ff ff 00 	movl   $0x0,-0x448(%rbp)
+  402691:	00 00 00 
+  402694:	48 8d b5 50 fd ff ff 	lea    -0x2b0(%rbp),%rsi
+  40269b:	b8 00 00 00 00       	mov    $0x0,%eax
+  4026a0:	ba 54 00 00 00       	mov    $0x54,%edx
+  4026a5:	48 89 f7             	mov    %rsi,%rdi
+  4026a8:	48 89 d1             	mov    %rdx,%rcx
+  4026ab:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+  4026ae:	48 c7 85 50 fd ff ff 	movq   $0x403ad8,-0x2b0(%rbp)
+  4026b5:	d8 3a 40 00 
+  4026b9:	c6 85 58 fd ff ff 61 	movb   $0x61,-0x2a8(%rbp)
+  4026c0:	c7 85 60 fd ff ff 01 	movl   $0x1,-0x2a0(%rbp)
+  4026c7:	00 00 00 
+  4026ca:	48 8d 85 e0 fb ff ff 	lea    -0x420(%rbp),%rax
+  4026d1:	48 89 85 68 fd ff ff 	mov    %rax,-0x298(%rbp)
+  4026d8:	48 c7 85 70 fd ff ff 	movq   $0x403ae0,-0x290(%rbp)
+  4026df:	e0 3a 40 00 
+  4026e3:	48 c7 85 78 fd ff ff 	movq   $0x403b01,-0x288(%rbp)
+  4026ea:	01 3b 40 00 
+  4026ee:	48 c7 85 80 fd ff ff 	movq   $0x403b09,-0x280(%rbp)
+  4026f5:	09 3b 40 00 
+  4026f9:	c6 85 88 fd ff ff 63 	movb   $0x63,-0x278(%rbp)
+  402700:	c7 85 90 fd ff ff 04 	movl   $0x4,-0x270(%rbp)
+  402707:	00 00 00 
+  40270a:	48 8d 85 e8 fb ff ff 	lea    -0x418(%rbp),%rax
+  402711:	48 89 85 98 fd ff ff 	mov    %rax,-0x268(%rbp)
+  402718:	48 c7 85 a0 fd ff ff 	movq   $0x403b10,-0x260(%rbp)
+  40271f:	10 3b 40 00 
+  402723:	48 c7 85 a8 fd ff ff 	movq   $0x403b33,-0x258(%rbp)
+  40272a:	33 3b 40 00 
+  40272e:	48 c7 85 b0 fd ff ff 	movq   $0x403b3a,-0x250(%rbp)
+  402735:	3a 3b 40 00 
+  402739:	c6 85 b8 fd ff ff 70 	movb   $0x70,-0x248(%rbp)
+  402740:	48 8d 85 ac fb ff ff 	lea    -0x454(%rbp),%rax
+  402747:	48 89 85 c8 fd ff ff 	mov    %rax,-0x238(%rbp)
+  40274e:	48 c7 85 d0 fd ff ff 	movq   $0x403b48,-0x230(%rbp)
+  402755:	48 3b 40 00 
+  402759:	48 c7 85 e0 fd ff ff 	movq   $0x403b6f,-0x220(%rbp)
+  402760:	6f 3b 40 00 
+  402764:	48 8d 85 b0 fb ff ff 	lea    -0x450(%rbp),%rax
+  40276b:	48 89 85 f8 fd ff ff 	mov    %rax,-0x208(%rbp)
+  402772:	48 c7 85 00 fe ff ff 	movq   $0x403b78,-0x200(%rbp)
+  402779:	78 3b 40 00 
+  40277d:	48 c7 85 10 fe ff ff 	movq   $0x403bab,-0x1f0(%rbp)
+  402784:	ab 3b 40 00 
+  402788:	c6 85 18 fe ff ff 64 	movb   $0x64,-0x1e8(%rbp)
+  40278f:	48 8d 85 b4 fb ff ff 	lea    -0x44c(%rbp),%rax
+  402796:	48 89 85 28 fe ff ff 	mov    %rax,-0x1d8(%rbp)
+  40279d:	48 c7 85 30 fe ff ff 	movq   $0x403bbd,-0x1d0(%rbp)
+  4027a4:	bd 3b 40 00 
+  4027a8:	48 c7 85 40 fe ff ff 	movq   $0x403bd6,-0x1c0(%rbp)
+  4027af:	d6 3b 40 00 
+  4027b3:	c6 85 48 fe ff ff 67 	movb   $0x67,-0x1b8(%rbp)
+  4027ba:	48 8d 85 b8 fb ff ff 	lea    -0x448(%rbp),%rax
+  4027c1:	48 89 85 58 fe ff ff 	mov    %rax,-0x1a8(%rbp)
+  4027c8:	48 c7 85 60 fe ff ff 	movq   $0x403be0,-0x1a0(%rbp)
+  4027cf:	e0 3b 40 00 
+  4027d3:	48 c7 85 70 fe ff ff 	movq   $0x403c0d,-0x190(%rbp)
+  4027da:	0d 3c 40 00 
+  4027de:	c6 85 78 fe ff ff 72 	movb   $0x72,-0x188(%rbp)
+  4027e5:	48 8d 85 bc fb ff ff 	lea    -0x444(%rbp),%rax
+  4027ec:	48 89 85 88 fe ff ff 	mov    %rax,-0x178(%rbp)
+  4027f3:	48 c7 85 90 fe ff ff 	movq   $0x403c18,-0x170(%rbp)
+  4027fa:	18 3c 40 00 
+  4027fe:	48 c7 85 a0 fe ff ff 	movq   $0x403c41,-0x160(%rbp)
+  402805:	41 3c 40 00 
+  402809:	c6 85 a8 fe ff ff 73 	movb   $0x73,-0x158(%rbp)
+  402810:	c7 85 b0 fe ff ff 01 	movl   $0x1,-0x150(%rbp)
+  402817:	00 00 00 
+  40281a:	48 8d 85 f0 fb ff ff 	lea    -0x410(%rbp),%rax
+  402821:	48 89 85 b8 fe ff ff 	mov    %rax,-0x148(%rbp)
+  402828:	48 c7 85 c0 fe ff ff 	movq   $0x403c50,-0x140(%rbp)
+  40282f:	50 3c 40 00 
+  402833:	48 c7 85 d0 fe ff ff 	movq   $0x403c75,-0x130(%rbp)
+  40283a:	75 3c 40 00 
+  40283e:	c6 85 d8 fe ff ff 65 	movb   $0x65,-0x128(%rbp)
+  402845:	c7 85 e0 fe ff ff 05 	movl   $0x5,-0x120(%rbp)
+  40284c:	00 00 00 
+  40284f:	48 8d 85 f8 fb ff ff 	lea    -0x408(%rbp),%rax
+  402856:	48 89 85 e8 fe ff ff 	mov    %rax,-0x118(%rbp)
+  40285d:	48 c7 85 f0 fe ff ff 	movq   $0x403c7d,-0x110(%rbp)
+  402864:	7d 3c 40 00 
+  402868:	48 c7 85 00 ff ff ff 	movq   $0x403c9b,-0x100(%rbp)
+  40286f:	9b 3c 40 00 
+  402873:	48 8d 85 c0 fb ff ff 	lea    -0x440(%rbp),%rax
+  40287a:	48 89 85 18 ff ff ff 	mov    %rax,-0xe8(%rbp)
+  402881:	48 c7 85 20 ff ff ff 	movq   $0x403ca8,-0xe0(%rbp)
+  402888:	a8 3c 40 00 
+  40288c:	48 c7 85 30 ff ff ff 	movq   $0x403cde,-0xd0(%rbp)
+  402893:	de 3c 40 00 
+  402897:	c6 85 38 ff ff ff 56 	movb   $0x56,-0xc8(%rbp)
+  40289e:	48 8d 85 c4 fb ff ff 	lea    -0x43c(%rbp),%rax
+  4028a5:	48 89 85 48 ff ff ff 	mov    %rax,-0xb8(%rbp)
+  4028ac:	48 c7 85 50 ff ff ff 	movq   $0x403ce6,-0xb0(%rbp)
+  4028b3:	e6 3c 40 00 
+  4028b7:	48 c7 85 60 ff ff ff 	movq   $0x403cfe,-0xa0(%rbp)
+  4028be:	fe 3c 40 00 
+  4028c2:	c7 85 70 ff ff ff 05 	movl   $0x5,-0x90(%rbp)
+  4028c9:	00 00 00 
+  4028cc:	48 8d 85 00 fc ff ff 	lea    -0x400(%rbp),%rax
+  4028d3:	48 89 85 78 ff ff ff 	mov    %rax,-0x88(%rbp)
+  4028da:	48 c7 45 80 ff 3c 40 	movq   $0x403cff,-0x80(%rbp)
+  4028e1:	00 
+  4028e2:	48 c7 45 90 09 3d 40 	movq   $0x403d09,-0x70(%rbp)
+  4028e9:	00 
+  4028ea:	c6 45 98 62          	movb   $0x62,-0x68(%rbp)
+  4028ee:	c7 45 a0 01 00 00 00 	movl   $0x1,-0x60(%rbp)
+  4028f5:	48 8d 85 08 fc ff ff 	lea    -0x3f8(%rbp),%rax
+  4028fc:	48 89 45 a8          	mov    %rax,-0x58(%rbp)
+  402900:	48 c7 45 b0 18 3d 40 	movq   $0x403d18,-0x50(%rbp)
+  402907:	00 
+  402908:	be 4b 3d 40 00       	mov    $0x403d4b,%esi
+  40290d:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  402912:	e8 b9 f5 ff ff       	callq  401ed0 <g_dgettext@plt>
+  402917:	48 89 45 b8          	mov    %rax,-0x48(%rbp)
+  40291b:	48 c7 85 e0 fb ff ff 	movq   $0x0,-0x420(%rbp)
+  402922:	00 00 00 00 
+  402926:	48 c7 85 e8 fb ff ff 	movq   $0x0,-0x418(%rbp)
+  40292d:	00 00 00 00 
+  402931:	c7 85 ac fb ff ff 00 	movl   $0x0,-0x454(%rbp)
+  402938:	00 00 00 
+  40293b:	c7 85 d4 fb ff ff 00 	movl   $0x0,-0x42c(%rbp)
+  402942:	00 00 00 
+  402945:	c7 85 b0 fb ff ff 00 	movl   $0x0,-0x450(%rbp)
+  40294c:	00 00 00 
+  40294f:	c7 85 bc fb ff ff 00 	movl   $0x0,-0x444(%rbp)
+  402956:	00 00 00 
+  402959:	48 c7 85 f0 fb ff ff 	movq   $0x0,-0x410(%rbp)
+  402960:	00 00 00 00 
+  402964:	48 c7 85 f8 fb ff ff 	movq   $0x0,-0x408(%rbp)
+  40296b:	00 00 00 00 
+  40296f:	c7 85 c0 fb ff ff 00 	movl   $0x0,-0x440(%rbp)
+  402976:	00 00 00 
+  402979:	c7 85 c4 fb ff ff 00 	movl   $0x0,-0x43c(%rbp)
+  402980:	00 00 00 
+  402983:	48 c7 85 00 fc ff ff 	movq   $0x0,-0x400(%rbp)
+  40298a:	00 00 00 00 
+  40298e:	48 c7 85 08 fc ff ff 	movq   $0x0,-0x3f8(%rbp)
+  402995:	00 00 00 00 
+  402999:	c7 85 d8 fb ff ff 00 	movl   $0x0,-0x428(%rbp)
+  4029a0:	00 00 00 
+  4029a3:	48 8d 95 50 fd ff ff 	lea    -0x2b0(%rbp),%rdx
+  4029aa:	48 8d 8d 90 fb ff ff 	lea    -0x470(%rbp),%rcx
+  4029b1:	48 8d 85 9c fb ff ff 	lea    -0x464(%rbp),%rax
+  4029b8:	48 89 ce             	mov    %rcx,%rsi
+  4029bb:	48 89 c7             	mov    %rax,%rdi
+  4029be:	e8 dd f5 ff ff       	callq  401fa0 <midori_app_setup@plt>
+  4029c3:	8b 85 b8 fb ff ff    	mov    -0x448(%rbp),%eax
+  4029c9:	85 c0                	test   %eax,%eax
+  4029cb:	74 64                	je     402a31 <main+0x3ca>
+  4029cd:	bf 53 3d 40 00       	mov    $0x403d53,%edi
+  4029d2:	e8 99 f4 ff ff       	callq  401e70 <g_find_program_in_path@plt>
+  4029d7:	48 89 85 48 fc ff ff 	mov    %rax,-0x3b8(%rbp)
+  4029de:	48 83 bd 48 fc ff ff 	cmpq   $0x0,-0x3b8(%rbp)
+  4029e5:	00 
+  4029e6:	75 1c                	jne    402a04 <main+0x39d>
+  4029e8:	be 57 3d 40 00       	mov    $0x403d57,%esi
+  4029ed:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  4029f2:	e8 d9 f4 ff ff       	callq  401ed0 <g_dgettext@plt>
+  4029f7:	48 89 c7             	mov    %rax,%rdi
+  4029fa:	b8 00 00 00 00       	mov    $0x0,%eax
+  4029ff:	e8 9c f8 ff ff       	callq  4022a0 <midori_error@plt>
+  402a04:	48 8b 85 48 fc ff ff 	mov    -0x3b8(%rbp),%rax
+  402a0b:	be 01 00 00 00       	mov    $0x1,%esi
+  402a10:	48 89 c7             	mov    %rax,%rdi
+  402a13:	e8 e8 f5 ff ff       	callq  402000 <sokoke_spawn_gdb@plt>
+  402a18:	48 8b 85 48 fc ff ff 	mov    -0x3b8(%rbp),%rax
+  402a1f:	48 89 c7             	mov    %rax,%rdi
+  402a22:	e8 39 f5 ff ff       	callq  401f60 <g_free@plt>
+  402a27:	b8 00 00 00 00       	mov    $0x0,%eax
+  402a2c:	e9 e4 0f 00 00       	jmpq   403a15 <main+0x13ae>
+  402a31:	be 74 3d 40 00       	mov    $0x403d74,%esi
+  402a36:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  402a3b:	e8 90 f4 ff ff       	callq  401ed0 <g_dgettext@plt>
+  402a40:	48 89 c7             	mov    %rax,%rdi
+  402a43:	e8 c8 f4 ff ff       	callq  401f10 <g_set_application_name@plt>
+  402a48:	bf 7b 3d 40 00       	mov    $0x403d7b,%edi
+  402a4d:	e8 3e f5 ff ff       	callq  401f90 <g_set_prgname@plt>
+  402a52:	8b 85 c4 fb ff ff    	mov    -0x43c(%rbp),%eax
+  402a58:	85 c0                	test   %eax,%eax
+  402a5a:	0f 84 ae 00 00 00    	je     402b0e <main+0x4a7>
+  402a60:	bf fe 3c 40 00       	mov    $0x403cfe,%edi
+  402a65:	e8 a6 f5 ff ff       	callq  402010 <g_string_new@plt>
+  402a6a:	48 89 85 50 fc ff ff 	mov    %rax,-0x3b0(%rbp)
+  402a71:	48 8b 85 50 fc ff ff 	mov    -0x3b0(%rbp),%rax
+  402a78:	be 0a 00 00 00       	mov    $0xa,%esi
+  402a7d:	48 89 c7             	mov    %rax,%rdi
+  402a80:	e8 38 fa ff ff       	callq  4024bd <g_string_append_c_inline>
+  402a85:	48 8b 85 50 fc ff ff 	mov    -0x3b0(%rbp),%rax
+  402a8c:	be 00 00 00 00       	mov    $0x0,%esi
+  402a91:	48 89 c7             	mov    %rax,%rdi
+  402a94:	e8 e7 f6 ff ff       	callq  402180 <midori_view_list_versions@plt>
+  402a99:	48 8b 85 50 fc ff ff 	mov    -0x3b0(%rbp),%rax
+  402aa0:	48 8b 00             	mov    (%rax),%rax
+  402aa3:	48 89 c6             	mov    %rax,%rsi
+  402aa6:	bf 83 3d 40 00       	mov    $0x403d83,%edi
+  402aab:	b8 00 00 00 00       	mov    $0x0,%eax
+  402ab0:	e8 db f3 ff ff       	callq  401e90 <g_print@plt>
+  402ab5:	48 8b 85 50 fc ff ff 	mov    -0x3b0(%rbp),%rax
+  402abc:	be 01 00 00 00       	mov    $0x1,%esi
+  402ac1:	48 89 c7             	mov    %rax,%rdi
+  402ac4:	e8 f7 f3 ff ff       	callq  401ec0 <g_string_free@plt>
+  402ac9:	be 87 3d 40 00       	mov    $0x403d87,%esi
+  402ace:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  402ad3:	e8 f8 f3 ff ff       	callq  401ed0 <g_dgettext@plt>
+  402ad8:	48 89 c3             	mov    %rax,%rbx
+  402adb:	be a8 3d 40 00       	mov    $0x403da8,%esi
+  402ae0:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  402ae5:	e8 e6 f3 ff ff       	callq  401ed0 <g_dgettext@plt>
+  402aea:	48 89 d9             	mov    %rbx,%rcx
+  402aed:	ba e0 3d 40 00       	mov    $0x403de0,%edx
+  402af2:	48 89 c6             	mov    %rax,%rsi
+  402af5:	bf 08 3e 40 00       	mov    $0x403e08,%edi
+  402afa:	b8 00 00 00 00       	mov    $0x0,%eax
+  402aff:	e8 8c f3 ff ff       	callq  401e90 <g_print@plt>
+  402b04:	b8 00 00 00 00       	mov    $0x0,%eax
+  402b09:	e9 07 0f 00 00       	jmpq   403a15 <main+0x13ae>
+  402b0e:	8b 85 c0 fb ff ff    	mov    -0x440(%rbp),%eax
+  402b14:	85 c0                	test   %eax,%eax
+  402b16:	0f 84 22 06 00 00    	je     40313e <main+0xad7>
+  402b1c:	e8 5f f4 ff ff       	callq  401f80 <midori_browser_new@plt>
+  402b21:	48 89 85 58 fc ff ff 	mov    %rax,-0x3a8(%rbp)
+  402b28:	48 8b 85 58 fc ff ff 	mov    -0x3a8(%rbp),%rax
+  402b2f:	48 89 c7             	mov    %rax,%rdi
+  402b32:	e8 39 f4 ff ff       	callq  401f70 <midori_browser_get_action_group@plt>
+  402b37:	48 89 85 60 fc ff ff 	mov    %rax,-0x3a0(%rbp)
+  402b3e:	48 8b 85 60 fc ff ff 	mov    -0x3a0(%rbp),%rax
+  402b45:	48 89 c7             	mov    %rax,%rdi
+  402b48:	e8 83 f7 ff ff       	callq  4022d0 <gtk_action_group_list_actions@plt>
+  402b4d:	48 89 85 28 fc ff ff 	mov    %rax,-0x3d8(%rbp)
+  402b54:	48 8b 85 28 fc ff ff 	mov    -0x3d8(%rbp),%rax
+  402b5b:	48 89 85 30 fc ff ff 	mov    %rax,-0x3d0(%rbp)
+  402b62:	48 8b 85 58 fc ff ff 	mov    -0x3a8(%rbp),%rax
+  402b69:	48 89 c7             	mov    %rax,%rdi
+  402b6c:	e8 cf f5 ff ff       	callq  402140 <midori_browser_get_settings@plt>
+  402b71:	48 8b 00             	mov    (%rax),%rax
+  402b74:	48 89 85 68 fc ff ff 	mov    %rax,-0x398(%rbp)
+  402b7b:	48 8d 95 20 fc ff ff 	lea    -0x3e0(%rbp),%rdx
+  402b82:	48 8b 85 68 fc ff ff 	mov    -0x398(%rbp),%rax
+  402b89:	48 89 d6             	mov    %rdx,%rsi
+  402b8c:	48 89 c7             	mov    %rax,%rdi
+  402b8f:	e8 3c f5 ff ff       	callq  4020d0 <g_object_class_list_properties@plt>
+  402b94:	48 89 85 70 fc ff ff 	mov    %rax,-0x390(%rbp)
+  402b9b:	c7 85 cc fb ff ff 01 	movl   $0x1,-0x434(%rbp)
+  402ba2:	00 00 00 
+  402ba5:	eb 77                	jmp    402c1e <main+0x5b7>
+  402ba7:	8b 9d cc fb ff ff    	mov    -0x434(%rbp),%ebx
+  402bad:	48 8b 85 30 fc ff ff 	mov    -0x3d0(%rbp),%rax
+  402bb4:	48 8b 00             	mov    (%rax),%rax
+  402bb7:	48 89 c7             	mov    %rax,%rdi
+  402bba:	e8 a1 f5 ff ff       	callq  402160 <gtk_action_get_name@plt>
+  402bbf:	48 89 c7             	mov    %rax,%rdi
+  402bc2:	e8 89 f4 ff ff       	callq  402050 <strlen@plt>
+  402bc7:	48 83 c0 01          	add    $0x1,%rax
+  402bcb:	48 39 c3             	cmp    %rax,%rbx
+  402bce:	77 1f                	ja     402bef <main+0x588>
+  402bd0:	48 8b 85 30 fc ff ff 	mov    -0x3d0(%rbp),%rax
+  402bd7:	48 8b 00             	mov    (%rax),%rax
+  402bda:	48 89 c7             	mov    %rax,%rdi
+  402bdd:	e8 7e f5 ff ff       	callq  402160 <gtk_action_get_name@plt>
+  402be2:	48 89 c7             	mov    %rax,%rdi
+  402be5:	e8 66 f4 ff ff       	callq  402050 <strlen@plt>
+  402bea:	83 c0 01             	add    $0x1,%eax
+  402bed:	eb 06                	jmp    402bf5 <main+0x58e>
+  402bef:	8b 85 cc fb ff ff    	mov    -0x434(%rbp),%eax
+  402bf5:	89 85 cc fb ff ff    	mov    %eax,-0x434(%rbp)
+  402bfb:	48 83 bd 30 fc ff ff 	cmpq   $0x0,-0x3d0(%rbp)
+  402c02:	00 
+  402c03:	74 0d                	je     402c12 <main+0x5ab>
+  402c05:	48 8b 85 30 fc ff ff 	mov    -0x3d0(%rbp),%rax
+  402c0c:	48 8b 40 08          	mov    0x8(%rax),%rax
+  402c10:	eb 05                	jmp    402c17 <main+0x5b0>
+  402c12:	b8 00 00 00 00       	mov    $0x0,%eax
+  402c17:	48 89 85 30 fc ff ff 	mov    %rax,-0x3d0(%rbp)
+  402c1e:	48 83 bd 30 fc ff ff 	cmpq   $0x0,-0x3d0(%rbp)
+  402c25:	00 
+  402c26:	0f 85 7b ff ff ff    	jne    402ba7 <main+0x540>
+  402c2c:	c7 85 c8 fb ff ff 00 	movl   $0x0,-0x438(%rbp)
+  402c33:	00 00 00 
+  402c36:	eb 7d                	jmp    402cb5 <main+0x64e>
+  402c38:	8b 9d cc fb ff ff    	mov    -0x434(%rbp),%ebx
+  402c3e:	8b 85 c8 fb ff ff    	mov    -0x438(%rbp),%eax
+  402c44:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+  402c4b:	00 
+  402c4c:	48 8b 85 70 fc ff ff 	mov    -0x390(%rbp),%rax
+  402c53:	48 01 d0             	add    %rdx,%rax
+  402c56:	48 8b 00             	mov    (%rax),%rax
+  402c59:	48 89 c7             	mov    %rax,%rdi
+  402c5c:	e8 ff f3 ff ff       	callq  402060 <g_param_spec_get_name@plt>
+  402c61:	48 89 c7             	mov    %rax,%rdi
+  402c64:	e8 e7 f3 ff ff       	callq  402050 <strlen@plt>
+  402c69:	48 83 c0 01          	add    $0x1,%rax
+  402c6d:	48 39 c3             	cmp    %rax,%rbx
+  402c70:	77 30                	ja     402ca2 <main+0x63b>
+  402c72:	8b 85 c8 fb ff ff    	mov    -0x438(%rbp),%eax
+  402c78:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+  402c7f:	00 
+  402c80:	48 8b 85 70 fc ff ff 	mov    -0x390(%rbp),%rax
+  402c87:	48 01 d0             	add    %rdx,%rax
+  402c8a:	48 8b 00             	mov    (%rax),%rax
+  402c8d:	48 89 c7             	mov    %rax,%rdi
+  402c90:	e8 cb f3 ff ff       	callq  402060 <g_param_spec_get_name@plt>
+  402c95:	48 89 c7             	mov    %rax,%rdi
+  402c98:	e8 b3 f3 ff ff       	callq  402050 <strlen@plt>
+  402c9d:	83 c0 01             	add    $0x1,%eax
+  402ca0:	eb 06                	jmp    402ca8 <main+0x641>
+  402ca2:	8b 85 cc fb ff ff    	mov    -0x434(%rbp),%eax
+  402ca8:	89 85 cc fb ff ff    	mov    %eax,-0x434(%rbp)
+  402cae:	83 85 c8 fb ff ff 01 	addl   $0x1,-0x438(%rbp)
+  402cb5:	8b 85 20 fc ff ff    	mov    -0x3e0(%rbp),%eax
+  402cbb:	39 85 c8 fb ff ff    	cmp    %eax,-0x438(%rbp)
+  402cc1:	0f 82 71 ff ff ff    	jb     402c38 <main+0x5d1>
+  402cc7:	8b 85 cc fb ff ff    	mov    -0x434(%rbp),%eax
+  402ccd:	be 20 00 00 00       	mov    $0x20,%esi
+  402cd2:	48 89 c7             	mov    %rax,%rdi
+  402cd5:	e8 f6 f2 ff ff       	callq  401fd0 <g_strnfill@plt>
+  402cda:	48 89 85 78 fc ff ff 	mov    %rax,-0x388(%rbp)
+  402ce1:	e9 6d 01 00 00       	jmpq   402e53 <main+0x7ec>
+  402ce6:	48 8b 85 28 fc ff ff 	mov    -0x3d8(%rbp),%rax
+  402ced:	48 8b 00             	mov    (%rax),%rax
+  402cf0:	48 89 85 80 fc ff ff 	mov    %rax,-0x380(%rbp)
+  402cf7:	48 8b 85 80 fc ff ff 	mov    -0x380(%rbp),%rax
+  402cfe:	48 89 c7             	mov    %rax,%rdi
+  402d01:	e8 5a f4 ff ff       	callq  402160 <gtk_action_get_name@plt>
+  402d06:	48 89 85 88 fc ff ff 	mov    %rax,-0x378(%rbp)
+  402d0d:	48 8b 85 78 fc ff ff 	mov    -0x388(%rbp),%rax
+  402d14:	48 89 c7             	mov    %rax,%rdi
+  402d17:	e8 34 f3 ff ff       	callq  402050 <strlen@plt>
+  402d1c:	48 89 c3             	mov    %rax,%rbx
+  402d1f:	48 8b 85 88 fc ff ff 	mov    -0x378(%rbp),%rax
+  402d26:	48 89 c7             	mov    %rax,%rdi
+  402d29:	e8 22 f3 ff ff       	callq  402050 <strlen@plt>
+  402d2e:	48 29 c3             	sub    %rax,%rbx
+  402d31:	48 89 da             	mov    %rbx,%rdx
+  402d34:	48 8b 85 78 fc ff ff 	mov    -0x388(%rbp),%rax
+  402d3b:	48 89 d6             	mov    %rdx,%rsi
+  402d3e:	48 89 c7             	mov    %rax,%rdi
+  402d41:	e8 9a f2 ff ff       	callq  401fe0 <g_strndup@plt>
+  402d46:	48 89 85 90 fc ff ff 	mov    %rax,-0x370(%rbp)
+  402d4d:	48 8b 85 80 fc ff ff 	mov    -0x380(%rbp),%rax
+  402d54:	be 5c 3e 40 00       	mov    $0x403e5c,%esi
+  402d59:	48 89 c7             	mov    %rax,%rdi
+  402d5c:	e8 5f f4 ff ff       	callq  4021c0 <katze_object_get_string@plt>
+  402d61:	48 89 85 98 fc ff ff 	mov    %rax,-0x368(%rbp)
+  402d68:	48 8b 85 98 fc ff ff 	mov    -0x368(%rbp),%rax
+  402d6f:	48 89 c7             	mov    %rax,%rdi
+  402d72:	e8 f9 f2 ff ff       	callq  402070 <katze_strip_mnemonics@plt>
+  402d77:	48 89 85 a0 fc ff ff 	mov    %rax,-0x360(%rbp)
+  402d7e:	48 8b 85 80 fc ff ff 	mov    -0x380(%rbp),%rax
+  402d85:	be 62 3e 40 00       	mov    $0x403e62,%esi
+  402d8a:	48 89 c7             	mov    %rax,%rdi
+  402d8d:	e8 2e f4 ff ff       	callq  4021c0 <katze_object_get_string@plt>
+  402d92:	48 89 85 a8 fc ff ff 	mov    %rax,-0x358(%rbp)
+  402d99:	48 83 bd a8 fc ff ff 	cmpq   $0x0,-0x358(%rbp)
+  402da0:	00 
+  402da1:	74 09                	je     402dac <main+0x745>
+  402da3:	48 8b 95 a8 fc ff ff 	mov    -0x358(%rbp),%rdx
+  402daa:	eb 05                	jmp    402db1 <main+0x74a>
+  402dac:	ba fe 3c 40 00       	mov    $0x403cfe,%edx
+  402db1:	48 83 bd a8 fc ff ff 	cmpq   $0x0,-0x358(%rbp)
+  402db8:	00 
+  402db9:	74 07                	je     402dc2 <main+0x75b>
+  402dbb:	b8 6a 3e 40 00       	mov    $0x403e6a,%eax
+  402dc0:	eb 05                	jmp    402dc7 <main+0x760>
+  402dc2:	b8 fe 3c 40 00       	mov    $0x403cfe,%eax
+  402dc7:	48 8b 8d a0 fc ff ff 	mov    -0x360(%rbp),%rcx
+  402dce:	48 8b bd 90 fc ff ff 	mov    -0x370(%rbp),%rdi
+  402dd5:	48 8b b5 88 fc ff ff 	mov    -0x378(%rbp),%rsi
+  402ddc:	49 89 d1             	mov    %rdx,%r9
+  402ddf:	49 89 c0             	mov    %rax,%r8
+  402de2:	48 89 fa             	mov    %rdi,%rdx
+  402de5:	bf 6d 3e 40 00       	mov    $0x403e6d,%edi
+  402dea:	b8 00 00 00 00       	mov    $0x0,%eax
+  402def:	e8 9c f0 ff ff       	callq  401e90 <g_print@plt>
+  402df4:	48 8b 85 a8 fc ff ff 	mov    -0x358(%rbp),%rax
+  402dfb:	48 89 c7             	mov    %rax,%rdi
+  402dfe:	e8 5d f1 ff ff       	callq  401f60 <g_free@plt>
+  402e03:	48 8b 85 90 fc ff ff 	mov    -0x370(%rbp),%rax
+  402e0a:	48 89 c7             	mov    %rax,%rdi
+  402e0d:	e8 4e f1 ff ff       	callq  401f60 <g_free@plt>
+  402e12:	48 8b 85 98 fc ff ff 	mov    -0x368(%rbp),%rax
+  402e19:	48 89 c7             	mov    %rax,%rdi
+  402e1c:	e8 3f f1 ff ff       	callq  401f60 <g_free@plt>
+  402e21:	48 8b 85 a0 fc ff ff 	mov    -0x360(%rbp),%rax
+  402e28:	48 89 c7             	mov    %rax,%rdi
+  402e2b:	e8 30 f1 ff ff       	callq  401f60 <g_free@plt>
+  402e30:	48 83 bd 28 fc ff ff 	cmpq   $0x0,-0x3d8(%rbp)
+  402e37:	00 
+  402e38:	74 0d                	je     402e47 <main+0x7e0>
+  402e3a:	48 8b 85 28 fc ff ff 	mov    -0x3d8(%rbp),%rax
+  402e41:	48 8b 40 08          	mov    0x8(%rax),%rax
+  402e45:	eb 05                	jmp    402e4c <main+0x7e5>
+  402e47:	b8 00 00 00 00       	mov    $0x0,%eax
+  402e4c:	48 89 85 28 fc ff ff 	mov    %rax,-0x3d8(%rbp)
+  402e53:	48 83 bd 28 fc ff ff 	cmpq   $0x0,-0x3d8(%rbp)
+  402e5a:	00 
+  402e5b:	0f 85 85 fe ff ff    	jne    402ce6 <main+0x67f>
+  402e61:	48 8b 85 28 fc ff ff 	mov    -0x3d8(%rbp),%rax
+  402e68:	48 89 c7             	mov    %rax,%rdi
+  402e6b:	e8 40 f2 ff ff       	callq  4020b0 <g_list_free@plt>
+  402e70:	bf 79 3e 40 00       	mov    $0x403e79,%edi
+  402e75:	b8 00 00 00 00       	mov    $0x0,%eax
+  402e7a:	e8 11 f0 ff ff       	callq  401e90 <g_print@plt>
+  402e7f:	c7 85 c8 fb ff ff 00 	movl   $0x0,-0x438(%rbp)
+  402e86:	00 00 00 
+  402e89:	e9 54 02 00 00       	jmpq   4030e2 <main+0xa7b>
+  402e8e:	8b 85 c8 fb ff ff    	mov    -0x438(%rbp),%eax
+  402e94:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+  402e9b:	00 
+  402e9c:	48 8b 85 70 fc ff ff 	mov    -0x390(%rbp),%rax
+  402ea3:	48 01 d0             	add    %rdx,%rax
+  402ea6:	48 8b 00             	mov    (%rax),%rax
+  402ea9:	48 89 85 b0 fc ff ff 	mov    %rax,-0x350(%rbp)
+  402eb0:	48 8b 85 b0 fc ff ff 	mov    -0x350(%rbp),%rax
+  402eb7:	8b 40 10             	mov    0x10(%rax),%eax
+  402eba:	83 e0 02             	and    $0x2,%eax
+  402ebd:	85 c0                	test   %eax,%eax
+  402ebf:	75 05                	jne    402ec6 <main+0x85f>
+  402ec1:	e9 15 02 00 00       	jmpq   4030db <main+0xa74>
+  402ec6:	48 8b 85 b0 fc ff ff 	mov    -0x350(%rbp),%rax
+  402ecd:	48 89 c7             	mov    %rax,%rdi
+  402ed0:	e8 8b f1 ff ff       	callq  402060 <g_param_spec_get_name@plt>
+  402ed5:	48 89 85 b8 fc ff ff 	mov    %rax,-0x348(%rbp)
+  402edc:	48 8b 85 78 fc ff ff 	mov    -0x388(%rbp),%rax
+  402ee3:	48 89 c7             	mov    %rax,%rdi
+  402ee6:	e8 65 f1 ff ff       	callq  402050 <strlen@plt>
+  402eeb:	48 89 c3             	mov    %rax,%rbx
+  402eee:	48 8b 85 b8 fc ff ff 	mov    -0x348(%rbp),%rax
+  402ef5:	48 89 c7             	mov    %rax,%rdi
+  402ef8:	e8 53 f1 ff ff       	callq  402050 <strlen@plt>
+  402efd:	48 29 c3             	sub    %rax,%rbx
+  402f00:	48 89 da             	mov    %rbx,%rdx
+  402f03:	48 8b 85 78 fc ff ff 	mov    -0x388(%rbp),%rax
+  402f0a:	48 89 d6             	mov    %rdx,%rsi
+  402f0d:	48 89 c7             	mov    %rax,%rdi
+  402f10:	e8 cb f0 ff ff       	callq  401fe0 <g_strndup@plt>
+  402f15:	48 89 85 c0 fc ff ff 	mov    %rax,-0x340(%rbp)
+  402f1c:	48 8b 85 b0 fc ff ff 	mov    -0x350(%rbp),%rax
+  402f23:	48 8b 00             	mov    (%rax),%rax
+  402f26:	48 8b 00             	mov    (%rax),%rax
+  402f29:	48 89 85 c8 fc ff ff 	mov    %rax,-0x338(%rbp)
+  402f30:	48 c7 85 40 fc ff ff 	movq   $0x0,-0x3c0(%rbp)
+  402f37:	00 00 00 00 
+  402f3b:	48 8b 05 9e 23 20 00 	mov    0x20239e(%rip),%rax        # 6052e0 <_edata>
+  402f42:	48 83 c0 70          	add    $0x70,%rax
+  402f46:	48 8b 00             	mov    (%rax),%rax
+  402f49:	48 3b 85 c8 fc ff ff 	cmp    -0x338(%rbp),%rax
+  402f50:	75 10                	jne    402f62 <main+0x8fb>
+  402f52:	48 c7 85 38 fc ff ff 	movq   $0x403e7b,-0x3c8(%rbp)
+  402f59:	7b 3e 40 00 
+  402f5d:	e9 25 01 00 00       	jmpq   403087 <main+0xa20>
+  402f62:	48 8b 05 77 23 20 00 	mov    0x202377(%rip),%rax        # 6052e0 <_edata>
+  402f69:	48 83 c0 10          	add    $0x10,%rax
+  402f6d:	48 8b 00             	mov    (%rax),%rax
+  402f70:	48 3b 85 c8 fc ff ff 	cmp    -0x338(%rbp),%rax
+  402f77:	75 10                	jne    402f89 <main+0x922>
+  402f79:	48 c7 85 38 fc ff ff 	movq   $0x403e82,-0x3c8(%rbp)
+  402f80:	82 3e 40 00 
+  402f84:	e9 fe 00 00 00       	jmpq   403087 <main+0xa20>
+  402f89:	48 8b 05 50 23 20 00 	mov    0x202350(%rip),%rax        # 6052e0 <_edata>
+  402f90:	48 83 c0 50          	add    $0x50,%rax
+  402f94:	48 8b 00             	mov    (%rax),%rax
+  402f97:	48 3b 85 c8 fc ff ff 	cmp    -0x338(%rbp),%rax
+  402f9e:	0f 85 d8 00 00 00    	jne    40307c <main+0xa15>
+  402fa4:	48 8b 85 b0 fc ff ff 	mov    -0x350(%rbp),%rax
+  402fab:	48 8b 40 18          	mov    0x18(%rax),%rax
+  402faf:	48 89 c7             	mov    %rax,%rdi
+  402fb2:	e8 e9 f1 ff ff       	callq  4021a0 <g_type_class_peek@plt>
+  402fb7:	be 30 00 00 00       	mov    $0x30,%esi
+  402fbc:	48 89 c7             	mov    %rax,%rdi
+  402fbf:	e8 7c f2 ff ff       	callq  402240 <g_type_check_class_cast@plt>
+  402fc4:	48 89 85 d0 fc ff ff 	mov    %rax,-0x330(%rbp)
+  402fcb:	c7 85 d0 fb ff ff 00 	movl   $0x0,-0x430(%rbp)
+  402fd2:	00 00 00 
+  402fd5:	bf fe 3c 40 00       	mov    $0x403cfe,%edi
+  402fda:	e8 31 f0 ff ff       	callq  402010 <g_string_new@plt>
+  402fdf:	48 89 85 40 fc ff ff 	mov    %rax,-0x3c0(%rbp)
+  402fe6:	c7 85 d0 fb ff ff 00 	movl   $0x0,-0x430(%rbp)
+  402fed:	00 00 00 
+  402ff0:	eb 65                	jmp    403057 <main+0x9f0>
+  402ff2:	48 8b 85 d0 fc ff ff 	mov    -0x330(%rbp),%rax
+  402ff9:	48 8b 48 18          	mov    0x18(%rax),%rcx
+  402ffd:	8b 95 d0 fb ff ff    	mov    -0x430(%rbp),%edx
+  403003:	48 89 d0             	mov    %rdx,%rax
+  403006:	48 01 c0             	add    %rax,%rax
+  403009:	48 01 d0             	add    %rdx,%rax
+  40300c:	48 c1 e0 03          	shl    $0x3,%rax
+  403010:	48 01 c8             	add    %rcx,%rax
+  403013:	48 8b 50 08          	mov    0x8(%rax),%rdx
+  403017:	48 8b 85 40 fc ff ff 	mov    -0x3c0(%rbp),%rax
+  40301e:	48 89 d6             	mov    %rdx,%rsi
+  403021:	48 89 c7             	mov    %rax,%rdi
+  403024:	e8 e7 f0 ff ff       	callq  402110 <g_string_append@plt>
+  403029:	83 bd d0 fb ff ff 02 	cmpl   $0x2,-0x430(%rbp)
+  403030:	75 07                	jne    403039 <main+0x9d2>
+  403032:	b8 8e 3e 40 00       	mov    $0x403e8e,%eax
+  403037:	eb 05                	jmp    40303e <main+0x9d7>
+  403039:	b8 94 3e 40 00       	mov    $0x403e94,%eax
+  40303e:	48 8b 95 40 fc ff ff 	mov    -0x3c0(%rbp),%rdx
+  403045:	48 89 c6             	mov    %rax,%rsi
+  403048:	48 89 d7             	mov    %rdx,%rdi
+  40304b:	e8 c0 f0 ff ff       	callq  402110 <g_string_append@plt>
+  403050:	83 85 d0 fb ff ff 01 	addl   $0x1,-0x430(%rbp)
+  403057:	48 8b 85 d0 fc ff ff 	mov    -0x330(%rbp),%rax
+  40305e:	8b 40 10             	mov    0x10(%rax),%eax
+  403061:	3b 85 d0 fb ff ff    	cmp    -0x430(%rbp),%eax
+  403067:	77 89                	ja     402ff2 <main+0x98b>
+  403069:	48 8b 85 40 fc ff ff 	mov    -0x3c0(%rbp),%rax
+  403070:	48 8b 00             	mov    (%rax),%rax
+  403073:	48 89 85 38 fc ff ff 	mov    %rax,-0x3c8(%rbp)
+  40307a:	eb 0b                	jmp    403087 <main+0xa20>
+  40307c:	48 c7 85 38 fc ff ff 	movq   $0x403e96,-0x3c8(%rbp)
+  403083:	96 3e 40 00 
+  403087:	48 8b 8d 38 fc ff ff 	mov    -0x3c8(%rbp),%rcx
+  40308e:	48 8b 95 c0 fc ff ff 	mov    -0x340(%rbp),%rdx
+  403095:	48 8b 85 b8 fc ff ff 	mov    -0x348(%rbp),%rax
+  40309c:	48 89 c6             	mov    %rax,%rsi
+  40309f:	bf 9d 3e 40 00       	mov    $0x403e9d,%edi
+  4030a4:	b8 00 00 00 00       	mov    $0x0,%eax
+  4030a9:	e8 e2 ed ff ff       	callq  401e90 <g_print@plt>
+  4030ae:	48 83 bd 40 fc ff ff 	cmpq   $0x0,-0x3c0(%rbp)
+  4030b5:	00 
+  4030b6:	74 14                	je     4030cc <main+0xa65>
+  4030b8:	48 8b 85 40 fc ff ff 	mov    -0x3c0(%rbp),%rax
+  4030bf:	be 01 00 00 00       	mov    $0x1,%esi
+  4030c4:	48 89 c7             	mov    %rax,%rdi
+  4030c7:	e8 f4 ed ff ff       	callq  401ec0 <g_string_free@plt>
+  4030cc:	48 8b 85 c0 fc ff ff 	mov    -0x340(%rbp),%rax
+  4030d3:	48 89 c7             	mov    %rax,%rdi
+  4030d6:	e8 85 ee ff ff       	callq  401f60 <g_free@plt>
+  4030db:	83 85 c8 fb ff ff 01 	addl   $0x1,-0x438(%rbp)
+  4030e2:	8b 85 20 fc ff ff    	mov    -0x3e0(%rbp),%eax
+  4030e8:	39 85 c8 fb ff ff    	cmp    %eax,-0x438(%rbp)
+  4030ee:	0f 82 9a fd ff ff    	jb     402e8e <main+0x827>
+  4030f4:	48 8b 85 70 fc ff ff 	mov    -0x390(%rbp),%rax
+  4030fb:	48 89 c7             	mov    %rax,%rdi
+  4030fe:	e8 5d ee ff ff       	callq  401f60 <g_free@plt>
+  403103:	48 8b 85 78 fc ff ff 	mov    -0x388(%rbp),%rax
+  40310a:	48 89 c7             	mov    %rax,%rdi
+  40310d:	e8 4e ee ff ff       	callq  401f60 <g_free@plt>
+  403112:	e8 59 f2 ff ff       	callq  402370 <gtk_widget_get_type@plt>
+  403117:	48 89 c2             	mov    %rax,%rdx
+  40311a:	48 8b 85 58 fc ff ff 	mov    -0x3a8(%rbp),%rax
+  403121:	48 89 d6             	mov    %rdx,%rsi
+  403124:	48 89 c7             	mov    %rax,%rdi
+  403127:	e8 84 ed ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40312c:	48 89 c7             	mov    %rax,%rdi
+  40312f:	e8 ac ed ff ff       	callq  401ee0 <gtk_widget_destroy@plt>
+  403134:	b8 00 00 00 00       	mov    $0x0,%eax
+  403139:	e9 d7 08 00 00       	jmpq   403a15 <main+0x13ae>
+  40313e:	48 8b 85 f0 fb ff ff 	mov    -0x410(%rbp),%rax
+  403145:	48 85 c0             	test   %rax,%rax
+  403148:	0f 84 0f 02 00 00    	je     40335d <main+0xcf6>
+  40314e:	48 c7 85 18 fc ff ff 	movq   $0x0,-0x3e8(%rbp)
+  403155:	00 00 00 00 
+  403159:	48 8d 95 18 fc ff ff 	lea    -0x3e8(%rbp),%rdx
+  403160:	48 8d 85 20 fc ff ff 	lea    -0x3e0(%rbp),%rax
+  403167:	48 89 c6             	mov    %rax,%rsi
+  40316a:	bf a5 3e 40 00       	mov    $0x403ea5,%edi
+  40316f:	e8 7c f0 ff ff       	callq  4021f0 <g_file_open_tmp@plt>
+  403174:	89 85 dc fb ff ff    	mov    %eax,-0x424(%rbp)
+  40317a:	8b 85 dc fb ff ff    	mov    -0x424(%rbp),%eax
+  403180:	89 c7                	mov    %eax,%edi
+  403182:	e8 c9 ed ff ff       	callq  401f50 <close@plt>
+  403187:	48 8b 85 18 fc ff ff 	mov    -0x3e8(%rbp),%rax
+  40318e:	48 85 c0             	test   %rax,%rax
+  403191:	74 29                	je     4031bc <main+0xb55>
+  403193:	48 8b 85 18 fc ff ff 	mov    -0x3e8(%rbp),%rax
+  40319a:	48 8b 40 08          	mov    0x8(%rax),%rax
+  40319e:	48 89 c1             	mov    %rax,%rcx
+  4031a1:	ba b9 3e 40 00       	mov    $0x403eb9,%edx
+  4031a6:	be 04 00 00 00       	mov    $0x4,%esi
+  4031ab:	bf 00 00 00 00       	mov    $0x0,%edi
+  4031b0:	b8 00 00 00 00       	mov    $0x0,%eax
+  4031b5:	e8 76 ef ff ff       	callq  402130 <g_log@plt>
+  4031ba:	eb fe                	jmp    4031ba <main+0xb53>
+  4031bc:	48 8b 85 20 fc ff ff 	mov    -0x3e0(%rbp),%rax
+  4031c3:	48 89 c7             	mov    %rax,%rdi
+  4031c6:	e8 d5 ec ff ff       	callq  401ea0 <g_unlink@plt>
+  4031cb:	83 f8 ff             	cmp    $0xffffffff,%eax
+  4031ce:	75 2c                	jne    4031fc <main+0xb95>
+  4031d0:	e8 ab f0 ff ff       	callq  402280 <__errno_location@plt>
+  4031d5:	8b 00                	mov    (%rax),%eax
+  4031d7:	89 c7                	mov    %eax,%edi
+  4031d9:	e8 62 f1 ff ff       	callq  402340 <g_strerror@plt>
+  4031de:	48 89 c1             	mov    %rax,%rcx
+  4031e1:	ba b9 3e 40 00       	mov    $0x403eb9,%edx
+  4031e6:	be 04 00 00 00       	mov    $0x4,%esi
+  4031eb:	bf 00 00 00 00       	mov    $0x0,%edi
+  4031f0:	b8 00 00 00 00       	mov    $0x0,%eax
+  4031f5:	e8 36 ef ff ff       	callq  402130 <g_log@plt>
+  4031fa:	eb fe                	jmp    4031fa <main+0xb93>
+  4031fc:	e8 2f ee ff ff       	callq  402030 <webkit_web_view_new@plt>
+  403201:	48 89 85 d8 fc ff ff 	mov    %rax,-0x328(%rbp)
+  403208:	e8 83 ee ff ff       	callq  402090 <gtk_offscreen_window_new@plt>
+  40320d:	48 89 85 e0 fc ff ff 	mov    %rax,-0x320(%rbp)
+  403214:	e8 77 ef ff ff       	callq  402190 <gtk_container_get_type@plt>
+  403219:	48 89 c2             	mov    %rax,%rdx
+  40321c:	48 8b 85 e0 fc ff ff 	mov    -0x320(%rbp),%rax
+  403223:	48 89 d6             	mov    %rdx,%rsi
+  403226:	48 89 c7             	mov    %rax,%rdi
+  403229:	e8 82 ec ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40322e:	48 8b 95 d8 fc ff ff 	mov    -0x328(%rbp),%rdx
+  403235:	48 89 d6             	mov    %rdx,%rsi
+  403238:	48 89 c7             	mov    %rax,%rdi
+  40323b:	e8 e0 f0 ff ff       	callq  402320 <gtk_container_add@plt>
+  403240:	e8 9b f0 ff ff       	callq  4022e0 <gdk_screen_get_default@plt>
+  403245:	48 89 85 e8 fc ff ff 	mov    %rax,-0x318(%rbp)
+  40324c:	48 83 bd e8 fc ff ff 	cmpq   $0x0,-0x318(%rbp)
+  403253:	00 
+  403254:	74 37                	je     40328d <main+0xc26>
+  403256:	48 8b 85 e8 fc ff ff 	mov    -0x318(%rbp),%rax
+  40325d:	48 89 c7             	mov    %rax,%rdi
+  403260:	e8 bb ee ff ff       	callq  402120 <gdk_screen_get_height@plt>
+  403265:	89 c3                	mov    %eax,%ebx
+  403267:	48 8b 85 e8 fc ff ff 	mov    -0x318(%rbp),%rax
+  40326e:	48 89 c7             	mov    %rax,%rdi
+  403271:	e8 ea f0 ff ff       	callq  402360 <gdk_screen_get_width@plt>
+  403276:	89 c1                	mov    %eax,%ecx
+  403278:	48 8b 85 d8 fc ff ff 	mov    -0x328(%rbp),%rax
+  40327f:	89 da                	mov    %ebx,%edx
+  403281:	89 ce                	mov    %ecx,%esi
+  403283:	48 89 c7             	mov    %rax,%rdi
+  403286:	e8 25 f1 ff ff       	callq  4023b0 <gtk_widget_set_size_request@plt>
+  40328b:	eb 19                	jmp    4032a6 <main+0xc3f>
+  40328d:	48 8b 85 d8 fc ff ff 	mov    -0x328(%rbp),%rax
+  403294:	ba 58 02 00 00       	mov    $0x258,%edx
+  403299:	be 20 03 00 00       	mov    $0x320,%esi
+  40329e:	48 89 c7             	mov    %rax,%rdi
+  4032a1:	e8 0a f1 ff ff       	callq  4023b0 <gtk_widget_set_size_request@plt>
+  4032a6:	48 8b 85 e0 fc ff ff 	mov    -0x320(%rbp),%rax
+  4032ad:	48 89 c7             	mov    %rax,%rdi
+  4032b0:	e8 7b ef ff ff       	callq  402230 <gtk_widget_show_all@plt>
+  4032b5:	48 8b 95 20 fc ff ff 	mov    -0x3e0(%rbp),%rdx
+  4032bc:	48 8b 85 d8 fc ff ff 	mov    -0x328(%rbp),%rax
+  4032c3:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  4032c9:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  4032cf:	48 89 d1             	mov    %rdx,%rcx
+  4032d2:	ba b9 25 40 00       	mov    $0x4025b9,%edx
+  4032d7:	be bc 3e 40 00       	mov    $0x403ebc,%esi
+  4032dc:	48 89 c7             	mov    %rax,%rdi
+  4032df:	e8 4c ec ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  4032e4:	48 8b 85 f0 fb ff ff 	mov    -0x410(%rbp),%rax
+  4032eb:	ba 01 00 00 00       	mov    $0x1,%edx
+  4032f0:	be 00 00 00 00       	mov    $0x0,%esi
+  4032f5:	48 89 c7             	mov    %rax,%rdi
+  4032f8:	e8 a3 ed ff ff       	callq  4020a0 <sokoke_magic_uri@plt>
+  4032fd:	48 89 85 f0 fc ff ff 	mov    %rax,-0x310(%rbp)
+  403304:	e8 b7 ef ff ff       	callq  4022c0 <webkit_web_view_get_type@plt>
+  403309:	48 89 c2             	mov    %rax,%rdx
+  40330c:	48 8b 85 d8 fc ff ff 	mov    -0x328(%rbp),%rax
+  403313:	48 89 d6             	mov    %rdx,%rsi
+  403316:	48 89 c7             	mov    %rax,%rdi
+  403319:	e8 92 eb ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40331e:	48 8b 95 f0 fc ff ff 	mov    -0x310(%rbp),%rdx
+  403325:	48 89 d6             	mov    %rdx,%rsi
+  403328:	48 89 c7             	mov    %rax,%rdi
+  40332b:	e8 40 ef ff ff       	callq  402270 <webkit_web_view_load_uri@plt>
+  403330:	48 8b 85 f0 fc ff ff 	mov    -0x310(%rbp),%rax
+  403337:	48 89 c7             	mov    %rax,%rdi
+  40333a:	e8 21 ec ff ff       	callq  401f60 <g_free@plt>
+  40333f:	e8 fc eb ff ff       	callq  401f40 <gtk_main@plt>
+  403344:	48 8b 85 20 fc ff ff 	mov    -0x3e0(%rbp),%rax
+  40334b:	48 89 c7             	mov    %rax,%rdi
+  40334e:	e8 0d ec ff ff       	callq  401f60 <g_free@plt>
+  403353:	b8 00 00 00 00       	mov    $0x0,%eax
+  403358:	e9 b8 06 00 00       	jmpq   403a15 <main+0x13ae>
+  40335d:	8b 85 b0 fb ff ff    	mov    -0x450(%rbp),%eax
+  403363:	85 c0                	test   %eax,%eax
+  403365:	0f 84 27 02 00 00    	je     403592 <main+0xf2b>
+  40336b:	bf 00 00 00 00       	mov    $0x0,%edi
+  403370:	e8 3b ef ff ff       	callq  4022b0 <gtk_window_new@plt>
+  403375:	48 89 85 f8 fc ff ff 	mov    %rax,-0x308(%rbp)
+  40337c:	be 00 00 00 00       	mov    $0x0,%esi
+  403381:	bf 00 00 00 00       	mov    $0x0,%edi
+  403386:	e8 85 ee ff ff       	callq  402210 <gtk_vbox_new@plt>
+  40338b:	48 89 85 00 fd ff ff 	mov    %rax,-0x300(%rbp)
+  403392:	e8 89 eb ff ff       	callq  401f20 <gtk_entry_new@plt>
+  403397:	48 89 85 08 fd ff ff 	mov    %rax,-0x2f8(%rbp)
+  40339e:	be 00 00 00 00       	mov    $0x0,%esi
+  4033a3:	bf 00 00 00 00       	mov    $0x0,%edi
+  4033a8:	e8 c3 ed ff ff       	callq  402170 <gtk_scrolled_window_new@plt>
+  4033ad:	48 89 85 10 fd ff ff 	mov    %rax,-0x2f0(%rbp)
+  4033b4:	e8 77 ec ff ff       	callq  402030 <webkit_web_view_new@plt>
+  4033b9:	48 89 85 18 fd ff ff 	mov    %rax,-0x2e8(%rbp)
+  4033c0:	e8 8b ef ff ff       	callq  402350 <gtk_window_get_type@plt>
+  4033c5:	48 89 c2             	mov    %rax,%rdx
+  4033c8:	48 8b 85 f8 fc ff ff 	mov    -0x308(%rbp),%rax
+  4033cf:	48 89 d6             	mov    %rdx,%rsi
+  4033d2:	48 89 c7             	mov    %rax,%rdi
+  4033d5:	e8 d6 ea ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  4033da:	48 89 c7             	mov    %rax,%rdi
+  4033dd:	e8 2e ef ff ff       	callq  402310 <katze_window_set_sensible_default_size@plt>
+  4033e2:	e8 69 ed ff ff       	callq  402150 <gtk_box_get_type@plt>
+  4033e7:	48 89 c2             	mov    %rax,%rdx
+  4033ea:	48 8b 85 00 fd ff ff 	mov    -0x300(%rbp),%rax
+  4033f1:	48 89 d6             	mov    %rdx,%rsi
+  4033f4:	48 89 c7             	mov    %rax,%rdi
+  4033f7:	e8 b4 ea ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  4033fc:	48 8b b5 08 fd ff ff 	mov    -0x2f8(%rbp),%rsi
+  403403:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  403409:	b9 00 00 00 00       	mov    $0x0,%ecx
+  40340e:	ba 00 00 00 00       	mov    $0x0,%edx
+  403413:	48 89 c7             	mov    %rax,%rdi
+  403416:	e8 e5 ea ff ff       	callq  401f00 <gtk_box_pack_start@plt>
+  40341b:	e8 30 ed ff ff       	callq  402150 <gtk_box_get_type@plt>
+  403420:	48 89 c2             	mov    %rax,%rdx
+  403423:	48 8b 85 00 fd ff ff 	mov    -0x300(%rbp),%rax
+  40342a:	48 89 d6             	mov    %rdx,%rsi
+  40342d:	48 89 c7             	mov    %rax,%rdi
+  403430:	e8 7b ea ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  403435:	48 8b b5 10 fd ff ff 	mov    -0x2f0(%rbp),%rsi
+  40343c:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  403442:	b9 01 00 00 00       	mov    $0x1,%ecx
+  403447:	ba 01 00 00 00       	mov    $0x1,%edx
+  40344c:	48 89 c7             	mov    %rax,%rdi
+  40344f:	e8 ac ea ff ff       	callq  401f00 <gtk_box_pack_start@plt>
+  403454:	e8 37 ed ff ff       	callq  402190 <gtk_container_get_type@plt>
+  403459:	48 89 c2             	mov    %rax,%rdx
+  40345c:	48 8b 85 10 fd ff ff 	mov    -0x2f0(%rbp),%rax
+  403463:	48 89 d6             	mov    %rdx,%rsi
+  403466:	48 89 c7             	mov    %rax,%rdi
+  403469:	e8 42 ea ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40346e:	48 8b 95 18 fd ff ff 	mov    -0x2e8(%rbp),%rdx
+  403475:	48 89 d6             	mov    %rdx,%rsi
+  403478:	48 89 c7             	mov    %rax,%rdi
+  40347b:	e8 a0 ee ff ff       	callq  402320 <gtk_container_add@plt>
+  403480:	e8 0b ed ff ff       	callq  402190 <gtk_container_get_type@plt>
+  403485:	48 89 c2             	mov    %rax,%rdx
+  403488:	48 8b 85 f8 fc ff ff 	mov    -0x308(%rbp),%rax
+  40348f:	48 89 d6             	mov    %rdx,%rsi
+  403492:	48 89 c7             	mov    %rax,%rdi
+  403495:	e8 16 ea ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40349a:	48 8b 95 00 fd ff ff 	mov    -0x300(%rbp),%rdx
+  4034a1:	48 89 d6             	mov    %rdx,%rsi
+  4034a4:	48 89 c7             	mov    %rax,%rdi
+  4034a7:	e8 74 ee ff ff       	callq  402320 <gtk_container_add@plt>
+  4034ac:	48 8b 85 00 fc ff ff 	mov    -0x400(%rbp),%rax
+  4034b3:	48 85 c0             	test   %rax,%rax
+  4034b6:	74 1b                	je     4034d3 <main+0xe6c>
+  4034b8:	48 8b 85 00 fc ff ff 	mov    -0x400(%rbp),%rax
+  4034bf:	48 8b 00             	mov    (%rax),%rax
+  4034c2:	48 85 c0             	test   %rax,%rax
+  4034c5:	74 0c                	je     4034d3 <main+0xe6c>
+  4034c7:	48 8b 85 00 fc ff ff 	mov    -0x400(%rbp),%rax
+  4034ce:	48 8b 18             	mov    (%rax),%rbx
+  4034d1:	eb 05                	jmp    4034d8 <main+0xe71>
+  4034d3:	bb ca 3e 40 00       	mov    $0x403eca,%ebx
+  4034d8:	e8 43 eb ff ff       	callq  402020 <gtk_entry_get_type@plt>
+  4034dd:	48 89 c2             	mov    %rax,%rdx
+  4034e0:	48 8b 85 08 fd ff ff 	mov    -0x2f8(%rbp),%rax
+  4034e7:	48 89 d6             	mov    %rdx,%rsi
+  4034ea:	48 89 c7             	mov    %rax,%rdi
+  4034ed:	e8 be e9 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  4034f2:	48 89 de             	mov    %rbx,%rsi
+  4034f5:	48 89 c7             	mov    %rax,%rdi
+  4034f8:	e8 03 ed ff ff       	callq  402200 <gtk_entry_set_text@plt>
+  4034fd:	48 8b 95 18 fd ff ff 	mov    -0x2e8(%rbp),%rdx
+  403504:	48 8b 85 08 fd ff ff 	mov    -0x2f8(%rbp),%rax
+  40350b:	48 89 d6             	mov    %rdx,%rsi
+  40350e:	48 89 c7             	mov    %rax,%rdi
+  403511:	e8 2a f0 ff ff       	callq  402540 <plain_entry_activate_cb>
+  403516:	48 8b 95 18 fd ff ff 	mov    -0x2e8(%rbp),%rdx
+  40351d:	48 8b 85 08 fd ff ff 	mov    -0x2f8(%rbp),%rax
+  403524:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  40352a:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  403530:	48 89 d1             	mov    %rdx,%rcx
+  403533:	ba 40 25 40 00       	mov    $0x402540,%edx
+  403538:	be e1 3e 40 00       	mov    $0x403ee1,%esi
+  40353d:	48 89 c7             	mov    %rax,%rdi
+  403540:	e8 eb e9 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  403545:	48 8b 95 f8 fc ff ff 	mov    -0x308(%rbp),%rdx
+  40354c:	48 8b 85 f8 fc ff ff 	mov    -0x308(%rbp),%rax
+  403553:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  403559:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  40355f:	48 89 d1             	mov    %rdx,%rcx
+  403562:	ba f0 1f 40 00       	mov    $0x401ff0,%edx
+  403567:	be ea 3e 40 00       	mov    $0x403eea,%esi
+  40356c:	48 89 c7             	mov    %rax,%rdi
+  40356f:	e8 bc e9 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  403574:	48 8b 85 f8 fc ff ff 	mov    -0x308(%rbp),%rax
+  40357b:	48 89 c7             	mov    %rax,%rdi
+  40357e:	e8 ad ec ff ff       	callq  402230 <gtk_widget_show_all@plt>
+  403583:	e8 b8 e9 ff ff       	callq  401f40 <gtk_main@plt>
+  403588:	b8 00 00 00 00       	mov    $0x0,%eax
+  40358d:	e9 83 04 00 00       	jmpq   403a15 <main+0x13ae>
+  403592:	b8 00 00 00 00       	mov    $0x0,%eax
+  403597:	e8 e4 ea ff ff       	callq  402080 <midori_private_data_register_built_ins@plt>
+  40359c:	8b 85 bc fb ff ff    	mov    -0x444(%rbp),%eax
+  4035a2:	85 c0                	test   %eax,%eax
+  4035a4:	0f 84 4c 02 00 00    	je     4037f6 <main+0x118f>
+  4035aa:	48 c7 85 10 fc ff ff 	movq   $0x0,-0x3f0(%rbp)
+  4035b1:	00 00 00 00 
+  4035b5:	48 c7 85 18 fc ff ff 	movq   $0x0,-0x3e8(%rbp)
+  4035bc:	00 00 00 00 
+  4035c0:	48 8b 85 00 fc ff ff 	mov    -0x400(%rbp),%rax
+  4035c7:	48 85 c0             	test   %rax,%rax
+  4035ca:	74 0c                	je     4035d8 <main+0xf71>
+  4035cc:	48 8b 85 00 fc ff ff 	mov    -0x400(%rbp),%rax
+  4035d3:	48 8b 00             	mov    (%rax),%rax
+  4035d6:	eb 05                	jmp    4035dd <main+0xf76>
+  4035d8:	b8 00 00 00 00       	mov    $0x0,%eax
+  4035dd:	48 8d 95 18 fc ff ff 	lea    -0x3e8(%rbp),%rdx
+  4035e4:	48 8d b5 10 fc ff ff 	lea    -0x3f0(%rbp),%rsi
+  4035eb:	48 89 d1             	mov    %rdx,%rcx
+  4035ee:	ba 00 00 00 00       	mov    $0x0,%edx
+  4035f3:	48 89 c7             	mov    %rax,%rdi
+  4035f6:	e8 d5 eb ff ff       	callq  4021d0 <g_file_get_contents@plt>
+  4035fb:	85 c0                	test   %eax,%eax
+  4035fd:	0f 84 91 01 00 00    	je     403794 <main+0x112d>
+  403603:	48 8b 85 e8 fb ff ff 	mov    -0x418(%rbp),%rax
+  40360a:	48 89 c6             	mov    %rax,%rsi
+  40360d:	bf 03 00 00 00       	mov    $0x3,%edi
+  403612:	e8 99 eb ff ff       	callq  4021b0 <midori_paths_init@plt>
+  403617:	e8 64 e9 ff ff       	callq  401f80 <midori_browser_new@plt>
+  40361c:	48 89 85 20 fd ff ff 	mov    %rax,-0x2e0(%rbp)
+  403623:	48 8b 85 20 fd ff ff 	mov    -0x2e0(%rbp),%rax
+  40362a:	48 89 c7             	mov    %rax,%rdi
+  40362d:	e8 0e eb ff ff       	callq  402140 <midori_browser_get_settings@plt>
+  403632:	48 89 85 28 fd ff ff 	mov    %rax,-0x2d8(%rbp)
+  403639:	e8 52 ed ff ff       	callq  402390 <webkit_get_default_session@plt>
+  40363e:	be 50 00 00 00       	mov    $0x50,%esi
+  403643:	48 89 c7             	mov    %rax,%rdi
+  403646:	e8 65 e8 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40364b:	ba 01 00 00 00       	mov    $0x1,%edx
+  403650:	be f7 3e 40 00       	mov    $0x403ef7,%esi
+  403655:	48 89 c7             	mov    %rax,%rdi
+  403658:	e8 63 ea ff ff       	callq  4020c0 <g_object_set_data@plt>
+  40365d:	48 8b 85 28 fd ff ff 	mov    -0x2d8(%rbp),%rax
+  403664:	48 89 c7             	mov    %rax,%rdi
+  403667:	e8 94 ea ff ff       	callq  402100 <midori_load_soup_session@plt>
+  40366c:	48 c7 85 20 fc ff ff 	movq   $0x0,-0x3e0(%rbp)
+  403673:	00 00 00 00 
+  403677:	48 8b 85 28 fd ff ff 	mov    -0x2d8(%rbp),%rax
+  40367e:	48 89 c6             	mov    %rax,%rsi
+  403681:	bf 00 00 00 00       	mov    $0x0,%edi
+  403686:	e8 55 eb ff ff       	callq  4021e0 <midori_view_new_with_item@plt>
+  40368b:	48 89 85 30 fd ff ff 	mov    %rax,-0x2d0(%rbp)
+  403692:	48 8b 85 28 fd ff ff 	mov    -0x2d8(%rbp),%rax
+  403699:	b9 00 00 00 00       	mov    $0x0,%ecx
+  40369e:	ba 01 00 00 00       	mov    $0x1,%edx
+  4036a3:	be 0c 3f 40 00       	mov    $0x403f0c,%esi
+  4036a8:	48 89 c7             	mov    %rax,%rdi
+  4036ab:	b8 00 00 00 00       	mov    $0x0,%eax
+  4036b0:	e8 7b ec ff ff       	callq  402330 <g_object_set@plt>
+  4036b5:	48 8b 95 30 fd ff ff 	mov    -0x2d0(%rbp),%rdx
+  4036bc:	48 8b 85 20 fd ff ff 	mov    -0x2e0(%rbp),%rax
+  4036c3:	48 89 d6             	mov    %rdx,%rsi
+  4036c6:	48 89 c7             	mov    %rax,%rdi
+  4036c9:	e8 e2 e8 ff ff       	callq  401fb0 <midori_browser_add_tab@plt>
+  4036ce:	e8 9d ec ff ff       	callq  402370 <gtk_widget_get_type@plt>
+  4036d3:	48 89 c2             	mov    %rax,%rdx
+  4036d6:	48 8b 85 20 fd ff ff 	mov    -0x2e0(%rbp),%rax
+  4036dd:	48 89 d6             	mov    %rdx,%rsi
+  4036e0:	48 89 c7             	mov    %rax,%rdi
+  4036e3:	e8 c8 e7 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  4036e8:	48 89 c7             	mov    %rax,%rdi
+  4036eb:	e8 40 eb ff ff       	callq  402230 <gtk_widget_show_all@plt>
+  4036f0:	e8 7b ec ff ff       	callq  402370 <gtk_widget_get_type@plt>
+  4036f5:	48 89 c2             	mov    %rax,%rdx
+  4036f8:	48 8b 85 20 fd ff ff 	mov    -0x2e0(%rbp),%rax
+  4036ff:	48 89 d6             	mov    %rdx,%rsi
+  403702:	48 89 c7             	mov    %rax,%rdi
+  403705:	e8 a6 e7 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  40370a:	48 89 c7             	mov    %rax,%rdi
+  40370d:	e8 de e7 ff ff       	callq  401ef0 <gtk_widget_hide@plt>
+  403712:	48 8b 9d 10 fc ff ff 	mov    -0x3f0(%rbp),%rbx
+  403719:	e8 d2 e9 ff ff       	callq  4020f0 <midori_view_get_type@plt>
+  40371e:	48 89 c2             	mov    %rax,%rdx
+  403721:	48 8b 85 30 fd ff ff 	mov    -0x2d0(%rbp),%rax
+  403728:	48 89 d6             	mov    %rdx,%rsi
+  40372b:	48 89 c7             	mov    %rax,%rdi
+  40372e:	e8 7d e7 ff ff       	callq  401eb0 <g_type_check_instance_cast@plt>
+  403733:	48 8d 95 20 fc ff ff 	lea    -0x3e0(%rbp),%rdx
+  40373a:	48 89 de             	mov    %rbx,%rsi
+  40373d:	48 89 c7             	mov    %rax,%rdi
+  403740:	e8 3b e7 ff ff       	callq  401e80 <midori_view_execute_script@plt>
+  403745:	48 8b 85 20 fc ff ff 	mov    -0x3e0(%rbp),%rax
+  40374c:	48 85 c0             	test   %rax,%rax
+  40374f:	74 25                	je     403776 <main+0x110f>
+  403751:	48 8b 85 20 fc ff ff 	mov    -0x3e0(%rbp),%rax
+  403758:	48 89 c1             	mov    %rax,%rcx
+  40375b:	ba 83 3d 40 00       	mov    $0x403d83,%edx
+  403760:	be 04 00 00 00       	mov    $0x4,%esi
+  403765:	bf 00 00 00 00       	mov    $0x0,%edi
+  40376a:	b8 00 00 00 00       	mov    $0x0,%eax
+  40376f:	e8 bc e9 ff ff       	callq  402130 <g_log@plt>
+  403774:	eb fe                	jmp    403774 <main+0x110d>
+  403776:	e8 c5 e7 ff ff       	callq  401f40 <gtk_main@plt>
+  40377b:	48 8b 85 10 fc ff ff 	mov    -0x3f0(%rbp),%rax
+  403782:	48 89 c7             	mov    %rax,%rdi
+  403785:	e8 d6 e7 ff ff       	callq  401f60 <g_free@plt>
+  40378a:	b8 00 00 00 00       	mov    $0x0,%eax
+  40378f:	e9 81 02 00 00       	jmpq   403a15 <main+0x13ae>
+  403794:	48 8b 85 18 fc ff ff 	mov    -0x3e8(%rbp),%rax
+  40379b:	48 85 c0             	test   %rax,%rax
+  40379e:	74 29                	je     4037c9 <main+0x1162>
+  4037a0:	48 8b 85 18 fc ff ff 	mov    -0x3e8(%rbp),%rax
+  4037a7:	48 8b 40 08          	mov    0x8(%rax),%rax
+  4037ab:	48 89 c1             	mov    %rax,%rcx
+  4037ae:	ba 83 3d 40 00       	mov    $0x403d83,%edx
+  4037b3:	be 04 00 00 00       	mov    $0x4,%esi
+  4037b8:	bf 00 00 00 00       	mov    $0x0,%edi
+  4037bd:	b8 00 00 00 00       	mov    $0x0,%eax
+  4037c2:	e8 69 e9 ff ff       	callq  402130 <g_log@plt>
+  4037c7:	eb fe                	jmp    4037c7 <main+0x1160>
+  4037c9:	be 1e 3f 40 00       	mov    $0x403f1e,%esi
+  4037ce:	bf d1 3a 40 00       	mov    $0x403ad1,%edi
+  4037d3:	e8 f8 e6 ff ff       	callq  401ed0 <g_dgettext@plt>
+  4037d8:	48 89 c1             	mov    %rax,%rcx
+  4037db:	ba 83 3d 40 00       	mov    $0x403d83,%edx
+  4037e0:	be 04 00 00 00       	mov    $0x4,%esi
+  4037e5:	bf 00 00 00 00       	mov    $0x0,%edi
+  4037ea:	b8 00 00 00 00       	mov    $0x0,%eax
+  4037ef:	e8 3c e9 ff ff       	callq  402130 <g_log@plt>
+  4037f4:	eb fe                	jmp    4037f4 <main+0x118d>
+  4037f6:	8b 85 ac fb ff ff    	mov    -0x454(%rbp),%eax
+  4037fc:	85 c0                	test   %eax,%eax
+  4037fe:	0f 84 a1 00 00 00    	je     4038a5 <main+0x123e>
+  403804:	4c 8b 85 08 fc ff ff 	mov    -0x3f8(%rbp),%r8
+  40380b:	48 8b 8d f8 fb ff ff 	mov    -0x408(%rbp),%rcx
+  403812:	48 8b 95 00 fc ff ff 	mov    -0x400(%rbp),%rdx
+  403819:	48 8b b5 e0 fb ff ff 	mov    -0x420(%rbp),%rsi
+  403820:	48 8b 85 e8 fb ff ff 	mov    -0x418(%rbp),%rax
+  403827:	8b bd d8 fb ff ff    	mov    -0x428(%rbp),%edi
+  40382d:	4d 89 c1             	mov    %r8,%r9
+  403830:	41 89 f8             	mov    %edi,%r8d
+  403833:	48 89 c7             	mov    %rax,%rdi
+  403836:	e8 c5 ea ff ff       	callq  402300 <midori_private_app_new@plt>
+  40383b:	48 89 85 38 fd ff ff 	mov    %rax,-0x2c8(%rbp)
+  403842:	48 8b 85 38 fd ff ff 	mov    -0x2c8(%rbp),%rax
+  403849:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  40384f:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  403855:	b9 00 00 00 00       	mov    $0x0,%ecx
+  40385a:	ba f0 1f 40 00       	mov    $0x401ff0,%edx
+  40385f:	be 37 3f 40 00       	mov    $0x403f37,%esi
+  403864:	48 89 c7             	mov    %rax,%rdi
+  403867:	e8 c4 e6 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  40386c:	48 8b 85 38 fd ff ff 	mov    -0x2c8(%rbp),%rax
+  403873:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  403879:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  40387f:	b9 00 00 00 00       	mov    $0x0,%ecx
+  403884:	ba f0 1f 40 00       	mov    $0x401ff0,%edx
+  403889:	be 3f 3f 40 00       	mov    $0x403f3f,%esi
+  40388e:	48 89 c7             	mov    %rax,%rdi
+  403891:	e8 9a e6 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  403896:	e8 a5 e6 ff ff       	callq  401f40 <gtk_main@plt>
+  40389b:	b8 00 00 00 00       	mov    $0x0,%eax
+  4038a0:	e9 70 01 00 00       	jmpq   403a15 <main+0x13ae>
+  4038a5:	48 8b 85 e0 fb ff ff 	mov    -0x420(%rbp),%rax
+  4038ac:	48 85 c0             	test   %rax,%rax
+  4038af:	0f 84 97 00 00 00    	je     40394c <main+0x12e5>
+  4038b5:	48 8b bd 08 fc ff ff 	mov    -0x3f8(%rbp),%rdi
+  4038bc:	48 8b 95 f8 fb ff ff 	mov    -0x408(%rbp),%rdx
+  4038c3:	48 8b b5 00 fc ff ff 	mov    -0x400(%rbp),%rsi
+  4038ca:	48 8b 85 e0 fb ff ff 	mov    -0x420(%rbp),%rax
+  4038d1:	8b 8d d8 fb ff ff    	mov    -0x428(%rbp),%ecx
+  4038d7:	49 89 f8             	mov    %rdi,%r8
+  4038da:	48 89 c7             	mov    %rax,%rdi
+  4038dd:	e8 9e ea ff ff       	callq  402380 <midori_web_app_new@plt>
+  4038e2:	48 89 85 40 fd ff ff 	mov    %rax,-0x2c0(%rbp)
+  4038e9:	48 8b 85 40 fd ff ff 	mov    -0x2c0(%rbp),%rax
+  4038f0:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  4038f6:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  4038fc:	b9 00 00 00 00       	mov    $0x0,%ecx
+  403901:	ba f0 1f 40 00       	mov    $0x401ff0,%edx
+  403906:	be 37 3f 40 00       	mov    $0x403f37,%esi
+  40390b:	48 89 c7             	mov    %rax,%rdi
+  40390e:	e8 1d e6 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  403913:	48 8b 85 40 fd ff ff 	mov    -0x2c0(%rbp),%rax
+  40391a:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  403920:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  403926:	b9 00 00 00 00       	mov    $0x0,%ecx
+  40392b:	ba f0 1f 40 00       	mov    $0x401ff0,%edx
+  403930:	be 3f 3f 40 00       	mov    $0x403f3f,%esi
+  403935:	48 89 c7             	mov    %rax,%rdi
+  403938:	e8 f3 e5 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  40393d:	e8 fe e5 ff ff       	callq  401f40 <gtk_main@plt>
+  403942:	b8 00 00 00 00       	mov    $0x0,%eax
+  403947:	e9 c9 00 00 00       	jmpq   403a15 <main+0x13ae>
+  40394c:	48 8b b5 08 fc ff ff 	mov    -0x3f8(%rbp),%rsi
+  403953:	4c 8b 85 f8 fb ff ff 	mov    -0x408(%rbp),%r8
+  40395a:	48 8b 8d 00 fc ff ff 	mov    -0x400(%rbp),%rcx
+  403961:	8b 95 b4 fb ff ff    	mov    -0x44c(%rbp),%edx
+  403967:	83 bd d4 fb ff ff 00 	cmpl   $0x0,-0x42c(%rbp)
+  40396e:	74 07                	je     403977 <main+0x1310>
+  403970:	b8 44 3f 40 00       	mov    $0x403f44,%eax
+  403975:	eb 05                	jmp    40397c <main+0x1315>
+  403977:	b8 4d 3f 40 00       	mov    $0x403f4d,%eax
+  40397c:	48 8b bd e8 fb ff ff 	mov    -0x418(%rbp),%rdi
+  403983:	44 8b 8d d8 fb ff ff 	mov    -0x428(%rbp),%r9d
+  40398a:	48 89 34 24          	mov    %rsi,(%rsp)
+  40398e:	48 89 c6             	mov    %rax,%rsi
+  403991:	e8 2a e6 ff ff       	callq  401fc0 <midori_normal_app_new@plt>
+  403996:	48 89 85 48 fd ff ff 	mov    %rax,-0x2b8(%rbp)
+  40399d:	48 83 bd 48 fd ff ff 	cmpq   $0x0,-0x2b8(%rbp)
+  4039a4:	00 
+  4039a5:	75 07                	jne    4039ae <main+0x1347>
+  4039a7:	b8 00 00 00 00       	mov    $0x0,%eax
+  4039ac:	eb 67                	jmp    403a15 <main+0x13ae>
+  4039ae:	b8 ef be ad de       	mov    $0xdeadbeef,%eax
+  4039b3:	48 39 85 48 fd ff ff 	cmp    %rax,-0x2b8(%rbp)
+  4039ba:	75 07                	jne    4039c3 <main+0x135c>
+  4039bc:	b8 01 00 00 00       	mov    $0x1,%eax
+  4039c1:	eb 52                	jmp    403a15 <main+0x13ae>
+  4039c3:	48 8b 85 48 fd ff ff 	mov    -0x2b8(%rbp),%rax
+  4039ca:	41 b9 00 00 00 00    	mov    $0x0,%r9d
+  4039d0:	41 b8 00 00 00 00    	mov    $0x0,%r8d
+  4039d6:	b9 00 00 00 00       	mov    $0x0,%ecx
+  4039db:	ba f0 1f 40 00       	mov    $0x401ff0,%edx
+  4039e0:	be 3f 3f 40 00       	mov    $0x403f3f,%esi
+  4039e5:	48 89 c7             	mov    %rax,%rdi
+  4039e8:	e8 43 e5 ff ff       	callq  401f30 <g_signal_connect_data@plt>
+  4039ed:	e8 4e e5 ff ff       	callq  401f40 <gtk_main@plt>
+  4039f2:	48 8b 85 48 fd ff ff 	mov    -0x2b8(%rbp),%rax
+  4039f9:	48 89 c7             	mov    %rax,%rdi
+  4039fc:	e8 1f e8 ff ff       	callq  402220 <midori_normal_app_on_quit@plt>
+  403a01:	48 8b 85 48 fd ff ff 	mov    -0x2b8(%rbp),%rax
+  403a08:	48 89 c7             	mov    %rax,%rdi
+  403a0b:	e8 80 e8 ff ff       	callq  402290 <g_object_unref@plt>
+  403a10:	b8 00 00 00 00       	mov    $0x0,%eax
+  403a15:	48 81 c4 78 04 00 00 	add    $0x478,%rsp
+  403a1c:	5b                   	pop    %rbx
+  403a1d:	5d                   	pop    %rbp
+  403a1e:	c3                   	retq   
+  403a1f:	90                   	nop
+
+0000000000403a20 <__libc_csu_init>:
+  403a20:	41 57                	push   %r15
+  403a22:	41 89 ff             	mov    %edi,%r15d
+  403a25:	41 56                	push   %r14
+  403a27:	49 89 f6             	mov    %rsi,%r14
+  403a2a:	41 55                	push   %r13
+  403a2c:	49 89 d5             	mov    %rdx,%r13
+  403a2f:	41 54                	push   %r12
+  403a31:	4c 8d 25 58 13 20 00 	lea    0x201358(%rip),%r12        # 604d90 <__frame_dummy_init_array_entry>
+  403a38:	55                   	push   %rbp
+  403a39:	48 8d 2d 58 13 20 00 	lea    0x201358(%rip),%rbp        # 604d98 <__init_array_end>
+  403a40:	53                   	push   %rbx
+  403a41:	4c 29 e5             	sub    %r12,%rbp
+  403a44:	31 db                	xor    %ebx,%ebx
+  403a46:	48 c1 fd 03          	sar    $0x3,%rbp
+  403a4a:	48 83 ec 08          	sub    $0x8,%rsp
+  403a4e:	e8 d5 e3 ff ff       	callq  401e28 <_init>
+  403a53:	48 85 ed             	test   %rbp,%rbp
+  403a56:	74 1e                	je     403a76 <__libc_csu_init+0x56>
+  403a58:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  403a5f:	00 
+  403a60:	4c 89 ea             	mov    %r13,%rdx
+  403a63:	4c 89 f6             	mov    %r14,%rsi
+  403a66:	44 89 ff             	mov    %r15d,%edi
+  403a69:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  403a6d:	48 83 c3 01          	add    $0x1,%rbx
+  403a71:	48 39 eb             	cmp    %rbp,%rbx
+  403a74:	75 ea                	jne    403a60 <__libc_csu_init+0x40>
+  403a76:	48 83 c4 08          	add    $0x8,%rsp
+  403a7a:	5b                   	pop    %rbx
+  403a7b:	5d                   	pop    %rbp
+  403a7c:	41 5c                	pop    %r12
+  403a7e:	41 5d                	pop    %r13
+  403a80:	41 5e                	pop    %r14
+  403a82:	41 5f                	pop    %r15
+  403a84:	c3                   	retq   
+  403a85:	66 66 2e 0f 1f 84 00 	data32 nopw %cs:0x0(%rax,%rax,1)
+  403a8c:	00 00 00 00 
+
+0000000000403a90 <__libc_csu_fini>:
+  403a90:	f3 c3                	repz retq 
+
+Disassembly of section .fini:
+
+0000000000403a94 <_fini>:
+  403a94:	48 83 ec 08          	sub    $0x8,%rsp
+  403a98:	48 83 c4 08          	add    $0x8,%rsp
+  403a9c:	c3                   	retq   
