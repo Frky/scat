@@ -29,3 +29,9 @@
 
 # file too large
 asm/mupdf.asm
+
+# Mac OS X files
+.DS_Store
+
+# Vim temporary files
+*.swp
