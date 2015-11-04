@@ -1,0 +1,9 @@
+pin:
+    path:   /usr/bin/pin
+    pintool:
+        arity: ./bin/obj-intel64/arity.so
+        type: ./bin/obj-intel64/type.so
+        couple: ./bin/obj-intel64/couple.so
+
+log:
+    path: ./log

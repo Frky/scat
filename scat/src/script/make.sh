@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 pindir="/usr/bin/pin/source/tools/pinalloc/"
 curr=`pwd`
 pintooldir="$curr/pintool"
