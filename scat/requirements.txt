@@ -1,0 +1,5 @@
+cmd2==0.6.8
+pyparsing==2.0.5
+pyreadline==2.1
+PyYAML==3.11
+wheel==0.24.0
