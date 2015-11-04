@@ -28,7 +28,12 @@ def parse_config(config_path):
     req_struct = {
                     "pin": {
                                 "path": "",
-                                "pintool": {
+                                "pintool-src": {
+                                                "arity": "",
+                                                "type": "", 
+                                                "couple": "",
+                                    },
+                                "pintool-obj": {
                                                 "arity": "",
                                                 "type": "", 
                                                 "couple": "",
