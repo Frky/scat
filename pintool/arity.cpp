@@ -113,8 +113,8 @@ VOID fn_call(unsigned int fid) {
  */
 VOID fn_ret(void) {
 #if DEBUG_CALLS
-#endif
     std::cerr << "[IN_] fn_ret" << endl;
+#endif
 #if 1
     if (!reg_read_since_written[REG_EAX] && !ret_since_written) {
         nb_ret[call_stack[call_depth]] += 1;
@@ -145,8 +145,8 @@ VOID fn_ret(void) {
     /* Reset the call depth */
     call_depth -= 1;
 #if DEBUG_CALLS
-#endif
     std::cerr << "[OUT] fn_ret" << endl;
+#endif
 }
 
 

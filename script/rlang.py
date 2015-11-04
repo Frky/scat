@@ -23,6 +23,7 @@ class Function(object):
         if fpath[-4:] == ".dat":
             self.loaded = True
             self.protos = pickle.load(open(fpath, "rb"))
+            print self.protos.keys()
 
     def find_protos(self, node, **kwargs):
         verbose = False
