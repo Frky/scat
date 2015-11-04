@@ -35,3 +35,6 @@ asm/mupdf.asm
 
 # Vim temporary files
 *.swp
+
+# Python bytecode
+*.pyc
