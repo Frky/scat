@@ -78,7 +78,6 @@ class Pin(object):
         subprocess.call(cmd, shell=True)
         self.log("Inference results logged in {0}".format(logfile))
 
-
     def compile(self):
         """
             Compile all pintools needed
