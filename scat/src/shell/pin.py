@@ -20,9 +20,19 @@ def inf_code_to_str(code):
     return "unknown"
 
 
+def inf_str_to_code(s):
+    if s == "arity":
+        return INF_ARITY
+    if s == "type":
+        return INF_TYPE
+    if s == "couple":
+        return INF_COUPLE
+    return -1
+
+
 def get_previous_step(code):
     if code == INF_ARITY:
-        raise ValueError
+        return -1
     if code == INF_TYPE:
         return INF_ARITY
     if code == INF_COUPLE:

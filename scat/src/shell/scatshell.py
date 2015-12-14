@@ -7,7 +7,8 @@ import subprocess
 from datetime import datetime
 
 from src.shell.config import parse_config, ConfigFileError
-from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, get_previous_step
+from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, get_previous_step, inf_str_to_code
+from src.shell.result import Result
 
 class ScatShell(Cmd):
 
@@ -25,6 +26,8 @@ class ScatShell(Cmd):
         self.config_ok = False
         # Set the log directory
         self.log_dir = self.config["log"]["path"]
+        # Create a result objet
+        self.res = Result(self.log_dir)
         # Create a pin object with pin executable path
         self.__pin = Pin(
                             pinpath=self.config["pin"]["path"], 
@@ -60,26 +63,25 @@ class ScatShell(Cmd):
     
     def get_inputfile(self, inf_code, binary):
         """
-            Retrieve the most recent logfile from the previous
-            step of inference (recall: inference order is 
-            arity > type > couple). 
+            Retrieve the most recent logfile from the given
+            step of inference.
 
             @param inf_code code corresponding to the inference step to 
-                            launch
+                            look for
 
             @param binary   the binary file to analyse
 
-            @ret            a path to the most recent logfile from previous step
+            @ret            a path to the most recent logfile from step
 
-            @raise IOError  if no file from previous step is found.
+            @raise IOError  if no file from step is found.
 
         """
-        if inf_code == INF_ARITY:
+        if inf_code not in [INF_TYPE, INF_ARITY]:
             return None
-        prev_inf_name = inf_code_to_str(get_previous_step(inf_code))
-        candidates = [self.log_dir + "/" + fn for fn in os.listdir(self.log_dir) if fn.startswith(os.path.basename(binary) + "_" + prev_inf_name) and fn.endswith(".log")]
+        inf_name = inf_code_to_str(inf_code)
+        candidates = [self.log_dir + "/" + fn for fn in os.listdir(self.log_dir) if fn.startswith(os.path.basename(binary) + "_" + inf_name) and fn.endswith(".log")]
         if len(candidates) == 0:
-            self.stderr("cannot file result from the previous step of inference - ensure that you did run every step in order (arity > type > couple) for this binary")
+            self.stderr("cannot file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(inf_name))
             raise IOError
         return max(candidates, key=os.path.getmtime)
 
@@ -164,7 +166,7 @@ class ScatShell(Cmd):
         except ValueError:
             return
         try:
-            inputfile = self.get_inputfile(code, binary)
+            inputfile = self.get_inputfile(get_previous_step(code), binary)
         except IOError:
             return
         self.out("Launching {0} inference on {1}".format(inf_code_to_str(code), binary))
@@ -201,3 +203,23 @@ class ScatShell(Cmd):
 
         """
         self.__pin.compile()
+
+
+    def complete_display(self, text, line, begidx, endidx):
+        pgm_inf  = self.res.get_pgm_list() 
+        for p, inf in pgm_inf:
+            if line.find(p) >= 0:
+                return [i for i in inf if i.startswith(text)]
+        return [pgm for pgm, inf in pgm_inf if pgm.startswith(text)]
+
+
+    def do_display(self, s):
+        """
+            Display results of inference
+
+        """
+        pgm, inf = s.split(" ")
+        inf_code = inf_str_to_code(inf)
+        inputfile = self.get_inputfile(inf_code, pgm)
+        self.res.compute(pgm, inf_code, inputfile)
+
