@@ -19,6 +19,11 @@
 #define DEBUG_SEGFAULT          0
 #define DEBUG_DATA              0
 
+ifstream ifile;
+KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+ofstream ofile;
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
+
 /* Inferred data address space*/
 UINT64 DATA1_BASE, DATA1_TOP;
 UINT64 DATA2_BASE, DATA2_TOP;
@@ -249,7 +254,6 @@ VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
 #endif
 
     if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
-        std::cerr << "Yolo" << endl;
         treated[fid] = true;
     }
 #if DEBUG_SEGFAULT
@@ -416,8 +420,6 @@ VOID Instruction(INS ins, VOID *v) {
 
 VOID Commence() {
     init = true;
-    ifstream ifile;
-    ifile.open("dump.txt");
     char n, m, o, v;
     string _addr, _name;
     if (ifile.is_open()) {
@@ -554,8 +556,6 @@ VOID Fini(INT32 code, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTER] " << __func__ << endl;
 #endif
-    ofstream ofile;
-    ofile.open("dump_type.txt");
     /* Iterate on functions */
     for(unsigned int fid = 0; fid < nb_fn; fid++) {
         if (!treated[fid])
@@ -599,40 +599,8 @@ VOID Fini(INT32 code, VOID *v) {
         ofile << endl;
     }
     return;
-#if 0
-    for(unsigned int fid = 0; fid < nb_fn; fid++) {
-        if (!param_is_addr[fid][0] || nb_call[fid] < 10) {
-            continue; 
-        }
-        for(unsigned int gid = 0; gid < nb_fn; gid++) {
-            for(unsigned int pid = 1; pid <= nb_param_int[gid]; pid++) {
-                if (!param_is_addr[gid][pid])
-                    continue;
-                list<UINT64>::iterator pv, rv;
-                int nb_link = 0;
-                for (
-                        pv = param_val[gid][pid]->begin(); 
-                        pv != param_val[gid][pid]->end(); 
-                        pv++
-                       ) {
-                    for (
-                        rv = param_val[fid][0]->begin(); 
-                        rv != param_val[fid][0]->end(); 
-                        rv++) {
-                        if (*rv == *pv) {
-                            nb_link += 1;
-                            break;
-                        }
-                    }
-                }
-                if (nb_link > 0)
-                    // std::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << faddr[fid] << "(" << *fname[fid] << ") -> " << faddr[gid] << "(" << *fname[gid] << ")" << endl;
-                    std::cout << "{\\tt" << *fname[fid] << " } & {\\tt " << *fname[gid] << "[" << pid << "] } & " << ((float) nb_link)/param_val[gid][pid]->size() << "\\" << endl;
-            }
-        }
-    }
-#endif
 }
+
 
 int main(int argc, char * argv[])
 {
@@ -668,7 +636,8 @@ int main(int argc, char * argv[])
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
-
+    ifile.open(KnobInputFile.Value().c_str());
+    ofile.open(KnobOutputFile.Value().c_str());
     
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);

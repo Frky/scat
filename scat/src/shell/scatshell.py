@@ -7,7 +7,7 @@ import subprocess
 from datetime import datetime
 
 from src.shell.config import parse_config, ConfigFileError
-from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE
+from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, get_previous_step
 
 class ScatShell(Cmd):
 
@@ -56,6 +56,32 @@ class ScatShell(Cmd):
         inf_name = inf_code_to_str(inf_code)
         timestamp = datetime.now().strftime("%s")
         return "{0}_{1}_{2}.log".format(os.path.basename(binary), inf_name, timestamp)
+
+    
+    def get_inputfile(self, inf_code, binary):
+        """
+            Retrieve the most recent logfile from the previous
+            step of inference (recall: inference order is 
+            arity > type > couple). 
+
+            @param inf_code code corresponding to the inference step to 
+                            launch
+
+            @param binary   the binary file to analyse
+
+            @ret            a path to the most recent logfile from previous step
+
+            @raise IOError  if no file from previous step is found.
+
+        """
+        if inf_code == INF_ARITY:
+            return None
+        prev_inf_name = inf_code_to_str(get_previous_step(inf_code))
+        candidates = [self.log_dir + "/" + fn for fn in os.listdir(self.log_dir) if fn.startswith(os.path.basename(binary) + "_" + prev_inf_name) and fn.endswith(".log")]
+        if len(candidates) == 0:
+            self.stderr("cannot file result from the previous step of inference - ensure that you did run every step in order (arity > type > couple) for this binary")
+            raise IOError
+        return max(candidates, key=os.path.getmtime)
 
 
     def __check_path(self, fpath, **kwargs):
@@ -137,8 +163,12 @@ class ScatShell(Cmd):
             self.__check_path(binary, isdir=False, isexec=True)
         except ValueError:
             return
+        try:
+            inputfile = self.get_inputfile(code, binary)
+        except IOError:
+            return
         self.out("Launching {0} inference on {1}".format(inf_code_to_str(code), binary))
-        self.__pin.infer(code, binary, self.log_dir + "/" + self.gen_logfile(code, binary))
+        self.__pin.infer(code, binary, self.log_dir + "/" + self.gen_logfile(code, binary), inputfile)
 
 
     def do_arity(self, binary):

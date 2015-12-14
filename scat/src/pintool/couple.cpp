@@ -18,6 +18,11 @@
 
 #define DEBUG_SEGFAULT          0
 
+ifstream ifile;
+KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+ofstream ofile;
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
+
 /* Inferred data address space*/
 UINT64 DATA1_BASE, DATA1_TOP;
 UINT64 DATA2_BASE, DATA2_TOP;
@@ -250,8 +255,6 @@ VOID Commence() {
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
     init = true;
-    ifstream ifile;
-    ifile.open("dump.txt");
     char m;
     string _addr, _name;
     if (ifile.is_open()) {
@@ -370,9 +373,6 @@ VOID Fini(INT32 code, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
-#if 1
-    ofstream ofile;
-    ofile.open("dump_couple.txt");
 #if 0
     /* Iterate on functions */
     for(unsigned int fid = 0; fid < nb_fn; fid++) {
@@ -465,7 +465,6 @@ VOID Fini(INT32 code, VOID *v) {
     }
     ofile.close();
 #endif
-#endif
 }
 
 int main(int argc, char * argv[])
@@ -496,7 +495,8 @@ int main(int argc, char * argv[])
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
-
+    ifile.open(KnobInputFile.Value().c_str());
+    ofile.open(KnobOutputFile.Value().c_str());
     
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);

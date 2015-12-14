@@ -15,7 +15,8 @@
 #define MAX_DEPTH               1000
 #define SEUIL                   0.05
 
-#define OUTPUT_IN_FILE          1
+ofstream ofile;
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
 
 /*
  * We define here several ararys to store 
@@ -113,8 +114,8 @@ VOID fn_call(unsigned int fid) {
  */
 VOID fn_ret(void) {
 #if DEBUG_CALLS
-#endif
     std::cerr << "[IN_] fn_ret" << endl;
+#endif
 #if 1
     if (!reg_read_since_written[REG_EAX] && !ret_since_written) {
         nb_ret[call_stack[call_depth]] += 1;
@@ -145,8 +146,8 @@ VOID fn_ret(void) {
     /* Reset the call depth */
     call_depth -= 1;
 #if DEBUG_CALLS
-#endif
     std::cerr << "[OUT] fn_ret" << endl;
+#endif
 }
 
 
@@ -575,10 +576,6 @@ VOID Instruction(INS ins, VOID *v) {
 VOID Fini(INT32 code, VOID *v) {
 
 #define VERBOSE 0
-#if OUTPUT_IN_FILE
-    ofstream ofile;
-    ofile.open("dump.txt");
-#endif
     for (unsigned int i = 1; i <= nb_fn; i++) {
         if (nb_call[i] >= NB_CALLS_TO_CONCLUDE) {
             UINT64 arity = 0;
@@ -603,48 +600,26 @@ VOID Fini(INT32 code, VOID *v) {
                 std::cerr << "[" << nb_call[i] << "] " << "{\\tt 0x" << std::hex << faddr[i] << "} & {\\tt " << *(fname[i]) << "} & " << arity << " \\\\" << endl;
             }
 #endif
-#if OUTPUT_IN_FILE
             ofile << faddr[i] << ":" << *(fname[i]) << ":" << arity << ":" << max_ar_idx << ":";
-#else 
-            std::cout << faddr[i] << ":" << *(fname[i]) << ":" << arity << ":" << max_ar_idx << ":";
-#endif
             if ((float) nb_ret[i] > SEUIL * (float) nb_call[i]) {
-#if OUTPUT_IN_FILE
                 ofile << "1:";
-#else
-                std::cout << "1:";
-#endif
-                // std::cerr << *fname[i] << " - " << (float) nb_ret[i] / (float) nb_call[i] << endl;
             } else
-#if OUTPUT_IN_FILE
                 ofile << "0:";
-#else
-            std::cout << "0:";
-#endif
             for (unsigned int j = 0; j < 16; j++) {
                 if (param_size[i][j] > 0 && param_size[i][j] < 64) {
-#if OUTPUT_IN_FILE
                     ofile << j << ","; //<< "(" << param_size[i][j] << ") - ";
-#else
-                    std::cout << j << j;
-#endif
                 }
             }
-#if OUTPUT_IN_FILE
             ofile << endl;
-#else
-            std::cout << endl;
-#endif
         }
     }
-#if OUTPUT_IN_FILE
     ofile.close();
-#endif
 }
 
 
 int main(int argc, char * argv[])
 {
+
     nb_call = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
@@ -674,6 +649,7 @@ int main(int argc, char * argv[])
     PIN_InitSymbolsAlt(DEBUG_OR_EXPORT_SYMBOLS);
 
     if (PIN_Init(argc, argv)) return 1;
+    ofile.open(KnobOutputFile.Value().c_str());
 
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
@@ -686,5 +662,4 @@ int main(int argc, char * argv[])
     
     return 0;
 }
-
 

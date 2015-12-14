@@ -19,6 +19,16 @@ def inf_code_to_str(code):
         return "couple"
     return "unknown"
 
+
+def get_previous_step(code):
+    if code == INF_ARITY:
+        raise ValueError
+    if code == INF_TYPE:
+        return INF_ARITY
+    if code == INF_COUPLE:
+        return INF_TYPE
+
+
 class Pin(object):
     """
         This class defines an interface between python and 
@@ -55,12 +65,14 @@ class Pin(object):
             self.__log(msg)
         
 
-    def __cmd(self, pintool, binary, logfile):
-        print pintool, binary, logfile
-        return "{0} -t {1} -- {2}".format(self.pinpath, pintool, binary)
+    def __cmd(self, pintool, binary, logfile, infile=None):
+        if infile is not None:
+            return "{0} -t {1} -o {2} -i {3} -- {4}".format(self.pinpath, pintool, logfile, infile, binary)
+        else:
+            return "{0} -t {1} -o {2} -- {3}".format(self.pinpath, pintool, logfile, binary)
 
 
-    def infer(self, inf_code, binary, logfile):
+    def infer(self, inf_code, binary, logfile, infile=None):
         """
             Launch specified inference on binary given in parameter
 
@@ -69,14 +81,19 @@ class Pin(object):
 
             @param binary   the binary file to analyse (must be a valid path to
                             an executable path
+
             @param logfile  path to the log file where arity information
                             is stored (must be a valid path)
 
+            @param infile   path to the file where previous inference result is
+                            stored (must be a valid path)
+
         """
-        cmd = self.__cmd(self.pintool[inf_code], binary, logfile)
+        cmd = self.__cmd(self.pintool[inf_code], binary, logfile, infile)
         self.log(cmd)
         subprocess.call(cmd, shell=True)
         self.log("Inference results logged in {0}".format(logfile))
+
 
     def compile(self):
         """
@@ -95,6 +112,7 @@ class Pin(object):
             self.log("Compiling {0} ...".format(pfile))
             copyfile(pfile, wd + os.path.basename(pfile))
             cmd = "make obj-intel64/" + os.path.basename(pfile)[:-3] + "so"
-            with open("/dev/null", 'r') as fnull:
+            with open("/dev/null", 'w') as fnull:
                 subprocess.call(cmd, cwd=wd, shell=True, stdout=fnull)
             copyfile(wd + "obj-intel64/" + os.path.basename(pfile)[:-3] + "so", self.pintool[code])
+
