@@ -75,14 +75,14 @@ class Pin(object):
             self.__log(msg)
         
 
-    def __cmd(self, pintool, binary, logfile, infile=None):
+    def __cmd(self, pintool, binary, args, logfile, infile=None):
         if infile is not None:
-            return "{0} -t {1} -o {2} -i {3} -- {4}".format(self.pinpath, pintool, logfile, infile, binary)
+            return "{0} -t {1} -o {2} -i {3} -- {4} {5}".format(self.pinpath, pintool, logfile, infile, binary, " ".join(args))
         else:
-            return "{0} -t {1} -o {2} -- {3}".format(self.pinpath, pintool, logfile, binary)
+            return "{0} -t {1} -o {2} -- {3} {4}".format(self.pinpath, pintool, logfile, binary, " ".join(args))
 
 
-    def infer(self, inf_code, binary, logfile, infile=None):
+    def infer(self, inf_code, binary, args, logfile, infile=None):
         """
             Launch specified inference on binary given in parameter
 
@@ -92,6 +92,8 @@ class Pin(object):
             @param binary   the binary file to analyse (must be a valid path to
                             an executable path
 
+            @param args     arguments to give to the binary 
+
             @param logfile  path to the log file where arity information
                             is stored (must be a valid path)
 
@@ -99,7 +101,7 @@ class Pin(object):
                             stored (must be a valid path)
 
         """
-        cmd = self.__cmd(self.pintool[inf_code], binary, logfile, infile)
+        cmd = self.__cmd(self.pintool[inf_code], binary, args, logfile, infile)
         self.log(cmd)
         subprocess.call(cmd, shell=True)
         self.log("Inference results logged in {0}".format(logfile))

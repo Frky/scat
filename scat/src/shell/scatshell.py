@@ -5,6 +5,7 @@ import os
 import sys
 import subprocess
 from datetime import datetime
+import glob
 
 from src.shell.config import parse_config, ConfigFileError
 from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, get_previous_step, inf_str_to_code
@@ -157,10 +158,17 @@ class ScatShell(Cmd):
         print self.do_setlogdir.__doc__.replace("\n", "")
 
 
-    def inference(self, code, binary):
+    def inference(self, code, s):
         self.do_checkconfig("")
         if not self.config_ok:
             return
+        # parse command into binary + args
+        args =  list()
+        for i, arg in enumerate(s.split(" ")):
+            if i == 0:
+                binary = arg
+            else:
+                args.append(arg)
         try:
             self.__check_path(binary, isdir=False, isexec=True)
         except ValueError:
@@ -170,31 +178,75 @@ class ScatShell(Cmd):
         except IOError:
             return
         self.out("Launching {0} inference on {1}".format(inf_code_to_str(code), binary))
-        self.__pin.infer(code, binary, self.log_dir + "/" + self.gen_logfile(code, binary), inputfile)
+        self.__pin.infer(code, binary, args, self.log_dir + "/" + self.gen_logfile(code, binary), inputfile)
 
 
-    def do_arity(self, binary):
+    def __complete_bin(self, text, line, begidx, endidx):
+        paths = list()
+        for path in glob.glob("/usr/bin/" + text + "*"):
+            if os.path.isdir(path):
+                continue
+            paths.append(path.replace("/usr/bin/", ""))
+        for path in glob.glob("/bin/" + text + "*"):
+            if os.path.isdir(path):
+                continue
+            paths.append(path.replace("/bin/", ""))
+        return paths
+
+
+
+    def __complete_path(self, text, line, begidx, endidx):
+        before_arg = line.rfind(" ", 0, begidx)
+        if before_arg == -1:
+            return 
+        fixed = line[before_arg+1:begidx]
+        arg = line[before_arg+1:endidx]
+        pattern = arg + "*"
+        paths = list()
+        for path in glob.glob(pattern):
+            if os.path.isdir(path) and path[-1] != os.sep:
+                path += os.sep
+            paths.append(path.replace(fixed, "", 1))
+        return paths
+
+
+    def complete_arity(self, text, line, begidx, endidx):
+        if len(line.split(" ")) < 3:
+            return self.__complete_bin(text, line, begidx, endidx)
+        else:
+            return  self.__complete_path(text, line, begidx, endidx)
+
+
+    def complete_type(self, text, line, begidx, endidx):
+        return  self.__complete_path(text, line, begidx, endidx)
+
+
+    def complete_couple(self, text, line, begidx, endidx):
+        return  self.__complete_path(text, line, begidx, endidx)
+    
+
+    def do_arity(self, s):
         """
             Launch arity inference on the binary specified as a parameter
 
         """
-        self.inference(INF_ARITY, binary)
+        self.inference(INF_ARITY, s)
 
 
-    def do_type(self, binary):
+    def do_type(self, s):
         """
             Launch type inference on the binary specified as a parameter
 
         """
-        self.inference(INF_TYPE, binary)
+        self.inference(INF_TYPE, s)
 
 
-    def do_couple(self, binary):
+    def do_couple(self, s):
         """
             Launch couple inference on the binary specified as a parameter
 
         """
-        self.inference(INF_COUPLE, binary)
+        self.inference(INF_COUPLE, s)
 
 
     def do_make(self, s):
@@ -218,7 +270,20 @@ class ScatShell(Cmd):
             Display results of inference
 
         """
-        pgm, inf = s.split(" ")
+        args = s.split(" ")
+        if len(args) == 0 or args[0] == '':
+            for p, inf in self.res.get_pgm_list():
+                print p
+            return
+        pgm = args[0]
+        if len(args) == 1:
+            for p, inf in self.res.get_pgm_list():
+                if p != pgm: 
+                    continue
+                for i in inf:
+                    print i
+                return
+        inf = args[1]
         inf_code = inf_str_to_code(inf)
         inputfile = self.get_inputfile(inf_code, pgm)
         self.res.compute(pgm, inf_code, inputfile)
