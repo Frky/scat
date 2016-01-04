@@ -218,11 +218,17 @@ class ScatShell(Cmd):
 
 
     def complete_type(self, text, line, begidx, endidx):
-        return  self.__complete_path(text, line, begidx, endidx)
+        if len(line.split(" ")) < 3:
+            return self.__complete_bin(text, line, begidx, endidx)
+        else:
+            return  self.__complete_path(text, line, begidx, endidx)
 
 
     def complete_couple(self, text, line, begidx, endidx):
-        return  self.__complete_path(text, line, begidx, endidx)
+        if len(line.split(" ")) < 3:
+            return self.__complete_bin(text, line, begidx, endidx)
+        else:
+            return  self.__complete_path(text, line, begidx, endidx)
     
 
     def do_arity(self, s):
