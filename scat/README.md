@@ -1,9 +1,19 @@
 
-# SCAT
+# scat 
 
 > «  Tell me! Everyone is picking up on that feline beat / 'Cause everything else is obsolete. 
 
 > \- Strictly high-buttoned shoes. »
+
+[What is `scat`?](#what-is-scat)
+
+[How does it work?](#how-does-it-work)
+
+[Some results obtained with `scat`](#some-results-obtained-with-scat)
+
+[How to use it?](#how-to-use-it)
+
+[Coupling](#coupling)
 
 ## What is `scat`?
 
@@ -14,12 +24,32 @@ using **dynamic analysis**. In particular, `scat` aims to recover:
 * **type** of arguments
 * behavioral **coupling** between functions
 
+### Arity
+
+By **arity**, we mean two things: first the number of parameters that a function takes, 
+and second if a function returns a value or not.
+
+### Type
+
+`scat` infers a simplified notion of type. We indeed consider only three possible ones: `INT`, `ADDR` and `FLOAT`. 
+We consider that they represent three different classes of variables that make sense semantically. 
+For instance, the size of an integer (`char`, `short`, `int`, `long int`) and weither it is signed or not
+does not make a significant difference semantically.  
+
+### Coupling
+
+#### What is coupling?
+
+#### What for?
+
+#### Example with `scat`
+
 ## How does it work?
 
 ### General Idea
 `scat` uses `pin` to instrument dynamically an execution of the program. During the execution, 
 we use heuristics on the use of registers and memory access to find arguments and retrieve types.
-More about heuristics can be found in our [paper](TODO) #TODO link.
+More about heuristics can be found in our [paper](paper/lightweight_heuristics_to_retrieve_parameter_associations.pdf).
 
 ### One execution (per recovery)
 The goal of `scat` is not to recover information about every function embedded on the binary, but 
@@ -32,12 +62,22 @@ requires on execution for each of the three steps (**arity**, **type** and **cou
 
 ## Some results obtained with `scat`
 
-TODO
-* How tested (trace)
-* What is accuracy
-* What is #function
+Here are presented some results obtained with `scat` on several open-source libraries. 
+First, note that each result is a consequence of one single execution with standard inputs. 
+Second, the accuracy was obtained by comparison between results given by `scat` and the
+source code of the binary under inference. 
+
+### Inputs used for test
+
+* For emacs, we open a `C` source file of about 500 lines.
+* For midori, we do not give any input (the browser automatically opens http://google.com/ when it starts).
+* For MuPDF, we open a pdf of 67 slides generated with Keynote.
+* For grep, we look for the expression "void" in a folder containing about 15000 files for a total of about 30 millions of lines.
 
 ### Arity inference
+
+* #function is the number of functions detected during the one execution we ran.
+* accuracy is the percentage of functions (that we detect) for which the arity we infered is consistant with the source code.
 
 |              |  midori  |  grep  |  mupdf  |  emacs  |
 |--------------|----------|--------|---------|---------|
@@ -47,12 +87,20 @@ TODO
 
 ### Type inference
 
+* #function is the number of functions detected during the one execution we ran.
+* accuracy is the percentage of functions (that we detect) for which the type of each parameter we infered is consistant with the source code.
+
 |              |  midori  |  grep  |  mupdf  |  emacs  |
 |--------------|----------|--------|---------|---------|
 | #function    | 4094     | 51     | 526     | 591     |
 | accuracy (%) | 96.2     | 100    | 92.5    | 90.4    |
 
 ### Overhead
+
+* #function is the number of functions detected during the one execution we ran.
+* T0 is the time of execution with no instrumentation.
+* T1 is the time of execution with arity inference.
+* T2 is the time of execution with type inference. 
 
 |              | grep | tar  | a2ps |
 | ------------ | ---- | ---  | ---- |
@@ -129,10 +177,15 @@ int strlen(addr);
 
 ```
 
-## Coupling
+#### Commands
 
-### What is coupling?
+Inference:
 
-### What for?
+* `arity $PGM`: launch arity inference on `$PGM`, where `$PGM` is an executable and its arguments if any.
+* `type $PGM`: launch type inference on `$PGM`. **Note** that it requires that arity inference was previously run on the same program.
+* `couple $PGM`: launch couple inference on `$PGM`. **Note** that it requires that type inference was previously run on the same program.
 
-### Example with `scat`
+Show results:
+
+* `display $PGM $INF`: show the results of the last inference `$INF` on the program `$PGM`. `$INF` can be either `arity`, `type` or `couple`.
+
