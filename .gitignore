@@ -38,3 +38,7 @@ asm/mupdf.asm
 
 # Python bytecode
 *.pyc
+
+*.log
+pgm/*
+asm/*
