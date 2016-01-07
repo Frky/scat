@@ -13,7 +13,7 @@
 
 [How to use it?](#how-to-use-it)
 
-[Coupling](#coupling)
+[Current limitations](#current-limitations-of-the-implementation)
 
 ## What is `scat`?
 
@@ -116,6 +116,7 @@ source code of the binary under inference.
 ### Requirements
 
 You need to have `pin` installed on your computer.
+If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `clang` for python installed.
 
 ### Installation
 
@@ -127,7 +128,7 @@ You need to have `pin` installed on your computer.
 
 ### Configuration
 
-The configuration of `scat` is set in a yaml file, namely `./config.yaml`. You
+The configuration of `scat` is set in a yaml file, namely `./config/config.yaml`. You
 can edit this file in order to fit with your own configuration. Main points are:
 
 * `pin -> path`: set the path to the `pin` executable. Required for `scat` to work correctly.
@@ -135,33 +136,44 @@ can edit this file in order to fit with your own configuration. Main points are:
 
 ### Basic usage
 
-Run `scat`: `python ./scat.py`. You are now in th `scat` shell, where you can launch inference 
+Run `scat` (from your virtualenv): `./scat.py`. You are now in th `scat` shell, where you can launch inference 
 on different binaries and display results. 
 
-#### Example 
+### Commands
 
-In this example, we successively infer **arity** and **type** on the binary `grep`, and display the results at each
-step.
+### Inference
+
+* `arity $PGM`: launch arity inference on `$PGM`, where `$PGM` is an executable and its arguments if any.
+* `type $PGM`: launch type inference on `$PGM`. **Note** that it requires that arity inference was previously run on the same program.
+* `couple $PGM`: launch couple inference on `$PGM`. **Note** that it requires that type inference was previously run on the same program.
 
 ```
-scat > arity grep -R "def" ./
+scat > arity grep -r "def" ./src
 [*] Launching arity inference on grep
-[*] /usr/bin/pin/pin -t ./bin/obj-intel64/arity.so -o ./log/grep_arity_1451915233.log -- grep -R "def" ./
+[*] /usr/bin/pin/pin -t ./bin/obj-intel64/arity.so -o ./log/grep_arity_1451915233.log -- grep -r "def" ./
 [*] Inference results logged in ./log/grep_arity_1451915233.log
 
+scat > type grep -R "def" ./
+[*] Launching type inference on grep
+[*] /usr/bin/pin/pin -t ./bin/obj-intel64/type.so -o ./log/grep_type_1451915649.log -i ./log/grep_arity_1451915233.log -- grep -R "def" ./
+[*] Inference results logged in ./log/grep_type_1451915649.log
+
+```
+
+### Results of inference
+
+* `display $PGM $INF`: show the results of the last inference `$INF` on the program `$PGM`. `$INF` can be either `arity`, `type` or `couple`.
+
+```
 scat > display grep arity
 0x7fffe4031c80 ('strnlen', 2, 1)
 0x7fffe403d180 ('argz_stringify', 3, 0)
 0x7fffe4035bf0 ('', 2, 1)
 0x402c30 ('', 3, 1)
 ...
+
 | Last inference:           2016-01-04 14:47:13
 | Total functions infered:  62
-
-scat > type grep -R "def" ./
-[*] Launching type inference on grep
-[*] /usr/bin/pin/pin -t ./bin/obj-intel64/type.so -o ./log/grep_type_1451915649.log -i ./log/grep_arity_1451915233.log -- grep -R "def" ./
-[*] Inference results logged in ./log/grep_type_1451915649.log
 
 scat > display grep type
 addr fts_read(addr);
@@ -172,20 +184,28 @@ addr fgets_unlocked(addr, int, addr);
 void argz_stringify(addr, int, int);
 int tcgetattr(int, addr);
 int strlen(addr);
+
 | Last inference:           2016-01-04 14:54:09
 | Total functions infered:  9
-
 ```
 
-#### Commands
+### Accuracy of inference
 
-Inference:
+#### Requirements
 
-* `arity $PGM`: launch arity inference on `$PGM`, where `$PGM` is an executable and its arguments if any.
-* `type $PGM`: launch type inference on `$PGM`. **Note** that it requires that arity inference was previously run on the same program.
-* `couple $PGM`: launch couple inference on `$PGM`. **Note** that it requires that type inference was previously run on the same program.
+#### Parse data from source code
 
-Show results:
+* `parsedata $PGM $SRCPATH`
 
-* `display $PGM $INF`: show the results of the last inference `$INF` on the program `$PGM`. `$INF` can be either `arity`, `type` or `couple`.
+#### Check inference results
+
+* `accuracy $PGM $INF`
+
+## Current limitations of the implementation
+
+### Unstripped binaries
+
+### Non object-oriented binaries
+
+### Calling convention
 
