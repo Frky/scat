@@ -12,3 +12,7 @@ pin:
 log:
     path: ./log
 
+clang:
+    lib-path: /usr/lib/x86_64-linux-gnu/libclang.so.1
+    data-path: ./data/
+

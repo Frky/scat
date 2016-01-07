@@ -1,0 +1,12 @@
+pin:
+    path: ""
+    pintool-src: 
+        arity: ""
+        type: ""
+        couple: ""
+    pintool-obj:
+        arity: ""
+        type: ""
+        couple: ""
+log:
+    path: ""

@@ -1,15 +1,18 @@
 #-*- coding: utf-8 -*-
 
+
 from cmd2 import Cmd
 import os
 import sys
 import subprocess
 from datetime import datetime
 import glob
+from confiture import Confiture, ConfigFileError
 
-from src.shell.config import parse_config, ConfigFileError
 from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, get_previous_step, inf_str_to_code
 from src.shell.result import Result
+from src.shell.source_parser import SourceParser
+
 
 class ScatShell(Cmd):
 
@@ -17,17 +20,16 @@ class ScatShell(Cmd):
     prompt = 'scat > '
 
 
-    def __init__(self, config_path="config.yaml"):
-        try:
-            # Parse configuration file and get result
-            self.config = parse_config(config_path)
-        except ConfigFileError:
-            exit()
+    def __init__(self, config_path="config/config.yaml"):
+        self.config_path = config_path
+        conf = Confiture("config/templates/general.yaml")
+        # Parse configuration file and get result
+        self.config = conf.check_and_get(config_path)
         # Before we checked the config, it is considered KO
         self.config_ok = False
         # Set the log directory
         self.log_dir = self.config["log"]["path"]
-        # Create a result objet
+        # Create a result object
         self.res = Result(self.log_dir)
         # Create a pin object with pin executable path
         self.__pin = Pin(
@@ -194,7 +196,6 @@ class ScatShell(Cmd):
         return paths
 
 
-
     def __complete_path(self, text, line, begidx, endidx):
         before_arg = line.rfind(" ", 0, begidx)
         if before_arg == -1:
@@ -271,16 +272,12 @@ class ScatShell(Cmd):
         return [pgm for pgm, inf in pgm_inf if pgm.startswith(text)]
 
 
-    def do_display(self, s):
-        """
-            Display results of inference
-
-        """
+    def get_pgm_and_inf(self, s):
         args = s.split(" ")
         if len(args) == 0 or args[0] == '':
             for p, inf in self.res.get_pgm_list():
                 print p
-            return
+            raise ValueError
         pgm = args[0]
         if len(args) == 1:
             for p, inf in self.res.get_pgm_list():
@@ -288,9 +285,72 @@ class ScatShell(Cmd):
                     continue
                 for i in inf:
                     print i
-                return
+                raise ValueError
         inf = args[1]
         inf_code = inf_str_to_code(inf)
-        inputfile = self.get_inputfile(inf_code, pgm)
-        self.res.compute(pgm, inf_code, inputfile)
+        return pgm, inf_code
+
+
+    def do_display(self, s):
+        """
+            Display results of inference
+
+        """
+        try:
+            pgm, inf = self.get_pgm_and_inf(s)
+        except ValueError:
+            return
+
+        inputfile = self.get_inputfile(inf, pgm)
+
+        self.res.compute(pgm, inf, inputfile)
+
+
+    def do_parsedata(self, s):
+        """
+            Parse source code to test inference results
+
+        """
+        # TODO check number of args
+        # TODO completion on args
+        pgm, srcdir = s.split(" ")
+        # Check CLANG configuration
+        conf = Confiture("config/templates/clang.yaml")
+        conf.check("config/config.yaml")
+        # Create a parser object
+        parser = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"], srcdir)
+        parser.parse()
+
+
+    def do_loaddata(self, pgm):
+        # Check CLANG configuration
+        conf = Confiture("config/templates/clang.yaml")
+        conf.check("config/config.yaml")
+        parser = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"])
+        parser.load()
+
+
+    def complete_accuracy(self, text, line, begidx, endidx):
+        return self.complete_display(text, line, begidx, endidx)
+
+
+    def do_accuracy(self, s):
+        try:
+            pgm, inf = self.get_pgm_and_inf(s)
+        except ValueError:
+            return
+
+        inputfile = self.get_inputfile(inf, pgm)
+
+        # Check CLANG configuration
+        conf = Confiture("config/templates/clang.yaml")
+        conf.check("config/config.yaml")
+        try:
+            data = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"]).load()
+        except IOError:
+            data = None
+        if data is None:
+            self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
+            return
+        self.res.accuracy(pgm, inf, inputfile, data) 
 
