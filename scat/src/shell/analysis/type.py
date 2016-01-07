@@ -6,13 +6,12 @@ import re
 
 class TypeAnalysis(object):
 
-    def __init__(self, pgm, logfile, datafile=None):
+    def __init__(self, pgm, logfile, data=None):
         self.pgm = pgm
         self.logfile = logfile
-        self.datafile = datafile
         self.date = datetime.fromtimestamp(int(re.search("[0123456789]+", logfile).group()))
+        self.data = data
         self.log = None
-        self.data = None
         self.parse_log()
 
 
@@ -27,8 +26,40 @@ class TypeAnalysis(object):
                 self.log[int(addr)] = (fn, args)
 
 
-    def parse_data(self):
-        raise NotImplemented
+    def print_general_info(self):
+        print "Information about inference"
+        print "| Last inference:           {0}".format(self.date)
+        print "| Total functions infered:  {0}".format(len(self.log.keys()))
+
+
+    def check_one(self, fname, args):
+        if fname not in self.data.keys():
+            return (0, 0)
+        ar = min(len(args), len(self.data[fname]))
+        ok, tot = 0, 0
+        for ref, inf in zip(self.data[fname][:ar], args[:ar]):
+            tot += 1
+            if (inf[:4] == "ADDR" and "*" not in ref and "[" not in ref) or (inf[:4] != "ADDR" and ("*" in ref or "[" in ref)):
+                continue
+            ok += 1
+        return (ok, tot)
+
+
+    def accuracy(self):
+        self.print_general_info()
+        print
+
+        tot_typ = 0
+        ok_typ = 0
+        for addr, (fn, args) in self.log.items():
+            if fn != "":
+                res = self.check_one(fn, args)
+                ok_typ += res[0]
+                tot_typ += res[1]
+        print "Accuracy of inference"
+        print "| Ok/Total tested:          {0}/{1}".format(ok_typ, tot_typ)
+        if tot_typ != 0:
+            print "- Ratio:                    {0:.2f}%".format(float(ok_typ)*100./float(tot_typ))
 
 
     def display(self):
@@ -63,7 +94,6 @@ class TypeAnalysis(object):
                     line += ", "
             line += ");"
             print line
-
-        print "| Last inference:           {0}".format(self.date)
-        print "| Total functions infered:  {0}".format(len(self.log.keys()))
+        print
+        self.print_general_info()
 
