@@ -38,13 +38,65 @@ does not make a significant difference semantically.
 
 ### Coupling
 
+We also introduce a notion of *coupling* between functions. Intuitively, two functions are coupled if they
+*interact* during the execution. `scat` is also able tor recover couples of functions from one execution.
+
 #### What is coupling?
+
+Let's take an example, with four functions (among others) embedded in a binary: `alloc`, `realloc`, `free` and `strlen`. 
+From an execution, we follow the values returned by those four functions, and see if they are given as a parameter to another
+function.
+
+![alt data flow](doc/img/data_flow.png "Data flow between functions")
+**Figure 1 -** *Data flow between functions*
+
+In **Figure 1**, an arrow from `A` to `B` means that one value returned by `A` was given as a parameter to `B`.
+From this observation, what we want is to *invert* the information. It means that instead of knowing *where the
+output goes*, we want to know *from where parameters come from*. So for each function, we compute the proportion 
+of times a parameter is a value returned by a particular function.
+
+![alt data flow](doc/img/couple.png "Coupling")
+**Figure 2 -** *Coupling*
+
+In **Figure 2**, we see that 70% of the parameters of `free` come directly from an output of `alloc`. Therefore, in this example 
+(meaning regarding this execution), `alloc` and `free` are coupled with a coupling coefficient of 0.7. In the same way, `realloc` and `alloc`
+are coupled with a coefficient of 1.
 
 #### What for?
 
+Finding functions coupled with a high coefficient can have different interests. 
+For example, two functions that are always coupled with a high coefficient are `malloc` and `free`, or 
+more generally the allocating and the liberating functions of an allocator. Therefore, the notion
+of coupling can be the first step to retrieve custom allocators embedded in binaries (for security purposes, 
+such as use-after-free detection). 
+
 #### Example with `scat`
 
-## How does it work?
+```
+scat > couple ./pgm/bin/mupdf-x11 ./testfile.pdf
+[*] Launching couple inference on ./pgm/bin/mupdf-x11
+[*] /usr/bin/pin/pin -t ./bin/obj-intel64/couple.so -o ./log/mupdf-x11_couple_1452528857.log -i ./log/mupdf-x11_type_1452528848.log -- ./pgm/bin/mupdf-x11 ./testfile.pdf
+[*] Inference results logged in ./log/mupdf-x11_couple_1452528857.log
+
+scat > display mupdf-x11 couple
+...
+(jsV_toobject, newproperty[2]) -- 0.986
+(jsV_toobject, insert[2]) -- 0.976
+(jsV_toobject, jsV_newobject[3]) -- 0.924
+(jsV_toobject, jsV_setproperty[2]) -- 0.986
+(jsV_toobject, js_pushobject[2]) -- 0.926
+(jsV_toobject, jsR_defproperty[2]) -- 0.986
+(jsU_bsearch, fz_new_pixmap_with_data[2]) -- 0.998
+(jsU_bsearch, fz_new_pixmap[2]) -- 0.998
+(jsU_bsearch, jsP_newnode[4]) -- 0.82
+
+Information about inference
+| Last inference:           1970-01-01 01:00:11
+| Total number of couples:  899
+| Unique left/right-side:   83/244
+```
+
+## How does `scat` work?
 
 ### General Idea
 `scat` uses `pin` to instrument dynamically an execution of the program. During the execution, 
