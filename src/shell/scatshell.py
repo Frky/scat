@@ -101,7 +101,7 @@ class ScatShell(Cmd):
             @raise IOError  if no file from step is found.
 
         """
-        if inf_code not in [INF_TYPE, INF_ARITY]:
+        if inf_code not in [INF_TYPE, INF_ARITY, INF_COUPLE]:
             return None
         inf_name = inf_code_to_str(inf_code)
         candidates = [self.log_dir + "/" + fn for fn in os.listdir(self.log_dir) if fn.startswith(os.path.basename(binary) + "_" + inf_name) and fn.endswith(".log")]

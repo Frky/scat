@@ -5,6 +5,7 @@ import os
 from src.shell.pin import INF_ARITY, INF_TYPE, INF_COUPLE
 from src.shell.analysis.arity import ArityAnalysis
 from src.shell.analysis.type import TypeAnalysis
+from src.shell.analysis.couple import CoupleAnalysis
 
 class Result(object):
 
@@ -19,6 +20,9 @@ class Result(object):
         elif infcode == INF_TYPE:
             ty = TypeAnalysis(pgm, logfile)
             ty.display()
+        elif infcode == INF_COUPLE:
+            co = CoupleAnalysis(pgm, logfile)
+            co.display()
 
 
     def accuracy(self, pgm, infcode, inputfile, data):
