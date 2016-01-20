@@ -34,6 +34,8 @@ class ScatShell(Cmd):
         # Create a pin object with pin executable path
         self.__pin = Pin(
                             pinpath=self.config["pin"]["path"], 
+                            pinbin=self.config["pin"]["bin"], 
+                            respath=self.config["res"]["path"], 
                             arity_src=self.config["pin"]["pintool-src"]["arity"],
                             type_src=self.config["pin"]["pintool-src"]["type"],
                             couple_src=self.config["pin"]["pintool-src"]["couple"],

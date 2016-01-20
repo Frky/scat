@@ -53,11 +53,16 @@ class Pin(object):
             self.__log = kwargs["log"]
         else:
             self.__log = None
-        # Path to pin executable
+        # Path to pin folder
         if "pinpath" in kwargs.keys():
             self.pinpath = kwargs["pinpath"]
         else:
             self.pinpath = ""
+        # Path to Pin executable
+        if "pinbin" in kwargs.keys():
+            self.pinbin = kwargs["pinbin"]
+        else:
+            self.pinbin = ""
         # Path to pin makefile
         if "respath" in kwargs.keys():
             self.respath = kwargs["respath"]
@@ -83,9 +88,9 @@ class Pin(object):
 
     def __cmd(self, pintool, binary, args, logfile, infile=None):
         if infile is not None:
-            return "{0} -t {1} -o {2} -i {3} -- {4} {5}".format(self.pinpath, pintool, logfile, infile, binary, " ".join(args))
+            return "{0} -t {1} -o {2} -i {3} -- {4} {5}".format(self.pinbin, pintool, logfile, infile, binary, " ".join(args))
         else:
-            return "{0} -t {1} -o {2} -- {3} {4}".format(self.pinpath, pintool, logfile, binary, " ".join(args))
+            return "{0} -t {1} -o {2} -- {3} {4}".format(self.pinbin, pintool, logfile, binary, " ".join(args))
 
 
     def infer(self, inf_code, binary, args, logfile, infile=None):
@@ -123,8 +128,7 @@ class Pin(object):
         #    - os independant
         #    - configuration-file adaptable
         #    - check compilation success
-        pin_basedir = os.path.dirname(self.pinpath)
-        wd = pin_basedir + "/source/tools/pinalloc/"
+        wd = self.pinpath + "/source/tools/pinalloc/"
         # Create pinalloc directory if does not exist
         if not os.path.exists(wd):
             os.mkdir(wd)

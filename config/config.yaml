@@ -1,5 +1,6 @@
 pin:
-    path:   /usr/bin/pin/pin
+    path:   /usr/bin/pin
+    bin: /usr/bin/pin/pin
     pintool-obj:
         arity: ./bin/obj-intel64/arity.so
         type: ./bin/obj-intel64/type.so
