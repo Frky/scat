@@ -2,6 +2,7 @@
 
 import subprocess
 import os
+import shutil
 from shutil import copyfile
 
 INF_ARITY = 0
@@ -57,6 +58,11 @@ class Pin(object):
             self.pinpath = kwargs["pinpath"]
         else:
             self.pinpath = ""
+        # Path to pin makefile
+        if "respath" in kwargs.keys():
+            self.respath = kwargs["respath"]
+        else:
+            self.respath = ""
         # Dictionary for pintool names and src
         self.pintool = dict()
         self.src = dict()
@@ -118,9 +124,19 @@ class Pin(object):
         #    - configuration-file adaptable
         #    - check compilation success
         pin_basedir = os.path.dirname(self.pinpath)
+        wd = pin_basedir + "/source/tools/pinalloc/"
+        # Create pinalloc directory if does not exist
+        if not os.path.exists(wd):
+            os.mkdir(wd)
+        # Create obj-intel64 if does not exist
+        if not os.path.exists(wd + "/obj-intel64"):
+            os.mkdir(wd + "/obj-intel64")
+        # Link makefile if does not exist
+        for makefile in ["makefile", "makefile.rules"]:
+            if not os.path.exists(wd + makefile):
+                shutil.copyfile(self.respath + "/" + makefile, wd + "/" + makefile)
         for code in [c for c in INF_CODES if c in self.src.keys()]:
             pfile = self.src[code]
-            wd = pin_basedir + "/source/tools/pinalloc/"
             self.log("Compiling {0} ...".format(pfile))
             copyfile(pfile, wd + os.path.basename(pfile))
             cmd = "make obj-intel64/" + os.path.basename(pfile)[:-3] + "so"

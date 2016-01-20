@@ -9,6 +9,9 @@ pin:
         type: ./src/pintool/type.cpp
         couple: ./src/pintool/couple.cpp
 
+res:
+    path: ./res
+
 log:
     path: ./log
 

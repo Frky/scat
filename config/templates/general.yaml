@@ -8,5 +8,7 @@ pin:
         arity: ""
         type: ""
         couple: ""
+res:
+    path: ""
 log:
     path: ""
