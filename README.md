@@ -168,7 +168,7 @@ source code of the binary under inference.
 ### Requirements
 
 You need to have `pin` installed on your computer.
-If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `clang` for python installed.
+If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `clang` installed.
 
 ### Installation
 
@@ -183,7 +183,8 @@ If you want to test the results of inference (see [relative section](#accuracy-o
 The configuration of `scat` is set in a yaml file, namely `./config/config.yaml`. You
 can edit this file in order to fit with your own configuration. Main points are:
 
-* `pin -> path`: set the path to the `pin` executable. Required for `scat` to work correctly.
+* `pin -> bin`: set the path to the `pin` executable. Typical value for this is `/usr/bin/pin/pin` or `/usr/bin/pin/intel64/bin/pinbin`. **Required for `scat` to work correctly.**
+* `pin -> path`: set the path to the `pin` main directory. May be different from the path to the executable. Typical value for this is `/usr/bin/pin/`. **Required for `scat` to work correctly.**
 * `log -> path`: set the path to the log directory.
 
 ### Basic usage
@@ -192,6 +193,17 @@ Run `scat` (from your virtualenv): `./scat.py`. You are now in th `scat` shell, 
 on different binaries and display results. 
 
 ### Commands
+
+### Make pintools
+
+Before being able to launch any inference, you must compile pintools:
+
+```
+scat > make
+[*] Compiling ./src/pintool/arity.cpp ...
+[*] Compiling ./src/pintool/type.cpp ...
+[*] Compiling ./src/pintool/couple.cpp ...
+```
 
 ### Inference
 
