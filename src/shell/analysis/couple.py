@@ -24,17 +24,17 @@ class CoupleAnalysis(object):
 
 
     def print_general_info(self):
-        print "Information about inference"
-        print "| Last inference:           {0}".format(self.date)
-        print "| Total number of couples:  {0}".format(len(self.log))
+        print("Information about inference")
+        print("| Last inference:           {0}".format(self.date))
+        print("| Total number of couples:  {0}".format(len(self.log)))
         l = len(set([f for f, g, c in self.log]))
         r = len(set([g for f, g, c in self.log]))
-        print "| Unique left/right-side:   {0}/{1}".format(l, r)
+        print("| Unique left/right-side:   {0}/{1}".format(l, r))
 
 
     def display(self):
         for f, g, c in self.log:
-            print "({0}, {1}) -- {2}".format(f, g, c)
-        print
+            print("({0}, {1}) -- {2}".format(f, g, c))
+        print()
         self.print_general_info()
 

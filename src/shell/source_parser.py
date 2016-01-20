@@ -35,7 +35,7 @@ class SourceParser(object):
     def __find_protos(self, node, **kwargs):
         if (node.type.kind == clang.cindex.TypeKind.FUNCTIONPROTO): # or node.type.kind == clang.cindex.TypeKind.FUNCTIONNOPROTO):
             if VERBOSE:
-                print node.spelling
+                print(node.spelling)
             if node.spelling not in self.protos.keys():
                 self.protos[node.spelling] = list()
                 self.rprotos[node.spelling] = list()

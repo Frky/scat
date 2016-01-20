@@ -27,9 +27,9 @@ class TypeAnalysis(object):
 
 
     def print_general_info(self):
-        print "Information about inference"
-        print "| Last inference:           {0}".format(self.date)
-        print "| Total functions infered:  {0}".format(len(self.log.keys()))
+        print("Information about inference")
+        print("| Last inference:           {0}".format(self.date))
+        print("| Total functions infered:  {0}".format(len(self.log.keys())))
 
 
     def check_one(self, fname, args):
@@ -47,7 +47,7 @@ class TypeAnalysis(object):
 
     def accuracy(self):
         self.print_general_info()
-        print
+        print()
 
         tot_typ = 0
         ok_typ = 0
@@ -56,10 +56,10 @@ class TypeAnalysis(object):
                 res = self.check_one(fn, args)
                 ok_typ += res[0]
                 tot_typ += res[1]
-        print "Accuracy of inference"
-        print "| Ok/Total tested:          {0}/{1}".format(ok_typ, tot_typ)
+        print("Accuracy of inference")
+        print("| Ok/Total tested:          {0}/{1}".format(ok_typ, tot_typ))
         if tot_typ != 0:
-            print "- Ratio:                    {0:.2f}%".format(float(ok_typ)*100./float(tot_typ))
+            print("- Ratio:                    {0:.2f}%".format(float(ok_typ)*100./float(tot_typ)))
 
 
     def display(self):
@@ -93,7 +93,7 @@ class TypeAnalysis(object):
                 if i != len(args) - 2:
                     line += ", "
             line += ");"
-            print line
-        print
+            print(line)
+        print()
         self.print_general_info()
 

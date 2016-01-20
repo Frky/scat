@@ -197,7 +197,7 @@ class ScatShell(Cmd):
         args = s.split(" ")
         if len(args) == 0 or args[0] == '':
             for p, inf in self.res.get_pgm_list():
-                print p
+                print(p)
             raise ValueError
         pgm = args[0]
         if len(args) == 1:
@@ -205,7 +205,7 @@ class ScatShell(Cmd):
                 if p != pgm: 
                     continue
                 for i in inf:
-                    print i
+                    print(i)
                 raise ValueError
         inf = args[1]
         inf_code = inf_str_to_code(inf)
@@ -231,7 +231,7 @@ class ScatShell(Cmd):
 
 
     def help_checkconfig(self):
-        print self.do_checkconfig.__doc__.replace("\n", "")
+        print(self.do_checkconfig.__doc__.replace("\n", ""))
 
 
     def do_checkconfig(self, s):
@@ -255,7 +255,7 @@ class ScatShell(Cmd):
 
 
     def help_setlogdir(self):
-        print self.do_setlogdir.__doc__.replace("\n", "")
+        print(self.do_setlogdir.__doc__.replace("\n", ""))
 
 
     def do_setlogdir(self, directory):
@@ -274,7 +274,7 @@ class ScatShell(Cmd):
 
 
     def help_arity(self):
-        print self.do_arity.__doc__.replace("\n", "")
+        print(self.do_arity.__doc__.replace("\n", ""))
 
 
     def complete_arity(self, text, line, begidx, endidx):
@@ -296,7 +296,7 @@ class ScatShell(Cmd):
 
 
     def help_type(self):
-        print self.do_type.__doc__.replace("\n", "")
+        print(self.do_type.__doc__.replace("\n", ""))
 
 
     def complete_type(self, text, line, begidx, endidx):
@@ -318,7 +318,7 @@ class ScatShell(Cmd):
 
 
     def help_couple(self):
-        print self.do_couple.__doc__.replace("\n", "")
+        print(self.do_couple.__doc__.replace("\n", ""))
 
 
     def complete_couple(self, text, line, begidx, endidx):
@@ -340,7 +340,7 @@ class ScatShell(Cmd):
 
 
     def help_make(self):
-        print self.do_make.__doc__.replace("\n", "")
+        print(self.do_make.__doc__.replace("\n", ""))
 
 
     def do_make(self, s):
@@ -355,7 +355,7 @@ class ScatShell(Cmd):
 
 
     def help_display(self):
-        print self.do_display.__doc__.replace("\n", "")
+        print(self.do_display.__doc__.replace("\n", ""))
 
 
     def complete_display(self, text, line, begidx, endidx):
@@ -385,7 +385,7 @@ class ScatShell(Cmd):
 
 
     def help_parsedata(self):
-        print self.do_parsedata.__doc__.replace("\n", "")
+        print(self.do_parsedata.__doc__.replace("\n", ""))
 
 
     def do_parsedata(self, s):
@@ -408,7 +408,7 @@ class ScatShell(Cmd):
 
 
     def help_accuracy(self):
-        print self.do_accuracy.__doc__.replace("\n", "")
+        print(self.do_accuracy.__doc__.replace("\n", ""))
 
 
     def complete_accuracy(self, text, line, begidx, endidx):

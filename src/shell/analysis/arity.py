@@ -41,14 +41,14 @@ class ArityAnalysis(object):
 
 
     def print_general_info(self):
-        print "Information about inference"
-        print "| Last inference:           {0}".format(self.date)
-        print "| Total functions infered:  {0}".format(len(self.log.keys()))
+        print("Information about inference")
+        print("| Last inference:           {0}".format(self.date))
+        print("| Total functions infered:  {0}".format(len(self.log.keys())))
 
 
     def accuracy(self):
         self.print_general_info()
-        print
+        print()
         tot_ar = 0
         ok_ar = 0
         ok_ret = 0
@@ -61,28 +61,26 @@ class ArityAnalysis(object):
                     not_found += 1
                     continue
                 elif res == 0 and ar > 6:
-                    # print fn, ar
                     overflow += 1
                 if self.check_one_ret(fn, ret == 1) > 0:
                     ok_ret += 1
                 else:
-                    # print fn, ret, self.data[fn][0]
                     pass
                 tot_ar += 1
                 ok_ar += res
-        print "Accuracy of inference"
-        print "| Ok/Total tested:          {0}/{1}".format(ok_ar, tot_ar)
+        print("Accuracy of inference")
+        print("| Ok/Total tested:          {0}/{1}".format(ok_ar, tot_ar))
         if tot_ar != 0:
-            print "| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(tot_ar))
-            print "| Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(tot_ar))
-        print "| Not found:                {0}".format(not_found)
+            print("| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(tot_ar)))
+            print("| Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(tot_ar)))
+        print("| Not found:                {0}".format(not_found))
         return 
 
 
     def display(self):
         for addr, fn in self.log.items():
-           print hex(addr), fn
-        print 
+           print(hex(addr), fn)
+        print()
         self.print_general_info()
             
 
