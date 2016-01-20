@@ -1,5 +1,7 @@
+clang==3.5
 cmd2==0.6.8
 pyparsing==2.0.5
 pyreadline==2.1
 PyYAML==3.11
+spread-confiture==0.17.2rc2
 wheel==0.24.0
