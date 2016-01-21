@@ -369,63 +369,11 @@ VOID Fini(INT32 code, VOID *v) {
 }
 #endif
 
+
 VOID Fini(INT32 code, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
-#if 0
-    /* Iterate on functions */
-    for(unsigned int fid = 0; fid < nb_fn; fid++) {
-        if (!treated[fid])
-            continue;
-        /* WARNING: Temporarily disable the type of return value */
-        /* To re-enable it, pid should start at 0 */
-        ofile << faddr[fid] << ":" << *fname[fid] << ":";
-        for (unsigned int pid = 1; pid <= nb_param_int[fid]; pid++) {
-            for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
-                if (is_data(*it)) {
-                    param_addr[fid][pid]++;
-                }
-            }
-
-            float coef = ((float) param_addr[fid][pid]) / ((float) nb_call[fid]);
-
-            if (coef > SEUIL && !param_is_int[fid][pid])
-                param_is_addr[fid][pid] = true;
-            if (param_call[fid][pid] > 0) {
-                ofile << "UNDEF"; 
-            } else if (param_is_addr[fid][pid]) {
-                ofile << "ADDR";
-            } else {
-                ofile << "INT";
-            }
-            ofile << "(" << coef << ")";
-
-            if (pid == 0) {
-                if (!param_is_addr[fid][pid])
-                    ofile << " ";
-                if (*(fname[fid]) == "")
-                    ofile << faddr[fid] << "(";
-                else
-                    ofile << *(fname[fid]) << "(";
-            } else {
-                if (pid < nb_param_int[fid])
-                    ofile << ",";
-            }
-        }
-
-        for (unsigned int pid = 1; pid <= nb_param_float[fid]; pid++) {
-            if (pid > 1 || nb_param_int[fid] > 0)
-                ofile << "," ;
-            ofile << "FLOAT";
-        }
-        ofile << endl;
-    }
-    std::cerr << "DATA1: [" << DATA1_BASE << " ; " << DATA1_TOP << "]" << endl;
-    std::cerr << "DATA2: [" << DATA2_BASE << " ; " << DATA2_TOP << "]" << endl;
-    return;
-#endif
-#if 1
     for (unsigned int fid = 1; fid < nb_fn; fid++) {
         if (param_addr[fid][0] == 0) {
             continue; 
@@ -459,13 +407,13 @@ VOID Fini(INT32 code, VOID *v) {
                 }
                 if (nb_link > SEUIL*((float) nb_call[fid]))
                     // std::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << faddr[fid] << "(" << *fname[fid] << ") -> " << faddr[gid] << "(" << *fname[gid] << ")" << endl;
-                    ofile << *fname[fid] << " -> " << *fname[gid] << "[" << pid << "] - " << ((float) nb_link)/param_val[gid][pid]->size() << endl;
+                    ofile << *fname[fid] << "(" << nb_p[fid] << ")" << " -> " << *fname[gid] << "(" << nb_p[gid] << ")" << "[" << pid << "] - " << ((float) nb_link)/param_val[gid][pid]->size() << endl;
             }
         }
     }
     ofile.close();
-#endif
 }
+
 
 int main(int argc, char * argv[])
 {

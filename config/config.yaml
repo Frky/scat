@@ -5,10 +5,12 @@ pin:
         arity: ./bin/obj-intel64/arity.so
         type: ./bin/obj-intel64/type.so
         couple: ./bin/obj-intel64/couple.so
+        alloc: ./bin/obj-intel64/alloc.so
     pintool-src:
         arity: ./src/pintool/arity.cpp
         type: ./src/pintool/type.cpp
         couple: ./src/pintool/couple.cpp
+        alloc: ./src/pintool/alloc.cpp
 
 res:
     path: ./res

@@ -8,8 +8,9 @@ from shutil import copyfile
 INF_ARITY = 0
 INF_TYPE = 1
 INF_COUPLE = 2
+INF_ALLOC = 3
 
-INF_CODES = [INF_ARITY, INF_TYPE, INF_COUPLE]
+INF_CODES = [INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC]
 
 def inf_code_to_str(code):
     if code == INF_ARITY:
@@ -18,6 +19,8 @@ def inf_code_to_str(code):
         return "type"
     if code == INF_COUPLE:
         return "couple"
+    if code == INF_ALLOC:
+        return "alloc"
     return "unknown"
 
 
@@ -28,6 +31,8 @@ def inf_str_to_code(s):
         return INF_TYPE
     if s == "couple":
         return INF_COUPLE
+    if s == "alloc":
+        return INF_ALLOC
     return -1
 
 
@@ -38,6 +43,8 @@ def get_previous_step(code):
         return INF_ARITY
     if code == INF_COUPLE:
         return INF_TYPE
+    if code == INF_ALLOC:
+        return INF_COUPLE
 
 
 class Pin(object):

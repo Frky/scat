@@ -5,10 +5,12 @@ pin:
         arity: ""
         type: ""
         couple: ""
+        alloc: ""
     pintool-obj:
         arity: ""
         type: ""
         couple: ""
+        alloc: ""
 res:
     path: ""
 log:
