@@ -167,8 +167,10 @@ source code of the binary under inference.
 
 ### Requirements
 
-You need to have `pin` installed on your computer.
-If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `clang` installed.
+* `scat` requires **python 2.7** and is not compatible with **python 3**.
+* You need to have `pin` installed on your computer.
+* You need `gcc`, version **lower** than (excluding) 5. Some issues are reported using a recent version of `gcc`.
+* If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `libclang1-3.4` installed.
 
 ### Installation
 
@@ -186,6 +188,45 @@ can edit this file in order to fit with your own configuration. Main points are:
 * `pin -> bin`: set the path to the `pin` executable. Typical value for this is `/usr/bin/pin/pin` or `/usr/bin/pin/intel64/bin/pinbin`. **Required for `scat` to work correctly.**
 * `pin -> path`: set the path to the `pin` main directory. May be different from the path to the executable. Typical value for this is `/usr/bin/pin/`. **Required for `scat` to work correctly.**
 * `log -> path`: set the path to the log directory.
+
+**Important note:** You need to ensure that you have acces permissions to the path to pin. Indeed, pintools will be compiled from this directory.
+
+If you use an esoteric linux distribution (e.g. ArchLinux), it may not be supported by `Pin` explicitly. You may encounter an error like this:
+
+```
+E: 4.3 is not a supported linux release
+```
+
+If so, you can add the command line argument `-ifeellucky` to `pin` by setting the entry `pin -> cli-options` in the configuration file.
+
+#### Example of a configuration file
+
+```
+pin:
+    path:   /usr/bin/pin
+    bin: /usr/bin/pin/pin
+    cli-options: -ifeellucky
+    pintool-obj:
+        arity: ./bin/obj-intel64/arity.so
+        type: ./bin/obj-intel64/type.so
+        couple: ./bin/obj-intel64/couple.so
+        alloc: ./bin/obj-intel64/alloc.so
+    pintool-src:
+        arity: ./src/pintool/arity.cpp
+        type: ./src/pintool/type.cpp
+        couple: ./src/pintool/couple.cpp
+        alloc: ./src/pintool/alloc.cpp
+
+res:
+    path: ./res
+
+log:
+    path: ./log
+
+clang:
+    lib-path: /usr/lib/x86_64-linux-gnu/libclang.so.1
+    data-path: ./data/
+```
 
 ### Basic usage
 
