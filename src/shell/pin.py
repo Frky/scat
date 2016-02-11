@@ -49,8 +49,8 @@ def get_previous_step(code):
 
 class Pin(object):
     """
-        This class defines an interface between python and 
-        our implementation using pin. 
+        This class defines an interface between python and
+        our implementation using pin.
 
     """
 
@@ -92,14 +92,14 @@ class Pin(object):
     def log(self, msg):
         if self.__log is not None:
             self.__log(msg)
-        
+
 
     def __cmd(self, pintool, binary, args, logfile, infile=None):
         if infile is not None:
             infile_opt = "-i {0}".format(infile)
         else:
             infile_opt = ""
-        return "{0} -t {1} -o {2} {3} {4} -- {5} {6}".format(self.pinbin, pintool, logfile, infile_opt, self.cli_options, binary, " ".join(args))
+        return "{0} {4} -t {1} -o {2} {3} -- {5} {6}".format(self.pinbin, pintool, logfile, infile_opt, self.cli_options, binary, " ".join(args))
 
 
     def infer(self, inf_code, binary, args, logfile, infile=None):
@@ -112,7 +112,7 @@ class Pin(object):
             @param binary   the binary file to analyse (must be a valid path to
                             an executable path
 
-            @param args     arguments to give to the binary 
+            @param args     arguments to give to the binary
 
             @param logfile  path to the log file where arity information
                             is stored (must be a valid path)
