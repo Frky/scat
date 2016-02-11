@@ -32,6 +32,11 @@ class ScatShell(Cmd):
         # Create a result object
         self.res = Result(self.log_dir)
         # Create a pin object with pin executable path
+        # Get CLI options for pin
+        if "cli-options" in self.config["pin"].keys():
+            cli_options = self.config["pin"]["cli-options"]
+        else:
+            cli_options = ""
         self.__pin = Pin(
                             pinpath=self.config["pin"]["path"],
                             pinbin=self.config["pin"]["bin"],

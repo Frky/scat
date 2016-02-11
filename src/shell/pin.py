@@ -78,6 +78,7 @@ class Pin(object):
         # Dictionary for pintool names and src
         self.pintool = dict()
         self.src = dict()
+        self.cli_options = kwargs["options"]
         # Name of pintool for arity, type and couple
         for code in INF_CODES:
             pt = inf_code_to_str(code)
@@ -95,9 +96,10 @@ class Pin(object):
 
     def __cmd(self, pintool, binary, args, logfile, infile=None):
         if infile is not None:
-            return "{0} -t {1} -o {2} -i {3} -- {4} {5}".format(self.pinbin, pintool, logfile, infile, binary, " ".join(args))
+            infile_opt = "-i {0}".format(infile)
         else:
-            return "{0} -t {1} -o {2} -- {3} {4}".format(self.pinbin, pintool, logfile, binary, " ".join(args))
+            infile_opt = ""
+        return "{0} -t {1} -o {2} {3} {4} -- {5} {6}".format(self.pinbin, pintool, logfile, infile_opt, self.cli_options, binary, " ".join(args))
 
 
     def infer(self, inf_code, binary, args, logfile, infile=None):
@@ -120,6 +122,8 @@ class Pin(object):
 
         """
         cmd = self.__cmd(self.pintool[inf_code], binary, args, logfile, infile)
+        print cmd 
+        return
         self.log(cmd)
         subprocess.call(cmd, shell=True)
         self.log("Inference results logged in {0}".format(logfile))
