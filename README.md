@@ -346,6 +346,11 @@ functions.
 **(WIP)** We recently hired an internship student to do this work (much cheaper). 
 
 ### Non object-oriented binaries only
+For now, `scat` is not capable of performing inference on object-oriented programs. The reason of this is that `scat` relies on
+the calling convention, and specificities introduced by object-oriented programs (and in particular *thiscall* convention)
+have not been studied yet.
 
 ### Calling convention
-
+As mentioned previously, `scat` relies on the knowledge of the calling convention. The approach proposed can be easily adapted to
+any calling convention. However, the work has only been done for `x86-64 System V AMD64` calling convention. Therefore, only this kind
+of binaries can be analysed for now. 
