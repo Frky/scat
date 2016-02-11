@@ -7,7 +7,7 @@
 
 [What is `scat`?](#what-is-scat)
 
-[How does it work?](#how-does-it-work)
+[How does it work?](#how-does-scat-work)
 
 [Some results obtained with `scat`](#some-results-obtained-with-scat)
 
@@ -300,17 +300,52 @@ int strlen(addr);
 
 #### Parse data from source code
 
-* `parsedata $PGM $SRCPATH`
+* `parsedata $PGM $SRCPATH`: launch parsing of source code (`.h`, `.c`) in `$SRCPATH` and store the results under the label `$PGM`. It means that these sources will be used to evaluate accuracy for the program `$PGM`.
+
+```
+scat > parsedata grep ./pgm/src/grep/
+```
+
+**Note:** results are stored in `./data/` as python pickled files.
 
 #### Check inference results
 
-* `accuracy $PGM $INF`
+* `accuracy $PGM $INF`: compare source-code information parsed before with results of inference `$INF` (`arity` or `type`) on the program `$PGM`.
+
+```
+scat > accuracy grep arity
+Information about inference
+| Last inference:           2016-02-11 16:22:53
+| Total functions infered:  49
+Accuracy of inference
+| Ok/Total tested:          11/12
+| Ratio arity:              91.67%
+| Ratio return:             100.00%
+| Not found:                6
+scat > accuracy grep type
+Information about inference
+| Last inference:           2016-01-19 14:15:46
+| Total functions infered:  7
+Accuracy of inference
+| Ok/Total tested:          13/13
+- Ratio:                    100.00%
+```
 
 ## Current limitations of the implementation
 
-### Unstripped binaries
+`scat` comes with several limitations. Some of them are relative to the approach, but we will detail here only 
+the ones relative to incomplete or mis-implementation.
 
-### Non object-oriented binaries
+### Unstripped binaries only
+`scat` does not currently work on stripped binaries. Indeed, although the approach does not require any symbol knowledge, 
+we do need some way to identify functions from an execution to another (e.g. from the arity inference to the type inference). 
+Currently, `scat` uses function names to identify functions, therefore it cannot handle stripped binaries.
+To fix this problem, `scat` needs to use another (more robust) invariant from an execution to another to identify
+functions. 
+
+**(WIP)** We recently hired an internship student to do this work (much cheaper). 
+
+### Non object-oriented binaries only
 
 ### Calling convention
 
