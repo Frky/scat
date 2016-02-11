@@ -122,8 +122,6 @@ class Pin(object):
 
         """
         cmd = self.__cmd(self.pintool[inf_code], binary, args, logfile, infile)
-        print cmd 
-        return
         self.log(cmd)
         subprocess.call(cmd, shell=True)
         self.log("Inference results logged in {0}".format(logfile))
