@@ -169,16 +169,21 @@ source code of the binary under inference.
 
 * `scat` requires **python 2.7** and is not compatible with **python 3**.
 * You need to have `pin` installed on your computer.
-* You need `gcc`, version **lower** than (excluding) 5. Some issues are reported using a recent version of `gcc`.
 * If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `libclang1-3.4` installed.
 
 ### Installation
 
 `$LOCAL_DIR` represents the path to where you want to download `scat`.
 
-* Clone this repository: `git clone https://github.com/Frky/scat.git $LOCAL_DIR` 
+* Clone this repository: `git clone https://github.com/Frky/scat.git $LOCAL_DIR`
 * (optional) Create a virtualenv for `scat`: `virtualenv ~/.venv/scat && source ~/.venv/scat/bin/activate`
 * Install required python libraries: `pip install -r requirements.txt`
+
+### GCC >= 5.0 ABI compatibility
+
+You need to edit the file located at `source/tools/Config/makefile.unix.config` inside your pin installation folder.
+Find the first occurences of the two variables `APP_CXXFLAGS_NOOPT` and `TOOL_CXXFLAGS_NOOPT`,
+and add these options to both : `-fabi-version=2 -D_GLIBCXX_USE_CXX11_ABI=0`
 
 ### Configuration
 
