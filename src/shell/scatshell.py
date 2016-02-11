@@ -33,9 +33,9 @@ class ScatShell(Cmd):
         self.res = Result(self.log_dir)
         # Create a pin object with pin executable path
         self.__pin = Pin(
-                            pinpath=self.config["pin"]["path"], 
-                            pinbin=self.config["pin"]["bin"], 
-                            respath=self.config["res"]["path"], 
+                            pinpath=self.config["pin"]["path"],
+                            pinbin=self.config["pin"]["bin"],
+                            respath=self.config["res"]["path"],
                             arity_src=self.config["pin"]["pintool-src"]["arity"],
                             type_src=self.config["pin"]["pintool-src"]["type"],
                             couple_src=self.config["pin"]["pintool-src"]["couple"],
@@ -46,7 +46,7 @@ class ScatShell(Cmd):
                             # alloc_obj=self.config["pin"]["pintool-obj"]["alloc"],
                             log=self.out
                         )
-        # Init shell 
+        # Init shell
         Cmd.__init__(self, completekey='tab')
 
 
@@ -90,12 +90,12 @@ class ScatShell(Cmd):
         timestamp = datetime.now().strftime("%s")
         return "{0}_{1}_{2}.log".format(os.path.basename(binary), inf_name, timestamp)
 
-    
+
     def __get_inputfile(self, inf_code, binary):
         """
             Retrieve the most recent logfile from the given step of inference.
 
-            @param inf_code code corresponding to the inference step to 
+            @param inf_code code corresponding to the inference step to
                             look for
 
             @param binary   the binary file to analyse
@@ -151,7 +151,7 @@ class ScatShell(Cmd):
 
     def __inference(self, code, s):
         """
-            First check that a valid program is given as a parameter s, 
+            First check that a valid program is given as a parameter s,
             and then launch the inference given as a parameter.
 
             @param code     code of the inference to launch (should be INF_ARITY, INF_TYPE or INF_COUPLE)
@@ -206,7 +206,7 @@ class ScatShell(Cmd):
         pgm = args[0]
         if len(args) == 1:
             for p, inf in self.res.get_pgm_list():
-                if p != pgm: 
+                if p != pgm:
                     continue
                 for i in inf:
                     print(i)
@@ -219,7 +219,7 @@ class ScatShell(Cmd):
     def __complete_path(self, text, line, begidx, endidx):
         before_arg = line.rfind(" ", 0, begidx)
         if before_arg == -1:
-            return 
+            return
         fixed = line[before_arg+1:begidx]
         arg = line[before_arg+1:endidx]
         pattern = arg + "*"
@@ -248,7 +248,7 @@ class ScatShell(Cmd):
         #TODO check also pintool paths => call pin.check_config
         try:
             self.__check_path(self.log_dir, isdir=True)
-            self.__check_path(self.__pin.pinpath, isexec=True)
+            self.__check_path(self.__pin.pinbin, isexec=True)
         except ValueError:
             self.config_ok = False
             return
@@ -330,7 +330,7 @@ class ScatShell(Cmd):
             return self.__complete_bin(text, line, begidx, endidx)
         else:
             return  self.__complete_path(text, line, begidx, endidx)
-    
+
 
     def do_couple(self, s):
         """
@@ -352,7 +352,7 @@ class ScatShell(Cmd):
             return self.__complete_bin(text, line, begidx, endidx)
         else:
             return  self.__complete_path(text, line, begidx, endidx)
-    
+
 
     def do_alloc(self, s):
         """
@@ -385,7 +385,7 @@ class ScatShell(Cmd):
 
 
     def complete_display(self, text, line, begidx, endidx):
-        pgm_inf  = self.res.get_pgm_list() 
+        pgm_inf  = self.res.get_pgm_list()
         for p, inf in pgm_inf:
             if line.find(p) >= 0:
                 return [i for i in inf if i.startswith(text)]
@@ -443,7 +443,7 @@ class ScatShell(Cmd):
 
     def do_accuracy(self, s):
         """
-            Analyse the results of inference for a given program, 
+            Analyse the results of inference for a given program,
             by comparison with source code.
 
         """
@@ -464,5 +464,5 @@ class ScatShell(Cmd):
         if data is None:
             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
             return
-        self.res.accuracy(pgm, inf, inputfile, data) 
+        self.res.accuracy(pgm, inf, inputfile, data)
 
