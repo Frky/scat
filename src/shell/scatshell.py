@@ -49,7 +49,8 @@ class ScatShell(Cmd):
                             type_obj=self.config["pin"]["pintool-obj"]["type"],
                             couple_obj=self.config["pin"]["pintool-obj"]["couple"],
                             # alloc_obj=self.config["pin"]["pintool-obj"]["alloc"],
-                            log=self.out
+                            log=self.out,
+                            options=cli_options,
                         )
         # Init shell
         Cmd.__init__(self, completekey='tab')
