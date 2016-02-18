@@ -143,8 +143,10 @@ VOID fn_ret(void) {
         reg_ret_since_written[i] = true;
         // written[i] = -1;
     }
-    /* Reset the call depth */
-    call_depth -= 1;
+
+    if (call_depth > 0)
+        /* Reset the call depth */
+        call_depth -= 1;
 #if DEBUG_CALLS
     std::cerr << "[OUT] fn_ret" << endl;
 #endif
