@@ -37,6 +37,12 @@ class ScatShell(Cmd):
             cli_options = self.config["pin"]["cli-options"]
         else:
             cli_options = ""
+        # Get function identification method
+        if "function-mode" in self.config.keys():
+            fn_mode = self.config["function-mode"]
+        else:
+            # For now, default is identifying functions by name
+            fn_mode = "name"
         self.__pin = Pin(
                             pinpath=self.config["pin"]["path"],
                             pinbin=self.config["pin"]["bin"],
@@ -51,6 +57,7 @@ class ScatShell(Cmd):
                             # alloc_obj=self.config["pin"]["pintool-obj"]["alloc"],
                             log=self.out,
                             options=cli_options,
+                            fn_mode=fn_mode,
                         )
         # Init shell
         Cmd.__init__(self, completekey='tab')

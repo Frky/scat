@@ -5,6 +5,10 @@ import os
 import shutil
 from shutil import copyfile
 
+FN_MODE_NAME = "name"
+FN_MODE_ADDR = "addr"
+FN_MODE_DEFAULT = FN_MODE_NAME
+
 INF_ARITY = 0
 INF_TYPE = 1
 INF_COUPLE = 2
@@ -75,6 +79,10 @@ class Pin(object):
             self.respath = kwargs["respath"]
         else:
             self.respath = ""
+        if "fn_mode" in kwargs.keys():
+            self.fn_mode = kwargs["fn_mode"]
+        else:
+            self.fn_mode = FN_MODE_DEFAULT
         # Dictionary for pintool names and src
         self.pintool = dict()
         self.src = dict()
@@ -89,6 +97,7 @@ class Pin(object):
             if pt + "_src" in kwargs.keys():
                 self.src[code] = kwargs[pt + "_src"]
 
+
     def log(self, msg):
         if self.__log is not None:
             self.__log(msg)
@@ -99,7 +108,7 @@ class Pin(object):
             infile_opt = "-i {0}".format(infile)
         else:
             infile_opt = ""
-        return "{0} {4} -t {1} -o {2} {3} -- {5} {6}".format(self.pinbin, pintool, logfile, infile_opt, self.cli_options, binary, " ".join(args))
+        return "{0} {4} -t {1} -o {2} -fn \"{7}\" {3} -- {5} {6}".format(self.pinbin, pintool, logfile, infile_opt, self.cli_options, binary, " ".join(args), self.fn_mode)
 
 
     def infer(self, inf_code, binary, args, logfile, infile=None):
