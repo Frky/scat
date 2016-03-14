@@ -18,10 +18,15 @@
 
 #define DEBUG_SEGFAULT          0
 
+#define FN_NAME 0
+#define FN_ADDR 1
+
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
+UINT64 FN_MODE;
+KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
 
 /* Inferred data address space*/
 UINT64 DATA1_BASE, DATA1_TOP;
@@ -443,9 +448,20 @@ int main(int argc, char * argv[])
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
+
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
     
+    // TODO better way to get mode from cli
+    if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
+        FN_MODE = FN_NAME;
+    } else if (strcmp(KnobFunctionMode.Value().c_str(), "addr") == 0) {
+        FN_MODE = FN_ADDR;
+    } else {
+        /* By default, names are used */
+        FN_MODE = FN_NAME;
+    }
+
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
 

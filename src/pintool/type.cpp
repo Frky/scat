@@ -345,12 +345,10 @@ VOID Routine(RTN rtn, VOID *v) {
     if (!init) 
         Commence();
     unsigned int fid = 0;
-    std::cerr << "LOOKFOR " << RTN_Name(rtn) << " | " << RTN_Address(rtn) << endl;
     /* Look for function id */
     for (unsigned int i = 1; i <= nb_fn; i++) {
         // if (faddr[i] == RTN_Address(rtn)) {
         if (*fname[i] == RTN_Name(rtn)) {
-            std::cerr << "FOUND" << endl;
             fid = i;
             faddr[i] = RTN_Address(rtn);
             break;
