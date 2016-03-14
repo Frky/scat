@@ -15,8 +15,13 @@
 #define MAX_DEPTH               1000
 #define SEUIL                   0.05
 
+#define FN_NAME 0
+#define FN_ADDR 1
+
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
+UINT64 FN_MODE;
+KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
 
 /*
  * We define here several ararys to store 
@@ -651,7 +656,18 @@ int main(int argc, char * argv[])
     PIN_InitSymbolsAlt(DEBUG_OR_EXPORT_SYMBOLS);
 
     if (PIN_Init(argc, argv)) return 1;
+
     ofile.open(KnobOutputFile.Value().c_str());
+
+    // TODO better way to get mode from cli
+    if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
+        FN_MODE = FN_NAME;
+    } else if (strcmp(KnobFunctionMode.Value().c_str(), "addr") == 0) {
+        FN_MODE = FN_ADDR;
+    } else {
+        /* By default, names are used */
+        FN_MODE = FN_NAME;
+    }
 
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
