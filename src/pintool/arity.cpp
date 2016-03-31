@@ -95,13 +95,13 @@ VOID fn_call(unsigned int fid) {
     ret_since_written = false;
     /* Update the current function being executed */
     curr_fn = fid;
+    call_depth += 1;
     /* If we reached the max depth of call */
     if (call_depth >= MAX_DEPTH)
-        /* We violently forget all calls before this one */
-        call_depth = 0;
-    else
-        /* Else we increment the depth couter */
-        call_depth += 1;
+        /* We're going to ignore every new call
+           until we get back below MAX_DEPTH */
+        return;
+
     /* Add the current function to the call stack */
     call_stack[call_depth] = fid;
     if (fid != 0) {
@@ -121,37 +121,29 @@ VOID fn_ret(void) {
 #if DEBUG_CALLS
     std::cerr << "[IN_] fn_ret" << endl;
 #endif
-#if 1
-    if (!reg_read_since_written[REG_EAX] && !ret_since_written) {
-        nb_ret[call_stack[call_depth]] += 1;
-#if 0
-        written[REG_RAX] = -1;
-        written[REG_EAX] = -1;
-        written[REG_AX] = -1;
-        written[REG_AH] = -1;
-        written[REG_AL] = -1;
-#endif
-    }
-    else if (!reg_read_since_written[REG_XMM0] && !ret_since_written)
-        nb_ret[call_stack[call_depth]] += 1;
-#endif
-    ret_since_written = true;
-    /* Reset the function we are currently in */
-    curr_fn = 0;
-    /* Reset the registers */
-    for (int i = 0; i <= nb_reg; i++) {
-        /* Except for return register */
-        if (i == REG_RAX || i == REG_EAX || i == REG_AX || i == REG_AH || i == REG_AL) {
-            continue;
+    /* If we haven't reached the max depth of call */
+    if (call_depth < MAX_DEPTH) {
+        if (!reg_read_since_written[REG_EAX] && !ret_since_written)
+            nb_ret[call_stack[call_depth]] += 1;
+        else if (!reg_read_since_written[REG_XMM0] && !ret_since_written)
+            nb_ret[call_stack[call_depth]] += 1;
+
+        ret_since_written = true;
+        /* Reset the function we are currently in */
+        curr_fn = 0;
+        /* Reset the registers */
+        for (int i = 0; i <= nb_reg; i++) {
+            /* Except for return register */
+            if (i == REG_RAX || i == REG_EAX || i == REG_AX || i == REG_AH || i == REG_AL) {
+                continue;
+            }
+            /* Set register to unwritten */
+            reg_ret_since_written[i] = true;
+            // written[i] = -1;
         }
-        /* Set register to unwritten */
-        reg_ret_since_written[i] = true;
-        // written[i] = -1;
     }
 
-    if (call_depth > 0)
-        /* Reset the call depth */
-        call_depth -= 1;
+    call_depth -= 1;
 #if DEBUG_CALLS
     std::cerr << "[OUT] fn_ret" << endl;
 #endif
@@ -162,14 +154,14 @@ VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
 #if DEBUG_CALLS
     std::cerr << "[IN_] reg_access" << endl;
 #endif
-#if 1
+    /* If we reached the max depth of call */
+    if (call_depth >= MAX_DEPTH)
+        /* Ignore this register access */
+        return;
+
     if (reg == REG_RAX || reg == REG_EAX || reg == REG_AX || reg == REG_AH || reg == REG_AL) {
-#if 0
-        if (written[reg] > call_depth && written[reg] <= call_nb_fn && ret_since_written) {
-#else
         reg_read_since_written[REG_EAX] = true;
         if (!ret_since_written)
-#endif
             return;
         for (int i = written[reg]; i > call_depth && i >= 0; i--)
             nb_ret[call_stack[i]] += 1;
@@ -177,7 +169,6 @@ VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
     } else if (reg == REG_XMM0) {
         reg_read_since_written[REG_XMM0] = true;
     }
-#endif
     bool is_float = false;
     UINT32 size_read = 0;
     /* Ignore three first calls */
@@ -312,6 +303,11 @@ VOID reg_write(REG reg) {
 #if DEBUG_CALLS
     std::cerr << "[IN_] reg_write" << endl;
 #endif
+    /* If we reached the max depth of call */
+    if (call_depth >= MAX_DEPTH)
+        /* Ignore this register access */
+        return;
+
     switch (reg) {
     case REG_RDI:
     case REG_EDI:
