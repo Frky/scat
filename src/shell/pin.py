@@ -157,6 +157,11 @@ class Pin(object):
         for makefile in ["makefile", "makefile.rules"]:
             if not os.path.exists(wd + makefile):
                 shutil.copyfile(self.respath + "/" + makefile, wd + "/" + makefile)
+        # Add utils directory
+        os.mkdir(wd + "/utils")
+        for dirpath, dirnames, filenames in os.walk("./src/pintool/utils"):
+            for fname in filenames:
+                copyfile(dirpath + "/" + fname, wd + "/utils/" + fname)
         for code in [c for c in INF_CODES if c in self.src.keys()]:
             pfile = self.src[code]
             self.log("Compiling {0} ...".format(pfile))

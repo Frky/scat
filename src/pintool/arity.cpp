@@ -9,6 +9,7 @@
 
 #include "pin.H"
 
+
 #define DEBUG_CALLS             0
 #define NB_CALLS_TO_CONCLUDE    50
 #define NB_FN_MAX               10000
@@ -17,6 +18,14 @@
 
 #define FN_NAME 0
 #define FN_ADDR 1
+
+#if DEBUG_CALLS
+    #define debug(msg) std::cerr << msg << endl;
+#else
+    #define debug(msg)
+#endif
+
+#include "utils/hollow_stack.h"
 
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
@@ -46,13 +55,8 @@ string **fname;
 /* Return value detected */
 UINT32 *nb_ret;
 
-/* Function currently being executed */
-unsigned int curr_fn;
-
-/* Call stack (more recent call is in last non_empty position of the list) */
-UINT64 *call_stack;
-/* Index of the last non-empty element of call_stack */
-int call_depth;
+/* Call stack */
+HollowStack<NB_FN_MAX, UINT64> call_stack;
 
 /*
  * Information relative to registers
@@ -89,28 +93,18 @@ unsigned int fn_add(ADDRINT addr, string f_name) {
  *  is called in the instrumented binary
  */
 VOID fn_call(unsigned int fid) {
-#if DEBUG_CALLS
-    std::cerr << "[IN_] fn_call" << endl;
-#endif
+    debug("[IN_] fn_call ");
+
     ret_since_written = false;
-    /* Update the current function being executed */
-    curr_fn = fid;
-    call_depth += 1;
-    /* If we reached the max depth of call */
-    if (call_depth >= MAX_DEPTH)
-        /* We're going to ignore every new call
-           until we get back below MAX_DEPTH */
-        return;
 
     /* Add the current function to the call stack */
-    call_stack[call_depth] = fid;
+    call_stack.push(fid);
     if (fid != 0) {
         /* Increment number of calls for this function */
-        nb_call[curr_fn]++;
+        nb_call[call_stack.top()]++;
     }
-#if DEBUG_CALLS
-    std::cerr << "[OUT] fn_call" << endl;
-#endif
+
+    debug("[OUT] fn_call");
 }
 
 
@@ -118,19 +112,17 @@ VOID fn_call(unsigned int fid) {
  *  returns in the instrumented binary
  */
 VOID fn_ret(void) {
-#if DEBUG_CALLS
-    std::cerr << "[IN_] fn_ret" << endl;
-#endif
-    /* If we haven't reached the max depth of call */
-    if (call_depth < MAX_DEPTH) {
+    debug("[IN_] fn_ret ");
+
+    /* If the function has not been forgotten because of too
+       many recursive calls */
+    if (!call_stack.is_top_forgotten()) {
         if (!reg_read_since_written[REG_EAX] && !ret_since_written)
-            nb_ret[call_stack[call_depth]] += 1;
+            nb_ret[call_stack.top()] += 1;
         else if (!reg_read_since_written[REG_XMM0] && !ret_since_written)
-            nb_ret[call_stack[call_depth]] += 1;
+            nb_ret[call_stack.top()] += 1;
 
         ret_since_written = true;
-        /* Reset the function we are currently in */
-        curr_fn = 0;
         /* Reset the registers */
         for (int i = 0; i <= nb_reg; i++) {
             /* Except for return register */
@@ -143,28 +135,25 @@ VOID fn_ret(void) {
         }
     }
 
-    call_depth -= 1;
-#if DEBUG_CALLS
-    std::cerr << "[OUT] fn_ret" << endl;
-#endif
+    call_stack.pop();
+
+    debug("[OUT] fn_ret");
 }
 
 
 VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
-#if DEBUG_CALLS
-    std::cerr << "[IN_] reg_access" << endl;
-#endif
-    /* If we reached the max depth of call */
-    if (call_depth >= MAX_DEPTH)
-        /* Ignore this register access */
+    debug("[IN_] reg_access");
+
+    if (call_stack.is_empty() || call_stack.is_top_forgotten())
         return;
 
     if (reg == REG_RAX || reg == REG_EAX || reg == REG_AX || reg == REG_AH || reg == REG_AL) {
         reg_read_since_written[REG_EAX] = true;
         if (!ret_since_written)
             return;
-        for (int i = written[reg]; i > call_depth && i >= 0; i--)
-            nb_ret[call_stack[i]] += 1;
+        for (int i = written[reg]; i > call_stack.height(); i--)
+            if (!call_stack.is_forgotten(i))
+                nb_ret[call_stack.peek(i)] += 1;
         return;
     } else if (reg == REG_XMM0) {
         reg_read_since_written[REG_XMM0] = true;
@@ -172,11 +161,9 @@ VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
     bool is_float = false;
     UINT32 size_read = 0;
     /* Ignore three first calls */
-    if (curr_fn == 0 || nb_call[curr_fn] < 3) {
+    if (nb_call[call_stack.top()] < 3 || reg_ret_since_written[reg])
         return;
-    }
-    if (reg_ret_since_written[reg]) //(call_depth < 0 || written[reg] >= call_depth || reg_ret_since_written[reg]) // written[reg] < 0)
-        return;
+
     UINT64 min_val_int = 7, min_val_float = 0;
     switch (reg) {
     case REG_RDI:
@@ -278,33 +265,31 @@ VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
     
     
     if (!is_float) {
-#if 1
-        for (int i = written[reg] + 1; i <= call_depth; i++) {
-            UINT64 fn = call_stack[i];
-            nb_param_intaddr[fn][min_val_int] += 1;
-            if (param_size[fn][min_val_int] < size_read)
-                param_size[fn][min_val_int] = size_read;
+        for (int i = written[reg] + 1; i <= call_stack.height(); i++) {
+            if (!call_stack.is_forgotten(i)) {
+                UINT64 fn = call_stack.peek(i);
+                nb_param_intaddr[fn][min_val_int] += 1;
+                if (param_size[fn][min_val_int] < size_read)
+                    param_size[fn][min_val_int] = size_read;
+            }
         }
-#else
-        nb_param_intaddr[curr_fn][min_val_int] += 1;
-        if (param_size[curr_fn][min_val_int] < size_read)
-            param_size[curr_fn][min_val_int] = size_read;
-#endif
     } else {
-        nb_param_float[curr_fn][min_val_float] += 1;
+        for (int i = written[reg] + 1; i <= call_stack.height(); i++) {
+            if (!call_stack.is_forgotten(i)) {
+                UINT64 fn = call_stack.peek(i);
+                nb_param_float[fn][min_val_float] += 1;
+            }
+        }
     }
 
-#if DEBUG_CALLS
-    std::cerr << "[OUT] reg_access" << endl;
-#endif
+    debug("[OUT] reg_access");
 }
 
 VOID reg_write(REG reg) {
-#if DEBUG_CALLS
-    std::cerr << "[IN_] reg_write" << endl;
-#endif
+    debug("[IN_] reg_write");
+
     /* If we reached the max depth of call */
-    if (call_depth >= MAX_DEPTH)
+    if (call_stack.is_empty() || call_stack.is_top_forgotten())
         /* Ignore this register access */
         return;
 
@@ -313,10 +298,10 @@ VOID reg_write(REG reg) {
     case REG_EDI:
     case REG_DI:
     case REG_DIL:
-        written[REG_RDI] = call_depth;
-        written[REG_EDI] = call_depth;
-        written[REG_DI] =  call_depth;
-        written[REG_DIL] = call_depth;
+        written[REG_RDI] = call_stack.height();
+        written[REG_EDI] = call_stack.height();
+        written[REG_DI] =  call_stack.height();
+        written[REG_DIL] = call_stack.height();
         reg_ret_since_written[REG_RDI] = false;
         reg_ret_since_written[REG_EDI] = false;
         reg_ret_since_written[REG_DI] = false;
@@ -326,10 +311,10 @@ VOID reg_write(REG reg) {
     case REG_ESI:
     case REG_SI:
     case REG_SIL:
-        written[REG_RSI] = call_depth;
-        written[REG_ESI] = call_depth;
-        written[REG_SI] =  call_depth;
-        written[REG_SIL] = call_depth;
+        written[REG_RSI] = call_stack.height();
+        written[REG_ESI] = call_stack.height();
+        written[REG_SI] =  call_stack.height();
+        written[REG_SIL] = call_stack.height();
         reg_ret_since_written[REG_RSI] = false;
         reg_ret_since_written[REG_ESI] = false;
         reg_ret_since_written[REG_SI] = false;
@@ -340,11 +325,11 @@ VOID reg_write(REG reg) {
     case REG_DX:
     case REG_DH:
     case REG_DL:
-        written[REG_RDX] = call_depth;
-        written[REG_EDX] = call_depth;
-        written[REG_DX] =  call_depth;
-        written[REG_DH] =  call_depth;
-        written[REG_DL] =  call_depth;
+        written[REG_RDX] = call_stack.height();
+        written[REG_EDX] = call_stack.height();
+        written[REG_DX] =  call_stack.height();
+        written[REG_DH] =  call_stack.height();
+        written[REG_DL] =  call_stack.height();
         reg_ret_since_written[REG_RDX] = false;
         reg_ret_since_written[REG_EDX] = false;
         reg_ret_since_written[REG_DX] = false;
@@ -356,11 +341,11 @@ VOID reg_write(REG reg) {
     case REG_CX:
     case REG_CH:
     case REG_CL:
-        written[REG_RCX] = call_depth;
-        written[REG_ECX] = call_depth;
-        written[REG_CX] =  call_depth;
-        written[REG_CH] =  call_depth;
-        written[REG_CL] =  call_depth;
+        written[REG_RCX] = call_stack.height();
+        written[REG_ECX] = call_stack.height();
+        written[REG_CX] =  call_stack.height();
+        written[REG_CH] =  call_stack.height();
+        written[REG_CL] =  call_stack.height();
         reg_ret_since_written[REG_RCX] = false;
         reg_ret_since_written[REG_ECX] = false;
         reg_ret_since_written[REG_CX] = false;
@@ -373,11 +358,11 @@ VOID reg_write(REG reg) {
     case REG_AH:
     case REG_AL:
         ret_since_written = false;
-        written[REG_RAX] = call_depth;
-        written[REG_EAX] = call_depth;
-        written[REG_AX] =  call_depth;
-        written[REG_AH] =  call_depth;
-        written[REG_AL] =  call_depth;
+        written[REG_RAX] = call_stack.height();
+        written[REG_EAX] = call_stack.height();
+        written[REG_AX] =  call_stack.height();
+        written[REG_AH] =  call_stack.height();
+        written[REG_AL] =  call_stack.height();
         reg_read_since_written[REG_RAX] = false;
         reg_read_since_written[REG_EAX] = false; 
         reg_read_since_written[REG_AX]  = false; 
@@ -388,10 +373,10 @@ VOID reg_write(REG reg) {
     case REG_R8D:
     case REG_R8W:
     case REG_R8B:
-        written[REG_R8] =  call_depth;
-        written[REG_R8D] = call_depth;
-        written[REG_R8W] = call_depth;
-        written[REG_R8B] = call_depth;
+        written[REG_R8] =  call_stack.height();
+        written[REG_R8D] = call_stack.height();
+        written[REG_R8W] = call_stack.height();
+        written[REG_R8B] = call_stack.height();
         reg_ret_since_written[REG_R8] = false;
         reg_ret_since_written[REG_R8D] = false;
         reg_ret_since_written[REG_R8W] = false;
@@ -401,10 +386,10 @@ VOID reg_write(REG reg) {
     case REG_R9D:
     case REG_R9W:
     case REG_R9B:
-        written[REG_R9] =  call_depth;
-        written[REG_R9D] = call_depth;
-        written[REG_R9W] = call_depth;
-        written[REG_R9B] = call_depth;
+        written[REG_R9] =  call_stack.height();
+        written[REG_R9D] = call_stack.height();
+        written[REG_R9W] = call_stack.height();
+        written[REG_R9B] = call_stack.height();
         reg_ret_since_written[REG_R9] = false;
         reg_ret_since_written[REG_R9D] = false;
         reg_ret_since_written[REG_R9W] = false;
@@ -419,15 +404,14 @@ VOID reg_write(REG reg) {
     case REG_XMM5:
     case REG_XMM6:
     case REG_XMM7:
-        written[reg] =     call_depth;
+        written[reg] = call_stack.height();
         reg_ret_since_written[reg] = false;
         break;
     default: 
         return;
     }
-#if DEBUG_CALLS
-    std::cerr << "[OUT] reg_write" << endl;
-#endif
+
+    debug("[OUT] reg_write");
     return;
 }
 
@@ -640,13 +624,9 @@ int main(int argc, char * argv[])
     written = (INT64 *) malloc(sizeof(INT64) * (nb_reg+1));
     reg_ret_since_written = (bool *) calloc(nb_reg + 1, sizeof(bool));
     reg_read_since_written = (bool *) calloc(nb_reg + 1, sizeof(bool));
-    curr_fn = 0;
     nb_fn = 0;
 
-    call_depth = -1;
-    call_stack = (UINT64 *) malloc(1000 * sizeof(UINT64));
-    
-    /* Initialize symbol table code, 
+    /* Initialize symbol table code,
        needed for rtn instrumentation */
     PIN_SetSyntaxIntel();
     PIN_InitSymbolsAlt(DEBUG_OR_EXPORT_SYMBOLS);
