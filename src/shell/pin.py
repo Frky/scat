@@ -158,6 +158,7 @@ class Pin(object):
             if not os.path.exists(wd + makefile):
                 shutil.copyfile(self.respath + "/" + makefile, wd + "/" + makefile)
         # Add utils directory
+        shutil.rmtree(wd + "/utils", True)
         os.mkdir(wd + "/utils")
         for dirpath, dirnames, filenames in os.walk("./src/pintool/utils"):
             for fname in filenames:

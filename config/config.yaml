@@ -1,6 +1,7 @@
 pin:
-    path:   /usr/bin/pin
-    bin: /usr/bin/pin/pin
+    path:   /opt/pin
+    bin: /opt/pin/intel64/bin/pinbin
+    cli-options: -ifeellucky
     pintool-obj:
         arity: ./bin/obj-intel64/arity.so
         type: ./bin/obj-intel64/type.so
@@ -19,7 +20,6 @@ log:
     path: ./log
 
 clang:
-    lib-path: /usr/lib/x86_64-linux-gnu/libclang.so.1
+    lib-path: /usr/lib/libclang.so
     data-path: ./data/
 
-function-mode: name
