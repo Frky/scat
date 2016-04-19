@@ -9,7 +9,6 @@
 
 #include "pin.H"
 
-
 #define DEBUG_CALLS             0
 #define NB_CALLS_TO_CONCLUDE    50
 #define NB_FN_MAX               10000
@@ -25,6 +24,7 @@
     #define debug(msg)
 #endif
 
+#include "utils/registers.h"
 #include "utils/hollow_stack.h"
 
 ofstream ofile;
@@ -58,14 +58,11 @@ UINT32 *nb_ret;
 /* Call stack */
 HollowStack<NB_FN_MAX, UINT64> call_stack;
 
+/** Information relative to registers **/
 /*
- * Information relative to registers
- **/
-/* Number of registers we watch */
-int nb_reg;
-/* For each register, we store the id of the last function
-   that has written it 
-   This array indexes from 0 to nb_reg (included) */
+ * For each register family, we store the height in the
+ * call stack of the last function that has written it
+ */
 INT64 *written;
 /* Return since written ? */
 bool ret_since_written;
@@ -93,7 +90,7 @@ unsigned int fn_add(ADDRINT addr, string f_name) {
  *  is called in the instrumented binary
  */
 VOID fn_call(unsigned int fid) {
-    debug("[IN_] fn_call ");
+    debug("[IN_] fn_call");
 
     ret_since_written = false;
 
@@ -117,22 +114,23 @@ VOID fn_ret(void) {
     /* If the function has not been forgotten because of too
        many recursive calls */
     if (!call_stack.is_top_forgotten()) {
-        if (!reg_read_since_written[REG_EAX] && !ret_since_written)
+        if (!reg_read_since_written[REGF_AX] && !ret_since_written)
             nb_ret[call_stack.top()] += 1;
-        else if (!reg_read_since_written[REG_XMM0] && !ret_since_written)
+        else if (!reg_read_since_written[REGF_XMM0] && !ret_since_written)
             nb_ret[call_stack.top()] += 1;
 
-        ret_since_written = true;
-        /* Reset the registers */
-        for (int i = 0; i <= nb_reg; i++) {
-            /* Except for return register */
-            if (i == REG_RAX || i == REG_EAX || i == REG_AX || i == REG_AH || i == REG_AL) {
-                continue;
-            }
-            /* Set register to unwritten */
-            reg_ret_since_written[i] = true;
-            // written[i] = -1;
+    }
+
+    ret_since_written = true;
+    /* Reset the registers */
+    for (int regf = REGF_FIRST; regf <= REGF_LAST; regf++) {
+        /* Except for return register */
+        if (regf == REGF_AX) {
+            continue;
         }
+        /* Set register to unwritten */
+        reg_ret_since_written[regf] = true;
+        // written[i] = -1;
     }
 
     call_stack.pop();
@@ -141,143 +139,46 @@ VOID fn_ret(void) {
 }
 
 
-VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
+VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
     debug("[IN_] reg_access");
 
     if (call_stack.is_empty() || call_stack.is_top_forgotten())
         return;
 
-    if (reg == REG_RAX || reg == REG_EAX || reg == REG_AX || reg == REG_AH || reg == REG_AL) {
-        reg_read_since_written[REG_EAX] = true;
+    if (regf == REGF_AX) {
+        reg_read_since_written[REGF_AX] = true;
         if (!ret_since_written)
             return;
-        for (int i = written[reg]; i > call_stack.height(); i--)
+        for (int i = written[regf]; i > call_stack.height(); i--)
             if (!call_stack.is_forgotten(i))
                 nb_ret[call_stack.peek(i)] += 1;
         return;
-    } else if (reg == REG_XMM0) {
-        reg_read_since_written[REG_XMM0] = true;
     }
-    bool is_float = false;
-    UINT32 size_read = 0;
+    else if (regf == REGF_XMM0) {
+        reg_read_since_written[REGF_XMM0] = true;
+    }
+
     /* Ignore three first calls */
-    if (nb_call[call_stack.top()] < 3 || reg_ret_since_written[reg])
+    if (nb_call[call_stack.top()] < 3 || reg_ret_since_written[regf])
         return;
 
-    UINT64 min_val_int = 7, min_val_float = 0;
-    switch (reg) {
-    case REG_RDI:
-    case REG_EDI:
-    case REG_DI:
-    case REG_DIL:
-        min_val_int--;
-    case REG_RSI:
-    case REG_ESI:
-    case REG_SI:
-    case REG_SIL:
-        min_val_int--;
-    case REG_RDX:
-    case REG_EDX:
-    case REG_DX:
-    case REG_DH:
-    case REG_DL:
-        min_val_int--;
-    case REG_RCX:
-    case REG_ECX:
-    case REG_CX:
-    case REG_CH:
-    case REG_CL:
-        min_val_int--;
-    case REG_R8:
-    case REG_R8D:
-    case REG_R8W:
-    case REG_R8B:
-        min_val_int--;
-    case REG_R9:
-    case REG_R9D:
-    case REG_R9W:
-    case REG_R9B:
-        min_val_int--;
-        break;
-    case REG_XMM7:
-        min_val_float++;
-    case REG_XMM6:
-        min_val_float++;
-    case REG_XMM5:
-        min_val_float++;
-    case REG_XMM4:
-        min_val_float++;
-    case REG_XMM3:
-        min_val_float++;
-    case REG_XMM2:
-        min_val_float++;
-    case REG_XMM1:
-        min_val_float++;
-    case REG_XMM0:
-        min_val_float++;
-        is_float = true;
-        break;
-    default: 
-        return;
-    }
-
-    switch (reg) {
-    case REG_RDI:
-    case REG_RSI:
-    case REG_RDX:
-    case REG_RCX:
-    case REG_R8:
-    case REG_R9:
-        size_read = 64;
-        break;
-
-    case REG_EDI:
-    case REG_ESI:
-    case REG_EDX:
-    case REG_ECX:
-    case REG_R8D:
-    case REG_R9D:
-        size_read = 32;
-        break;
-
-    case REG_DI:
-    case REG_SI:
-    case REG_DX:
-    case REG_CX:
-    case REG_R8W:
-    case REG_R9W:
-        size_read = 16;
-        break;
-
-    case REG_CH:
-    case REG_DH:
-    case REG_DIL:
-    case REG_SIL:
-    case REG_DL:
-    case REG_CL:
-    case REG_R8B:
-    case REG_R9B:
-        size_read = 8;
-        break;
-    default:
-        break;
-    }
-    
-    
-    if (!is_float) {
-        for (int i = written[reg] + 1; i <= call_stack.height(); i++) {
+    if (regf_is_float(regf)) {
+        UINT64 param_pos = regf - REGF_XMM0 + 1;
+        for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
             if (!call_stack.is_forgotten(i)) {
                 UINT64 fn = call_stack.peek(i);
-                nb_param_intaddr[fn][min_val_int] += 1;
-                if (param_size[fn][min_val_int] < size_read)
-                    param_size[fn][min_val_int] = size_read;
+                nb_param_float[fn][param_pos] += 1;
             }
         }
-    } else {
-        for (int i = written[reg] + 1; i <= call_stack.height(); i++) {
+    }
+    else {
+        UINT64 param_pos = regf - REGF_DI + 1;
+        for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
             if (!call_stack.is_forgotten(i)) {
                 UINT64 fn = call_stack.peek(i);
-                nb_param_float[fn][min_val_float] += 1;
+                nb_param_intaddr[fn][param_pos] += 1;
+                if (param_size[fn][param_pos] < reg_size)
+                    param_size[fn][param_pos] = reg_size;
             }
         }
     }
@@ -285,134 +186,23 @@ VOID reg_access(REG reg, string insDis, UINT64 insAddr) {
     debug("[OUT] reg_access");
 }
 
-VOID reg_write(REG reg) {
+VOID reg_write(REGF regf) {
     debug("[IN_] reg_write");
 
-    /* If we reached the max depth of call */
     if (call_stack.is_empty() || call_stack.is_top_forgotten())
-        /* Ignore this register access */
         return;
 
-    switch (reg) {
-    case REG_RDI:
-    case REG_EDI:
-    case REG_DI:
-    case REG_DIL:
-        written[REG_RDI] = call_stack.height();
-        written[REG_EDI] = call_stack.height();
-        written[REG_DI] =  call_stack.height();
-        written[REG_DIL] = call_stack.height();
-        reg_ret_since_written[REG_RDI] = false;
-        reg_ret_since_written[REG_EDI] = false;
-        reg_ret_since_written[REG_DI] = false;
-        reg_ret_since_written[REG_DIL] = false;
-        break;
-    case REG_RSI:
-    case REG_ESI:
-    case REG_SI:
-    case REG_SIL:
-        written[REG_RSI] = call_stack.height();
-        written[REG_ESI] = call_stack.height();
-        written[REG_SI] =  call_stack.height();
-        written[REG_SIL] = call_stack.height();
-        reg_ret_since_written[REG_RSI] = false;
-        reg_ret_since_written[REG_ESI] = false;
-        reg_ret_since_written[REG_SI] = false;
-        reg_ret_since_written[REG_SIL] = false;
-        break;
-    case REG_RDX:
-    case REG_EDX:
-    case REG_DX:
-    case REG_DH:
-    case REG_DL:
-        written[REG_RDX] = call_stack.height();
-        written[REG_EDX] = call_stack.height();
-        written[REG_DX] =  call_stack.height();
-        written[REG_DH] =  call_stack.height();
-        written[REG_DL] =  call_stack.height();
-        reg_ret_since_written[REG_RDX] = false;
-        reg_ret_since_written[REG_EDX] = false;
-        reg_ret_since_written[REG_DX] = false;
-        reg_ret_since_written[REG_DH] = false;
-        reg_ret_since_written[REG_DL] = false;
-        break;
-    case REG_RCX:
-    case REG_ECX:
-    case REG_CX:
-    case REG_CH:
-    case REG_CL:
-        written[REG_RCX] = call_stack.height();
-        written[REG_ECX] = call_stack.height();
-        written[REG_CX] =  call_stack.height();
-        written[REG_CH] =  call_stack.height();
-        written[REG_CL] =  call_stack.height();
-        reg_ret_since_written[REG_RCX] = false;
-        reg_ret_since_written[REG_ECX] = false;
-        reg_ret_since_written[REG_CX] = false;
-        reg_ret_since_written[REG_CH] = false;
-        reg_ret_since_written[REG_CL] = false;
-        break;
-    case REG_RAX:
-    case REG_EAX:
-    case REG_AX:
-    case REG_AH:
-    case REG_AL:
+    if (regf == REGF_AX) {
         ret_since_written = false;
-        written[REG_RAX] = call_stack.height();
-        written[REG_EAX] = call_stack.height();
-        written[REG_AX] =  call_stack.height();
-        written[REG_AH] =  call_stack.height();
-        written[REG_AL] =  call_stack.height();
-        reg_read_since_written[REG_RAX] = false;
-        reg_read_since_written[REG_EAX] = false; 
-        reg_read_since_written[REG_AX]  = false; 
-        reg_read_since_written[REG_AH]  = false; 
-        reg_read_since_written[REG_AL]  = false; 
-        break;
-    case REG_R8:
-    case REG_R8D:
-    case REG_R8W:
-    case REG_R8B:
-        written[REG_R8] =  call_stack.height();
-        written[REG_R8D] = call_stack.height();
-        written[REG_R8W] = call_stack.height();
-        written[REG_R8B] = call_stack.height();
-        reg_ret_since_written[REG_R8] = false;
-        reg_ret_since_written[REG_R8D] = false;
-        reg_ret_since_written[REG_R8W] = false;
-        reg_ret_since_written[REG_R8B] = false;
-        break;
-    case REG_R9:
-    case REG_R9D:
-    case REG_R9W:
-    case REG_R9B:
-        written[REG_R9] =  call_stack.height();
-        written[REG_R9D] = call_stack.height();
-        written[REG_R9W] = call_stack.height();
-        written[REG_R9B] = call_stack.height();
-        reg_ret_since_written[REG_R9] = false;
-        reg_ret_since_written[REG_R9D] = false;
-        reg_ret_since_written[REG_R9W] = false;
-        reg_ret_since_written[REG_R9B] = false;
-        break;
-    case REG_XMM0:
+    }
+    else if (regf == REGF_XMM0) {
         reg_read_since_written[REG_XMM0] = false;
-    case REG_XMM1:
-    case REG_XMM2:
-    case REG_XMM3:
-    case REG_XMM4:
-    case REG_XMM5:
-    case REG_XMM6:
-    case REG_XMM7:
-        written[reg] = call_stack.height();
-        reg_ret_since_written[reg] = false;
-        break;
-    default: 
-        return;
     }
 
+    written[regf] = call_stack.height();
+    reg_ret_since_written[regf] = false;
+
     debug("[OUT] reg_write");
-    return;
 }
 
 
@@ -420,110 +210,63 @@ VOID reg_write(REG reg) {
  */
 VOID Routine(RTN rtn, VOID *v) {
     fn_add(RTN_Address(rtn), RTN_Name(rtn));
-    return;
-    /* Open routine object */
-    RTN_Open(rtn);
-
-    RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) fn_call, 
-        IARG_UINT32, nb_fn,
-        IARG_END);
-    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) fn_ret, 
-        IARG_END);
-    /* Close routine object */
-    RTN_Close(rtn);
-    nb_fn++;
 }
 
-list<REG> *reg_watch() {
-    list<REG> *reg_l = new list<REG>();
-    reg_l->push_back(REG_RDI);
-    reg_l->push_back(REG_EDI);
-    reg_l->push_back(REG_DI);
-    reg_l->push_back(REG_DIL);
-
-    reg_l->push_back(REG_RSI);
-    reg_l->push_back(REG_ESI);
-    reg_l->push_back(REG_SI);
-    reg_l->push_back(REG_SIL);
-
-    reg_l->push_back(REG_RDX);
-    reg_l->push_back(REG_EDX);
-    reg_l->push_back(REG_DX);
-    reg_l->push_back(REG_DH);
-    reg_l->push_back(REG_DL);
-    
-    reg_l->push_back(REG_RCX);
-    reg_l->push_back(REG_ECX);
-    reg_l->push_back(REG_CX);
-    reg_l->push_back(REG_CH);
-    reg_l->push_back(REG_CL);
-
-    reg_l->push_back(REG_R8);
-    reg_l->push_back(REG_R8D);
-    reg_l->push_back(REG_R8W);
-    reg_l->push_back(REG_R8B);
-
-    reg_l->push_back(REG_R9);
-    reg_l->push_back(REG_R9D);
-    reg_l->push_back(REG_R9W);
-    reg_l->push_back(REG_R9B);
-
-    reg_l->push_back(REG_XMM0);
-    reg_l->push_back(REG_XMM1);
-    reg_l->push_back(REG_XMM2);
-    reg_l->push_back(REG_XMM3);
-    reg_l->push_back(REG_XMM4);
-    reg_l->push_back(REG_XMM5);
-    reg_l->push_back(REG_XMM6);
-    reg_l->push_back(REG_XMM7);
-
-#if 1
-    reg_l->push_back(REG_RAX);
-    reg_l->push_back(REG_EAX);
-    reg_l->push_back(REG_AX);
-    reg_l->push_back(REG_AH);
-    reg_l->push_back(REG_AL);
-#endif
-
-    return reg_l;
-}
-
+#define reg_watch_size 39
+REG reg_watch[reg_watch_size] = {
+    REG_RAX, REG_EAX, REG_AX, REG_AH, REG_AL,
+    REG_RDI, REG_EDI, REG_DI, REG_DIL,
+    REG_RSI, REG_ESI, REG_SI, REG_SIL,
+    REG_RDX, REG_EDX, REG_DX, REG_DH, REG_DL,
+    REG_RCX, REG_ECX, REG_CX, REG_CH, REG_CL,
+    REG_R8, REG_R8D, REG_R8W, REG_R8B,
+    REG_R9, REG_R9D, REG_R9W, REG_R9B,
+    REG_XMM0,
+    REG_XMM1,
+    REG_XMM2,
+    REG_XMM3,
+    REG_XMM4,
+    REG_XMM5,
+    REG_XMM6,
+    REG_XMM7
+};
 
 /*  Instrumentation of each instruction
  *  that uses a memory operand
  */
 VOID Instruction(INS ins, VOID *v) {
-
-    list<REG> *reg_l = reg_watch();
-    list<REG>::iterator it;
-    for (it = reg_l->begin(); it != reg_l->end(); it++) {
-        if (INS_RegRContain(ins, *it) && !INS_RegWContain(ins, *it)) {
+    for (int i = 0; i < reg_watch_size; i++) {
+        REG reg = reg_watch[i];
+        if (INS_RegRContain(ins, reg) && !INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE, 
                         (AFUNPTR) reg_access,
-                        IARG_UINT32, *it,
+                        IARG_UINT32, regf(reg),
+                        IARG_UINT32, reg_size(reg),
                         IARG_PTR, new string(INS_Disassemble(ins)),
                         IARG_ADDRINT, INS_Address(ins),
                         IARG_END);
-        } else if (INS_RegRContain(ins, *it) && INS_RegWContain(ins, *it)) {
+        } else if (INS_RegRContain(ins, reg) && INS_RegWContain(ins, reg)) {
             if ((INS_OperandCount(ins) >= 2 && INS_OperandReg(ins, 0) != INS_OperandReg(ins, 1)) || INS_IsMov(ins)) {
                 INS_InsertCall(ins,
                         IPOINT_BEFORE, 
                         (AFUNPTR) reg_access,
-                        IARG_UINT32, *it,
+                        IARG_UINT32, regf(reg),
+                        IARG_UINT32, reg_size(reg),
                         IARG_PTR, new string(INS_Disassemble(ins)),
                         IARG_ADDRINT, INS_Address(ins),
                         IARG_END);
             }
         }
-        if (INS_RegWContain(ins, *it)) {
+        if (INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE, 
                         (AFUNPTR) reg_write,
-                        IARG_UINT32, *it,
+                        IARG_UINT32, regf(reg),
                         IARG_END);
         }
     }
+
     if (INS_IsCall(ins)) {
         ADDRINT addr; 
         unsigned int fid;
@@ -604,9 +347,7 @@ VOID Fini(INT32 code, VOID *v) {
 }
 
 
-int main(int argc, char * argv[])
-{
-
+int main(int argc, char * argv[]) {
     nb_call = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
@@ -616,15 +357,9 @@ int main(int argc, char * argv[])
     nb_ret = (UINT32 *) calloc(NB_FN_MAX, sizeof(UINT32));
     ret_since_written = false;
 
-    list<REG> *reg_l = reg_watch();
-    nb_reg = 0;
-    for (list<REG>::iterator it = reg_l->begin(); it != reg_l->end(); it++) {
-        nb_reg += 1;
-    }
-    written = (INT64 *) malloc(sizeof(INT64) * (nb_reg+1));
-    reg_ret_since_written = (bool *) calloc(nb_reg + 1, sizeof(bool));
-    reg_read_since_written = (bool *) calloc(nb_reg + 1, sizeof(bool));
-    nb_fn = 0;
+    written = (INT64 *) malloc(sizeof(INT64) * REGF_COUNT);
+    reg_ret_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
+    reg_read_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
 
     /* Initialize symbol table code,
        needed for rtn instrumentation */
