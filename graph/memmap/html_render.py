@@ -1,4 +1,5 @@
 
+import sys
 from bs4 import BeautifulSoup
 from random import randint
 
@@ -15,6 +16,20 @@ def generate_random_access(N):
         while addr in data.keys():
             addr = randint(A_MIN, A_MAX)
         data[addr] = (randint(R_MIN, R_MAX), randint(W_MIN, W_MAX))
+    return sorted([(a, r, w) for a, (r, w) in data.items()], key=lambda a:a[0])
+
+def parse_access(fpath):
+    data = dict()
+    with open(fpath, 'r') as f:
+        for line in f.readlines():
+            typ, val = line[:-1].split(":")
+            val = int(val)
+            if val not in data.keys():
+                data[val] = [0,0]
+            if typ == "p":
+                data[val][0] += 1
+            else:
+                data[val][1] += 1
     return sorted([(a, r, w) for a, (r, w) in data.items()], key=lambda a:a[0])
 
 def render(data):
@@ -54,7 +69,7 @@ with open("template.html", "r") as f:
 soup = BeautifulSoup(content, 'html.parser')
 
 memap = soup.select("#memory-map > tbody")[0]
-data_content = BeautifulSoup(render(generate_random_access(1000)))
+data_content = BeautifulSoup(render(parse_access(sys.argv[1]))) #generate_random_access(1000)))
 memap.append(data_content)
 
 with open("mem_map.html", "w") as f:
