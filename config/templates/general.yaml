@@ -13,6 +13,7 @@ pin:
         couple: ""
         alloc: ""
         uaf: ""
+        memmap: ""
 res:
     path: ""
 log:

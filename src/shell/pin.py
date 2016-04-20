@@ -14,34 +14,30 @@ INF_TYPE = 1
 INF_COUPLE = 2
 INF_ALLOC = 3
 INF_UAF = 4
+INF_MEM_MAP = 5
 
-INF_CODES = [INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF]
+INF_ALL = [
+            (INF_ARITY, "arity"), 
+            (INF_TYPE, "type"), 
+            (INF_COUPLE, "couple"),
+            (INF_ALLOC, "alloc"),
+            (INF_UAF, "uaf"),
+            (INF_MEM_MAP, "memmap"),
+        ]
 
 def inf_code_to_str(code):
-    if code == INF_ARITY:
-        return "arity"
-    if code == INF_TYPE:
-        return "type"
-    if code == INF_COUPLE:
-        return "couple"
-    if code == INF_ALLOC:
-        return "alloc"
-    if code == INF_UAF:
-        return "uaf"
+    global INF_ALL
+    for c, name in INF_ALL:
+        if c == code:
+            return name
     return "unknown"
 
 
 def inf_str_to_code(s):
-    if s == "arity":
-        return INF_ARITY
-    if s == "type":
-        return INF_TYPE
-    if s == "couple":
-        return INF_COUPLE
-    if s == "alloc":
-        return INF_ALLOC
-    if s == "uaf":
-        return INF_UAF
+    global INF_ALL
+    for c, name in INF_ALL:
+        if name == s:
+            return c
     return -1
 
 
@@ -55,6 +51,8 @@ def get_previous_step(code):
     if code == INF_ALLOC:
         return INF_COUPLE
     if code == INF_UAF:
+        return INF_TYPE
+    if code == INF_MEM_MAP:
         return INF_TYPE
 
 
@@ -95,8 +93,7 @@ class Pin(object):
         self.src = dict()
         self.cli_options = kwargs["options"]
         # Name of pintool for arity, type and couple
-        for code in INF_CODES:
-            pt = inf_code_to_str(code)
+        for code, pt in INF_ALL:
             if pt + "_obj" in kwargs.keys():
                 self.pintool[code] = kwargs[pt + "_obj"]
             else:
@@ -170,7 +167,7 @@ class Pin(object):
         for dirpath, dirnames, filenames in os.walk("./src/pintool/utils"):
             for fname in filenames:
                 copyfile(dirpath + "/" + fname, wd + "/utils/" + fname)
-        for code in [c for c in INF_CODES if c in self.src.keys()]:
+        for code in [c for c, n in INF_ALL if c in self.src.keys()]:
             pfile = self.src[code]
             self.log("Compiling {0} ...".format(pfile))
             copyfile(pfile, wd + os.path.basename(pfile))
