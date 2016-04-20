@@ -9,7 +9,6 @@
 
 #include "pin.H"
 
-#define DEBUG_CALLS             0
 #define NB_CALLS_TO_CONCLUDE    1
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
@@ -18,15 +17,8 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-#if DEBUG_CALLS
-    #define debug(...) { \
-        char buf[200]; \
-        sprintf(buf, __VA_ARGS__); \
-        LOG(buf); \
-    }
-#else
-    #define debug(msg)
-#endif
+#define DEBUG_ENABLED
+#include "utils/debug.h"
 
 #include "utils/registers.h"
 #include "utils/hollow_stack.h"
@@ -57,7 +49,7 @@ ADDRINT *faddr;
 /* Name of each function (if symbol table is present) */
 string **fname;
 /* Return value detected */
-UINT32 *nb_ret;
+UINT64 *nb_ret;
 
 /* Call stack */
 HollowStack<NB_FN_MAX, UINT64> call_stack;
@@ -95,7 +87,6 @@ UINT64 ret_count = 0;
  *  is called in the instrumented binary
  */
 VOID fn_call(unsigned int fid) {
-    debug("[IN_] fn_call %s\n", fname[fid]->c_str());
     call_count++;
 
     /* Add the current function to the call stack */
@@ -104,8 +95,6 @@ VOID fn_call(unsigned int fid) {
         /* Increment number of calls for this function */
         nb_call[call_stack.top()]++;
     }
-
-    debug("[OUT] fn_call\n");
 }
 
 
@@ -113,17 +102,15 @@ VOID fn_call(unsigned int fid) {
  *  returns in the instrumented binary
  */
 VOID fn_ret(void) {
-    debug("[IN_] fn_ret \n");
     ret_count++;
 
     /* If the function has not been forgotten because of too
        many recursive calls */
     if (!call_stack.is_top_forgotten()) {
-        if (!reg_read_since_written[REGF_AX] && !reg_ret_since_written[REGF_AX])
+        if ((!reg_read_since_written[REGF_AX] && !reg_ret_since_written[REGF_AX])
+                || (!reg_read_since_written[REGF_XMM0] && !reg_ret_since_written[REGF_XMM0])) {
             nb_ret[call_stack.top()] += 1;
-        else if (!reg_read_since_written[REGF_XMM0] && !reg_ret_since_written[REGF_XMM0])
-            nb_ret[call_stack.top()] += 1;
-
+        }
     }
 
     /* Reset the registers */
@@ -132,27 +119,23 @@ VOID fn_ret(void) {
     }
 
     call_stack.pop();
-
-    debug("[OUT] fn_ret \n");
 }
 
 
 VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
-    debug("[IN_] reg_access\n");
-
     if (call_stack.is_empty() || call_stack.is_top_forgotten())
         return;
 
+    reg_read_since_written[regf] = true;
     if (regf == REGF_AX || regf == REGF_XMM0) {
-        reg_read_since_written[regf] = true;
-        if (!reg_ret_since_written[regf])
-            return;
+        if (reg_ret_since_written[regf]) {
+            for (int i = written[regf] - 1; i > call_stack.height(); i--)
+                if (!call_stack.is_forgotten(i))
+                   nb_ret[call_stack.peek(i)] += 1;
 
-        for (int i = written[regf] - 1; i > call_stack.height(); i--)
-            if (!call_stack.is_forgotten(i))
-                nb_ret[call_stack.peek(i)] += 1;
-
-        return;
+            if (regf == REGF_AX)
+                return;
+        }
     }
 
     /* Ignore three first calls */
@@ -179,13 +162,9 @@ VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
             }
         }
     }
-
-    debug("[OUT] reg_access\n");
 }
 
 VOID reg_write(REGF regf) {
-    debug("[IN_] reg_write\n");
-
     if (call_stack.is_empty() || call_stack.is_top_forgotten())
         return;
 
@@ -195,8 +174,6 @@ VOID reg_write(REGF regf) {
 
     written[regf] = call_stack.height();
     reg_ret_since_written[regf] = false;
-
-    debug("[OUT] reg_write\n");
 }
 
 
@@ -298,6 +275,13 @@ VOID Instruction(INS ins, VOID *v) {
  *  execution
  */
 VOID Fini(INT32 code, VOID *v) {
+    debug("Total %lu / %lu\n", call_count, ret_count);
+    for (unsigned int i = 1; i <= nb_fn; i++) {
+        if (nb_call[i] > 0 || nb_ret[i] > 0) {
+            debug("[%s] %lu / %lu\n", fname[i]->c_str(), nb_call[i], nb_ret[i]);
+        }
+    }
+
 #define VERBOSE 0
     for (unsigned int i = 1; i <= nb_fn; i++) {
         if (nb_call[i] >= NB_CALLS_TO_CONCLUDE) {
@@ -347,7 +331,7 @@ int main(int argc, char * argv[]) {
     param_size = (UINT32 **) calloc(NB_FN_MAX, sizeof(UINT32 *)); 
     faddr = (ADDRINT *) calloc(NB_FN_MAX, sizeof(ADDRINT));
     fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
-    nb_ret = (UINT32 *) calloc(NB_FN_MAX, sizeof(UINT32));
+    nb_ret = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
 
     written = (INT64 *) malloc(sizeof(INT64) * REGF_COUNT);
     reg_ret_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
