@@ -3,6 +3,7 @@
 from datetime import datetime
 import re
 
+VERBOSE = True
 
 class ArityAnalysis(object):
 
@@ -27,7 +28,10 @@ class ArityAnalysis(object):
         if fname in self.data.keys():
             if ar == len(self.data[fname]) - 1:
                 return 1
-            else: 
+            else:
+                if VERBOSE:
+                    print("[{}] Arity mismatch".format(fname))
+                    print("   Expected {}, got {}".format(self.data[fname][1:], ar))
                 return 0
         else:
             return -1
@@ -35,6 +39,9 @@ class ArityAnalysis(object):
 
     def check_one_ret(self, fname, ret):
         if (ret and self.data[fname][0] == "void") or (not ret and self.data[fname][0] != "void"):
+            if VERBOSE:
+                print("[{}] Return mismatch".format(fname))
+                print("   Expected {}, got {}".format(self.data[fname][0], ret))
             return 0
         else:
             return 1

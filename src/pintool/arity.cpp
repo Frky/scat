@@ -9,7 +9,7 @@
 
 #include "pin.H"
 
-#define NB_CALLS_TO_CONCLUDE    1
+#define NB_CALLS_TO_CONCLUDE    50
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
 #define SEUIL                   0.05
@@ -17,7 +17,6 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-#define DEBUG_ENABLED
 #include "utils/debug.h"
 
 #include "utils/registers.h"
@@ -52,7 +51,7 @@ string **fname;
 UINT64 *nb_ret;
 
 /* Call stack */
-HollowStack<NB_FN_MAX, UINT64> call_stack;
+HollowStack<MAX_DEPTH, UINT64> call_stack;
 
 /** Information relative to registers **/
 /*
@@ -129,9 +128,21 @@ VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
     reg_read_since_written[regf] = true;
     if (regf == REGF_AX || regf == REGF_XMM0) {
         if (reg_ret_since_written[regf]) {
-            for (int i = written[regf] - 1; i > call_stack.height(); i--)
-                if (!call_stack.is_forgotten(i))
-                   nb_ret[call_stack.peek(i)] += 1;
+            if (written[regf] - 1 > call_stack.height()) {
+                debug("Propagation %s\n", regf == REGF_AX ? "AX" : "XMM0");
+                debug("De   [%d] %s\n", call_stack.height() + 1, fname[call_stack.peek(call_stack.height() + 1)]->c_str());
+                debug("Vers [%ld] %s\n", written[regf], fname[call_stack.peek(written[regf])]->c_str());
+            }
+
+            for (int i = call_stack.height() + 1; i < written[regf]; i++)
+                if (!call_stack.is_forgotten(i)) {
+                    nb_ret[call_stack.peek(i)] += 1;
+                    debug("  [%d] %s: %lu/%lu\n",
+                            i,
+                            fname[call_stack.peek(i)]->c_str(),
+                            nb_call[call_stack.peek(i)],
+                            nb_ret[call_stack.peek(i)]);
+                }
 
             if (regf == REGF_AX)
                 return;
@@ -165,7 +176,7 @@ VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
 }
 
 VOID reg_write(REGF regf) {
-    if (call_stack.is_empty() || call_stack.is_top_forgotten())
+    if (call_stack.is_empty())
         return;
 
     if (regf == REGF_AX || regf == REGF_XMM0) {
@@ -362,7 +373,8 @@ int main(int argc, char * argv[]) {
     /* Register Fini to be called when the 
        application exits */
     PIN_AddFiniFunction(Fini, 0);
-    
+
+    debug("Starting\n");
     PIN_StartProgram();
     
     return 0;
