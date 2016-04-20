@@ -32,6 +32,7 @@ public:
             top_(),
             height_(-1),
             middleSize_(0),
+            topHeight(-1),
             topFirst_(0),
             topSize_(0) {}
 
@@ -64,9 +65,7 @@ public:
      */
     bool is_forgotten(int height) {
         if (is_empty()) throw new EmptyStackException;
-
-        int c = height - BOTTOM_CAPACITY;
-        return c >= 0 && c < middleSize_;
+        return height >= BOTTOM_CAPACITY && height < topHeight;
     }
 
     /**
@@ -87,6 +86,7 @@ public:
         else {
             top_[topFirst_] = element;
             middleSize_++;
+            topHeight = BOTTOM_CAPACITY + middleSize_;
             topFirst_ = modulo(topFirst_ + 1, TOP_CAPACITY);
         }
     }
@@ -108,11 +108,11 @@ public:
         if (height < BOTTOM_CAPACITY) {
             return bottom_[height];
         }
-        else if (height < BOTTOM_CAPACITY + middleSize_) {
+        else if (height < topHeight) {
             throw new IgnoredElementException;
         }
         else {
-            int topIndex = height - BOTTOM_CAPACITY - middleSize_;
+            int topIndex = height - topHeight;
             return top_[modulo(topFirst_ + topIndex, TOP_CAPACITY)];
         }
     }
@@ -148,6 +148,7 @@ private:
 
     int height_;
     int middleSize_;
+    int topHeight;
     int topFirst_;
     int topSize_;
 
