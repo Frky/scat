@@ -12,8 +12,8 @@
 #include "pin.H"
 
 #define NB_FN_MAX               5000
-#define NB_VALS_TO_CONCLUDE     100
-#define NB_CALLS_TO_CONCLUDE    50
+#define NB_VALS_TO_CONCLUDE     1 // 100
+#define NB_CALLS_TO_CONCLUDE    1 // 50
 #define SEUIL                   0.01
 
 #define DEBUG_SEGFAULT          0
@@ -351,16 +351,19 @@ VOID Routine(RTN rtn, VOID *v) {
         if (*fname[i] == RTN_Name(rtn)) {
             fid = i;
             faddr[i] = RTN_Address(rtn);
+            std::cerr << *fname[i] << ": " << faddr[i] << endl;
             break;
         }
     }
     if (fid == 0) {
         return;
     }
+    /*
     RTN_Open(rtn);
     RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
     RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
     RTN_Close(rtn);
+    */
 }
 
 /*  Instrumentation of each instruction
@@ -368,6 +371,8 @@ VOID Routine(RTN rtn, VOID *v) {
  */
 VOID Instruction(INS ins, VOID *v) {
 #define OK 0
+    if (!init) 
+        Commence();
     /* Instrument each access to memory */
     if (INS_OperandCount(ins) > 1 && 
             (INS_IsMemoryWrite(ins)) && !INS_IsStackRead(ins)) {
@@ -377,6 +382,65 @@ VOID Instruction(INS ins, VOID *v) {
                         IARG_MEMORYOP_EA, 0,
                         IARG_END);
     }
+    if (INS_IsCall(ins)) {
+        ADDRINT addr; 
+        unsigned int fid;
+        if (INS_IsDirectCall(ins)) {
+            addr = INS_DirectBranchOrCallTargetAddress(ins);
+            unsigned int i;
+            for (i = 0; i < nb_fn; i++) {
+                if (faddr[i] == addr)
+                    break;
+            }
+            if (i == nb_fn) {
+                std::cerr << "ET MERDE: " << addr << endl;
+                fid = 0;
+            } else {
+                fid = i;
+            }
+        } else {
+            fid = 0;
+        }
+        if (fid != 0) {
+            INS_InsertCall(ins, 
+                    IPOINT_BEFORE, 
+                    (AFUNPTR) call,
+                    IARG_CONST_CONTEXT,
+                    IARG_UINT32, fid,
+                    IARG_END);
+        }
+    } 
+# if 0
+    if (INS_IsRet(ins)) {
+        ADDRINT addr; 
+        unsigned int fid;
+        if (INS_IsDirectCall(ins)) {
+            addr = INS_DirectBranchOrCallTargetAddress(ins);
+            unsigned int i;
+            for (i = 0; i < nb_fn; i++) {
+                if (faddr[i] == addr)
+                    break;
+            }
+            if (i == nb_fn) {
+                std::cerr << "ET MERDE" << endl;
+                fid = 0;
+            } else {
+                fid = i;
+                std::cerr << "INTERCEPTING " << *fname[fid];
+            }
+        } else {
+            fid = 0;
+        }
+        if (fid != 0) {
+            INS_InsertCall(ins,
+                    IPOINT_BEFORE, 
+                    (AFUNPTR) ret,
+                    IARG_CONST_CONTEXT,
+                    IARG_UINT32, fid,
+                    IARG_END);
+        }
+    }
+#endif
 #if OK
     if (INS_IsCall(ins))
             INS_InsertCall(ins, 
@@ -483,6 +547,7 @@ VOID Commence() {
             if (atol(_addr.c_str()) != 0) {
                 unsigned int fid = fn_add(atol(_addr.c_str()), n, o - '0', int_param_idx, v == '0');
                 fname[fid] = new string(_name);
+                std::cerr << "ADDING " << *fname[fid] << endl;
             }
         }
     }

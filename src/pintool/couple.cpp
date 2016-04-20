@@ -34,6 +34,7 @@ UINT64 DATA2_BASE, DATA2_TOP;
 /* Inferred code address space*/
 UINT64 CODE_BASE, CODE_TOP;
 
+UINT64 counter;
 
 list<ADDRINT> *call_stack;
 unsigned int nb_fn = 0;
@@ -46,6 +47,7 @@ bool *treated;
 unsigned int *nb_call;
 unsigned int *nb_p;
 list<UINT64> ***param_val;
+list<UINT64> ***param_val_counter;
 int **param_addr;
 
 long int depth = 0;
@@ -82,6 +84,7 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     }
     ADDRINT regv = PIN_GetContextReg(ctxt, reg);
     param_val[fid][pid]->push_front(regv);
+    param_val_counter[fid][pid]->push_front(counter);
 #if DEBUG_SEGFAULT
     std::cerr << "[LEAVING] " << __func__ << endl;
 #endif
@@ -92,6 +95,7 @@ VOID call(CONTEXT *ctxt, UINT32 fid) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+    counter += 1;
     depth++;
     if (treated[fid])
         return;
@@ -114,11 +118,13 @@ VOID ret(CONTEXT *ctxt, UINT32 fid) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+    counter += 1;
     depth--;
     ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
     regv = regv;
     if (param_val[fid][0]->size() < 2*NB_VALS_TO_CONCLUDE)
         param_val[fid][0]->push_front(regv);
+        param_val_counter[fid][0]->push_front(counter);
     if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
         treated[fid] = true;
     }
@@ -155,10 +161,12 @@ unsigned int fn_add(ADDRINT addr, string name, unsigned int nb_param, vector<boo
     param_addr[fid] = (int *) calloc(nb_p[fid], sizeof(int));
     /* Create arrays of lists (one for each parameter, plus one for the return value) */
     param_val[fid] = (list<UINT64> **) malloc((nb_p[fid]) * sizeof(list<UINT64> *));
+    param_val_counter[fid] = (list<UINT64> **) malloc((nb_p[fid]) * sizeof(list<UINT64> *));
 
     /* Iteration on parameters */
     for (unsigned int i = 0; i < nb_p[fid]; i++) {
         param_val[fid][i] = new list<UINT64>();
+        param_val_counter[fid][i] = new list<UINT64>();
         if (type_param[i])
             param_addr[fid][i] = 1;
         else
@@ -259,6 +267,8 @@ VOID Commence() {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+    /* Init instruction counter */
+    counter = 0;
     init = true;
     char m;
     string _addr, _name;
@@ -386,6 +396,7 @@ VOID Fini(INT32 code, VOID *v) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
             continue; 
         }
+        float max_av_dist = -1;
         for (unsigned int gid = 1; gid < nb_fn; gid++) {
             if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
                 continue; 
@@ -393,26 +404,38 @@ VOID Fini(INT32 code, VOID *v) {
             for (unsigned int pid = 1; pid < nb_p[gid]; pid++) {
                 if (param_addr[gid][pid] == 0)
                     continue;
-                list<UINT64>::iterator pv, rv;
+                list<UINT64>::iterator pv, pc;
+                list<UINT64>::reverse_iterator rv, rc;
                 int nb_link = 0;
+                double av_dist = 0;
+                pc = param_val_counter[gid][pid]->begin();
                 for (
                         pv = param_val[gid][pid]->begin(); 
                         pv != param_val[gid][pid]->end(); 
                         pv++
                        ) {
+                    rc = param_val_counter[fid][0]->rbegin();
                     for (
-                        rv = param_val[fid][0]->begin(); 
-                        rv != param_val[fid][0]->end(); 
+                        rv = param_val[fid][0]->rbegin(); 
+                        rv != param_val[fid][0]->rend(); 
                         rv++) {
-                        if (*rv == *pv) {
+                        if (*rv == *pv && *pc > *rc) {
                             nb_link += 1;
+                            av_dist += (((*pc) - (*rc)));
+                            std::cerr << *rv << "," << *fname[fid] << "," << *rc << "," << *fname[gid] << "," << *pc << endl; 
                             break;
                         }
+                        rc++;
                     }
+                    pc++;
                 }
-                if (nb_link > SEUIL*((float) nb_call[fid]))
-                    // std::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << faddr[fid] << "(" << *fname[fid] << ") -> " << faddr[gid] << "(" << *fname[gid] << ")" << endl;
+                av_dist = av_dist / ((float) nb_link);
+                if (av_dist > max_av_dist) {
+                    max_av_dist = av_dist;
+                }
+                if (nb_link > SEUIL*((float) nb_call[fid])) {
                     ofile << *fname[fid] << "(" << nb_p[fid] << ")" << " -> " << *fname[gid] << "(" << nb_p[gid] << ")" << "[" << pid << "] - " << ((float) nb_link)/param_val[gid][pid]->size() << endl;
+                }
             }
         }
     }
@@ -436,6 +459,7 @@ int main(int argc, char * argv[])
     treated = (bool *) malloc(NB_FN_MAX * sizeof(bool));
     nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
+    param_val_counter = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
     param_addr = (int **) malloc(NB_FN_MAX * sizeof(int *));
     nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));
     fname = (string **) calloc(NB_FN_MAX, sizeof(string *));

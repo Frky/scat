@@ -18,10 +18,15 @@
 
 #define DEBUG_SEGFAULT          0
 
+#define FN_NAME 0
+#define FN_ADDR 1
+
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
+UINT64 FN_MODE;
+KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
 
 /* Inferred data address space*/
 UINT64 DATA1_BASE, DATA1_TOP;
@@ -29,11 +34,12 @@ UINT64 DATA2_BASE, DATA2_TOP;
 /* Inferred code address space*/
 UINT64 CODE_BASE, CODE_TOP;
 
-
 list<ADDRINT> *call_stack;
 unsigned int nb_cpl = 0;
 
 int nb_calls = 0;
+
+UINT64 counter;
 
 bool *treated;
 unsigned int *nb_call;
@@ -57,44 +63,9 @@ struct couple {
 
 couple_t **cpl;
 
-#if 0
-VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    REG reg;
-    switch (pid) {
-    case 1:
-        reg = REG_RDI;
-        break;
-    case 2:
-        reg = REG_RSI;
-        break;
-    case 3:
-        reg = REG_RDX;
-        break;
-    case 4:
-        reg = REG_RCX;
-        break;
-    case 5:
-        reg = REG_R8;
-        break;
-    case 6:
-        reg = REG_R9;
-        break;
-    default:
-        return;
-    }
-    // ADDRINT regv = PIN_GetContextReg(ctxt, reg);
-    // param_val[fid][pid]->push_front(regv);
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-}
-#endif
-
 
 VOID call(CONTEXT *ctxt, string *name) {
+    counter += 1;
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
@@ -131,7 +102,8 @@ VOID call(CONTEXT *ctxt, string *name) {
 }
 
 
-VOID ret(CONTEXT *ctxt, UINT32 fid) {
+VOID ret(CONTEXT *ctxt) {
+    counter += 1;
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
@@ -188,7 +160,7 @@ VOID Routine(RTN rtn, VOID *v) {
 #endif
     RTN_Open(rtn);
     RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_PTR, new string(RTN_Name(rtn)), IARG_END);
-//    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
+    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_END);
     RTN_Close(rtn);
 }
 
@@ -218,6 +190,8 @@ VOID Commence() {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+    /* Init instruction counter */
+    counter = 0;
     init = true;
     char m;
     string _fname, _gname;
@@ -257,7 +231,7 @@ VOID Commence() {
             while (ifile && m != '\n') {
                 ifile.read(&m, 1);
             }
-            if (nbp_f <= 3 && nbp_g <= 2)
+            if (nbp_f <= 4 && nbp_g <= 3)
                 add_couple(_fname, _gname, pid);
             else {
                 std::cerr << _fname << " " << nbp_f << " | " << _gname << " " << nbp_g << endl;
@@ -272,6 +246,7 @@ VOID Fini(INT32 code, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+    std::cerr << "COUNTER: " << counter << endl;
     unsigned int i;
     for (i = 1; i <= nb_cpl; i++) {
         if (cpl[i]->first == 1 && cpl[i]->nb_f >= cpl[i]->nb_g)
@@ -344,6 +319,16 @@ int main(int argc, char * argv[])
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
     
+    // TODO better way to get mode from cli
+    if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
+        FN_MODE = FN_NAME;
+    } else if (strcmp(KnobFunctionMode.Value().c_str(), "addr") == 0) {
+        FN_MODE = FN_ADDR;
+    } else {
+        /* By default, names are used */
+        FN_MODE = FN_NAME;
+    }
+
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
 

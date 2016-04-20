@@ -10,7 +10,7 @@
 #include "pin.H"
 
 #define DEBUG_CALLS             0
-#define NB_CALLS_TO_CONCLUDE    50
+#define NB_CALLS_TO_CONCLUDE    1
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
 #define SEUIL                   0.05
