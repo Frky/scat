@@ -9,7 +9,7 @@ from datetime import datetime
 import glob
 from confiture import Confiture, ConfigFileError
 
-from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, get_previous_step, inf_str_to_code
+from src.shell.pin import Pin, inf_code_to_str, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, get_previous_step, inf_str_to_code
 from src.shell.result import Result
 from src.shell.source_parser import SourceParser
 
@@ -50,11 +50,13 @@ class ScatShell(Cmd):
                             arity_src=self.config["pin"]["pintool-src"]["arity"],
                             type_src=self.config["pin"]["pintool-src"]["type"],
                             couple_src=self.config["pin"]["pintool-src"]["couple"],
-                            # alloc_src=self.config["pin"]["pintool-src"]["alloc"],
+                            alloc_src=self.config["pin"]["pintool-src"]["alloc"],
+                            uaf_src=self.config["pin"]["pintool-src"]["uaf"],
                             arity_obj=self.config["pin"]["pintool-obj"]["arity"],
                             type_obj=self.config["pin"]["pintool-obj"]["type"],
                             couple_obj=self.config["pin"]["pintool-obj"]["couple"],
-                            # alloc_obj=self.config["pin"]["pintool-obj"]["alloc"],
+                            alloc_obj=self.config["pin"]["pintool-obj"]["alloc"],
+                            uaf_obj=self.config["pin"]["pintool-obj"]["uaf"],
                             log=self.out,
                             options=cli_options,
                             fn_mode=fn_mode,
@@ -329,6 +331,28 @@ class ScatShell(Cmd):
 
         """
         self.__inference(INF_TYPE, s)
+
+
+    #********** uaf **********#
+
+
+    def help_uaf(self):
+        print(self.do_type.__doc__.replace("\n", ""))
+
+
+    def complete_uaf(self, text, line, begidx, endidx):
+        if len(line.split(" ")) < 3:
+            return self.__complete_bin(text, line, begidx, endidx)
+        else:
+            return  self.__complete_path(text, line, begidx, endidx)
+
+
+    def do_uaf(self, s):
+        """
+            Launch type inference on the binary specified as a parameter
+
+        """
+        self.__inference(INF_UAF, s)
 
 
     #********** couple **********#

@@ -6,11 +6,13 @@ pin:
         type: ""
         couple: ""
         alloc: ""
+        uaf: ""
     pintool-obj:
         arity: ""
         type: ""
         couple: ""
         alloc: ""
+        uaf: ""
 res:
     path: ""
 log:

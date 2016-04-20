@@ -13,8 +13,9 @@ INF_ARITY = 0
 INF_TYPE = 1
 INF_COUPLE = 2
 INF_ALLOC = 3
+INF_UAF = 4
 
-INF_CODES = [INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC]
+INF_CODES = [INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF]
 
 def inf_code_to_str(code):
     if code == INF_ARITY:
@@ -25,6 +26,8 @@ def inf_code_to_str(code):
         return "couple"
     if code == INF_ALLOC:
         return "alloc"
+    if code == INF_UAF:
+        return "uaf"
     return "unknown"
 
 
@@ -37,6 +40,8 @@ def inf_str_to_code(s):
         return INF_COUPLE
     if s == "alloc":
         return INF_ALLOC
+    if s == "uaf":
+        return INF_UAF
     return -1
 
 
@@ -49,6 +54,8 @@ def get_previous_step(code):
         return INF_TYPE
     if code == INF_ALLOC:
         return INF_COUPLE
+    if code == INF_UAF:
+        return INF_TYPE
 
 
 class Pin(object):
