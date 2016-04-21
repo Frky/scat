@@ -11,6 +11,9 @@
 
 #include "pin.H"
 
+#define ALLOC "mem_alloc"
+#define FREE "mem_free"
+
 #define NB_FN_MAX               5000
 #define NB_VALS_TO_CONCLUDE     50000
 #define NB_CALLS_TO_CONCLUDE    500
@@ -52,7 +55,9 @@ list<UINT64> ***param_val;
 list<UINT64> ***param_val_counter;
 int **param_addr;
 list<ADDRINT> *addr_param;
-list<ADDRINT> *addr_ret;
+list<ADDRINT> *addr_alloc;
+list<UINT32> *addr_size;
+list<ADDRINT> *addr_free;
 list<ADDRINT> *addr_read;
 
 ADDRINT ALLOCATED_LOW = -1;
@@ -114,6 +119,11 @@ VOID call(CONTEXT *ctxt, UINT32 fid) {
         }
     }
 #endif
+    if (*fname[fid] == FREE) {
+        addr_free->push_front(val_from_reg(ctxt, 1));
+    } else if (*fname[fid] == ALLOC) {
+        addr_size->push_front(val_from_reg(ctxt, 1));
+    }
 #if DEBUG_SEGFAULT
     std::cerr << "[LEAVING] " << __func__ << endl;
 #endif
@@ -127,9 +137,9 @@ VOID ret(CONTEXT *ctxt, UINT32 fid) {
 #endif
     counter += 1;
     depth--;
-    if (*fname[fid] == "mem_alloc") {
+    if (*fname[fid] == ALLOC) {
         ADDRINT new_addr = PIN_GetContextReg(ctxt, REG_RAX);
-        addr_ret->push_front(new_addr);
+        addr_alloc->push_front(new_addr);
         if (new_addr > ALLOCATED_HIGH)
             ALLOCATED_HIGH = new_addr;
         if (new_addr < ALLOCATED_LOW)
@@ -206,8 +216,12 @@ VOID Routine(RTN rtn, VOID *v) {
         return;
     }
     RTN_Open(rtn);
-    RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
-    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
+    if (RTN_Name(rtn) == ALLOC) {
+        RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
+    }
+    if (RTN_Name(rtn) == ALLOC || RTN_Name(rtn) == FREE) {
+        RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
+    }
     RTN_Close(rtn);
 }
 
@@ -226,6 +240,8 @@ VOID Instruction(INS ins, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+#define OK 0
+#if OK
     if (INS_IsMemoryRead(ins)) 
             INS_InsertCall(ins, 
                             IPOINT_BEFORE, 
@@ -234,8 +250,6 @@ VOID Instruction(INS ins, VOID *v) {
                             IARG_MEMORYREAD_SIZE,
                             IARG_END
                     );
-#define OK 0
-#if OK
     if (INS_IsCall(ins))
             INS_InsertCall(ins, 
                         IPOINT_BEFORE, 
@@ -411,6 +425,7 @@ VOID Fini(INT32 code, VOID *v) {
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
     list<ADDRINT>::iterator it;
+    list<UINT32>::iterator it_size;
 #if 0
     std::cerr << "ADDR PARAM: " << addr_param->size() << endl;
     std::cerr << "RET PARAM: " << addr_ret->size() << endl;
@@ -418,11 +433,13 @@ VOID Fini(INT32 code, VOID *v) {
         ofile << "r:" << *it << endl;
     }
 #endif
-    for (it = addr_param->begin(); it != addr_param->end(); it++) {
-        ofile << "m:" << *it << endl;
+    it_size = addr_size->begin();
+    for (it = addr_alloc->begin(); it != addr_alloc->end(); it++) {
+        ofile << "alloc:" << *it << ":" << *it_size << endl;
+        it_size++;
     }
-    for (it = addr_read->begin(); it != addr_read->end(); it++) {
-        ofile << "r:" << *it << endl;
+    for (it = addr_free->begin(); it != addr_free->end(); it++) {
+        ofile << "free:" << *it << ":" << endl;
     }
 }
 
@@ -448,7 +465,9 @@ int main(int argc, char * argv[])
     nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));
     fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
     addr_param = new list<ADDRINT>();
-    addr_ret = new list<ADDRINT>();
+    addr_alloc = new list<ADDRINT>();
+    addr_free = new list<ADDRINT>();
+    addr_size = new list<UINT32>();
     addr_read = new list<ADDRINT>();
 
     call_stack = new list<ADDRINT>();

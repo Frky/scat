@@ -4,19 +4,31 @@
 }
 
 #memory-map td {
-    width: 12px;
-    height: 12px;
-    border-style: solid;
+    width: 1px;
+    height: 1px;
+    border-style: none; // solid;
     border-width: 0px;
-    border-color: rgb(108, 122, 137);
+    border-color: black;
 }
 
 #memory-map td.hdr-addr {
     width: 100px;
-    text-align: right;
+    text-align: center;
     font-size: 0.7em;
     font-family: "Courier New";
     padding-right: 20px;
+}
+
+#memory-map tr:nth-child(2) td {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0px 0px 0px;
+}
+
+#memory-map tr:last-child td {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0px 0px 0px;
 }
 
 td[data-intensity="0"] {
@@ -32,15 +44,35 @@ td[data-intensity="2"] {
 }
 
 td[data-intensity="3"] {
-    background-color: rgb(248, 148, 6);
+    background-color: rgb(245, 171, 53);
 }
 
 td[data-intensity="4"] {
-    background-color: rgb(249, 105, 14);
+    background-color: rgb(248, 148, 6);
 }
 
 td[data-intensity="5"] {
+    background-color: rgb(232, 126, 4);
+}
+
+td[data-intensity="6"] {
+    background-color: rgb(249, 105, 14);
+}
+
+td[data-intensity="7"] {
+    background-color: rgb(239, 72, 54);
+}
+
+td[data-intensity="8"] {
     background-color: rgb(207, 0, 15);
+}
+
+td[data-intensity="9"] {
+    background-color: rgb(150, 40, 27);
+}
+
+#memory-map td[data-alloc="0"] {
+    border-style: none;
 }
 
 #memory-map td:hover {

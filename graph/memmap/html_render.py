@@ -44,13 +44,14 @@ def parse_access(fpath):
             if pg != progress:
                 progress = pg
                 print progress
-            typ, val = line[:-1].split(":")
+            typ, val, size = line[:-1].split(":")
             val = int(val)
-            if val not in data[val % DATA_SIZE].keys():
-                data[val % DATA_SIZE][val] = [0,0]
-            if typ == "p":
-                data[val % DATA_SIZE][val][0] += 1
-            else:
+            if typ == "alloc":
+                size = int(size)
+                for j in xrange(size):
+                    if (val + j) not in data[(val + j) % DATA_SIZE].keys():
+                        data[(val + j) % DATA_SIZE][(val + j)] = [0,0]
+                    data[(val + j) % DATA_SIZE][(val + j)][0] += 1
                 data[val % DATA_SIZE][val][1] += 1
     to_sort = list()
     for d in data:
@@ -90,8 +91,8 @@ def render(data):
     print D_MIN, D_MAX
     print a_min, a_max
     print data[D_MIN:D_MAX]
-    i_min = min([d[1] + d[2] for d in data[D_MIN:D_MAX]])
-    i_max = max([d[1] + d[2] for d in data[D_MIN:D_MAX]])
+    i_min = min([d[1] for d in data[D_MIN:D_MAX]])
+    i_max = max([d[1] for d in data[D_MIN:D_MAX]])
     r_min = min([d[1] for d in data[D_MIN:D_MAX]])
     r_max = max([d[1] for d in data[D_MIN:D_MAX]])
     w_min = min([d[2] for d in data[D_MIN:D_MAX]])
@@ -99,11 +100,13 @@ def render(data):
     print i_min, i_max
     print r_min, r_max
     print w_min, w_max
-    I_LEVEL = 6
+    I_LEVEL = 9
+    A_LEVEL = 3
     html = ""
-    WIDTH = 16
+    WIDTH = 64
     senti = D_MIN
     a_min = a_min - (a_min % WIDTH)
+    html += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_min, WIDTH)
     for i in xrange(a_min, a_max + 1):
         if i % 100 == 0:
             print i
@@ -114,12 +117,13 @@ def render(data):
             d = (i, 0, 0)
         if i % WIDTH == 0:
             html += "<tr>"
-            html += "<td class=\"hdr-addr\">{0:06x}</td>".format(i)
-        html += "<td data-addr={0} data-intensity={1} data-read={2} data-write={3}></td>\n".format(d[0], ((-i_min + d[1] + d[2]) * I_LEVEL) / i_max, d[1], d[2])
+            # html += "<td class=\"hdr-addr\">{0:06x}</td>".format(i)
+        html += "<td data-addr={0} data-intensity={1} data-alloc={2}></td>\n".format(d[0], ((-i_min + d[1]) * I_LEVEL) / i_max, ((-w_min + d[2]) * A_LEVEL) / w_max)
         if i % WIDTH == WIDTH - 1:
             html += "</tr>"
     if i % WIDTH != WIDTH - 1:
         html += "</tr>"
+    html += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_max, WIDTH)
     return html
 
 
