@@ -28,8 +28,8 @@ UINT64 FN_MODE;
 KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
 
 /*
- * We define here several ararys to store 
- * efficiently information relative to each function 
+ * We define here several arrays to store
+ * efficiently information relative to each function
  * during execution
  **/
 /* Number of functions we watch
@@ -53,20 +53,23 @@ UINT64 *nb_ret;
 /* Call stack */
 HollowStack<MAX_DEPTH, UINT64> call_stack;
 
-/** Information relative to registers **/
 /*
- * For each register family, we store the height in the
- * call stack of the last function that has written it
- */
+ * Information relative to registers
+ * These arrays are indexed from REGF_FIRST to REGF_LAST
+ **/
+/* For each register family, we store the height in the
+ * call stack of the last function that has written it */
 INT64 *written;
-/* Return since written ? */
 bool *reg_ret_since_written;
-bool *reg_read_since_written;
+/* For each relevant register family, indicates if it is
+ * a valid return candidate so far */
+bool *reg_maybe_return;
 
 unsigned int fn_add(ADDRINT addr, string f_name) {
     if (nb_fn >= NB_FN_MAX) {
         return 0;
     }
+
     unsigned int fid = nb_fn;
     nb_fn++;
     nb_call[fid] = 0;
@@ -79,21 +82,20 @@ unsigned int fn_add(ADDRINT addr, string f_name) {
     return fid;
 }
 
-UINT64 call_count = 0;
-UINT64 ret_count = 0;
-
 /*  Function called each time a procedure
  *  is called in the instrumented binary
  */
 VOID fn_call(unsigned int fid) {
-    call_count++;
-
-    /* Add the current function to the call stack */
     call_stack.push(fid);
-    if (fid != 0) {
-        /* Increment number of calls for this function */
+    if (fid != 0 && !call_stack.is_top_forgotten()) {
         nb_call[call_stack.top()]++;
     }
+
+    // These are scratch registers, calling a
+    // function means previous write in the calling
+    // function are definitely not return value
+    reg_maybe_return[REGF_AX] = false;
+    reg_maybe_return[REGF_XMM0] = false;
 }
 
 
@@ -101,18 +103,13 @@ VOID fn_call(unsigned int fid) {
  *  returns in the instrumented binary
  */
 VOID fn_ret(void) {
-    ret_count++;
-
-    /* If the function has not been forgotten because of too
-       many recursive calls */
     if (!call_stack.is_top_forgotten()) {
-        if ((!reg_read_since_written[REGF_AX] && !reg_ret_since_written[REGF_AX])
-                || (!reg_read_since_written[REGF_XMM0] && !reg_ret_since_written[REGF_XMM0])) {
-            nb_ret[call_stack.top()] += 1;
-        }
+        if (reg_maybe_return[REGF_AX] && !reg_ret_since_written[REGF_AX])
+            nb_ret[call_stack.top()]++;
+        if (reg_maybe_return[REGF_XMM0] && !reg_ret_since_written[REGF_XMM0])
+            nb_ret[call_stack.top()]++;
     }
 
-    /* Reset the registers */
     for (int regf = REGF_FIRST; regf <= REGF_LAST; regf++) {
         reg_ret_since_written[regf] = true;
     }
@@ -121,38 +118,39 @@ VOID fn_ret(void) {
 }
 
 
-VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
-    if (call_stack.is_empty() || call_stack.is_top_forgotten())
+VOID reg_access(REGF regf, UINT32 reg_size) {
+    if (call_stack.is_empty())
         return;
 
-    reg_read_since_written[regf] = true;
+    // Discard the previous write as a potential
+    // return value. Reading the value does not
+    // necessarily mean the register cannot be a
+    // return value, but void functions can use
+    // return registers as scratch registers
+    // We're taking a precautious approach
+    // and hoping the call stack propagation
+    // on register access will detect it instead
+    reg_maybe_return[regf] = false;
+
     if (regf == REGF_AX || regf == REGF_XMM0) {
         if (reg_ret_since_written[regf]) {
-            if (written[regf] - 1 > call_stack.height()) {
-                debug("Propagation %s\n", regf == REGF_AX ? "AX" : "XMM0");
-                debug("De   [%d] %s\n", call_stack.height() + 1, fname[call_stack.peek(call_stack.height() + 1)]->c_str());
-                debug("Vers [%ld] %s\n", written[regf], fname[call_stack.peek(written[regf])]->c_str());
-            }
-
-            for (int i = call_stack.height() + 1; i < written[regf]; i++)
-                if (!call_stack.is_forgotten(i)) {
+            // Propagate the return value up the call stack
+            for (int i = call_stack.height() + 1; i <= written[regf]; i++)
+                if (!call_stack.is_forgotten(i))
                     nb_ret[call_stack.peek(i)] += 1;
-                    debug("  [%d] %s: %lu/%lu\n",
-                            i,
-                            fname[call_stack.peek(i)]->c_str(),
-                            nb_call[call_stack.peek(i)],
-                            nb_ret[call_stack.peek(i)]);
-                }
 
+            // REGF_AX is not used as a parameter
             if (regf == REGF_AX)
                 return;
         }
     }
 
-    /* Ignore three first calls */
-    if (nb_call[call_stack.top()] < 3 || reg_ret_since_written[regf])
+    if (call_stack.is_top_forgotten()
+            || nb_call[call_stack.top()] < 3 /* Ignore the three first calls */
+            || reg_ret_since_written[regf])  /* And value written by unrelated functions */
         return;
 
+    // Propagate the parameter up the call stack
     if (regf_is_float(regf)) {
         UINT64 param_pos = regf - REGF_XMM0 + 1;
         for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
@@ -168,6 +166,7 @@ VOID reg_access(REGF regf, UINT32 reg_size, string insDis, UINT64 insAddr) {
             if (!call_stack.is_forgotten(i)) {
                 UINT64 fn = call_stack.peek(i);
                 nb_param_intaddr[fn][param_pos] += 1;
+
                 if (param_size[fn][param_pos] < reg_size)
                     param_size[fn][param_pos] = reg_size;
             }
@@ -179,21 +178,18 @@ VOID reg_write(REGF regf) {
     if (call_stack.is_empty())
         return;
 
-    if (regf == REGF_AX || regf == REGF_XMM0) {
-        reg_read_since_written[regf] = false;
-    }
-
     written[regf] = call_stack.height();
+    if (regf == REGF_AX || regf == REGF_XMM0)
+        reg_maybe_return[regf] = true;
     reg_ret_since_written[regf] = false;
 }
 
 
-/*  Instrumentation of each function
- */
-VOID Routine(RTN rtn, VOID *v) {
+VOID register_function_name(RTN rtn, VOID *v) {
     fn_add(RTN_Address(rtn), RTN_Name(rtn));
 }
 
+/* Array of all the monitored registers */
 #define reg_watch_size 39
 REG reg_watch[reg_watch_size] = {
     REG_RAX, REG_EAX, REG_AX, REG_AH, REG_AL,
@@ -214,35 +210,33 @@ REG reg_watch[reg_watch_size] = {
 };
 
 /*  Instrumentation of each instruction
- *  that uses a memory operand
+ *    - that uses a memory operand
+ *    - which is a function call
+ *    - which is a return
  */
-VOID Instruction(INS ins, VOID *v) {
+VOID instrument_instruction(INS ins, VOID *v) {
     for (int i = 0; i < reg_watch_size; i++) {
         REG reg = reg_watch[i];
         if (INS_RegRContain(ins, reg) && !INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
-                        IPOINT_BEFORE, 
+                        IPOINT_BEFORE,
                         (AFUNPTR) reg_access,
                         IARG_UINT32, regf(reg),
                         IARG_UINT32, reg_size(reg),
-                        IARG_PTR, new string(INS_Disassemble(ins)),
-                        IARG_ADDRINT, INS_Address(ins),
                         IARG_END);
         } else if (INS_RegRContain(ins, reg) && INS_RegWContain(ins, reg)) {
             if ((INS_OperandCount(ins) >= 2 && INS_OperandReg(ins, 0) != INS_OperandReg(ins, 1)) || INS_IsMov(ins)) {
                 INS_InsertCall(ins,
-                        IPOINT_BEFORE, 
+                        IPOINT_BEFORE,
                         (AFUNPTR) reg_access,
                         IARG_UINT32, regf(reg),
                         IARG_UINT32, reg_size(reg),
-                        IARG_PTR, new string(INS_Disassemble(ins)),
-                        IARG_ADDRINT, INS_Address(ins),
                         IARG_END);
             }
         }
         if (INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
-                        IPOINT_BEFORE, 
+                        IPOINT_BEFORE,
                         (AFUNPTR) reg_write,
                         IARG_UINT32, regf(reg),
                         IARG_END);
@@ -250,32 +244,32 @@ VOID Instruction(INS ins, VOID *v) {
     }
 
     if (INS_IsCall(ins)) {
-        ADDRINT addr; 
-        unsigned int fid;
+        ADDRINT addr;
+        unsigned int fid = 0;
         if (INS_IsDirectCall(ins)) {
             addr = INS_DirectBranchOrCallTargetAddress(ins);
-            unsigned int i;
-            for (i = 0; i < nb_fn; i++) {
-                if (faddr[i] == addr)
+
+            // Lookup the function by address
+            for (fid = 0; fid < nb_fn; fid++) {
+                if (faddr[fid] == addr)
                     break;
             }
-            if (i == nb_fn) {
+
+            // Or register it without a name
+            if (fid == nb_fn) {
                 fid = fn_add(addr, "");
-            } else {
-                fid = i;
             }
-        } else {
-            fid = 0;
         }
-        INS_InsertCall(ins, 
-                    IPOINT_BEFORE, 
+
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
                     (AFUNPTR) fn_call,
                     IARG_UINT32, fid,
                     IARG_END);
-    } 
+    }
     if (INS_IsRet(ins)) {
         INS_InsertCall(ins,
-                    IPOINT_BEFORE, 
+                    IPOINT_BEFORE,
                     (AFUNPTR) fn_ret,
                     IARG_END);
     }
@@ -285,15 +279,8 @@ VOID Instruction(INS ins, VOID *v) {
 /*  This function is called at the end of the
  *  execution
  */
-VOID Fini(INT32 code, VOID *v) {
-    debug("Total %lu / %lu\n", call_count, ret_count);
-    for (unsigned int i = 1; i <= nb_fn; i++) {
-        if (nb_call[i] > 0 || nb_ret[i] > 0) {
-            debug("[%s] %lu / %lu\n", fname[i]->c_str(), nb_call[i], nb_ret[i]);
-        }
-    }
+VOID fini(INT32 code, VOID *v) {
 
-#define VERBOSE 0
     for (unsigned int i = 1; i <= nb_fn; i++) {
         if (nb_call[i] >= NB_CALLS_TO_CONCLUDE) {
             UINT64 arity = 0;
@@ -313,11 +300,7 @@ VOID Fini(INT32 code, VOID *v) {
                 }
             }
             arity += max_ar_idx;
-#if VERBOSE
-            if (fname[i]->compare(string("")) != 0) {
-                std::cerr << "[" << nb_call[i] << "] " << "{\\tt 0x" << std::hex << faddr[i] << "} & {\\tt " << *(fname[i]) << "} & " << arity << " \\\\" << endl;
-            }
-#endif
+
             ofile << faddr[i] << ":" << *(fname[i]) << ":" << arity << ":" << max_ar_idx << ":";
             if ((float) nb_ret[i] > SEUIL * (float) nb_call[i]) {
                 ofile << "1:";
@@ -339,14 +322,14 @@ int main(int argc, char * argv[]) {
     nb_call = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    param_size = (UINT32 **) calloc(NB_FN_MAX, sizeof(UINT32 *)); 
+    param_size = (UINT32 **) calloc(NB_FN_MAX, sizeof(UINT32 *));
     faddr = (ADDRINT *) calloc(NB_FN_MAX, sizeof(ADDRINT));
     fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
     nb_ret = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
 
     written = (INT64 *) malloc(sizeof(INT64) * REGF_COUNT);
     reg_ret_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
-    reg_read_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
+    reg_maybe_return = (bool *) calloc(REGF_COUNT, sizeof(bool));
 
     /* Initialize symbol table code,
        needed for rtn instrumentation */
@@ -367,16 +350,16 @@ int main(int argc, char * argv[]) {
         FN_MODE = FN_NAME;
     }
 
-    INS_AddInstrumentFunction(Instruction, 0);
-    RTN_AddInstrumentFunction(Routine, 0);
+    INS_AddInstrumentFunction(instrument_instruction, 0);
+    RTN_AddInstrumentFunction(register_function_name, 0);
 
-    /* Register Fini to be called when the 
+    /* Register fini to be called when the
        application exits */
-    PIN_AddFiniFunction(Fini, 0);
+    PIN_AddFiniFunction(fini, 0);
 
     debug("Starting\n");
     PIN_StartProgram();
-    
+
     return 0;
 }
 

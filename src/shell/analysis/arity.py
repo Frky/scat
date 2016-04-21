@@ -3,7 +3,7 @@
 from datetime import datetime
 import re
 
-VERBOSE = True
+VERBOSE = False
 
 class ArityAnalysis(object):
 
@@ -56,7 +56,7 @@ class ArityAnalysis(object):
     def accuracy(self):
         self.print_general_info()
         print()
-        tot_ar = 0
+        total = 0
         ok_ar = 0
         ok_ret = 0
         overflow = 0
@@ -73,15 +73,16 @@ class ArityAnalysis(object):
                     ok_ret += 1
                 else:
                     pass
-                tot_ar += 1
+                total += 1
                 ok_ar += res
         print("Accuracy of inference")
-        print("| Ok/Total tested:          {0}/{1}".format(ok_ar, tot_ar))
-        if tot_ar != 0:
-            print("| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(tot_ar)))
-            print("| Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(tot_ar)))
+        print("| Arity  Ok/Total tested:   {0}/{1}".format(ok_ar, total))
+        print("| Return Ok/Total tested:   {0}/{1}".format(ok_ret, total))
+        if total != 0:
+            print("| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(total)))
+            print("| Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(total)))
         print("| Not found:                {0}".format(not_found))
-        return 
+        return
 
 
     def display(self):
@@ -89,5 +90,5 @@ class ArityAnalysis(object):
            print(hex(addr), fn)
         print()
         self.print_general_info()
-            
+
 

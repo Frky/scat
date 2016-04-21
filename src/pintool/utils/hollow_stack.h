@@ -3,9 +3,7 @@
 
 #include <exception>
 
-class EmptyStackException : public std::exception {};
-
-class IgnoredElementException : public std::exception {};
+class ForgottenElementException : public std::exception {};
 
 /**
  * HollowStack
@@ -48,7 +46,7 @@ public:
      * Also the height of the top element.
      */
     inline int height() {
-        if (is_empty()) throw new EmptyStackException;
+        if (is_empty()) return 0;
         return height_;
     }
 
@@ -64,8 +62,7 @@ public:
      * been forgotten
      */
     bool is_forgotten(int height) {
-        if (is_empty()) throw new EmptyStackException;
-        return height >= BOTTOM_CAPACITY && height < topHeight;
+        return height < 0 || (height >= BOTTOM_CAPACITY && height < topHeight);
     }
 
     /**
@@ -103,13 +100,11 @@ public:
      * in this stack
      */
     T peek(int height) {
-        if (is_empty()) throw new EmptyStackException;
-
         if (height < BOTTOM_CAPACITY) {
             return bottom_[height];
         }
         else if (height < topHeight) {
-            throw new IgnoredElementException;
+            throw new ForgottenElementException;
         }
         else {
             int topIndex = height - topHeight;
@@ -121,7 +116,7 @@ public:
      * Discards the top element of this stack
      */
     void pop() {
-        if (is_empty()) throw new EmptyStackException;
+        if (is_empty()) return;
 
         if (height_ < BOTTOM_CAPACITY) {
             height_--;
