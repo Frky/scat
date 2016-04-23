@@ -3,7 +3,7 @@
 from datetime import datetime
 import re
 
-VERBOSE = False
+VERBOSE = True
 
 class ArityAnalysis(object):
 
@@ -25,26 +25,21 @@ class ArityAnalysis(object):
 
 
     def check_one_arity(self, fname, ar):
-        if fname in self.data.keys():
-            if ar == len(self.data[fname]) - 1:
-                return 1
-            else:
-                if VERBOSE:
-                    print("[{}] Arity mismatch".format(fname))
-                    print("   Expected {}, got {}".format(self.data[fname][1:], ar))
-                return 0
+        if ar == len(self.data[fname]) - 1:
+            return True
         else:
-            return -1
+            if VERBOSE:
+                print("[Arity mismatch {}] Expected {}, got {}".format(fname, self.data[fname][1:], ar))
+            return False
 
 
     def check_one_ret(self, fname, ret):
-        if (ret and self.data[fname][0] == "void") or (not ret and self.data[fname][0] != "void"):
-            if VERBOSE:
-                print("[{}] Return mismatch".format(fname))
-                print("   Expected {}, got {}".format(self.data[fname][0], ret))
-            return 0
+        if (ret == (self.data[fname][0] != "void")):
+            return True
         else:
-            return 1
+            if VERBOSE:
+                print("[Return mismatch {}] Expected {}, got {}".format(fname, self.data[fname][0], ret))
+            return False
 
 
     def print_general_info(self):
@@ -56,25 +51,28 @@ class ArityAnalysis(object):
     def accuracy(self):
         self.print_general_info()
         print()
+
         total = 0
         ok_ar = 0
         ok_ret = 0
         overflow = 0
         not_found = 0
         for addr, (fn, ar, ret) in self.log.items():
-            if fn != "":
-                res = self.check_one_arity(fn, ar)
-                if res == -1:
-                    not_found += 1
-                    continue
-                elif res == 0 and ar > 6:
-                    overflow += 1
-                if self.check_one_ret(fn, ret == 1) > 0:
-                    ok_ret += 1
-                else:
-                    pass
-                total += 1
-                ok_ar += res
+            if fn == "":
+                continue
+            elif fn not in self.data.keys():
+                not_found += 1
+                continue
+
+            total += 1
+            if self.check_one_arity(fn, ar):
+                ok_ar += 1
+            elif ar > 6:
+                overflow += 1
+
+            if self.check_one_ret(fn, ret == 1):
+                ok_ret += 1
+
         print("Accuracy of inference")
         print("| Arity  Ok/Total tested:   {0}/{1}".format(ok_ar, total))
         print("| Return Ok/Total tested:   {0}/{1}".format(ok_ret, total))

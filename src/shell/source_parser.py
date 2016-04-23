@@ -15,10 +15,10 @@ class SourceParser(object):
         self.srcdir = srcdir
         self.dstdir = dstdir
         self.protos = dict()
-        self.rprotos = dict()
 
 
     def parse(self):
+        self.__hardcoded_protos()
         self.__extract_protos()
         self.dump()
 
@@ -32,13 +32,18 @@ class SourceParser(object):
         return self.protos
 
 
+    def __hardcoded_protos(self):
+        self.protos["strlen"] = ["int", "char *"]
+        self.protos["memchr"] = ["void *", "void *", "void *", "int"]
+        self.protos["memcpy"] = ["void *", "void *", "void *", "int"]
+
+
     def __find_protos(self, node, **kwargs):
         if (node.type.kind == clang.cindex.TypeKind.FUNCTIONPROTO): # or node.type.kind == clang.cindex.TypeKind.FUNCTIONNOPROTO):
             if VERBOSE:
                 print(node.spelling)
             if node.spelling not in self.protos.keys():
                 self.protos[node.spelling] = list()
-                self.rprotos[node.spelling] = list()
             if len(self.protos[node.spelling]) == 0:
                 if (node.result_type.spelling == "Lisp_Object"):
                     self.protos[node.spelling].append("void *")
@@ -49,7 +54,6 @@ class SourceParser(object):
                         self.protos[node.spelling].append("void *")
                     else:
                         self.protos[node.spelling].append(c.type.get_canonical().spelling)
-                    self.rprotos[node.spelling].append(c.type.spelling)
         for c in node.get_children():
             self.__find_protos(c)
         return
