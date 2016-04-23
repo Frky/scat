@@ -102,7 +102,7 @@ VOID fn_call(unsigned int fid) {
 /*  Function called each time a procedure
  *  returns in the instrumented binary
  */
-VOID fn_ret(void) {
+VOID fn_ret() {
     if (!call_stack.is_top_forgotten()) {
         if (reg_maybe_return[REGF_AX] && !reg_ret_since_written[REGF_AX])
             nb_ret[call_stack.top()]++;
@@ -184,7 +184,6 @@ VOID reg_write(REGF regf) {
     reg_ret_since_written[regf] = false;
 }
 
-
 VOID register_function_name(RTN rtn, VOID *v) {
     fn_add(RTN_Address(rtn), RTN_Name(rtn));
 }
@@ -215,8 +214,21 @@ REG reg_watch[reg_watch_size] = {
  *    - which is a return
  */
 VOID instrument_instruction(INS ins, VOID *v) {
+    if (INS_IsNop(ins)) {
+        return;
+    }
+
+    // SetCC instructions are used to store the result of
+    // a decision flag into a register.
+    // We assume they are mostly used for temporarily saving
+    // the flag and not setting parameters nor return values
+    if (INS_Category(ins) == XED_CATEGORY_SETCC) {
+        return;
+    }
+
     for (int i = 0; i < reg_watch_size; i++) {
         REG reg = reg_watch[i];
+
         if (INS_RegRContain(ins, reg) && !INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
@@ -280,7 +292,6 @@ VOID instrument_instruction(INS ins, VOID *v) {
  *  execution
  */
 VOID fini(INT32 code, VOID *v) {
-
     for (unsigned int i = 1; i <= nb_fn; i++) {
         if (nb_call[i] >= NB_CALLS_TO_CONCLUDE) {
             UINT64 arity = 0;
