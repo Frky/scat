@@ -40,6 +40,7 @@ asm/mupdf.asm
 # Python bytecode
 *.pyc
 
+config/config.yaml
 *.log
 pgm/*
 asm/*
