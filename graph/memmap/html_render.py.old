@@ -38,27 +38,22 @@ def parse_access(fpath):
     LINES = wc_l(fpath)
     print LINES
     progress = 0.0
-    mem_size = list()
     with open(fpath, 'r') as f:
         for i, line in enumerate(f.readlines()):
             pg = round(((i * 100.0)/LINES)*10)/10
             if pg != progress:
                 progress = pg
                 print progress
-            io, typ, val, name, counter = line[:-1].split(":")
+            typ, val, size = line[:-1].split(":")
             val = int(val)
-            counter = int(counter)
-            j = 0
-            if name == "mem_alloc" and io == "in" and typ == "int":
-                mem_size.append(val)
-            elif name == "mem_alloc" and io == "out" and typ == "addr":
-                size = mem_size.pop(-1)
-                for j in xrange(size):
-                    if (val + j) not in data[(val + j) % DATA_SIZE].keys():
-                        data[(val + j) % DATA_SIZE][(val + j)] = [0,0]
+            size = int(size)
+            for j in xrange(size):
+                if (val + j) not in data[(val + j) % DATA_SIZE].keys():
+                    data[(val + j) % DATA_SIZE][(val + j)] = [0,0]
+                if typ == "alloc":
                     data[(val + j) % DATA_SIZE][(val + j)][0] += 1
-            # elif name == "mem_free" and io == "in" and typ == "addr":
-            #    data[(val + j) % DATA_SIZE][(val + j)][1] += 1
+                elif typ == "free":
+                    data[(val + j) % DATA_SIZE][(val + j)][1] += 1
     to_sort = list()
     for d in data:
         for a, (r, w) in d.items():
@@ -96,6 +91,7 @@ def render(data):
     a_max = data[D_MAX][0]
     print D_MIN, D_MAX
     print a_min, a_max
+    print data[D_MIN:D_MAX]
     i_min = min([d[1] for d in data[D_MIN:D_MAX]])
     i_max = max([d[1] for d in data[D_MIN:D_MAX]])
     r_min = min([d[1] for d in data[D_MIN:D_MAX]])
@@ -113,7 +109,7 @@ def render(data):
     senti = D_MIN
     a_min = a_min - (a_min % WIDTH)
     html_alloc += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_min, WIDTH)
-    # html_free += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_min, WIDTH)
+    html_free += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_min, WIDTH)
     for i in xrange(a_min, a_max + 1):
         if i % 100 == 0:
             print i
@@ -127,13 +123,13 @@ def render(data):
             html_free += "<tr>"
             # html += "<td class=\"hdr-addr\">{0:06x}</td>".format(i)
         html_alloc += "<td data-addr={0} data-intensity={1} data-alloc={2}></td>\n".format(d[0], ((-i_min + d[1]) * I_LEVEL) / i_max, 0)
-        # html_free += "<td data-addr={0} data-intensity={1} data-alloc={2}></td>\n".format(d[0], ((-w_min + d[2]) * I_LEVEL) / i_max, 0)
+        html_free += "<td data-addr={0} data-intensity={1} data-alloc={2}></td>\n".format(d[0], ((-w_min + d[2]) * I_LEVEL) / i_max, 0)
         if i % WIDTH == WIDTH - 1:
             html_alloc += "</tr>"
             html_free += "</tr>"
     if i % WIDTH != WIDTH - 1:
         html_alloc += "</tr>"
-    # html_free += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_max, WIDTH)
+    html_free += "<tr><td class=\"hdr-addr\" colspan=\"{1}\" class=\"hdr-addr\">{0:06x}</td></tr>".format(a_max, WIDTH)
     return html_alloc, html_free
 
 

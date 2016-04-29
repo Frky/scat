@@ -1,9 +1,9 @@
 
-#memory-map {
+.memory-map {
     border-collapse: collapse;
 }
 
-#memory-map td {
+.memory-map td {
     width: 1px;
     height: 1px;
     border-style: none; // solid;
@@ -11,7 +11,7 @@
     border-color: black;
 }
 
-#memory-map td.hdr-addr {
+.memory-map td.hdr-addr {
     width: 100px;
     text-align: center;
     font-size: 0.7em;
@@ -19,13 +19,13 @@
     padding-right: 20px;
 }
 
-#memory-map tr:nth-child(2) td {
+.memory-map tr:nth-child(2) td {
     border-style: solid;
     border-color: black;
     border-width: 1px 0px 0px 0px;
 }
 
-#memory-map tr:last-child td {
+.memory-map tr:last-child td {
     border-style: solid;
     border-color: black;
     border-width: 1px 0px 0px 0px;
@@ -71,11 +71,11 @@ td[data-intensity="9"] {
     background-color: rgb(150, 40, 27);
 }
 
-#memory-map td[data-alloc="0"] {
+.memory-map td[data-alloc="0"] {
     border-style: none;
 }
 
-#memory-map td:hover {
+.memory-map td:hover {
     filter: blur(2px);
     -webkit-filter: blur(2px);
 }

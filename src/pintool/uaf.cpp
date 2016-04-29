@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 
 #include <stdarg.h>
 #include <string.h>
@@ -20,9 +21,6 @@
 
 #define FN_NAME 0
 #define FN_ADDR 1
-
-#define MALLOC "jas_malloc"
-#define FREE "jas_free"
 
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
@@ -43,20 +41,21 @@ UINT64 counter;
 list<ADDRINT> *call_stack;
 unsigned int nb_fn = 0;
 
-int nb_calls = 0;
+typedef struct {
+    ADDRINT val;
+    UINT64 fid;
+    UINT64 counter;
+    bool is_addr;
+} param_t;
 
 ADDRINT *faddr;
 string **fname;
-bool *treated;
-unsigned int *nb_call;
 unsigned int *nb_p;
 list<UINT64> ***param_val;
 list<UINT64> ***param_val_counter;
-int **param_addr;
-list<ADDRINT> *freed;
-ADDRINT being_freed;
-bool in_malloc = false;
-bool in_free = false;
+bool **param_addr;
+list<param_t *> *param_in;
+list<param_t *> *param_out;
 
 long int depth = 0;
 
@@ -68,6 +67,9 @@ ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
 #endif
     REG reg;
     switch (pid) {
+    case 0:
+        reg = REG_RAX;
+        break;
     case 1:
         reg = REG_RDI;
         break;
@@ -96,70 +98,30 @@ ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
 }
 
 
-VOID alloc(ADDRINT val) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    /* Check if value is in freed list */
-    list<ADDRINT>::iterator it;
-    for (it = freed->begin(); it != freed->end(); it++)
-        if (*it == val)
-            it = freed->erase(it);
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-}
-
-
-VOID free(ADDRINT val) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    /* Check if value is already in freed list */
-    list<ADDRINT>::iterator it;
-    for (it = freed->begin(); it != freed->end(); it++)
-        if (*it == val)
-            return;
-    freed->push_front(val);
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-}
-
-
-bool check_uaf(ADDRINT val) {
-    /* Check if value is in freed list */
-    list<ADDRINT>::iterator it;
-    for (it = freed->begin(); it != freed->end(); it++)
-        if (*it == val)
-            return true;
-    return false;
-}
-
-
 VOID call(CONTEXT *ctxt, UINT32 fid) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
     counter += 1;
-    depth++;
-    if (treated[fid])
-        return;
-    nb_call[fid]++;
-    if (fname[fid]->compare(MALLOC) == 0) {
-        in_malloc = true;
-    }
-    if (fname[fid]->compare(FREE) == 0) {
-        in_free = true;
-    }
     for (unsigned int i = 1; i < nb_p[fid]; i++) {
+        // If parameter is an address
         if (param_addr[fid][i]) {
-            if (fname[fid]->compare(FREE) != 0) {
-                if (check_uaf(val_from_reg(ctxt, i)) && !in_malloc && !in_free)
-                    std::cerr << "[" << *fname[fid] << "] UAF!! UAF!! UAF!!" << endl;;
-            } else {
-                being_freed = val_from_reg(ctxt, 1);
-            }
+            param_t *new_addr = (param_t *) malloc(sizeof(param_t));
+            new_addr->fid = fid;
+            new_addr->counter = counter;
+            new_addr->val = val_from_reg(ctxt, i); 
+            new_addr->is_addr = true;
+            param_in->push_front(new_addr);
+        }
+        // If the function return an address and takes an integer as a first parameter
+        // this is a special case to have the size of mallocs
+        else if (i == 1 && param_addr[fid][0]) {
+            param_t *new_int = (param_t *) malloc(sizeof(param_t));
+            new_int->fid = fid;
+            new_int->counter = counter;
+            new_int->val = val_from_reg(ctxt, i); 
+            new_int->is_addr = false;
+            param_in->push_front(new_int);
         }
     }
 #if DEBUG_SEGFAULT
@@ -174,13 +136,14 @@ VOID ret(CONTEXT *ctxt, UINT32 fid) {
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
     counter += 1;
-    depth--;
-    if (*(fname[fid]) == MALLOC) {
-        in_malloc = false;
-        malloc(PIN_GetContextReg(ctxt, REG_RAX));
-    } else if (*(fname[fid]) == FREE) {
-        in_free = false;
-        free(being_freed);
+    // If return value is of type ADDR
+    if (param_addr[fid][0]) {
+        param_t *new_addr = (param_t *) malloc(sizeof(param_t));
+        new_addr->fid = fid;
+        new_addr->counter = counter;
+        new_addr->val = val_from_reg(ctxt, 0); 
+        new_addr->is_addr = true;
+        param_out->push_front(new_addr);
     }
 #if DEBUG_SEGFAULT
     std::cerr << "[LEAVING] " << __func__ << endl;
@@ -193,7 +156,6 @@ unsigned int fn_add(ADDRINT addr, string name, unsigned int nb_param, vector<boo
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
-//    std::cerr << "Adding " << addr << " w/ " << n << endl;
     /* If reached the max number of functions this pintool can handle */
     if (nb_fn >= NB_FN_MAX - 1)
         /* Do nothing and return an invalid fid */
@@ -205,14 +167,12 @@ unsigned int fn_add(ADDRINT addr, string name, unsigned int nb_param, vector<boo
     
     /* Set the address of the function */
     faddr[fid] = addr;
-    /* Reset the number of calls for this function */
-    nb_call[fid] = 0;
     /* Set the name of the function */
     fname[fid] = new string(name);
     /* Set the number of parameters */
     nb_p[fid] = nb_param;
     /* Set the array of booleans indicating which parameter is an ADDR */
-    param_addr[fid] = (int *) calloc(nb_p[fid], sizeof(int));
+    param_addr[fid] = (bool *) calloc(nb_p[fid], sizeof(bool));
     /* Create arrays of lists (one for each parameter, plus one for the return value) */
     param_val[fid] = (list<UINT64> **) malloc((nb_p[fid]) * sizeof(list<UINT64> *));
     param_val_counter[fid] = (list<UINT64> **) malloc((nb_p[fid]) * sizeof(list<UINT64> *));
@@ -221,10 +181,11 @@ unsigned int fn_add(ADDRINT addr, string name, unsigned int nb_param, vector<boo
     for (unsigned int i = 0; i < nb_p[fid]; i++) {
         param_val[fid][i] = new list<UINT64>();
         param_val_counter[fid][i] = new list<UINT64>();
-        if (type_param[i])
-            param_addr[fid][i] = 1;
+        if (type_param[i]) {
+            param_addr[fid][i] = true;
+        }
         else
-            param_addr[fid][i] = 0;
+            param_addr[fid][i] = false;
     }
 #if DEBUG_SEGFAULT
     std::cerr << "[LEAVING] " << __func__ << endl;
@@ -360,91 +321,55 @@ VOID Commence() {
             if (atol(_addr.c_str()) != 0) {
                 unsigned int fid = fn_add(atol(_addr.c_str()), _name, nb_param, type_param);
                 fid = fid;
-                // std::cerr << _name << " : " << param_addr[fid][0] << ":" << nb_param << endl;
             }
         }
     }
     return;
 }
 
-#if 0
-/*  This function is called at the end of the
- *  execution
- */
-VOID Fini(INT32 code, VOID *v) {
-    unsigned int i;
-    std::cout << "DATA : [0x" << std::hex << DATA_BASE << " ; 0x" << std::hex << DATA_TOP << "]" << endl;
-    std::cout << "CODE : [0x" << std::hex << CODE_BASE << " ; 0x" << std::hex << CODE_TOP << "]" << endl;
-
-    map<string, func_t>::iterator senti, o_senti;
-    for (senti = fns.begin(); senti != fns.end(); senti++) { 
-        if (senti->second.treated) { // || (senti->second.ret_call + senti->second.param_call[0]) > 0) {
-            std::cout << senti->first << "(";
-            float coef = ((float) senti->second.ret_addr) / ((float) senti->second._nb_call);
-            if (coef > SEUIL) {
-                senti->second.ret_is_addr = true;
-            }
-            for (i = 0; i < senti->second._nb_param; i++) {
-                if (((float) senti->second.param_addr[i]) / 
-                        ((float) senti->second._nb_call) > SEUIL) {
-                    senti->second.param_is_addr[i] = true;
-                }
-#if 0
-                if (senti->param_call[i] > 0)
-                    std::cout << "FNC";
-#endif 
-                if (senti->second.param_is_addr[i])
-                    std::cout << "ADDR";
-                else  
-                    std::cout << "INT";
-                if (i < senti->second._nb_param - 1)
-                    std::cout << ", ";
-            }
-            std::cout << ") -> ";
-            if (senti->second.ret_call > 0)
-                std::cout << "FNC";
-            else if (senti->second.ret_is_addr)
-                std::cout << "ADDR";
-            else  
-                std::cout << "INT";
-            std::cout << endl;
-        }
-    }
-
-    for (senti = fns.begin(); senti != fns.end(); senti++) {
-        if (!senti->second.ret_is_addr)
-            continue; 
-        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) { 
-            if (!(o_senti->second.param_is_addr[0]))
-                continue;
-            list<UINT64>::iterator ret, param;
-            int nb_link = 0;
-            for (
-                    param = o_senti->second.param_val[0].begin(); 
-                    param != o_senti->second.param_val[0].end(); 
-                    param++
-                   ) {
-                for (ret = senti->second.ret_val.begin(); ret != senti->second.ret_val.end(); ret++) {
-                    if (*ret == *param) {
-                        nb_link += 1;
-                        break;
-                    }
-                }
-            }
-            if (senti->second._nb_call > 10 && nb_link > 0)
-                std::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << senti->first << " -> " << o_senti->first << endl;
-        }
+string fn_to_str(UINT64 fid) {
+    if (*(fname[fid]) != "")
+        return *(fname[fid]);
+    else {
+        std::stringstream s;
+        s << std::hex << faddr[fid];
+        return s.str();
     }
 }
-#endif
 
 
 VOID Fini(INT32 code, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
+    list<param_t *>::reverse_iterator it_in, it_out;
+    it_in = param_in->rbegin();
+    it_out = param_out->rbegin();
+
+    while (it_in != param_in->rend() && it_out != param_out->rend()) {
+        param_t *p;
+        if (it_in == param_in->rend()) {
+            p = *it_out;
+            it_out++;
+            ofile << "out:";
+        } else if (it_out == param_out->rend() || (*it_out)->counter >= (*it_in)->counter) {
+            p = *it_in;
+            it_in++;
+            ofile << "in:";
+        } else {
+            p = *it_out;
+            it_out++;
+            ofile << "out:";
+        }
+        if (p->is_addr)
+            ofile << "addr:";
+        else 
+            ofile << "int:";
+        ofile << p->val << ":" << fn_to_str(p->fid) << ":" << p->counter << endl;
+    }
+#if 0
     for (unsigned int fid = 1; fid < nb_fn; fid++) {
-        if (param_addr[fid][0] == 0) {
+        if (!param_addr[fid][0]) {
             continue; 
         }
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
@@ -456,7 +381,7 @@ VOID Fini(INT32 code, VOID *v) {
                 continue; 
             }
             for (unsigned int pid = 1; pid < nb_p[gid]; pid++) {
-                if (param_addr[gid][pid] == 0)
+                if (!param_addr[gid][pid])
                     continue;
                 list<UINT64>::iterator pv, pc;
                 list<UINT64>::reverse_iterator rv, rc;
@@ -493,6 +418,7 @@ VOID Fini(INT32 code, VOID *v) {
             }
         }
     }
+#endif
     ofile.close();
 }
 
@@ -510,14 +436,13 @@ int main(int argc, char * argv[])
     CODE_TOP = 0;
 
     faddr = (ADDRINT *) malloc(NB_FN_MAX * sizeof(ADDRINT));
-    treated = (bool *) malloc(NB_FN_MAX * sizeof(bool));
-    nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
     param_val_counter = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
-    param_addr = (int **) malloc(NB_FN_MAX * sizeof(int *));
+    param_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));
     fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
-    freed = new list<ADDRINT>();
+    param_in = new list<param_t *>();
+    param_out = new list<param_t *>();
 
     call_stack = new list<ADDRINT>();
 
@@ -541,7 +466,7 @@ int main(int argc, char * argv[])
         FN_MODE = FN_NAME;
     }
 
-    INS_AddInstrumentFunction(Instruction, 0);
+    // INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
 
     /* Register Fini to be called when the 

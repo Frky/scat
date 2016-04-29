@@ -8,7 +8,12 @@
 
 <body>
 
-    <table id="memory-map">
+    <table id="alloc" class="memory-map">
+        <tbody>
+        </tbody>
+    </table>
+
+    <table id="free" class="memory-map">
         <tbody>
         </tbody>
     </table>
@@ -25,7 +30,7 @@
             $("#cell-info #addr").text($(cell).attr("data-addr"));
         }
         $(document).ready(function() {
-            $("#memory-map td").hover(function() {
+            $(".memory-map td").hover(function() {
                 update_cell_info(this);
             });
         });
