@@ -2,8 +2,9 @@
 #include <map>
 #include <iostream>
 #include <fstream>
-
+#include <cmath>
 #include <stdlib.h>
+#include <stdint.h>
 
 #include <string.h>
 
@@ -12,7 +13,12 @@
 #define NB_CALLS_TO_CONCLUDE    50
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
-#define SEUIL                   0.05
+#define PARAM_THRESHOLD         0.10
+#define RETURN_THRESHOLD        0.05
+
+#define PARAM_INT_COUNT         6
+#define PARAM_FLOAT_COUNT       8
+#define PARAM_STACK_COUNT       10
 
 #define FN_NAME 0
 #define FN_ADDR 1
@@ -35,23 +41,25 @@ KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Spe
 /* Number of functions we watch
    All futher arrays index from 0 to nb_fn (included) */
 unsigned int nb_fn;
-/* Number of calls of each function */
-UINT64 *nb_call;
-/* Number of parameters int/addr for each function */
-UINT64 **nb_param_intaddr;
-/* Size of the read register (in bit: 8 - 64) */
-UINT32 **param_size;
-/* Number of parameters float for each function */
-UINT64 **nb_param_float;
 /* Address in binary of each function */
 ADDRINT *faddr;
 /* Name of each function (if symbol table is present) */
 string **fname;
+
+/* Number of calls of each function */
+UINT64 *nb_call;
+/* Number of parameters int/addr for each function */
+UINT64 **nb_param_intaddr;
+/* Number of parameters float for each function */
+UINT64 **nb_param_float;
+/* Number of stack parameters for each function */
+UINT64 **nb_param_stack;
 /* Return value detected */
 UINT64 *nb_ret;
 
 /* Call stack */
 HollowStack<MAX_DEPTH, UINT64> call_stack;
+HollowStack<MAX_DEPTH, UINT64> sp_stack;
 
 /*
  * Information relative to registers
@@ -73,20 +81,28 @@ unsigned int fn_add(ADDRINT addr, string f_name) {
     unsigned int fid = nb_fn;
     nb_fn++;
     nb_call[fid] = 0;
-    nb_param_intaddr[fid] = (UINT64 *) calloc(16, sizeof(UINT64));
-    nb_param_float[fid] = (UINT64 *) calloc(8, sizeof(UINT64));
-    param_size[fid] = (UINT32 *) calloc(16, sizeof(UINT32));
+    nb_param_intaddr[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
+    nb_param_float[fid] = (UINT64 *) calloc(PARAM_FLOAT_COUNT, sizeof(UINT64));
+    nb_param_stack[fid] = (UINT64 *) calloc(PARAM_STACK_COUNT, sizeof(UINT64));
     faddr[fid] = addr;
     string *_name = new string(f_name);
     fname[fid] = _name;
     return fid;
 }
 
+inline UINT64 sp(CONTEXT* ctxt) {
+    UINT64 sp;
+    PIN_GetContextRegval(ctxt, REG_RSP, (UINT8*) &sp);
+    return sp;
+}
+
 /*  Function called each time a procedure
  *  is called in the instrumented binary
  */
-VOID fn_call(unsigned int fid) {
+VOID fn_call(CONTEXT* ctxt, unsigned int fid) {
     call_stack.push(fid);
+    sp_stack.push(sp(ctxt));
+
     if (fid != 0 && !call_stack.is_top_forgotten()) {
         nb_call[call_stack.top()]++;
     }
@@ -102,23 +118,28 @@ VOID fn_call(unsigned int fid) {
 /*  Function called each time a procedure
  *  returns in the instrumented binary
  */
-VOID fn_ret() {
+VOID fn_ret(CONTEXT* ctxt) {
     if (!call_stack.is_top_forgotten()) {
-        if (reg_maybe_return[REGF_AX] && !reg_ret_since_written[REGF_AX])
+        if (reg_maybe_return[REGF_AX])
             nb_ret[call_stack.top()]++;
-        if (reg_maybe_return[REGF_XMM0] && !reg_ret_since_written[REGF_XMM0])
+        if (reg_maybe_return[REGF_XMM0])
             nb_ret[call_stack.top()]++;
     }
+    // reg_maybe_return is only meant to detect
+    // return value directly inside the callee
+    reg_maybe_return[REGF_AX] = false;
+    reg_maybe_return[REGF_XMM0] = false;
 
     for (int regf = REGF_FIRST; regf <= REGF_LAST; regf++) {
         reg_ret_since_written[regf] = true;
     }
 
     call_stack.pop();
+    sp_stack.pop();
 }
 
 
-VOID reg_access(REGF regf, UINT32 reg_size) {
+VOID reg_access(REGF regf) {
     if (call_stack.is_empty())
         return;
 
@@ -133,16 +154,14 @@ VOID reg_access(REGF regf, UINT32 reg_size) {
     reg_maybe_return[regf] = false;
 
     if (regf == REGF_AX || regf == REGF_XMM0) {
-        if (reg_ret_since_written[regf]) {
-            // Propagate the return value up the call stack
-            for (int i = call_stack.height() + 1; i <= written[regf]; i++)
-                if (!call_stack.is_forgotten(i))
-                    nb_ret[call_stack.peek(i)] += 1;
+        // Propagate the return value up the call stack
+        for (int i = call_stack.height() + 1; i <= written[regf]; i++)
+            if (!call_stack.is_forgotten(i))
+                nb_ret[call_stack.peek(i)] += 1;
 
-            // REGF_AX is not used as a parameter
-            if (regf == REGF_AX)
-                return;
-        }
+        // REGF_AX is not used as a parameter
+        if (regf == REGF_AX)
+            return;
     }
 
     if (call_stack.is_top_forgotten()
@@ -152,23 +171,20 @@ VOID reg_access(REGF regf, UINT32 reg_size) {
 
     // Propagate the parameter up the call stack
     if (regf_is_float(regf)) {
-        UINT64 param_pos = regf - REGF_XMM0 + 1;
+        UINT64 position = regf - REGF_XMM0;
         for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
             if (!call_stack.is_forgotten(i)) {
                 UINT64 fn = call_stack.peek(i);
-                nb_param_float[fn][param_pos] += 1;
+                nb_param_float[fn][position] += 1;
             }
         }
     }
     else {
-        UINT64 param_pos = regf - REGF_DI + 1;
+        UINT64 position = regf - REGF_DI;
         for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
             if (!call_stack.is_forgotten(i)) {
                 UINT64 fn = call_stack.peek(i);
-                nb_param_intaddr[fn][param_pos] += 1;
-
-                if (param_size[fn][param_pos] < reg_size)
-                    param_size[fn][param_pos] = reg_size;
+                nb_param_intaddr[fn][position] += 1;
             }
         }
     }
@@ -182,6 +198,17 @@ VOID reg_write(REGF regf) {
     if (regf == REGF_AX || regf == REGF_XMM0)
         reg_maybe_return[regf] = true;
     reg_ret_since_written[regf] = false;
+}
+
+VOID stack_read(ADDRINT addr, UINT32 size) {
+    if (sp_stack.is_top_forgotten())
+        return;
+
+    UINT64 sp = sp_stack.top();
+    UINT64 position = (addr - sp) / 8;
+    if (position >= 0 && position < PARAM_STACK_COUNT) {
+        nb_param_stack[call_stack.top()][position] += 1;
+    }
 }
 
 VOID register_function_name(RTN rtn, VOID *v) {
@@ -234,7 +261,6 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IPOINT_BEFORE,
                         (AFUNPTR) reg_access,
                         IARG_UINT32, regf(reg),
-                        IARG_UINT32, reg_size(reg),
                         IARG_END);
         } else if (INS_RegRContain(ins, reg) && INS_RegWContain(ins, reg)) {
             if ((INS_OperandCount(ins) >= 2 && INS_OperandReg(ins, 0) != INS_OperandReg(ins, 1)) || INS_IsMov(ins)) {
@@ -242,7 +268,6 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IPOINT_BEFORE,
                         (AFUNPTR) reg_access,
                         IARG_UINT32, regf(reg),
-                        IARG_UINT32, reg_size(reg),
                         IARG_END);
             }
         }
@@ -253,6 +278,20 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IARG_UINT32, regf(reg),
                         IARG_END);
         }
+    }
+
+    if (INS_IsStackRead(ins)
+            // RET and CALL can be seen as stack read
+            // because of the stored return address
+            // but we only care about read before them
+            && !INS_IsRet(ins)
+            && !INS_IsCall(ins)) {
+        INS_InsertCall(ins,
+                IPOINT_BEFORE,
+                (AFUNPTR) stack_read,
+                IARG_MEMORYREAD_EA,
+                IARG_MEMORYREAD_SIZE,
+                IARG_END);
     }
 
     if (INS_IsCall(ins)) {
@@ -276,6 +315,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
         INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_call,
+                    IARG_CONST_CONTEXT,
                     IARG_UINT32, fid,
                     IARG_END);
     }
@@ -283,48 +323,53 @@ VOID instrument_instruction(INS ins, VOID *v) {
         INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_ret,
+                    IARG_CONST_CONTEXT,
                     IARG_END);
     }
 }
 
 
+uint32_t detected_arity(uint32_t param_threshold, UINT64* detection, uint32_t from) {
+    for (int i = from - 1; i >= 0; i--) {
+        if (detection[i] > param_threshold) {
+            return i + 1;
+        }
+    }
+
+    return 0;
+}
+
 /*  This function is called at the end of the
  *  execution
  */
 VOID fini(INT32 code, VOID *v) {
-    for (unsigned int i = 1; i <= nb_fn; i++) {
-        if (nb_call[i] >= NB_CALLS_TO_CONCLUDE) {
-            UINT64 arity = 0;
-            UINT64 max_ar_idx = 0;
-            for (unsigned int j = 15; j < 16; j--) {
-                if (((float) nb_param_intaddr[i][j]) >= (((float) nb_call[i]) * 0.10)) {
-                    max_ar_idx = j;
-                    break;
-                }
-            }
-            arity += max_ar_idx;
-            max_ar_idx = 0;
-            for (unsigned int j = 7; j <= 7; j--) {
-                if (((float) nb_param_float[i][j]) >= (((float) nb_call[i]) * 0.10)) {
-                    max_ar_idx = j;
-                    break;
-                }
-            }
-            arity += max_ar_idx;
+    ofile.open(KnobOutputFile.Value().c_str());
 
-            ofile << faddr[i] << ":" << *(fname[i]) << ":" << arity << ":" << max_ar_idx << ":";
-            if ((float) nb_ret[i] > SEUIL * (float) nb_call[i]) {
-                ofile << "1:";
-            } else
-                ofile << "0:";
-            for (unsigned int j = 0; j < 16; j++) {
-                if (param_size[i][j] > 0 && param_size[i][j] < 64) {
-                    ofile << j << ","; //<< "(" << param_size[i][j] << ") - ";
-                }
-            }
-            ofile << endl;
+    for (unsigned int fid = 1; fid <= nb_fn; fid++) {
+        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
+            continue;
         }
+
+        uint32_t param_threshold = (int) ceil(nb_call[fid] * PARAM_THRESHOLD);
+        uint32_t return_threshold = (int) ceil(nb_call[fid] * RETURN_THRESHOLD);
+
+        uint32_t int_stack_arity = 0;
+        int_stack_arity += detected_arity(param_threshold, nb_param_intaddr[fid], PARAM_INT_COUNT);
+        int_stack_arity += detected_arity(param_threshold, nb_param_stack[fid], PARAM_STACK_COUNT);
+
+        uint32_t total_arity = int_stack_arity;
+        total_arity += detected_arity(param_threshold, nb_param_float[fid], PARAM_FLOAT_COUNT);
+
+        bool ret = nb_ret[fid] > return_threshold;
+
+        ofile << faddr[fid] << ":" << *(fname[fid])
+                << ":" << total_arity
+                << ":" << int_stack_arity
+                << ":" << (ret ? "1" : "0");
+
+        ofile << endl;
     }
+
     ofile.close();
 }
 
@@ -333,7 +378,7 @@ int main(int argc, char * argv[]) {
     nb_call = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    param_size = (UINT32 **) calloc(NB_FN_MAX, sizeof(UINT32 *));
+    nb_param_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     faddr = (ADDRINT *) calloc(NB_FN_MAX, sizeof(ADDRINT));
     fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
     nb_ret = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
@@ -348,8 +393,6 @@ int main(int argc, char * argv[]) {
     PIN_InitSymbolsAlt(DEBUG_OR_EXPORT_SYMBOLS);
 
     if (PIN_Init(argc, argv)) return 1;
-
-    ofile.open(KnobOutputFile.Value().c_str());
 
     // TODO better way to get mode from cli
     if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {

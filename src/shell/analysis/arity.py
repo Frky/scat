@@ -20,8 +20,8 @@ class ArityAnalysis(object):
         self.log = dict()
         with open(self.logfile, "r") as f:
             for line in f.readlines():
-                addr, fn, ar, iar, ret, misc = line[:-1].split(":")
-                self.log[int(addr)] = (fn, int(ar, 16), int(ret, 16))
+                addr, fn, ar, iar, ret = line[:-1].split(":")
+                self.log[int(addr)] = (fn, int(ar), int(ret))
 
 
     def check_one_arity(self, fname, ar):

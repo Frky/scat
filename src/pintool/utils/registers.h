@@ -40,7 +40,7 @@ typedef enum {
 #define REGF_LAST  REGF_XMM7
 #define REGF_COUNT REGF_LAST + 1
 
-#define regf_is_float(regf__) (regf__ >= REGF_XMM0)
+#define regf_is_float(regf__) ((regf__) >= REGF_XMM0)
 
 REGF regf(REG reg) {
     switch (reg) {

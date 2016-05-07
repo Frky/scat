@@ -1,12 +1,13 @@
 TESTS = \
 	int_return \
 	float_return \
-	call_stack_overflow
+	call_stack_overflow \
+	stack_params
 
 all: $(TESTS:=.bin)
 
 %.s: %.c
-	gcc -S $<
+	gcc -S -masm=intel $<
 
 %.o: %.c
 	gcc -c $<
