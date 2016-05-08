@@ -3,8 +3,6 @@
 from datetime import datetime
 import re
 
-VERBOSE = False
-
 class ArityAnalysis(object):
 
     def __init__(self, pgm, logfile, data=None):
@@ -29,41 +27,33 @@ class ArityAnalysis(object):
 
 
     def check_one_arity(self, fname, ar, proto):
-        if ar == len(proto) - 1:
-            return True
-        else:
-            if VERBOSE:
-                print("[Arity mismatch {}] Expected {}, got {}".format(fname, proto[1:], ar))
-            return False
+        return ar == len(proto) - 1
 
 
     def check_one_ret(self, fname, ret, proto):
-        if (ret == (proto[0] != "void")):
-            return True
-        else:
-            if VERBOSE:
-                print("[Return mismatch {}] Expected {}, got {}".format(fname, proto[0], ret))
-            return False
+        return ret == (proto[0] != "void")
 
 
     def print_general_info(self):
         print("Information about inference")
         print("| Last inference:           {0}".format(self.date))
         print("| Total functions infered:  {0}".format(len(self.log.keys())))
-        print("")
 
 
     def accuracy(self):
         self.print_general_info()
+        print("")
+
+        without_name = 0
+        variadic = 0
+        not_found = 0
 
         total = 0
-        variadic = 0
         ok_ar = 0
         ok_ret = 0
-        overflow = 0
-        not_found = 0
         for addr, (fn, ar, ret) in self.log.items():
             if fn == "":
+                without_name += 1
                 continue
             elif fn not in self.data.keys():
                 not_found += 1
@@ -82,8 +72,9 @@ class ArityAnalysis(object):
                 ok_ret += 1
 
         print("Ignored")
+        print("| Without name:             {0}".format(without_name))
         print("| Variadic:                 {0}".format(variadic))
-        print("| Not found:                {0}".format(not_found))
+        print("| Not found (in source):    {0}".format(not_found))
         print("")
 
         print("Accuracy of inference")
@@ -100,4 +91,31 @@ class ArityAnalysis(object):
         print()
         self.print_general_info()
 
+
+    def mismatch(self):
+        self.print_general_info()
+        print("")
+
+        for addr, (fname, ar, ret) in self.log.items():
+            if fname == "" or fname not in self.data.keys():
+                continue
+
+            proto = self.data[fname]
+            if self.is_variadic(proto):
+                continue
+
+            arity_ok = self.check_one_arity(fname, ar, proto);
+            return_ok = self.check_one_ret(fname, ret == 1, proto);
+
+            if arity_ok and return_ok:
+                continue
+
+            print("[{}] {} ({}) -> {}".format(hex(addr), fname, ", ".join(proto[1:]), proto[0]));
+            if not arity_ok:
+                print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
+            if not return_ok:
+                if ret == 1:
+                    print("   Return : Expected 0 got 1")
+                else:
+                    print("   Return : Expected 1 got 0")
 

@@ -34,6 +34,12 @@ class Result(object):
             ty.accuracy()
 
 
+    def mismatch(self, pgm, infcode, inputfile, data):
+        if infcode == INF_ARITY:
+            ar = ArityAnalysis(pgm, inputfile, data)
+            ar.mismatch()
+
+
     def get_pgm_list(self, inf_code=None):
         file_list = [f for f in os.listdir(self.log_dir) if f.endswith("log")]
         pgm_list = set([re.sub("_.*", "", f) for f in file_list]) 

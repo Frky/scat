@@ -523,3 +523,39 @@ class ScatShell(Cmd):
             return
         self.res.accuracy(pgm, inf, inputfile, data)
 
+
+    #********** mismatch **********#
+
+
+    def help_mismatch(self):
+        print(self.do_accuracy.__doc__.replace("\n", ""))
+
+
+    def complete_mismatch(self, text, line, begidx, endidx):
+        return self.complete_display(text, line, begidx, endidx)
+
+
+    def do_mismatch(self, s):
+        """
+            Displays all mismatch for a given program,
+            by comparison with source code.
+
+        """
+        try:
+            pgm, inf = self.__get_pgm_and_inf(s)
+        except ValueError:
+            return
+
+        inputfile = self.__get_inputfile(inf, pgm)
+
+        # Check CLANG configuration
+        conf = Confiture("config/templates/clang.yaml")
+        conf.check("config/config.yaml")
+        try:
+            data = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"]).load()
+        except IOError:
+            data = None
+        if data is None:
+            self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
+            return
+        self.res.mismatch(pgm, inf, inputfile, data)
