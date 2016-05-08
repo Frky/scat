@@ -102,14 +102,8 @@ inline UINT64 sp(CONTEXT* ctxt) {
 VOID fn_call(CONTEXT* ctxt, unsigned int fid) {
     call_stack.push(fid);
     sp_stack.push(sp(ctxt));
+    nb_call[fid]++;
 
-    if (fid != 0 && !call_stack.is_top_forgotten()) {
-        nb_call[call_stack.top()]++;
-    }
-
-    // These are scratch registers, calling a
-    // function means previous write in the calling
-    // function are definitely not return value
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
 }
@@ -119,14 +113,11 @@ VOID fn_call(CONTEXT* ctxt, unsigned int fid) {
  *  returns in the instrumented binary
  */
 VOID fn_ret(CONTEXT* ctxt) {
-    if (!call_stack.is_top_forgotten()) {
-        if (reg_maybe_return[REGF_AX])
-            nb_ret[call_stack.top()]++;
-        if (reg_maybe_return[REGF_XMM0])
-            nb_ret[call_stack.top()]++;
-    }
-    // reg_maybe_return is only meant to detect
-    // return value directly inside the callee
+    if (!call_stack.is_top_forgotten()
+            && (reg_maybe_return[REGF_AX]
+            || reg_maybe_return[REGF_XMM0]))
+        nb_ret[call_stack.top()]++;
+
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
 
@@ -138,8 +129,41 @@ VOID fn_ret(CONTEXT* ctxt) {
     sp_stack.pop();
 }
 
+VOID param_read(REGF regf) {
+    if (call_stack.is_empty() || call_stack.is_top_forgotten()
+            || nb_call[call_stack.top()] < 3 /* Ignore the three first calls */
+            || reg_ret_since_written[regf])  /* And value written by unrelated functions */
+        return;
 
-VOID reg_read(REGF regf) {
+    UINT64 position;
+    UINT64** nb_param;
+    if (regf_is_float(regf)) {
+        position = regf - REGF_XMM0;
+        nb_param = nb_param_float;
+    }
+    else {
+        position = regf - REGF_DI;
+        nb_param = nb_param_intaddr;
+    }
+
+    // Propagate the parameter up the call stack
+    for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
+        if (!call_stack.is_forgotten(i)) {
+            UINT64 fn = call_stack.peek(i);
+            nb_param[fn][position] += 1;
+        }
+    }
+}
+
+VOID param_write(REGF regf) {
+    if (call_stack.is_empty())
+        return;
+
+    written[regf] = call_stack.height();
+    reg_ret_since_written[regf] = false;
+}
+
+VOID return_read(REGF regf) {
     if (call_stack.is_empty())
         return;
 
@@ -153,51 +177,18 @@ VOID reg_read(REGF regf) {
     // on register access will detect it instead
     reg_maybe_return[regf] = false;
 
-    if (regf == REGF_AX || regf == REGF_XMM0) {
-        // Propagate the return value up the call stack
-        for (int i = call_stack.height() + 1; i <= written[regf]; i++)
-            if (!call_stack.is_forgotten(i))
-                nb_ret[call_stack.peek(i)] += 1;
-
-        // REGF_AX is not used as a parameter
-        if (regf == REGF_AX)
-            return;
-    }
-
-    if (call_stack.is_top_forgotten()
-            || nb_call[call_stack.top()] < 3 /* Ignore the three first calls */
-            || reg_ret_since_written[regf])  /* And value written by unrelated functions */
-        return;
-
-    // Propagate the parameter up the call stack
-    if (regf_is_float(regf)) {
-        UINT64 position = regf - REGF_XMM0;
-        for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
-            if (!call_stack.is_forgotten(i)) {
-                UINT64 fn = call_stack.peek(i);
-                nb_param_float[fn][position] += 1;
-            }
-        }
-    }
-    else {
-        UINT64 position = regf - REGF_DI;
-        for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
-            if (!call_stack.is_forgotten(i)) {
-                UINT64 fn = call_stack.peek(i);
-                nb_param_intaddr[fn][position] += 1;
-            }
-        }
-    }
+    // Propagate the return value up the call stack
+    for (int i = call_stack.height() + 1; i <= written[regf]; i++)
+        if (!call_stack.is_forgotten(i))
+            nb_ret[call_stack.peek(i)] += 1;
 }
 
-VOID reg_write(REGF regf) {
+VOID return_write(REGF regf) {
     if (call_stack.is_empty())
         return;
 
     written[regf] = call_stack.height();
-    if (regf == REGF_AX || regf == REGF_XMM0)
-        reg_maybe_return[regf] = true;
-    reg_ret_since_written[regf] = false;
+    reg_maybe_return[regf] = true;
 }
 
 VOID stack_read(ADDRINT addr, UINT32 size) {
@@ -216,9 +207,8 @@ VOID register_function_name(RTN rtn, VOID *v) {
 }
 
 /* Array of all the monitored registers */
-#define reg_params_size 39
+#define reg_params_size 34
 REG reg_params[reg_params_size] = {
-    REG_RAX, REG_EAX, REG_AX, REG_AH, REG_AL,
     REG_RDI, REG_EDI, REG_DI, REG_DIL,
     REG_RSI, REG_ESI, REG_SI, REG_SIL,
     REG_RDX, REG_EDX, REG_DX, REG_DH, REG_DL,
@@ -233,6 +223,12 @@ REG reg_params[reg_params_size] = {
     REG_XMM5,
     REG_XMM6,
     REG_XMM7
+};
+
+#define reg_return_size 6
+REG reg_return[reg_return_size] = {
+    REG_RAX, REG_EAX, REG_AX, REG_AH, REG_AL,
+    REG_XMM0
 };
 
 /*  Instrumentation of each instruction
@@ -265,7 +261,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
         if (INS_RegRContain(ins, reg) && !xor_reset) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
-                        (AFUNPTR) reg_read,
+                        (AFUNPTR) param_read,
                         IARG_UINT32, regf(reg),
                         IARG_END);
         }
@@ -273,7 +269,27 @@ VOID instrument_instruction(INS ins, VOID *v) {
         if (INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
-                        (AFUNPTR) reg_write,
+                        (AFUNPTR) param_write,
+                        IARG_UINT32, regf(reg),
+                        IARG_END);
+        }
+    }
+
+    for (int i = 0; i < reg_return_size; i++) {
+        REG reg = reg_return[i];
+
+        if (INS_RegRContain(ins, reg) && !xor_reset) {
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) return_read,
+                        IARG_UINT32, regf(reg),
+                        IARG_END);
+        }
+
+        if (INS_RegWContain(ins, reg)) {
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) return_write,
                         IARG_UINT32, regf(reg),
                         IARG_END);
         }
