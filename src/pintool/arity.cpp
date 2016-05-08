@@ -139,7 +139,7 @@ VOID fn_ret(CONTEXT* ctxt) {
 }
 
 
-VOID reg_access(REGF regf) {
+VOID reg_read(REGF regf) {
     if (call_stack.is_empty())
         return;
 
@@ -216,8 +216,8 @@ VOID register_function_name(RTN rtn, VOID *v) {
 }
 
 /* Array of all the monitored registers */
-#define reg_watch_size 39
-REG reg_watch[reg_watch_size] = {
+#define reg_params_size 39
+REG reg_params[reg_params_size] = {
     REG_RAX, REG_EAX, REG_AX, REG_AH, REG_AL,
     REG_RDI, REG_EDI, REG_DI, REG_DIL,
     REG_RSI, REG_ESI, REG_SI, REG_SIL,
@@ -253,24 +253,23 @@ VOID instrument_instruction(INS ins, VOID *v) {
         return;
     }
 
-    for (int i = 0; i < reg_watch_size; i++) {
-        REG reg = reg_watch[i];
+    // Detect XOR-alike instructions where the operands are the same
+    // register, they are just a somehow faster version of
+    // "MOV reg, 0". I.e: The read register is irrelevant.
+    bool xor_reset = OPCODE_StringShort(INS_Opcode(ins)).find("XOR") != string::npos
+            && INS_OperandReg(ins, 0) == INS_OperandReg(ins, 1);
 
-        if (INS_RegRContain(ins, reg) && !INS_RegWContain(ins, reg)) {
+    for (int i = 0; i < reg_params_size; i++) {
+        REG reg = reg_params[i];
+
+        if (INS_RegRContain(ins, reg) && !xor_reset) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
-                        (AFUNPTR) reg_access,
+                        (AFUNPTR) reg_read,
                         IARG_UINT32, regf(reg),
                         IARG_END);
-        } else if (INS_RegRContain(ins, reg) && INS_RegWContain(ins, reg)) {
-            if ((INS_OperandCount(ins) >= 2 && INS_OperandReg(ins, 0) != INS_OperandReg(ins, 1)) || INS_IsMov(ins)) {
-                INS_InsertCall(ins,
-                        IPOINT_BEFORE,
-                        (AFUNPTR) reg_access,
-                        IARG_UINT32, regf(reg),
-                        IARG_END);
-            }
         }
+
         if (INS_RegWContain(ins, reg)) {
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
@@ -282,8 +281,8 @@ VOID instrument_instruction(INS ins, VOID *v) {
 
     if (INS_IsStackRead(ins)
             // RET and CALL can be seen as stack read
-            // because of the stored return address
-            // but we only care about read before them
+            // because of the stored return address but
+            // we only care about read in between them
             && !INS_IsRet(ins)
             && !INS_IsCall(ins)) {
         INS_InsertCall(ins,
