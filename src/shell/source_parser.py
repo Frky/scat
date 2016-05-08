@@ -54,6 +54,8 @@ class SourceParser(object):
                         self.protos[node.spelling].append("void *")
                     else:
                         self.protos[node.spelling].append(c.type.get_canonical().spelling)
+                if node.type.is_function_variadic():
+                    self.protos[node.spelling].append("...")
         for c in node.get_children():
             self.__find_protos(c)
         return

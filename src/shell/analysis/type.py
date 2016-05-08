@@ -38,6 +38,8 @@ class TypeAnalysis(object):
         ar = min(len(args), len(self.data[fname]))
         ok, tot = 0, 0
         for ref, inf in zip(self.data[fname][:ar], args[:ar]):
+            if ref == "...":
+                break
             tot += 1
             if (inf[:4] == "ADDR" and "*" not in ref and "[" not in ref) or (inf[:4] != "ADDR" and ("*" in ref or "[" in ref)):
                 continue

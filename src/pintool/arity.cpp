@@ -343,8 +343,6 @@ uint32_t detected_arity(uint32_t param_threshold, UINT64* detection, uint32_t fr
  *  execution
  */
 VOID fini(INT32 code, VOID *v) {
-    ofile.open(KnobOutputFile.Value().c_str());
-
     for (unsigned int fid = 1; fid <= nb_fn; fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
             continue;
@@ -394,6 +392,11 @@ int main(int argc, char * argv[]) {
 
     if (PIN_Init(argc, argv)) return 1;
 
+    // We need to open this file early (even though
+    // it is only needed in the end) because PIN seems
+    // to mess up IO at some point
+    ofile.open(KnobOutputFile.Value().c_str());
+
     // TODO better way to get mode from cli
     if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
         FN_MODE = FN_NAME;
@@ -411,6 +414,9 @@ int main(int argc, char * argv[]) {
        application exits */
     PIN_AddFiniFunction(fini, 0);
 
+    // If debug is enabled, this print a first message to
+    // ensure the log file is opened because PIN seems
+    // to mess up IO at some point
     debug("Starting\n");
     PIN_StartProgram();
 

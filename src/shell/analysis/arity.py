@@ -3,7 +3,7 @@
 from datetime import datetime
 import re
 
-VERBOSE = True
+VERBOSE = False
 
 class ArityAnalysis(object):
 
@@ -24,21 +24,25 @@ class ArityAnalysis(object):
                 self.log[int(addr)] = (fn, int(ar), int(ret))
 
 
-    def check_one_arity(self, fname, ar):
-        if ar == len(self.data[fname]) - 1:
+    def is_variadic(self, proto):
+        return proto[-1] == "..."
+
+
+    def check_one_arity(self, fname, ar, proto):
+        if ar == len(proto) - 1:
             return True
         else:
             if VERBOSE:
-                print("[Arity mismatch {}] Expected {}, got {}".format(fname, self.data[fname][1:], ar))
+                print("[Arity mismatch {}] Expected {}, got {}".format(fname, proto[1:], ar))
             return False
 
 
-    def check_one_ret(self, fname, ret):
-        if (ret == (self.data[fname][0] != "void")):
+    def check_one_ret(self, fname, ret, proto):
+        if (ret == (proto[0] != "void")):
             return True
         else:
             if VERBOSE:
-                print("[Return mismatch {}] Expected {}, got {}".format(fname, self.data[fname][0], ret))
+                print("[Return mismatch {}] Expected {}, got {}".format(fname, proto[0], ret))
             return False
 
 
@@ -46,13 +50,14 @@ class ArityAnalysis(object):
         print("Information about inference")
         print("| Last inference:           {0}".format(self.date))
         print("| Total functions infered:  {0}".format(len(self.log.keys())))
+        print("")
 
 
     def accuracy(self):
         self.print_general_info()
-        print()
 
         total = 0
+        variadic = 0
         ok_ar = 0
         ok_ret = 0
         overflow = 0
@@ -64,14 +69,22 @@ class ArityAnalysis(object):
                 not_found += 1
                 continue
 
-            total += 1
-            if self.check_one_arity(fn, ar):
-                ok_ar += 1
-            elif ar > 6:
-                overflow += 1
+            proto = self.data[fn]
+            if self.is_variadic(proto):
+                variadic += 1
+                continue
 
-            if self.check_one_ret(fn, ret == 1):
+            total += 1
+            if self.check_one_arity(fn, ar, proto):
+                ok_ar += 1
+
+            if self.check_one_ret(fn, ret == 1, proto):
                 ok_ret += 1
+
+        print("Ignored")
+        print("| Variadic:                 {0}".format(variadic))
+        print("| Not found:                {0}".format(not_found))
+        print("")
 
         print("Accuracy of inference")
         print("| Arity  Ok/Total tested:   {0}/{1}".format(ok_ar, total))
@@ -79,8 +92,6 @@ class ArityAnalysis(object):
         if total != 0:
             print("| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(total)))
             print("| Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(total)))
-        print("| Not found:                {0}".format(not_found))
-        return
 
 
     def display(self):

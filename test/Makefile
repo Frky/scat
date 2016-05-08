@@ -2,7 +2,8 @@ TESTS = \
 	int_return \
 	float_return \
 	call_stack_overflow \
-	stack_params
+	stack_params \
+	variadic
 
 all: $(TESTS:=.bin)
 
