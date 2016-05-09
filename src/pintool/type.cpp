@@ -12,15 +12,15 @@
 #include "pin.H"
 
 #define NB_FN_MAX               5000
-#define NB_VALS_TO_CONCLUDE     1 // 100
-#define NB_CALLS_TO_CONCLUDE    1 // 50
+#define NB_VALS_TO_CONCLUDE     100
+#define NB_CALLS_TO_CONCLUDE    50
 #define SEUIL                   0.01
 
 #define DEBUG_SEGFAULT          0
 #define DEBUG_DATA              0
 
-#define FN_NAME 0
-#define FN_ADDR 1
+#define FN_NAME 1
+#define FN_ADDR 0
 
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
@@ -358,12 +358,10 @@ VOID Routine(RTN rtn, VOID *v) {
     if (fid == 0) {
         return;
     }
-    /*
     RTN_Open(rtn);
     RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
     RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
     RTN_Close(rtn);
-    */
 }
 
 /*  Instrumentation of each instruction
@@ -382,6 +380,7 @@ VOID Instruction(INS ins, VOID *v) {
                         IARG_MEMORYOP_EA, 0,
                         IARG_END);
     }
+# if 0
     if (INS_IsCall(ins)) {
         ADDRINT addr; 
         unsigned int fid;
@@ -393,7 +392,6 @@ VOID Instruction(INS ins, VOID *v) {
                     break;
             }
             if (i == nb_fn) {
-                std::cerr << "ET MERDE: " << addr << endl;
                 fid = 0;
             } else {
                 fid = i;
@@ -410,7 +408,6 @@ VOID Instruction(INS ins, VOID *v) {
                     IARG_END);
         }
     } 
-# if 0
     if (INS_IsRet(ins)) {
         ADDRINT addr; 
         unsigned int fid;

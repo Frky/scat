@@ -346,7 +346,7 @@ VOID Fini(INT32 code, VOID *v) {
     it_in = param_in->rbegin();
     it_out = param_out->rbegin();
 
-    while (it_in != param_in->rend() && it_out != param_out->rend()) {
+    while (it_in != param_in->rend() || it_out != param_out->rend()) {
         param_t *p;
         if (it_in == param_in->rend()) {
             p = *it_out;
