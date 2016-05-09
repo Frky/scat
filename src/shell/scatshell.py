@@ -9,7 +9,7 @@ from datetime import datetime
 import glob
 from confiture import Confiture, ConfigFileError
 
-from src.shell.pin import Pin, inf_code_to_str, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
+from src.shell.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
 from src.shell.result import Result
 from src.shell.source_parser import SourceParser
 
@@ -46,6 +46,8 @@ class ScatShell(Cmd):
         # Get information from config file for all needed pintools
         kwargs = dict()
         for inf_code, inf_name in INF_ALL:
+            if inf_code == INF_BASE:
+                continue
             kwargs["{0}_src".format(inf_name)] = self.config["pin"]["pintool-src"][inf_name]
             kwargs["{0}_obj".format(inf_name)] = self.config["pin"]["pintool-obj"][inf_name]
         # Other Pin configuration options
@@ -178,6 +180,10 @@ class ScatShell(Cmd):
         # Parse command into binary + args
         args =  list()
         for i, arg in enumerate(s.split(" ")):
+            if arg[0] == "\"":
+                arg = arg[1:]
+            if arg[-1] == "\"":
+                arg = arg[:-1]
             if i == 0:
                 binary = arg
             else:
@@ -287,6 +293,28 @@ class ScatShell(Cmd):
         self.log_dir = directory
 
 
+    #********** base **********#
+
+
+    def help_base(self):
+        print(self.do_base.__doc__.replace("\n", ""))
+
+
+    def complete_base(self, text, line, begidx, endidx):
+        if len(line.split(" ")) < 3:
+            return self.__complete_bin(text, line, begidx, endidx)
+        else:
+            return  self.__complete_path(text, line, begidx, endidx)
+
+
+    def do_base(self, s):
+        """
+            Launch the binary specified as a parameter with no instrumentation performed
+
+        """
+        self.__inference(INF_BASE, s)
+
+
     #********** arity **********#
 
 
@@ -306,6 +334,7 @@ class ScatShell(Cmd):
             Launch arity inference on the binary specified as a parameter
 
         """
+        print s
         self.__inference(INF_ARITY, s)
 
 

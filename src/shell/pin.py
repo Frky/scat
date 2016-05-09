@@ -3,6 +3,7 @@
 import subprocess
 import os
 import shutil
+from datetime import datetime
 from shutil import copyfile
 
 FN_MODE_NAME = "name"
@@ -15,8 +16,10 @@ INF_COUPLE = 2
 INF_ALLOC = 3
 INF_UAF = 4
 INF_MEM_MAP = 5
+INF_BASE = 6
 
 INF_ALL = [
+            (INF_BASE, "base"),
             (INF_ARITY, "arity"), 
             (INF_TYPE, "type"), 
             (INF_COUPLE, "couple"),
@@ -54,6 +57,8 @@ def get_previous_step(code):
         return INF_TYPE
     if code == INF_MEM_MAP:
         return INF_TYPE
+    if code == INF_BASE:
+        return -1
 
 
 class Pin(object):
@@ -123,7 +128,7 @@ class Pin(object):
                             (must be an element of the list INF_CODES)
 
             @param binary   the binary file to analyse (must be a valid path to
-                            an executable path
+                            an executable)
 
             @param args     arguments to give to the binary
 
@@ -134,12 +139,18 @@ class Pin(object):
                             stored (must be a valid path)
 
         """
-        cmd = self.__cmd(self.pintool[inf_code], binary, args, logfile, infile)
+        if inf_code == INF_BASE:
+            cmd = "{0} {1}".format(binary, " ".join(args))
+        else:
+            cmd = self.__cmd(self.pintool[inf_code], binary, args, logfile, infile)
         self.log(cmd)
+        start = datetime.now()
         subprocess.call(cmd, shell=True)
+        duration = datetime.now() - start
         self.log("Inference results logged in {0}".format(logfile))
-
-
+        self.log("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds))
+                
+    
     def compile(self):
         """
             Compile all pintools needed
