@@ -20,8 +20,8 @@ INF_BASE = 6
 
 INF_ALL = [
             (INF_BASE, "base"),
-            (INF_ARITY, "arity"), 
-            (INF_TYPE, "type"), 
+            (INF_ARITY, "arity"),
+            (INF_TYPE, "type"),
             (INF_COUPLE, "couple"),
             (INF_ALLOC, "alloc"),
             (INF_UAF, "uaf"),
@@ -149,8 +149,8 @@ class Pin(object):
         duration = datetime.now() - start
         self.log("Inference results logged in {0}".format(logfile))
         self.log("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds))
-                
-    
+
+
     def compile(self):
         """
             Compile all pintools needed
@@ -178,7 +178,10 @@ class Pin(object):
         for dirpath, dirnames, filenames in os.walk("./src/pintool/utils"):
             for fname in filenames:
                 copyfile(dirpath + "/" + fname, wd + "/utils/" + fname)
-        for code in [c for c, n in INF_ALL if c in self.src.keys()]:
+
+        # inf = [ (INF_ARITY, "arity"), (INF_TYPE, "type") ]
+        inf = INF_ALL
+        for code in [c for c, n in inf if c in self.src.keys()]:
             pfile = self.src[code]
             self.log("Compiling {0} ...".format(pfile))
             copyfile(pfile, wd + os.path.basename(pfile))
@@ -186,4 +189,3 @@ class Pin(object):
             with open("/dev/null", 'w') as fnull:
                 subprocess.call(cmd, cwd=wd, shell=True, stdout=fnull)
             copyfile(wd + "obj-intel64/" + os.path.basename(pfile)[:-3] + "so", self.pintool[code])
-
