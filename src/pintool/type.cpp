@@ -11,6 +11,9 @@
 
 #include "pin.H"
 
+//#define DEBUG_ENABLED
+#include "utils/debug.h"
+
 #define NB_FN_MAX               5000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
@@ -161,7 +164,7 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     ADDRINT regv = PIN_GetContextReg(ctxt, reg);
     param_val[fid][pid]->push_front(regv);
 #if 0
-    if (is_data(regv)) 
+    if (is_data(regv))
         param_addr[fid][pid]++;
 #endif
 }
@@ -255,7 +258,7 @@ VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
     param_val[fid][0]->push_front(regv);
 
 #if 0
-    if (is_data(regv)) 
+    if (is_data(regv))
         param_addr[fid][0]++;
 #endif
 
@@ -269,7 +272,7 @@ VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
 
 #if 0
 VOID stack_access(string ins, ADDRINT addr, ADDRINT ebp) {
-    if (call_stack.empty()) 
+    if (call_stack.empty())
         return;
     string curr_fn = call_stack.begin()->first;
     if (curr_fn == "mem_alloc")
@@ -298,7 +301,7 @@ unsigned int fn_add(ADDRINT addr, unsigned int nb_p, unsigned int nb_pf, vector<
     nb_fn++;
     /* Set the fid */
     unsigned int fid = nb_fn;
-    
+
     /* Set the address of the function */
     faddr[fid] = addr;
     /* At first, this function is not treated yet */
@@ -342,7 +345,8 @@ unsigned int fn_add(ADDRINT addr, unsigned int nb_p, unsigned int nb_pf, vector<
 VOID Commence();
 
 VOID Routine(RTN rtn, VOID *v) {
-    if (!init) 
+    debug_routine(rtn);
+    if (!init)
         Commence();
     unsigned int fid = 0;
     /* Look for function id */
@@ -369,20 +373,20 @@ VOID Routine(RTN rtn, VOID *v) {
  */
 VOID Instruction(INS ins, VOID *v) {
 #define OK 0
-    if (!init) 
+    if (!init)
         Commence();
     /* Instrument each access to memory */
-    if (INS_OperandCount(ins) > 1 && 
+    if (INS_OperandCount(ins) > 1 &&
             (INS_IsMemoryWrite(ins)) && !INS_IsStackRead(ins)) {
-        INS_InsertCall(ins, 
-                        IPOINT_BEFORE, 
-                        (AFUNPTR) update_data, 
+        INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) update_data,
                         IARG_MEMORYOP_EA, 0,
                         IARG_END);
     }
 # if 0
     if (INS_IsCall(ins)) {
-        ADDRINT addr; 
+        ADDRINT addr;
         unsigned int fid;
         if (INS_IsDirectCall(ins)) {
             addr = INS_DirectBranchOrCallTargetAddress(ins);
@@ -400,16 +404,16 @@ VOID Instruction(INS ins, VOID *v) {
             fid = 0;
         }
         if (fid != 0) {
-            INS_InsertCall(ins, 
-                    IPOINT_BEFORE, 
+            INS_InsertCall(ins,
+                    IPOINT_BEFORE,
                     (AFUNPTR) call,
                     IARG_CONST_CONTEXT,
                     IARG_UINT32, fid,
                     IARG_END);
         }
-    } 
+    }
     if (INS_IsRet(ins)) {
-        ADDRINT addr; 
+        ADDRINT addr;
         unsigned int fid;
         if (INS_IsDirectCall(ins)) {
             addr = INS_DirectBranchOrCallTargetAddress(ins);
@@ -430,7 +434,7 @@ VOID Instruction(INS ins, VOID *v) {
         }
         if (fid != 0) {
             INS_InsertCall(ins,
-                    IPOINT_BEFORE, 
+                    IPOINT_BEFORE,
                     (AFUNPTR) ret,
                     IARG_CONST_CONTEXT,
                     IARG_UINT32, fid,
@@ -440,9 +444,9 @@ VOID Instruction(INS ins, VOID *v) {
 #endif
 #if OK
     if (INS_IsCall(ins))
-            INS_InsertCall(ins, 
-                        IPOINT_BEFORE, 
-                        (AFUNPTR) call, 
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) call,
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_END);
@@ -450,9 +454,9 @@ VOID Instruction(INS ins, VOID *v) {
 #if 0
     if (INS_IsDirectCall(ins)) {
 #if OK
-            INS_InsertCall(ins, 
-                        IPOINT_BEFORE, 
-                        (AFUNPTR) update_code, 
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) update_code,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_END);
 #endif
@@ -467,19 +471,19 @@ VOID Instruction(INS ins, VOID *v) {
         if (fid == nb_fn + 1) {
             return;
         }
-        INS_InsertCall(ins, 
-                    IPOINT_BEFORE, 
-                    (AFUNPTR) fn_call, 
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) fn_call,
                     IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid, 
+                    IARG_UINT32, fid,
                     IARG_END);
     }
 #endif
 #if 0
     if (INS_IsRet(ins))
-        INS_InsertCall(ins, 
-                    IPOINT_BEFORE, 
-                    (AFUNPTR) ret, 
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) ret,
                     IARG_ADDRINT, RTN_Address(INS_Rtn(ins)),
                     IARG_END);
 #endif
@@ -507,6 +511,7 @@ VOID Commence() {
                 _name += m;
                 ifile.read(&m, 1);
             }
+
             /* Read function number of parameters */
             n = 0;
             ifile.read(&m, 1);
@@ -527,19 +532,12 @@ VOID Commence() {
             }
             /* Read return value type (void/not void) */
             ifile.read(&v, 1);
-            /* Read separator */
-            m = '!';
-            while (ifile && m != ':') {
-                ifile.read(&m, 1);
-            }
             /* Read the end of line */
             m = '!';
             while (ifile && m != '\n') {
                 ifile.read(&m, 1);
-                if (m <= '9' && m >= '0') {
-                    int_param_idx.push_back(m - '0');
-                }
             }
+
             /* TODO manage float parameters */
             if (atol(_addr.c_str()) != 0) {
                 unsigned int fid = fn_add(atol(_addr.c_str()), n, o - '0', int_param_idx, v == '0');
@@ -548,6 +546,7 @@ VOID Commence() {
             }
         }
     }
+
     return;
 }
 
@@ -561,7 +560,7 @@ VOID Fini(INT32 code, VOID *v) {
     std::cout << "CODE : [0x" << std::hex << CODE_BASE << " ; 0x" << std::hex << CODE_TOP << "]" << endl;
 
     map<string, func_t>::iterator senti, o_senti;
-    for (senti = fns.begin(); senti != fns.end(); senti++) { 
+    for (senti = fns.begin(); senti != fns.end(); senti++) {
         if (senti->second.treated) { // || (senti->second.ret_call + senti->second.param_call[0]) > 0) {
             std::cout << senti->first << "(";
             float coef = ((float) senti->second.ret_addr) / ((float) senti->second._nb_call);
@@ -569,17 +568,17 @@ VOID Fini(INT32 code, VOID *v) {
                 senti->second.ret_is_addr = true;
             }
             for (i = 0; i < senti->second._nb_param; i++) {
-                if (((float) senti->second.param_addr[i]) / 
+                if (((float) senti->second.param_addr[i]) /
                         ((float) senti->second._nb_call) > SEUIL) {
                     senti->second.param_is_addr[i] = true;
                 }
 #if 0
                 if (senti->param_call[i] > 0)
                     std::cout << "FNC";
-#endif 
+#endif
                 if (senti->second.param_is_addr[i])
                     std::cout << "ADDR";
-                else  
+                else
                     std::cout << "INT";
                 if (i < senti->second._nb_param - 1)
                     std::cout << ", ";
@@ -589,7 +588,7 @@ VOID Fini(INT32 code, VOID *v) {
                 std::cout << "FNC";
             else if (senti->second.ret_is_addr)
                 std::cout << "ADDR";
-            else  
+            else
                 std::cout << "INT";
             std::cout << endl;
         }
@@ -597,15 +596,15 @@ VOID Fini(INT32 code, VOID *v) {
 
     for (senti = fns.begin(); senti != fns.end(); senti++) {
         if (!senti->second.ret_is_addr)
-            continue; 
-        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) { 
+            continue;
+        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) {
             if (!(o_senti->second.param_is_addr[0]))
                 continue;
             list<UINT64>::iterator ret, param;
             int nb_link = 0;
             for (
-                    param = o_senti->second.param_val[0].begin(); 
-                    param != o_senti->second.param_val[0].end(); 
+                    param = o_senti->second.param_val[0].begin();
+                    param != o_senti->second.param_val[0].end();
                     param++
                    ) {
                 for (ret = senti->second.ret_val.begin(); ret != senti->second.ret_val.end(); ret++) {
@@ -649,7 +648,7 @@ VOID Fini(INT32 code, VOID *v) {
             if (coef > SEUIL && !param_is_int[fid][pid])
                 param_is_addr[fid][pid] = true;
             if (param_call[fid][pid] > 0) {
-                ofile << "UNDEF"; 
+                ofile << "UNDEF";
             } else if (param_is_addr[fid][pid]) {
                 ofile << "ADDR";
             } else {
@@ -700,7 +699,7 @@ int main(int argc, char * argv[])
 
     call_stack = new list<ADDRINT>();
 
-    /* Initialize symbol table code, 
+    /* Initialize symbol table code,
        needed for rtn instrumentation */
     PIN_InitSymbols();
     PIN_SetSyntaxIntel();
@@ -709,7 +708,7 @@ int main(int argc, char * argv[])
 
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
-    
+
     // TODO better way to get mode from cli
     if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
         FN_MODE = FN_NAME;
@@ -723,13 +722,12 @@ int main(int argc, char * argv[])
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
 
-    /* Register Fini to be called when the 
+    /* Register Fini to be called when the
        application exits */
     PIN_AddFiniFunction(Fini, 0);
 
+    debug("Starting\n");
     PIN_StartProgram();
-    
+
     return 0;
 }
-
-

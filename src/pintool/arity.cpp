@@ -23,6 +23,7 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
+//#define DEBUG_ENABLED
 #include "utils/debug.h"
 
 #include "utils/registers.h"
@@ -203,6 +204,7 @@ VOID stack_read(ADDRINT addr, UINT32 size) {
 }
 
 VOID register_function_name(RTN rtn, VOID *v) {
+    debug_routine(rtn);
     fn_add(RTN_Address(rtn), RTN_Name(rtn));
 }
 
@@ -437,4 +439,3 @@ int main(int argc, char * argv[]) {
 
     return 0;
 }
-
