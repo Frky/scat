@@ -179,8 +179,8 @@ class Pin(object):
             for fname in filenames:
                 copyfile(dirpath + "/" + fname, wd + "/utils/" + fname)
 
-        # inf = [ (INF_ARITY, "arity"), (INF_TYPE, "type") ]
         inf = INF_ALL
+        inf = [ (INF_ARITY, "arity"), (INF_TYPE, "type") ]
         for code in [c for c, n in inf if c in self.src.keys()]:
             pfile = self.src[code]
             self.log("Compiling {0} ...".format(pfile))

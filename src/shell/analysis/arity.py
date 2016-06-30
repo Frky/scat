@@ -18,7 +18,7 @@ class ArityAnalysis(object):
         self.log = dict()
         with open(self.logfile, "r") as f:
             for line in f.readlines():
-                addr, fn, ar, iar, ret = line[:-1].split(":")
+                addr, fn, ar, iar, ret, int_indices = line[:-1].split(":")
                 self.log[int(addr)] = (fn, int(ar), int(ret))
 
 
@@ -118,4 +118,3 @@ class ArityAnalysis(object):
                     print("   Return : Expected 0 got 1")
                 else:
                     print("   Return : Expected 1 got 0")
-

@@ -345,7 +345,6 @@ unsigned int fn_add(ADDRINT addr, unsigned int nb_p, unsigned int nb_pf, vector<
 VOID Commence();
 
 VOID Routine(RTN rtn, VOID *v) {
-    debug_routine(rtn);
     if (!init)
         Commence();
     unsigned int fid = 0;
@@ -532,10 +531,18 @@ VOID Commence() {
             }
             /* Read return value type (void/not void) */
             ifile.read(&v, 1);
+            /* Read separator */
+            m = '!';
+            while (ifile && m != ':') {
+               ifile.read(&m, 1);
+            }
             /* Read the end of line */
             m = '!';
             while (ifile && m != '\n') {
                 ifile.read(&m, 1);
+                if (m <= '9' && m >= '0') {
+                    int_param_idx.push_back(m - '0');
+                }
             }
 
             /* TODO manage float parameters */

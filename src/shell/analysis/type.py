@@ -37,7 +37,9 @@ class TypeAnalysis(object):
             return (0, 0)
         ar = min(len(args), len(self.data[fname]))
         ok, tot = 0, 0
+        print("# " + fname)
         for ref, inf in zip(self.data[fname][:ar], args[:ar]):
+            print("  " + ref + " / " + inf)
             if ref == "...":
                 break
             tot += 1
@@ -98,4 +100,3 @@ class TypeAnalysis(object):
             print(line)
         print()
         self.print_general_info()
-
