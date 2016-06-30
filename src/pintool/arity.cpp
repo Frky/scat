@@ -23,9 +23,8 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-#define DEBUG_ENABLED
 #include "utils/debug.h"
-
+#include "utils/functions_registry.h"
 #include "utils/registers.h"
 #include "utils/hollow_stack.h"
 
@@ -33,28 +32,6 @@ ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
 UINT64 FN_MODE;
 KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
-
-/*
- * We define here several arrays to store
- * efficiently information relative to each function
- * during execution
- **/
-/* Number of functions we watch
-   All futher arrays index from 0 to nb_fn (included) */
-unsigned int nb_fn;
-
-/* The couple (fimg[fid], fimgaddr[fid])
-   forms a unique identifier for the function */
-/* Name of image containing each function */
-string **fimg;
-/* Address inside its image for each function */
-ADDRINT *fimgaddr;
-
-/* Execution/Virtual address inside the running program memory
-   for each function */
-ADDRINT *faddr;
-/* Name of each function (if symbol table is present) */
-string **fname;
 
 /* Number of calls of each function */
 UINT64 *nb_call;
@@ -71,7 +48,7 @@ UINT64 **nb_param_stack;
 UINT64 *nb_ret;
 
 /* Call stack */
-HollowStack<MAX_DEPTH, UINT64> call_stack;
+HollowStack<MAX_DEPTH, FID> call_stack;
 /* A stack which keeps track of the program stack pointers */
 HollowStack<MAX_DEPTH, UINT64> sp_stack;
 
@@ -87,26 +64,12 @@ bool *reg_ret_since_written;
  * a valid return candidate so far */
 bool *reg_maybe_return;
 
-unsigned int fn_add(IMG img, ADDRINT f_addr, string f_name) {
-    if (nb_fn >= NB_FN_MAX) {
-        return 0;
-    }
-
-    unsigned int fid = nb_fn;
-    nb_fn++;
-
-    fimg[fid] = new string(IMG_Name(img));
-    fimgaddr[fid] = f_addr - IMG_LoadOffset(img);
-    faddr[fid] = f_addr;
-    fname[fid] = new string(f_name);
-
+void fn_registered(FID fid) {
     nb_call[fid] = 0;
     nb_param_intaddr[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
     param_max_size[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
     nb_param_float[fid] = (UINT64 *) calloc(PARAM_FLOAT_COUNT, sizeof(UINT64));
     nb_param_stack[fid] = (UINT64 *) calloc(PARAM_STACK_COUNT, sizeof(UINT64));
-
-    return fid;
 }
 
 inline UINT64 sp(CONTEXT* ctxt) {
@@ -118,7 +81,7 @@ inline UINT64 sp(CONTEXT* ctxt) {
 /*  Function called each time a procedure
  *  is called in the instrumented binary
  */
-VOID fn_call(CONTEXT* ctxt, unsigned int fid) {
+VOID fn_call(CONTEXT* ctxt, FID fid) {
     call_stack.push(fid);
     sp_stack.push(sp(ctxt));
     nb_call[fid]++;
@@ -131,7 +94,7 @@ VOID fn_call(CONTEXT* ctxt, unsigned int fid) {
 /*  Function called each time a procedure
  *  returns in the instrumented binary
  */
-VOID fn_ret(CONTEXT* ctxt) {
+VOID fn_ret() {
     if (!call_stack.is_top_forgotten()
             && (reg_maybe_return[REGF_AX]
             || reg_maybe_return[REGF_XMM0]))
@@ -168,11 +131,11 @@ VOID param_read(REGF regf, UINT32 reg_size) {
     // Propagate the parameter up the call stack
     for (int i = written[regf] + 1; i <= call_stack.height(); i++) {
         if (!call_stack.is_forgotten(i)) {
-            UINT64 fn = call_stack.peek(i);
-            nb_param[fn][position] += 1;
+            FID fid = call_stack.peek(i);
+            nb_param[fid][position] += 1;
 
-            if (param_max_size[fn][position] < reg_size) {
-                param_max_size[fn][position] = reg_size;
+            if (param_max_size[fid][position] < reg_size) {
+                param_max_size[fid][position] = reg_size;
             }
         }
     }
@@ -225,11 +188,8 @@ VOID stack_read(ADDRINT addr, UINT32 size) {
     }
 }
 
-VOID register_function_name(RTN rtn, VOID *v) {
-    IMG img = SEC_Img(RTN_Sec(rtn));
-    ADDRINT f_addr = RTN_Address(rtn);
-    string f_name = RTN_Name(rtn);
-    fn_add(img, f_addr, f_name);
+VOID register_function(RTN rtn, VOID *v) {
+    fn_register_from_rtn(rtn);
 }
 
 /* Array of all the monitored registers */
@@ -337,31 +297,13 @@ VOID instrument_instruction(INS ins, VOID *v) {
     }
 
     if (INS_IsCall(ins)) {
-        ADDRINT addr;
-        unsigned int fid = 0;
+        FID fid;
         if (INS_IsDirectCall(ins)) {
-            addr = INS_DirectBranchOrCallTargetAddress(ins);
-
-            // Lookup the function by address
-            for (fid = 0; fid < nb_fn; fid++) {
-                if (faddr[fid] == addr)
-                    break;
-            }
-
-            // Or register it without a name
-            if (fid == nb_fn) {
-                IMG img = IMG_FindByAddress(addr);
-                if (IMG_Valid(img)) {
-                    fid = fn_add(img, addr, "");
-                }
-                else {
-                    // Some (rare) call target are not part of a
-                    // registered image, we won't be able
-                    // to identify them across all pintools.
-                    // Hence, we ignore them.
-                    fid = 0;
-                }
-            }
+            ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
+            fid = fn_get_or_register(addr);
+        }
+        else {
+            fid = 0;
         }
 
         INS_InsertCall(ins,
@@ -376,7 +318,6 @@ VOID instrument_instruction(INS ins, VOID *v) {
         INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_ret,
-                    IARG_CONST_CONTEXT,
                     IARG_END);
     }
 }
@@ -396,7 +337,7 @@ uint32_t detected_arity(uint32_t param_threshold, UINT64* detection, uint32_t fr
  *  execution
  */
 VOID fini(INT32 code, VOID *v) {
-    for (unsigned int fid = 1; fid <= nb_fn; fid++) {
+    for (FID fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
             continue;
         }
@@ -413,7 +354,7 @@ VOID fini(INT32 code, VOID *v) {
 
         bool ret = nb_ret[fid] > return_threshold;
 
-        ofile << faddr[fid] << ":" << *(fname[fid])
+        ofile << fn_addr(fid) << ":" << fn_name(fid)
                 << ":" << total_arity
                 << ":" << int_stack_arity
                 << ":" << (ret ? "1:" : "0:");
@@ -437,10 +378,6 @@ int main(int argc, char * argv[]) {
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     param_max_size = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    fimg = (string **) calloc(NB_FN_MAX, sizeof(string *));
-    fimgaddr = (ADDRINT *) calloc(NB_FN_MAX, sizeof(ADDRINT));
-    faddr = (ADDRINT *) calloc(NB_FN_MAX, sizeof(ADDRINT));
-    fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
     nb_ret = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
 
     written = (INT64 *) malloc(sizeof(INT64) * REGF_COUNT);
@@ -470,11 +407,13 @@ int main(int argc, char * argv[]) {
     }
 
     INS_AddInstrumentFunction(instrument_instruction, 0);
-    RTN_AddInstrumentFunction(register_function_name, 0);
+    RTN_AddInstrumentFunction(register_function, 0);
 
     /* Register fini to be called when the
        application exits */
     PIN_AddFiniFunction(fini, 0);
+
+    fn_registry_init(NB_FN_MAX, fn_registered);
 
     // If debug is enabled, this print a first message to
     // ensure the log file is opened because PIN seems

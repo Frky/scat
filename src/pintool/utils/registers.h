@@ -16,6 +16,7 @@
 typedef enum {
     /* Return register */
     REGF_AX,
+    REGF_FIRST = REGF_AX,
 
     /* Parameter registers */
     REGF_DI,
@@ -34,11 +35,9 @@ typedef enum {
     REGF_XMM5,
     REGF_XMM6,
     REGF_XMM7,
+    REGF_LAST = REGF_XMM7,
+    REGF_COUNT
 } REGF;
-
-#define REGF_FIRST REGF_AX
-#define REGF_LAST  REGF_XMM7
-#define REGF_COUNT REGF_LAST + 1
 
 #define regf_is_float(regf__) ((regf__) >= REGF_XMM0)
 
