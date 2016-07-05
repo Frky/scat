@@ -303,7 +303,9 @@ VOID instrument_instruction(INS ins, VOID *v) {
             fid = fn_get_or_register(addr);
         }
         else {
-            fid = 0;
+            // TODO: Indirect call (Adress in a register)
+            // Maybe add support for them
+            fid = FID_UNKNOWN;
         }
 
         INS_InsertCall(ins,
@@ -354,7 +356,8 @@ VOID fini(INT32 code, VOID *v) {
 
         bool ret = nb_ret[fid] > return_threshold;
 
-        ofile << fn_addr(fid) << ":" << fn_name(fid)
+        ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
+                << ":" << fn_name(fid)
                 << ":" << total_arity
                 << ":" << int_stack_arity
                 << ":" << (ret ? "1:" : "0:");

@@ -18,8 +18,8 @@ class ArityAnalysis(object):
         self.log = dict()
         with open(self.logfile, "r") as f:
             for line in f.readlines():
-                addr, fn, ar, iar, ret, int_indices = line[:-1].split(":")
-                self.log[int(addr)] = (fn, int(ar), int(ret))
+                img, imgaddr, fn, ar, iar, ret, int_indices = line[:-1].split(":")
+                self.log[(img, int(imgaddr))] = (fn, int(ar), int(ret))
 
 
     def is_variadic(self, proto):
@@ -51,7 +51,7 @@ class ArityAnalysis(object):
         total = 0
         ok_ar = 0
         ok_ret = 0
-        for addr, (fn, ar, ret) in self.log.items():
+        for (img, imgaddr), (fn, ar, ret) in self.log.items():
             if fn == "":
                 without_name += 1
                 continue
@@ -86,8 +86,8 @@ class ArityAnalysis(object):
 
 
     def display(self):
-        for addr, fn in self.log.items():
-           print(hex(addr), fn)
+        for (img, imgaddr), fn in self.log.items():
+           print("{} [{}@{}]".format(fn, img, hex(imgaddr)))
         print()
         self.print_general_info()
 
@@ -96,7 +96,7 @@ class ArityAnalysis(object):
         self.print_general_info()
         print("")
 
-        for addr, (fname, ar, ret) in self.log.items():
+        for (img, imgaddr), (fname, ar, ret) in self.log.items():
             if fname == "" or fname not in self.data.keys():
                 continue
 
@@ -110,7 +110,8 @@ class ArityAnalysis(object):
             if arity_ok and return_ok:
                 continue
 
-            print("[{}] {} ({}) -> {}".format(hex(addr), fname, ", ".join(proto[1:]), proto[0]));
+            print("[{}@{}] {} ({}) -> {}".format(img, hex(imgaddr),
+                    fname, ", ".join(proto[1:]), proto[0]));
             if not arity_ok:
                 print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
             if not return_ok:

@@ -4,6 +4,7 @@
 #include "pin.H"
 
 typedef unsigned int FID;
+#define FID_UNKNOWN 0
 
 unsigned int _fn_max_nb;
 void (*_fn_registered)(FID fid);
@@ -34,10 +35,10 @@ void fn_registry_init(unsigned int fn_max_nb, void (*fn_registered)(FID fid)) {
     _fn_addr = (ADDRINT *) calloc(_fn_max_nb, sizeof(ADDRINT));
     _fn_name = (string **) calloc(_fn_max_nb, sizeof(string *));
 
-    _fn_img[0] = new string("<unknown>");
-    _fn_imgaddr[0] = 0;
-    _fn_addr[0] = 0;
-    _fn_name[0] = new string("<unknown>");
+    _fn_img[FID_UNKNOWN] = new string("<unknown>");
+    _fn_imgaddr[FID_UNKNOWN] = 0;
+    _fn_addr[FID_UNKNOWN] = 0;
+    _fn_name[FID_UNKNOWN] = new string("<unknown>");
 
     _fn_registered(0);
 
@@ -45,14 +46,12 @@ void fn_registry_init(unsigned int fn_max_nb, void (*fn_registered)(FID fid)) {
 }
 
 inline unsigned int fn_nb() {
-    return _fn_nb >= _fn_max_nb
-        ? _fn_max_nb - 1
-        : _fn_nb;
+    return _fn_nb;
 }
 
 FID fn_register(IMG img, ADDRINT addr, string name) {
     if (_fn_nb >= _fn_max_nb) {
-        return 0;
+        return FID_UNKNOWN;
     }
 
     FID fid = _fn_nb;
@@ -92,7 +91,7 @@ FID fn_get_or_register(ADDRINT addr) {
         // registered image, we won't be able
         // to identify them across all pintools.
         // Ignore them.
-        return 0;
+        return FID_UNKNOWN;
     }
 }
 
