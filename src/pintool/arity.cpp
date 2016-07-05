@@ -90,6 +90,18 @@ VOID fn_call(CONTEXT* ctxt, FID fid) {
     reg_maybe_return[REGF_XMM0] = false;
 }
 
+VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
+    // Indirect call, we have to look up the function each time
+    // Locking is not implicit in inserted call, the same way
+    // it is with *_AddInstrumentFunction() callback.
+    // IMG_FindByAddress(...) needs it.
+    PIN_LockClient();
+    FID fid = fn_get_or_register(target);
+    PIN_UnlockClient();
+
+    fn_call(ctxt, fid);
+}
+
 
 /*  Function called each time a procedure
  *  returns in the instrumented binary
@@ -297,23 +309,26 @@ VOID instrument_instruction(INS ins, VOID *v) {
     }
 
     if (INS_IsCall(ins)) {
-        FID fid;
         if (INS_IsDirectCall(ins)) {
             ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
-            fid = fn_get_or_register(addr);
+            FID fid = fn_get_or_register(addr);
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) fn_call,
+                        IARG_CONST_CONTEXT,
+                        IARG_UINT32, fid,
+                        IARG_END);
         }
         else {
-            // TODO: Indirect call (Adress in a register)
-            // Maybe add support for them
-            fid = FID_UNKNOWN;
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) fn_indirect_call,
+                        IARG_CONST_CONTEXT,
+                        IARG_BRANCH_TARGET_ADDR,
+                        IARG_END);
         }
 
-        INS_InsertCall(ins,
-                    IPOINT_BEFORE,
-                    (AFUNPTR) fn_call,
-                    IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid,
-                    IARG_END);
+
     }
 
     if (INS_IsRet(ins)) {
