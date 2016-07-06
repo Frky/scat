@@ -23,6 +23,8 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
+//#define DEBUG_ENABLED
+//#define TRACE_ENABLED
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/registers.h"
@@ -82,24 +84,39 @@ inline UINT64 sp(CONTEXT* ctxt) {
  *  is called in the instrumented binary
  */
 VOID fn_call(CONTEXT* ctxt, FID fid) {
+    trace_enter();
+
     call_stack.push(fid);
     sp_stack.push(sp(ctxt));
+    trace("Before %u\n", fid);
     nb_call[fid]++;
+    trace("After %u\n", fid);
 
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
+
+    trace_leave();
 }
 
 VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
+    trace_enter();
+
     // Indirect call, we have to look up the function each time
-    // Locking is not implicit in inserted call, the same way
-    // it is with *_AddInstrumentFunction() callback.
-    // IMG_FindByAddress(...) needs it.
+    // (Maybe we need to make functions lookup faster ?)
+    // Locking is not implicit in inserted call, as opposed
+    // to callback added with *_AddInstrumentFunction().
+    // Yet, fn_lookup_or_register needs it.
     PIN_LockClient();
-    FID fid = fn_get_or_register(target);
+    FN_LOOKUP fn_lookup = fn_lookup_or_register(target);
+    FID fid = fid_of(fn_lookup);
+    if (fn_is_new(fn_lookup)) {
+        fn_registered(fid);
+    }
     PIN_UnlockClient();
 
     fn_call(ctxt, fid);
+
+    trace_leave();
 }
 
 
@@ -107,6 +124,8 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
  *  returns in the instrumented binary
  */
 VOID fn_ret() {
+    trace_enter();
+
     if (!call_stack.is_top_forgotten()
             && (reg_maybe_return[REGF_AX]
             || reg_maybe_return[REGF_XMM0]))
@@ -121,13 +140,19 @@ VOID fn_ret() {
 
     call_stack.pop();
     sp_stack.pop();
+
+    trace_leave();
 }
 
 VOID param_read(REGF regf, UINT32 reg_size) {
+    trace_enter();
+
     if (call_stack.is_empty() || call_stack.is_top_forgotten()
             || nb_call[call_stack.top()] < 3 /* Ignore the three first calls */
-            || reg_ret_since_written[regf])  /* And value written by unrelated functions */
+            || reg_ret_since_written[regf]) { /* And value written by unrelated functions */
+        trace_leave();
         return;
+    }
 
     UINT64 position;
     UINT64** nb_param;
@@ -151,21 +176,33 @@ VOID param_read(REGF regf, UINT32 reg_size) {
             }
         }
     }
+
+    trace_leave();
 }
 
 VOID param_write(REGF regf) {
-    if (call_stack.is_empty())
+    trace_enter();
+
+    if (call_stack.is_empty()) {
+        trace_leave();
         return;
+    }
 
     written[regf] = call_stack.height();
     reg_ret_since_written[regf] = false;
+
+    trace_leave();
 }
 
 VOID return_read(REGF regf) {
-    if (call_stack.is_empty())
-        return;
+    trace_enter();
 
-    // Discard the previous write as a potential
+    if (call_stack.is_empty()) {
+        trace_leave();
+        return;
+    }
+
+    // Discards the previous write as a potential
     // return value. Reading the value does not
     // necessarily mean the register cannot be a
     // return value, but void functions can use
@@ -179,29 +216,48 @@ VOID return_read(REGF regf) {
     for (int i = call_stack.height() + 1; i <= written[regf]; i++)
         if (!call_stack.is_forgotten(i))
             nb_ret[call_stack.peek(i)] += 1;
+
+    trace_leave();
 }
 
 VOID return_write(REGF regf) {
-    if (call_stack.is_empty())
+    trace_enter();
+
+    if (call_stack.is_empty()) {
+        trace_leave();
         return;
+    }
 
     written[regf] = call_stack.height();
     reg_maybe_return[regf] = true;
+
+    trace_leave();
 }
 
 VOID stack_read(ADDRINT addr, UINT32 size) {
-    if (sp_stack.is_top_forgotten())
+    trace_enter();
+
+    if (sp_stack.is_top_forgotten()) {
+        trace_leave();
         return;
+    }
 
     UINT64 sp = sp_stack.top();
     UINT64 position = (addr - sp) / 8;
     if (position >= 0 && position < PARAM_STACK_COUNT) {
         nb_param_stack[call_stack.top()][position] += 1;
     }
+
+    trace_leave();
 }
 
 VOID register_function(RTN rtn, VOID *v) {
-    fn_register_from_rtn(rtn);
+    trace_enter();
+
+    FID fid = fn_register_from_rtn(rtn);
+    fn_registered(fid);
+
+    trace_leave();
 }
 
 /* Array of all the monitored registers */
@@ -235,6 +291,8 @@ REG reg_return[reg_return_size] = {
  *    - which is a return
  */
 VOID instrument_instruction(INS ins, VOID *v) {
+    trace_enter();
+
     if (INS_IsNop(ins)) {
         return;
     }
@@ -311,7 +369,12 @@ VOID instrument_instruction(INS ins, VOID *v) {
     if (INS_IsCall(ins)) {
         if (INS_IsDirectCall(ins)) {
             ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
-            FID fid = fn_get_or_register(addr);
+            FN_LOOKUP fn_lookup = fn_lookup_or_register(addr);
+            FID fid = fid_of(fn_lookup);
+            if (fn_is_new(fn_lookup)) {
+                fn_registered(fid);
+            }
+
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
                         (AFUNPTR) fn_call,
@@ -337,6 +400,8 @@ VOID instrument_instruction(INS ins, VOID *v) {
                     (AFUNPTR) fn_ret,
                     IARG_END);
     }
+
+    trace_leave();
 }
 
 
@@ -354,6 +419,8 @@ uint32_t detected_arity(uint32_t param_threshold, UINT64* detection, uint32_t fr
  *  execution
  */
 VOID fini(INT32 code, VOID *v) {
+    trace_enter();
+
     for (FID fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
             continue;
@@ -387,6 +454,8 @@ VOID fini(INT32 code, VOID *v) {
     }
 
     ofile.close();
+
+    trace_leave();
 }
 
 
@@ -431,7 +500,8 @@ int main(int argc, char * argv[]) {
        application exits */
     PIN_AddFiniFunction(fini, 0);
 
-    fn_registry_init(NB_FN_MAX, fn_registered);
+    fn_registry_init(NB_FN_MAX);
+    fn_registered(FID_UNKNOWN);
 
     // If debug is enabled, this print a first message to
     // ensure the log file is opened because PIN seems

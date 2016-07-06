@@ -12,6 +12,7 @@
 #include "pin.H"
 
 //#define DEBUG_ENABLED
+//#define TRACE_ENABLED
 #include "utils/debug.h"
 
 #define NB_FN_MAX               5000
@@ -69,60 +70,45 @@ bool init = false;
  *  regarding the new address value addr
  */
 VOID update_data(UINT64 addr) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTER] " << __func__ << endl;
-#endif
+    trace_enter();
+
     if (DATA1_BASE == 0 || DATA1_BASE > addr) {
-#if DEBUG_DATA
-        std::cerr << "DATA1_BASE <- " << addr << endl;
-#endif
+        debug("DATA1_BASE <- %lx", addr);
         DATA1_BASE = addr;
         if (DATA1_TOP == 0) {
             DATA1_TOP = DATA1_BASE;
-#if DEBUG_DATA
-            std::cerr << "DATA1_TOP <- " << DATA1_TOP << endl;
-#endif
+            debug("DATA1_TOP <- %lx", DATA1_TOP);
         }
         if (DATA1_TOP * DATA2_BASE > 0 && (DATA1_TOP - DATA1_BASE) > (DATA2_BASE - DATA1_TOP)) {
             DATA1_TOP = DATA1_BASE;
-#if DEBUG_DATA
-            std::cerr << "DATA1_TOP <- " << DATA1_TOP << endl;
-#endif
+            debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
     }
     if (DATA2_TOP == 0 || DATA2_TOP < addr) {
-#if DEBUG_DATA
-        std::cerr << "DATA2_TOP <- " << addr << endl;
-#endif
+        debug("DATA2_TOP <- %lx\n", addr);
         DATA2_TOP = addr;
         if (DATA2_BASE == 0) {
             DATA2_BASE = DATA2_TOP;
-#if DEBUG_DATA
-            std::cerr << "DATA2_BASE <- " << DATA2_BASE << endl;
-#endif
+            debug("DATA2_BASE <- %lx", DATA2_BASE);
         }
     }
     if (addr < DATA2_BASE && addr > DATA1_TOP) {
         if (abs(addr - DATA2_BASE) < abs(addr - DATA1_TOP)) {
             DATA2_BASE = addr;
-#if DEBUG_DATA
-            std::cerr << "DATA2_BASE <- " << addr << endl;
-#endif
+            debug("DATA2_BASE <- %lx\n", addr);
         } else {
             DATA1_TOP = addr;
-#if DEBUG_DATA
-            std::cerr << "DATA1_TOP <- " << addr << endl;
-#endif
+            debug("DATA1_TOP <- %lx\n", addr);
         }
     }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
+
+    trace_leave();
 }
 
 
 bool is_data(UINT64 addr) {
-    return (addr <= DATA2_TOP && addr >= DATA2_BASE) || (addr <= DATA1_TOP && addr >= DATA1_BASE);
+    return (addr <= DATA2_TOP && addr >= DATA2_BASE)
+            || (addr <= DATA1_TOP && addr >= DATA1_BASE);
 }
 
 
@@ -173,28 +159,24 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
  *  is called in the instrumented binary
  */
 VOID fn_call(CONTEXT *ctxt, unsigned int fid) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTER] " << __func__ << endl;
-#endif
+    trace_enter();
+
     if (treated[fid]) {
-#if DEBUG_SEGFAULT
-        std::cerr << "[LEAVE] " << __func__ << endl;
-#endif
+        trace_leave();
         return;
     }
-#if 1
+
     if (*fname[fid] == "sqlite3_prepare") {
         std::cerr << "SQLITE PREPARE: " << PIN_GetContextReg(ctxt, REG_R8) << endl;
     }
-#endif
+
     nb_call[fid]++;
     for (unsigned int i = 1; i <= nb_param_int[fid]; i++) {
         if (param_val[fid][i]->size() < NB_VALS_TO_CONCLUDE)
             add_val(fid, ctxt, i);
     }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVE] " << __func__ << endl;
-#endif
+
+    trace_leave();
 }
 
 VOID call(CONTEXT *ctxt, UINT32 fid) {
@@ -223,9 +205,8 @@ VOID ret(CONTEXT *ctxt, UINT32 fid) {
  *  returns in the instrumented binary
  */
 VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTER] " << __func__ << endl;
-#endif
+    trace_enter();
+
     nb_calls--;
     unsigned int fid = 0;
 #if 0
@@ -248,12 +229,12 @@ VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
             break;
         }
     }
+
     if (fid == 0) {
-#if DEBUG_SEGFAULT
-        std::cerr << "[LEAVE] " << __func__ << endl;
-#endif
+        trace_leave();
         return;
     }
+
     ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
     param_val[fid][0]->push_front(regv);
 
@@ -265,9 +246,8 @@ VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
     if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
         treated[fid] = true;
     }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVE] " << __func__ << endl;
-#endif
+
+    trace_leave();
 }
 
 #if 0
@@ -492,6 +472,7 @@ VOID Instruction(INS ins, VOID *v) {
 
 VOID Commence() {
     init = true;
+
     char n, m, o, v;
     string _addr, _name;
     if (ifile.is_open()) {
@@ -549,7 +530,7 @@ VOID Commence() {
             if (atol(_addr.c_str()) != 0) {
                 unsigned int fid = fn_add(atol(_addr.c_str()), n, o - '0', int_param_idx, v == '0');
                 fname[fid] = new string(_name);
-                std::cerr << "ADDING " << *fname[fid] << endl;
+                debug("ADDING %s\n", fname[fid]->c_str);
             }
         }
     }
@@ -622,16 +603,15 @@ VOID Fini(INT32 code, VOID *v) {
                 }
             }
             if (senti->second._nb_call > 10 && nb_link > 0)
-                std::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << senti->first << " -> " << o_senti->first << endl;
+                ENTERstd::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << senti->first << " -> " << o_senti->first << endl;
         }
     }
 }
 #endif
 
 VOID Fini(INT32 code, VOID *v) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTER] " << __func__ << endl;
-#endif
+    trace_enter();
+
     /* Iterate on functions */
     for(unsigned int fid = 0; fid < nb_fn; fid++) {
         if (!treated[fid])
@@ -674,6 +654,8 @@ VOID Fini(INT32 code, VOID *v) {
         }
         ofile << endl;
     }
+
+    trace_leave();
     return;
 }
 

@@ -2,45 +2,70 @@
 #define __FUNCTIONS_REGISTRY_H__
 
 #include "pin.H"
+#include "debug.h"
 
+#include <tr1/unordered_map>
+
+// Type of the unique ID given to each registered
+// function allowing for fast lookup
 typedef unsigned int FID;
+
+// The unknown function ID
 #define FID_UNKNOWN 0
 
+// Type of the function lookup return value
+// Use `fn_is_new` to check is the function got created
+// and `fid_of` to get the corresponding FID
+typedef long int FN_LOOKUP;
+
+struct FnKey {
+    string* img_name;
+    ADDRINT img_addr;
+
+    bool operator==(const FnKey &other) const {
+        return *img_name == *other.img_name
+                && img_addr == other.img_addr;
+    }
+};
+
+struct fn_key_hash {
+
+    std::size_t operator()(const FnKey& key) const {
+        return 289
+                + 17 * key.img_addr
+                + std::hash<std::string>()(*key.img_name);
+    }
+};
+
 unsigned int _fn_max_nb;
-void (*_fn_registered)(FID fid);
 
 /* Number of functions we watch
    All futher arrays index from 0 to _fn_nb (included) */
 unsigned int _fn_nb;
 
-/* The couple (_fn_img[fid], _fn_imgaddr[fid])
-   forms a unique identifier for the function */
-/* Name of image containing each function */
-string **_fn_img;
-/* Address inside its image for each function */
-ADDRINT *_fn_imgaddr;
+/* The couple (image(=binary), address in image)
+   forms a unique identifier for each function */
+FnKey* _fn_key;
 
-/* Execution/Virtual address inside the running program memory
-   for each function */
-ADDRINT *_fn_addr;
 /* Name of each function (if symbol table is present) */
 string **_fn_name;
 
-void fn_registry_init(unsigned int fn_max_nb, void (*fn_registered)(FID fid)) {
-    _fn_max_nb = fn_max_nb + 1;
-    _fn_registered = fn_registered;
+std::tr1::unordered_map<FnKey, FID, fn_key_hash> _fn_map;
 
-    _fn_img = (string **) calloc(_fn_max_nb, sizeof(string *));
-    _fn_imgaddr = (ADDRINT *) calloc(_fn_max_nb, sizeof(ADDRINT));
-    _fn_addr = (ADDRINT *) calloc(_fn_max_nb, sizeof(ADDRINT));
+// Initialize the functions registry
+//   * Allocates all necessary space
+//   * Create the unknown function entry
+void fn_registry_init(unsigned int fn_max_nb) {
+    _fn_max_nb = fn_max_nb + 1;
+
+    _fn_key = (FnKey *) calloc(_fn_max_nb, sizeof(FnKey));
     _fn_name = (string **) calloc(_fn_max_nb, sizeof(string *));
 
-    _fn_img[FID_UNKNOWN] = new string("<unknown>");
-    _fn_imgaddr[FID_UNKNOWN] = 0;
-    _fn_addr[FID_UNKNOWN] = 0;
+    _fn_key[FID_UNKNOWN].img_name = new string("<unknown>");
+    _fn_key[FID_UNKNOWN].img_addr = 0;
     _fn_name[FID_UNKNOWN] = new string("<unknown>");
 
-    _fn_registered(0);
+    _fn_map[_fn_key[FID_UNKNOWN]] = FID_UNKNOWN;
 
     _fn_nb = 1;
 }
@@ -49,7 +74,9 @@ inline unsigned int fn_nb() {
     return _fn_nb;
 }
 
-FID fn_register(IMG img, ADDRINT addr, string name) {
+// Registers a function with the given informations
+// Returns the newly created function entry FID
+FID fn_register(FnKey key, string name) {
     if (_fn_nb >= _fn_max_nb) {
         return FID_UNKNOWN;
     }
@@ -57,34 +84,61 @@ FID fn_register(IMG img, ADDRINT addr, string name) {
     FID fid = _fn_nb;
     _fn_nb++;
 
-    _fn_img[fid] = new string(IMG_Name(img));
-    _fn_imgaddr[fid] = addr - IMG_LoadOffset(img);
-    _fn_addr[fid] = addr;
+    _fn_key[fid].img_name = key.img_name;
+    _fn_key[fid].img_addr = key.img_addr;
     _fn_name[fid] = new string(name);
 
-    _fn_registered(fid);
+    _fn_map[_fn_key[fid]] = fid;
 
     return fid;
 }
 
-FID fn_register_from_rtn(RTN rtn) {
-    IMG img = SEC_Img(RTN_Sec(rtn));
-    ADDRINT addr = RTN_Address(rtn);
-    string name = RTN_Name(rtn);
-    return fn_register(img, addr, name);
+inline string fn_img(FID fid) {
+    return *(_fn_key[fid].img_name);
 }
 
-FID fn_get_or_register(ADDRINT addr) {
+inline ADDRINT fn_imgaddr(FID fid) {
+    return _fn_key[fid].img_addr;
+}
+
+inline string fn_name(FID fid) {
+    return *(_fn_name[fid]);
+}
+
+// Registers a function using informations from the given RTN
+// Returns the newly created function entry FID
+FID fn_register_from_rtn(RTN rtn) {
+    IMG img = SEC_Img(RTN_Sec(rtn));
+    FnKey fn_key;
+    fn_key.img_name = new string(IMG_Name(img));
+    ADDRINT img_offset = IMG_LoadOffset(img);
+    fn_key.img_addr = RTN_Address(rtn) - img_offset;
+    string name = RTN_Name(rtn);
+    return fn_register(fn_key, name);
+}
+
+// Looks up an already registered function from its runtime address
+// or registers it if not found
+// NOTE: Require PIN Lock
+FN_LOOKUP fn_lookup_or_register(ADDRINT runtime_addr) {
+    IMG img = IMG_FindByAddress(runtime_addr);
+    if (!IMG_Valid(img)) {
+        return FID_UNKNOWN;
+    }
+
+    FnKey fn_key;
+    fn_key.img_name = new string(IMG_Name(img));
+    ADDRINT img_offset = IMG_LoadOffset(img);
+    fn_key.img_addr = runtime_addr - img_offset;
+
     // Lookup the function by address
-    for (FID fid = 1; fid < _fn_nb; fid++) {
-        if (_fn_addr[fid] == addr)
-            return fid;
+    if (_fn_map.count(fn_key) > 0) {
+        return _fn_map[fn_key];
     }
 
     // Or register it without a name
-    IMG img = IMG_FindByAddress(addr);
     if (IMG_Valid(img)) {
-        return fn_register(img, addr, "");
+        return -((FN_LOOKUP) fn_register(fn_key, ""));
     }
     else {
         // Some (rare) call target are not part of a
@@ -95,20 +149,12 @@ FID fn_get_or_register(ADDRINT addr) {
     }
 }
 
-inline string fn_img(FID fid) {
-    return *(_fn_img[fid]);
+inline bool fn_is_new(FN_LOOKUP fn_lookup) {
+    return fn_lookup < 0;
 }
 
-inline ADDRINT fn_imgaddr(FID fid) {
-    return _fn_imgaddr[fid];
-}
-
-inline ADDRINT fn_addr(FID fid) {
-    return _fn_addr[fid];
-}
-
-inline string fn_name(FID fid) {
-    return *(_fn_name[fid]);
+inline FID fid_of(FN_LOOKUP fn_lookup) {
+    return (FID) (fn_lookup >= 0 ? fn_lookup : -fn_lookup);
 }
 
 #endif
