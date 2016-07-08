@@ -421,6 +421,8 @@ uint32_t detected_arity(uint32_t param_threshold, UINT64* detection, uint32_t fr
 VOID fini(INT32 code, VOID *v) {
     trace_enter();
 
+    debug("Hash table buckets mean size : %lf\n", fn_bucket_mean_size());
+
     for (FID fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
             continue;

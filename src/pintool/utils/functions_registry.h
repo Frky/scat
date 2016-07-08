@@ -4,7 +4,6 @@
 #include "pin.H"
 #include "debug.h"
 
-#include <tr1/unordered_map>
 
 // Type of the unique ID given to each registered
 // function allowing for fast lookup
@@ -26,6 +25,7 @@ struct FnEntry {
     /* Next entry in the hash table in case of collision */
     FnEntry* next;
 
+    unsigned int hash;
 };
 
 unsigned int _fn_max_nb;
@@ -51,10 +51,11 @@ void fn_registry_init(unsigned int fn_max_nb) {
 
     _entries_by_fid = (FnEntry*) calloc(_fn_max_nb, sizeof(FnEntry));
 
-    _entries_by_fid[FID_UNKNOWN].fid = FID_UNKNOWN;
-    _entries_by_fid[FID_UNKNOWN].img_name = new string("<unknown>");
-    _entries_by_fid[FID_UNKNOWN].img_addr = 0;
-    _entries_by_fid[FID_UNKNOWN].fn_name = new string("<unknown>");
+    FnEntry* unknown_entry = _entries_by_fid + FID_UNKNOWN;
+    unknown_entry->fid = FID_UNKNOWN;
+    unknown_entry->img_name = new string("<unknown>");
+    unknown_entry->img_addr = 0;
+    unknown_entry->fn_name = new string("<unknown>");
 
     _hash_mask = next_pot - 1;
     _entries_by_hash = (FnEntry**) calloc(next_pot, sizeof(FnEntry*));
@@ -67,7 +68,10 @@ inline unsigned int fn_nb() {
 }
 
 inline unsigned int fn_hash(string img_name, ADDRINT img_addr) {
-    return img_addr & _hash_mask;
+    unsigned int hash = 289
+                 + 17 * img_addr
+                 + std::hash<std::string>()(img_name);
+    return hash & _hash_mask;
 }
 
 // Registers a function with the given informations
@@ -169,6 +173,24 @@ FID fn_lookup_by_rtn(RTN rtn) {
 FID fn_lookup_by_address(ADDRINT runtime_addr) {
     IMG img = IMG_FindByAddress(runtime_addr);
     return fn_lookup(img, runtime_addr);
+}
+
+double fn_bucket_mean_size() {
+    double bucket_count = 0;
+    double entries = 0;
+    for (unsigned int i = 0; i <= _hash_mask; i++) {
+        FnEntry* entry = _entries_by_hash[i];
+        if (entry != NULL) {
+            bucket_count++;
+
+            while (entry != NULL) {
+                entries++;
+                entry = entry->next;
+            }
+        }
+    }
+
+    return entries / bucket_count;
 }
 
 #endif

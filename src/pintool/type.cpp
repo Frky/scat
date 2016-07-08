@@ -11,8 +11,8 @@
 
 #include "pin.H"
 
-#define DEBUG_ENABLED
-#define TRACE_ENABLED
+//#define DEBUG_ENABLED
+//#define TRACE_ENABLED
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 
@@ -237,7 +237,7 @@ void fn_registered(FID fid,
     param_is_addr[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
     param_is_int[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
 
-    for (unsigned int i = 0; i < int_arity; i++) {
+    for (unsigned int i = 0; i < int_arity + 1; i++) {
         param_addr[fid][i] = 0;
         param_call[fid][i] = 0;
         param_is_addr[fid][i] = false;
