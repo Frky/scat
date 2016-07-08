@@ -13,28 +13,19 @@ typedef unsigned int FID;
 // The unknown function ID
 #define FID_UNKNOWN 0
 
-// Type of the function lookup return value
-// Use `fn_is_new` to check is the function got created
-// and `fid_of` to get the corresponding FID
-typedef long int FN_LOOKUP;
-
-struct FnKey {
+struct FnEntry {
+    /* The couple (image(=binary), address in image)
+       forms a unique identifier for each function */
+    FID fid;
     string* img_name;
     ADDRINT img_addr;
 
-    bool operator==(const FnKey &other) const {
-        return *img_name == *other.img_name
-                && img_addr == other.img_addr;
-    }
-};
+    /* Name of the function (only available if symbol table is) */
+    string* fn_name;
 
-struct fn_key_hash {
+    /* Next entry in the hash table in case of collision */
+    FnEntry* next;
 
-    std::size_t operator()(const FnKey& key) const {
-        return 289
-                + 17 * key.img_addr
-                + std::hash<std::string>()(*key.img_name);
-    }
 };
 
 unsigned int _fn_max_nb;
@@ -43,29 +34,30 @@ unsigned int _fn_max_nb;
    All futher arrays index from 0 to _fn_nb (included) */
 unsigned int _fn_nb;
 
-/* The couple (image(=binary), address in image)
-   forms a unique identifier for each function */
-FnKey* _fn_key;
-
-/* Name of each function (if symbol table is present) */
-string **_fn_name;
-
-std::tr1::unordered_map<FnKey, FID, fn_key_hash> _fn_map;
+FnEntry* _entries_by_fid;
+unsigned int _hash_mask;
+FnEntry** _entries_by_hash;
 
 // Initialize the functions registry
 //   * Allocates all necessary space
 //   * Create the unknown function entry
 void fn_registry_init(unsigned int fn_max_nb) {
+    unsigned int next_pot = 1;
+    while (next_pot < fn_max_nb) {
+        next_pot *= 2;
+    }
+
     _fn_max_nb = fn_max_nb + 1;
 
-    _fn_key = (FnKey *) calloc(_fn_max_nb, sizeof(FnKey));
-    _fn_name = (string **) calloc(_fn_max_nb, sizeof(string *));
+    _entries_by_fid = (FnEntry*) calloc(_fn_max_nb, sizeof(FnEntry));
 
-    _fn_key[FID_UNKNOWN].img_name = new string("<unknown>");
-    _fn_key[FID_UNKNOWN].img_addr = 0;
-    _fn_name[FID_UNKNOWN] = new string("<unknown>");
+    _entries_by_fid[FID_UNKNOWN].fid = FID_UNKNOWN;
+    _entries_by_fid[FID_UNKNOWN].img_name = new string("<unknown>");
+    _entries_by_fid[FID_UNKNOWN].img_addr = 0;
+    _entries_by_fid[FID_UNKNOWN].fn_name = new string("<unknown>");
 
-    _fn_map[_fn_key[FID_UNKNOWN]] = FID_UNKNOWN;
+    _hash_mask = next_pot - 1;
+    _entries_by_hash = (FnEntry**) calloc(next_pot, sizeof(FnEntry*));
 
     _fn_nb = 1;
 }
@@ -74,9 +66,13 @@ inline unsigned int fn_nb() {
     return _fn_nb;
 }
 
+inline unsigned int fn_hash(string img_name, ADDRINT img_addr) {
+    return img_addr & _hash_mask;
+}
+
 // Registers a function with the given informations
 // Returns the newly created function entry FID
-FID fn_register(FnKey key, string name) {
+FID fn_register(string img_name, ADDRINT img_addr, string name) {
     if (_fn_nb >= _fn_max_nb) {
         return FID_UNKNOWN;
     }
@@ -84,77 +80,95 @@ FID fn_register(FnKey key, string name) {
     FID fid = _fn_nb;
     _fn_nb++;
 
-    _fn_key[fid].img_name = key.img_name;
-    _fn_key[fid].img_addr = key.img_addr;
-    _fn_name[fid] = new string(name);
+    FnEntry* entry = _entries_by_fid + fid;
+    entry->fid = fid;
+    entry->img_name = new string(img_name);
+    entry->img_addr = img_addr;
+    entry->fn_name = new string(name);
 
-    _fn_map[_fn_key[fid]] = fid;
+    FnEntry** bucket = _entries_by_hash + fn_hash(img_name, img_addr);
+    entry->next = *bucket;
+    *bucket = entry;
 
     return fid;
 }
 
 inline string fn_img(FID fid) {
-    return *(_fn_key[fid].img_name);
+    return *(_entries_by_fid[fid].img_name);
 }
 
 inline ADDRINT fn_imgaddr(FID fid) {
-    return _fn_key[fid].img_addr;
+    return _entries_by_fid[fid].img_addr;
 }
 
 inline string fn_name(FID fid) {
-    return *(_fn_name[fid]);
+    return *(_entries_by_fid[fid].fn_name);
 }
 
 // Registers a function using informations from the given RTN
 // Returns the newly created function entry FID
 FID fn_register_from_rtn(RTN rtn) {
     IMG img = SEC_Img(RTN_Sec(rtn));
-    FnKey fn_key;
-    fn_key.img_name = new string(IMG_Name(img));
+    if (!IMG_Valid(img)) {
+        return FID_UNKNOWN;
+    }
+
+    string img_name = IMG_Name(img);
     ADDRINT img_offset = IMG_LoadOffset(img);
-    fn_key.img_addr = RTN_Address(rtn) - img_offset;
+    ADDRINT img_addr = RTN_Address(rtn) - img_offset;
     string name = RTN_Name(rtn);
-    return fn_register(fn_key, name);
+    return fn_register(img_name, img_addr, name);
 }
 
-// Looks up an already registered function from its runtime address
-// or registers it if not found
-// NOTE: Require PIN Lock
-FN_LOOKUP fn_lookup_or_register(ADDRINT runtime_addr) {
+// Registers a function using informations for the given address
+// with an empty name
+// Returns the newly created function entry FID
+FID fn_register_from_address(ADDRINT runtime_addr) {
     IMG img = IMG_FindByAddress(runtime_addr);
     if (!IMG_Valid(img)) {
         return FID_UNKNOWN;
     }
 
-    FnKey fn_key;
-    fn_key.img_name = new string(IMG_Name(img));
+    string img_name = IMG_Name(img);
     ADDRINT img_offset = IMG_LoadOffset(img);
-    fn_key.img_addr = runtime_addr - img_offset;
+    ADDRINT img_addr = runtime_addr - img_offset;
+    return fn_register(img_name, img_addr, "");
+}
 
-    // Lookup the function by address
-    if (_fn_map.count(fn_key) > 0) {
-        return _fn_map[fn_key];
-    }
-
-    // Or register it without a name
-    if (IMG_Valid(img)) {
-        return -((FN_LOOKUP) fn_register(fn_key, ""));
-    }
-    else {
-        // Some (rare) call target are not part of a
-        // registered image, we won't be able
-        // to identify them across all pintools.
-        // Ignore them.
+// Looks up an already registered function
+// NOTE: Require PIN Lock
+FID fn_lookup(IMG img, ADDRINT runtime_addr) {
+    if (!IMG_Valid(img)) {
         return FID_UNKNOWN;
     }
+
+    string img_name = IMG_Name(img);
+    ADDRINT img_addr = runtime_addr - IMG_LoadOffset(img);
+
+    FnEntry* entry = _entries_by_hash[fn_hash(img_name, img_addr)];
+    while (entry != NULL
+            && (img_name != *(entry->img_name)
+            || img_addr != entry->img_addr)) {
+        entry = entry->next;
+    }
+
+    return entry == NULL
+            ? FID_UNKNOWN
+            : entry->fid;
 }
 
-inline bool fn_is_new(FN_LOOKUP fn_lookup) {
-    return fn_lookup < 0;
+// Looks up an already registered function based on a rtn
+// NOTE: Require PIN Lock
+FID fn_lookup_by_rtn(RTN rtn) {
+    IMG img = SEC_Img(RTN_Sec(rtn));
+    return fn_lookup(img, RTN_Address(rtn));
 }
 
-inline FID fid_of(FN_LOOKUP fn_lookup) {
-    return (FID) (fn_lookup >= 0 ? fn_lookup : -fn_lookup);
+// Looks up an already registered function from its runtime address
+// NOTE: Require PIN Lock
+FID fn_lookup_by_address(ADDRINT runtime_addr) {
+    IMG img = IMG_FindByAddress(runtime_addr);
+    return fn_lookup(img, runtime_addr);
 }
 
 #endif

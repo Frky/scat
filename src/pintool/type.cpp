@@ -11,11 +11,12 @@
 
 #include "pin.H"
 
-//#define DEBUG_ENABLED
-//#define TRACE_ENABLED
+#define DEBUG_ENABLED
+#define TRACE_ENABLED
 #include "utils/debug.h"
+#include "utils/functions_registry.h"
 
-#define NB_FN_MAX               5000
+#define NB_FN_MAX               10000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
 #define SEUIL                   0.01
@@ -42,11 +43,9 @@ UINT64 CODE_BASE, CODE_TOP;
 
 
 list<ADDRINT> *call_stack;
-unsigned int nb_fn = 0;
 
 int nb_calls = 0;
 
-ADDRINT *faddr;
 bool *treated;
 unsigned int *ret_addr;
 unsigned int *ret_call;
@@ -59,7 +58,6 @@ UINT64 **param_addr;
 list<UINT64> ***param_val;
 bool **param_is_addr;
 bool **param_is_int;
-string **fname;
 bool *ret_void;
 
 long int depth = 0;
@@ -73,32 +71,32 @@ VOID update_data(UINT64 addr) {
     trace_enter();
 
     if (DATA1_BASE == 0 || DATA1_BASE > addr) {
-        debug("DATA1_BASE <- %lx", addr);
+        //debug("DATA1_BASE <- %lx\n", addr);
         DATA1_BASE = addr;
         if (DATA1_TOP == 0) {
             DATA1_TOP = DATA1_BASE;
-            debug("DATA1_TOP <- %lx", DATA1_TOP);
+            //debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
         if (DATA1_TOP * DATA2_BASE > 0 && (DATA1_TOP - DATA1_BASE) > (DATA2_BASE - DATA1_TOP)) {
             DATA1_TOP = DATA1_BASE;
-            debug("DATA1_TOP <- %lx\n", DATA1_TOP);
+            //debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
     }
     if (DATA2_TOP == 0 || DATA2_TOP < addr) {
-        debug("DATA2_TOP <- %lx\n", addr);
+        //debug("DATA2_TOP <- %lx\n", addr);
         DATA2_TOP = addr;
         if (DATA2_BASE == 0) {
             DATA2_BASE = DATA2_TOP;
-            debug("DATA2_BASE <- %lx", DATA2_BASE);
+            //debug("DATA2_BASE <- %lx\n", DATA2_BASE);
         }
     }
     if (addr < DATA2_BASE && addr > DATA1_TOP) {
         if (abs(addr - DATA2_BASE) < abs(addr - DATA1_TOP)) {
             DATA2_BASE = addr;
-            debug("DATA2_BASE <- %lx\n", addr);
+            //debug("DATA2_BASE <- %lx\n", addr);
         } else {
             DATA1_TOP = addr;
-            debug("DATA1_TOP <- %lx\n", addr);
+            //debug("DATA1_TOP <- %lx\n", addr);
         }
     }
 
@@ -124,6 +122,8 @@ VOID update_code(UINT64 addr) {
 
 
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
+    trace_enter();
+
     REG reg;
     switch (pid) {
     case 1:
@@ -145,6 +145,7 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
         reg = REG_R9;
         break;
     default:
+        trace_leave();
         return;
     }
     ADDRINT regv = PIN_GetContextReg(ctxt, reg);
@@ -153,96 +154,34 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     if (is_data(regv))
         param_addr[fid][pid]++;
 #endif
-}
-
-/*  Function called each time a procedure
- *  is called in the instrumented binary
- */
-VOID fn_call(CONTEXT *ctxt, unsigned int fid) {
-    trace_enter();
-
-    if (treated[fid]) {
-        trace_leave();
-        return;
-    }
-
-    if (*fname[fid] == "sqlite3_prepare") {
-        std::cerr << "SQLITE PREPARE: " << PIN_GetContextReg(ctxt, REG_R8) << endl;
-    }
-
-    nb_call[fid]++;
-    for (unsigned int i = 1; i <= nb_param_int[fid]; i++) {
-        if (param_val[fid][i]->size() < NB_VALS_TO_CONCLUDE)
-            add_val(fid, ctxt, i);
-    }
 
     trace_leave();
 }
 
 VOID call(CONTEXT *ctxt, UINT32 fid) {
-    depth++;
-    if (treated[fid])
-        return;
-    nb_call[fid]++;
-    for (unsigned int i = 1; i <= nb_param_int[fid]; i++) {
-        if (param_val[fid][i]->size() < NB_VALS_TO_CONCLUDE)
-            add_val(fid, ctxt, i);
-    }
-    return;
-}
-
-VOID ret(CONTEXT *ctxt, UINT32 fid) {
-    depth--;
-    ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
-    param_val[fid][0]->push_front(regv);
-    if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
-        treated[fid] = true;
-    }
-    return;
-}
-
-/*  Function called each time a procedure
- *  returns in the instrumented binary
- */
-VOID fn_ret(CONTEXT *ctxt, ADDRINT addr) {
     trace_enter();
 
-    nb_calls--;
-    unsigned int fid = 0;
-#if 0
-    if (call_stack->size() <= 1) {
-#if DEBUG_SEGFAULT
-        std::cerr << "[LEAVE] " << __func__ << endl;
-#endif
-        return;
-    }
-    std::cerr << "P" << endl;
-    ADDRINT addr = call_stack->front();
-    std::cerr << "L" << endl;
-    call_stack->pop_front();
-    std::cerr << "O" << endl;
-#endif
-    unsigned int i;
-    for(i = 0; i <= nb_fn; i++) {
-        if (addr == faddr[i]) {
-            fid = i;
-            break;
-        }
-    }
-
-    if (fid == 0) {
+    depth++;
+    if (treated[fid]) {
         trace_leave();
         return;
     }
 
+    nb_call[fid]++;
+    for (unsigned int pid = 1; pid <= nb_param_int[fid]; pid++) {
+        if (param_val[fid][pid]->size() < NB_VALS_TO_CONCLUDE)
+            add_val(fid, ctxt, pid);
+    }
+
+    trace_leave();
+}
+
+VOID ret(CONTEXT *ctxt, UINT32 fid) {
+    trace_enter();
+
+    depth--;
     ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
     param_val[fid][0]->push_front(regv);
-
-#if 0
-    if (is_data(regv))
-        param_addr[fid][0]++;
-#endif
-
     if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
         treated[fid] = true;
     }
@@ -271,25 +210,17 @@ VOID stack_access(string ins, ADDRINT addr, ADDRINT ebp) {
 }
 #endif
 
-
-unsigned int fn_add(ADDRINT addr, unsigned int nb_p, unsigned int nb_pf, vector<UINT32> int_idx, bool is_void) {
-    /* If reached the max number of functions this pintool can handle */
-    if (nb_fn >= NB_FN_MAX - 1)
-        /* Do nothing and return an invalid fid */
-        return 0;
-    /* Else increase the number of functions */
-    nb_fn++;
-    /* Set the fid */
-    unsigned int fid = nb_fn;
-
-    /* Set the address of the function */
-    faddr[fid] = addr;
+void fn_registered(FID fid,
+            unsigned int total_arity,
+            unsigned int int_arity,
+            bool is_void,
+            vector<UINT32> int_idx) {
     /* At first, this function is not treated yet */
     treated[fid] = false;
     /* Set the number of parameters of this function */
-    nb_param_int[fid] = nb_p - nb_pf;
+    nb_param_int[fid] = int_arity;
     /* Among them, set how many are floats */
-    nb_param_float[fid] = nb_pf;
+    nb_param_float[fid] = total_arity - int_arity;
     /* Reset the number of calls for this function */
     nb_call[fid] = 0;
     /* Set the basic type of return value */
@@ -297,16 +228,16 @@ unsigned int fn_add(ADDRINT addr, unsigned int nb_p, unsigned int nb_pf, vector<
 
     /* Create arrays of lists (one for each parameter, plus one for the return value) */
     /* For parameter values */
-    param_val[fid] = (list<UINT64> **) malloc((nb_p - nb_pf + 1) * sizeof(list<UINT64> *));
+    param_val[fid] = (list<UINT64> **) malloc((int_arity + 1) * sizeof(list<UINT64> *));
     /* For the number of addresses detected */
-    param_addr[fid] = (UINT64 *) malloc((nb_p - nb_pf + 1) * sizeof(UINT64));
+    param_addr[fid] = (UINT64 *) malloc((int_arity + 1) * sizeof(UINT64));
     /* For the number of calls detected */
-    param_call[fid] = (UINT64 *) malloc((nb_p - nb_pf + 1) * sizeof(UINT64));
+    param_call[fid] = (UINT64 *) malloc((int_arity + 1) * sizeof(UINT64));
     /* For the final decision */
-    param_is_addr[fid] = (bool *) malloc((nb_p - nb_pf + 1) * sizeof(bool));
-    param_is_int[fid] = (bool *) malloc((nb_p - nb_pf + 1) * sizeof(bool));
+    param_is_addr[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
+    param_is_int[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
 
-    for (unsigned int i = 0; i < nb_p - nb_pf + 1; i++) {
+    for (unsigned int i = 0; i < int_arity; i++) {
         param_addr[fid][i] = 0;
         param_call[fid][i] = 0;
         param_is_addr[fid][i] = false;
@@ -318,7 +249,17 @@ unsigned int fn_add(ADDRINT addr, unsigned int nb_p, unsigned int nb_pf, vector<
     for (unsigned int i = 0; i < int_idx.size(); i++) {
         param_is_int[fid][int_idx[i]] = true;
     }
+}
 
+FID fn_add(string img_name, ADDRINT img_addr, string name,
+            unsigned int total_arity,
+            unsigned int int_arity,
+            bool is_void,
+            vector<UINT32> int_idx) {
+    FID fid = fn_register(img_name, img_addr, name);
+    if (fid != FID_UNKNOWN) {
+        fn_registered(fid, total_arity, int_arity, is_void, int_idx);
+    }
     return fid;
 }
 
@@ -327,23 +268,21 @@ VOID Commence();
 VOID Routine(RTN rtn, VOID *v) {
     if (!init)
         Commence();
-    unsigned int fid = 0;
-    /* Look for function id */
-    for (unsigned int i = 1; i <= nb_fn; i++) {
-        // if (faddr[i] == RTN_Address(rtn)) {
-        if (*fname[i] == RTN_Name(rtn)) {
-            fid = i;
-            faddr[i] = RTN_Address(rtn);
-            std::cerr << *fname[i] << ": " << faddr[i] << endl;
-            break;
-        }
-    }
-    if (fid == 0) {
+
+    FID fid = fn_lookup_by_rtn(rtn);
+    if (fid == FID_UNKNOWN) {
         return;
     }
+
     RTN_Open(rtn);
-    RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
-    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
+    RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call,
+            IARG_CONST_CONTEXT,
+            IARG_UINT32, fid,
+            IARG_END);
+    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret,
+            IARG_CONST_CONTEXT,
+            IARG_UINT32, fid,
+            IARG_END);
     RTN_Close(rtn);
 }
 
@@ -351,9 +290,9 @@ VOID Routine(RTN rtn, VOID *v) {
  *  that uses a memory operand
  */
 VOID Instruction(INS ins, VOID *v) {
-#define OK 0
     if (!init)
         Commence();
+
     /* Instrument each access to memory */
     if (INS_OperandCount(ins) > 1 &&
             (INS_IsMemoryWrite(ins)) && !INS_IsStackRead(ins)) {
@@ -363,175 +302,48 @@ VOID Instruction(INS ins, VOID *v) {
                         IARG_MEMORYOP_EA, 0,
                         IARG_END);
     }
-# if 0
-    if (INS_IsCall(ins)) {
-        ADDRINT addr;
-        unsigned int fid;
-        if (INS_IsDirectCall(ins)) {
-            addr = INS_DirectBranchOrCallTargetAddress(ins);
-            unsigned int i;
-            for (i = 0; i < nb_fn; i++) {
-                if (faddr[i] == addr)
-                    break;
-            }
-            if (i == nb_fn) {
-                fid = 0;
-            } else {
-                fid = i;
-            }
-        } else {
-            fid = 0;
-        }
-        if (fid != 0) {
-            INS_InsertCall(ins,
-                    IPOINT_BEFORE,
-                    (AFUNPTR) call,
-                    IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid,
-                    IARG_END);
-        }
-    }
-    if (INS_IsRet(ins)) {
-        ADDRINT addr;
-        unsigned int fid;
-        if (INS_IsDirectCall(ins)) {
-            addr = INS_DirectBranchOrCallTargetAddress(ins);
-            unsigned int i;
-            for (i = 0; i < nb_fn; i++) {
-                if (faddr[i] == addr)
-                    break;
-            }
-            if (i == nb_fn) {
-                std::cerr << "ET MERDE" << endl;
-                fid = 0;
-            } else {
-                fid = i;
-                std::cerr << "INTERCEPTING " << *fname[fid];
-            }
-        } else {
-            fid = 0;
-        }
-        if (fid != 0) {
-            INS_InsertCall(ins,
-                    IPOINT_BEFORE,
-                    (AFUNPTR) ret,
-                    IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid,
-                    IARG_END);
-        }
-    }
-#endif
-#if OK
-    if (INS_IsCall(ins))
-            INS_InsertCall(ins,
-                        IPOINT_BEFORE,
-                        (AFUNPTR) call,
-                        IARG_CONST_CONTEXT,
-                        IARG_BRANCH_TARGET_ADDR,
-                        IARG_END);
-#endif
-#if 0
-    if (INS_IsDirectCall(ins)) {
-#if OK
-            INS_InsertCall(ins,
-                        IPOINT_BEFORE,
-                        (AFUNPTR) update_code,
-                        IARG_BRANCH_TARGET_ADDR,
-                        IARG_END);
-#endif
-        ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
-        unsigned int fid;
-        for (fid = 1; fid < nb_fn + 1; fid++) {
-            if (faddr[fid] == addr) {
-                break;
-            } else {
-            }
-        }
-        if (fid == nb_fn + 1) {
-            return;
-        }
-        INS_InsertCall(ins,
-                    IPOINT_BEFORE,
-                    (AFUNPTR) fn_call,
-                    IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid,
-                    IARG_END);
-    }
-#endif
-#if 0
-    if (INS_IsRet(ins))
-        INS_InsertCall(ins,
-                    IPOINT_BEFORE,
-                    (AFUNPTR) ret,
-                    IARG_ADDRINT, RTN_Address(INS_Rtn(ins)),
-                    IARG_END);
-#endif
+
     return;
 }
 
+string read_part(char* c) {
+    char m;
+    string str = "";
+
+    ifile.read(&m, 1);
+    while (ifile && m != ':' && m != '\n') {
+        str += m;
+        ifile.read(&m, 1);
+    }
+
+    *c = m;
+    return str;
+}
 
 VOID Commence() {
     init = true;
 
-    char n, m, o, v;
-    string _addr, _name;
     if (ifile.is_open()) {
         while (ifile) {
+            char m;
+            string img_name = read_part(&m);
+            if (img_name.empty()) {
+                continue;
+            }
+
+            ADDRINT img_addr = atol(read_part(&m).c_str());
+            string name = read_part(&m);
+            UINT64 total_arity = atol(read_part(&m).c_str());
+            UINT64 int_arity = atol(read_part(&m).c_str());
+            UINT64 ret_is_void = atol(read_part(&m).c_str());
+
             vector<UINT32> int_param_idx;
-            _addr = "";
-            _name = "";
-            ifile.read(&m, 1);
-            while (ifile && m != ':') {
-                _addr += m;
-                ifile.read(&m, 1);
-            }
-            /* Read function name */
-            ifile.read(&m, 1);
-            while (ifile && m != ':') {
-                _name += m;
-                ifile.read(&m, 1);
-            }
-
-            /* Read function number of parameters */
-            n = 0;
-            ifile.read(&m, 1);
-            while (m >= '0' && m <= '9') {
-                n = 10*n + (m - '0');
-                ifile.read(&m, 1);
-            }
-            /* Read separator */
-            while (ifile && m != ':') {
-                ifile.read(&m, 1);
-            }
-            /* Read function number of float parameters */
-            ifile.read(&o, 1);
-            /* Read separator */
-            m = '!';
-            while (ifile && m != ':') {
-                ifile.read(&m, 1);
-            }
-            /* Read return value type (void/not void) */
-            ifile.read(&v, 1);
-            /* Read separator */
-            m = '!';
-            while (ifile && m != ':') {
-               ifile.read(&m, 1);
-            }
-            /* Read the end of line */
-            m = '!';
             while (ifile && m != '\n') {
-                ifile.read(&m, 1);
-                if (m <= '9' && m >= '0') {
-                    int_param_idx.push_back(m - '0');
-                }
+                int_param_idx.push_back(atol(read_part(&m).c_str()));
             }
 
-            /* TODO manage float parameters */
-            if (atol(_addr.c_str()) != 0) {
-                unsigned int fid = fn_add(atol(_addr.c_str()), n, o - '0', int_param_idx, v == '0');
-                fname[fid] = new string(_name);
-                debug("ADDING %s\n", fname[fid]->c_str);
-            }
+            fn_add(img_name, img_addr, name,
+                    total_arity, int_arity, ret_is_void, int_param_idx);
         }
     }
 
@@ -575,18 +387,9 @@ VOID Fini(INT32 code, VOID *v) {
             if (senti->second.ret_call > 0)
                 std::cout << "FNC";
             else if (senti->second.ret_is_addr)
-                std::cout << "ADDR";
-            else
-                std::cout << "INT";
-            std::cout << endl;
-        }
-    }
+                std::cout << "ADDR";        return;
 
-    for (senti = fns.begin(); senti != fns.end(); senti++) {
-        if (!senti->second.ret_is_addr)
-            continue;
-        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) {
-            if (!(o_senti->second.param_is_addr[0]))
+        ]))
                 continue;
             list<UINT64>::iterator ret, param;
             int nb_link = 0;
@@ -613,12 +416,14 @@ VOID Fini(INT32 code, VOID *v) {
     trace_enter();
 
     /* Iterate on functions */
-    for(unsigned int fid = 0; fid < nb_fn; fid++) {
+    for(unsigned int fid = 0; fid < fn_nb(); fid++) {
         if (!treated[fid])
             continue;
         /* WARNING: Temporarily disable the type of return value */
         /* To re-enable it, pid should start at 0 */
-        ofile << faddr[fid] << ":" << *fname[fid] << ":";
+        ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
+                << ":" << fn_name(fid)
+                << ":";
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
             if (pid == 0 && ret_void[fid]) {
                 ofile << "VOID,";
@@ -660,9 +465,7 @@ VOID Fini(INT32 code, VOID *v) {
 }
 
 
-int main(int argc, char * argv[])
-{
-
+int main(int argc, char * argv[]) {
     DATA1_BASE = 0;
     DATA2_BASE = 0;
     DATA1_TOP = 0;
@@ -670,7 +473,6 @@ int main(int argc, char * argv[])
     CODE_BASE = 0;
     CODE_TOP = 0;
 
-    faddr = (ADDRINT *) malloc(NB_FN_MAX * sizeof(ADDRINT));
     treated = (bool *) malloc(NB_FN_MAX * sizeof(bool));
     ret_addr = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     ret_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
@@ -683,7 +485,6 @@ int main(int argc, char * argv[])
     param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
     param_is_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     param_is_int = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
-    fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
     ret_void = (bool *) calloc(NB_FN_MAX, sizeof(bool));
 
     call_stack = new list<ADDRINT>();
@@ -714,6 +515,10 @@ int main(int argc, char * argv[])
     /* Register Fini to be called when the
        application exits */
     PIN_AddFiniFunction(Fini, 0);
+
+    fn_registry_init(NB_FN_MAX);
+    vector<UINT32> unknown_int_idx;
+    fn_registered(FID_UNKNOWN, 0, 0, 0, unknown_int_idx);
 
     debug("Starting\n");
     PIN_StartProgram();

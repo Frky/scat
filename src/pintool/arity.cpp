@@ -88,9 +88,7 @@ VOID fn_call(CONTEXT* ctxt, FID fid) {
 
     call_stack.push(fid);
     sp_stack.push(sp(ctxt));
-    trace("Before %u\n", fid);
     nb_call[fid]++;
-    trace("After %u\n", fid);
 
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
@@ -102,15 +100,17 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
     trace_enter();
 
     // Indirect call, we have to look up the function each time
-    // (Maybe we need to make functions lookup faster ?)
+    // The functions `fn_lookup` & `fn_register` needs PIN's Lock.
     // Locking is not implicit in inserted call, as opposed
     // to callback added with *_AddInstrumentFunction().
-    // Yet, fn_lookup_or_register needs it.
+    //
     PIN_LockClient();
-    FN_LOOKUP fn_lookup = fn_lookup_or_register(target);
-    FID fid = fid_of(fn_lookup);
-    if (fn_is_new(fn_lookup)) {
-        fn_registered(fid);
+    FID fid = fn_lookup_by_address(target);
+    if (fid == FID_UNKNOWN) {
+        fid = fn_register_from_address(target);
+        if (fid != FID_UNKNOWN) {
+            fn_registered(fid);
+        }
     }
     PIN_UnlockClient();
 
@@ -369,10 +369,12 @@ VOID instrument_instruction(INS ins, VOID *v) {
     if (INS_IsCall(ins)) {
         if (INS_IsDirectCall(ins)) {
             ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
-            FN_LOOKUP fn_lookup = fn_lookup_or_register(addr);
-            FID fid = fid_of(fn_lookup);
-            if (fn_is_new(fn_lookup)) {
-                fn_registered(fid);
+            FID fid = fn_lookup_by_address(addr);
+            if (fid == FID_UNKNOWN) {
+                fid = fn_register_from_address(addr);
+                if (fid != FID_UNKNOWN) {
+                    fn_registered(fid);
+                }
             }
 
             INS_InsertCall(ins,
@@ -390,8 +392,6 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_END);
         }
-
-
     }
 
     if (INS_IsRet(ins)) {
