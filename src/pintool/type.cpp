@@ -211,20 +211,21 @@ VOID stack_access(string ins, ADDRINT addr, ADDRINT ebp) {
 #endif
 
 void fn_registered(FID fid,
-            unsigned int total_arity,
             unsigned int int_arity,
-            bool is_void,
+            unsigned int stack_arity,
+            unsigned int float_arity,
+            bool has_return,
             vector<UINT32> int_idx) {
     /* At first, this function is not treated yet */
     treated[fid] = false;
     /* Set the number of parameters of this function */
     nb_param_int[fid] = int_arity;
     /* Among them, set how many are floats */
-    nb_param_float[fid] = total_arity - int_arity;
+    nb_param_float[fid] = float_arity;
     /* Reset the number of calls for this function */
     nb_call[fid] = 0;
     /* Set the basic type of return value */
-    ret_void[fid] = is_void;
+    ret_void[fid] = !has_return;
 
     /* Create arrays of lists (one for each parameter, plus one for the return value) */
     /* For parameter values */
@@ -252,13 +253,15 @@ void fn_registered(FID fid,
 }
 
 FID fn_add(string img_name, ADDRINT img_addr, string name,
-            unsigned int total_arity,
             unsigned int int_arity,
-            bool is_void,
+            unsigned int stack_arity,
+            unsigned int float_arity,
+            bool has_return,
             vector<UINT32> int_idx) {
     FID fid = fn_register(img_name, img_addr, name);
     if (fid != FID_UNKNOWN) {
-        fn_registered(fid, total_arity, int_arity, is_void, int_idx);
+        fn_registered(fid, int_arity, stack_arity, float_arity, has_return,
+            int_idx);
     }
     return fid;
 }
@@ -333,9 +336,10 @@ VOID Commence() {
 
             ADDRINT img_addr = atol(read_part(&m).c_str());
             string name = read_part(&m);
-            UINT64 total_arity = atol(read_part(&m).c_str());
             UINT64 int_arity = atol(read_part(&m).c_str());
-            UINT64 ret_is_void = atol(read_part(&m).c_str());
+            UINT64 stack_arity = atol(read_part(&m).c_str());
+            UINT64 float_arity = atol(read_part(&m).c_str());
+            UINT64 has_return = atol(read_part(&m).c_str());
 
             vector<UINT32> int_param_idx;
             while (ifile && m != '\n') {
@@ -343,7 +347,9 @@ VOID Commence() {
             }
 
             fn_add(img_name, img_addr, name,
-                    total_arity, int_arity, ret_is_void, int_param_idx);
+                    int_arity, stack_arity, float_arity,
+                    has_return,
+                    int_param_idx);
         }
     }
 
@@ -518,7 +524,7 @@ int main(int argc, char * argv[]) {
 
     fn_registry_init(NB_FN_MAX);
     vector<UINT32> unknown_int_idx;
-    fn_registered(FID_UNKNOWN, 0, 0, 0, unknown_int_idx);
+    fn_registered(FID_UNKNOWN, 0, 0, 0, 0, unknown_int_idx);
 
     debug("Starting\n");
     PIN_StartProgram();

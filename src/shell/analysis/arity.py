@@ -18,8 +18,12 @@ class ArityAnalysis(object):
         self.log = dict()
         with open(self.logfile, "r") as f:
             for line in f.readlines():
-                img, imgaddr, fn, ar, iar, ret, int_indices = line[:-1].split(":")
-                self.log[(img, int(imgaddr))] = (fn, int(ar), int(ret))
+                img, imgaddr, fn, int_ar, stack_ar, float_ar, ret, int_indices = line[:-1].split(":")
+                self.log[(img, int(imgaddr))] = (fn,
+                        int(int_ar),
+                        int(stack_ar),
+                        int(float_ar),
+                        int(ret))
 
 
     def is_variadic(self, proto):
@@ -51,7 +55,9 @@ class ArityAnalysis(object):
         total = 0
         ok_ar = 0
         ok_ret = 0
-        for (img, imgaddr), (fn, ar, ret) in self.log.items():
+        for (img, imgaddr), fn_log in self.log.items():
+            fn, int_ar, stack_ar, float_ar, ret = fn_log
+            ar = int_ar + stack_ar + float_ar
             if fn == "":
                 without_name += 1
                 continue
@@ -74,7 +80,7 @@ class ArityAnalysis(object):
         print("Ignored")
         print("| Without name:             {0}".format(without_name))
         print("| Variadic:                 {0}".format(variadic))
-        print("| Not found (in source):    {0}".format(not_found))
+        print("- Not found (in source):    {0}".format(not_found))
         print("")
 
         print("Accuracy of inference")
@@ -82,7 +88,7 @@ class ArityAnalysis(object):
         print("| Return Ok/Total tested:   {0}/{1}".format(ok_ret, total))
         if total != 0:
             print("| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(total)))
-            print("| Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(total)))
+            print("- Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(total)))
 
 
     def display(self):
@@ -96,7 +102,9 @@ class ArityAnalysis(object):
         self.print_general_info()
         print("")
 
-        for (img, imgaddr), (fname, ar, ret) in self.log.items():
+        for (img, imgaddr), fn_log in self.log.items():
+            fname, int_ar, stack_ar, float_ar, ret = fn_log
+            ar = int_ar + stack_ar + float_ar
             if fname == "" or fname not in self.data.keys():
                 continue
 

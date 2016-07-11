@@ -431,19 +431,20 @@ VOID fini(INT32 code, VOID *v) {
         uint32_t param_threshold = (int) ceil(nb_call[fid] * PARAM_THRESHOLD);
         uint32_t return_threshold = (int) ceil(nb_call[fid] * RETURN_THRESHOLD);
 
-        uint32_t int_stack_arity = 0;
-        int_stack_arity += detected_arity(param_threshold, nb_param_intaddr[fid], PARAM_INT_COUNT);
-        int_stack_arity += detected_arity(param_threshold, nb_param_stack[fid], PARAM_STACK_COUNT);
-
-        uint32_t total_arity = int_stack_arity;
-        total_arity += detected_arity(param_threshold, nb_param_float[fid], PARAM_FLOAT_COUNT);
+        uint32_t int_arity = detected_arity(
+                param_threshold, nb_param_intaddr[fid], PARAM_INT_COUNT);
+        uint32_t stack_arity = detected_arity(
+                param_threshold, nb_param_stack[fid], PARAM_STACK_COUNT);
+        uint32_t float_arity = detected_arity(
+                param_threshold, nb_param_float[fid], PARAM_FLOAT_COUNT);
 
         bool ret = nb_ret[fid] > return_threshold;
 
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)
-                << ":" << total_arity
-                << ":" << int_stack_arity
+                << ":" << int_arity
+                << ":" << stack_arity
+                << ":" << float_arity
                 << ":" << (ret ? "1:" : "0:");
 
         for (unsigned int pid = 0; pid < 16; pid++) {
