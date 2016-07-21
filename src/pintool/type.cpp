@@ -11,18 +11,17 @@
 
 #include "pin.H"
 
-//#define DEBUG_ENABLED
-//#define TRACE_ENABLED
+#define DEBUG_ENABLED 0
+#define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
+#include "utils/hollow_stack.h"
 
 #define NB_FN_MAX               10000
+#define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
 #define SEUIL                   0.01
-
-#define DEBUG_SEGFAULT          0
-#define DEBUG_DATA              0
 
 #define FN_NAME 1
 #define FN_ADDR 0
@@ -42,7 +41,8 @@ UINT64 DATA2_BASE, DATA2_TOP;
 UINT64 CODE_BASE, CODE_TOP;
 
 
-list<ADDRINT> *call_stack;
+/* Call stack */
+HollowStack<MAX_DEPTH, FID> call_stack;
 
 int nb_calls = 0;
 
@@ -59,8 +59,6 @@ list<UINT64> ***param_val;
 bool **param_is_addr;
 bool **param_is_int;
 bool *ret_void;
-
-long int depth = 0;
 
 bool init = false;
 
@@ -142,7 +140,7 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
         reg = REG_R8;
         break;
     case 6:
-        reg = REG_R9;
+        reg = REG_RDEBUG_ENABLED9;
         break;
     default:
         trace_leave();
@@ -157,58 +155,6 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
 
     trace_leave();
 }
-
-VOID call(CONTEXT *ctxt, UINT32 fid) {
-    trace_enter();
-
-    depth++;
-    if (treated[fid]) {
-        trace_leave();
-        return;
-    }
-
-    nb_call[fid]++;
-    for (unsigned int pid = 1; pid <= nb_param_int[fid]; pid++) {
-        if (param_val[fid][pid]->size() < NB_VALS_TO_CONCLUDE)
-            add_val(fid, ctxt, pid);
-    }
-
-    trace_leave();
-}
-
-VOID ret(CONTEXT *ctxt, UINT32 fid) {
-    trace_enter();
-
-    depth--;
-    ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
-    param_val[fid][0]->push_front(regv);
-    if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
-        treated[fid] = true;
-    }
-
-    trace_leave();
-}
-
-#if 0
-VOID stack_access(string ins, ADDRINT addr, ADDRINT ebp) {
-    if (call_stack.empty())
-        return;
-    string curr_fn = call_stack.begin()->first;
-    if (curr_fn == "mem_alloc")
-        std::cerr << "plop " << std::hex << addr << " ; " << std::hex << ebp << endl;
-    if (addr > ebp) {
-        UINT64 offset = addr - ebp;
-        while (fns[curr_fn].param_access.size() < offset + 1) {
-            fns[curr_fn].param_access.push_back(0);
-            std::cerr << "pushing for " << curr_fn << endl;
-            for (list< pair<string, bool> >::iterator i = call_stack.begin(); i != call_stack.end(); i++)
-                std::cerr << i->first;
-            std::cerr << endl;
-        }
-        fns[curr_fn].param_access[offset]++;
-    }
-}
-#endif
 
 void fn_registered(FID fid,
             unsigned int int_arity,
@@ -266,28 +212,80 @@ FID fn_add(string img_name, ADDRINT img_addr, string name,
     return fid;
 }
 
-VOID Commence();
+VOID fn_call(CONTEXT *ctxt, FID fid) {
+    trace_enter();
 
-VOID Routine(RTN rtn, VOID *v) {
-    if (!init)
-        Commence();
+    call_stack.push(fid);
 
-    FID fid = fn_lookup_by_rtn(rtn);
-    if (fid == FID_UNKNOWN) {
+    if (treated[fid]) {
+        trace_leave();
         return;
     }
 
-    RTN_Open(rtn);
-    RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call,
-            IARG_CONST_CONTEXT,
-            IARG_UINT32, fid,
-            IARG_END);
-    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret,
-            IARG_CONST_CONTEXT,
-            IARG_UINT32, fid,
-            IARG_END);
-    RTN_Close(rtn);
+    nb_call[fid]++;
+    for (unsigned int pid = 1; pid <= nb_param_int[fid]; pid++) {
+        if (param_val[fid][pid]->size() < NB_VALS_TO_CONCLUDE)
+            add_val(fid, ctxt, pid);
+    }
+
+    trace_leave();
 }
+
+VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
+    trace_enter();
+
+    // Indirect call, we have to look up the function each time
+    // The functions `fn_lookup` & `fn_register` needs PIN's Lock.
+    // Locking is not implicit in inserted call, as opposed
+    // to callback added with *_AddInstrumentFunction().
+    PIN_LockClient();
+    FID fid = fn_lookup_by_address(target);
+    PIN_UnlockClient();
+
+    fn_call(ctxt, fid);
+
+    trace_leave();
+}
+
+VOID fn_ret(CONTEXT *ctxt) {
+    trace_enter();
+
+    if (!call_stack.is_top_forgotten()) {
+        FID fid = call_stack.top();
+
+        ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
+        param_val[fid][0]->push_front(regv);
+        if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
+            treated[fid] = true;
+        }
+    }
+
+    call_stack.pop();
+    trace_leave();
+}
+
+#if 0
+VOID stack_access(string ins, ADDRINT addr, ADDRINT ebp) {
+    if (call_stack.empty())
+        return;
+    string curr_fn = c    //all_stack.begin()->first;
+    if (curr_fn == "mem_alloc")
+        std::cerr << "plop " << std::hex << addr << " ; " << std::hex << ebp << endl;
+    if (addr > ebp) {
+        UINT64 offset = addr - ebp;
+        while (fns[curr_fn].param_access.size() < offset + 1) {
+            fns[curr_fn].param_access.push_back(0);
+            std::cerr << "pushing for " << curr_fn << endl;
+            for (list< pair<string, bool> >::iterator i = call_stack.begin(); i != call_stack.end(); i++)
+                std::cerr << i->first;
+            std::cerr << endl;
+        }
+        fns[curr_fn].param_access[offset]++;
+    }
+}
+#endif
+
+VOID Commence();
 
 /*  Instrumentation of each instruction
  *  that uses a memory operand
@@ -304,6 +302,36 @@ VOID Instruction(INS ins, VOID *v) {
                         (AFUNPTR) update_data,
                         IARG_MEMORYOP_EA, 0,
                         IARG_END);
+    }
+
+    if (INS_IsCall(ins)) {
+        if (INS_IsDirectCall(ins)) {
+            ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
+            FID fid = fn_lookup_by_address(addr);
+
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) fn_call,
+                        IARG_CONST_CONTEXT,
+                        IARG_UINT32, fid,
+                        IARG_END);
+        }
+        else {
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) fn_indirect_call,
+                        IARG_CONST_CONTEXT,
+                        IARG_BRANCH_TARGET_ADDR,
+                        IARG_END);
+        }
+    }
+
+    if (INS_IsRet(ins)) {
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) fn_ret,
+                    IARG_CONST_CONTEXT,
+                    IARG_END);
     }
 
     return;
@@ -337,6 +365,7 @@ VOID Commence() {
             ADDRINT img_addr = atol(read_part(&m).c_str());
             string name = read_part(&m);
             UINT64 int_arity = atol(read_part(&m).c_str());
+
             UINT64 stack_arity = atol(read_part(&m).c_str());
             UINT64 float_arity = atol(read_part(&m).c_str());
             UINT64 has_return = atol(read_part(&m).c_str());
@@ -422,11 +451,9 @@ VOID Fini(INT32 code, VOID *v) {
     trace_enter();
 
     /* Iterate on functions */
-    for(unsigned int fid = 0; fid < fn_nb(); fid++) {
+    for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
         if (!treated[fid])
             continue;
-        /* WARNING: Temporarily disable the type of return value */
-        /* To re-enable it, pid should start at 0 */
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)
                 << ":";
@@ -493,8 +520,6 @@ int main(int argc, char * argv[]) {
     param_is_int = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     ret_void = (bool *) calloc(NB_FN_MAX, sizeof(bool));
 
-    call_stack = new list<ADDRINT>();
-
     /* Initialize symbol table code,
        needed for rtn instrumentation */
     PIN_InitSymbols();
@@ -516,7 +541,6 @@ int main(int argc, char * argv[]) {
     }
 
     INS_AddInstrumentFunction(Instruction, 0);
-    RTN_AddInstrumentFunction(Routine, 0);
 
     /* Register Fini to be called when the
        application exits */

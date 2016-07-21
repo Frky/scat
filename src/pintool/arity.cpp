@@ -23,8 +23,8 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-//#define DEBUG_ENABLED
-//#define TRACE_ENABLED
+#define DEBUG_ENABLED 0
+#define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/registers.h"

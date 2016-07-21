@@ -1,7 +1,7 @@
 #ifndef DEBUG_H_
 #define DEBUG_H_
 
-#ifdef DEBUG_ENABLED
+#if DEBUG_ENABLED
     char debug_buf[250];
 
     #define debug(...) { \
@@ -12,7 +12,7 @@
     #define debug(...)
 #endif
 
-#ifdef TRACE_ENABLED
+#if TRACE_ENABLED
     char trace_buf[250];
 
     #define trace(...) { \

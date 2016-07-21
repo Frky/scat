@@ -41,6 +41,9 @@ class Result(object):
         if infcode == INF_ARITY:
             ar = ArityAnalysis(pgm, inputfile, data)
             ar.mismatch()
+        elif infcode == INF_TYPE:
+            ty = TypeAnalysis(pgm, inputfile, data)
+            ty.mismatch()
 
 
     def get_pgm_list(self, inf_code=None):

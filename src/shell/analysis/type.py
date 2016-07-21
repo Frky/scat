@@ -10,7 +10,7 @@ class TypeAnalysis(object):
         self.pgm = pgm
         self.logfile = logfile
         self.date = datetime.fromtimestamp(int(re.search("[0123456789]+", logfile).group()))
-        self.data = data.protos
+        self.data = data
         self.log = None
         self.parse_log()
 
@@ -92,30 +92,27 @@ class TypeAnalysis(object):
             print("- Ratio:                 {0:.2f}%".format(ratio))
 
 
-    def display(self):
-        for (img, imgaddr), (fn, args) in self.log.items():
-            line = ""
-            if len(args) == 0:
-                line += "void "
+    def args_str(self, fn, args):
+        line = ""
+        if len(args) == 0:
+            line += "void "
+        else:
+            endidx = args[0].find("(")
+            if endidx == -1:
+                line += args[0].lower()
             else:
-                endidx = args[0].find("(")
-                if endidx == -1:
-                    line += args[0].lower()
-                else:
-                    line += args[0][0:endidx].lower()
+                line += args[0][0:endidx].lower()
+        line += " "
+        if fn == "":
+            line += img
             line += " "
-            if fn == "":
-                line += img
-                line += " "
-                line += hex(imgaddr)
-            else:
-                line += fn
-            line += "("
-            if len(args) == 1:
-                line += "void"
-            if args is None or len(args) == 1:
-                line += ");"
-                continue
+            line += hex(imgaddr)
+        else:
+            line += fn
+        line += "("
+        if len(args) == 1:
+            line += "void"
+        if not (args is None or len(args) == 1):
             for i, arg in enumerate(args[1:]):
                 endidx = arg.find("(")
                 if endidx == -1:
@@ -124,7 +121,34 @@ class TypeAnalysis(object):
                     line += arg[0:endidx].lower()
                 if i != len(args) - 2:
                     line += ", "
-            line += ");"
-            print(line)
+        line += ");"
+        return line
+
+
+    def display(self):
+        for (img, imgaddr), (fn, args) in self.log.items():
+            print(self.args_str(fn, args))
         print("")
         self.print_general_info()
+
+
+    def mismatch(self):
+        self.print_general_info()
+        print("")
+
+        for (img, imgaddr), (fname, args) in self.log.items():
+            if fname == "" or fname not in self.data.keys():
+                continue
+
+            proto = self.data[fname]
+            if self.is_variadic(proto):
+                continue
+
+            res = self.check_one(fname, args, proto)
+
+            if res[0] == res[1]:
+                continue
+
+            print("[{}@{}] Invalid".format(img, hex(imgaddr)))
+            print("  {} -> {}".format(", ".join(proto[1:]), proto[0]))
+            print("  {} -> {}".format(", ".join(args[1:]), args[0]))
