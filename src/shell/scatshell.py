@@ -11,11 +11,9 @@ from confiture import Confiture, ConfigFileError
 
 from src.shell.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
 from src.shell.result import Result
-from src.shell.source_parser import SourceParser
-
+from src.shell.data.data import Data
 
 class ScatShell(Cmd):
-
 
     prompt = 'scat > '
 
@@ -334,7 +332,7 @@ class ScatShell(Cmd):
             Launch arity inference on the binary specified as a parameter
 
         """
-        print s
+        print(s)
         self.__inference(INF_ARITY, s)
 
 
@@ -521,13 +519,21 @@ class ScatShell(Cmd):
         """
         # TODO check number of args
         # TODO completion on args
-        pgm, srcdir = s.split(" ")
+        split = s.split(" ")
+        if len(split) == 1:
+            binary, srcdir = split[0], None
+        else:
+            binary, srcdir = split
+
+        pgm = os.path.basename(binary)
+
         # Check CLANG configuration
         conf = Confiture("config/templates/clang.yaml")
         conf.check("config/config.yaml")
         # Create a parser object
-        parser = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"], srcdir)
-        parser.parse()
+        data = Data(self.config["clang"]["data-path"], pgm)
+        data.parse(binary, self.config["clang"]["lib-path"], srcdir)
+        data.dump()
 
 
     #********** accuracy **********#
@@ -544,7 +550,7 @@ class ScatShell(Cmd):
     def do_accuracy(self, s):
         """
             Analyse the results of inference for a given program,
-            by comparison with source code.
+            by comparison with binary and source code.
 
         """
         try:
@@ -558,7 +564,9 @@ class ScatShell(Cmd):
         conf = Confiture("config/templates/clang.yaml")
         conf.check("config/config.yaml")
         try:
-            data = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"]).load()
+            data = Data(self.config["clang"]["data-path"], pgm)
+            data.load()
+            data = data.protos
         except IOError:
             data = None
         if data is None:
@@ -581,7 +589,7 @@ class ScatShell(Cmd):
     def do_mismatch(self, s):
         """
             Displays all mismatch for a given program,
-            by comparison with source code.
+            by comparison with binary and source code.
 
         """
         try:
@@ -595,7 +603,9 @@ class ScatShell(Cmd):
         conf = Confiture("config/templates/clang.yaml")
         conf.check("config/config.yaml")
         try:
-            data = SourceParser(self.config["clang"]["lib-path"], pgm, self.config["clang"]["data-path"]).load()
+            data = Data(self.config["clang"]["data-path"], pgm)
+            data.load()
+            data = data.protos
         except IOError:
             data = None
         if data is None:

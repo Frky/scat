@@ -67,6 +67,13 @@ inline unsigned int fn_nb() {
     return _fn_nb;
 }
 
+string basename(string img_name) {
+    std::size_t found = img_name.find_last_of("/");
+    return found == string::npos
+        ? img_name
+        : img_name.substr(found+1);
+}
+
 inline unsigned int fn_hash(string img_name, ADDRINT img_addr) {
     unsigned int hash = 289
                  + 17 * img_addr
@@ -81,16 +88,18 @@ FID fn_register(string img_name, ADDRINT img_addr, string name) {
         return FID_UNKNOWN;
     }
 
+    string img_basename = basename(img_name);
+
     FID fid = _fn_nb;
     _fn_nb++;
 
     FnEntry* entry = _entries_by_fid + fid;
     entry->fid = fid;
-    entry->img_name = new string(img_name);
+    entry->img_name = new string(img_basename);
     entry->img_addr = img_addr;
     entry->fn_name = new string(name);
 
-    FnEntry** bucket = _entries_by_hash + fn_hash(img_name, img_addr);
+    FnEntry** bucket = _entries_by_hash + fn_hash(img_basename, img_addr);
     entry->next = *bucket;
     *bucket = entry;
 
@@ -146,7 +155,7 @@ FID fn_lookup(IMG img, ADDRINT runtime_addr) {
         return FID_UNKNOWN;
     }
 
-    string img_name = IMG_Name(img);
+    string img_name = basename(IMG_Name(img));
     ADDRINT img_addr = runtime_addr - IMG_LoadOffset(img);
 
     FnEntry* entry = _entries_by_hash[fn_hash(img_name, img_addr)];

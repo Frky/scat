@@ -11,10 +11,10 @@ all: $(TESTS:=.bin)
 	gcc -S -masm=intel $<
 
 %.o: %.c
-	gcc -c $<
+	gcc -g -c $<
 
 %.bin: %.o
-	gcc -o $@ $<
+	gcc -g -o $@ $<
 
 .PHONY: clean
 clean:

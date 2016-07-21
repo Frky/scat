@@ -10,7 +10,7 @@ class TypeAnalysis(object):
         self.pgm = pgm
         self.logfile = logfile
         self.date = datetime.fromtimestamp(int(re.search("[0123456789]+", logfile).group()))
-        self.data = data
+        self.data = data.protos
         self.log = None
         self.parse_log()
 
@@ -33,7 +33,7 @@ class TypeAnalysis(object):
     def print_general_info(self):
         print("Information about inference")
         print("| Last inference:           {0}".format(self.date))
-        print("| Total functions infered:  {0}".format(len(self.log.keys())))
+        print("- Total functions infered:  {0}".format(len(self.log.keys())))
 
 
     def check_one(self, fname, args, proto):
@@ -78,16 +78,18 @@ class TypeAnalysis(object):
             total += res[1]
 
         print("Ignored")
-        print("| Without name:             {0}".format(without_name))
-        print("| Variadic:                 {0}".format(variadic))
-        print("- Not found (in source):    {0}".format(not_found))
+        print("| Without name:          {0}".format(without_name))
+        print("| Variadic:              {0}".format(variadic))
+        print("- Not in binary/source:  {0}".format(not_found))
         print("")
 
         print("Accuracy of inference")
-        print("| Ok/Total tested:          {0}/{1}".format(ok, total))
-        if total != 0:
+        if total == 0:
+            print("- Ok/Total tested:       {0}/{1}".format(ok, total))
+        else:
+            print("| Ok/Total tested:       {0}/{1}".format(ok, total))
             ratio = float(ok) * 100. / float(total)
-            print("- Ratio:                    {0:.2f}%".format(ratio))
+            print("- Ratio:                 {0:.2f}%".format(ratio))
 
 
     def display(self):
@@ -124,5 +126,5 @@ class TypeAnalysis(object):
                     line += ", "
             line += ");"
             print(line)
-        print()
+        print("")
         self.print_general_info()

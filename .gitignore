@@ -42,5 +42,6 @@ asm/mupdf.asm
 
 config/config.yaml
 *.log
+data/*
 pgm/*
 asm/*

@@ -8,7 +8,8 @@ class ArityAnalysis(object):
     def __init__(self, pgm, logfile, data=None):
         self.pgm = pgm
         self.logfile = logfile
-        self.date = datetime.fromtimestamp(int(re.search("[0123456789]+", logfile).group()))
+        date_str = re.search("[0123456789]+", logfile.split('_')[-1]).group()
+        self.date = datetime.fromtimestamp(int(date_str))
         self.data = data
         self.log = None
         self.parse_log()
@@ -41,7 +42,14 @@ class ArityAnalysis(object):
     def print_general_info(self):
         print("Information about inference")
         print("| Last inference:           {0}".format(self.date))
-        print("| Total functions infered:  {0}".format(len(self.log.keys())))
+        print("- Total functions infered:  {0}".format(len(self.log.keys())))
+
+
+    def display(self):
+        for (img, imgaddr), fn in self.log.items():
+           print("{} [{}@{}]".format(fn, img, hex(imgaddr)))
+        print("")
+        self.print_general_info()
 
 
     def accuracy(self):
@@ -50,6 +58,7 @@ class ArityAnalysis(object):
 
         without_name = 0
         variadic = 0
+        pseudo_functions = 0
         not_found = 0
 
         total = 0
@@ -58,8 +67,14 @@ class ArityAnalysis(object):
         for (img, imgaddr), fn_log in self.log.items():
             fn, int_ar, stack_ar, float_ar, ret = fn_log
             ar = int_ar + stack_ar + float_ar
-            if fn == "":
+            if fn == '':
                 without_name += 1
+                continue
+            elif ('.part.' in fn
+                    or '.isra.' in fn
+                    or '.constprop.' in fn
+                    or '.plt' in fn):
+                pseudo_functions += 1
                 continue
             elif fn not in self.data.keys():
                 not_found += 1
@@ -78,24 +93,20 @@ class ArityAnalysis(object):
                 ok_ret += 1
 
         print("Ignored")
-        print("| Without name:             {0}".format(without_name))
-        print("| Variadic:                 {0}".format(variadic))
-        print("- Not found (in source):    {0}".format(not_found))
+        print("| Without name:            {0}".format(without_name))
+        print("| Variadic:                {0}".format(variadic))
+        print("| Pseudo-Functions:        {0}".format(pseudo_functions))
+        print("- Not in binary/source:    {0}".format(not_found))
         print("")
 
         print("Accuracy of inference")
-        print("| Arity  Ok/Total tested:   {0}/{1}".format(ok_ar, total))
-        print("| Return Ok/Total tested:   {0}/{1}".format(ok_ret, total))
-        if total != 0:
-            print("| Ratio arity:              {0:.2f}%".format(float(ok_ar)*100./float(total)))
-            print("- Ratio return:             {0:.2f}%".format(float(ok_ret)*100./float(total)))
-
-
-    def display(self):
-        for (img, imgaddr), fn in self.log.items():
-           print("{} [{}@{}]".format(fn, img, hex(imgaddr)))
-        print()
-        self.print_general_info()
+        print("| Arity  Ok/Total tested:  {0}/{1}".format(ok_ar, total))
+        if total == 0:
+            print("- Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
+        else:
+            print("| Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
+            print("| Ratio arity:             {0:.2f}%".format(float(ok_ar)*100./float(total)))
+            print("- Ratio return:            {0:.2f}%".format(float(ok_ret)*100./float(total)))
 
 
     def mismatch(self):
