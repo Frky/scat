@@ -457,10 +457,21 @@ class ScatShell(Cmd):
 
     def do_make(self, s):
         """
-            (Re)compile  all pintools -- Experimental (WIP)
+            (Re)compile pintools 
 
         """
-        self.__pin.compile()
+        pintools = list()
+        if s != "":
+            to_compile = s.split(" ")
+            for pintool in to_compile:
+                code, name = inf_str_to_code(pintool), pintool
+                # Check if the pintool is known
+                if code == -1:
+                    # If not, print a message and abort
+                    self.stderr("pintool {0} is unknown".format(name))
+                    return
+                pintools.append((code, name))
+        self.__pin.compile(pintools)
 
 
     #********** display **********#

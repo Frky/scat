@@ -151,7 +151,7 @@ class Pin(object):
         self.log("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds))
 
 
-    def compile(self):
+    def compile(self, pintools=None):
         """
             Compile all pintools needed
 
@@ -178,9 +178,14 @@ class Pin(object):
         for dirpath, dirnames, filenames in os.walk("./src/pintool/utils"):
             for fname in filenames:
                 copyfile(dirpath + "/" + fname, wd + "/utils/" + fname)
-
-        inf = INF_ALL
-        inf = [ (INF_ARITY, "arity"), (INF_TYPE, "type") ]
+        
+        # If pintools are specified, only compile these ones
+        if pintools is not None and len(pintools) != 0:
+            inf = pintools
+        # Otherwise, compile all pintools
+        else:
+            inf = INF_ALL
+        # inf = [ (INF_ARITY, "arity"), (INF_TYPE, "type") ]
         for code in [c for c, n in inf if c in self.src.keys()]:
             pfile = self.src[code]
             self.log("Compiling {0} ...".format(pfile))
