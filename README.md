@@ -115,8 +115,8 @@ requires on execution for each of the three steps (**arity**, **type** and **cou
 ## Function identity
 
 Because scat is also meant to be used with stripped binaries (i.e. binaries without function name)
-scat requires another method to identify functions across all inferences. The solution choosen is to
-identify them using the name of the binary file where their are defined and the static address (offset) in
+A name-agnostic method is required to identify functions across all inferences. The solution choosen is to
+identify them using the name of the binary file where they are defined and the static address (offset) in
 this binary.
 
 **Note**: if the binary is not stripped, function names are still available as meta-informations.
