@@ -140,7 +140,7 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
         reg = REG_R8;
         break;
     case 6:
-        reg = REG_RDEBUG_ENABLED9;
+        reg = REG_R9;
         break;
     default:
         trace_leave();
