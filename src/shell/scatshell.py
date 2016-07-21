@@ -452,12 +452,15 @@ class ScatShell(Cmd):
 
 
     def help_make(self):
-        print(self.do_make.__doc__.replace("\n", ""))
+        print(self.do_make.__doc__)
 
 
     def do_make(self, s):
         """
-            (Re)compile pintools 
+            (Re)compile pintools. With no argument, this command recompiles 
+            every pintool registered. 
+
+            You can also specify the pintools you want to compile (e.g. make arity type)
 
         """
         pintools = list()
