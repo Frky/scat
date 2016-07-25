@@ -125,7 +125,7 @@ class ArityAnalysis(Analysis):
                 continue
 
             print("[{}@{}] {} ({}) -> {}".format(img, hex(imgaddr),
-                    fname, ", ".join(proto[1:]), proto[0]));
+                    fname, ", ".join(proto[1:]), proto[0]))
             if not arity_ok:
                 print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
             if not return_ok:

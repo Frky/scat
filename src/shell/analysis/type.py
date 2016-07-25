@@ -33,6 +33,7 @@ class TypeAnalysis(Analysis):
         else:
             Analysis.print_general_info_with_data(self, self.data)
 
+
     def check_one(self, fname, args, proto):
         ar = min(len(args), len(proto))
         ok, tot = 0, 0
@@ -127,6 +128,25 @@ class TypeAnalysis(Analysis):
         return line
 
 
+    def pp_data_type(self, type):
+        if '*' in type or '[' in type:
+            return 'ADDR '
+        elif type == 'void':
+            return 'VOID'
+        elif type == 'float' or type == 'double':
+            return 'FLOAT'
+        else:
+            return 'INT  '
+
+
+    def pp_inferred_type(self, type):
+        idx = type.find("(")
+        if idx == -1:
+            return type.ljust(5)
+        else:
+            return type[:idx].ljust(5)
+
+
     def display(self):
         for (img, imgaddr), (fn, args) in self.log.items():
             print(self.args_str(fn, args))
@@ -151,6 +171,11 @@ class TypeAnalysis(Analysis):
             if res[0] == res[1]:
                 continue
 
-            print("[{}@{}] Invalid {}".format(img, hex(imgaddr), fname))
-            print("  {} -> {}".format(", ".join(proto[1:]), proto[0]))
-            print("  {} -> {}".format(", ".join(args[1:]), args[0]))
+            print("[{}@{}] {}".format(img, hex(imgaddr), fname))
+            print("           {} -> {}".format(", ".join(proto[1:]), proto[0]))
+            print("Expected:  {} -> {}".format(
+                    ", ".join(map(self.pp_data_type, proto[1:])),
+                    self.pp_data_type(proto[0])))
+            print("Got:       {} -> {}".format(
+                    ", ".join(map(self.pp_inferred_type, args[1:])),
+                    self.pp_inferred_type(args[0])))
