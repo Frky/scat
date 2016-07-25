@@ -50,6 +50,7 @@ bool *treated;
 unsigned int *ret_addr;
 unsigned int *ret_call;
 unsigned int *nb_param_int;
+unsigned int *nb_param_stack;
 unsigned int *nb_param_float;
 unsigned int *nb_call;
 list<UINT64> **ret_val;
@@ -164,10 +165,11 @@ void fn_registered(FID fid,
             vector<UINT32> int_idx) {
     /* At first, this function is not treated yet */
     treated[fid] = false;
-    /* Set the number of parameters of this function */
+
     nb_param_int[fid] = int_arity;
-    /* Among them, set how many are floats */
+    nb_param_stack[fid] = stack_arity;
     nb_param_float[fid] = float_arity;
+
     /* Reset the number of calls for this function */
     nb_call[fid] = 0;
     /* Set the basic type of return value */
@@ -454,14 +456,20 @@ VOID Fini(INT32 code, VOID *v) {
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
         if (!treated[fid])
             continue;
+
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)
                 << ":";
+
+        bool need_comma = false;
+
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
             if (pid == 0 && ret_void[fid]) {
-                ofile << "VOID,";
+                ofile << "VOID";
+                need_comma = true;
                 continue;
             }
+
             for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
                 if (is_data(*it)) {
                     param_addr[fid][pid]++;
@@ -470,26 +478,37 @@ VOID Fini(INT32 code, VOID *v) {
 
             float coef = ((float) param_addr[fid][pid]) / ((float) nb_call[fid]);
 
+            if (need_comma)
+                ofile << "," ;
+
             if (coef > SEUIL && !param_is_int[fid][pid])
                 param_is_addr[fid][pid] = true;
-            if (param_call[fid][pid] > 0) {
+            if (param_call[fid][pid] > 0)
                 ofile << "UNDEF";
-            } else if (param_is_addr[fid][pid]) {
+            else if (param_is_addr[fid][pid])
                 ofile << "ADDR";
-            } else {
+            else
                 ofile << "INT";
-            }
-            ofile << "(" << coef << ")";
 
-            if (pid < nb_param_int[fid])
+            ofile << "(" << coef << ")";
+            need_comma = true;
+        }
+
+        for (unsigned int pid = 1; pid <= nb_param_stack[fid]; pid++) {
+            if (need_comma)
                 ofile << ",";
+            // TODO: Really infer type
+            ofile << "INT";
+            need_comma = true;
         }
 
         for (unsigned int pid = 1; pid <= nb_param_float[fid]; pid++) {
-            if (pid > 0 || nb_param_int[fid] > 0)
+            if (need_comma)
                 ofile << "," ;
             ofile << "FLOAT";
+            need_comma = true;
         }
+
         ofile << endl;
     }
 
@@ -510,6 +529,7 @@ int main(int argc, char * argv[]) {
     ret_addr = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     ret_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_int = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
+    nb_param_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_float = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     ret_val = (list<UINT64> **) malloc(NB_FN_MAX * sizeof(list<UINT64> *));
