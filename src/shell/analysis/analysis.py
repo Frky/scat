@@ -48,8 +48,14 @@ class Analysis(object):
         nb_inf_pgm = self.compute_nb_inf_pgm()
         nb_src = len(data.protos.keys())
         nb_src_pgm = len(data.protos_without_libs.keys())
-        coverage = float(nb_inf) * 100 / float(nb_src)
-        coverage_pgm = float(nb_inf_pgm) * 100 / float(nb_src_pgm)
+        if nb_src == 0:
+            coverage = float('nan')
+        else:
+            coverage = float(nb_inf) * 100 / float(nb_src)
+        if nb_src_pgm == 0:
+            coverage_pgm = float('nan')
+        else:
+            coverage_pgm = float(nb_inf_pgm) * 100 / float(nb_src_pgm)
 
         print("Inference")
         print("| Date:                 {}".format(self.date))

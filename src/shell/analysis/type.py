@@ -79,6 +79,11 @@ class TypeAnalysis(Analysis):
             ok += res[0]
             total += res[1]
 
+        if total == 0:
+            ratio = float('nan')
+        else:
+            ratio = float(ok) * 100. / float(total)
+
         print("Ignored")
         print("| Without name:          {0}".format(without_name))
         print("| Variadic:              {0}".format(variadic))
@@ -87,15 +92,11 @@ class TypeAnalysis(Analysis):
         print("")
 
         print("Accuracy of inference")
-        if total == 0:
-            print("- Ok/Total tested:       {0}/{1}".format(ok, total))
-        else:
-            print("| Ok/Total tested:       {0}/{1}".format(ok, total))
-            ratio = float(ok) * 100. / float(total)
-            print("- Ratio:                 {0:.2f}%".format(ratio))
+        print("| Ok/Total tested:       {0}/{1}".format(ok, total))
+        print("- Ratio:                 {0:.2f}%".format(ratio))
 
 
-    def args_str(self, fn, args):
+    def args_str(self, img, imgaddr, fn, args):
         line = ""
         if len(args) == 0:
             line += "void "
@@ -107,9 +108,7 @@ class TypeAnalysis(Analysis):
                 line += args[0][0:endidx].lower()
         line += " "
         if fn == "":
-            line += img
-            line += " "
-            line += hex(imgaddr)
+            line += '[{}@{}]'.format(img, hex(imgaddr))
         else:
             line += fn
         line += "("
@@ -149,7 +148,7 @@ class TypeAnalysis(Analysis):
 
     def display(self):
         for (img, imgaddr), (fn, args) in self.log.items():
-            print(self.args_str(fn, args))
+            print(self.args_str(img, imgaddr, fn, args))
         print("")
         self.print_general_info()
 
