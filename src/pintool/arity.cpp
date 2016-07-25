@@ -453,7 +453,7 @@ VOID fini(INT32 code, VOID *v) {
                 << ":" << float_arity
                 << ":" << (ret ? "1:" : "0:");
 
-        for (unsigned int pid = 0; pid < 16; pid++) {
+        for (unsigned int pid = 0; pid < int_arity; pid++) {
             if (param_max_size[fid][pid] > 0 && param_max_size[fid][pid] < 64) {
                 ofile << pid << ",";
             }

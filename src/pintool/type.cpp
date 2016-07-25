@@ -196,7 +196,7 @@ void fn_registered(FID fid,
 
     /* For all those we already know are not ADDR */
     for (unsigned int i = 0; i < int_idx.size(); i++) {
-        param_is_int[fid][int_idx[i]] = true;
+        param_is_int[fid][int_idx[i] + 1] = true;
     }
 }
 
