@@ -2,17 +2,18 @@
 
 from datetime import datetime
 import re
+from analysis import Analysis
 
-
-class TypeAnalysis(object):
+class TypeAnalysis(Analysis):
 
     def __init__(self, pgm, logfile, data=None):
-        self.pgm = pgm
-        self.logfile = logfile
-        self.date = datetime.fromtimestamp(int(re.search("[0123456789]+", logfile).group()))
+        Analysis.__init__(self, pgm, logfile)
+
         self.data = data
-        self.log = None
-        self.parse_log()
+        if data == None:
+            self.protos = None
+        else:
+            self.protos = data.protos
 
 
     def parse_log(self):
@@ -26,15 +27,11 @@ class TypeAnalysis(object):
                 self.log[(img, int(imgaddr))] = (fn, args)
 
 
-    def is_variadic(self, proto):
-        return proto[-1] == "..."
-
-
     def print_general_info(self):
-        print("Information about inference")
-        print("| Last inference:           {0}".format(self.date))
-        print("- Total functions infered:  {0}".format(len(self.log.keys())))
-
+        if self.data is None:
+            Analysis.print_general_info(self)
+        else:
+            Analysis.print_general_info_with_data(self, self.data)
 
     def check_one(self, fname, args, proto):
         ar = min(len(args), len(proto))
@@ -55,6 +52,7 @@ class TypeAnalysis(object):
 
         without_name = 0
         variadic = 0
+        pseudo_functions = 0
         not_found = 0
 
         total = 0
@@ -64,11 +62,14 @@ class TypeAnalysis(object):
             if fn == "":
                 without_name += 1
                 continue
-            elif fn not in self.data.keys():
+            elif self.is_pseudo_function(fn):
+                pseudo_functions += 1
+                continue
+            elif fn not in self.protos.keys():
                 not_found += 1
                 continue
 
-            proto = self.data[fn]
+            proto = self.protos[fn]
             if self.is_variadic(proto):
                 variadic += 1
                 continue
@@ -80,6 +81,7 @@ class TypeAnalysis(object):
         print("Ignored")
         print("| Without name:          {0}".format(without_name))
         print("| Variadic:              {0}".format(variadic))
+        print("| Pseudo-Functions:      {0}".format(pseudo_functions))
         print("- Not in binary/source:  {0}".format(not_found))
         print("")
 
@@ -137,10 +139,10 @@ class TypeAnalysis(object):
         print("")
 
         for (img, imgaddr), (fname, args) in self.log.items():
-            if fname == "" or fname not in self.data.keys():
+            if fname == "" or fname not in self.protos.keys():
                 continue
 
-            proto = self.data[fname]
+            proto = self.protos[fname]
             if self.is_variadic(proto):
                 continue
 
@@ -149,6 +151,6 @@ class TypeAnalysis(object):
             if res[0] == res[1]:
                 continue
 
-            print("[{}@{}] Invalid".format(img, hex(imgaddr)))
+            print("[{}@{}] Invalid {}".format(img, hex(imgaddr), fname))
             print("  {} -> {}".format(", ".join(proto[1:]), proto[0]))
             print("  {} -> {}".format(", ".join(args[1:]), args[0]))

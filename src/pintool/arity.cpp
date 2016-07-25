@@ -11,7 +11,7 @@
 #include "pin.H"
 
 #define NB_CALLS_TO_CONCLUDE    50
-#define NB_FN_MAX               10000
+#define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
 #define PARAM_THRESHOLD         0.10
 #define RETURN_THRESHOLD        0.05
@@ -23,7 +23,7 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-#define DEBUG_ENABLED 0
+#define DEBUG_ENABLED 1
 #define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
@@ -423,10 +423,16 @@ VOID fini(INT32 code, VOID *v) {
 
     debug("Hash table buckets mean size : %lf\n", fn_bucket_mean_size());
 
+    int inferred = 0;
+    int dismissed = 0;
+
     for (FID fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
+            dismissed++;
             continue;
         }
+
+        inferred++;
 
         uint32_t param_threshold = (int) ceil(nb_call[fid] * PARAM_THRESHOLD);
         uint32_t return_threshold = (int) ceil(nb_call[fid] * RETURN_THRESHOLD);
@@ -457,6 +463,10 @@ VOID fini(INT32 code, VOID *v) {
     }
 
     ofile.close();
+
+    debug("## Results\n");
+    debug("| Inferred  : %d\n", inferred);
+    debug("| Dismissed : %d\n", dismissed);
 
     trace_leave();
 }

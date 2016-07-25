@@ -2,17 +2,18 @@
 
 from datetime import datetime
 import re
+from analysis import Analysis
 
-class ArityAnalysis(object):
+class ArityAnalysis(Analysis):
 
     def __init__(self, pgm, logfile, data=None):
-        self.pgm = pgm
-        self.logfile = logfile
-        date_str = re.search("[0123456789]+", logfile.split('_')[-1]).group()
-        self.date = datetime.fromtimestamp(int(date_str))
+        Analysis.__init__(self, pgm, logfile)
+
         self.data = data
-        self.log = None
-        self.parse_log()
+        if data == None:
+            self.protos = None
+        else:
+            self.protos = data.protos
 
 
     def parse_log(self):
@@ -27,10 +28,6 @@ class ArityAnalysis(object):
                         int(ret))
 
 
-    def is_variadic(self, proto):
-        return proto[-1] == "..."
-
-
     def check_one_arity(self, fname, ar, proto):
         return ar == len(proto) - 1
 
@@ -40,9 +37,10 @@ class ArityAnalysis(object):
 
 
     def print_general_info(self):
-        print("Information about inference")
-        print("| Last inference:           {0}".format(self.date))
-        print("- Total functions infered:  {0}".format(len(self.log.keys())))
+        if self.data is None:
+            Analysis.print_general_info(self)
+        else:
+            Analysis.print_general_info_with_data(self, self.data)
 
 
     def display(self):
@@ -70,17 +68,14 @@ class ArityAnalysis(object):
             if fn == '':
                 without_name += 1
                 continue
-            elif ('.part.' in fn
-                    or '.isra.' in fn
-                    or '.constprop.' in fn
-                    or '.plt' in fn):
+            elif self.is_pseudo_function(fn):
                 pseudo_functions += 1
                 continue
-            elif fn not in self.data.keys():
+            elif fn not in self.protos.keys():
                 not_found += 1
                 continue
 
-            proto = self.data[fn]
+            proto = self.protos[fn]
             if self.is_variadic(proto):
                 variadic += 1
                 continue
@@ -116,10 +111,10 @@ class ArityAnalysis(object):
         for (img, imgaddr), fn_log in self.log.items():
             fname, int_ar, stack_ar, float_ar, ret = fn_log
             ar = int_ar + stack_ar + float_ar
-            if fname == "" or fname not in self.data.keys():
+            if fname == "" or fname not in self.protos.keys():
                 continue
 
-            proto = self.data[fname]
+            proto = self.protos[fname]
             if self.is_variadic(proto):
                 continue
 
