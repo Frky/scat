@@ -129,21 +129,21 @@ class TypeAnalysis(Analysis):
 
     def pp_data_type(self, type):
         if '*' in type or '[' in type:
-            return 'ADDR '
+            return 'addr '
         elif type == 'void':
-            return 'VOID'
+            return 'void '
         elif type == 'float' or type == 'double':
-            return 'FLOAT'
+            return 'float'
         else:
-            return 'INT  '
+            return 'int  '
 
 
     def pp_inferred_type(self, type):
         idx = type.find("(")
         if idx == -1:
-            return type.ljust(5)
+            return type.lower().ljust(5)
         else:
-            return type[:idx].ljust(5)
+            return type[:idx].lower().ljust(5)
 
 
     def display(self):
