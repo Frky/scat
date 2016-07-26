@@ -148,8 +148,10 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
         trace_leave();
         return;
     }
+
     ADDRINT regv = PIN_GetContextReg(ctxt, reg);
-    param_val[fid][pid]->push_front(regv);
+    if (regv != 0)
+        param_val[fid][pid]->push_front(regv);
 
     trace_leave();
 }
@@ -251,7 +253,8 @@ VOID fn_ret(CONTEXT *ctxt) {
         FID fid = call_stack.top();
 
         ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
-        param_val[fid][0]->push_front(regv);
+        if (regv != 0)
+            param_val[fid][0]->push_front(regv);
         if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
             treated[fid] = true;
         }
@@ -406,14 +409,10 @@ VOID Fini(INT32 code, VOID *v) {
                 continue;
             }
 
-            if (debugf) {
-                list<UINT64>::iterator it = param_val[fid][pid]->begin();
-                debug("  First value : %ld - %lX [%d]\n", *it, *it, is_data(*it));
-            }
-
             int param_addr = 0;
             for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
                 if (debugf) {
+                    debug("  * %ld - %lX [%d]\n", *it, *it, is_data(*it));
                 }
                 if (is_data(*it)) {
                     param_addr++;
