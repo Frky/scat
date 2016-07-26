@@ -464,8 +464,8 @@ class ScatShell(Cmd):
 
     def do_make(self, s):
         """
-            (Re)compile pintools. With no argument, this command recompiles 
-            every pintool registered. 
+            (Re)compile pintools. With no argument, this command recompiles
+            every pintool registered.
 
             You can also specify the pintools you want to compile (e.g. make arity type)
 
@@ -593,7 +593,6 @@ class ScatShell(Cmd):
         try:
             data = Data(self.config["clang"]["data-path"], pgm)
             data.load()
-            data = data.protos
         except IOError:
             data = None
         if data is None:
@@ -632,7 +631,6 @@ class ScatShell(Cmd):
         try:
             data = Data(self.config["clang"]["data-path"], pgm)
             data.load()
-            data = data.protos
         except IOError:
             data = None
         if data is None:
