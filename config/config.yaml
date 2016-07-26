@@ -27,3 +27,10 @@ clang:
     data-path: ./data/
 
 function-mode: name
+
+test:
+    proto:
+        src: ./test/proto/src
+        bin: ./test/proto/bin
+        log: ./test/proto/log
+

@@ -12,6 +12,7 @@ from confiture import Confiture, ConfigFileError
 from src.shell.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
 from src.shell.result import Result
 from src.shell.data.data import Data
+from src.shell.test import ScatTest
 
 class ScatShell(Cmd):
 
@@ -29,6 +30,7 @@ class ScatShell(Cmd):
         self.log_dir = self.config["log"]["path"]
         # Create a result object
         self.res = Result(self.log_dir)
+
         # Create a pin object with pin executable path
         # Get CLI options for pin
         if "cli-options" in self.config["pin"].keys():
@@ -55,9 +57,16 @@ class ScatShell(Cmd):
         kwargs["fn_mode"] = fn_mode
         kwargs["pinbin"] = self.config["pin"]["bin"]
         kwargs["respath"] = self.config["res"]["path"]
-
         # Init Pin
         self.__pin = Pin(**kwargs)
+
+        # Create a test object
+        # Testing options
+        kwargs = dict()
+        kwargs["log"] = self.out
+        if "test" in self.config.keys() and "proto" in self.config["test"]:
+            kwargs["proto"] = self.config["test"]["proto"]
+        self.test = ScatTest(**kwargs)
 
         # Init shell
         Cmd.__init__(self, completekey='tab')
@@ -534,6 +543,24 @@ class ScatShell(Cmd):
         data = Data(self.config["clang"]["data-path"], pgm)
         data.parse(binary, self.config["clang"]["lib-path"], srcdir)
         data.dump()
+
+
+    #********** testing **********#
+
+
+    def help_test(self):
+        print(self.do_test.__doc__.replace("\n", ""))
+
+    
+    def complete_test(self, text, line, begidx, endidx):
+        # TODO
+        pass
+
+
+    def do_test(self, s):
+        # TODO documentation
+        # TODO check that config is specified in config file (+template)
+        self.test.arity(self.__pin.infer)
 
 
     #********** accuracy **********#

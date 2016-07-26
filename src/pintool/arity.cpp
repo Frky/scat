@@ -25,12 +25,14 @@
 
 #define DEBUG_ENABLED 0
 #define TRACE_ENABLED 0
+
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/registers.h"
 #include "utils/hollow_stack.h"
 
 ofstream ofile;
+// TODO change "mouaha"
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
 UINT64 FN_MODE;
 KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");

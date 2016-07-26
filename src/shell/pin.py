@@ -107,8 +107,8 @@ class Pin(object):
                 self.src[code] = kwargs[pt + "_src"]
 
 
-    def log(self, msg):
-        if self.__log is not None:
+    def log(self, msg, verbose):
+        if self.__log is not None and verbose:
             self.__log(msg)
 
 
@@ -120,7 +120,7 @@ class Pin(object):
         return "{0} {4} -t {1} -o {2} -fn \"{7}\" {3} -- {5} {6}".format(self.pinbin, pintool, logfile, infile_opt, self.cli_options, binary, " ".join(args), self.fn_mode)
 
 
-    def infer(self, inf_code, binary, args, logfile, infile=None):
+    def infer(self, inf_code, binary, args, logfile, infile=None, verbose=True):
         """
             Launch specified inference on binary given in parameter
 
@@ -138,17 +138,19 @@ class Pin(object):
             @param infile   path to the file where previous inference result is
                             stored (must be a valid path)
 
+            @param verbose  if True, print intermediate steps
+
         """
         if inf_code == INF_BASE:
             cmd = "{0} {1}".format(binary, " ".join(args))
         else:
             cmd = self.__cmd(self.pintool[inf_code], binary, args, logfile, infile)
-        self.log(cmd)
+        self.log(cmd, verbose)
         start = datetime.now()
         subprocess.call(cmd, shell=True)
         duration = datetime.now() - start
-        self.log("Inference results logged in {0}".format(logfile))
-        self.log("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds))
+        self.log("Inference results logged in {0}".format(logfile), verbose)
+        self.log("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds), verbose)
 
 
     def compile(self, pintools=None):
