@@ -23,7 +23,7 @@
 #define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
-#define SEUIL                   0.01
+#define THRESHOLD               0.01
 
 #define FN_NAME 1
 #define FN_ADDR 0
@@ -39,28 +39,21 @@ KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Spe
 /* Inferred data address space*/
 UINT64 DATA1_BASE, DATA1_TOP;
 UINT64 DATA2_BASE, DATA2_TOP;
-/* Inferred code address space*/
-UINT64 CODE_BASE, CODE_TOP;
 
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
 
-int nb_calls = 0;
-
-bool *treated;
-unsigned int *ret_addr;
-unsigned int *ret_call;
+/* Arity informations for each functions */
 unsigned int *nb_param_int;
 unsigned int *nb_param_stack;
 unsigned int *nb_param_float;
-unsigned int *nb_call;
-list<UINT64> **ret_val;
-UINT64 **param_call;
-list<UINT64> ***param_val;
-bool **param_is_addr;
-bool **param_is_int;
 bool *ret_void;
+bool **param_is_not_addr;
+
+/* Variables used for the analysis of each function */
+unsigned int *nb_call;
+list<UINT64> ***param_val;
 
 bool init = false;
 
@@ -110,17 +103,6 @@ bool is_data(UINT64 addr) {
 }
 
 
-/*  Update the values of code address space
- *  regarding the new address value addr
- */
-VOID update_code(UINT64 addr) {
-    if (CODE_BASE == 0 || CODE_BASE > addr)
-        CODE_BASE = addr;
-    if (CODE_TOP == 0 || CODE_TOP < addr)
-        CODE_TOP = addr;
-}
-
-
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     trace_enter();
 
@@ -156,59 +138,32 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     trace_leave();
 }
 
+// Register and initialize the functions found with the arity pintool
 void fn_registered(FID fid,
             unsigned int int_arity,
             unsigned int stack_arity,
             unsigned int float_arity,
             bool has_return,
             vector<UINT32> int_idx) {
-    /* At first, this function is not treated yet */
-    treated[fid] = false;
-
     nb_param_int[fid] = int_arity;
     nb_param_stack[fid] = stack_arity;
     nb_param_float[fid] = float_arity;
-
-    /* Reset the number of calls for this function */
-    nb_call[fid] = 0;
-    /* Set the basic type of return value */
     ret_void[fid] = !has_return;
+    param_is_not_addr[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
 
-    /* Create arrays of lists (one for each parameter, plus one for the return value) */
-    /* For parameter values */
+    nb_call[fid] = 0;
     param_val[fid] = (list<UINT64> **) malloc((int_arity + 1) * sizeof(list<UINT64> *));
-    /* For the number of addresses detected */
-    /* For the number of calls detected */
-    param_call[fid] = (UINT64 *) malloc((int_arity + 1) * sizeof(UINT64));
-    /* For the final decision */
-    param_is_addr[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
-    param_is_int[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
 
-    for (unsigned int i = 0; i < int_arity + 1; i++) {
-        param_call[fid][i] = 0;
-        param_is_addr[fid][i] = false;
-        param_is_int[fid][i] = false;
-        param_val[fid][i] = new list<UINT64>();
+    for (unsigned int pid = 0; pid < int_arity + 1; pid++) {
+        param_is_not_addr[fid][pid] = false;
+        param_val[fid][pid] = new list<UINT64>();
     }
 
-    /* For all those we already know are not ADDR */
     for (unsigned int i = 0; i < int_idx.size(); i++) {
-        param_is_int[fid][int_idx[i] + 1] = true;
+        // + 1 because arity does not meld params with return
+        int pid = int_idx[i] + 1;
+        param_is_not_addr[fid][pid] = true;
     }
-}
-
-FID fn_add(string img_name, ADDRINT img_addr, string name,
-            unsigned int int_arity,
-            unsigned int stack_arity,
-            unsigned int float_arity,
-            bool has_return,
-            vector<UINT32> int_idx) {
-    FID fid = fn_register(img_name, img_addr, name);
-    if (fid != FID_UNKNOWN) {
-        fn_registered(fid, int_arity, stack_arity, float_arity, has_return,
-            int_idx);
-    }
-    return fid;
 }
 
 VOID fn_call(CONTEXT *ctxt, FID fid) {
@@ -216,7 +171,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 
     call_stack.push(fid);
 
-    if (treated[fid]) {
+    if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
         trace_leave();
         return;
     }
@@ -255,16 +210,66 @@ VOID fn_ret(CONTEXT *ctxt) {
         ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
         if (regv != 0)
             param_val[fid][0]->push_front(regv);
-        if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
-            treated[fid] = true;
-        }
     }
 
     call_stack.pop();
     trace_leave();
 }
 
-VOID Commence();
+string read_part(char* c) {
+    char m;
+    string str = "";
+
+    ifile.read(&m, 1);
+    while (ifile && m != ':' && m != ',' && m != '\n') {
+        str += m;
+        ifile.read(&m, 1);
+    }
+
+    *c = m;
+    return str;
+}
+
+VOID Commence() {
+    init = true;
+
+    if (ifile.is_open()) {
+        while (ifile) {
+            char m;
+            string img_name = read_part(&m);
+            if (img_name.empty()) {
+                continue;
+            }
+
+            ADDRINT img_addr = atol(read_part(&m).c_str());
+            string name = read_part(&m);
+
+            UINT64 int_arity = atol(read_part(&m).c_str());
+            UINT64 stack_arity = atol(read_part(&m).c_str());
+            UINT64 float_arity = atol(read_part(&m).c_str());
+            UINT64 has_return = atol(read_part(&m).c_str());
+
+            vector<UINT32> int_param_idx;
+            while (ifile && m != '\n') {
+                string part = read_part(&m);
+                if (part.length() == 0) {
+                    break;
+                }
+
+                long idx = atol(part.c_str());
+                int_param_idx.push_back(idx);
+            }
+
+            FID fid = fn_register(img_name, img_addr, name);
+            if (fid != FID_UNKNOWN) {
+                fn_registered(fid, int_arity, stack_arity, float_arity, has_return,
+                    int_param_idx);
+            }
+        }
+    }
+
+    return;
+}
 
 /*  Instrumentation of each instruction
  *  that uses a memory operand
@@ -316,60 +321,6 @@ VOID Instruction(INS ins, VOID *v) {
     return;
 }
 
-string read_part(char* c) {
-    char m;
-    string str = "";
-
-    ifile.read(&m, 1);
-    while (ifile && m != ':' && m != ',' && m != '\n') {
-        str += m;
-        ifile.read(&m, 1);
-    }
-
-    *c = m;
-    return str;
-}
-
-VOID Commence() {
-    init = true;
-
-    if (ifile.is_open()) {
-        while (ifile) {
-            char m;
-            string img_name = read_part(&m);
-            if (img_name.empty()) {
-                continue;
-            }
-
-            ADDRINT img_addr = atol(read_part(&m).c_str());
-            string name = read_part(&m);
-
-            UINT64 int_arity = atol(read_part(&m).c_str());
-            UINT64 stack_arity = atol(read_part(&m).c_str());
-            UINT64 float_arity = atol(read_part(&m).c_str());
-            UINT64 has_return = atol(read_part(&m).c_str());
-
-            vector<UINT32> int_param_idx;
-            while (ifile && m != '\n') {
-                string part = read_part(&m);
-                if (part.length() == 0) {
-                    break;
-                }
-
-                long idx = atol(part.c_str());
-                int_param_idx.push_back(idx);
-            }
-
-            fn_add(img_name, img_addr, name,
-                    int_arity, stack_arity, float_arity,
-                    has_return,
-                    int_param_idx);
-        }
-    }
-
-    return;
-}
-
 VOID Fini(INT32 code, VOID *v) {
     trace_enter();
 
@@ -379,7 +330,7 @@ VOID Fini(INT32 code, VOID *v) {
 
     /* Iterate on functions */
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
-        if (!treated[fid])
+        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE)
             continue;
 
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
@@ -427,17 +378,10 @@ VOID Fini(INT32 code, VOID *v) {
             if (debugf) {
                 debug("  Param Addr   : %f\n", coef);
                 debug("  Coef   : %f\n", coef);
-                debug("  Is Int : %d\n", param_is_int[fid][pid]);
+                debug("  Is Int : %d\n", param_is_not_addr[fid][pid]);
             }
 
-            if (coef > SEUIL && !param_is_int[fid][pid]) {
-                param_is_addr[fid][pid] = true;
-            }
-
-            if (param_call[fid][pid] > 0) {
-                ofile << "UNDEF";
-            }
-            else if (param_is_addr[fid][pid]) {
+            if (coef > THRESHOLD && !param_is_not_addr[fid][pid]) {
                 if (debugf)
                     debug("  ADDR !\n");
                 ofile << "ADDR";
@@ -480,22 +424,15 @@ int main(int argc, char * argv[]) {
     DATA2_BASE = 0;
     DATA1_TOP = 0;
     DATA2_TOP = 0;
-    CODE_BASE = 0;
-    CODE_TOP = 0;
 
-    treated = (bool *) malloc(NB_FN_MAX * sizeof(bool));
-    ret_addr = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    ret_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_int = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_float = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    ret_val = (list<UINT64> **) malloc(NB_FN_MAX * sizeof(list<UINT64> *));
-    param_call = (UINT64 **) malloc(NB_FN_MAX * sizeof(UINT64 *));
-    param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
-    param_is_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
-    param_is_int = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     ret_void = (bool *) calloc(NB_FN_MAX, sizeof(bool));
+    param_is_not_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
+
+    nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
+    param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
 
     /* Initialize symbol table code,
        needed for rtn instrumentation */
