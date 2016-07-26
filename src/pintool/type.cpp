@@ -1,4 +1,6 @@
 #include <list>
+#include <algorithm>
+#include <iterator>
 #include <map>
 #include <iostream>
 #include <iomanip>
@@ -11,7 +13,7 @@
 
 #include "pin.H"
 
-#define DEBUG_ENABLED 0
+#define DEBUG_ENABLED 1
 #define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
@@ -55,7 +57,6 @@ unsigned int *nb_param_float;
 unsigned int *nb_call;
 list<UINT64> **ret_val;
 UINT64 **param_call;
-UINT64 **param_addr;
 list<UINT64> ***param_val;
 bool **param_is_addr;
 bool **param_is_int;
@@ -149,10 +150,6 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     }
     ADDRINT regv = PIN_GetContextReg(ctxt, reg);
     param_val[fid][pid]->push_front(regv);
-#if 0
-    if (is_data(regv))
-        param_addr[fid][pid]++;
-#endif
 
     trace_leave();
 }
@@ -179,7 +176,6 @@ void fn_registered(FID fid,
     /* For parameter values */
     param_val[fid] = (list<UINT64> **) malloc((int_arity + 1) * sizeof(list<UINT64> *));
     /* For the number of addresses detected */
-    param_addr[fid] = (UINT64 *) malloc((int_arity + 1) * sizeof(UINT64));
     /* For the number of calls detected */
     param_call[fid] = (UINT64 *) malloc((int_arity + 1) * sizeof(UINT64));
     /* For the final decision */
@@ -187,7 +183,6 @@ void fn_registered(FID fid,
     param_is_int[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
 
     for (unsigned int i = 0; i < int_arity + 1; i++) {
-        param_addr[fid][i] = 0;
         param_call[fid][i] = 0;
         param_is_addr[fid][i] = false;
         param_is_int[fid][i] = false;
@@ -266,27 +261,6 @@ VOID fn_ret(CONTEXT *ctxt) {
     trace_leave();
 }
 
-#if 0
-VOID stack_access(string ins, ADDRINT addr, ADDRINT ebp) {
-    if (call_stack.empty())
-        return;
-    string curr_fn = c    //all_stack.begin()->first;
-    if (curr_fn == "mem_alloc")
-        std::cerr << "plop " << std::hex << addr << " ; " << std::hex << ebp << endl;
-    if (addr > ebp) {
-        UINT64 offset = addr - ebp;
-        while (fns[curr_fn].param_access.size() < offset + 1) {
-            fns[curr_fn].param_access.push_back(0);
-            std::cerr << "pushing for " << curr_fn << endl;
-            for (list< pair<string, bool> >::iterator i = call_stack.begin(); i != call_stack.end(); i++)
-                std::cerr << i->first;
-            std::cerr << endl;
-        }
-        fns[curr_fn].param_access[offset]++;
-    }
-}
-#endif
-
 VOID Commence();
 
 /*  Instrumentation of each instruction
@@ -344,7 +318,7 @@ string read_part(char* c) {
     string str = "";
 
     ifile.read(&m, 1);
-    while (ifile && m != ':' && m != '\n') {
+    while (ifile && m != ':' && m != ',' && m != '\n') {
         str += m;
         ifile.read(&m, 1);
     }
@@ -366,15 +340,21 @@ VOID Commence() {
 
             ADDRINT img_addr = atol(read_part(&m).c_str());
             string name = read_part(&m);
-            UINT64 int_arity = atol(read_part(&m).c_str());
 
+            UINT64 int_arity = atol(read_part(&m).c_str());
             UINT64 stack_arity = atol(read_part(&m).c_str());
             UINT64 float_arity = atol(read_part(&m).c_str());
             UINT64 has_return = atol(read_part(&m).c_str());
 
             vector<UINT32> int_param_idx;
             while (ifile && m != '\n') {
-                int_param_idx.push_back(atol(read_part(&m).c_str()));
+                string part = read_part(&m);
+                if (part.length() == 0) {
+                    break;
+                }
+
+                long idx = atol(part.c_str());
+                int_param_idx.push_back(idx);
             }
 
             fn_add(img_name, img_addr, name,
@@ -387,70 +367,12 @@ VOID Commence() {
     return;
 }
 
-#if 0
-/*  This function is called at the end of the
- *  execution
- */
-VOID Fini(INT32 code, VOID *v) {
-    unsigned int i;
-    std::cout << "DATA : [0x" << std::hex << DATA_BASE << " ; 0x" << std::hex << DATA_TOP << "]" << endl;
-    std::cout << "CODE : [0x" << std::hex << CODE_BASE << " ; 0x" << std::hex << CODE_TOP << "]" << endl;
-
-    map<string, func_t>::iterator senti, o_senti;
-    for (senti = fns.begin(); senti != fns.end(); senti++) {
-        if (senti->second.treated) { // || (senti->second.ret_call + senti->second.param_call[0]) > 0) {
-            std::cout << senti->first << "(";
-            float coef = ((float) senti->second.ret_addr) / ((float) senti->second._nb_call);
-            if (coef > SEUIL) {
-                senti->second.ret_is_addr = true;
-            }
-            for (i = 0; i < senti->second._nb_param; i++) {
-                if (((float) senti->second.param_addr[i]) /
-                        ((float) senti->second._nb_call) > SEUIL) {
-                    senti->second.param_is_addr[i] = true;
-                }
-#if 0
-                if (senti->param_call[i] > 0)
-                    std::cout << "FNC";
-#endif
-                if (senti->second.param_is_addr[i])
-                    std::cout << "ADDR";
-                else
-                    std::cout << "INT";
-                if (i < senti->second._nb_param - 1)
-                    std::cout << ", ";
-            }
-            std::cout << ") -> ";
-            if (senti->second.ret_call > 0)
-                std::cout << "FNC";
-            else if (senti->second.ret_is_addr)
-                std::cout << "ADDR";        return;
-
-        ]))
-                continue;
-            list<UINT64>::iterator ret, param;
-            int nb_link = 0;
-            for (
-                    param = o_senti->second.param_val[0].begin();
-                    param != o_senti->second.param_val[0].end();
-                    param++
-                   ) {
-                for (ret = senti->second.ret_val.begin(); ret != senti->second.ret_val.end(); ret++) {
-                    if (*ret == *param) {
-                        nb_link += 1;
-                        break;
-                    }
-                }
-            }
-            if (senti->second._nb_call > 10 && nb_link > 0)
-                ENTERstd::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << senti->first << " -> " << o_senti->first << endl;
-        }
-    }
-}
-#endif
-
 VOID Fini(INT32 code, VOID *v) {
     trace_enter();
+
+    debug("Fini : \n");
+    debug("  DATA1: %lX - %lX\n", DATA1_BASE, DATA1_TOP);
+    debug("  DATA2: %lX - %lX\n", DATA2_BASE, DATA2_TOP);
 
     /* Iterate on functions */
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
@@ -463,32 +385,69 @@ VOID Fini(INT32 code, VOID *v) {
 
         bool need_comma = false;
 
+        bool debugf = fn_name(fid).compare("dfasuperset") == 0;
+        if (debugf) {
+            debug("Found [%s@%lX] %s\n",
+                    fn_img(fid).c_str(),
+                    fn_imgaddr(fid),
+                    fn_name(fid).c_str());
+        }
+
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
+            if (debugf) {
+                debug("# Pid %d\n", pid);
+            }
             if (pid == 0 && ret_void[fid]) {
+                if (debugf) {
+                    debug("  Is void return\n");
+                }
                 ofile << "VOID";
                 need_comma = true;
                 continue;
             }
 
+            if (debugf) {
+                list<UINT64>::iterator it = param_val[fid][pid]->begin();
+                debug("  First value : %ld - %lX [%d]\n", *it, *it, is_data(*it));
+            }
+
+            int param_addr = 0;
             for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
+                if (debugf) {
+                }
                 if (is_data(*it)) {
-                    param_addr[fid][pid]++;
+                    param_addr++;
                 }
             }
 
-            float coef = ((float) param_addr[fid][pid]) / ((float) nb_call[fid]);
+            float coef = ((float) param_addr) / ((float) nb_call[fid]);
 
             if (need_comma)
                 ofile << "," ;
 
-            if (coef > SEUIL && !param_is_int[fid][pid])
+            if (debugf) {
+                debug("  Param Addr   : %f\n", coef);
+                debug("  Coef   : %f\n", coef);
+                debug("  Is Int : %d\n", param_is_int[fid][pid]);
+            }
+
+            if (coef > SEUIL && !param_is_int[fid][pid]) {
                 param_is_addr[fid][pid] = true;
-            if (param_call[fid][pid] > 0)
+            }
+
+            if (param_call[fid][pid] > 0) {
                 ofile << "UNDEF";
-            else if (param_is_addr[fid][pid])
+            }
+            else if (param_is_addr[fid][pid]) {
+                if (debugf)
+                    debug("  ADDR !\n");
                 ofile << "ADDR";
-            else
+            }
+            else {
+                if (debugf)
+                    debug("  INT  !\n");
                 ofile << "INT";
+            }
 
             ofile << "(" << coef << ")";
             need_comma = true;
@@ -534,7 +493,6 @@ int main(int argc, char * argv[]) {
     nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     ret_val = (list<UINT64> **) malloc(NB_FN_MAX * sizeof(list<UINT64> *));
     param_call = (UINT64 **) malloc(NB_FN_MAX * sizeof(UINT64 *));
-    param_addr = (UINT64 **) malloc(NB_FN_MAX * sizeof(UINT64 *));
     param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
     param_is_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     param_is_int = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
