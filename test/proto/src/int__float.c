@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-// ORACLE FLOAT FOO(INT)
+// ORACLE FLOAT foo(INT)
 
 float foo(int a) {
     float b;

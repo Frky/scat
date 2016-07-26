@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-// ORACLE INT FOO(INT)
+// ORACLE INT foo(INT)
 
 int foo(int a) {
     int b;
@@ -19,7 +19,7 @@ int main(void) {
     
     int a = 0, i;
 
-    for (i=0; i < 10000; i++) {
+    for (i=0; i < 1000; i++) {
         a += foo(rand() % 65536);
     }
 

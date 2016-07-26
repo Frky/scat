@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-// ORACLE INT FOO(VOID)
+// ORACLE INT foo(VOID)
 
 int foo(void) {
     int a, b;
@@ -18,8 +18,12 @@ int foo(void) {
 
 int main(void) {
     
-    int a = foo();
-    int b = foo();
+    int a, b, i;
+
+    for (i = 0; i < 100; i++) {
+        a = foo();
+        b = foo();
+    }
 
     return a + b; 
 }

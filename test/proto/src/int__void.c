@@ -21,7 +21,7 @@ void foo(int b) {
 int main(void) {
     int i;
     for (i = 0; i < rand() % 65536; i++)
-        foo(rand());
+        foo(rand() % 65536);
     return 0; 
 }
 
