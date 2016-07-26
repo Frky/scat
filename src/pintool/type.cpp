@@ -23,7 +23,7 @@
 #define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
-#define THRESHOLD               0.01
+#define THRESHOLD               0.26
 
 #define FN_NAME 1
 #define FN_ADDR 0
@@ -48,7 +48,7 @@ HollowStack<MAX_DEPTH, FID> call_stack;
 unsigned int *nb_param_int;
 unsigned int *nb_param_stack;
 unsigned int *nb_param_float;
-bool *ret_void;
+bool *has_return;
 bool **param_is_not_addr;
 
 /* Variables used for the analysis of each function */
@@ -140,21 +140,21 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
 
 // Register and initialize the functions found with the arity pintool
 void fn_registered(FID fid,
-            unsigned int int_arity,
-            unsigned int stack_arity,
-            unsigned int float_arity,
-            bool has_return,
+            unsigned int _nb_param_int,
+            unsigned int _nb_param_stack,
+            unsigned int _nb_param_float,
+            bool _has_return,
             vector<UINT32> int_idx) {
-    nb_param_int[fid] = int_arity;
-    nb_param_stack[fid] = stack_arity;
-    nb_param_float[fid] = float_arity;
-    ret_void[fid] = !has_return;
-    param_is_not_addr[fid] = (bool *) malloc((int_arity + 1) * sizeof(bool));
+    nb_param_int[fid] = _nb_param_int;
+    nb_param_stack[fid] = _nb_param_stack;
+    nb_param_float[fid] = _nb_param_float;
+    has_return[fid] = _has_return;
+    param_is_not_addr[fid] = (bool *) malloc((_nb_param_int + 1) * sizeof(bool));
 
     nb_call[fid] = 0;
-    param_val[fid] = (list<UINT64> **) malloc((int_arity + 1) * sizeof(list<UINT64> *));
+    param_val[fid] = (list<UINT64> **) malloc((_nb_param_int + 1) * sizeof(list<UINT64> *));
 
-    for (unsigned int pid = 0; pid < int_arity + 1; pid++) {
+    for (unsigned int pid = 0; pid < _nb_param_int + 1; pid++) {
         param_is_not_addr[fid][pid] = false;
         param_val[fid][pid] = new list<UINT64>();
     }
@@ -339,7 +339,7 @@ VOID Fini(INT32 code, VOID *v) {
 
         bool need_comma = false;
 
-        bool debugf = fn_name(fid).compare("dfasuperset") == 0;
+        bool debugf = fn_name(fid).compare("strcmp") == 0;
         if (debugf) {
             debug("Found [%s@%lX] %s\n",
                     fn_img(fid).c_str(),
@@ -351,11 +351,21 @@ VOID Fini(INT32 code, VOID *v) {
             if (debugf) {
                 debug("# Pid %d\n", pid);
             }
-            if (pid == 0 && ret_void[fid]) {
+            if (pid == 0 && !has_return[fid]) {
                 if (debugf) {
                     debug("  Is void return\n");
                 }
                 ofile << "VOID";
+                need_comma = true;
+                continue;
+            }
+
+            if (param_val[fid][pid]->size() < NB_CALLS_TO_CONCLUDE / 3) {
+                debug("  Not enough values to conclude\n");
+
+                if (need_comma)
+                    ofile << "," ;
+                ofile << "UNDEF";
                 need_comma = true;
                 continue;
             }
@@ -370,15 +380,14 @@ VOID Fini(INT32 code, VOID *v) {
                 }
             }
 
-            float coef = ((float) param_addr) / ((float) nb_call[fid]);
+            float coef = ((float) param_addr) / ((float) param_val[fid][pid]->size());
 
             if (need_comma)
                 ofile << "," ;
 
             if (debugf) {
-                debug("  Param Addr   : %f\n", coef);
-                debug("  Coef   : %f\n", coef);
-                debug("  Is Int : %d\n", param_is_not_addr[fid][pid]);
+                debug("  Coef        : %f\n", coef);
+                debug("  Is Not Addr : %d\n", param_is_not_addr[fid][pid]);
             }
 
             if (coef > THRESHOLD && !param_is_not_addr[fid][pid]) {
@@ -428,7 +437,7 @@ int main(int argc, char * argv[]) {
     nb_param_int = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_float = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    ret_void = (bool *) calloc(NB_FN_MAX, sizeof(bool));
+    has_return = (bool *) calloc(NB_FN_MAX, sizeof(bool));
     param_is_not_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
 
     nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
