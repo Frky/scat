@@ -78,7 +78,7 @@ class DwarfExtractor(object):
             if DIE.offset != addr:
                 continue
 
-            if (DIE.tag == 'DW_TAG_base_type' or DIE.tag == 'DW_TAG_typedef'):
+            if (DIE.tag == 'DW_TAG_base_type'):
                 name = DIE.attributes['DW_AT_name']
                 return name.value
             elif DIE.tag == 'DW_TAG_structure_type':
@@ -101,6 +101,9 @@ class DwarfExtractor(object):
                     return 'anonymous union'
             elif (DIE.tag == 'DW_TAG_subroutine_type'):
                 return self.subroutine_type(CU, DIE)
+            elif DIE.tag == 'DW_TAG_typedef':
+                name = DIE.attributes['DW_AT_name']
+                return "typedef " + self.DIE_type(CU, DIE) + " " + name.value
             elif DIE.tag == 'DW_TAG_const_type':
                 return "const " + self.DIE_type(CU, DIE)
             elif DIE.tag == 'DW_TAG_volatile_type':
