@@ -5,11 +5,11 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <cmath>
 
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
-#include <math.h>
 
 #include "pin.H"
 
@@ -84,7 +84,7 @@ VOID update_data(UINT64 addr) {
         }
     }
     if (addr < DATA2_BASE && addr > DATA1_TOP) {
-        if (abs(addr - DATA2_BASE) < abs(addr - DATA1_TOP)) {
+        if (std::abs(addr - DATA2_BASE) < std::abs(addr - DATA1_TOP)) {
             DATA2_BASE = addr;
             //debug("DATA2_BASE <- %lx\n", addr);
         } else {
