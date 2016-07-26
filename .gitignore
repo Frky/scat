@@ -45,3 +45,7 @@ config/config.yaml
 data/*
 pgm/*
 asm/*
+
+# Test files (bin & log)
+test/proto/bin/*
+test/proto/log/*
