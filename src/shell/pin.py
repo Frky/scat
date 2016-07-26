@@ -107,7 +107,7 @@ class Pin(object):
                 self.src[code] = kwargs[pt + "_src"]
 
 
-    def log(self, msg, verbose):
+    def log(self, msg, verbose=True):
         if self.__log is not None and verbose:
             self.__log(msg)
 

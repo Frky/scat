@@ -560,7 +560,7 @@ class ScatShell(Cmd):
     def do_test(self, s):
         # TODO documentation
         # TODO check that config is specified in config file (+template)
-        self.test.arity(self.__pin.infer)
+        self.test.proto(self.__pin.infer)
 
 
     #********** accuracy **********#
