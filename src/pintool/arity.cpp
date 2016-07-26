@@ -23,7 +23,7 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-#define DEBUG_ENABLED 1
+#define DEBUG_ENABLED 0
 #define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
@@ -39,15 +39,17 @@ KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Spe
 UINT64 *nb_call;
 /* Number of parameters int/addr for each function */
 UINT64 **nb_param_intaddr;
-/* Store the minimum size of parameter
-   Used as a clue that the parameter is not an address if below 64 bits */
-UINT64 **param_max_size;
 /* Number of parameters float for each function */
 UINT64 **nb_param_float;
 /* Number of stack parameters for each function */
 UINT64 **nb_param_stack;
 /* Return value detected */
 UINT64 *nb_ret;
+
+/* Store the minimum size of parameter/return
+   Used as a clue that this is not an address if below 64 bits
+   in type pintool */
+UINT64 **param_max_size;
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
@@ -171,8 +173,9 @@ VOID param_read(REGF regf, UINT32 reg_size) {
             FID fid = call_stack.peek(i);
             nb_param[fid][position] += 1;
 
-            if (param_max_size[fid][position] < reg_size) {
-                param_max_size[fid][position] = reg_size;
+            // +1 because param_max_size[fid][0] is for the return value
+            if (param_max_size[fid][position + 1] < reg_size) {
+                param_max_size[fid][position + 1] = reg_size;
             }
         }
     }
@@ -194,7 +197,7 @@ VOID param_write(REGF regf) {
     trace_leave();
 }
 
-VOID return_read(REGF regf) {
+VOID return_read(REGF regf, UINT32 reg_size) {
     trace_enter();
 
     if (call_stack.is_empty()) {
@@ -216,6 +219,13 @@ VOID return_read(REGF regf) {
     for (int i = call_stack.height() + 1; i <= written[regf]; i++)
         if (!call_stack.is_forgotten(i))
             nb_ret[call_stack.peek(i)] += 1;
+
+    if (!call_stack.is_top_forgotten()) {
+        FID fid = call_stack.top();
+        if (param_max_size[fid][0] < reg_size) {
+            param_max_size[fid][0] = reg_size;
+        }
+    }
 
     trace_leave();
 }
@@ -348,6 +358,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IPOINT_BEFORE,
                         (AFUNPTR) return_write,
                         IARG_UINT32, regf(reg),
+                        IARG_UINT32, reg_size(reg),
                         IARG_END);
         }
     }

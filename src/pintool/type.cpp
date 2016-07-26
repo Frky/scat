@@ -13,7 +13,7 @@
 
 #include "pin.H"
 
-#define DEBUG_ENABLED 1
+#define DEBUG_ENABLED 0
 #define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
@@ -64,32 +64,25 @@ VOID update_data(UINT64 addr) {
     trace_enter();
 
     if (DATA1_BASE == 0 || DATA1_BASE > addr) {
-        //debug("DATA1_BASE <- %lx\n", addr);
         DATA1_BASE = addr;
         if (DATA1_TOP == 0) {
             DATA1_TOP = DATA1_BASE;
-            //debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
         if (DATA1_TOP * DATA2_BASE > 0 && (DATA1_TOP - DATA1_BASE) > (DATA2_BASE - DATA1_TOP)) {
             DATA1_TOP = DATA1_BASE;
-            //debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
     }
     if (DATA2_TOP == 0 || DATA2_TOP < addr) {
-        //debug("DATA2_TOP <- %lx\n", addr);
         DATA2_TOP = addr;
         if (DATA2_BASE == 0) {
             DATA2_BASE = DATA2_TOP;
-            //debug("DATA2_BASE <- %lx\n", DATA2_BASE);
         }
     }
     if (addr < DATA2_BASE && addr > DATA1_TOP) {
         if (std::abs(addr - DATA2_BASE) < std::abs(addr - DATA1_TOP)) {
             DATA2_BASE = addr;
-            //debug("DATA2_BASE <- %lx\n", addr);
         } else {
             DATA1_TOP = addr;
-            //debug("DATA1_TOP <- %lx\n", addr);
         }
     }
 
@@ -98,8 +91,10 @@ VOID update_data(UINT64 addr) {
 
 
 bool is_data(UINT64 addr) {
-    return (addr <= DATA2_TOP && addr >= DATA2_BASE)
-            || (addr <= DATA1_TOP && addr >= DATA1_BASE);
+    bool small_negative32 = addr >= 0xFFFFFFF0 && addr <= 0xFFFFFFFF;
+    bool in_data = ((addr <= DATA2_TOP && addr >= DATA2_BASE)
+            || (addr <= DATA1_TOP && addr >= DATA1_BASE));
+    return !small_negative32 && in_data;
 }
 
 
@@ -160,9 +155,7 @@ void fn_registered(FID fid,
     }
 
     for (unsigned int i = 0; i < int_idx.size(); i++) {
-        // + 1 because arity does not meld params with return
-        int pid = int_idx[i] + 1;
-        param_is_not_addr[fid][pid] = true;
+        param_is_not_addr[fid][int_idx[i]] = true;
     }
 }
 
@@ -339,30 +332,14 @@ VOID Fini(INT32 code, VOID *v) {
 
         bool need_comma = false;
 
-        bool debugf = fn_name(fid).compare("strcmp") == 0;
-        if (debugf) {
-            debug("Found [%s@%lX] %s\n",
-                    fn_img(fid).c_str(),
-                    fn_imgaddr(fid),
-                    fn_name(fid).c_str());
-        }
-
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
-            if (debugf) {
-                debug("# Pid %d\n", pid);
-            }
             if (pid == 0 && !has_return[fid]) {
-                if (debugf) {
-                    debug("  Is void return\n");
-                }
                 ofile << "VOID";
                 need_comma = true;
                 continue;
             }
 
             if (param_val[fid][pid]->size() < NB_CALLS_TO_CONCLUDE / 3) {
-                debug("  Not enough values to conclude\n");
-
                 if (need_comma)
                     ofile << "," ;
                 ofile << "UNDEF";
@@ -372,9 +349,6 @@ VOID Fini(INT32 code, VOID *v) {
 
             int param_addr = 0;
             for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
-                if (debugf) {
-                    debug("  * %ld - %lX [%d]\n", *it, *it, is_data(*it));
-                }
                 if (is_data(*it)) {
                     param_addr++;
                 }
@@ -385,19 +359,10 @@ VOID Fini(INT32 code, VOID *v) {
             if (need_comma)
                 ofile << "," ;
 
-            if (debugf) {
-                debug("  Coef        : %f\n", coef);
-                debug("  Is Not Addr : %d\n", param_is_not_addr[fid][pid]);
-            }
-
             if (coef > THRESHOLD && !param_is_not_addr[fid][pid]) {
-                if (debugf)
-                    debug("  ADDR !\n");
                 ofile << "ADDR";
             }
             else {
-                if (debugf)
-                    debug("  INT  !\n");
                 ofile << "INT";
             }
 
