@@ -122,9 +122,10 @@ VOID ret(CONTEXT *ctxt, UINT32 fid) {
     depth--;
     ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
     regv = regv;
-    if (param_val[fid][0]->size() < 2*NB_VALS_TO_CONCLUDE)
+    if (param_val[fid][0]->size() < 2*NB_VALS_TO_CONCLUDE) {
         param_val[fid][0]->push_front(regv);
         param_val_counter[fid][0]->push_front(counter);
+    }
     if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
         treated[fid] = true;
     }
@@ -148,7 +149,7 @@ unsigned int fn_add(ADDRINT addr, string name, unsigned int nb_param, vector<boo
     nb_fn++;
     /* Set the fid */
     unsigned int fid = nb_fn;
-    
+
     /* Set the address of the function */
     faddr[fid] = addr;
     /* Reset the number of calls for this function */
@@ -186,7 +187,7 @@ VOID Routine(RTN rtn, VOID *v) {
 #if DEBUG_SEGFAULT
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
-    if (!init) 
+    if (!init)
         Commence();
     unsigned int fid = 0;
     /* Look for function id */
@@ -216,9 +217,9 @@ VOID Instruction(INS ins, VOID *v) {
 #define OK 0
 #if OK
     if (INS_IsCall(ins))
-            INS_InsertCall(ins, 
-                        IPOINT_BEFORE, 
-                        (AFUNPTR) call, 
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) call,
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_END);
@@ -226,9 +227,9 @@ VOID Instruction(INS ins, VOID *v) {
 #if 0
     if (INS_IsDirectCall(ins)) {
 #if OK
-            INS_InsertCall(ins, 
-                        IPOINT_BEFORE, 
-                        (AFUNPTR) update_code, 
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) update_code,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_END);
 #endif
@@ -243,19 +244,19 @@ VOID Instruction(INS ins, VOID *v) {
         if (fid == nb_fn + 1) {
             return;
         }
-        INS_InsertCall(ins, 
-                    IPOINT_BEFORE, 
-                    (AFUNPTR) fn_call, 
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) fn_call,
                     IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid, 
+                    IARG_UINT32, fid,
                     IARG_END);
     }
 #endif
 #if 0
     if (INS_IsRet(ins))
-        INS_InsertCall(ins, 
-                    IPOINT_BEFORE, 
-                    (AFUNPTR) ret, 
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) ret,
                     IARG_ADDRINT, RTN_Address(INS_Rtn(ins)),
                     IARG_END);
 #endif
@@ -323,7 +324,7 @@ VOID Fini(INT32 code, VOID *v) {
     std::cout << "CODE : [0x" << std::hex << CODE_BASE << " ; 0x" << std::hex << CODE_TOP << "]" << endl;
 
     map<string, func_t>::iterator senti, o_senti;
-    for (senti = fns.begin(); senti != fns.end(); senti++) { 
+    for (senti = fns.begin(); senti != fns.end(); senti++) {
         if (senti->second.treated) { // || (senti->second.ret_call + senti->second.param_call[0]) > 0) {
             std::cout << senti->first << "(";
             float coef = ((float) senti->second.ret_addr) / ((float) senti->second._nb_call);
@@ -331,17 +332,17 @@ VOID Fini(INT32 code, VOID *v) {
                 senti->second.ret_is_addr = true;
             }
             for (i = 0; i < senti->second._nb_param; i++) {
-                if (((float) senti->second.param_addr[i]) / 
+                if (((float) senti->second.param_addr[i]) /
                         ((float) senti->second._nb_call) > SEUIL) {
                     senti->second.param_is_addr[i] = true;
                 }
 #if 0
                 if (senti->param_call[i] > 0)
                     std::cout << "FNC";
-#endif 
+#endif
                 if (senti->second.param_is_addr[i])
                     std::cout << "ADDR";
-                else  
+                else
                     std::cout << "INT";
                 if (i < senti->second._nb_param - 1)
                     std::cout << ", ";
@@ -351,7 +352,7 @@ VOID Fini(INT32 code, VOID *v) {
                 std::cout << "FNC";
             else if (senti->second.ret_is_addr)
                 std::cout << "ADDR";
-            else  
+            else
                 std::cout << "INT";
             std::cout << endl;
         }
@@ -359,15 +360,15 @@ VOID Fini(INT32 code, VOID *v) {
 
     for (senti = fns.begin(); senti != fns.end(); senti++) {
         if (!senti->second.ret_is_addr)
-            continue; 
-        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) { 
+            continue;
+        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) {
             if (!(o_senti->second.param_is_addr[0]))
                 continue;
             list<UINT64>::iterator ret, param;
             int nb_link = 0;
             for (
-                    param = o_senti->second.param_val[0].begin(); 
-                    param != o_senti->second.param_val[0].end(); 
+                    param = o_senti->second.param_val[0].begin();
+                    param != o_senti->second.param_val[0].end();
                     param++
                    ) {
                 for (ret = senti->second.ret_val.begin(); ret != senti->second.ret_val.end(); ret++) {
@@ -391,15 +392,15 @@ VOID Fini(INT32 code, VOID *v) {
 #endif
     for (unsigned int fid = 1; fid < nb_fn; fid++) {
         if (param_addr[fid][0] == 0) {
-            continue; 
+            continue;
         }
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
-            continue; 
+            continue;
         }
         float max_av_dist = -1;
         for (unsigned int gid = 1; gid < nb_fn; gid++) {
             if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
-                continue; 
+                continue;
             }
             for (unsigned int pid = 1; pid < nb_p[gid]; pid++) {
                 if (param_addr[gid][pid] == 0)
@@ -410,19 +411,19 @@ VOID Fini(INT32 code, VOID *v) {
                 double av_dist = 0;
                 pc = param_val_counter[gid][pid]->begin();
                 for (
-                        pv = param_val[gid][pid]->begin(); 
-                        pv != param_val[gid][pid]->end(); 
+                        pv = param_val[gid][pid]->begin();
+                        pv != param_val[gid][pid]->end();
                         pv++
                        ) {
                     rc = param_val_counter[fid][0]->rbegin();
                     for (
-                        rv = param_val[fid][0]->rbegin(); 
-                        rv != param_val[fid][0]->rend(); 
+                        rv = param_val[fid][0]->rbegin();
+                        rv != param_val[fid][0]->rend();
                         rv++) {
                         if (*rv == *pv && *pc > *rc) {
                             nb_link += 1;
                             av_dist += (((*pc) - (*rc)));
-                            std::cerr << *rv << "," << *fname[fid] << "," << *rc << "," << *fname[gid] << "," << *pc << endl; 
+                            std::cerr << *rv << "," << *fname[fid] << "," << *rc << "," << *fname[gid] << "," << *pc << endl;
                             break;
                         }
                         rc++;
@@ -466,7 +467,7 @@ int main(int argc, char * argv[])
 
     call_stack = new list<ADDRINT>();
 
-    /* Initialize symbol table code, 
+    /* Initialize symbol table code,
        needed for rtn instrumentation */
     PIN_InitSymbols();
     PIN_SetSyntaxIntel();
@@ -475,7 +476,7 @@ int main(int argc, char * argv[])
 
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
-    
+
     // TODO better way to get mode from cli
     if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
         FN_MODE = FN_NAME;
@@ -489,13 +490,11 @@ int main(int argc, char * argv[])
     INS_AddInstrumentFunction(Instruction, 0);
     RTN_AddInstrumentFunction(Routine, 0);
 
-    /* Register Fini to be called when the 
+    /* Register Fini to be called when the
        application exits */
     PIN_AddFiniFunction(Fini, 0);
 
     PIN_StartProgram();
-    
+
     return 0;
 }
-
-

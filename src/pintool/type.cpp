@@ -13,8 +13,6 @@
 
 #include "pin.H"
 
-#define DEBUG_ENABLED 0
-#define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
@@ -438,7 +436,7 @@ int main(int argc, char * argv[]) {
     vector<UINT32> unknown_int_idx;
     fn_registered(FID_UNKNOWN, 0, 0, 0, 0, unknown_int_idx);
 
-    debug("Starting\n");
+    debug_trace_init();
     PIN_StartProgram();
 
     return 0;

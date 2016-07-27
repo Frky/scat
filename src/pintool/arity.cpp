@@ -23,8 +23,6 @@
 #define FN_NAME 0
 #define FN_ADDR 1
 
-#define DEBUG_ENABLED 0
-#define TRACE_ENABLED 0
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/registers.h"
@@ -530,7 +528,7 @@ int main(int argc, char * argv[]) {
     // If debug is enabled, this print a first message to
     // ensure the log file is opened because PIN seems
     // to mess up IO at some point
-    debug("Starting\n");
+    debug_trace_init();
     PIN_StartProgram();
 
     return 0;

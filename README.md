@@ -188,12 +188,6 @@ source code of the binary under inference.
 * (optional) Create a virtualenv for `scat`: `virtualenv ~/.venv/scat && source ~/.venv/scat/bin/activate`
 * Install required python libraries: `pip install -r requirements.txt`
 
-### GCC >= 5.0 ABI compatibility
-
-You need to edit the file located at `source/tools/Config/makefile.unix.config` inside your pin installation folder.
-Find the first occurences of the two variables `APP_CXXFLAGS_NOOPT` and `TOOL_CXXFLAGS_NOOPT`,
-and add these options to both : `-fabi-version=2 -D_GLIBCXX_USE_CXX11_ABI=0`
-
 ### Configuration
 
 The configuration of `scat` is set in a yaml file, namely `./config/config.yaml`. You
@@ -203,15 +197,15 @@ can edit this file in order to fit with your own configuration. Main points are:
 * `pin -> path`: set the path to the `pin` main directory. May be different from the path to the executable. Typical value for this is `/usr/bin/pin/`. **Required for `scat` to work correctly.**
 * `log -> path`: set the path to the log directory.
 
-**Important note:** You need to ensure that you have acces permissions to the path to pin. Indeed, pintools will be compiled from this directory.
+### Error E: 4.3 is not a supported linux release
 
-If you use an esoteric linux distribution (e.g. ArchLinux), it may not be supported by `Pin` explicitly. You may encounter an error like this:
-
-```
-E: 4.3 is not a supported linux release
-```
-
+If you use an esoteric linux distribution (e.g. ArchLinux), it may not be supported by `Pin` explicitly.
 If so, you can add the command line argument `-ifeellucky` to `pin` by setting the entry `pin -> cli-options` in the configuration file.
+
+### GCC >= 5.0 ABI compatibility (The C++ ABI of your compiler does not match the ABI of the pin kit.)
+
+If you're linux distribution uses a recent gcc version, you may encounter this kind of errors when trying to compile the pintool.
+To fix this, you can add the gcc flags `-fabi-version=2 -D_GLIBCXX_USE_CXX11_ABI=0` by setting the entry `pin -> compile-flags` in the configuration file.
 
 #### Example of a configuration file
 
@@ -251,13 +245,24 @@ on different binaries and display results.
 
 ### Make pintools
 
-Before being able to launch any inference, you must compile pintools:
+Before being able to launch any inference, you must compile pintools with the command make:
+
+* make [-f] [-d] [-t] [pintools...]
+where:
+    - -f  --force  -B :    Force compilation even if already up to date
+    - -d  --debug :        Compile in debug mode
+    - -t  --trace :        Compile in trace mode (Warning: very verbose ! Mostly useful when debugging segfault)
+
+Note: This actually use the os command make under the hood, thus tools will only be compiled after changes.
 
 ```
 scat > make
-[*] Compiling ./src/pintool/arity.cpp ...
-[*] Compiling ./src/pintool/type.cpp ...
-[*] Compiling ./src/pintool/couple.cpp ...
+[*] Compiling pintool: arity ...
+[*]    => Done !
+
+[*] Compiling pintool: type ...
+[*]    => Up to date !
+
 ```
 
 ### Inference
