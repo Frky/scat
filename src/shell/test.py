@@ -1,5 +1,6 @@
 
 import os, glob
+import subprocess
 
 from src.shell.pin import INF_ALL, INF_ARITY, INF_TYPE, inf_code_to_str, get_previous_step
 from src.shell.log_parser import TypeLogParser
@@ -13,8 +14,11 @@ class ScatTest(object):
         self.src = dict()
         self.bin = dict()
         self.log = dict()
+        self.root = dict()
         self.__log = kwargs["log"]
         if "proto" in kwargs.keys():
+            if "root" in kwargs["proto"].keys():
+                self.root["proto"] = kwargs["proto"]["root"]
             if "src" in kwargs["proto"].keys():
                 self.src["proto"] = kwargs["proto"]["src"]
             if "bin" in kwargs["proto"].keys():
@@ -94,9 +98,16 @@ class ScatTest(object):
         return self.oracle(src_path, self.__log_file(bin_path, INF_TYPE))
 
 
+    def make(self):
+        self.__log("Compiling tests ...")
+        cmd = "make"
+        with open("/dev/null", 'w') as fnull:
+            subprocess.call(cmd, cwd=self.root["proto"], shell=True, stdout=fnull)
+
+
     def proto(self, infer):
-        # TODO
         # Compile all 
+        self.make()
         # Global number of failures
         ko = 0
         # Global number of tries

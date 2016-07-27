@@ -30,6 +30,7 @@ function-mode: name
 
 test:
     proto:
+        root: ./test/proto
         src: ./test/proto/src
         bin: ./test/proto/bin
         log: ./test/proto/log
