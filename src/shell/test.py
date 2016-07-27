@@ -78,6 +78,8 @@ class ScatTest(object):
                     fname = line[line.index(" ") + 1:line.index("(")]
                     # Get parameters
                     params = line[line.index("(") + 1:line.index(")")].replace(" ", "").split(",")
+                    if params == ["VOID"]:
+                        params = []
                     oracle[fname] = [out] + params
                     ko += self.__compare(fname, oracle[fname], log.get_proto(fname))
                     tot += 1

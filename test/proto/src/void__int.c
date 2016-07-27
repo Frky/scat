@@ -13,16 +13,16 @@ int foo(void) {
     for (i = 0; i < b; i++) 
         a += b;
 
-    return a;
+    return a % 65536;
 }
 
 int main(void) {
     
-    int a, b, i;
+    int a = 0, b = 0, i;
 
     for (i = 0; i < 100; i++) {
-        a = foo();
-        b = foo();
+        a += foo();
+        b += foo();
     }
 
     return a + b; 

@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-// ORACLE VOID foo(VOID)
+// ORACLE VOID foo(INT)
 
 void foo(int b) {
     int a;

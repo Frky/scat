@@ -6,13 +6,14 @@
 int foo(int a) {
     int b;
     int i;
+    int res = 0; 
 
     b = rand() % 65536;
 
     for (i = 0; i < b; i++) 
-        a += b;
+        res += a;
 
-    return a;
+    return res % 65536;
 }
 
 int main(void) {
@@ -23,5 +24,5 @@ int main(void) {
         a += foo(rand() % 65536);
     }
 
-    return a; 
+    return 0; 
 }

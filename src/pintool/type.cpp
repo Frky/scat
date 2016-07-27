@@ -24,7 +24,7 @@
 #define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
-#define THRESHOLD               0.26
+#define THRESHOLD               0.50
 
 #define FN_NAME 1
 #define FN_ADDR 0
