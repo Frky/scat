@@ -129,8 +129,8 @@ VOID fn_ret() {
 
     if (!call_stack.is_top_forgotten()) {
         if (reg_maybe_return[REGF_AX])
-            nb_ret_int[call_stack.top()];
-        if (reg_maybe_return[REGF_XMM0])
+            nb_ret_int[call_stack.top()]++;
+        else if (reg_maybe_return[REGF_XMM0])
             nb_ret_float[call_stack.top()]++;
     }
 
@@ -459,7 +459,7 @@ VOID fini(INT32 code, VOID *v) {
         uint32_t float_arity = detected_arity(
                 param_threshold, nb_param_float[fid], PARAM_FLOAT_COUNT);
 
-        uint32_t ret;
+        uint32_t ret = 0;
         if (nb_ret_int[fid] > return_threshold) {
             ret = 1;
         }

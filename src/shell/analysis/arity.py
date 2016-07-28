@@ -87,7 +87,7 @@ class ArityAnalysis(Analysis):
             if self.check_one_arity(fn, ar, proto):
                 ok_ar += 1
 
-            if self.check_one_ret(fn, ret == 1, proto):
+            if self.check_one_ret(fn, ret, proto):
                 ok_ret += 1
 
         print("Ignored")

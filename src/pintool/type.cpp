@@ -330,11 +330,6 @@ VOID Fini(INT32 code, VOID *v) {
 
         bool need_comma = false;
 
-        if (fn_name(fid).compare("float_value") == 0) {
-            debug("Found [%s@%lX] %s", fn_img(fid).c_str(), fn_imgaddr(fid), fn_name(fid).c_str());
-            debug("Has_Return %d\n")
-        }
-
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
             if (pid == 0) {
                 if (has_return[fid] == 0) {
