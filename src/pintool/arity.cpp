@@ -42,7 +42,8 @@ UINT64 **nb_param_float;
 /* Number of stack parameters for each function */
 UINT64 **nb_param_stack;
 /* Return value detected */
-UINT64 *nb_ret;
+UINT64 *nb_ret_int;
+UINT64 *nb_ret_float;
 
 /* Store the minimum size of parameter/return
    Used as a clue that this is not an address if below 64 bits
@@ -126,10 +127,12 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
 VOID fn_ret() {
     trace_enter();
 
-    if (!call_stack.is_top_forgotten()
-            && (reg_maybe_return[REGF_AX]
-            || reg_maybe_return[REGF_XMM0]))
-        nb_ret[call_stack.top()]++;
+    if (!call_stack.is_top_forgotten()) {
+        if (reg_maybe_return[REGF_AX])
+            nb_ret_int[call_stack.top()];
+        if (reg_maybe_return[REGF_XMM0])
+            nb_ret_float[call_stack.top()]++;
+    }
 
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
@@ -213,6 +216,9 @@ VOID return_read(REGF regf, UINT32 reg_size) {
     // on register access will detect it instead
     reg_maybe_return[regf] = false;
 
+    UINT64 *nb_ret = regf == REGF_AX
+            ? nb_ret_int
+            : nb_ret_float;
     // Propagate the return value up the call stack
     for (int i = call_stack.height() + 1; i <= written[regf]; i++)
         if (!call_stack.is_forgotten(i))
@@ -453,14 +459,21 @@ VOID fini(INT32 code, VOID *v) {
         uint32_t float_arity = detected_arity(
                 param_threshold, nb_param_float[fid], PARAM_FLOAT_COUNT);
 
-        bool ret = nb_ret[fid] > return_threshold;
+        uint32_t ret;
+        if (nb_ret_int[fid] > return_threshold) {
+            ret = 1;
+        }
+        else if (nb_ret_float[fid] > return_threshold) {
+            ret = 2;
+        }
 
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)
                 << ":" << int_arity
                 << ":" << stack_arity
                 << ":" << float_arity
-                << ":" << (ret ? "1:" : "0:");
+                << ":" << ret
+                << ":";
 
         for (unsigned int pid = 0; pid < int_arity; pid++) {
             if (param_max_size[fid][pid] > 0 && param_max_size[fid][pid] < 64) {
@@ -487,7 +500,8 @@ int main(int argc, char * argv[]) {
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     param_max_size = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    nb_ret = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
+    nb_ret_int = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
+    nb_ret_float = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
 
     written = (INT64 *) malloc(sizeof(INT64) * REGF_COUNT);
     reg_ret_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
