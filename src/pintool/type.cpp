@@ -13,9 +13,6 @@
 
 #include "pin.H"
 
-#define DEBUG_ENABLED 0
-#define TRACE_ENABLED 0
-
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
@@ -49,7 +46,7 @@ HollowStack<MAX_DEPTH, FID> call_stack;
 unsigned int *nb_param_int;
 unsigned int *nb_param_stack;
 unsigned int *nb_param_float;
-bool *has_return;
+unsigned int *has_return;
 bool **param_is_not_addr;
 
 /* Variables used for the analysis of each function */
@@ -65,32 +62,25 @@ VOID update_data(UINT64 addr) {
     trace_enter();
 
     if (DATA1_BASE == 0 || DATA1_BASE > addr) {
-        //debug("DATA1_BASE <- %lx\n", addr);
         DATA1_BASE = addr;
         if (DATA1_TOP == 0) {
             DATA1_TOP = DATA1_BASE;
-            //debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
         if (DATA1_TOP * DATA2_BASE > 0 && (DATA1_TOP - DATA1_BASE) > (DATA2_BASE - DATA1_TOP)) {
             DATA1_TOP = DATA1_BASE;
-            //debug("DATA1_TOP <- %lx\n", DATA1_TOP);
         }
     }
     if (DATA2_TOP == 0 || DATA2_TOP < addr) {
-        //debug("DATA2_TOP <- %lx\n", addr);
         DATA2_TOP = addr;
         if (DATA2_BASE == 0) {
             DATA2_BASE = DATA2_TOP;
-            //debug("DATA2_BASE <- %lx\n", DATA2_BASE);
         }
     }
     if (addr < DATA2_BASE && addr > DATA1_TOP) {
         if (std::abs(addr - DATA2_BASE) < std::abs(addr - DATA1_TOP)) {
             DATA2_BASE = addr;
-            //debug("DATA2_BASE <- %lx\n", addr);
         } else {
             DATA1_TOP = addr;
-            //debug("DATA1_TOP <- %lx\n", addr);
         }
     }
 
@@ -99,8 +89,10 @@ VOID update_data(UINT64 addr) {
 
 
 bool is_data(UINT64 addr) {
-    return (addr <= DATA2_TOP && addr >= DATA2_BASE)
-            || (addr <= DATA1_TOP && addr >= DATA1_BASE);
+    bool small_negative32 = addr >= 0xFFFFFFF0 && addr <= 0xFFFFFFFF;
+    bool in_data = ((addr <= DATA2_TOP && addr >= DATA2_BASE)
+            || (addr <= DATA1_TOP && addr >= DATA1_BASE));
+    return !small_negative32 && in_data;
 }
 
 
@@ -144,7 +136,7 @@ void fn_registered(FID fid,
             unsigned int _nb_param_int,
             unsigned int _nb_param_stack,
             unsigned int _nb_param_float,
-            bool _has_return,
+            unsigned int _has_return,
             vector<UINT32> int_idx) {
     nb_param_int[fid] = _nb_param_int;
     nb_param_stack[fid] = _nb_param_stack;
@@ -161,9 +153,7 @@ void fn_registered(FID fid,
     }
 
     for (unsigned int i = 0; i < int_idx.size(); i++) {
-        // + 1 because arity does not meld params with return
-        int pid = int_idx[i] + 1;
-        param_is_not_addr[fid][pid] = true;
+        param_is_not_addr[fid][int_idx[i]] = true;
     }
 }
 
@@ -340,30 +330,21 @@ VOID Fini(INT32 code, VOID *v) {
 
         bool need_comma = false;
 
-        bool debugf = fn_name(fid).compare("strcmp") == 0;
-        if (debugf) {
-            debug("Found [%s@%lX] %s\n",
-                    fn_img(fid).c_str(),
-                    fn_imgaddr(fid),
-                    fn_name(fid).c_str());
-        }
-
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
-            if (debugf) {
-                debug("# Pid %d\n", pid);
-            }
-            if (pid == 0 && !has_return[fid]) {
-                if (debugf) {
-                    debug("  Is void return\n");
+            if (pid == 0) {
+                if (has_return[fid] == 0) {
+                    ofile << "VOID";
+                    need_comma = true;
+                    continue;
                 }
-                ofile << "VOID";
-                need_comma = true;
-                continue;
+                else if (has_return[fid] == 2) {
+                    ofile << "FLOAT";
+                    need_comma = true;
+                    continue;
+                }
             }
 
             if (param_val[fid][pid]->size() < NB_CALLS_TO_CONCLUDE / 3) {
-                debug("  Not enough values to conclude\n");
-
                 if (need_comma)
                     ofile << "," ;
                 ofile << "UNDEF";
@@ -373,9 +354,6 @@ VOID Fini(INT32 code, VOID *v) {
 
             int param_addr = 0;
             for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
-                if (debugf) {
-                    debug("  * %ld - %lX [%d]\n", *it, *it, is_data(*it));
-                }
                 if (is_data(*it)) {
                     param_addr++;
                 }
@@ -386,19 +364,10 @@ VOID Fini(INT32 code, VOID *v) {
             if (need_comma)
                 ofile << "," ;
 
-            if (debugf) {
-                debug("  Coef        : %f\n", coef);
-                debug("  Is Not Addr : %d\n", param_is_not_addr[fid][pid]);
-            }
-
             if (coef > THRESHOLD && !param_is_not_addr[fid][pid]) {
-                if (debugf)
-                    debug("  ADDR !\n");
                 ofile << "ADDR";
             }
             else {
-                if (debugf)
-                    debug("  INT  !\n");
                 ofile << "INT";
             }
 
@@ -438,7 +407,7 @@ int main(int argc, char * argv[]) {
     nb_param_int = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_float = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    has_return = (bool *) calloc(NB_FN_MAX, sizeof(bool));
+    has_return = (unsigned int *) calloc(NB_FN_MAX, sizeof(bool));
     param_is_not_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
 
     nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
@@ -474,7 +443,7 @@ int main(int argc, char * argv[]) {
     vector<UINT32> unknown_int_idx;
     fn_registered(FID_UNKNOWN, 0, 0, 0, 0, unknown_int_idx);
 
-    debug("Starting\n");
+    debug_trace_init();
     PIN_StartProgram();
 
     return 0;

@@ -97,6 +97,7 @@ class Pin(object):
         self.pintool = dict()
         self.src = dict()
         self.cli_options = kwargs["options"]
+        self.compile_flags = kwargs["compile_flags"]
         # Name of pintool for arity, type and couple
         for code, pt in INF_ALL:
             if pt + "_obj" in kwargs.keys():
@@ -153,46 +154,66 @@ class Pin(object):
         self.log("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds), verbose)
 
 
-    def compile(self, pintools=None):
+    def compile(self, force, debug, trace, pintools=[]):
         """
             Compile all pintools needed
 
         """
-        #TODO NOT FLEXIBLE AT ALL
-        #TODO
-        #    - os independant
-        #    - configuration-file adaptable
-        #    - check compilation success
-        wd = self.pinpath + "/source/tools/pinalloc/"
-        # Create pinalloc directory if does not exist
-        if not os.path.exists(wd):
-            os.mkdir(wd)
-        # Create obj-intel64 if does not exist
-        if not os.path.exists(wd + "/obj-intel64"):
-            os.mkdir(wd + "/obj-intel64")
-        # Link makefile if does not exist
-        for makefile in ["makefile", "makefile.rules"]:
-            if not os.path.exists(wd + makefile):
-                shutil.copyfile(self.respath + "/" + makefile, wd + "/" + makefile)
-        # Add utils directory
-        shutil.rmtree(wd + "/utils", True)
-        os.mkdir(wd + "/utils")
-        for dirpath, dirnames, filenames in os.walk("./src/pintool/utils"):
-            for fname in filenames:
-                copyfile(dirpath + "/" + fname, wd + "/utils/" + fname)
-        
-        # If pintools are specified, only compile these ones
-        if pintools is not None and len(pintools) != 0:
-            inf = pintools
-        # Otherwise, compile all pintools
-        else:
+        #TODO os independant
+
+        force_flag = ''
+        if force:
+            force_flag = '-B'
+
+        if len(pintools) == 0:
             inf = INF_ALL
-        # inf = [ (INF_ARITY, "arity"), (INF_TYPE, "type") ]
+        else:
+            inf = pintools
+
         for code in [c for c, n in inf if c in self.src.keys()]:
-            pfile = self.src[code]
-            self.log("Compiling {0} ...".format(pfile))
-            copyfile(pfile, wd + os.path.basename(pfile))
-            cmd = "make obj-intel64/" + os.path.basename(pfile)[:-3] + "so"
+            src_path, src_name = os.path.split(self.src[code])
+
+            obj_path, obj_name = os.path.split(self.pintool[code])
+            obj_path = os.path.abspath(obj_path)
+
+            obj_build_path = "{}/build".format(obj_path)
+            obj_build_name = src_name[:-4]
+            if debug or trace:
+                if debug:
+                    obj_build_name += '-debug'
+                if trace:
+                    obj_build_name += '-trace'
+            else:
+                obj_build_name += '-release'
+
+            if not os.path.exists(obj_build_path):
+                os.makedirs(obj_build_path)
+
+            obj_build_file = "{}/{}.so".format(obj_build_path, obj_build_name)
+            if os.path.exists(obj_build_file):
+                mtime_before = os.stat(obj_build_file).st_mtime
+            else:
+                mtime_before = 0
+
+            cmd = "make {} PIN_ROOT='{}' SCAT_COMPILE_FLAGS='{}' OBJDIR='{}/' '{}/{}.so'".format(
+                    force_flag,
+                    self.pinpath,
+                    self.compile_flags,
+                    obj_build_path,
+                    obj_build_path,
+                    obj_build_name)
+
+            self.log("Compiling pintool: {0} ...".format(src_name[:-4]))
             with open("/dev/null", 'w') as fnull:
-                subprocess.call(cmd, cwd=wd, shell=True, stdout=fnull)
-            copyfile(wd + "obj-intel64/" + os.path.basename(pfile)[:-3] + "so", self.pintool[code])
+                try:
+                    subprocess.check_call(cmd, cwd=src_path, shell=True, stdout=fnull)
+                    mtime_now = os.stat("{}/{}.so".format(obj_build_path, obj_build_name)).st_mtime
+                    shutil.copyfile(
+                            '{}/{}.so'.format(obj_build_path, obj_build_name),
+                            '{}/{}'.format(obj_path, obj_name))
+                    if mtime_before == mtime_now:
+                        self.log("   => Up to date !")
+                    else:
+                        self.log("   => Done !")
+                except subprocess.CalledProcessError as error:
+                    self.log("/!\ Compilation exited with non-zero status {} /!\\\n\n".format(error.returncode))

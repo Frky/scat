@@ -20,7 +20,10 @@ class ArityAnalysis(Analysis):
         self.log = dict()
         with open(self.logfile, "r") as f:
             for line in f.readlines():
-                img, imgaddr, fn, int_ar, stack_ar, float_ar, ret, int_indices = line[:-1].split(":")
+                (img, imgaddr, fn,
+                        int_ar, stack_ar, float_ar,
+                        ret,
+                        int_indices) = line[:-1].split(":")
                 self.log[(img, int(imgaddr))] = (fn,
                         int(int_ar),
                         int(stack_ar),
@@ -33,7 +36,7 @@ class ArityAnalysis(Analysis):
 
 
     def check_one_ret(self, fname, ret, proto):
-        return ret == (proto[0] != "void")
+        return (ret > 0) == (proto[0] != "void")
 
 
     def print_general_info(self):
@@ -84,7 +87,7 @@ class ArityAnalysis(Analysis):
             if self.check_one_arity(fn, ar, proto):
                 ok_ar += 1
 
-            if self.check_one_ret(fn, ret == 1, proto):
+            if self.check_one_ret(fn, ret, proto):
                 ok_ret += 1
 
         print("Ignored")
@@ -119,7 +122,7 @@ class ArityAnalysis(Analysis):
                 continue
 
             arity_ok = self.check_one_arity(fname, ar, proto);
-            return_ok = self.check_one_ret(fname, ret == 1, proto);
+            return_ok = self.check_one_ret(fname, ret, proto);
 
             if arity_ok and return_ok:
                 continue
@@ -129,7 +132,7 @@ class ArityAnalysis(Analysis):
             if not arity_ok:
                 print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
             if not return_ok:
-                if ret == 1:
+                if ret:
                     print("   Return : Expected 0 got 1")
                 else:
                     print("   Return : Expected 1 got 0")

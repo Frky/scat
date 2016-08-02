@@ -1,23 +1,31 @@
 #ifndef DEBUG_H_
 #define DEBUG_H_
 
-#if DEBUG_ENABLED
-    char debug_buf[250];
+#if defined (SCAT_DEBUG_ENABLED) || defined (SCAT_TRACE_ENABLED)
+    char debug_trace_buf[3000];
+
+    #define debug_trace_init() { \
+        LOG("Starting pintool\n"); \
+    }
+#else
+    #define debug_trace_init()
+#endif
+
+#if defined (SCAT_DEBUG_ENABLED)
 
     #define debug(...) { \
-        sprintf(debug_buf, __VA_ARGS__); \
-        LOG(debug_buf); \
+        sprintf(debug_trace_buf, __VA_ARGS__); \
+        LOG(debug_trace_buf); \
     }
 #else
     #define debug(...)
 #endif
 
-#if TRACE_ENABLED
-    char trace_buf[250];
+#if defined (SCAT_TRACE_ENABLED)
 
     #define trace(...) { \
-        sprintf(trace_buf, __VA_ARGS__); \
-        LOG(trace_buf); \
+        sprintf(debug_trace_buf, __VA_ARGS__); \
+        LOG(debug_trace_buf); \
     }
 
     #define trace_enter() { trace("[ENTER] %s\n", __func__); }

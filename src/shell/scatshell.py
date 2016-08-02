@@ -37,6 +37,11 @@ class ScatShell(Cmd):
             cli_options = self.config["pin"]["cli-options"]
         else:
             cli_options = ""
+        # Get compile-flags
+        if "compile-flags" in self.config["pin"].keys():
+            compile_flags = self.config["pin"]['compile-flags']
+        else:
+            compile_flags = ''
         # Get function identification method
         if "function-mode" in self.config.keys():
             fn_mode = self.config["function-mode"]
@@ -53,6 +58,7 @@ class ScatShell(Cmd):
         # Other Pin configuration options
         kwargs["pinpath"] = self.config["pin"]["path"]
         kwargs["options"] = cli_options
+        kwargs["compile_flags"] = compile_flags
         kwargs["log"] = self.out
         kwargs["fn_mode"] = fn_mode
         kwargs["pinbin"] = self.config["pin"]["bin"]
@@ -470,10 +476,23 @@ class ScatShell(Cmd):
             You can also specify the pintools you want to compile (e.g. make arity type)
 
         """
+        force = False
+        debug = False
+        trace = False
         pintools = list()
         if s != "":
             to_compile = s.split(" ")
             for pintool in to_compile:
+                if pintool == '-f' or pintool == '--force' or pintool == '-B':
+                    force = True
+                    continue
+                if pintool == '-d' or pintool == '--debug':
+                    debug = True
+                    continue
+                if pintool == '-t' or pintool == '--trace':
+                    trace = True
+                    continue
+
                 code, name = inf_str_to_code(pintool), pintool
                 # Check if the pintool is known
                 if code == -1:
@@ -481,7 +500,7 @@ class ScatShell(Cmd):
                     self.stderr("pintool {0} is unknown".format(name))
                     return
                 pintools.append((code, name))
-        self.__pin.compile(pintools)
+        self.__pin.compile(force, debug, trace, pintools)
 
 
     #********** display **********#
