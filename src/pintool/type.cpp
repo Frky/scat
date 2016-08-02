@@ -5,7 +5,6 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <cmath>
 
 #include <stdarg.h>
 #include <string.h>
@@ -77,7 +76,7 @@ VOID update_data(UINT64 addr) {
         }
     }
     if (addr < DATA2_BASE && addr > DATA1_TOP) {
-        if (std::abs(addr - DATA2_BASE) < std::abs(addr - DATA1_TOP)) {
+        if ((addr - DATA2_BASE)*(addr - DATA2_BASE) < (addr - DATA1_TOP)*(addr - DATA1_TOP)) {
             DATA2_BASE = addr;
         } else {
             DATA1_TOP = addr;

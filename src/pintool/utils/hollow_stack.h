@@ -104,7 +104,8 @@ public:
             return bottom_[height];
         }
         else if (height < topHeight) {
-            throw new ForgottenElementException;
+            // TODO handle this properly
+            return -1;
         }
         else {
             int topIndex = height - topHeight;

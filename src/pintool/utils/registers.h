@@ -14,6 +14,9 @@
  * to streamline the code.
  */
 typedef enum {
+    /* ERROR REGISTER */
+    REGF_NULL, 
+
     /* Return register */
     REGF_AX,
     REGF_FIRST = REGF_AX,
@@ -99,7 +102,9 @@ REGF regf(REG reg) {
     case REG_XMM7:
         return REGF_XMM7;
     default:
-        throw new runtime_error("Invalid register");
+        // throw new runtime_error("Invalid register");
+        // TODO handle this properly
+        return REGF_NULL;
     }
 }
 
@@ -150,7 +155,9 @@ UINT32 reg_size(REG reg) {
     case REG_XMM7:
         return 128;
     default:
-        throw new runtime_error("Invalid register");
+        // throw new runtime_error("Invalid register");
+        // TODO handle this properly
+        return REGF_NULL;
     }
 }
 
