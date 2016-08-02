@@ -4,8 +4,6 @@
 #include "pin.H"
 #include "debug.h"
 
-#include <tr1/functional>
-
 // Type of the unique ID given to each registered
 // function allowing for fast lookup
 typedef unsigned int FID;
@@ -78,7 +76,7 @@ string basename(string img_name) {
 inline unsigned int fn_hash(string img_name, ADDRINT img_addr) {
     unsigned int hash = 289
                  + 17 * img_addr
-                 + std::tr1::hash<std::string> () (img_name);
+                 + std::hash<std::string> () (img_name);
     return hash & _hash_mask;
 }
 
