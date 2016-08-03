@@ -398,8 +398,9 @@ VOID Fini(INT32 code, VOID *v) {
         ofile << endl;
     }
 
+    ofile.close();
+
     trace_leave();
-    return;
 }
 
 VOID image_loaded(IMG img, void* data) {

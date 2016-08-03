@@ -45,11 +45,6 @@ UINT64 **nb_param_stack;
 UINT64 *nb_ret_int;
 UINT64 *nb_ret_float;
 
-/* Store the minimum size of parameter/return
-   Used as a clue that this is not an address if below 64 bits
-   in type pintool */
-UINT64 **param_max_size;
-
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
 /* A stack which keeps track of the program stack pointers */
@@ -67,10 +62,18 @@ bool *reg_ret_since_written;
  * a valid return candidate so far */
 bool *reg_maybe_return;
 
+UINT64 *last_written_size;
+/* Store the minimum size of parameter/return
+   Used as a clue that this is not an address if below 64 bits
+   in type pintool */
+UINT64 **param_min_size;
+
 void fn_registered(FID fid) {
     nb_call[fid] = 0;
     nb_param_intaddr[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
-    param_max_size[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
+    param_min_size[fid] = (UINT64 *) calloc(PARAM_INT_COUNT + 1, sizeof(UINT64));
+    for (int pid = 0; pid < PARAM_INT_COUNT + 1; pid++)
+        param_min_size[fid][pid] = 1024;
     nb_param_float[fid] = (UINT64 *) calloc(PARAM_FLOAT_COUNT, sizeof(UINT64));
     nb_param_stack[fid] = (UINT64 *) calloc(PARAM_STACK_COUNT, sizeof(UINT64));
 }
@@ -118,6 +121,16 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
     fn_call(ctxt, fid);
 
     trace_leave();
+}
+
+void update_param_min_size(FID fid, UINT64 pid, REGF regf) {
+    UINT64 last_written = last_written_size[regf];
+    if (last_written == 0)
+        return;
+
+    if (param_min_size[fid][pid] > last_written) {
+        param_min_size[fid][pid] = last_written;
+    }
 }
 
 
@@ -174,17 +187,15 @@ VOID param_read(REGF regf, UINT32 reg_size) {
             FID fid = call_stack.peek(i);
             nb_param[fid][position] += 1;
 
-            // +1 because param_max_size[fid][0] is for the return value
-            if (param_max_size[fid][position + 1] < reg_size) {
-                param_max_size[fid][position + 1] = reg_size;
-            }
+            // +1 because param_min_size[fid][0] is for the return value
+            update_param_min_size(fid, position + 1, regf);
         }
     }
 
     trace_leave();
 }
 
-VOID param_write(REGF regf) {
+VOID param_write(REGF regf, UINT32 reg_size) {
     trace_enter();
 
     if (call_stack.is_empty()) {
@@ -193,6 +204,7 @@ VOID param_write(REGF regf) {
     }
 
     written[regf] = call_stack.height();
+    last_written_size[regf] = reg_size;
     reg_ret_since_written[regf] = false;
 
     trace_leave();
@@ -224,17 +236,10 @@ VOID return_read(REGF regf, UINT32 reg_size) {
         if (!call_stack.is_forgotten(i))
             nb_ret[call_stack.peek(i)] += 1;
 
-    if (!call_stack.is_top_forgotten()) {
-        FID fid = call_stack.top();
-        if (param_max_size[fid][0] < reg_size) {
-            param_max_size[fid][0] = reg_size;
-        }
-    }
-
     trace_leave();
 }
 
-VOID return_write(REGF regf) {
+VOID return_write(REGF regf, UINT32 reg_size) {
     trace_enter();
 
     if (call_stack.is_empty()) {
@@ -243,6 +248,7 @@ VOID return_write(REGF regf) {
     }
 
     written[regf] = call_stack.height();
+    last_written_size[regf] = reg_size;
     reg_maybe_return[regf] = true;
 
     trace_leave();
@@ -342,6 +348,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IPOINT_BEFORE,
                         (AFUNPTR) param_write,
                         IARG_UINT32, regf(reg),
+                        IARG_UINT32, reg_size(reg),
                         IARG_END);
         }
     }
@@ -476,7 +483,7 @@ VOID fini(INT32 code, VOID *v) {
                 << ":";
 
         for (unsigned int pid = 0; pid < int_arity; pid++) {
-            if (param_max_size[fid][pid] > 0 && param_max_size[fid][pid] < 64) {
+            if (param_min_size[fid][pid] > 0 && param_min_size[fid][pid] < 64) {
                 ofile << pid << ",";
             }
         }
@@ -498,12 +505,13 @@ int main(int argc, char * argv[]) {
     nb_call = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    param_max_size = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
+    param_min_size = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_param_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_ret_int = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_ret_float = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
 
     written = (INT64 *) malloc(sizeof(INT64) * REGF_COUNT);
+    last_written_size = (UINT64 *) malloc(sizeof(UINT64) * REGF_COUNT);
     reg_ret_since_written = (bool *) calloc(REGF_COUNT, sizeof(bool));
     reg_maybe_return = (bool *) calloc(REGF_COUNT, sizeof(bool));
 
