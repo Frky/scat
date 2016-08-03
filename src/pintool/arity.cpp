@@ -123,14 +123,19 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
     trace_leave();
 }
 
-void update_param_min_size(FID fid, UINT64 pid, REGF regf) {
-    UINT64 last_written = last_written_size[regf];
-    if (last_written == 0)
+void update_param_min_size(FID fid, UINT64 pid, REGF regf, UINT32 read_size) {
+    // Take the maximum size between the last value written and the value read
+    UINT64 candidate_min_size = read_size < last_written_size[regf]
+            ? last_written_size[regf]
+            : read_size;
+
+    // Zero are irrelevant
+    // (Fairly usual value for both int and address)
+    if (candidate_min_size == 0)
         return;
 
-    if (param_min_size[fid][pid] > last_written) {
-        param_min_size[fid][pid] = last_written;
-    }
+    if (param_min_size[fid][pid] > candidate_min_size)
+        param_min_size[fid][pid] = candidate_min_size;
 }
 
 
@@ -186,9 +191,8 @@ VOID param_read(REGF regf, UINT32 reg_size) {
         if (!call_stack.is_forgotten(i)) {
             FID fid = call_stack.peek(i);
             nb_param[fid][position] += 1;
-
             // +1 because param_min_size[fid][0] is for the return value
-            update_param_min_size(fid, position + 1, regf);
+            update_param_min_size(fid, position + 1, regf, reg_size);
         }
     }
 

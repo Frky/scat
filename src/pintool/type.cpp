@@ -20,7 +20,7 @@
 #define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     100
 #define NB_CALLS_TO_CONCLUDE    50
-#define THRESHOLD               0.26
+#define THRESHOLD               0.75
 
 #define FN_NAME 1
 #define FN_ADDR 0
@@ -321,8 +321,15 @@ VOID Instruction(INS ins, VOID *v) {
     return;
 }
 
+
 VOID Fini(INT32 code, VOID *v) {
     trace_enter();
+
+    #define append_type(type) \
+            if (need_comma) \
+                ofile << "," ; \
+            ofile << (type); \
+            need_comma = true
 
     /* Iterate on functions */
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
@@ -336,63 +343,40 @@ VOID Fini(INT32 code, VOID *v) {
         bool need_comma = false;
 
         for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
-            if (pid == 0) {
-                if (has_return[fid] == 0) {
-                    ofile << "VOID";
-                    need_comma = true;
-                    continue;
-                }
-                else if (has_return[fid] == 2) {
-                    ofile << "FLOAT";
-                    need_comma = true;
-                    continue;
-                }
+            if (pid == 0 && has_return[fid] == 0) {
+                append_type("VOID");
             }
-
-            if (param_val[fid][pid]->size() < NB_CALLS_TO_CONCLUDE / 3) {
-                if (need_comma)
-                    ofile << "," ;
-                ofile << "UNDEF";
-                need_comma = true;
-                continue;
+            else if (pid == 0 && has_return[fid] == 2) {
+                append_type("FLOAT");
             }
-
-            int param_addr = 0;
-            for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
-                if (is_addr(*it)) {
-                    param_addr++;
-                }
+            else if (param_is_not_addr[fid][pid]) {
+                append_type("INT");
             }
-
-            float coef = ((float) param_addr) / ((float) param_val[fid][pid]->size());
-
-            if (need_comma)
-                ofile << "," ;
-
-            if (coef > THRESHOLD && !param_is_not_addr[fid][pid]) {
-                ofile << "ADDR";
+            else if (param_val[fid][pid]->size() < NB_CALLS_TO_CONCLUDE / 3) {
+                append_type("UNDEF");
             }
             else {
-                ofile << "INT";
+                int param_addr = 0;
+                for (list<UINT64>::iterator it = param_val[fid][pid]->begin(); it != param_val[fid][pid]->end(); it++) {
+                    if (is_addr(*it)) {
+                        param_addr++;
+                    }
+                }
+
+                float coef = ((float) param_addr) / ((float) param_val[fid][pid]->size());
+                append_type(coef > THRESHOLD ? "ADDR" : "INT");
+
+                ofile << "(" << coef << ")";
             }
-
-            ofile << "(" << coef << ")";
-            need_comma = true;
         }
 
-        for (unsigned int pid = 1; pid <= nb_param_stack[fid]; pid++) {
-            if (need_comma)
-                ofile << ",";
+        for (unsigned int pid = 0; pid < nb_param_stack[fid]; pid++) {
             // TODO: Really infer type
-            ofile << "INT";
-            need_comma = true;
+            append_type("INT");
         }
 
-        for (unsigned int pid = 1; pid <= nb_param_float[fid]; pid++) {
-            if (need_comma)
-                ofile << "," ;
-            ofile << "FLOAT";
-            need_comma = true;
+        for (unsigned int pid = 0; pid < nb_param_float[fid]; pid++) {
+            append_type("FLOAT");
         }
 
         ofile << endl;
