@@ -1,6 +1,5 @@
 #-*- coding: utf-8 -*-
 
-
 from cmd2 import Cmd
 import os
 import sys
@@ -9,10 +8,12 @@ from datetime import datetime
 import glob
 from confiture import Confiture, ConfigFileError
 
-from src.shell.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
+from src.shell.pin.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
 from src.shell.result import Result
 from src.shell.data.data import Data
 from src.shell.test import ScatTest
+
+from src.shell.pin.inscount import Pintool
 
 class ScatShell(Cmd):
 
@@ -31,40 +32,33 @@ class ScatShell(Cmd):
         # Create a result object
         self.res = Result(self.log_dir)
 
-        # Create a pin object with pin executable path
-        # Get CLI options for pin
-        if "cli-options" in self.config["pin"].keys():
-            cli_options = self.config["pin"]["cli-options"]
-        else:
-            cli_options = ""
-        # Get compile-flags
-        if "compile-flags" in self.config["pin"].keys():
-            compile_flags = self.config["pin"]['compile-flags']
-        else:
-            compile_flags = ''
-        # Get function identification method
-        if "function-mode" in self.config.keys():
-            fn_mode = self.config["function-mode"]
-        else:
-            # For now, default is identifying functions by name
-            fn_mode = "name"
-        # Get information from config file for all needed pintools
-        kwargs = dict()
-        for inf_code, inf_name in INF_ALL:
-            if inf_code == INF_BASE:
-                continue
-            kwargs["{0}_src".format(inf_name)] = self.config["pin"]["pintool-src"][inf_name]
-            kwargs["{0}_obj".format(inf_name)] = self.config["pin"]["pintool-obj"][inf_name]
-        # Other Pin configuration options
-        kwargs["pinpath"] = self.config["pin"]["path"]
-        kwargs["options"] = cli_options
-        kwargs["compile_flags"] = compile_flags
-        kwargs["log"] = self.out
-        kwargs["fn_mode"] = fn_mode
-        kwargs["pinbin"] = self.config["pin"]["bin"]
-        kwargs["respath"] = self.config["res"]["path"]
-        # Init Pin
-        self.__pin = Pin(**kwargs)
+        # Available pintools
+        self.__pintools = dict()
+        for pintool in self.config["pintool"]:
+            # Check the needed two arguments
+            req = ["src", "obj"]
+            for r in req:
+                if r not in self.config["pintool"][pintool].keys(): 
+                    #TODO
+                    raise Exception
+            src = self.config["pintool"][pintool]["src"]
+            obj = self.config["pintool"][pintool]["obj"]
+            # Check potential extra argument
+            if "prev_step" in self.config["pintool"][pintool].keys():
+                prev_step = self.config["pintool"][pintool]["prev_step"]
+            else:
+                prev_step = None
+            # Create pintool object
+            pintool_obj = Pintool(
+                                    name=pintool, 
+                                    src_path=src,
+                                    obj_path=obj,
+                                    pinconf=self.config["pin"],
+                                    log=self.out,
+                                    log_dir=self.log_dir,
+                                    prev_step=prev_step,
+                                )
+            self.__pintools[pintool] = pintool_obj
 
         # Create a test object
         # Testing options
@@ -82,14 +76,15 @@ class ScatShell(Cmd):
         pass
 
 
-    def out(self, msg):
+    def out(self, msg, verbose=True):
         """
             Print message on standard input, with formatting.
 
             @param msg  message to print
 
         """
-        sys.stdout.write("[*] " + msg + "\n")
+        if verbose:
+            sys.stdout.write("[*] " + msg + "\n")
 
 
     def stderr(self, msg):
@@ -177,43 +172,15 @@ class ScatShell(Cmd):
             raise ValueError
 
 
-    def __inference(self, code, s):
-        """
-            First check that a valid program is given as a parameter s,
-            and then launch the inference given as a parameter.
+    # def __inference(self, code, s):
+    #     """
+    #         First check that a valid program is given as a parameter s,
+    #         and then launch the inference given as a parameter.
 
-            @param code     code of the inference to launch (should be INF_ARITY, INF_TYPE or INF_COUPLE)
-            @param s        argument string that should correspond to a valid binary to execute
+    #         @param code     code of the inference to launch (should be INF_ARITY, INF_TYPE or INF_COUPLE)
+    #         @param s        argument string that should correspond to a valid binary to execute
 
-        """
-        # Before inference, check that the configuration is correct
-        self.do_checkconfig("")
-        if not self.config_ok:
-            return
-        # Parse command into binary + args
-        args =  list()
-        for i, arg in enumerate(s.split(" ")):
-            if arg[0] == "\"":
-                arg = arg[1:]
-            if arg[-1] == "\"":
-                arg = arg[:-1]
-            if i == 0:
-                binary = arg
-            else:
-                args.append(arg)
-        # Check the binary (exists? is executable?)
-        try:
-            self.__check_path(binary, isdir=False, isexec=True)
-        except ValueError:
-            return
-        # Check that all previous steps of inference have been performed
-        try:
-            inputfile = self.__get_inputfile(get_previous_step(code), binary)
-        except IOError:
-            return
-        # Run inference
-        self.out("Launching {0} inference on {1}".format(inf_code_to_str(code), binary))
-        self.__pin.infer(code, binary, args, self.log_dir + "/" + self.__gen_logfile(code, binary), inputfile)
+    #     """
 
 
     def __complete_bin(self, text, line, begidx, endidx):
@@ -280,7 +247,7 @@ class ScatShell(Cmd):
         #TODO check also pintool paths => call pin.check_config
         try:
             self.__check_path(self.log_dir, isdir=True)
-            self.__check_path(self.__pin.pinbin, isexec=True)
+            self.__check_path(self.config["pin"]["bin"], isexec=True)
         except ValueError:
             self.config_ok = False
             return
@@ -656,3 +623,43 @@ class ScatShell(Cmd):
             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
             return
         self.res.mismatch(pgm, inf, inputfile, data)
+
+
+    #************ new pintool **********#
+    def do_launch(self, s):
+        inf = s.split(" ")[0] 
+        if inf in self.__pintools.keys():
+            p = self.__pintools[inf]
+            p.compile("", "", "")
+            # Before inference, check that the configuration is correct
+            self.do_checkconfig("")
+            if not self.config_ok:
+                return
+            # Parse command into binary + args
+            args =  list()
+            for i, arg in enumerate(s.split(" ")[1:]):
+                if arg[0] == "\"":
+                    arg = arg[1:]
+                if arg[-1] == "\"":
+                    arg = arg[:-1]
+                if i == 0:
+                    binary = arg
+                else:
+                    args.append(arg)
+            # Check the binary (exists? is executable?)
+            try:
+                self.__check_path(binary, isdir=False, isexec=True)
+            except ValueError:
+                return
+            # inputfile = self.__get_inputfile(get_previous_step(code), binary)
+            # Run inference
+            self.out("Launching {0} inference on {1}".format(p, binary))
+            p.launch(binary, args)
+                #self.__pin.infer(code, binary, args, self.log_dir + "/" + self.__gen_logfile(code, binary), inputfile)
+
+    def do_infarity(self, s):
+        p = Pintool(
+                )
+        p.compile("", "", "")
+        self.__inference(p, s)
+

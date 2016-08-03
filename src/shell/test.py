@@ -2,7 +2,7 @@
 import os, glob
 import subprocess
 
-from src.shell.pin import INF_ALL, INF_ARITY, INF_TYPE, inf_code_to_str, get_previous_step
+from src.shell.pin.pin import INF_ALL, INF_ARITY, INF_TYPE, inf_code_to_str, get_previous_step
 from src.shell.log_parser import TypeLogParser
 
 
