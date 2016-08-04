@@ -51,8 +51,8 @@ class ScatShell(Cmd):
                                     src_path=src,
                                     obj_path=obj,
                                     pinconf=self.config["pin"],
-                                    stdout=self.stdout,
-                                    stderr=self.stdout,
+                                    stdout=self.out,
+                                    stderr=self.out,
                                     log_dir=self.log_dir,
                                     prev_step=prev_step,
                                 )
@@ -61,7 +61,7 @@ class ScatShell(Cmd):
         # Create a test object
         # Testing options
         kwargs = dict()
-        kwargs["log"] = self.stdout
+        kwargs["log"] = self.out
         if "test" in self.config.keys() and "proto" in self.config["test"]:
             kwargs["proto"] = self.config["test"]["proto"]
         self.test = ScatTest(**kwargs)
@@ -74,7 +74,7 @@ class ScatShell(Cmd):
 
     #========== LOG functions ==========#
 
-    def stdout(self, msg, verbose=True):
+    def out(self, msg, verbose=True):
         """
             Print message on standard input, with formatting.
 
@@ -454,6 +454,6 @@ class ScatShell(Cmd):
             except ValueError:
                 return
             # Run inference
-            self.stdout("Launching {0} inference on {1}".format(p, binary))
+            self.out("Launching {0} inference on {1}".format(p, binary))
             p.launch(binary, args)
 
