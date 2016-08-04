@@ -18,19 +18,15 @@
 
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
-#define NB_VALS_TO_CONCLUDE     100
+#define MAX_VALS_TO_COLLECT     100
 #define NB_CALLS_TO_CONCLUDE    50
+#define MIN_VALS_TO_CONCLUDE    15
 #define THRESHOLD               0.75
-
-#define FN_NAME 1
-#define FN_ADDR 0
 
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
-UINT64 FN_MODE;
-KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
 
 
 /* Call stack */
@@ -159,12 +155,6 @@ VOID Commence() {
     }
 }
 
-inline UINT64 sp(CONTEXT* ctxt) {
-    UINT64 sp;
-    PIN_GetContextRegval(ctxt, REG_RSP, (UINT8*) &sp);
-    return sp;
-}
-
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     trace_enter();
 
@@ -212,7 +202,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 
     nb_call[fid]++;
     for (unsigned int pid = 1; pid <= nb_param_int[fid]; pid++) {
-        if (param_val[fid][pid]->size() < NB_VALS_TO_CONCLUDE)
+        if (param_val[fid][pid]->size() < MAX_VALS_TO_COLLECT)
             add_val(fid, ctxt, pid);
     }
 
@@ -359,7 +349,7 @@ VOID Fini(INT32 code, VOID *v) {
             else if (param_is_not_addr[fid][pid]) {
                 append_type("INT");
             }
-            else if (param_val[fid][pid]->size() < NB_CALLS_TO_CONCLUDE / 3) {
+            else if (param_val[fid][pid]->size() < MIN_VALS_TO_CONCLUDE) {
                 append_type("UNDEF");
             }
             else {
@@ -432,16 +422,6 @@ int main(int argc, char * argv[]) {
 
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
-
-    // TODO better way to get mode from cli
-    if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
-        FN_MODE = FN_NAME;
-    } else if (strcmp(KnobFunctionMode.Value().c_str(), "addr") == 0) {
-        FN_MODE = FN_ADDR;
-    } else {
-        /* By default, names are used */
-        FN_MODE = FN_NAME;
-    }
 
     INS_AddInstrumentFunction(Instruction, 0);
     IMG_AddInstrumentFunction(image_loaded, 0);

@@ -11,8 +11,7 @@
     #define debug_trace_init()
 #endif
 
-#if defined (SCAT_DEBUG_ENABLED)
-
+#ifdef SCAT_DEBUG_ENABLED
     #define debug(...) { \
         sprintf(debug_trace_buf, __VA_ARGS__); \
         LOG(debug_trace_buf); \
@@ -21,8 +20,7 @@
     #define debug(...)
 #endif
 
-#if defined (SCAT_TRACE_ENABLED)
-
+#ifdef SCAT_TRACE_ENABLED
     #define trace(...) { \
         sprintf(debug_trace_buf, __VA_ARGS__); \
         LOG(debug_trace_buf); \

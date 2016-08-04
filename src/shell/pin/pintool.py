@@ -72,15 +72,14 @@ class Pintool(object):
             cli_options = self.__pinconf["cli-options"]
         else:
             cli_options = ""
-        return "{0} {4} -t {1} -o {2} -fn \"{7}\" {3} -- {5} {6}".format(
+        return "{0} {4} -t {1} -o {2} {3} -- {5} {6}".format(
                                                                             self.__pinconf["bin"],
-                                                                            self.__obj_path, 
-                                                                            logfile, 
-                                                                            infile_opt, 
+                                                                            self.__obj_path,
+                                                                            logfile,
+                                                                            infile_opt,
                                                                             cli_options,
-                                                                            binary, 
-                                                                            " ".join(args), 
-                                                                            self.__pinconf["function-mode"]
+                                                                            binary,
+                                                                            " ".join(args),
                                                                         )
 
     def __gen_logfile(self, binary):
@@ -117,13 +116,13 @@ class Pintool(object):
                                 os.listdir(self.__logdir),
                         )
         candidates = filter(
-                                lambda x: 
+                                lambda x:
                                     (x.startswith("{2}/{0}_{1}".format(
                                                                             os.path.basename(binary), 
-                                                                            inf, 
+                                                                            inf,
                                                                             self.__logdir)
-                                                                        ) and 
-                                    x.endswith(".log")), 
+                                                                        ) and
+                                    x.endswith(".log")),
                                 candidates,
                             )
         if len(candidates) == 0:
