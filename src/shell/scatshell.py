@@ -1,24 +1,21 @@
 #-*- coding: utf-8 -*-
 
-from cmd2 import Cmd
+import glob
 import os
 import sys
 import subprocess
-from datetime import datetime
-import glob
+from cmd2 import Cmd
 from confiture import Confiture, ConfigFileError
+from datetime import datetime
 
-# from src.shell.pin.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
-from src.shell.result import Result
 from src.shell.data.data import Data
-from src.shell.test import ScatTest
-
 from src.shell.pin.pintool import Pintool
+from src.shell.result import Result
+from src.shell.test import ScatTest
 
 class ScatShell(Cmd):
 
     prompt = 'scat > '
-
 
     def __init__(self, config_path="config/config.yaml"):
         self.config_path = config_path
@@ -54,8 +51,8 @@ class ScatShell(Cmd):
                                     src_path=src,
                                     obj_path=obj,
                                     pinconf=self.config["pin"],
-                                    stdout=self.out,
-                                    stderr=self.out,
+                                    stdout=self.stdout,
+                                    stderr=self.stdout,
                                     log_dir=self.log_dir,
                                     prev_step=prev_step,
                                 )
@@ -64,7 +61,7 @@ class ScatShell(Cmd):
         # Create a test object
         # Testing options
         kwargs = dict()
-        kwargs["log"] = self.out
+        kwargs["log"] = self.stdout
         if "test" in self.config.keys() and "proto" in self.config["test"]:
             kwargs["proto"] = self.config["test"]["proto"]
         self.test = ScatTest(**kwargs)
@@ -75,7 +72,9 @@ class ScatShell(Cmd):
     def emptyline(self):
         pass
 
-    def out(self, msg, verbose=True):
+    #========== LOG functions ==========#
+
+    def stdout(self, msg, verbose=True):
         """
             Print message on standard input, with formatting.
 
@@ -94,38 +93,54 @@ class ScatShell(Cmd):
         """
         sys.stderr.write("*** " + msg + "\n")
 
+    #========== Check functions ==========#
+
     def __check_path(self, fpath, **kwargs):
         """
-            Perform some verifications of a path (e.g. exists ? is a directory ?)
-            Raise ValueError if some error occur
+            Perform some verifications of a path (e.g. exists? is a directory?)
+            
+            @param fpath            path of the file/dir to check
+
+            @param (opt) isdir      True => check if fpath is directory
+
+            @param (opt) isexec     True => check if fpath is executable
+
+            @raise ValueError if some error occur
 
         """
         # By default, file is not required to be a directory
         isdir = False
         if "isdir" in kwargs.keys():
             isdir = kwargs["isdir"]
+
         # By default, file is not required to be executable
         isexec = False
         if "isexec" in kwargs.keys():
             isexec = kwargs["isexec"]
+
         # Check if path is not empty
         if fpath == "":
             self.stderr("You must specify a path")
             raise ValueError
+
         # If executable, check if we can execute (exists + permission X)
         if isexec and subprocess.call("type " + fpath, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) != 0:
             self.stderr("Specified target ({0}) is not found or not executable - check permissions".format(fpath))
             raise ValueError
         else:
             return
+
         # Check path existance
         if not os.path.exists(fpath):
             self.stderr("Specified target ({0}) does not exist".format(fpath))
             raise ValueError
+
         # If dir is mandatory, perform additional check
         if isdir and not os.path.isdir(fpath):
             self.stderr("Specified target ({0}) is not a directory".format(fpath))
             raise ValueError
+
+    #========== Completion functions ==========#
 
     def __complete_bin(self, text, line, begidx, endidx):
         paths = list()
@@ -171,13 +186,10 @@ class ScatShell(Cmd):
             paths.append(path.replace(fixed, "", 1))
         return paths
 
-
-    #********** checkconfig **********#
-
+    #========== checkconfig ==========#
 
     def help_checkconfig(self):
         print(self.do_checkconfig.__doc__.replace("\n", ""))
-
 
     def do_checkconfig(self, s):
         """
@@ -195,13 +207,10 @@ class ScatShell(Cmd):
             return
         self.config_ok = True
 
-
-    #********** setlogdir **********#
-
+    #========== setlogdir ==========#
 
     def help_setlogdir(self):
         print(self.do_setlogdir.__doc__.replace("\n", ""))
-
 
     def do_setlogdir(self, directory):
         """
@@ -214,13 +223,10 @@ class ScatShell(Cmd):
             return
         self.log_dir = directory
 
-
-    #********** make **********#
-
+    #========== make ==========#
 
     def help_make(self):
         print(self.do_make.__doc__)
-
 
     def do_make(self, s):
         """
@@ -267,13 +273,10 @@ class ScatShell(Cmd):
         for p in to_compile:
             p.compile(force, debug, trace)
         
-
-    #********** display **********#
-
+    #========== display ==========#
 
     def help_display(self):
         print(self.do_display.__doc__.replace("\n", ""))
-
 
     def complete_display(self, text, line, begidx, endidx):
         pgm_inf  = self.res.get_pgm_list()
@@ -281,7 +284,6 @@ class ScatShell(Cmd):
             if line.find(p) >= 0:
                 return [i for i in inf if i.startswith(text)]
         return [pgm for pgm, inf in pgm_inf if pgm.startswith(text)]
-
 
     def do_display(self, s):
         """
@@ -297,13 +299,10 @@ class ScatShell(Cmd):
 
         self.res.compute(pgm, inf, inputfile)
 
-
-    #********** parsedata **********#
-
+    #========== parsedata ==========#
 
     def help_parsedata(self):
         print(self.do_parsedata.__doc__.replace("\n", ""))
-
 
     def do_parsedata(self, s):
         """
@@ -328,35 +327,27 @@ class ScatShell(Cmd):
         data.parse(binary, self.config["clang"]["lib-path"], srcdir)
         data.dump()
 
-
-    #********** testing **********#
-
+    #========== testing ==========#
 
     def help_test(self):
         print(self.do_test.__doc__.replace("\n", ""))
 
-    
     def complete_test(self, text, line, begidx, endidx):
         # TODO
         pass
-
 
     def do_test(self, s):
         # TODO documentation
         # TODO check that config is specified in config file (+template)
         self.test.proto([self.__pintools["arity"], self.__pintools["type"]])
 
-
-    #********** accuracy **********#
-
+    #========== accuracy ==========#
 
     def help_accuracy(self):
         print(self.do_accuracy.__doc__.replace("\n", ""))
 
-
     def complete_accuracy(self, text, line, begidx, endidx):
         return self.complete_display(text, line, begidx, endidx)
-
 
     def do_accuracy(self, s):
         """
@@ -384,17 +375,13 @@ class ScatShell(Cmd):
             return
         self.res.accuracy(pgm, inf, inputfile, data)
 
-
-    #********** mismatch **********#
-
+    #========== mismatch ==========#
 
     def help_mismatch(self):
         print(self.do_accuracy.__doc__.replace("\n", ""))
 
-
     def complete_mismatch(self, text, line, begidx, endidx):
         return self.complete_display(text, line, begidx, endidx)
-
 
     def do_mismatch(self, s):
         """
@@ -422,8 +409,7 @@ class ScatShell(Cmd):
             return
         self.res.mismatch(pgm, inf, inputfile, data)
 
-
-    #************ new pintool **********#
+    #========== new pintool ==========#
 
     def complete_launch(self, text, line, begidx, endidx):
         if len(line.split(" ")) < 3:
@@ -462,6 +448,6 @@ class ScatShell(Cmd):
             except ValueError:
                 return
             # Run inference
-            self.out("Launching {0} inference on {1}".format(p, binary))
+            self.stdout("Launching {0} inference on {1}".format(p, binary))
             p.launch(binary, args)
 
