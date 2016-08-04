@@ -8,12 +8,12 @@ from datetime import datetime
 import glob
 from confiture import Confiture, ConfigFileError
 
-from src.shell.pin.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
+# from src.shell.pin.pin import Pin, inf_code_to_str, INF_BASE, INF_ALL, INF_ARITY, INF_TYPE, INF_COUPLE, INF_ALLOC, INF_UAF, INF_MEM_MAP, get_previous_step, inf_str_to_code
 from src.shell.result import Result
 from src.shell.data.data import Data
 from src.shell.test import ScatTest
 
-from src.shell.pin.inscount import Pintool
+from src.shell.pin.pintool import Pintool
 
 class ScatShell(Cmd):
 
@@ -54,7 +54,8 @@ class ScatShell(Cmd):
                                     src_path=src,
                                     obj_path=obj,
                                     pinconf=self.config["pin"],
-                                    log=self.out,
+                                    stdout=self.out,
+                                    stderr=self.out,
                                     log_dir=self.log_dir,
                                     prev_step=prev_step,
                                 )
@@ -71,10 +72,8 @@ class ScatShell(Cmd):
         # Init shell
         Cmd.__init__(self, completekey='tab')
 
-
     def emptyline(self):
         pass
-
 
     def out(self, msg, verbose=True):
         """
@@ -86,7 +85,6 @@ class ScatShell(Cmd):
         if verbose:
             sys.stdout.write("[*] " + msg + "\n")
 
-
     def stderr(self, msg):
         """
             Print message on standard error, with formatting.
@@ -95,48 +93,6 @@ class ScatShell(Cmd):
 
         """
         sys.stderr.write("*** " + msg + "\n")
-
-
-    def __gen_logfile(self, inf_code, binary):
-        """
-            Generate a name for a new log file. For example, for arity inference
-            on "grep", this will return grep_arity_{timestamp}.log.
-
-            @param inf_code     Ccde of the inference for which we require a log
-                                (should be INF_ARITY, INF_TYPE or INF_COUPLE)
-            @param binary       name of the binary for which we require a log
-
-            @ret                the generated name for the log file.
-
-        """
-        inf_name = inf_code_to_str(inf_code)
-        timestamp = datetime.now().strftime("%s")
-        return "{0}_{1}_{2}.log".format(os.path.basename(binary), inf_name, timestamp)
-
-
-    def __get_inputfile(self, inf_code, binary):
-        """
-            Retrieve the most recent logfile from the given step of inference.
-
-            @param inf_code code corresponding to the inference step to
-                            look for
-
-            @param binary   the binary file to analyse
-
-            @ret            a path to the most recent logfile from step
-
-            @raise IOError  if no file from step is found.
-
-        """
-        if inf_code not in [INF_TYPE, INF_ARITY, INF_COUPLE]:
-            return None
-        inf_name = inf_code_to_str(inf_code)
-        candidates = [self.log_dir + "/" + fn for fn in os.listdir(self.log_dir) if fn.startswith(os.path.basename(binary) + "_" + inf_name) and fn.endswith(".log")]
-        if len(candidates) == 0:
-            self.stderr("cannot file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(inf_name))
-            raise IOError
-        return max(candidates, key=os.path.getmtime)
-
 
     def __check_path(self, fpath, **kwargs):
         """
@@ -171,18 +127,6 @@ class ScatShell(Cmd):
             self.stderr("Specified target ({0}) is not a directory".format(fpath))
             raise ValueError
 
-
-    # def __inference(self, code, s):
-    #     """
-    #         First check that a valid program is given as a parameter s,
-    #         and then launch the inference given as a parameter.
-
-    #         @param code     code of the inference to launch (should be INF_ARITY, INF_TYPE or INF_COUPLE)
-    #         @param s        argument string that should correspond to a valid binary to execute
-
-    #     """
-
-
     def __complete_bin(self, text, line, begidx, endidx):
         paths = list()
         for path in glob.glob("/usr/bin/" + text + "*"):
@@ -194,7 +138,6 @@ class ScatShell(Cmd):
                 continue
             paths.append(path.replace("/bin/", ""))
         return paths
-
 
     def __get_pgm_and_inf(self, s):
         args = s.split(" ")
@@ -213,7 +156,6 @@ class ScatShell(Cmd):
         inf = args[1]
         inf_code = inf_str_to_code(inf)
         return pgm, inf_code
-
 
     def __complete_path(self, text, line, begidx, endidx):
         before_arg = line.rfind(" ", 0, begidx)
@@ -273,161 +215,6 @@ class ScatShell(Cmd):
         self.log_dir = directory
 
 
-    #********** base **********#
-
-
-    def help_base(self):
-        print(self.do_base.__doc__.replace("\n", ""))
-
-
-    def complete_base(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_base(self, s):
-        """
-            Launch the binary specified as a parameter with no instrumentation performed
-
-        """
-        self.__inference(INF_BASE, s)
-
-
-    #********** arity **********#
-
-
-    def help_arity(self):
-        print(self.do_arity.__doc__.replace("\n", ""))
-
-
-    def complete_arity(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_arity(self, s):
-        """
-            Launch arity inference on the binary specified as a parameter
-
-        """
-        print(s)
-        self.__inference(INF_ARITY, s)
-
-
-    #********** type **********#
-
-
-    def help_type(self):
-        print(self.do_type.__doc__.replace("\n", ""))
-
-
-    def complete_type(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_type(self, s):
-        """
-            Launch type inference on the binary specified as a parameter
-
-        """
-        self.__inference(INF_TYPE, s)
-
-
-    #********** uaf **********#
-
-
-    def help_uaf(self):
-        print(self.do_type.__doc__.replace("\n", ""))
-
-
-    def complete_uaf(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_uaf(self, s):
-        """
-            Launch type inference on the binary specified as a parameter
-
-        """
-        self.__inference(INF_UAF, s)
-
-
-    #********** memmap **********#
-
-
-    def help_memmap(self):
-        print(self.do_type.__doc__.replace("\n", ""))
-
-
-    def complete_memmap(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_memmap(self, s):
-        """
-            Launch type inference on the binary specified as a parameter
-
-        """
-        self.__inference(INF_MEM_MAP, s)
-
-
-    #********** couple **********#
-
-
-    def help_couple(self):
-        print(self.do_couple.__doc__.replace("\n", ""))
-
-
-    def complete_couple(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_couple(self, s):
-        """
-            Launch couple inference on the binary specified as a parameter
-
-        """
-        self.__inference(INF_COUPLE, s)
-
-
-    #********** alloc **********#
-
-
-    def help_alloc(self):
-        print(self.do_couple.__doc__.replace("\n", ""))
-
-
-    def complete_alloc(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return self.__complete_bin(text, line, begidx, endidx)
-        else:
-            return  self.__complete_path(text, line, begidx, endidx)
-
-
-    def do_alloc(self, s):
-        """
-            Launch allocator inference on the binary specified as a parameter
-
-        """
-        self.__inference(INF_ALLOC, s)
-
-
     #********** make **********#
 
 
@@ -446,29 +233,40 @@ class ScatShell(Cmd):
         force = False
         debug = False
         trace = False
-        pintools = list()
+
         if s != "":
-            to_compile = s.split(" ")
-            for pintool in to_compile:
-                if pintool == '-f' or pintool == '--force' or pintool == '-B':
-                    force = True
-                    continue
-                if pintool == '-d' or pintool == '--debug':
-                    debug = True
-                    continue
-                if pintool == '-t' or pintool == '--trace':
-                    trace = True
-                    continue
+            args = s.split(" ")
+        else: 
+            args = list()
 
-                code, name = inf_str_to_code(pintool), pintool
-                # Check if the pintool is known
-                if code == -1:
-                    # If not, print a message and abort
-                    self.stderr("pintool {0} is unknown".format(name))
-                    return
-                pintools.append((code, name))
-        self.__pin.compile(force, debug, trace, pintools)
+        to_compile = list()
 
+        for arg in args:
+            if arg == '-f' or arg == '--force' or arg == '-B':
+                force = True
+                continue
+            if arg == '-d' or arg == '--debug':
+                debug = True
+                continue
+            if arg == '-t' or arg == '--trace':
+                trace = True
+                continue
+
+            try:
+                p = self.__pintools[arg]
+            except KeyError:
+                self.stderr("pintool {0} is unknown".format(name))
+                return
+            to_compile.append(p)
+
+        # If no pintool given in argument, compile everything
+        if len(to_compile) == 0:
+            to_compile = self.__pintools.values()
+
+        # Compile pintools
+        for p in to_compile:
+            p.compile(force, debug, trace)
+        
 
     #********** display **********#
 
@@ -546,7 +344,7 @@ class ScatShell(Cmd):
     def do_test(self, s):
         # TODO documentation
         # TODO check that config is specified in config file (+template)
-        self.test.proto(self.__pin.infer)
+        self.test.proto([self.__pintools["arity"], self.__pintools["type"]])
 
 
     #********** accuracy **********#
@@ -626,6 +424,18 @@ class ScatShell(Cmd):
 
 
     #************ new pintool **********#
+
+    def complete_launch(self, text, line, begidx, endidx):
+        if len(line.split(" ")) < 3:
+            return filter(
+                            lambda x: x.startswith(text), 
+                            map(lambda x: str(x), self.__pintools),
+                        )
+        elif len(line.split(" ")) < 4:
+            return self.__complete_bin(text, line, begidx, endidx)
+        else:
+            return  self.__complete_path(text, line, begidx, endidx)
+
     def do_launch(self, s):
         inf = s.split(" ")[0] 
         if inf in self.__pintools.keys():
@@ -651,15 +461,7 @@ class ScatShell(Cmd):
                 self.__check_path(binary, isdir=False, isexec=True)
             except ValueError:
                 return
-            # inputfile = self.__get_inputfile(get_previous_step(code), binary)
             # Run inference
             self.out("Launching {0} inference on {1}".format(p, binary))
             p.launch(binary, args)
-                #self.__pin.infer(code, binary, args, self.log_dir + "/" + self.__gen_logfile(code, binary), inputfile)
-
-    def do_infarity(self, s):
-        p = Pintool(
-                )
-        p.compile("", "", "")
-        self.__inference(p, s)
 

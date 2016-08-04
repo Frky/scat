@@ -26,18 +26,14 @@ class ScatTest(object):
             if "log" in kwargs["proto"].keys():
                 self.log["proto"] = kwargs["proto"]["log"]
 
-
     def __log_file(self, bin_path, inf_code):
         return "{2}/{0}_{1}.log".format(os.path.basename(bin_path), inf_code_to_str(inf_code), self.log["proto"])
-
 
     def __ok(self, fname):
         self.__log("\t[ok] {0}".format(fname))
 
-
     def __ko(self, fname, oracle, infered):
         self.__log("\t[ko] {0} -- (real) {1} | (infered) {2}".format(fname, oracle, infered))
-
 
     def __compare(self, fname, oracle, infered):
         if oracle == infered:
@@ -46,7 +42,6 @@ class ScatTest(object):
         else:
             self.__ko(fname, oracle, infered)
             return 1
-
 
     def oracle(self, src_path, log_path):
         """
@@ -86,26 +81,21 @@ class ScatTest(object):
         return ko, tot
 
 
-    def unit_test(self, src_path, bin_path, infer):
+    def unit_test(self, src_path, bin_path, pintools):
         self.__log("{0}".format(bin_path))
-        for inf in [INF_ARITY, INF_TYPE]:
-            infer(
-                    inf, 
+        for p in pintools:
+            p.launch(
                     bin_path, 
                     "", 
-                    self.__log_file(bin_path, inf), 
-                    self.__log_file(bin_path, get_previous_step(inf)) if get_previous_step(inf) >= 0 else None,
                     False,  # Set this to True for verbose debug
                 )
         return self.oracle(src_path, self.__log_file(bin_path, INF_TYPE))
-
 
     def make(self):
         self.__log("Compiling tests ...")
         cmd = "make"
         with open("/dev/null", 'w') as fnull:
             subprocess.call(cmd, cwd=self.root["proto"], shell=True, stdout=fnull)
-
 
     def proto(self, infer):
         # Compile all 
