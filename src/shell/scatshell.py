@@ -168,9 +168,10 @@ class ScatShell(Cmd):
                 for i in inf:
                     print(i)
                 raise ValueError
-        inf = args[1]
-        inf_code = inf_str_to_code(inf)
-        return pgm, inf_code
+        # This line might raise KeyError if pintool is not found
+        # This exception should be handled by the caller
+        pintool = self.__pintools[args[1]]
+        return pgm, pintool
 
     def __complete_path(self, text, line, begidx, endidx):
         before_arg = line.rfind(" ", 0, begidx)
@@ -291,13 +292,15 @@ class ScatShell(Cmd):
 
         """
         try:
-            pgm, inf = self.__get_pgm_and_inf(s)
+            pgm, pintool = self.__get_pgm_and_inf(s)
         except ValueError:
             return
+        except KeyError:
+            #TODO explicit message (w/ pintool and binary details)
+            self.stderr("Pintool error")
 
-        inputfile = self.__get_inputfile(inf, pgm)
-
-        self.res.compute(pgm, inf, inputfile)
+        print pintool
+        self.res.compute(pgm, pintool)
 
     #========== parsedata ==========#
 
@@ -356,11 +359,12 @@ class ScatShell(Cmd):
 
         """
         try:
-            pgm, inf = self.__get_pgm_and_inf(s)
+            pgm, pintool = self.__get_pgm_and_inf(s)
         except ValueError:
             return
-
-        inputfile = self.__get_inputfile(inf, pgm)
+        except KeyError:
+            #TODO explicit message (w/ pintool and binary details)
+            self.stderr("Pintool error")
 
         # Check CLANG configuration
         conf = Confiture("config/templates/clang.yaml")
@@ -373,7 +377,7 @@ class ScatShell(Cmd):
         if data is None:
             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
             return
-        self.res.accuracy(pgm, inf, inputfile, data)
+        self.res.accuracy(pgm, pintool, data)
 
     #========== mismatch ==========#
 
@@ -390,11 +394,12 @@ class ScatShell(Cmd):
 
         """
         try:
-            pgm, inf = self.__get_pgm_and_inf(s)
+            pgm, pintool = self.__get_pgm_and_inf(s)
         except ValueError:
             return
-
-        inputfile = self.__get_inputfile(inf, pgm)
+        except KeyError:
+            #TODO explicit message (w/ pintool and binary details)
+            self.stderr("Pintool error")
 
         # Check CLANG configuration
         conf = Confiture("config/templates/clang.yaml")
@@ -407,7 +412,8 @@ class ScatShell(Cmd):
         if data is None:
             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
             return
-        self.res.mismatch(pgm, inf, inputfile, data)
+
+        self.res.mismatch(pgm, pintool, data)
 
     #========== new pintool ==========#
 

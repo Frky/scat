@@ -5,7 +5,6 @@ import os
 
 
 
-from src.shell.pin.pin import INF_ARITY, INF_TYPE, INF_COUPLE
 from src.shell.analysis.arity import ArityAnalysis
 from src.shell.analysis.type import TypeAnalysis
 from src.shell.analysis.couple import CoupleAnalysis
@@ -16,32 +15,36 @@ class Result(object):
         self.log_dir = logdir
 
 
-    def compute(self, pgm, infcode, logfile):
-        if infcode == INF_ARITY:
+    def compute(self, pgm, pintool):
+        logfile = pintool.get_logfile(pgm, prev=False)
+        #TODO better than string here
+        if str(pintool) == 'arity':
             ar = ArityAnalysis(pgm, logfile)
             ar.display()
-        elif infcode == INF_TYPE:
+        elif str(pintool.name) == 'type':
             ty = TypeAnalysis(pgm, logfile)
             ty.display()
-        elif infcode == INF_COUPLE:
+        elif str(pintool.name) == 'couple':
             co = CoupleAnalysis(pgm, logfile)
             co.display()
 
 
-    def accuracy(self, pgm, infcode, inputfile, data):
-        if infcode == INF_ARITY:
+    def accuracy(self, pgm, pintool, data): 
+        inputfile = pintool.get_logfile(pgm, prev=False)
+        if str(pintool) == 'arity':
             ar = ArityAnalysis(pgm, inputfile, data)
             ar.accuracy()
-        elif infcode == INF_TYPE:
+        elif str(pintool) == 'type':
             ty = TypeAnalysis(pgm, inputfile, data)
             ty.accuracy()
 
 
-    def mismatch(self, pgm, infcode, inputfile, data):
-        if infcode == INF_ARITY:
+    def mismatch(self, pgm, pintool, data):
+        inputfile = pintool.get_logfile(pgm, prev=False)
+        if str(pintool) == 'arity':
             ar = ArityAnalysis(pgm, inputfile, data)
             ar.mismatch()
-        elif infcode == INF_TYPE:
+        elif str(pintool) == 'type':
             ty = TypeAnalysis(pgm, inputfile, data)
             ty.mismatch()
 

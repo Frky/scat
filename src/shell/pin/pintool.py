@@ -96,17 +96,21 @@ class Pintool(object):
         timestamp = datetime.now().strftime("%s")
         return "{3}/{0}_{1}_{2}.log".format(os.path.basename(binary), str(self), timestamp, self.__logdir)
 
-    def __get_inputfile(self, binary):
+    def get_logfile(self, binary, prev=True):
         """
             Retrieve the most recent logfile from the given step of inference.
 
             @param binary   the binary file to analyse
+
+            @param prev     If true, retrieve the log file of the previouis step
+                            Otherwise, retrieve the log for the current step
 
             @ret            a path to the most recent logfile from step
 
             @raise IOError  if no file from step is found.
 
         """
+        inf = self.__prev_step if prev else self
         candidates = map(
                                 lambda x:
                                     "{0}/{1}".format(self.__logdir, x),
@@ -116,13 +120,12 @@ class Pintool(object):
                                 lambda x: 
                                     (x.startswith("{2}/{0}_{1}".format(
                                                                             os.path.basename(binary), 
-                                                                            self.__prev_step, 
+                                                                            inf, 
                                                                             self.__logdir)
                                                                         ) and 
                                     x.endswith(".log")), 
                                 candidates,
                             )
-        # [self.log_dir + "/" + fn for fn in os.listdir(self.log_dir) if fn.startswith(os.path.basename(binary) + "_" + inf_name) and fn.endswith(".log")]
         if len(candidates) == 0:
             self.stderr("Cannot file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(self))
             raise IOError
@@ -145,7 +148,7 @@ class Pintool(object):
         # else:
         logfile = self.__gen_logfile(binary)
         if self.__prev_step is not None:
-            infile = self.__get_inputfile(binary)
+            infile = self.get_logfile(binary)
         else:
             infile = None
         cmd = self.__cmd(binary, args, logfile, infile)
