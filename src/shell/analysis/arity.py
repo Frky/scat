@@ -21,13 +21,15 @@ class ArityAnalysis(Analysis):
         with open(self.logfile, "r") as f:
             for line in f.readlines():
                 (img, imgaddr, fn,
-                        int_ar, stack_ar, float_ar,
+                        int_ar, int_stack_ar,
+                        float_ar, float_stack_ar,
                         ret,
                         int_indices) = line[:-1].split(":")
                 self.log[(img, int(imgaddr))] = (fn,
                         int(int_ar),
-                        int(stack_ar),
+                        int(int_stack_ar),
                         int(float_ar),
+                        int(float_stack_ar),
                         int(ret))
 
 
@@ -66,8 +68,8 @@ class ArityAnalysis(Analysis):
         ok_ar = 0
         ok_ret = 0
         for (img, imgaddr), fn_log in self.log.items():
-            fn, int_ar, stack_ar, float_ar, ret = fn_log
-            ar = int_ar + stack_ar + float_ar
+            fn, int_ar, int_stack_ar, float_ar, float_stack_ar, ret = fn_log
+            ar = int_ar + int_stack_ar + float_ar + float_stack_ar
             if fn == '':
                 without_name += 1
                 continue
@@ -112,8 +114,8 @@ class ArityAnalysis(Analysis):
         print("")
 
         for (img, imgaddr), fn_log in self.log.items():
-            fname, int_ar, stack_ar, float_ar, ret = fn_log
-            ar = int_ar + stack_ar + float_ar
+            fname, int_ar, stack_ar, float_ar, float_stack_ar, ret = fn_log
+            ar = int_ar + int_stack_ar + float_ar + float_stack_ar
             if fname == "" or fname not in self.protos.keys():
                 continue
 

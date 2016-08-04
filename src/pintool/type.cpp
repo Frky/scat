@@ -38,8 +38,9 @@ HollowStack<MAX_DEPTH, FID> call_stack;
 
 /* Arity informations for each functions */
 unsigned int *nb_param_int;
-unsigned int *nb_param_stack;
+unsigned int *nb_param_int_stack;
 unsigned int *nb_param_float;
+unsigned int *nb_param_float_stack;
 unsigned int *has_return;
 bool **param_is_not_addr;
 
@@ -90,13 +91,15 @@ string read_part(char* c) {
 // Register and initialize the functions found with the arity pintool
 void fn_registered(FID fid,
             unsigned int _nb_param_int,
-            unsigned int _nb_param_stack,
+            unsigned int _nb_param_int_stack,
             unsigned int _nb_param_float,
+            unsigned int _nb_param_float_stack,
             unsigned int _has_return,
             vector<UINT32> int_idx) {
     nb_param_int[fid] = _nb_param_int;
-    nb_param_stack[fid] = _nb_param_stack;
+    nb_param_int_stack[fid] = _nb_param_int_stack;
     nb_param_float[fid] = _nb_param_float;
+    nb_param_float_stack[fid] = _nb_param_float_stack;
     has_return[fid] = _has_return;
     param_is_not_addr[fid] = (bool *) malloc((_nb_param_int + 1) * sizeof(bool));
 
@@ -128,8 +131,9 @@ VOID Commence() {
             string name = read_part(&m);
 
             UINT64 int_arity = atol(read_part(&m).c_str());
-            UINT64 stack_arity = atol(read_part(&m).c_str());
+            UINT64 int_stack_arity = atol(read_part(&m).c_str());
             UINT64 float_arity = atol(read_part(&m).c_str());
+            UINT64 float_stack_arity = atol(read_part(&m).c_str());
             UINT64 has_return = atol(read_part(&m).c_str());
 
             vector<UINT32> int_param_idx;
@@ -145,7 +149,10 @@ VOID Commence() {
 
             FID fid = fn_register(img_name, img_addr, name);
             if (fid != FID_UNKNOWN) {
-                fn_registered(fid, int_arity, stack_arity, float_arity, has_return,
+                fn_registered(fid,
+                    int_arity, int_stack_arity,
+                    float_arity, float_stack_arity,
+                    has_return,
                     int_param_idx);
             }
         }
@@ -370,12 +377,16 @@ VOID Fini(INT32 code, VOID *v) {
             }
         }
 
-        for (unsigned int pid = 0; pid < nb_param_stack[fid]; pid++) {
+        for (unsigned int pid = 0; pid < nb_param_int_stack[fid]; pid++) {
             // TODO: Really infer type
             append_type("INT");
         }
 
         for (unsigned int pid = 0; pid < nb_param_float[fid]; pid++) {
+            append_type("FLOAT");
+        }
+
+        for (unsigned int pid = 0; pid < nb_param_float_stack[fid]; pid++) {
             append_type("FLOAT");
         }
 
@@ -403,8 +414,9 @@ VOID image_loaded(IMG img, void* data) {
 
 int main(int argc, char * argv[]) {
     nb_param_int = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    nb_param_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
+    nb_param_int_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     nb_param_float = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
+    nb_param_float_stack = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     has_return = (unsigned int *) calloc(NB_FN_MAX, sizeof(bool));
     param_is_not_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
 
@@ -440,7 +452,7 @@ int main(int argc, char * argv[]) {
 
     fn_registry_init(NB_FN_MAX);
     vector<UINT32> unknown_int_idx;
-    fn_registered(FID_UNKNOWN, 0, 0, 0, 0, unknown_int_idx);
+    fn_registered(FID_UNKNOWN, 0, 0, 0, 0, 0, unknown_int_idx);
 
     debug_trace_init();
     PIN_StartProgram();

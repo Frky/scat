@@ -4,7 +4,6 @@
 #include <fstream>
 #include <cmath>
 #include <stdlib.h>
-#include <stdint.h>
 
 #include <string.h>
 
@@ -16,9 +15,10 @@
 #define PARAM_THRESHOLD         0.10
 #define RETURN_THRESHOLD        0.05
 
-#define PARAM_INT_COUNT         6
-#define PARAM_FLOAT_COUNT       8
-#define PARAM_STACK_COUNT       10
+#define PARAM_INT_COUNT          6
+#define PARAM_INT_STACK_COUNT   10
+#define PARAM_FLOAT_COUNT        8
+#define PARAM_FLOAT_STACK_COUNT  6
 
 #define FN_NAME 0
 #define FN_ADDR 1
@@ -36,12 +36,11 @@ KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Spe
 
 /* Number of calls of each function */
 UINT64 *nb_call;
-/* Number of parameters int/addr for each function */
-UINT64 **nb_param_intaddr;
-/* Number of parameters float for each function */
+/* Number of parameters for each function */
+UINT64 **nb_param_int;
+UINT64 **nb_param_int_stack;
 UINT64 **nb_param_float;
-/* Number of stack parameters for each function */
-UINT64 **nb_param_stack;
+UINT64 **nb_param_float_stack;
 /* Return value detected */
 UINT64 *nb_ret_int;
 UINT64 *nb_ret_float;
@@ -71,12 +70,14 @@ UINT64 **param_min_size;
 
 void fn_registered(FID fid) {
     nb_call[fid] = 0;
-    nb_param_intaddr[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
+    nb_param_int[fid] = (UINT64 *) calloc(PARAM_INT_COUNT, sizeof(UINT64));
     param_min_size[fid] = (UINT64 *) calloc(PARAM_INT_COUNT + 1, sizeof(UINT64));
     for (int pid = 0; pid < PARAM_INT_COUNT + 1; pid++)
         param_min_size[fid][pid] = 1024;
+    nb_param_int_stack[fid] = (UINT64 *) calloc(PARAM_INT_STACK_COUNT, sizeof(UINT64));
+
     nb_param_float[fid] = (UINT64 *) calloc(PARAM_FLOAT_COUNT, sizeof(UINT64));
-    nb_param_stack[fid] = (UINT64 *) calloc(PARAM_STACK_COUNT, sizeof(UINT64));
+    nb_param_float_stack[fid] = (UINT64 *) calloc(PARAM_FLOAT_STACK_COUNT, sizeof(UINT64));
 }
 
 inline UINT64 sp(CONTEXT* ctxt) {
@@ -184,7 +185,7 @@ VOID param_read(REGF regf, UINT32 reg_size) {
     }
     else {
         position = regf - REGF_DI;
-        nb_param = nb_param_intaddr;
+        nb_param = nb_param_int;
     }
 
     // Propagate the parameter up the call stack
@@ -259,7 +260,7 @@ VOID return_write(REGF regf, UINT32 reg_size) {
     trace_leave();
 }
 
-VOID stack_read(ADDRINT addr, UINT32 size) {
+VOID stack_read(ADDRINT addr, UINT32 size, UINT64** nb_param, UINT32 param_count) {
     trace_enter();
 
     if (sp_stack.is_top_forgotten()) {
@@ -269,8 +270,8 @@ VOID stack_read(ADDRINT addr, UINT32 size) {
 
     UINT64 sp = sp_stack.top();
     UINT64 position = (addr - sp) / 8;
-    if (position >= 0 && position < PARAM_STACK_COUNT) {
-        nb_param_stack[call_stack.top()][position] += 1;
+    if (position >= 0 && position < param_count) {
+        nb_param[call_stack.top()][position] += 1;
     }
 
     trace_leave();
@@ -385,11 +386,32 @@ VOID instrument_instruction(INS ins, VOID *v) {
             // we only care about read in between them
             && !INS_IsRet(ins)
             && !INS_IsCall(ins)) {
-        INS_InsertCall(ins,
-                IPOINT_BEFORE,
-                (AFUNPTR) stack_read,
+
+        REG reg = REG_INVALID();
+        UINT32 operand_count = INS_OperandCount(ins);
+        for (UINT32 operand = 0; operand < operand_count; operand++) {
+            if (INS_OperandIsReg(ins, operand) && INS_OperandWritten(ins, operand)) {
+                reg = INS_OperandReg(ins, operand);
+                break;
+            }
+        }
+
+        UINT64** nb_param;
+        UINT32 nb_param_count;
+        if (REG_is_xmm(reg)) {
+            nb_param = nb_param_float_stack;
+            nb_param_count = PARAM_FLOAT_STACK_COUNT;
+        }
+        else {
+            nb_param = nb_param_int_stack;
+            nb_param_count = PARAM_INT_STACK_COUNT;
+        }
+
+        INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR) stack_read,
                 IARG_MEMORYREAD_EA,
                 IARG_MEMORYREAD_SIZE,
+                IARG_PTR, nb_param,
+                IARG_UINT32, nb_param_count,
                 IARG_END);
     }
 
@@ -432,7 +454,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
 }
 
 
-uint32_t detected_arity(uint32_t param_threshold, UINT64* detection, uint32_t from) {
+UINT64 detected_arity(UINT64 param_threshold, UINT64* detection, UINT64 from) {
     for (int i = from - 1; i >= 0; i--) {
         if (detection[i] > param_threshold) {
             return i + 1;
@@ -461,17 +483,19 @@ VOID fini(INT32 code, VOID *v) {
 
         inferred++;
 
-        uint32_t param_threshold = (int) ceil(nb_call[fid] * PARAM_THRESHOLD);
-        uint32_t return_threshold = (int) ceil(nb_call[fid] * RETURN_THRESHOLD);
+        UINT64 param_threshold = (UINT64) ceil(nb_call[fid] * PARAM_THRESHOLD);
+        UINT64 return_threshold = (UINT64) ceil(nb_call[fid] * RETURN_THRESHOLD);
 
-        uint32_t int_arity = detected_arity(
-                param_threshold, nb_param_intaddr[fid], PARAM_INT_COUNT);
-        uint32_t stack_arity = detected_arity(
-                param_threshold, nb_param_stack[fid], PARAM_STACK_COUNT);
-        uint32_t float_arity = detected_arity(
-                param_threshold, nb_param_float[fid], PARAM_FLOAT_COUNT);
+        UINT64 int_arity = detected_arity(param_threshold,
+                nb_param_int[fid], PARAM_INT_COUNT);
+        UINT64 int_stack_arity = detected_arity(param_threshold,
+                nb_param_int_stack[fid], PARAM_INT_STACK_COUNT);
+        UINT64 float_arity = detected_arity(param_threshold,
+                nb_param_float[fid], PARAM_FLOAT_COUNT);
+        UINT64 float_stack_arity = detected_arity(param_threshold,
+                nb_param_float_stack[fid], PARAM_FLOAT_STACK_COUNT);
 
-        uint32_t ret = 0;
+        UINT64 ret = 0;
         if (nb_ret_int[fid] > return_threshold) {
             ret = 1;
         }
@@ -482,8 +506,9 @@ VOID fini(INT32 code, VOID *v) {
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)
                 << ":" << int_arity
-                << ":" << stack_arity
+                << ":" << int_stack_arity
                 << ":" << float_arity
+                << ":" << float_stack_arity
                 << ":" << ret
                 << ":";
 
@@ -508,10 +533,11 @@ VOID fini(INT32 code, VOID *v) {
 
 int main(int argc, char * argv[]) {
     nb_call = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
-    nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    nb_param_intaddr = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
+    nb_param_int = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
+    nb_param_int_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     param_min_size = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
-    nb_param_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
+    nb_param_float = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
+    nb_param_float_stack = (UINT64 **) calloc(NB_FN_MAX, sizeof(UINT64 *));
     nb_ret_int = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
     nb_ret_float = (UINT64 *) calloc(NB_FN_MAX, sizeof(UINT64));
 
