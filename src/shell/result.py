@@ -5,7 +5,7 @@ import os
 
 
 
-from src.shell.pin import INF_ARITY, INF_TYPE, INF_COUPLE
+from src.shell.pin.pin import INF_ARITY, INF_TYPE, INF_COUPLE
 from src.shell.analysis.arity import ArityAnalysis
 from src.shell.analysis.type import TypeAnalysis
 from src.shell.analysis.couple import CoupleAnalysis

@@ -1,20 +1,28 @@
 pin:
     path:   /usr/bin/pin
     bin: /usr/bin/pin/pin
-    pintool-obj:
-        arity: ./bin/obj-intel64/arity.so
-        type: ./bin/obj-intel64/type.so
-        couple: ./bin/obj-intel64/couple.so
-        alloc: ./bin/obj-intel64/alloc.so
-        uaf: ./bin/obj-intel64/uaf.so
-        memmap: ./bin/obj-intel64/memmap.so
-    pintool-src:
-        arity: ./src/pintool/arity.cpp
-        type: ./src/pintool/type.cpp
-        couple: ./src/pintool/couple.cpp
-        alloc: ./src/pintool/alloc.cpp
-        uaf: ./src/pintool/uaf.cpp
-        memmap: ./src/pintool/memmap.cpp
+    function-mode: name
+
+pintool:
+    arity:
+        src: ./src/pintool/arity.cpp
+        obj: ./bin/obj-intel64/arity.so
+    type: 
+        src: ./src/pintool/type.cpp
+        obj: ./bin/obj-intel64/type.so
+        prev_step: arity
+    couple: 
+        src: ./src/pintool/couple.cpp
+        obj: ./bin/obj-intel64/couple.so
+    alloc: 
+        src: ./src/pintool/alloc.cpp
+        obj: ./bin/obj-intel64/alloc.so
+    uaf: 
+        src: ./src/pintool/uaf.cpp
+        obj: ./bin/obj-intel64/uaf.so
+    memmap: 
+        src: ./src/pintool/memmap.cpp
+        obj: ./bin/obj-intel64/memmap.so
 
 res:
     path: ./res
@@ -26,4 +34,10 @@ clang:
     lib-path: /usr/lib/x86_64-linux-gnu/libclang.so.1
     data-path: ./data/
 
-function-mode: name
+test:
+    proto:
+        root: ./test/proto
+        src: ./test/proto/src
+        bin: ./test/proto/bin
+        log: ./test/proto/log
+

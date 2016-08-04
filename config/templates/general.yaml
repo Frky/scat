@@ -1,19 +1,15 @@
 pin:
     path: ""
     bin: ""
-    pintool-src:
-        arity: ""
-        type: ""
-        couple: ""
-        alloc: ""
-        uaf: ""
-    pintool-obj:
-        arity: ""
-        type: ""
-        couple: ""
-        alloc: ""
-        uaf: ""
-        memmap: ""
+
+pintool:
+    arity:
+        src: ""
+        obj: ""
+    type:
+        src: ""
+        obj: ""
+
 res:
     path: ""
 log:
