@@ -75,7 +75,7 @@ LIB_ROOTS :=
 
 # Build the intermediate object file.
 $(OBJDIR)%-release$(OBJ_SUFFIX): %.cpp
-	$(CXX) $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) $(COMP_OBJ)$@ $<
+	$(CXX) $(TOOL_CXXFLAGS) $(SCAT_COMPILE_FLAGS) $(COMP_OBJ)$@ $<
 
 $(OBJDIR)%-debug$(OBJ_SUFFIX): %.cpp
 	$(CXX) $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_DEBUG_ENABLED $(COMP_OBJ)$@ $<

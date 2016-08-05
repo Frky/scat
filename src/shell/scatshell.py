@@ -35,7 +35,7 @@ class ScatShell(Cmd):
             # Check the needed two arguments
             req = ["src", "obj"]
             for r in req:
-                if r not in self.config["pintool"][pintool].keys(): 
+                if r not in self.config["pintool"][pintool].keys():
                     #TODO
                     raise Exception
             src = self.config["pintool"][pintool]["src"]
@@ -47,7 +47,7 @@ class ScatShell(Cmd):
                 prev_step = None
             # Create pintool object
             pintool_obj = Pintool(
-                                    name=pintool, 
+                                    name=pintool,
                                     src_path=src,
                                     obj_path=obj,
                                     pinconf=self.config["pin"],
@@ -98,7 +98,7 @@ class ScatShell(Cmd):
     def __check_path(self, fpath, **kwargs):
         """
             Perform some verifications of a path (e.g. exists? is a directory?)
-            
+
             @param fpath            path of the file/dir to check
 
             @param (opt) isdir      True => check if fpath is directory
@@ -243,7 +243,7 @@ class ScatShell(Cmd):
 
         if s != "":
             args = s.split(" ")
-        else: 
+        else:
             args = list()
 
         to_compile = list()
@@ -273,7 +273,7 @@ class ScatShell(Cmd):
         # Compile pintools
         for p in to_compile:
             p.compile(force, debug, trace)
-        
+
     #========== display ==========#
 
     def help_display(self):
@@ -420,7 +420,7 @@ class ScatShell(Cmd):
     def complete_launch(self, text, line, begidx, endidx):
         if len(line.split(" ")) < 3:
             return filter(
-                            lambda x: x.startswith(text), 
+                            lambda x: x.startswith(text),
                             map(lambda x: str(x), self.__pintools),
                         )
         elif len(line.split(" ")) < 4:
@@ -429,17 +429,34 @@ class ScatShell(Cmd):
             return  self.__complete_path(text, line, begidx, endidx)
 
     def do_launch(self, s):
-        inf = s.split(" ")[0] 
+        split = s.split(" ")
+        index = 0
+
+        debug = False
+        trace = False
+        while index < len(split) and split[index].startswith("-"):
+            arg = split[index]
+            if arg == '-d' or arg == '--debug':
+                debug = True
+            elif arg == '-t' or arg == '--trace':
+                trace = True
+            index += 1
+
+        print("Debug {} Trace {}".format(debug, trace))
+
+        inf = split[index]
+        index += 1
+
         if inf in self.__pintools.keys():
             p = self.__pintools[inf]
-            p.compile("", "", "")
+            p.compile(False, debug, trace)
             # Before inference, check that the configuration is correct
             self.do_checkconfig("")
             if not self.config_ok:
                 return
             # Parse command into binary + args
             args =  list()
-            for i, arg in enumerate(s.split(" ")[1:]):
+            for i, arg in enumerate(split[index:]):
                 if arg[0] == "\"":
                     arg = arg[1:]
                 if arg[-1] == "\"":
@@ -456,4 +473,3 @@ class ScatShell(Cmd):
             # Run inference
             self.out("Launching {0} inference on {1}".format(p, binary))
             p.launch(binary, args)
-

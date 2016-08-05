@@ -118,7 +118,7 @@ class Pintool(object):
         candidates = filter(
                                 lambda x:
                                     (x.startswith("{2}/{0}_{1}".format(
-                                                                            os.path.basename(binary), 
+                                                                            os.path.basename(binary),
                                                                             inf,
                                                                             self.__logdir)
                                                                         ) and
