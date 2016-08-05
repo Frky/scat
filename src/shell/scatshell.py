@@ -442,8 +442,6 @@ class ScatShell(Cmd):
                 trace = True
             index += 1
 
-        print("Debug {} Trace {}".format(debug, trace))
-
         inf = split[index]
         index += 1
 
