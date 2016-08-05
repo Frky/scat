@@ -21,15 +21,15 @@ class Result(object):
         if str(pintool) == 'arity':
             ar = ArityAnalysis(pgm, logfile)
             ar.display()
-        elif str(pintool.name) == 'type':
+        elif str(pintool) == 'type':
             ty = TypeAnalysis(pgm, logfile)
             ty.display()
-        elif str(pintool.name) == 'couple':
+        elif str(pintool) == 'couple':
             co = CoupleAnalysis(pgm, logfile)
             co.display()
 
 
-    def accuracy(self, pgm, pintool, data): 
+    def accuracy(self, pgm, pintool, data):
         inputfile = pintool.get_logfile(pgm, prev=False)
         if str(pintool) == 'arity':
             ar = ArityAnalysis(pgm, inputfile, data)

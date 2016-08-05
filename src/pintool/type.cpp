@@ -20,7 +20,6 @@
 #define MAX_DEPTH               1000
 #define MAX_VALS_TO_COLLECT     100
 #define NB_CALLS_TO_CONCLUDE    50
-#define MIN_VALS_TO_CONCLUDE    15
 #define THRESHOLD               0.75
 
 ifstream ifile;
@@ -100,9 +99,10 @@ void fn_registered(FID fid,
     param_is_not_addr[fid] = (bool *) malloc((_nb_param_int + 1) * sizeof(bool));
 
     nb_call[fid] = 0;
-    param_val[fid] = (list<UINT64> **) malloc((_nb_param_int + 1) * sizeof(list<UINT64> *));
+    unsigned int param_val_size = 1 + _nb_param_int + _nb_param_int_stack;
+    param_val[fid] = (list<UINT64> **) malloc(param_val_size * sizeof(list<UINT64> *));
 
-    for (unsigned int pid = 0; pid < _nb_param_int + 1; pid++) {
+    for (unsigned int pid = 0; pid < param_val_size; pid++) {
         param_is_not_addr[fid][pid] = false;
         param_val[fid][pid] = new list<UINT64>();
     }
@@ -155,37 +155,45 @@ VOID Commence() {
     }
 }
 
+REG param_reg(unsigned int pid) {
+    switch (pid) {
+    case 0:
+        return REG_RAX;
+    case 1:
+        return REG_RDI;
+    case 2:
+        return REG_RSI;
+    case 3:
+        return REG_RDX;
+    case 4:
+        return REG_RCX;
+    case 5:
+        return REG_R8;
+    case 6:
+        return REG_R9;
+    default:
+        return REG_INVALID();
+    }
+}
+
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
     trace_enter();
 
-    REG reg;
-    switch (pid) {
-    case 1:
-        reg = REG_RDI;
-        break;
-    case 2:
-        reg = REG_RSI;
-        break;
-    case 3:
-        reg = REG_RDX;
-        break;
-    case 4:
-        reg = REG_RCX;
-        break;
-    case 5:
-        reg = REG_R8;
-        break;
-    case 6:
-        reg = REG_R9;
-        break;
-    default:
-        trace_leave();
-        return;
+    UINT64 val;
+    if (pid < 1 + nb_param_int[fid]) {
+        PIN_GetContextRegval(ctxt, param_reg(pid), (UINT8*) &val);
+    }
+    else {
+        // Assumes this is called from fn_call (for sp to be accurate)
+        UINT64 sp;
+        PIN_GetContextRegval(ctxt, REG_RSP, (UINT8*) &sp);
+        unsigned int sp_offset = pid - (1 + nb_param_int[fid]);
+        UINT64* addr = (UINT64*) (sp + sp_offset * 8);
+        val = *addr;
     }
 
-    ADDRINT regv = PIN_GetContextReg(ctxt, reg);
-    if (regv != 0)
-        param_val[fid][pid]->push_front(regv);
+    if (val != 0)
+        param_val[fid][pid]->push_front(val);
 
     trace_leave();
 }
@@ -195,14 +203,11 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 
     call_stack.push(fid);
 
-    if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
-        trace_leave();
-        return;
-    }
-
     nb_call[fid]++;
-    for (unsigned int pid = 1; pid <= nb_param_int[fid]; pid++) {
-        if (param_val[fid][pid]->size() < MAX_VALS_TO_COLLECT)
+    unsigned int param_val_size = 1 + nb_param_int[fid] + nb_param_int_stack[fid];
+    for (unsigned int pid = 1; pid < param_val_size; pid++) {
+        if (!param_is_not_addr[fid][pid] &&
+                param_val[fid][pid]->size() < MAX_VALS_TO_COLLECT)
             add_val(fid, ctxt, pid);
     }
 
@@ -231,9 +236,9 @@ VOID fn_ret(CONTEXT *ctxt) {
     if (!call_stack.is_top_forgotten()) {
         FID fid = call_stack.top();
 
-        ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
-        if (regv != 0)
-            param_val[fid][0]->push_front(regv);
+        if (has_return[fid] == 1) {
+            add_val(fid, ctxt, 0);
+        }
     }
 
     call_stack.pop();
@@ -339,17 +344,18 @@ VOID Fini(INT32 code, VOID *v) {
 
         bool need_comma = false;
 
-        for (unsigned int pid = 0; pid <= nb_param_int[fid]; pid++) {
+        unsigned int param_val_size = 1 + nb_param_int[fid] + nb_param_int_stack[fid];
+        for (unsigned int pid = 0; pid < param_val_size; pid++) {
             if (pid == 0 && has_return[fid] == 0) {
                 append_type("VOID");
             }
             else if (pid == 0 && has_return[fid] == 2) {
                 append_type("FLOAT");
             }
-            else if (param_is_not_addr[fid][pid]) {
+            else if (pid < 1 + nb_param_int[fid] && param_is_not_addr[fid][pid]) {
                 append_type("INT");
             }
-            else if (param_val[fid][pid]->size() < MIN_VALS_TO_CONCLUDE) {
+            else if (param_val[fid][pid]->size() == 0) {
                 append_type("UNDEF");
             }
             else {
@@ -367,16 +373,9 @@ VOID Fini(INT32 code, VOID *v) {
             }
         }
 
-        for (unsigned int pid = 0; pid < nb_param_int_stack[fid]; pid++) {
-            // TODO: Really infer type
-            append_type("INT");
-        }
-
-        for (unsigned int pid = 0; pid < nb_param_float[fid]; pid++) {
-            append_type("FLOAT");
-        }
-
-        for (unsigned int pid = 0; pid < nb_param_float_stack[fid]; pid++) {
+        for (unsigned int pid = 0;
+                pid < nb_param_float[fid] + nb_param_float_stack[fid];
+                pid++) {
             append_type("FLOAT");
         }
 

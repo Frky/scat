@@ -34,14 +34,19 @@ class TypeAnalysis(Analysis):
             Analysis.print_general_info_with_data(self, self.data)
 
 
-    def check_one(self, fname, args, proto):
+    def check_one(self, fname, args, proto, undef_as_int = False):
         ar = min(len(args), len(proto))
         ok, tot = 0, 0
         for ref, inf in zip(proto[:ar], args[:ar]):
             if ref == "...":
                 break
             tot += 1
-            if ((inf[:4] == "ADDR") != ("*" in ref or "[" in ref)):
+            if inf == "UNDEF":
+                if undef_as_int:
+                    inf = "INT"
+                else:
+                    continue
+            if (inf[:4] == "ADDR") != ("*" in ref or "[" in ref):
                 continue
             ok += 1
         return (ok, tot)
@@ -75,7 +80,7 @@ class TypeAnalysis(Analysis):
                 variadic += 1
                 continue
 
-            res = self.check_one(fn, args, proto)
+            res = self.check_one(fn, args, proto, undef_as_int = True)
             ok += res[0]
             total += res[1]
 
