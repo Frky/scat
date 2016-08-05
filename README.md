@@ -17,12 +17,15 @@
 
 ## What is `scat`?
 
-`scat` is a tool to recover high-level information about functions embedded in an executable
-using **dynamic analysis**. In particular, `scat` aims to recover:
+Originally, `scat` was a tool to recover high-level information about functions embedded in an executable
+using **dynamic analysis**. In particular, `scat` aimed to recover:
 
 * **arity** of functions
 * **type** of arguments
 * behavioral **coupling** between functions
+
+Now, we've made `scat` more generic, and it handles several reverse-engineering functionalities, like allocator detection (WIP). 
+It is also easy to add your own pintools to `scat` to perform your own analysis.
 
 ### Arity
 
@@ -73,7 +76,7 @@ such as use-after-free detection).
 #### Example with `scat`
 
 ```
-scat > couple ./pgm/bin/mupdf-x11 ./testfile.pdf
+scat > launch couple ./pgm/bin/mupdf-x11 ./testfile.pdf
 [*] Launching couple inference on ./pgm/bin/mupdf-x11
 [*] /usr/bin/pin/pin -t ./bin/obj-intel64/couple.so -o ./log/mupdf-x11_couple_1452528857.log -i ./log/mupdf-x11_type_1452528848.log -- ./pgm/bin/mupdf-x11 ./testfile.pdf
 [*] Inference results logged in ./log/mupdf-x11_couple_1452528857.log
@@ -177,7 +180,7 @@ source code of the binary under inference.
 ### Requirements
 
 * `scat` requires **python 2.7** and is not compatible with **python 3**.
-* You need to have `pin` installed on your computer.
+* You need to have `Pin` installed on your computer.
 * If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `libclang1-3.4` installed.
 
 ### Installation
@@ -193,14 +196,14 @@ source code of the binary under inference.
 The configuration of `scat` is set in a yaml file, namely `./config/config.yaml`. You
 can edit this file in order to fit with your own configuration. Main points are:
 
-* `pin -> bin`: set the path to the `pin` executable. Typical value for this is `/usr/bin/pin/pin` or `/usr/bin/pin/intel64/bin/pinbin`. **Required for `scat` to work correctly.**
-* `pin -> path`: set the path to the `pin` main directory. May be different from the path to the executable. Typical value for this is `/usr/bin/pin/`. **Required for `scat` to work correctly.**
+* `pin -> bin`: set the path to the `Pin` executable. Typical value for this is `/usr/bin/pin/pin` or `/usr/bin/pin/intel64/bin/pinbin`. **Required for `scat` to work correctly.**
+* `pin -> path`: set the path to the `Pin` main directory. May be different from the path to the executable. Typical value for this is `/usr/bin/pin/`. **Required for `scat` to work correctly.**
 * `log -> path`: set the path to the log directory.
 
 ### Error E: 4.3 is not a supported linux release
 
 If you use an esoteric linux distribution (e.g. ArchLinux), it may not be supported by `Pin` explicitly.
-If so, you can add the command line argument `-ifeellucky` to `pin` by setting the entry `pin -> cli-options` in the configuration file.
+If so, you can add the command line argument `-ifeellucky` to `Pin` by setting the entry `pin -> cli-options` in the configuration file.
 
 ### GCC >= 5.0 ABI compatibility (The C++ ABI of your compiler does not match the ABI of the pin kit.)
 
@@ -214,16 +217,21 @@ pin:
     path:   /usr/bin/pin
     bin: /usr/bin/pin/pin
     cli-options: -ifeellucky
-    pintool-obj:
-        arity: ./bin/obj-intel64/arity.so
-        type: ./bin/obj-intel64/type.so
-        couple: ./bin/obj-intel64/couple.so
-        alloc: ./bin/obj-intel64/alloc.so
-    pintool-src:
-        arity: ./src/pintool/arity.cpp
-        type: ./src/pintool/type.cpp
-        couple: ./src/pintool/couple.cpp
-        alloc: ./src/pintool/alloc.cpp
+
+pintool:
+    arity:
+        src: ./src/pintool/arity.cpp
+        obj: ./bin/obj-intel64/arity.so
+    type: 
+        src: ./src/pintool/type.cpp
+        obj: ./bin/obj-intel64/type.so
+        prev_step: arity
+    couple: 
+        src: ./src/pintool/couple.cpp
+        obj: ./bin/obj-intel64/couple.so
+    alloc: 
+        src: ./src/pintool/alloc.cpp
+        obj: ./bin/obj-intel64/alloc.so
 
 res:
     path: ./res
@@ -267,17 +275,21 @@ scat > make
 
 ### Inference
 
-* `arity $PGM`: launch arity inference on `$PGM`, where `$PGM` is an executable and its arguments if any.
-* `type $PGM`: launch type inference on `$PGM`. **Note** that it requires that arity inference was previously run on the same program.
-* `couple $PGM`: launch couple inference on `$PGM`. **Note** that it requires that type inference was previously run on the same program.
+To perform an inference driven by a pintool, use `launch` followed by the name of the inference (relatively to the configuration file).
+
+Examples:
+
+* `launch arity $PGM`: launch arity inference on `$PGM`, where `$PGM` is an executable and its arguments if any.
+* `launch type $PGM`: launch type inference on `$PGM`. **Note** that it requires that arity inference was previously run on the same program.
+* `launch couple $PGM`: launch couple inference on `$PGM`. **Note** that it requires that type inference was previously run on the same program.
 
 ```
-scat > arity grep -r "def" ./src
+scat > launch arity grep -r "def" ./src
 [*] Launching arity inference on grep
 [*] /usr/bin/pin/pin -t ./bin/obj-intel64/arity.so -o ./log/grep_arity_1451915233.log -- grep -r "def" ./
 [*] Inference results logged in ./log/grep_arity_1451915233.log
 
-scat > type grep -R "def" ./
+scat > launch type grep -R "def" ./
 [*] Launching type inference on grep
 [*] /usr/bin/pin/pin -t ./bin/obj-intel64/type.so -o ./log/grep_type_1451915649.log -i ./log/grep_arity_1451915233.log -- grep -R "def" ./
 [*] Inference results logged in ./log/grep_type_1451915649.log
@@ -406,7 +418,6 @@ Information about inference
 
 
 ## Current limitations of the implementation
-
 `scat` comes with several limitations. Some of them are relative to the approach, but we will detail here only
 the ones relative to incomplete or mis-implementation.
 
