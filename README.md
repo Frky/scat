@@ -249,8 +249,6 @@ clang:
 Run `scat` (from your virtualenv): `./scat.py`. You are now in th `scat` shell, where you can launch inference
 on different binaries and display results.
 
-### Commands
-
 ### Make pintools
 
 Before being able to launch any inference, you must compile pintools with the command make:
@@ -416,6 +414,59 @@ Information about inference
    Arity  : Expected 8 got 7
 ```
 
+### Advanced usage
+
+#### Add your own pintool
+
+To add your own pintool, simply add an entry to the configuration file (typically `congig/config.yaml`). For example, let's say you want to add
+a pintool named `nopcounter` to count the number of `NOP` instructions.
+
+Here is what you should add to your configuration file:
+
+```
+pin:
+    path:   /usr/bin/pin
+    bin: /usr/bin/pin/pin
+    cli-options: -ifeellucky
+
+pintool:
+    arity:
+        src: ./src/pintool/arity.cpp
+        obj: ./bin/obj-intel64/arity.so
+    type: 
+        src: ./src/pintool/type.cpp
+        obj: ./bin/obj-intel64/type.so
+        prev_step: arity
+    couple: 
+        src: ./src/pintool/couple.cpp
+        obj: ./bin/obj-intel64/couple.so
+    alloc: 
+        src: ./src/pintool/alloc.cpp
+        obj: ./bin/obj-intel64/alloc.so
++   nopcounter:
++       src: $SRC_DIR/nopcounter.cpp
++       obj: $OBJ_DIR/nopcounter.so
+
+res:
+    path: ./res
+
+log:
+    path: ./log
+
+clang:
+    lib-path: /usr/lib/x86_64-linux-gnu/libclang.so.1
+    data-path: ./data/
+```
+
+where:
+
+* `$SRC_DIR` is the path to the source file of `nopcount` 
+* `$OBJ_DIR` is the path to the compiled shared library of `nopcount` 
+
+And that's it. You don't need to actually compile your pintool, compilation will be handled by `scat`.
+
+From now on, you can use the command `launch nopcount $PGM` within `scat` (be sure you ran `make nopcount` in `scat` before
+to compile it).
 
 ## Current limitations of the implementation
 `scat` comes with several limitations. Some of them are relative to the approach, but we will detail here only
