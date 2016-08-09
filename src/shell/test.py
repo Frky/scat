@@ -2,7 +2,7 @@
 import os, glob
 import subprocess
 
-from src.shell.log_parser import TypeLogParser
+from src.shell.parser.type import TypeLogParser
 
 
 class ScatTest(object):
@@ -25,8 +25,8 @@ class ScatTest(object):
             if "log" in kwargs["proto"].keys():
                 self.log["proto"] = kwargs["proto"]["log"]
 
-    def __log_file(self, bin_path, inf_code):
-        return "{2}/{0}_{1}.log".format(os.path.basename(bin_path), inf_code_to_str(inf_code), self.log["proto"])
+    def __log_file(self, bin_path, pintool):
+        return "{2}/{0}_{1}.log".format(os.path.basename(bin_path), pintool, self.log["proto"])
 
     def __ok(self, fname):
         self.__log("\t[ok] {0}".format(fname))
@@ -56,7 +56,6 @@ class ScatTest(object):
         oracle = dict()
         # Parse results
         log = TypeLogParser(log_path)
-        log.parse()
         # Local number of failures
         ko = 0
         # Local number of tries
@@ -79,7 +78,6 @@ class ScatTest(object):
                     tot += 1
         return ko, tot
 
-
     def unit_test(self, src_path, bin_path, pintools):
         self.__log("{0}".format(bin_path))
         for p in pintools:
@@ -88,7 +86,7 @@ class ScatTest(object):
                     "", 
                     False,  # Set this to True for verbose debug
                 )
-        return self.oracle(src_path, self.__log_file(bin_path, INF_TYPE))
+        return self.oracle(src_path, self.__log_file(bin_path, pintools[1]))
 
     def make(self):
         self.__log("Compiling tests ...")
