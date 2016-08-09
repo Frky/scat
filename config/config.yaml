@@ -14,15 +14,11 @@ pintool:
     couple: 
         src: ./src/pintool/couple.cpp
         obj: ./bin/obj-intel64/couple.so
-    alloc: 
-        src: ./src/pintool/alloc.cpp
-        obj: ./bin/obj-intel64/alloc.so
-    uaf: 
-        src: ./src/pintool/uaf.cpp
-        obj: ./bin/obj-intel64/uaf.so
-    memmap: 
-        src: ./src/pintool/memmap.cpp
-        obj: ./bin/obj-intel64/memmap.so
+        prev_step: type
+    memblock: 
+        src: ./src/pintool/memblock.cpp
+        obj: ./bin/obj-intel64/memblock.so
+        prev_step: type
 
 res:
     path: ./res
