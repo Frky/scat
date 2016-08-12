@@ -20,17 +20,23 @@ class MemComb(ICommand):
         for i in xrange(BlockTraceParser.DATA_SIZE):
             addr_seen.append(list())
         for io, typ, val, name, counter in self.__parser.get():
+            print io, typ, val, name, counter
             if name not in func.keys():
                 func[name] = [0]
             if io == "out" and typ == "addr":
-                key = val % BlockTraceParser.DATA_SIZE
-                if val not in addr_seen[key]:
-                    func[name][0] += 1
-            key = val % BlockTraceParser.DATA_SIZE
-            if val not in addr_seen[key]:
-                addr_seen[key].append(val)
-        alloc_s = sorted(func.items(), key=lambda a:a[1][0])[-1][0]
+                func[name][0] += 1
+                # key = val % BlockTraceParser.DATA_SIZE
+                # if val not in addr_seen[key]:
+                #     func[name][0] += 1
+            #key = val % BlockTraceParser.DATA_SIZE
+            #if val not in addr_seen[key]:
+            #    addr_seen[key].append(val)
+        alloc_s = sorted(func.items(), key=lambda a:a[1][0])[-1]
+        for a in alloc_s[:100]:
+            print a
+        return
         self.log("allocator found - {0}".format(alloc_s))
+        return
         addr_alloc = list()
         for i in xrange(BlockTraceParser.DATA_SIZE):
             addr_alloc.append(dict())

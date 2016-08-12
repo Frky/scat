@@ -2,6 +2,54 @@
 
 from src.shell.parser.i_log_parser import ILogParser
 
+class BlockTrace(object):
+
+    IN = 0
+    OUT = 1
+
+    NUM = 0
+    ADDR = 1
+
+    def __init__(self, line):
+        # io, typ, val, img, img_addr, name, counter = line[:-1].split(":")
+        # yield io, typ, int(val), img, img_addr, name, int(counter)
+        io, typ, value, img, img_addr, name, counter = line[:-1].split(":")
+        if io == "in":
+            self.__io = BlockTrace.IN
+        else:
+            self.__io = BlockTrace.OUT
+        if typ == "addr":
+            self.__type = BlockTrace.ADDR
+        else:
+            self.__type = BlockTrace.NUM
+        self.__val = int(value)
+        self.__date = int(counter)
+        if name != "":
+            self.__id = name
+        else:
+            self.__id = ":".join([img, img_addr])
+
+    @property
+    def io(self):
+        return self.__io
+
+    @property
+    def type(self):
+        return self.__type
+
+    @property
+    def val(self):
+        return self.__val
+
+    @property
+    def date(self):
+        return self.__date
+
+    @property
+    def id(self):
+        return self.__id
+
+
 class BlockTraceParser(ILogParser):
 
     # Size of the hash table
@@ -35,8 +83,7 @@ class BlockTraceParser(ILogParser):
                 #     progress = pg
                 #     if verbose:
                 #         # self.log("parsing data from log file ({2} lines): [{0}{1}]".format("#" * (int(progress*PWIDTH/100.0)), " " * (PWIDTH - int(progress*PWIDTH/100) - 1), LINES), False)
-                io, typ, val, name, counter = line[:-1].split(":")
-                yield io, typ, int(val), name, int(counter)
+                yield BlockTrace(line)
         # if verbose:
         #     self.log("")
 

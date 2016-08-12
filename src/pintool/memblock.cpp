@@ -24,14 +24,10 @@
 
 #define DEBUG_SEGFAULT          0
 
-#define FN_NAME 0
-#define FN_ADDR 1
-
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
-UINT64 FN_MODE;
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
@@ -111,7 +107,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 #endif
     call_stack.push(fid);
     counter += 1;
-    for (unsigned int i = 1; i < nb_p[fid]; i++) {
+    for (unsigned int i = 0; i < nb_p[fid]; i++) {
         // If parameter is an address
         if (param_addr[fid][i]) {
             param_t *new_addr = (param_t *) malloc(sizeof(param_t));
@@ -161,8 +157,8 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
 
     if (!call_stack.is_top_forgotten()) {
         FID fid = call_stack.top();
-    
         if (param_addr[fid][0]) {
+            std::cerr << "yolo" << endl; 
             param_t *new_addr = (param_t *) malloc(sizeof(param_t));
             new_addr->fid = fid;
             new_addr->counter = counter;
@@ -188,14 +184,18 @@ void fn_registered(
     /* Set the array of booleans indicating which parameter is an ADDR */
     param_addr[fid] = (bool *) calloc(nb_p[fid], sizeof(bool));
 
+    std::cerr << fn_name(fid) << ": ";
+
     /* Iteration on parameters */
     for (unsigned int i = 0; i < nb_p[fid]; i++) {
+        std::cerr << type_param[i] << ",";
         if (type_param[i]) {
             param_addr[fid][i] = true;
         }
         else
             param_addr[fid][i] = false;
     }
+    std::cerr << endl;
     return;
 }
 
@@ -271,9 +271,10 @@ VOID Commence() {
                     break;
                 case 'I':
                 case 'V':
-                    type_param.push_back(1);
+                    type_param.push_back(0);
                     break;
                 case 'F':
+                    type_param.push_back(0);
                     break;
                 }
                 nb_param += 1;
@@ -316,7 +317,7 @@ VOID Fini(INT32 code, VOID *v) {
             ofile << "addr:";
         else 
             ofile << "int:";
-        ofile << p->val << ":" << fn_name(p->fid) << ":" << p->counter << endl;
+        ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->counter << endl;
     }
     ofile.close();
 }

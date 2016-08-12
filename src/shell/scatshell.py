@@ -9,6 +9,7 @@ from confiture import Confiture, ConfigFileError
 from datetime import datetime
 
 from src.shell.command.memcomb import MemComb
+from src.shell.command.couple import Couple
 from src.shell.data.data import Data
 from src.shell.pin.pintool import Pintool
 from src.shell.result import Result
@@ -484,4 +485,14 @@ class ScatShell(Cmd):
             return
         logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
         MemComb(logfile, self.out).run()
+
+    #========== COUPLE FROM MEMBLOCK ==========
+
+    def do_couple(self, s):
+        # Get log file from last block inference
+        if "memblock" not in self.__pintools.keys():
+            self.stderr("you must run memblock inference first")
+            return
+        logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
+        Couple(logfile, self.out).run()
 
