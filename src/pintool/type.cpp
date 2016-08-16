@@ -61,7 +61,7 @@ typedef struct {
 
 } Region;
 
-Region data_regions[100];
+Region data_regions[10000];
 UINT64 data_regions_size = 0;
 
 Region stack_heap_region;
@@ -277,6 +277,8 @@ VOID update_heap(CONTEXT* ctxt, ADDRINT addr) {
  *  that uses a memory operand
  */
 VOID Instruction(INS ins, VOID *v) {
+    trace_enter();
+
     if (!init)
         Commence();
 
@@ -320,7 +322,7 @@ VOID Instruction(INS ins, VOID *v) {
                     IARG_END);
     }
 
-    return;
+    trace_leave();
 }
 
 
@@ -388,6 +390,8 @@ VOID Fini(INT32 code, VOID *v) {
 }
 
 VOID image_loaded(IMG img, void* data) {
+    trace_enter();
+
     for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec)) {
         if (!SEC_Valid(sec) || !SEC_Mapped(sec))
             continue;
@@ -399,6 +403,9 @@ VOID image_loaded(IMG img, void* data) {
         region->low = addr;
         region->high = addr + SEC_Size(sec);
     }
+
+
+    trace_leave();
 }
 
 int main(int argc, char * argv[]) {

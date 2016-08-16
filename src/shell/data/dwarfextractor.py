@@ -69,6 +69,8 @@ class DwarfExtractor(object):
             return self.types_cache[addr]
 
         type = self.lookup_type(CU, addr)
+        if 'Lisp_Object' in type:
+            type = 'void *'
         self.types_cache[addr] = type
         return type
 
