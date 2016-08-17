@@ -34,22 +34,40 @@ class TypeAnalysis(Analysis):
             Analysis.print_general_info_with_data(self, self.data)
 
 
-    def check_one(self, fname, args, proto, undef_as_int = False):
+    def check_function(self, fname, args, proto, undef_as_int = False):
+        return_ok, return_tot = 0, 1
+        params_ok, params_tot = 0, 0
+
+        if self.check_one(proto[0], args[0], undef_as_int):
+            return_ok = 1
+
         ar = min(len(args), len(proto))
-        ok, tot = 0, 0
-        for ref, inf in zip(proto[:ar], args[:ar]):
+        for ref, inf in zip(proto[1:ar], args[1:ar]):
             if ref == "...":
                 break
-            tot += 1
-            if inf == "UNDEF":
-                if undef_as_int:
-                    inf = "INT"
-                else:
-                    continue
-            if (inf[:4] == "ADDR") != ("*" in ref or "[" in ref):
-                continue
-            ok += 1
-        return (ok, tot)
+
+            params_tot += 1
+            if self.check_one(ref, inf, undef_as_int):
+                params_ok += 1
+
+        return (return_ok, return_tot, params_ok, params_tot)
+
+
+    def check_one(self, ref, inf, undef_as_int):
+        if inf == 'UNDEF':
+            if undef_as_int:
+                inf = 'INT'
+            else:
+                return False
+
+        if '*' in ref or '[' in ref:
+            return inf.startswith('ADDR')
+        elif ref == 'float' or ref == 'double':
+            return inf.startswith('FLOAT')
+        elif ref == 'void':
+            return inf.startswith('VOID')
+        else:
+            return inf.startswith('INT')
 
 
     def accuracy(self):
@@ -61,8 +79,10 @@ class TypeAnalysis(Analysis):
         pseudo_functions = 0
         not_found = 0
 
-        total = 0
-        ok = 0
+        return_ok = 0
+        return_total = 0
+        params_ok = 0
+        params_total = 0
 
         for (img, imgaddr), (fn, args) in self.log.items():
             if fn == "":
@@ -80,14 +100,11 @@ class TypeAnalysis(Analysis):
                 variadic += 1
                 continue
 
-            res = self.check_one(fn, args, proto, undef_as_int = True)
-            ok += res[0]
-            total += res[1]
-
-        if total == 0:
-            ratio = float('nan')
-        else:
-            ratio = float(ok) * 100. / float(total)
+            res = self.check_function(fn, args, proto, undef_as_int = True)
+            return_ok += res[0]
+            return_total += res[1]
+            params_ok += res[2]
+            params_total += res[3]
 
         print("Ignored")
         print("| Without name:          {0}".format(without_name))
@@ -97,8 +114,10 @@ class TypeAnalysis(Analysis):
         print("")
 
         print("Accuracy of inference")
-        print("| Ok/Total tested:       {0}/{1}".format(ok, total))
-        print("- Ratio:                 {0:.2f}%".format(ratio))
+        print("| Params Ok/Total tested:  {0}/{1}".format(params_ok, params_total))
+        print("| Return Ok/Total tested:  {0}/{1}".format(return_ok, return_total))
+        print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
+        print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
 
 
     def args_str(self, img, imgaddr, fn, args):
@@ -170,9 +189,9 @@ class TypeAnalysis(Analysis):
             if self.is_variadic(proto):
                 continue
 
-            res = self.check_one(fname, args, proto)
+            res = self.check_function(fname, args, proto, True)
 
-            if res[0] == res[1]:
+            if res[0] == res[1] and res[2] == res[3]:
                 continue
 
             print("[{}@{}] {}".format(img, hex(imgaddr), fname))

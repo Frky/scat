@@ -24,6 +24,13 @@ class Analysis(object):
                 or '.plt' in fname)
 
 
+    def ratio(self, ok, total):
+        if total == 0:
+            return float('nan')
+        else:
+            return float(ok) * 100. / float(total)
+
+
     def compute_nb_inf_pgm(self):
         nb = 0
         for (img, imgaddr), fn_log in self.log.items():

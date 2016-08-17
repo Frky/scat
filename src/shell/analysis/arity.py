@@ -100,13 +100,10 @@ class ArityAnalysis(Analysis):
         print("")
 
         print("Accuracy of inference")
-        print("| Arity  Ok/Total tested:  {0}/{1}".format(ok_ar, total))
-        if total == 0:
-            print("- Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
-        else:
-            print("| Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
-            print("| Ratio arity:             {0:.2f}%".format(float(ok_ar)*100./float(total)))
-            print("- Ratio return:            {0:.2f}%".format(float(ok_ret)*100./float(total)))
+        print("| Params Ok/Total tested:  {0}/{1}".format(ok_ar, total))
+        print("| Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
+        print("| Ratio params:            {0:.2f}%".format(self.ratio(ok_ar, total)))
+        print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
 
 
     def mismatch(self):
