@@ -436,11 +436,17 @@ class ScatShell(Cmd):
         split = s.split(" ")
         index = 0
 
+        release = False
+        force = False
         debug = False
         trace = False
         while index < len(split) and split[index].startswith("-"):
             arg = split[index]
-            if arg == '-d' or arg == '--debug':
+            if arg == '-f' or arg == '--force' or arg == '-B':
+                force = True
+            elif arg == '-r' or arg == '--release':
+                release = True
+            elif arg == '-d' or arg == '--debug':
                 debug = True
             elif arg == '-t' or arg == '--trace':
                 trace = True
@@ -449,32 +455,37 @@ class ScatShell(Cmd):
         inf = split[index]
         index += 1
 
-        if inf in self.__pintools.keys():
-            p = self.__pintools[inf]
-            p.compile(False, debug, trace)
-            # Before inference, check that the configuration is correct
-            self.do_checkconfig("")
-            if not self.config_ok:
-                return
-            # Parse command into binary + args
-            args =  list()
-            for i, arg in enumerate(split[index:]):
-                if arg[0] == "\"":
-                    arg = arg[1:]
-                if arg[-1] == "\"":
-                    arg = arg[:-1]
-                if i == 0:
-                    binary = arg
-                else:
-                    args.append(arg)
-            # Check the binary (exists? is executable?)
-            try:
-                self.__check_path(binary, isdir=False, isexec=True)
-            except ValueError:
-                return
-            # Run inference
-            self.out("Launching {0} inference on {1}".format(p, binary))
-            p.launch(binary, args)
+        if inf not in self.__pintools.keys():
+            print('Unknown inference "{}"'.format(inf))
+            return
+
+        p = self.__pintools[inf]
+        if release or debug or trace:
+            p.compile(force, debug, trace)
+
+        # Before inference, check that the configuration is correct
+        self.do_checkconfig("")
+        if not self.config_ok:
+            return
+        # Parse command into binary + args
+        args =  list()
+        for i, arg in enumerate(split[index:]):
+            if arg[0] == "\"":
+                arg = arg[1:]
+            if arg[-1] == "\"":
+                arg = arg[:-1]
+            if i == 0:
+                binary = arg
+            else:
+                args.append(arg)
+        # Check the binary (exists? is executable?)
+        try:
+            self.__check_path(binary, isdir=False, isexec=True)
+        except ValueError:
+            return
+        # Run inference
+        self.out("Launching {0} inference on {1}".format(p, binary))
+        p.launch(binary, args)
 
     #========== ALLOC RETRIEVING ==========
 
@@ -495,4 +506,3 @@ class ScatShell(Cmd):
             return
         logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
         Couple(logfile, self.out).run()
-
