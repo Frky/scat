@@ -109,7 +109,7 @@ class Pintool(object):
 
     def match_logfile(self, inf, binary, candidate):
         name = "{2}/{0}_{1}".format(os.path.basename(binary), inf, self.__logdir)
-        return candidate.startswith(name) and candidate.endswith(".results")
+        return candidate.startswith(name) and candidate.endswith(".log")
 
 
     def get_logfile(self, binary, prev=True):
@@ -136,7 +136,7 @@ class Pintool(object):
                 candidates,
         )
         if len(candidates) == 0:
-            self.stderr("Cannot file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(self))
+            self.stderr("Cannot find file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(self))
             raise IOError
         return max(candidates, key=os.path.getmtime)
 
