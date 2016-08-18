@@ -73,15 +73,16 @@ LIB_ROOTS :=
 # This section contains the build rules for all binaries that have special build rules.
 # See makefile.default.rules for the default build rules
 
+
 # Build the intermediate object file.
 $(OBJDIR)%-release$(OBJ_SUFFIX): %.cpp
-	$(CXX) $(TOOL_CXXFLAGS) $(SCAT_COMPILE_FLAGS) $(COMP_OBJ)$@ $<
+	$(CXX) -std=c++11 $(TOOL_CXXFLAGS) $(SCAT_COMPILE_FLAGS) $(COMP_OBJ)$@ $<
 
 $(OBJDIR)%-debug$(OBJ_SUFFIX): %.cpp
-	$(CXX) $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_DEBUG_ENABLED $(COMP_OBJ)$@ $<
+	$(CXX) -std=c++11 $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_DEBUG_ENABLED $(COMP_OBJ)$@ $<
 
 $(OBJDIR)%-trace$(OBJ_SUFFIX): %.cpp
-	$(CXX) $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_TRACE_ENABLED $(COMP_OBJ)$@ $<
+	$(CXX) -std=c++11 $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_TRACE_ENABLED $(COMP_OBJ)$@ $<
 
 $(OBJDIR)%-debug-trace$(OBJ_SUFFIX): %.cpp
-	$(CXX) $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_DEBUG_ENABLED -DSCAT_TRACE_ENABLED $(COMP_OBJ)$@ $<
+	$(CXX) -std=c++11 $(TOOL_CXXFLAGS_NOOPT) $(SCAT_COMPILE_FLAGS) -DSCAT_DEBUG_ENABLED -DSCAT_TRACE_ENABLED $(COMP_OBJ)$@ $<
