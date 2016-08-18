@@ -226,8 +226,10 @@ class Pintool(object):
                     self.stdout("\t=> Up to date !")
                 else:
                     self.stdout("\t=> Done !")
+                return True
             except subprocess.CalledProcessError as error:
                 self.stdout("/!\ Compilation exited with non-zero status {} /!\\\n\n".format(error.returncode))
+                return False
 
     def get_analysis(self, pgm, data = None):
         logfile = self.get_logfile(pgm, prev=False)

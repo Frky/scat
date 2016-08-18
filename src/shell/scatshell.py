@@ -467,7 +467,8 @@ class ScatShell(Cmd):
 
         p = self.__pintools[inf]
         if release or debug or trace:
-            p.compile(force, debug, trace)
+            if not p.compile(force, debug, trace):
+                return
 
         # Before inference, check that the configuration is correct
         self.do_checkconfig("")
