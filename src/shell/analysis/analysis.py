@@ -76,3 +76,14 @@ class Analysis(object):
         print("  | Functions inferred:   {}".format(nb_inf_pgm))
         print("  | Functions in source:  {}".format(nb_src_pgm))
         print("  - Coverage :            {:.2f}%".format(coverage_pgm))
+
+    def display(self):
+        print("Not implemented")
+
+
+    def accuracy(self):
+        print("Not implemented")
+
+
+    def mismatch(self):
+        print("Not implemented")

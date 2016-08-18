@@ -70,56 +70,6 @@ class TypeAnalysis(Analysis):
             return inf.startswith('INT')
 
 
-    def accuracy(self):
-        self.print_general_info()
-        print("")
-
-        without_name = 0
-        variadic = 0
-        pseudo_functions = 0
-        not_found = 0
-
-        return_ok = 0
-        return_total = 0
-        params_ok = 0
-        params_total = 0
-
-        for (img, imgaddr), (fn, args) in self.log.items():
-            if fn == "":
-                without_name += 1
-                continue
-            elif self.is_pseudo_function(fn):
-                pseudo_functions += 1
-                continue
-            elif fn not in self.protos.keys():
-                not_found += 1
-                continue
-
-            proto = self.protos[fn]
-            if self.is_variadic(proto):
-                variadic += 1
-                continue
-
-            res = self.check_function(fn, args, proto, undef_as_int = True)
-            return_ok += res[0]
-            return_total += res[1]
-            params_ok += res[2]
-            params_total += res[3]
-
-        print("Ignored")
-        print("| Without name:          {0}".format(without_name))
-        print("| Variadic:              {0}".format(variadic))
-        print("| Pseudo-Functions:      {0}".format(pseudo_functions))
-        print("- Not in binary/source:  {0}".format(not_found))
-        print("")
-
-        print("Accuracy of inference")
-        print("| Params Ok/Total tested:  {0}/{1}".format(params_ok, params_total))
-        print("| Return Ok/Total tested:  {0}/{1}".format(return_ok, return_total))
-        print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
-        print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
-
-
     def args_str(self, img, imgaddr, fn, args):
         line = ""
         if len(args) == 0:
@@ -175,6 +125,56 @@ class TypeAnalysis(Analysis):
             print(self.args_str(img, imgaddr, fn, args))
         print("")
         self.print_general_info()
+
+
+    def accuracy(self):
+        self.print_general_info()
+        print("")
+
+        without_name = 0
+        variadic = 0
+        pseudo_functions = 0
+        not_found = 0
+
+        return_ok = 0
+        return_total = 0
+        params_ok = 0
+        params_total = 0
+
+        for (img, imgaddr), (fn, args) in self.log.items():
+            if fn == "":
+                without_name += 1
+                continue
+            elif self.is_pseudo_function(fn):
+                pseudo_functions += 1
+                continue
+            elif fn not in self.protos.keys():
+                not_found += 1
+                continue
+
+            proto = self.protos[fn]
+            if self.is_variadic(proto):
+                variadic += 1
+                continue
+
+            res = self.check_function(fn, args, proto, undef_as_int = True)
+            return_ok += res[0]
+            return_total += res[1]
+            params_ok += res[2]
+            params_total += res[3]
+
+        print("Ignored")
+        print("| Without name:          {0}".format(without_name))
+        print("| Variadic:              {0}".format(variadic))
+        print("| Pseudo-Functions:      {0}".format(pseudo_functions))
+        print("- Not in binary/source:  {0}".format(not_found))
+        print("")
+
+        print("Accuracy of inference")
+        print("| Params Ok/Total tested:  {0}/{1}".format(params_ok, params_total))
+        print("| Return Ok/Total tested:  {0}/{1}".format(return_ok, return_total))
+        print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
+        print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
 
 
     def mismatch(self):

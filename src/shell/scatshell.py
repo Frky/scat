@@ -12,7 +12,6 @@ from src.shell.command.memcomb import MemComb
 from src.shell.command.couple import Couple
 from src.shell.data.data import Data
 from src.shell.pin.pintool import Pintool
-from src.shell.result import Result
 from src.shell.test import ScatTest
 
 class ScatShell(Cmd):
@@ -28,8 +27,6 @@ class ScatShell(Cmd):
         self.config_ok = False
         # Set the log directory
         self.log_dir = self.config["log"]["path"]
-        # Create a result object
-        self.res = Result(self.log_dir)
 
         # Available pintools
         self.__pintools = dict()
@@ -158,15 +155,24 @@ class ScatShell(Cmd):
             paths.append(path.replace("/bin/", ""))
         return paths
 
+    def __get_pgm_list(self, inf_code=None):
+        file_list = [f for f in os.listdir(self.log_dir) if f.endswith("log")]
+        pgm_list = set([re.sub("_.*", "", f) for f in file_list])
+        pgm_inf = list()
+        for p in pgm_list:
+            inf = set([re.sub("_.*$", "", re.sub("^[^_]*_", "", f)) for f in file_list if f.find(p) >= 0])
+            pgm_inf.append((p, list(inf)))
+        return pgm_inf
+
     def __get_pgm_and_inf(self, s):
         args = s.split(" ")
         if len(args) == 0 or args[0] == '':
-            for p, inf in self.res.get_pgm_list():
+            for p, inf in self.__get_pgm_list():
                 print(p)
             raise ValueError
         pgm = args[0]
         if len(args) == 1:
-            for p, inf in self.res.get_pgm_list():
+            for p, inf in self.__get_pgm_list():
                 if p != pgm:
                     continue
                 for i in inf:
@@ -266,7 +272,7 @@ class ScatShell(Cmd):
             try:
                 p = self.__pintools[arg]
             except KeyError:
-                self.stderr("pintool {0} is unknown".format(name))
+                self.stderr("pintool {0} is unknown".format(arg))
                 return
             to_compile.append(p)
 
@@ -284,7 +290,7 @@ class ScatShell(Cmd):
         print(self.do_display.__doc__.replace("\n", ""))
 
     def complete_display(self, text, line, begidx, endidx):
-        pgm_inf  = self.res.get_pgm_list()
+        pgm_inf  = self.__get_pgm_list()
         for p, inf in pgm_inf:
             if line.find(p) >= 0:
                 return [i for i in inf if i.startswith(text)]
@@ -302,9 +308,9 @@ class ScatShell(Cmd):
         except KeyError:
             #TODO explicit message (w/ pintool and binary details)
             self.stderr("Pintool error")
+            return
 
-        print pintool
-        self.res.compute(pgm, pintool)
+        pintool.get_analysis(pgm).display()
 
     #========== parsedata ==========#
 
@@ -381,7 +387,7 @@ class ScatShell(Cmd):
         if data is None:
             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
             return
-        self.res.accuracy(pgm, pintool, data)
+        pintool.get_analysis(pgm, data).accuracy()
 
     #========== mismatch ==========#
 
@@ -417,7 +423,7 @@ class ScatShell(Cmd):
             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
             return
 
-        self.res.mismatch(pgm, pintool, data)
+        pintool.get_analysis(pgm, data).mismatch()
 
     #========== new pintool ==========#
 

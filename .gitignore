@@ -41,7 +41,7 @@ asm/mupdf.asm
 *.pyc
 
 config/config.yaml
-*.log
+log/*
 data/*
 pgm/*
 asm/*

@@ -4,6 +4,10 @@ import subprocess
 import shutil
 from datetime import datetime
 
+from src.shell.analysis.arity import ArityAnalysis
+from src.shell.analysis.type import TypeAnalysis
+from src.shell.analysis.couple import CoupleAnalysis
+
 class Pintool(object):
 
     nb_pintools = 0
@@ -63,7 +67,7 @@ class Pintool(object):
         """
         return self.__prev_step
 
-    def __cmd(self, binary, args, logfile, infile=None):
+    def __cmd(self, binary, args, logfile, debugfile, infile=None):
         if infile is not None:
             infile_opt = "-i {0}".format(infile)
         else:
@@ -72,28 +76,41 @@ class Pintool(object):
             cli_options = self.__pinconf["cli-options"]
         else:
             cli_options = ""
-        return "{0} {4} -t {1} -o {2} {3} -- {5} {6}".format(
-                                                                            self.__pinconf["bin"],
-                                                                            self.__obj_path,
-                                                                            logfile,
-                                                                            infile_opt,
-                                                                            cli_options,
-                                                                            binary,
-                                                                            " ".join(args),
-                                                                        )
+        return "{} {} -t {} -o {} -logfile {} {} -- {} {}".format(
+                self.__pinconf["bin"],
+                cli_options,
+                self.__obj_path,
+                logfile,
+                debugfile,
+                infile_opt,
+                binary,
+                " ".join(args),
+        )
 
-    def __gen_logfile(self, binary):
+
+    def __gen_outputfile(self, binary, timestamp, ext):
         """
-            Generate a name for a new log file. For example, for arity inference
-            on "grep", this will return grep_arity_{timestamp}.log.
+            Generate a name for a new output file. For example, for arity inference
+            on "grep", this will return grep_arity_{timestamp}.{ext}.
 
-            @param binary       name of the binary for which we require a log
+            @param binary       name of the binary for which we require the output file
 
-            @ret                the generated name for the log file.
+            @ret                the generated name for the output file.
 
         """
-        timestamp = datetime.now().strftime("%s")
-        return "{3}/{0}_{1}_{2}.log".format(os.path.basename(binary), str(self), timestamp, self.__logdir)
+        return "{}/{}_{}_{}.{}".format(
+                self.__logdir,
+                os.path.basename(binary),
+                str(self),
+                timestamp,
+                ext
+        )
+
+
+    def match_logfile(self, inf, binary, candidate):
+        name = "{2}/{0}_{1}".format(os.path.basename(binary), inf, self.__logdir)
+        return candidate.startswith(name) and candidate.endswith(".results")
+
 
     def get_logfile(self, binary, prev=True):
         """
@@ -111,20 +128,13 @@ class Pintool(object):
         """
         inf = self.__prev_step if prev else self
         candidates = map(
-                                lambda x:
-                                    "{0}/{1}".format(self.__logdir, x),
-                                os.listdir(self.__logdir),
-                        )
+                lambda x: "{0}/{1}".format(self.__logdir, x),
+                os.listdir(self.__logdir),
+        )
         candidates = filter(
-                                lambda x:
-                                    (x.startswith("{2}/{0}_{1}".format(
-                                                                            os.path.basename(binary),
-                                                                            inf,
-                                                                            self.__logdir)
-                                                                        ) and
-                                    x.endswith(".log")),
-                                candidates,
-                            )
+                lambda x: self.match_logfile(inf, binary, x),
+                candidates,
+        )
         if len(candidates) == 0:
             self.stderr("Cannot file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(self))
             raise IOError
@@ -142,20 +152,19 @@ class Pintool(object):
             @param verbose  if True, print intermediate steps
 
         """
-        # if inf_code == INF_BASE:
-        #     cmd = "{0} {1}".format(binary, " ".join(args))
-        # else:
-        logfile = self.__gen_logfile(binary)
+        timestamp = datetime.now().strftime("%s")
+        logfile = self.__gen_outputfile(binary, timestamp, "results")
+        debugfile = self.__gen_outputfile(binary, timestamp, "log")
         if self.__prev_step is not None:
             infile = self.get_logfile(binary)
         else:
             infile = None
-        cmd = self.__cmd(binary, args, logfile, infile)
+        cmd = self.__cmd(binary, args, logfile, debugfile, infile)
         self.stdout(cmd, verbose)
         start = datetime.now()
         subprocess.call(cmd, shell=True)
         duration = datetime.now() - start
-        self.stdout("Inference results logged in {0}".format(logfile), verbose)
+        self.stdout("Inference results logged in {0}".format(debugfile), verbose)
         self.stdout("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds), verbose)
 
 
@@ -219,3 +228,14 @@ class Pintool(object):
                     self.stdout("\t=> Done !")
             except subprocess.CalledProcessError as error:
                 self.stdout("/!\ Compilation exited with non-zero status {} /!\\\n\n".format(error.returncode))
+
+    def get_analysis(self, pgm, data = None):
+        logfile = self.get_logfile(pgm, prev=False)
+        if str(self) == 'arity':
+            return ArityAnalysis(pgm, logfile, data)
+        elif str(self) == 'type':
+            return TypeAnalysis(pgm, logfile, data)
+        elif str(self) == 'couple':
+            return CoupleAnalysis(pgm, logfile)
+        else:
+            return Analysis(pgm, logfile)
