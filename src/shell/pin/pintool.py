@@ -153,8 +153,8 @@ class Pintool(object):
 
         """
         timestamp = datetime.now().strftime("%s")
-        logfile = self.__gen_outputfile(binary, timestamp, "results")
-        debugfile = self.__gen_outputfile(binary, timestamp, "log")
+        logfile = self.__gen_outputfile(binary, timestamp, "log")
+        debugfile = self.__gen_outputfile(binary, timestamp, "dbg")
         if self.__prev_step is not None:
             infile = self.get_logfile(binary)
         else:
