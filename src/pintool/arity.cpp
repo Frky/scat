@@ -491,6 +491,10 @@ VOID fini(INT32 code, VOID *v) {
         UINT64 float_stack_arity = detected_arity(param_threshold,
                 nb_param_float_stack[fid], PARAM_FLOAT_STACK_COUNT);
 
+        // Maxes out int & float arities if stack is used
+        if (int_stack_arity > 0) int_arity = PARAM_INT_COUNT;
+        if (float_stack_arity > 0) float_arity = PARAM_FLOAT_COUNT;
+
         UINT64 ret = 0;
         if (nb_ret_int[fid] > return_threshold) {
             ret = 1;
