@@ -30,6 +30,8 @@ KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Spec
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
+/* A stack which keeps track of the program stack pointers */
+HollowStack<MAX_DEPTH, UINT64> sp_stack;
 
 /* Arity informations for each functions */
 unsigned int *nb_param_int;
@@ -42,7 +44,7 @@ bool **param_is_not_addr;
 /* Variables used for the analysis of each function */
 unsigned int *nb_call;
 list<UINT64> ***param_val;
-
+unsigned int **nb_out;
 
 typedef struct {
     ADDRINT low = 0xFFFFFFFFFFFFFFFF;
@@ -101,6 +103,7 @@ void fn_registered(FID fid,
     nb_call[fid] = 0;
     unsigned int param_val_size = 1 + _nb_param_int + _nb_param_int_stack;
     param_val[fid] = (list<UINT64> **) malloc(param_val_size * sizeof(list<UINT64> *));
+    nb_out[fid] = (unsigned int *) calloc(param_val_size, sizeof(unsigned int));
 
     for (unsigned int pid = 0; pid < param_val_size; pid++) {
         param_is_not_addr[fid][pid] = false;
@@ -176,7 +179,7 @@ REG param_reg(unsigned int pid) {
     }
 }
 
-VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
+VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid, UINT64 sp) {
     trace_enter();
 
     UINT64 val;
@@ -184,9 +187,6 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
         PIN_GetContextRegval(ctxt, param_reg(pid), (UINT8*) &val);
     }
     else {
-        // Assumes this is called from fn_call (for sp to be accurate)
-        UINT64 sp;
-        PIN_GetContextRegval(ctxt, REG_RSP, (UINT8*) &sp);
         unsigned int sp_offset = pid - (1 + nb_param_int[fid]);
         UINT64* addr = (UINT64*) (sp + sp_offset * 8);
         val = *addr;
@@ -203,12 +203,16 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 
     call_stack.push(fid);
 
+    UINT64 sp;
+    PIN_GetContextRegval(ctxt, REG_RSP, (UINT8*) &sp);
+    sp_stack.push(sp);
+
     nb_call[fid]++;
     unsigned int param_val_size = 1 + nb_param_int[fid] + nb_param_int_stack[fid];
     for (unsigned int pid = 1; pid < param_val_size; pid++) {
         if (!param_is_not_addr[fid][pid] &&
                 param_val[fid][pid]->size() < MAX_VALS_TO_COLLECT)
-            add_val(fid, ctxt, pid);
+            add_val(fid, ctxt, pid, sp);
     }
 
     trace_leave();
@@ -237,11 +241,13 @@ VOID fn_ret(CONTEXT *ctxt) {
         FID fid = call_stack.top();
 
         if (has_return[fid] == 1) {
-            add_val(fid, ctxt, 0);
+            add_val(fid, ctxt, 0, 0);
         }
     }
 
     call_stack.pop();
+    sp_stack.pop();
+
     trace_leave();
 }
 
@@ -273,6 +279,33 @@ VOID update_heap(CONTEXT* ctxt, ADDRINT addr) {
     trace_leave();
 }
 
+VOID check_parameter_out(ADDRINT addr) {
+    trace_enter();
+
+    if (call_stack.is_top_forgotten()) {
+        trace_leave();
+        return;
+    }
+
+    FID fid = call_stack.top();
+    UINT64 sp = sp_stack.top();
+    if (sp + 1000 <= addr && addr < sp) {
+        trace_leave();
+        return;
+    }
+
+    unsigned int param_val_size = 1 + nb_param_int[fid] + nb_param_int_stack[fid];
+    for (unsigned int pid = 1; pid < param_val_size; pid++) {
+        if (param_val[fid][pid]->back() == addr) {
+            nb_out[fid][pid]++;
+            trace_leave();
+            return;
+        }
+    }
+
+    trace_leave();
+}
+
 /*  Instrumentation of each instruction
  *  that uses a memory operand
  */
@@ -282,14 +315,24 @@ VOID Instruction(INS ins, VOID *v) {
     if (!init)
         Commence();
 
-    if (INS_OperandCount(ins) > 1 &&
-            (INS_IsMemoryWrite(ins)) && !INS_IsStackRead(ins)) {
+    if (INS_OperandCount(ins) > 1
+            && INS_IsMemoryWrite(ins)
+            && !INS_IsStackRead(ins)) {
         INS_InsertCall(ins,
                         IPOINT_BEFORE,
                         (AFUNPTR) update_heap,
                         IARG_CONST_CONTEXT,
                         IARG_MEMORYOP_EA, 0,
                         IARG_END);
+
+        REG base_reg = INS_MemoryBaseReg(ins);
+        if (base_reg != REG_INVALID()) {
+            INS_InsertCall(ins,
+                            IPOINT_BEFORE,
+                            (AFUNPTR) check_parameter_out,
+                            IARG_REG_VALUE, base_reg,
+                            IARG_END);
+        }
     }
 
     if (INS_IsCall(ins)) {
@@ -348,6 +391,16 @@ VOID Fini(INT32 code, VOID *v) {
 
         unsigned int param_val_size = 1 + nb_param_int[fid] + nb_param_int_stack[fid];
         for (unsigned int pid = 0; pid < param_val_size; pid++) {
+            if (((float) nb_out[fid][pid]) > 0.75 * ((float) nb_call[fid])) {
+                debug("Found 'out parameter' candidate : [%s@%lX] %s %u (%u <=> %u)\n",
+                        fn_img(fid).c_str(),
+                        fn_imgaddr(fid),
+                        fn_name(fid).c_str(),
+                        pid,
+                        nb_out[fid][pid],
+                        nb_call[fid]);
+            }
+
             if (pid == 0 && has_return[fid] == 0) {
                 append_type("VOID");
             }
@@ -418,6 +471,7 @@ int main(int argc, char * argv[]) {
 
     nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
     param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
+    nb_out = (unsigned int **) malloc(NB_FN_MAX * sizeof(unsigned int*));
 
     /* Initialize symbol table code,
        needed for rtn instrumentation */
