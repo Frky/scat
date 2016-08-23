@@ -45,6 +45,7 @@ typedef struct {
 
 unsigned int *nb_p;
 bool **param_addr;
+bool *is_instrumented;
 list<param_t *> *param_in;
 list<param_t *> *param_out;
 
@@ -107,6 +108,9 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 #endif
     call_stack.push(fid);
     counter += 1;
+
+    bool param_pushed = false;
+
     for (unsigned int i = 0; i < nb_p[fid]; i++) {
         // If parameter is an address
         if (param_addr[fid][i]) {
@@ -116,6 +120,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
             new_addr->val = val_from_reg(ctxt, i); 
             new_addr->is_addr = true;
             param_in->push_front(new_addr);
+            param_pushed = true;
         }
         // If the function return an address and takes an integer as a first parameter
         // this is a special case to have the size of mallocs
@@ -126,7 +131,20 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
             new_int->val = val_from_reg(ctxt, i); 
             new_int->is_addr = false;
             param_in->push_front(new_int);
+            param_pushed = true;
         }
+    }
+
+    /* If the function is instrumented (ie for instance has an ADDR as
+       a return value) AND was not logged yet, create a special
+       entry to log the date of call */
+    if (!param_pushed && is_instrumented[fid]) {
+        param_t *new_addr = (param_t *) malloc(sizeof(param_t));
+        new_addr->fid = fid;
+        new_addr->counter = counter;
+        new_addr->val = 0; // val_from_reg(ctxt, i); 
+        new_addr->is_addr = false; // true;
+        param_in->push_front(new_addr);
     }
 #if DEBUG_SEGFAULT
     std::cerr << "[LEAVING] " << __func__ << endl;
@@ -157,16 +175,14 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
 
     if (!call_stack.is_top_forgotten()) {
         FID fid = call_stack.top();
-        if (param_addr[fid][0]) {
-            std::cerr << "yolo" << endl; 
-            param_t *new_addr = (param_t *) malloc(sizeof(param_t));
-            new_addr->fid = fid;
-            new_addr->counter = counter;
-            new_addr->val = val_from_reg(ctxt, 0); 
-            new_addr->is_addr = true;
-            param_out->push_front(new_addr);
+        if (is_instrumented[fid]) {
+            param_t *new_ret = (param_t *) malloc(sizeof(param_t));
+            new_ret->fid = fid;
+            new_ret->counter = counter;
+            new_ret->val = val_from_reg(ctxt, 0); 
+            new_ret->is_addr = param_addr[fid][0];
+            param_out->push_front(new_ret);
         }
-
     }
 
     call_stack.pop();
@@ -184,18 +200,20 @@ void fn_registered(
     /* Set the array of booleans indicating which parameter is an ADDR */
     param_addr[fid] = (bool *) calloc(nb_p[fid], sizeof(bool));
 
-    std::cerr << fn_name(fid) << ": ";
+    /* Is this function instrumented?*/
+    is_instrumented[fid] = false;
 
     /* Iteration on parameters */
     for (unsigned int i = 0; i < nb_p[fid]; i++) {
-        std::cerr << type_param[i] << ",";
         if (type_param[i]) {
             param_addr[fid][i] = true;
+            is_instrumented[fid] = true;
         }
         else
             param_addr[fid][i] = false;
     }
-    std::cerr << endl;
+
+
     return;
 }
 
@@ -329,6 +347,7 @@ int main(int argc, char * argv[])
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
     param_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
+    is_instrumented = (bool *) calloc(NB_FN_MAX, sizeof(bool));
     nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));
     param_in = new list<param_t *>();
     param_out = new list<param_t *>();
