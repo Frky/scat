@@ -30,14 +30,6 @@ class BlockTrace(object):
             self.__id = ":".join([img, img_addr])
 
     @property
-    def io(self):
-        return self.__io
-
-    @property
-    def type(self):
-        return self.__type
-
-    @property
     def val(self):
         return self.__val
 
@@ -48,6 +40,18 @@ class BlockTrace(object):
     @property
     def id(self):
         return self.__id
+
+    def is_addr(self):
+        return self.__type == BlockTrace.ADDR
+
+    def is_num(self):
+        return not self.is_addr()
+
+    def is_in(self):
+        return self.__io == BlockTrace.IN
+
+    def is_out(self):
+        return not self.is_in()
 
 
 class BlockTraceParser(ILogParser):

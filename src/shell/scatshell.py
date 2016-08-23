@@ -501,8 +501,9 @@ class ScatShell(Cmd):
         if "memblock" not in self.__pintools.keys():
             self.stderr("you must run memblock inference first")
             return
-        logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
-        MemComb(logfile, self.out).run()
+        proto_logfile = self.__pintools["memblock"].get_logfile(s, prev=True)
+        mem_logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
+        MemComb(mem_logfile, proto_logfile, self.out).run()
 
     #========== COUPLE FROM MEMBLOCK ==========
 
@@ -513,3 +514,4 @@ class ScatShell(Cmd):
             return
         logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
         Couple(logfile, self.out).run()
+

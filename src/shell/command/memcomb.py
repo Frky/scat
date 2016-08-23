@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from src.shell.command.i_command import ICommand
+from src.shell.parser.type import TypeLogParser
 from src.shell.parser.block_trace import BlockTraceParser
 
 class MemComb(ICommand):
@@ -9,9 +10,10 @@ class MemComb(ICommand):
 
     """
 
-    def __init__(self, log_file, log):
+    def __init__(self, mem_log_file, type_log_file, log):
         super(MemComb, self).__init__()
-        self.__parser = BlockTraceParser(log_file)
+        self.__parser = BlockTraceParser(mem_log_file)
+        self.__protos = TypeLogParser(type_log_file)
         self.log = log
 
     def run(self):
@@ -19,19 +21,36 @@ class MemComb(ICommand):
         addr_seen = list()
         for i in xrange(BlockTraceParser.DATA_SIZE):
             addr_seen.append(list())
-        for io, typ, val, name, counter in self.__parser.get():
-            print io, typ, val, name, counter
-            if name not in func.keys():
-                func[name] = [0]
-            if io == "out" and typ == "addr":
-                func[name][0] += 1
-                # key = val % BlockTraceParser.DATA_SIZE
-                # if val not in addr_seen[key]:
-                #     func[name][0] += 1
-            #key = val % BlockTraceParser.DATA_SIZE
-            #if val not in addr_seen[key]:
-            #    addr_seen[key].append(val)
-        alloc_s = sorted(func.items(), key=lambda a:a[1][0])[-1]
+        call_stack = CallStack()
+        for block in self.__parser.get():
+            if block.id not in func.keys():
+                func[block.id] = [0,1]
+            key = block.val % BlockTraceParser.DATA_SIZE
+            # IN PARAMETER
+            if block.is_in():
+                call_stack.push(block)
+            # OUT PARAMETER
+            else:
+                call_stack.expect(block.id)
+                if block.is_addr() or True:
+                    new = True
+                    for val, date, size in addr_seen[key]:
+                        # if date > call_stack.top()[1]:
+                        #    break
+                        if val <= block.val and val + size >= block.val:
+                            new = False
+                            break
+                    if new:
+                        func[block.id][0] += 1
+                        in_num = filter(lambda a: a.is_num(), call_stack.top())
+                        if len(in_num) == 0:
+                            size = 0
+                        else:
+                            size = min(map(lambda a: a.val, in_num))
+                        addr_seen[key].append((block.val, block.date, size))
+                    func[block.id][1] += 1
+                call_stack.pop()
+        alloc_s = sorted(func.items(), key=lambda a:-(a[1][0]))
         for a in alloc_s[:100]:
             print a
         return
@@ -66,4 +85,31 @@ class MemComb(ICommand):
         free_s = sorted(func.items(), key=lambda a:a[1])[-1][0]
         self.log("liberator found - {0}".format(free_s))
         return # alloc_s, free_s
+
+
+class CallStack(object):
+
+    def __init__(self):
+        self.__stack = list()
+
+    def pop(self):
+        return self.__stack.pop(-1)
+
+    def push(self, block):
+        # Only push if fid and date are different from the top
+        # of the stack
+        if len(self.__stack) > 0 and self.__stack[-1][0].id == block.id and self.__stack[-1][0].date == block.date:
+            self.__stack[-1].append(block)
+            return
+        self.__stack.append([block])
+        
+    def expect(self, fid):
+        if len(self.__stack) == 0 or self.__stack[-1][0].id != fid:
+            print "ERROR IN CALL STACK"
+            print "Expecting {0}, top is {1}".format(fid, self.top())
+            print self.__stack
+            raise Exception
+
+    def top(self):
+        return self.__stack[-1]
 

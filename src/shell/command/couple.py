@@ -18,6 +18,8 @@ class Couple(ICommand):
         inp = dict()
         out = dict()
         SIZE_LIMIT = 10000
+        NROUND = 65536
+        self.log("parsing memory blocks...")
         for block in self.__parser.get():
             if block.type != BlockTrace.ADDR:
                 continue
@@ -29,15 +31,33 @@ class Couple(ICommand):
             elif block.io == BlockTrace.OUT:
                 if block.id not in out.keys():
                     out[block.id] = list()
-                out[block.id].append(block.val)
-        print len(inp), len(out)
-        for g, param_in in out.items():
-            for f, param_out in inp.items():
+                    for i in xrange(NROUND):
+                        out[block.id].append(list())
+                out[block.id][block.val % NROUND].append(block.val)
+        self.log("#f: {0} | #g: {1} | #in: {2} | #out: {3}".format(
+                                len(inp), 
+                                len(out), 
+                                reduce(lambda p, q: p + len(q), inp.values(), 0), 
+                                reduce(lambda p, q: p + reduce(lambda x, y: x + len(y), q, 0), out.values(), 0),
+                            ),
+                        )
+        self.log("computing couples...")
+        couples = list()
+        for g, param_in in inp.items():
+            for f, param_out in out.items():
                 nb = 0
+                not_nb = 0
                 for param in param_in:
-                    if param in param_out:
+                    if param in param_out[param % NROUND]:
                         nb += 1
-                if float(nb) / float(len(param_in)) > 0.5:
-                    print f, g
+                    else:
+                        not_nb += 1
+                    if float(not_nb) / float(len(param_in)) > 1 - 0.5:
+                        break
+                rho = float(nb) / float(len(param_in))
+                if rho > 0.5:
+                    couples.append((f, g, rho))
+        for c in couples:
+            print c
         return
 
