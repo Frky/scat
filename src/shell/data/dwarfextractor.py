@@ -16,7 +16,7 @@ class DwarfExtractor(object):
 
             if not elf_file.has_dwarf_info():
                 print('    File has no debug info (DWARF format expected) !')
-                return
+                return protos
 
             dwarf_info = elf_file.get_dwarf_info()
             for CU in dwarf_info.iter_CUs():
