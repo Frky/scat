@@ -1,0 +1,34 @@
+$ echo "memcomb mupdf-x11" | ./scat.py 
+[*] allocator found - libc.so.6:529408
+[*] liberator found - libc.so.6:522592
+| libc.so.6:529408
+**| ld-linux-x86-64.so.2:122192
+**| libXcursor.so.1:8896
+**| libX11.so.6:99344
+**| libxcb.so.1:38304
+****| libxcb.so.1:38224
+**| .plt.got
+****| libX11.so.6:99232
+**| libc.so.6:604736
+**| libX11.so.6:99632
+****| libX11.so.6:98576
+**| malloc
+**| libcrypto.so.1.0.0:416592
+****| CRYPTO_malloc
+******| libcrypto.so.1.0.0:412512
+******| BN_new
+******| libcrypto.so.1.0.0:786432
+**| mupdf-x11:4210672
+****| ft_alloc
+******| ft_mem_qalloc
+****| fz_malloc_default
+******| do_scavenging_malloc
+********| fz_malloc
+**********| fz_lookup_text_style_imp
+************| fz_lookup_text_style
+**********| pdf_new_indirect
+**********| pdf_new_int_offset
+************| pdf_parse_ind_obj
+**********| pdf_new_real
+**********| pdf_new_string
+********| fz_malloc_array

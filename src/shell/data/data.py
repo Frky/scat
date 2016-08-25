@@ -80,7 +80,7 @@ class Data(object):
 
         print(" * Extracting data from binary debug informations")
         extractor = DwarfExtractor()
-        self.protos_without_libs.update(extractor.extract(binary))
+        # self.protos_without_libs.update(extractor.extract(binary))
 
         self.protos.update(self.protos_without_libs)
 
@@ -121,3 +121,4 @@ class Data(object):
         if 'sse2' not in name:
             self.__hardcoded_glibc_proto(name + '_sse2', proto)
             self.__hardcoded_glibc_proto(name + '_sse2_unaligned', proto)
+
