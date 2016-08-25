@@ -22,7 +22,6 @@
 #define NB_CALLS_TO_CONCLUDE    50
 #define THRESHOLD               0.75
 
-ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
@@ -57,7 +56,7 @@ typedef struct {
             high = addr;
     }
 
-    inline bool check(ADDRINT addr) {
+    inline bool contains(ADDRINT addr) {
         return addr >= low && addr <= high;
     }
 
@@ -67,23 +66,6 @@ Region data_regions[10000];
 UINT64 data_regions_size = 0;
 
 Region stack_heap_region;
-
-
-bool init = false;
-
-string read_part(char* c) {
-    char m;
-    string str = "";
-
-    ifile.read(&m, 1);
-    while (ifile && m != ':' && m != ',' && m != '\n') {
-        str += m;
-        ifile.read(&m, 1);
-    }
-
-    *c = m;
-    return str;
-}
 
 // Register and initialize the functions found with the arity pintool
 void fn_registered(FID fid,
@@ -115,29 +97,44 @@ void fn_registered(FID fid,
     }
 }
 
-VOID Commence() {
-    init = true;
+string read_part(ifstream& ifile, char* c) {
+    char m;
+    string str = "";
+
+    ifile.read(&m, 1);
+    while (ifile && m != ':' && m != ',' && m != '\n') {
+        str += m;
+        ifile.read(&m, 1);
+    }
+
+    *c = m;
+    return str;
+}
+
+VOID register_functions_from_arity_log() {
+    ifstream ifile;
+    ifile.open(KnobInputFile.Value().c_str());
 
     if (ifile.is_open()) {
         while (ifile) {
             char m;
-            string img_name = read_part(&m);
+            string img_name = read_part(ifile, &m);
             if (img_name.empty()) {
                 continue;
             }
 
-            ADDRINT img_addr = atol(read_part(&m).c_str());
-            string name = read_part(&m);
+            ADDRINT img_addr = atol(read_part(ifile, &m).c_str());
+            string name = read_part(ifile, &m);
 
-            UINT64 int_arity = atol(read_part(&m).c_str());
-            UINT64 int_stack_arity = atol(read_part(&m).c_str());
-            UINT64 float_arity = atol(read_part(&m).c_str());
-            UINT64 float_stack_arity = atol(read_part(&m).c_str());
-            UINT64 has_return = atol(read_part(&m).c_str());
+            UINT64 int_arity = atol(read_part(ifile, &m).c_str());
+            UINT64 int_stack_arity = atol(read_part(ifile, &m).c_str());
+            UINT64 float_arity = atol(read_part(ifile, &m).c_str());
+            UINT64 float_stack_arity = atol(read_part(ifile, &m).c_str());
+            UINT64 has_return = atol(read_part(ifile, &m).c_str());
 
             vector<UINT32> int_param_idx;
             while (ifile && m != '\n') {
-                string part = read_part(&m);
+                string part = read_part(ifile, &m);
                 if (part.length() == 0) {
                     break;
                 }
@@ -155,6 +152,8 @@ VOID Commence() {
                     int_param_idx);
             }
         }
+
+        ifile.close();
     }
 }
 
@@ -181,6 +180,11 @@ REG param_reg(unsigned int pid) {
 
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid, UINT64 sp) {
     trace_enter();
+
+    if (param_val[fid][pid]->size() >= MAX_VALS_TO_COLLECT) {
+        trace_leave();
+        return;
+    }
 
     UINT64 val;
     if (pid < 1 + nb_param_int[fid]) {
@@ -210,8 +214,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
     nb_call[fid]++;
     unsigned int param_val_size = 1 + nb_param_int[fid] + nb_param_int_stack[fid];
     for (unsigned int pid = 1; pid < param_val_size; pid++) {
-        if (!param_is_not_addr[fid][pid] &&
-                param_val[fid][pid]->size() < MAX_VALS_TO_COLLECT)
+        if (!param_is_not_addr[fid][pid])
             add_val(fid, ctxt, pid, sp);
     }
 
@@ -258,18 +261,18 @@ bool is_addr(UINT64 candidate) {
         return false;
     }
 
-    if (stack_heap_region.check(candidate))
+    if (stack_heap_region.contains(candidate))
         return true;
 
     for (unsigned int i = 0; i < data_regions_size; i++) {
-        if (data_regions[i].check(candidate))
+        if (data_regions[i].contains(candidate))
             return true;
     }
 
     return false;
 }
 
-VOID update_heap(CONTEXT* ctxt, ADDRINT addr) {
+VOID update_stack_heap_region(CONTEXT* ctxt, ADDRINT addr) {
     trace_enter();
 
     if (!is_addr(addr)) {
@@ -312,26 +315,26 @@ VOID check_parameter_out(ADDRINT addr) {
 VOID Instruction(INS ins, VOID *v) {
     trace_enter();
 
-    if (!init)
-        Commence();
+    if (!INS_IsStackRead(ins)) {
+        for (UINT32 memopIdx = 0; memopIdx < INS_MemoryOperandCount(ins); memopIdx++) {
+            if (INS_MemoryOperandIsWritten(ins, memopIdx)) {
+                INS_InsertCall(ins,
+                                IPOINT_BEFORE,
+                                (AFUNPTR) update_stack_heap_region,
+                                IARG_CONST_CONTEXT,
+                                IARG_MEMORYOP_EA, memopIdx,
+                                IARG_END);
 
-    if (INS_OperandCount(ins) > 1
-            && INS_IsMemoryWrite(ins)
-            && !INS_IsStackRead(ins)) {
-        INS_InsertCall(ins,
-                        IPOINT_BEFORE,
-                        (AFUNPTR) update_heap,
-                        IARG_CONST_CONTEXT,
-                        IARG_MEMORYOP_EA, 0,
-                        IARG_END);
-
-        REG base_reg = INS_MemoryBaseReg(ins);
-        if (base_reg != REG_INVALID()) {
-            INS_InsertCall(ins,
-                            IPOINT_BEFORE,
-                            (AFUNPTR) check_parameter_out,
-                            IARG_REG_VALUE, base_reg,
-                            IARG_END);
+                UINT32 opIdx = INS_MemoryOperandIndexToOperandIndex(ins, memopIdx);
+                REG base_reg = INS_OperandMemoryBaseReg(ins, opIdx);
+                if (base_reg != REG_INVALID()) {
+                    INS_InsertCall(ins,
+                                    IPOINT_BEFORE,
+                                    (AFUNPTR) check_parameter_out,
+                                    IARG_REG_VALUE, base_reg,
+                                    IARG_END);
+                }
+            }
         }
     }
 
@@ -369,6 +372,21 @@ VOID Instruction(INS ins, VOID *v) {
 }
 
 
+VOID image_loaded(IMG img, void* data) {
+    trace_enter();
+
+    for (int i = 0; i < IMG_NumRegions(img); i++) {
+        Region* region = data_regions + data_regions_size;
+        data_regions_size++;
+
+        region->low = IMG_RegionLowAddress(img, i);
+        region->high = IMG_RegionHighAddress(img, i);
+    }
+
+    trace_leave();
+}
+
+
 VOID Fini(INT32 code, VOID *v) {
     trace_enter();
 
@@ -378,7 +396,6 @@ VOID Fini(INT32 code, VOID *v) {
             ofile << (type); \
             need_comma = true
 
-    /* Iterate on functions */
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE)
             continue;
@@ -442,24 +459,6 @@ VOID Fini(INT32 code, VOID *v) {
     trace_leave();
 }
 
-VOID image_loaded(IMG img, void* data) {
-    trace_enter();
-
-    for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec)) {
-        if (!SEC_Valid(sec) || !SEC_Mapped(sec))
-            continue;
-
-        Region* region = data_regions + data_regions_size;
-        data_regions_size++;
-
-        ADDRINT addr = SEC_Address(sec);
-        region->low = addr;
-        region->high = addr + SEC_Size(sec);
-    }
-
-
-    trace_leave();
-}
 
 int main(int argc, char * argv[]) {
     nb_param_int = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
@@ -480,7 +479,6 @@ int main(int argc, char * argv[]) {
 
     if (PIN_Init(argc, argv)) return 1;
 
-    ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
 
     INS_AddInstrumentFunction(Instruction, 0);
@@ -490,11 +488,13 @@ int main(int argc, char * argv[]) {
        application exits */
     PIN_AddFiniFunction(Fini, 0);
 
+    debug_trace_init();
+
     fn_registry_init(NB_FN_MAX);
     vector<UINT32> unknown_int_idx;
     fn_registered(FID_UNKNOWN, 0, 0, 0, 0, 0, unknown_int_idx);
+    register_functions_from_arity_log();
 
-    debug_trace_init();
     PIN_StartProgram();
 
     return 0;

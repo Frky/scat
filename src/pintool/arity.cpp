@@ -127,11 +127,6 @@ void update_param_int_min_size(FID fid, UINT64 pid, REGF regf, UINT32 read_size)
             ? last_written_size[regf]
             : read_size;
 
-    // Zero are irrelevant
-    // (Fairly usual value for both int and address)
-    if (candidate_min_size == 0)
-        return;
-
     if (param_int_min_size[fid][pid] > candidate_min_size)
         param_int_min_size[fid][pid] = candidate_min_size;
 }
@@ -234,9 +229,15 @@ VOID return_read(REGF regf, UINT32 reg_size) {
             ? nb_ret_int
             : nb_ret_float;
     // Propagate the return value up the call stack
-    for (int i = call_stack.height() + 1; i <= written[regf]; i++)
-        if (!call_stack.is_forgotten(i))
-            nb_ret[call_stack.peek(i)] += 1;
+    for (int i = call_stack.height() + 1; i <= written[regf]; i++){
+        if (!call_stack.is_forgotten(i)) {
+            FID fid = call_stack.peek(i);
+            nb_ret[fid] += 1;
+            // Note : This is disable since it provides
+            // worse type inference results :
+            //update_param_int_min_size(fid, 0, regf, reg_size);
+        }
+    }
 
     trace_leave();
 }
