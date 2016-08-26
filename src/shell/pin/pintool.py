@@ -164,7 +164,7 @@ class Pintool(object):
         start = datetime.now()
         subprocess.call(cmd, shell=True)
         duration = datetime.now() - start
-        self.stdout("Inference results logged in {0}".format(debugfile), verbose)
+        self.stdout("Inference results logged in {0}".format(logfile), verbose)
         self.stdout("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds), verbose)
 
 
