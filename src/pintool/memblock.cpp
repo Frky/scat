@@ -41,6 +41,7 @@ typedef struct {
     UINT64 fid;
     UINT64 counter;
     bool is_addr;
+    UINT32 pos;
 } param_t;
 
 unsigned int *nb_p;
@@ -111,28 +112,15 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
 
     bool param_pushed = false;
 
-    for (unsigned int i = 0; i < nb_p[fid]; i++) {
-        // If parameter is an address
-        if (param_addr[fid][i]) {
-            param_t *new_addr = (param_t *) malloc(sizeof(param_t));
-            new_addr->fid = fid;
-            new_addr->counter = counter;
-            new_addr->val = val_from_reg(ctxt, i); 
-            new_addr->is_addr = true;
-            param_in->push_front(new_addr);
-            param_pushed = true;
-        }
-        // If the function return an address and takes an integer as a first parameter
-        // this is a special case to have the size of mallocs
-        else if (i == 1 && param_addr[fid][0]) {
-            param_t *new_int = (param_t *) malloc(sizeof(param_t));
-            new_int->fid = fid;
-            new_int->counter = counter;
-            new_int->val = val_from_reg(ctxt, i); 
-            new_int->is_addr = false;
-            param_in->push_front(new_int);
-            param_pushed = true;
-        }
+    for (unsigned int i = 1; i <= nb_p[fid]; i++) {
+        param_t *new_param = (param_t *) malloc(sizeof(param_t));
+        new_param->fid = fid;
+        new_param->counter = counter;
+        new_param->val = val_from_reg(ctxt, i); 
+        new_param->is_addr = param_addr[fid][i];
+        new_param->pos = i;
+        param_in->push_front(new_param);
+        param_pushed = true;
     }
 
     /* If the function is instrumented (ie for instance has an ADDR as
@@ -143,6 +131,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
         new_addr->fid = fid;
         new_addr->counter = counter;
         new_addr->val = 0; // val_from_reg(ctxt, i); 
+        new_addr->pos = 0;
         new_addr->is_addr = false; // true;
         param_in->push_front(new_addr);
     }
@@ -204,7 +193,7 @@ void fn_registered(
     is_instrumented[fid] = false;
 
     /* Iteration on parameters */
-    for (unsigned int i = 0; i < nb_p[fid]; i++) {
+    for (unsigned int i = 0; i <= nb_p[fid]; i++) {
         if (type_param[i]) {
             param_addr[fid][i] = true;
             is_instrumented[fid] = true;
@@ -212,7 +201,6 @@ void fn_registered(
         else
             param_addr[fid][i] = false;
     }
-
 
     return;
 }
@@ -285,14 +273,14 @@ VOID Commence() {
                 string part = read_part(&m);
                 switch (part[0]) {
                 case 'A':
-                    type_param.push_back(1);
+                    type_param.push_back(true);
                     break;
                 case 'I':
                 case 'V':
-                    type_param.push_back(0);
+                    type_param.push_back(false);
                     break;
                 case 'F':
-                    type_param.push_back(0);
+                    type_param.push_back(false);
                     break;
                 }
                 nb_param += 1;
@@ -300,7 +288,7 @@ VOID Commence() {
 
             FID fid = fn_register(img_name, img_addr, name);
             if (fid != FID_UNKNOWN) {
-                fn_registered(fid, nb_param, type_param);
+                fn_registered(fid, nb_param - 1, type_param);
             }
         }
     }
@@ -316,26 +304,42 @@ VOID Fini(INT32 code, VOID *v) {
     it_in = param_in->rbegin();
     it_out = param_out->rbegin();
 
+    int depth = 0;
+    UINT64 last_date = -1;
+    bool is_in = false;
+
     while (it_in != param_in->rend() || it_out != param_out->rend()) {
+        // for (int i = 0; i < depth; i++) 
+        //  ofile << " ";
         param_t *p;
         if (it_in == param_in->rend()) {
             p = *it_out;
             it_out++;
+            is_in = false;
             ofile << "out:";
         } else if (it_out == param_out->rend() || (*it_out)->counter >= (*it_in)->counter) {
             p = *it_in;
             it_in++;
+            is_in = true;
             ofile << "in:";
         } else {
             p = *it_out;
             it_out++;
+            is_in = false;
             ofile << "out:";
         }
         if (p->is_addr)
             ofile << "addr:";
         else 
             ofile << "int:";
-        ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->counter << endl;
+        if (last_date != p->counter) {
+            if (is_in)
+                depth++;
+            else
+                depth--;
+        }
+        last_date = p->counter;
+        ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->pos << ":" << p->counter << ":" << endl;
     }
     ofile.close();
 }
