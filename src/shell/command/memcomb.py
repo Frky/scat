@@ -23,7 +23,7 @@ class MemComb(ICommand):
             Try to retrieve the top-level allocator
 
         """
-        return "libc.so.6:529408"
+        # return "libc.so.6:529408"
         # Number of new addresses outputted by each function
         nb_new_addr = dict()
         # Addresses seen so far
@@ -37,25 +37,16 @@ class MemComb(ICommand):
                 call_stack.push(block)
             # OUT PARAMETER
             else:
-                call_stack.expect(block.id)
+                call_stack.expect(block.id, block.date)
                 if block.is_addr():
-                    new = True
-                    if addr_seen.contains(block.val):
-                        new = False
-                    if new:
+                    if block.id not in nb_new_addr.keys():
+                        nb_new_addr[block.id] = [0, 0]
+                    if not addr_seen.contains(block.val):
                         nb_new_addr[block.id][0] += 1
-                        # in_num = filter(lambda a: a.is_num(), call_stack.top())
-                        # if len(in_num) == 0:
-                        #     size = 0
-                        # else:
-                        #     size = min(map(lambda a: a.val, in_num))
                         addr_seen.add(block.val)
-                        # [key].append((block.val, block.date, size))
                     nb_new_addr[block.id][1] += 1
                 call_stack.pop()
         return max(nb_new_addr.items(), key=lambda a: a[1][0])[0]
-        alloc_s = sorted(nb_new_addr.items(), key=lambda a:-(a[1][0]))
-        ALLOC = alloc_s[0][0]
 
     def __wrappers(self, ALLOC):
         # Number of new addresses outputted by each function
@@ -75,7 +66,7 @@ class MemComb(ICommand):
                 call_stack.push(block)
             # OUT PARAMETER
             else:
-                call_stack.expect(block.id)
+                call_stack.expect(block.id, block.date)
                 if block.is_addr():
                     if block.id in wrappers.keys():
                         wrappers[block.id][1] += 1
@@ -111,7 +102,7 @@ class MemComb(ICommand):
         print WTREE.to_str(0)
 
     def __free(self, ALLOC):
-        return "libc.so.6:522592"
+        # return "__libc_free"
         # Number of new addresses outputted by each function
         nb_new_addr = dict()
         # Addresses seen so far
@@ -125,28 +116,54 @@ class MemComb(ICommand):
                 addr_alloc.add_dic(block.val, block.id)
             elif block.is_out() and block.id == ALLOC:
                 addr_alloc.add_dic(block.val, block.id)
-        for addr, call in addr_alloc.items():
-            if len(call) == 0 or call[0] != ALLOC:
+        for adr, call in addr_alloc.items():
+            if len(call) == 0:
+                continue
+            if call[0] != ALLOC:
                 continue
             while call.count(ALLOC) > 0:
                 if call.index(ALLOC) == 0:
                     call.pop(0)
+                    if len(call) > 0:
+                        free = call[-1]
+                    else: 
+                        continue
                 else:
                     free = call[call.index(ALLOC) - 1]
-                    if free not in nb_new_addr.keys():
-                        nb_new_addr[free] = 0
-                    nb_new_addr[free] += 1
                     call = call[call.index(ALLOC)+1:]
+                if free not in nb_new_addr.keys():
+                    nb_new_addr[free] = 0
+                nb_new_addr[free] += 1
         return max(nb_new_addr.items(), key=lambda a:a[1])[0]
 
-    def run(self):
+    def compute_blocks(self, ALLOC, FREE):
+        mem = Memory()
+        size_stack = [(0, -1)]
+        for block in self.__parser.get():
+            if block.id == ALLOC:
+                if block.is_in() and block.is_num() and size_stack[-1][1] != block.date:
+                    size_stack.append((block.val, block.date))
+                elif block.is_out():
+                    if len(size_stack) <= 1:
+                        raise Exception("ALLOC stack inconsistanc at date {0}".format(block.date))
+                    size, date = size_stack.pop(-1)
+                    mem.alloc(block.val, size)
+            elif block.id == FREE:
+                if block.is_in():
+                    mem.free(block.val)
+        return
+
+    def run(self, wrappers=True):
         ALLOC = self.__alloc()
         self.log("allocator found - {0}".format(ALLOC))
         FREE = self.__free(ALLOC)
         self.log("liberator found - {0}".format(FREE))
-        # Detecting suballocators
-        SUBALLOC = self.__wrappers(ALLOC)
-        return # alloc_s, free_s
+        self.log("checking consistancy of blocks...")
+        self.compute_blocks(ALLOC, FREE)
+        if wrappers:
+            # Detecting suballocators
+            SUBALLOC = self.__wrappers(ALLOC)
+        return ALLOC, FREE
 
 
 class CallStack(object):
@@ -165,10 +182,10 @@ class CallStack(object):
             return
         self.__stack.append([block])
         
-    def expect(self, fid):
+    def expect(self, fid, date=None):
         if len(self.__stack) == 0 or self.__stack[-1][0].id != fid:
             print "ERROR IN CALL STACK"
-            print "Expecting {0}, top is {1}".format(fid, self.top())
+            print "[{2}] Expecting {0}, top is {1}".format(fid, self.top()[0].id, date)
             print self.__stack
             raise Exception
 
@@ -211,6 +228,10 @@ class AddrTable(object):
             self.__addr[key][addr] = list()
         else:
             self.__addr[key].append(addr)
+
+    def remove(self, addr):
+        key = addr % AddrTable.TABLE_SIZE
+        self.__addr[key].remove(addr)
 
     def add_dic(self, addr, fid):
         if not self.__dic:
@@ -270,4 +291,47 @@ class Wrapper(object):
         for n in self.next:
             s += n.to_str(d + 1)
         return s
+
+
+class Memory(object):
+
+    HASH_SIZE = 1000000
+
+    def __init__(self):
+        self.__ALLOCATED = list()
+        self.__FREE = list()
+        self.__size = dict()
+        self.__error = 0
+        for i in xrange(Memory.HASH_SIZE):
+            self.__ALLOCATED.append(list())
+            self.__FREE.append(list())
+
+    def alloc(self, addr, size):
+        # Check that each cell is free
+        for i in xrange(size):
+            if self.is_allocated(addr + i):
+                self.__error += 1
+                print("ALLOC({0}, {1}): cell {2} already allocated".format(addr, size, addr + i))
+            else:
+                self.__ALLOCATED[(addr + i) % Memory.HASH_SIZE].append(addr + i)
+        self.__size[addr] = size
+    
+    def free(self, addr):
+        # Get size
+        if addr not in self.__size.keys():
+            self.__error += 1
+            print("FREE({0}): block not allocated".format(addr))
+            return
+        size = self.__size[addr]
+        # Check that each cell is allocated
+        for i in xrange(size):
+            if not self.is_allocated(addr + i):
+                self.__errors += 1
+                print("FREE({0}, {1}): cell {2} not allocated".format(addr, size, addr + i))
+            else: 
+                self.__ALLOCATED[(addr + i) % Memory.HASH_SIZE].remove(addr + i)
+        self.__size.pop(addr)
+
+    def is_allocated(self, addr):
+        return addr in self.__ALLOCATED[addr % Memory.HASH_SIZE]
 

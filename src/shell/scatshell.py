@@ -9,6 +9,7 @@ from confiture import Confiture, ConfigFileError
 from datetime import datetime
 
 from src.shell.command.memcomb import MemComb
+from src.shell.command.memuaf import MemUAF
 from src.shell.command.couple import Couple
 from src.shell.data.data import Data
 from src.shell.pin.pintool import Pintool
@@ -370,12 +371,11 @@ class ScatShell(Cmd):
         """
         try:
             pgm, pintool = self.__get_pgm_and_inf(s)
-        except ValueError:
-            return
+        except ValueError as e:
+            raise e
         except KeyError:
-            #TODO explicit message (w/ pintool and binary details)
             self.stderr("Pintool error")
-
+            return
         # Check CLANG configuration
         conf = Confiture("config/templates/clang.yaml")
         conf.check("config/config.yaml")
@@ -514,4 +514,19 @@ class ScatShell(Cmd):
             return
         logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
         Couple(logfile, self.out).run()
+
+    #========== DETECT SIMPLIFIED UAF ==========
+    def do_memuaf(self, s):
+        pgm = s.split(" ")[0]
+        # Get log file from last block inference
+        if "memblock" not in self.__pintools.keys():
+            self.stderr("you must run memblock inference first")
+            return
+        proto_logfile = self.__pintools["memblock"].get_logfile(pgm, prev=True)
+        mem_logfile = self.__pintools["memblock"].get_logfile(pgm, prev=False)
+        if len(s.split(" ")) > 1:
+            ALLOC, FREE = s.split(" ")[1:3]
+        else:
+            ALLOC, FREE = MemComb(mem_logfile, proto_logfile, self.out).run(wrappers=False)
+        MemUAF(mem_logfile, self.out).run(ALLOC, FREE)
 

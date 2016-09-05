@@ -13,7 +13,7 @@ class BlockTrace(object):
     def __init__(self, line):
         # io, typ, val, img, img_addr, name, counter = line[:-1].split(":")
         # yield io, typ, int(val), img, img_addr, name, int(counter)
-        io, typ, value, img, img_addr, name, counter = line[:-1].split(":")
+        io, typ, value, img, img_addr, name, pos, counter = line[:-1].split(":")
         if io == "in":
             self.__io = BlockTrace.IN
         else:
@@ -24,6 +24,7 @@ class BlockTrace(object):
             self.__type = BlockTrace.NUM
         self.__val = int(value)
         self.__date = int(counter)
+        self.__pos = int(pos)
         if name != "":
             self.__id = name
         else:
@@ -40,6 +41,10 @@ class BlockTrace(object):
     @property
     def id(self):
         return self.__id
+
+    @property
+    def pos(self):
+        return self.__pos
 
     def is_addr(self):
         return self.__type == BlockTrace.ADDR
