@@ -503,7 +503,7 @@ class ScatShell(Cmd):
             return
         proto_logfile = self.__pintools["memblock"].get_logfile(s, prev=True)
         mem_logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
-        MemComb(mem_logfile, proto_logfile, self.out).run()
+        MemComb(mem_logfile, proto_logfile, self.out, s).run()
 
     #========== COUPLE FROM MEMBLOCK ==========
 

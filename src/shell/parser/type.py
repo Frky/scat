@@ -16,7 +16,9 @@ class TypeLogParser(ILogParser):
         self.__fn = dict()
         with open(self.log_path, "r") as log:
             for line in log.readlines():
-                name, proto = line[:-1].split(":")[2:]
+                l = line[:-1].split(":")
+                name = ":".join(l[:3])
+                proto = l[-1]
                 self.__fn[name] = proto.replace(" ", "").split(",")
 
     def get(self):

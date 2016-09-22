@@ -25,10 +25,10 @@ class BlockTrace(object):
         self.__val = int(value)
         self.__date = int(counter)
         self.__pos = int(pos)
-        if name != "":
-            self.__id = name
-        else:
-            self.__id = ":".join([img, img_addr])
+        # if name != "":
+        #    self.__id = name
+        # else:
+        self.__id = ":".join([img, img_addr, name])
 
     @property
     def val(self):
