@@ -16,7 +16,7 @@
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
 
-#define NB_FN_MAX               10000
+#define NB_FN_MAX               100000
 #define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     500
 #define NB_CALLS_TO_CONCLUDE    500
@@ -31,6 +31,8 @@ KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Spec
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
+/* Call stack is jump */
+HollowStack<MAX_DEPTH, bool> is_jump_stack;
 
 UINT64 counter;
 
@@ -103,14 +105,18 @@ ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
 }
 
 
-VOID fn_call(CONTEXT *ctxt, FID fid) {
+VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
 #if DEBUG_SEGFAULT 
     std::cerr << "[ENTERING] " << __func__ << endl;
 #endif
     call_stack.push(fid);
+    is_jump_stack.push(is_jump);
     counter += 1;
 
     bool param_pushed = false;
+
+    if (!is_instrumented[fid])
+        return;
 
     for (unsigned int i = 1; i <= nb_p[fid]; i++) {
         param_t *new_param = (param_t *) malloc(sizeof(param_t));
@@ -126,7 +132,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
     /* If the function is instrumented (ie for instance has an ADDR as
        a return value) AND was not logged yet, create a special
        entry to log the date of call */
-    if (!param_pushed && is_instrumented[fid]) {
+    if (!param_pushed) {
         param_t *new_addr = (param_t *) malloc(sizeof(param_t));
         new_addr->fid = fid;
         new_addr->counter = counter;
@@ -141,7 +147,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
     return;
 }
 
-VOID fn_icall(CONTEXT* ctxt, ADDRINT target) {
+VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     trace_enter();
 
     // Indirect call, we have to look up the function each time
@@ -150,9 +156,13 @@ VOID fn_icall(CONTEXT* ctxt, ADDRINT target) {
     // to callback added with *_AddInstrumentFunction().
     PIN_LockClient();
     FID fid = fn_lookup_by_address(target);
+    if (is_jump && fid == FID_UNKNOWN) {
+        // std::cerr << "jumping: " << target << endl;
+        return;
+    }
     PIN_UnlockClient();
 
-    fn_call(ctxt, fid);
+    fn_call(ctxt, fid, is_jump);
 
     trace_leave();
 }
@@ -163,6 +173,19 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
     counter += 1;
 
     if (!call_stack.is_top_forgotten()) {
+        while (is_jump_stack.top()) {
+            FID fid = call_stack.top();
+            if (is_instrumented[fid]) {
+                param_t *new_ret = (param_t *) malloc(sizeof(param_t));
+                new_ret->fid = fid;
+                new_ret->counter = counter;
+                new_ret->val = val_from_reg(ctxt, 0); 
+                new_ret->is_addr = param_addr[fid][0];
+                param_out->push_front(new_ret);
+            }
+            call_stack.pop();
+            is_jump_stack.pop();
+        }
         FID fid = call_stack.top();
         if (is_instrumented[fid]) {
             param_t *new_ret = (param_t *) malloc(sizeof(param_t));
@@ -172,9 +195,10 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
             new_ret->is_addr = param_addr[fid][0];
             param_out->push_front(new_ret);
         }
+        call_stack.pop();
+        is_jump_stack.pop();
     }
 
-    call_stack.pop();
     trace_leave();
 }
 
@@ -222,6 +246,7 @@ VOID Instruction(INS ins, VOID *v) {
                         (AFUNPTR) fn_call, 
                         IARG_CONST_CONTEXT,
                         IARG_UINT32, fid, 
+                        IARG_BOOL, false,
                         IARG_END);
         } 
         else {
@@ -230,7 +255,20 @@ VOID Instruction(INS ins, VOID *v) {
                         (AFUNPTR) fn_icall,
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
+                        IARG_BOOL, false,
                         IARG_END);
+        }
+    }
+
+    if (INS_IsIndirectBranchOrCall(ins)) {
+        if (! INS_IsCall(ins)) {
+            INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) fn_icall,
+                    IARG_CONST_CONTEXT,
+                    IARG_BRANCH_TARGET_ADDR,
+                    IARG_BOOL, true,
+                    IARG_END);
         }
     }
 
@@ -282,6 +320,8 @@ VOID Commence() {
                 case 'F':
                     type_param.push_back(false);
                     break;
+                default:
+                    type_param.push_back(false);
                 }
                 nb_param += 1;
             }
@@ -339,7 +379,7 @@ VOID Fini(INT32 code, VOID *v) {
                 depth--;
         }
         last_date = p->counter;
-        ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->pos << ":" << p->counter << ":" << endl;
+        ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->pos << ":" << p->counter << endl;
     }
     ofile.close();
 }

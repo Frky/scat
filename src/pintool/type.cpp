@@ -29,6 +29,8 @@ KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Spec
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
+/* Call stack is jump */
+HollowStack<MAX_DEPTH, bool> is_jump_stack;
 /* A stack which keeps track of the program stack pointers */
 HollowStack<MAX_DEPTH, UINT64> sp_stack;
 
@@ -202,10 +204,11 @@ VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid, UINT64 sp) {
     trace_leave();
 }
 
-VOID fn_call(CONTEXT *ctxt, FID fid) {
+VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
     trace_enter();
 
     call_stack.push(fid);
+    is_jump_stack.push(is_jump);
 
     UINT64 sp;
     PIN_GetContextRegval(ctxt, REG_RSP, (UINT8*) &sp);
@@ -221,7 +224,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid) {
     trace_leave();
 }
 
-VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
+VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     trace_enter();
 
     // Indirect call, we have to look up the function each time
@@ -230,9 +233,25 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target) {
     // to callback added with *_AddInstrumentFunction().
     PIN_LockClient();
     FID fid = fn_lookup_by_address(target);
+#if 0
+    if (fid == FID_UNKNOWN) {
+        IMG img = IMG_FindByAddress(target);
+        if (!is_jump || (IMG_Valid(img) && IMG_Name(img) == "libc.so.6")) {
+            fid = fn_register_from_address(target);
+            if (fid != FID_UNKNOWN) {
+                fn_registered(fid);
+            }
+        }
+    }
+#endif
+
+    if (is_jump && fid == FID_UNKNOWN) {
+        // std::cerr << "jumping: " << target << endl;
+        return;
+    }
     PIN_UnlockClient();
 
-    fn_call(ctxt, fid);
+    fn_call(ctxt, fid, is_jump);
 
     trace_leave();
 }
@@ -241,15 +260,23 @@ VOID fn_ret(CONTEXT *ctxt) {
     trace_enter();
 
     if (!call_stack.is_top_forgotten()) {
+        while (is_jump_stack.top()) {
+            FID fid = call_stack.top();
+
+            if (has_return[fid] == 1) {
+                add_val(fid, ctxt, 0, 0);
+            }
+            call_stack.pop();
+            is_jump_stack.pop();
+        }
         FID fid = call_stack.top();
 
         if (has_return[fid] == 1) {
             add_val(fid, ctxt, 0, 0);
         }
+        call_stack.pop();
+        is_jump_stack.pop();
     }
-
-    call_stack.pop();
-    sp_stack.pop();
 
     trace_leave();
 }
@@ -348,6 +375,7 @@ VOID Instruction(INS ins, VOID *v) {
                         (AFUNPTR) fn_call,
                         IARG_CONST_CONTEXT,
                         IARG_UINT32, fid,
+                        IARG_BOOL, false,
                         IARG_END);
         }
         else {
@@ -356,7 +384,20 @@ VOID Instruction(INS ins, VOID *v) {
                         (AFUNPTR) fn_indirect_call,
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
+                        IARG_BOOL, true,
                         IARG_END);
+        }
+    }
+
+    if (INS_IsIndirectBranchOrCall(ins)) {
+        if (! INS_IsCall(ins)) {
+            INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) fn_indirect_call,
+                    IARG_CONST_CONTEXT,
+                    IARG_BRANCH_TARGET_ADDR,
+                    IARG_BOOL, true,
+                    IARG_END);
         }
     }
 
@@ -375,7 +416,7 @@ VOID Instruction(INS ins, VOID *v) {
 VOID image_loaded(IMG img, void* data) {
     trace_enter();
 
-    for (int i = 0; i < IMG_NumRegions(img); i++) {
+    for (unsigned int i = 0; i < IMG_NumRegions(img); i++) {
         Region* region = data_regions + data_regions_size;
         data_regions_size++;
 

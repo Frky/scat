@@ -2,6 +2,8 @@ pin:
     path:   /usr/bin/pin
     bin: /usr/bin/pin/pin
     function-mode: name
+    compile-flags: -std=c++11 -fabi-version=2 -D_GLIBCXX_USE_CXX11_ABI=0
+    cli-options: "-ifeellucky"
 
 pintool:
     arity:
@@ -27,7 +29,7 @@ log:
     path: ./log
 
 clang:
-    lib-path: /usr/lib/x86_64-linux-gnu/libclang.so.1
+    lib-path: /usr/lib/x86_64-linux-gnu/libclang-3.8.so
     data-path: ./data/
 
 test:
