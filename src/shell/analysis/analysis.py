@@ -13,7 +13,6 @@ class Analysis(object):
         self.log = None
         self.parse_log()
 
-
     def is_variadic(self, proto):
         return proto[-1] == "..."
 
@@ -23,25 +22,22 @@ class Analysis(object):
                 or '.constprop.' in fname
                 or '.plt' in fname)
 
-
     def ratio(self, ok, total):
         if total == 0:
             return float('nan')
         else:
             return float(ok) * 100. / float(total)
 
-
     def compute_nb_inf_pgm(self):
         nb = 0
-        for (img, imgaddr), fn_log in self.log.items():
-            fname = fn_log[0]
+        for fn, info in self.log.get():
+            img, img_addr, fname = fn.split(":")
             if self.pgm in img and len(fname) > 0:
                 nb += 1
         return nb
 
-
     def print_general_info(self):
-        nb_inf = len(self.log.keys())
+        nb_inf = self.log.count_lines()
         nb_inf_pgm = self.compute_nb_inf_pgm()
 
         print("Inference")
@@ -49,9 +45,8 @@ class Analysis(object):
         print("| Total functions inferred:    {}".format(nb_inf))
         print("- Program functions inferred:  {}".format(nb_inf_pgm))
 
-
     def print_general_info_with_data(self, data):
-        nb_inf = len(self.log.keys())
+        nb_inf = self.log.count_lines()
         nb_inf_pgm = self.compute_nb_inf_pgm()
         nb_src = len(data.protos.keys())
         nb_src_pgm = len(data.protos_without_libs.keys())
@@ -80,10 +75,8 @@ class Analysis(object):
     def display(self):
         print("Not implemented")
 
-
     def accuracy(self):
         print("Not implemented")
-
 
     def mismatch(self):
         print("Not implemented")

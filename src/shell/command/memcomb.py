@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+
 from src.shell.command.i_command import ICommand
 from src.shell.parser.type import TypeLogParser
-from src.shell.parser.block_trace import BlockTraceParser
+from src.shell.parser.memblock import MemblockParser
 
 from numpy import mean 
 from random import randint
+
 
 class MemComb(ICommand):
     """
@@ -15,7 +17,7 @@ class MemComb(ICommand):
 
     def __init__(self, mem_log_file, type_log_file, log, pgm):
         super(MemComb, self).__init__()
-        self.__parser = BlockTraceParser(mem_log_file)
+        self.__parser = MemblockParser(mem_log_file)
         self.__protos = TypeLogParser(type_log_file)
         self.log = log
         self.__pgm = pgm

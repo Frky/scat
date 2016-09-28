@@ -2,29 +2,29 @@
 
 from src.shell.parser.i_log_parser import ILogParser
 
-class TypeLogParser(ILogParser):
+class ArityLogParser(ILogParser):
     """
-        Parser for type log file
+        Parser for arity log file
 
     """
 
     def __init__(self, *args, **kwargs):
         self.__fn = None
-        super(TypeLogParser, self).__init__(*args, **kwargs)
+        super(ArityLogParser, self).__init__(*args, **kwargs)
 
     def get(self):
         if self.__fn is None:
             self.__fn = dict()
             with open(self.log_path, "r") as log:
                 for line in log.readlines():
-                    l = line[:-1].split(":")
+                    l = line[:-1].split(":")[:-1]
                     name = ":".join(l[:3])
-                    proto = l[-1].replace(" ", "").split(",")
-                    self.__fn[name] = proto
-                    yield name, proto
+                    arity = map(lambda a: int(a), l[3:])
+                    self.__fn[name] = arity
+                    yield name, arity
         else:
-            for name, proto in self.__fn.items():
-                yield name, proto
+            for fn, arity in self.__fn.items():
+                yield fn, arity
 
     def get_proto(self, fname):
         if self.__fn is None:

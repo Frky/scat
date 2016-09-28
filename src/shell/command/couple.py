@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from src.shell.command.i_command import ICommand
-from src.shell.parser.block_trace import BlockTraceParser, BlockTrace
+from src.shell.parser.memblock import MemblockParser
 
 class Couple(ICommand):
     """
@@ -11,7 +11,7 @@ class Couple(ICommand):
 
     def __init__(self, log_file, log):
         super(Couple, self).__init__()
-        self.__parser = BlockTraceParser(log_file)
+        self.__parser = MemblockParser(log_file)
         self.log = log
 
     def run(self):
@@ -21,16 +21,16 @@ class Couple(ICommand):
         NROUND = 65536
         self.log("parsing memory blocks...")
         for block in self.__parser.get():
-            if block.type != BlockTrace.ADDR:
+            if not block.is_addr():
                 continue
-            if block.io == BlockTrace.IN:
+            if block.is_in():
                 if block.id not in inp.keys():
                     inp[block.id] = list()
                 if len(inp[block.id]) < SIZE_LIMIT:
                     inp[block.id].append(block.val)
-            elif block.io == BlockTrace.OUT:
-                if block.id not in out.keys():
-                    out[block.id] = list()
+                elif block.is_out():
+                    if block.id not in out.keys():
+                        out[block.id] = list()
                     for i in xrange(NROUND):
                         out[block.id].append(list())
                 out[block.id][block.val % NROUND].append(block.val)

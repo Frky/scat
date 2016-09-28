@@ -3,6 +3,7 @@
 from datetime import datetime
 import re
 from analysis import Analysis
+from src.shell.parser.arity import ArityLogParser
 
 class ArityAnalysis(Analysis):
 
@@ -15,31 +16,15 @@ class ArityAnalysis(Analysis):
         else:
             self.protos = data.protos
 
-
     def parse_log(self):
-        self.log = dict()
-        with open(self.logfile, "r") as f:
-            for line in f.readlines():
-                (img, imgaddr, fn,
-                        int_ar, int_stack_ar,
-                        float_ar, float_stack_ar,
-                        ret,
-                        int_indices) = line[:-1].split(":")
-                self.log[(img, int(imgaddr))] = (fn,
-                        int(int_ar),
-                        int(int_stack_ar),
-                        int(float_ar),
-                        int(float_stack_ar),
-                        int(ret))
-
+        self.log = ArityLogParser(self.logfile)
+        return
 
     def check_one_arity(self, fname, ar, proto):
         return ar == len(proto) - 1
 
-
     def check_one_ret(self, fname, ret, proto):
         return (ret > 0) == (proto[0] != "void")
-
 
     def print_general_info(self):
         if self.data is None:
@@ -47,13 +32,11 @@ class ArityAnalysis(Analysis):
         else:
             Analysis.print_general_info_with_data(self, self.data)
 
-
     def display(self):
         for (img, imgaddr), fn in self.log.items():
            print("{} [{}@{}]".format(fn, img, hex(imgaddr)))
         print("")
         self.print_general_info()
-
 
     def accuracy(self):
         self.print_general_info()
@@ -67,8 +50,9 @@ class ArityAnalysis(Analysis):
         total = 0
         ok_ar = 0
         ok_ret = 0
-        for (img, imgaddr), fn_log in self.log.items():
-            fn, int_ar, int_stack_ar, float_ar, float_stack_ar, ret = fn_log
+        for function, arity in self.log.get():
+            fn = function.split(":")[-1]
+            int_ar, int_stack_ar, float_ar, float_stack_ar, ret = arity
             ar = int_ar + int_stack_ar + float_ar + float_stack_ar
             if fn == '':
                 without_name += 1
@@ -105,7 +89,6 @@ class ArityAnalysis(Analysis):
         print("| Ratio params:            {0:.2f}%".format(self.ratio(ok_ar, total)))
         print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
 
-
     def mismatch(self):
         self.print_general_info()
         print("")
@@ -135,3 +118,4 @@ class ArityAnalysis(Analysis):
                     print("   Return : Expected 0 got 1")
                 else:
                     print("   Return : Expected 1 got 0")
+

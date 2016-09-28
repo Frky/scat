@@ -8,6 +8,8 @@ from cmd2 import Cmd
 from confiture import Confiture, ConfigFileError
 from datetime import datetime
 
+from src.shell.exceptions import PintoolFileNotFound
+
 from src.shell.command.memcomb import MemComb
 from src.shell.command.memuaf import MemUAF
 from src.shell.command.couple import Couple
@@ -36,8 +38,7 @@ class ScatShell(Cmd):
             req = ["src", "obj"]
             for r in req:
                 if r not in self.config["pintool"][pintool].keys():
-                    #TODO
-                    raise Exception
+                    raise PintoolFileNotFound("{0} file not found for pintool {1}".format(r, pintool))
             src = self.config["pintool"][pintool]["src"]
             obj = self.config["pintool"][pintool]["obj"]
             # Check potential extra argument
@@ -516,6 +517,7 @@ class ScatShell(Cmd):
         Couple(logfile, self.out).run()
 
     #========== DETECT SIMPLIFIED UAF ==========
+
     def do_memuaf(self, s):
         pgm = s.split(" ")[0]
         # Get log file from last block inference

@@ -3,6 +3,7 @@
 from datetime import datetime
 import re
 from analysis import Analysis
+from src.shell.parser.type import TypeLogParser
 
 class TypeAnalysis(Analysis):
 
@@ -15,24 +16,14 @@ class TypeAnalysis(Analysis):
         else:
             self.protos = data.protos
 
-
     def parse_log(self):
-        self.log = dict()
-        with open(self.logfile, "r") as f:
-            for line in f.readlines():
-                img, imgaddr, fn, args = line[:-1].split(":")
-                args = args.split(",")
-                if args[0] == '':
-                    args = None
-                self.log[(img, int(imgaddr))] = (fn, args)
-
+        self.log = TypeLogParser(self.logfile)
 
     def print_general_info(self):
         if self.data is None:
             Analysis.print_general_info(self)
         else:
             Analysis.print_general_info_with_data(self, self.data)
-
 
     def check_function(self, fname, args, proto, undef_as_int = False):
         return_ok, return_tot = 0, 1
@@ -52,7 +43,6 @@ class TypeAnalysis(Analysis):
 
         return (return_ok, return_tot, params_ok, params_tot)
 
-
     def check_one(self, ref, inf, undef_as_int):
         if inf == 'UNDEF':
             if undef_as_int:
@@ -68,7 +58,6 @@ class TypeAnalysis(Analysis):
             return inf.startswith('VOID')
         else:
             return inf.startswith('INT')
-
 
     def args_str(self, img, imgaddr, fn, args):
         line = ""
@@ -100,7 +89,6 @@ class TypeAnalysis(Analysis):
         line += ");"
         return line
 
-
     def pp_data_type(self, type):
         if '*' in type or '[' in type:
             return 'addr '
@@ -111,7 +99,6 @@ class TypeAnalysis(Analysis):
         else:
             return 'int  '
 
-
     def pp_inferred_type(self, type):
         idx = type.find("(")
         if idx == -1:
@@ -119,13 +106,11 @@ class TypeAnalysis(Analysis):
         else:
             return type[:idx].lower().ljust(5)
 
-
     def display(self):
         for (img, imgaddr), (fn, args) in self.log.items():
             print(self.args_str(img, imgaddr, fn, args))
         print("")
         self.print_general_info()
-
 
     def accuracy(self):
         self.print_general_info()
@@ -141,7 +126,8 @@ class TypeAnalysis(Analysis):
         params_ok = 0
         params_total = 0
 
-        for (img, imgaddr), (fn, args) in self.log.items():
+        for function, args in self.log.get():
+            fn = function.split(":")[-1]
             if fn == "":
                 without_name += 1
                 continue
@@ -176,7 +162,6 @@ class TypeAnalysis(Analysis):
         print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
         print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
 
-
     def mismatch(self):
         self.print_general_info()
         print("")
@@ -202,3 +187,4 @@ class TypeAnalysis(Analysis):
             print("Got:       {} -> {}".format(
                     ", ".join(map(self.pp_inferred_type, args[1:])),
                     self.pp_inferred_type(args[0])))
+
