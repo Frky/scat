@@ -2,7 +2,7 @@
 
 from src.shell.command.i_command import ICommand
 from src.shell.parser.type import TypeLogParser
-from src.shell.parser.block_trace import BlockTraceParser
+from src.shell.parser.memblock import MemblockParser
 from src.shell.command.memcomb import MemComb, AddrTable
 
 class MemUAF(ICommand):
@@ -13,7 +13,7 @@ class MemUAF(ICommand):
 
     def __init__(self, mem_log_file, log):
         super(MemUAF, self).__init__()
-        self.__parser = BlockTraceParser(mem_log_file)
+        self.__parser = MemblockParser(mem_log_file)
         self.log = log
 
     def run(self, ALLOC, FREE):
