@@ -107,7 +107,9 @@ class TypeAnalysis(Analysis):
             return type[:idx].lower().ljust(5)
 
     def display(self):
-        for (img, imgaddr), (fn, args) in self.log.items():
+        for function, args in self.log.get():
+            img, imgaddr, fn = function.split(":")
+            imgaddr = int(imgaddr)
             print(self.args_str(img, imgaddr, fn, args))
         print("")
         self.print_general_info()
@@ -166,7 +168,9 @@ class TypeAnalysis(Analysis):
         self.print_general_info()
         print("")
 
-        for (img, imgaddr), (fname, args) in self.log.items():
+        for function, args in self.log.get():
+            img, imgaddr, fname = function.split(":")
+            imgaddr = int(imgaddr)
             if fname == "" or fname not in self.protos.keys():
                 continue
 
