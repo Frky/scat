@@ -28,9 +28,9 @@ class Couple(ICommand):
                     inp[block.id] = list()
                 if len(inp[block.id]) < SIZE_LIMIT:
                     inp[block.id].append(block.val)
-                elif block.is_out():
-                    if block.id not in out.keys():
-                        out[block.id] = list()
+            elif block.is_out():
+                if block.id not in out.keys():
+                    out[block.id] = list()
                     for i in xrange(NROUND):
                         out[block.id].append(list())
                 out[block.id][block.val % NROUND].append(block.val)
