@@ -69,6 +69,8 @@ class MemblockParser(ILogParser):
 
     def get(self):
         with open(self.log_path, 'r') as f:
+            # Skip first line
+            f.readline()
             for i, line in enumerate(f.readlines()):
                 yield Block(line)
 

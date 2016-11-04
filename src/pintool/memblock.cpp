@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <sys/time.h>
 
 #include "pin.H"
 
@@ -21,8 +22,7 @@
 #define NB_VALS_TO_CONCLUDE     500
 #define NB_CALLS_TO_CONCLUDE    500
 #define SEUIL                   0.8
-
-#define DEBUG_SEGFAULT          0
+#define IGNORE_LIBRARIES        1
 
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
@@ -35,6 +35,8 @@ HollowStack<MAX_DEPTH, FID> call_stack;
 HollowStack<MAX_DEPTH, bool> is_jump_stack;
 
 UINT64 counter;
+
+struct timeval start, stop; 
 
 unsigned int nb_fn = 0;
 
@@ -69,9 +71,9 @@ string read_part(char* c) {
 }
 
 ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
+
+    trace_enter();
+
     REG reg;
     switch (pid) {
     case 0:
@@ -96,27 +98,32 @@ ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
         reg = REG_R9;
         break;
     default:
+
+        trace_leave();
+
         return 0;
     }
+
+    trace_leave();
+
     return PIN_GetContextReg(ctxt, reg);
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
 }
 
 
 VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
-#if DEBUG_SEGFAULT 
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
+    
+    trace_enter();
+
     call_stack.push(fid);
     is_jump_stack.push(is_jump);
     counter += 1;
 
     bool param_pushed = false;
 
-    if (!is_instrumented[fid])
+    if (!is_instrumented[fid]) {
+        trace_leave();
         return;
+    }
 
     for (unsigned int i = 1; i <= nb_p[fid]; i++) {
         param_t *new_param = (param_t *) malloc(sizeof(param_t));
@@ -141,13 +148,13 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
         new_addr->is_addr = false; // true;
         param_in->push_front(new_addr);
     }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
+
+    trace_leave();
     return;
 }
 
 VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
+    
     trace_enter();
 
     // Indirect call, we have to look up the function each time
@@ -157,7 +164,7 @@ VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     PIN_LockClient();
     FID fid = fn_lookup_by_address(target);
     if (is_jump && fid == FID_UNKNOWN) {
-        // std::cerr << "jumping: " << target << endl;
+        trace_leave();
         return;
     }
     PIN_UnlockClient();
@@ -165,6 +172,7 @@ VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     fn_call(ctxt, fid, is_jump);
 
     trace_leave();
+    return;
 }
 
 VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
@@ -200,6 +208,7 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
     }
 
     trace_leave();
+    return;
 }
 
 
@@ -208,6 +217,9 @@ void fn_registered(
                     unsigned int nb_param, 
                     vector<bool> type_param
                 ) {
+
+    trace_enter();
+
     /* Set the number of parameters */
     nb_p[fid] = nb_param;
     /* Set the array of booleans indicating which parameter is an ADDR */
@@ -226,9 +238,9 @@ void fn_registered(
             param_addr[fid][i] = false;
     }
 
+    trace_leave();
     return;
 }
-
 
 VOID Commence();
 
@@ -261,7 +273,7 @@ VOID Instruction(INS ins, VOID *v) {
     }
 
     if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
+        if (!INS_IsCall(ins)) {
             INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_icall,
@@ -285,9 +297,9 @@ VOID Instruction(INS ins, VOID *v) {
 
 
 VOID Commence() {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
+
+    trace_enter();
+
     /* Init instruction counter */
     counter = 0;
     init = true;
@@ -332,14 +344,18 @@ VOID Commence() {
             }
         }
     }
+
+    gettimeofday(&start, NULL);
+
+    trace_leave();
+
     return;
 }
 
-
 VOID Fini(INT32 code, VOID *v) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
+
+    trace_enter();
+
     list<param_t *>::reverse_iterator it_in, it_out;
     it_in = param_in->rbegin();
     it_out = param_out->rbegin();
@@ -347,6 +363,10 @@ VOID Fini(INT32 code, VOID *v) {
     int depth = 0;
     UINT64 last_date = -1;
     bool is_in = false;
+
+    gettimeofday(&stop, NULL);
+
+    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
 
     while (it_in != param_in->rend() || it_out != param_out->rend()) {
         // for (int i = 0; i < depth; i++) 
@@ -382,14 +402,15 @@ VOID Fini(INT32 code, VOID *v) {
         ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->pos << ":" << p->counter << endl;
     }
     ofile.close();
+
+    trace_leave();
+
+    return;
 }
 
 
-int main(int argc, char * argv[])
-{
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
+int main(int argc, char * argv[]) {
+    
     param_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     is_instrumented = (bool *) calloc(NB_FN_MAX, sizeof(bool));
     nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));

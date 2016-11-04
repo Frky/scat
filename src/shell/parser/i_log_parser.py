@@ -16,6 +16,11 @@ class ILogParser(object):
     def __init__(self, log_path):
         # Path to log file
         self.log_path = log_path
+        with open(self.log_path, "r") as log:
+            self.elapsed_time = log.readline()[:-1]
+
+    def time(self):
+        return self.elapsed_time
 
     @abstractmethod
     def get(self):

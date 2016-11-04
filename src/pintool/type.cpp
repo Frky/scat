@@ -9,6 +9,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 #include "pin.H"
 
@@ -26,6 +27,7 @@ KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specif
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
 
+struct timeval start, stop; 
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
@@ -437,6 +439,10 @@ VOID Fini(INT32 code, VOID *v) {
             ofile << (type); \
             need_comma = true
 
+    gettimeofday(&stop, NULL);
+
+    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < NB_CALLS_TO_CONCLUDE)
             continue;
@@ -536,6 +542,8 @@ int main(int argc, char * argv[]) {
     fn_registered(FID_UNKNOWN, 0, 0, 0, 0, 0, unknown_int_idx);
     register_functions_from_arity_log();
 
+    gettimeofday(&start, NULL);
+   
     PIN_StartProgram();
 
     return 0;

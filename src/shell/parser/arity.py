@@ -16,6 +16,8 @@ class ArityLogParser(ILogParser):
         if self.__fn is None:
             self.__fn = dict()
             with open(self.log_path, "r") as log:
+                # Skip first line
+                log.readline()
                 for line in log.readlines():
                     l = line[:-1].split(":")[:-1]
                     name = ":".join(l[:3])

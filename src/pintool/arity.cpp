@@ -3,9 +3,10 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <stdlib.h>
 
+#include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
 
 #include "pin.H"
 
@@ -28,6 +29,8 @@
 ofstream ofile;
 // TODO change "mouaha"
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
+
+struct timeval start, stop; 
 
 ADDRINT got_beg = 0;
 ADDRINT got_end = 0;
@@ -507,6 +510,10 @@ UINT64 detected_arity(UINT64 param_threshold, UINT64* detection, UINT64 count) {
 VOID fini(INT32 code, VOID *v) {
     trace_enter();
 
+    gettimeofday(&stop, NULL);
+
+    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+
     debug("Hash table buckets mean size : %lf\n", fn_bucket_mean_size());
 
     int inferred = 0;
@@ -614,6 +621,9 @@ int main(int argc, char * argv[]) {
     // ensure the log file is opened because PIN seems
     // to mess up IO at some point
     debug_trace_init();
+    
+    gettimeofday(&start, NULL);
+   
     PIN_StartProgram();
 
     return 0;

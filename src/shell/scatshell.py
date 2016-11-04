@@ -159,22 +159,23 @@ class ScatShell(Cmd):
 
     def __get_pgm_list(self, inf_code=None):
         file_list = [f for f in os.listdir(self.log_dir) if f.endswith("log")]
-        pgm_list = set([re.sub("_.*", "", f) for f in file_list])
-        pgm_inf = list()
-        for p in pgm_list:
-            inf = set([re.sub("_.*$", "", re.sub("^[^_]*_", "", f)) for f in file_list if f.find(p) >= 0])
-            pgm_inf.append((p, list(inf)))
+        pgm_list = set(map(lambda a: (a.split("_")[0], a.split("_")[1]), file_list))
+        pgm_inf = dict()
+        for pgm, inf in pgm_list:
+            if pgm not in pgm_inf.keys():
+                pgm_inf[pgm] = list()
+            pgm_inf[pgm].append(inf)
         return pgm_inf
 
     def __get_pgm_and_inf(self, s):
         args = s.split(" ")
         if len(args) == 0 or args[0] == '':
-            for p, inf in self.__get_pgm_list():
+            for p, inf in self.__get_pgm_list().items():
                 print(p)
             raise ValueError
         pgm = args[0]
         if len(args) == 1:
-            for p, inf in self.__get_pgm_list():
+            for p, inf in self.__get_pgm_list().items():
                 if p != pgm:
                     continue
                 for i in inf:
@@ -293,10 +294,10 @@ class ScatShell(Cmd):
 
     def complete_display(self, text, line, begidx, endidx):
         pgm_inf  = self.__get_pgm_list()
-        for p, inf in pgm_inf:
+        for p, inf in pgm_inf.items():
             if line.find(p) >= 0:
                 return [i for i in inf if i.startswith(text)]
-        return [pgm for pgm, inf in pgm_inf if pgm.startswith(text)]
+        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
 
     def do_display(self, s):
         """
@@ -313,6 +314,35 @@ class ScatShell(Cmd):
             return
 
         pintool.get_analysis(pgm).display()
+
+    #========== time of execution ==========#
+
+    def help_time(self):
+        print(self.do_display.__doc__.replace("\n", " "))
+
+    def complete_time(self, text, line, begidx, endidx):
+        pgm_inf  = self.__get_pgm_list()
+        for p, inf in pgm_inf.items():
+            if line.find(p) >= 0:
+                return [i for i in inf if i.startswith(text)]
+        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
+
+    def do_time(self, s):
+        """
+            Display the time of execution of a given inference
+
+        """
+        try:
+            pgm, pintool = self.__get_pgm_and_inf(s)
+        except ValueError:
+            return
+        except KeyError:
+            #TODO explicit message (w/ pintool and binary details)
+            self.stderr("Pintool error")
+            return
+
+        pintool.get_analysis(pgm).time()
+        
 
     #========== parsedata ==========#
 

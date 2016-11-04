@@ -72,6 +72,9 @@ class Analysis(object):
         print("  | Functions in source:  {}".format(nb_src_pgm))
         print("  - Coverage :            {:.2f}%".format(coverage_pgm))
 
+    def time(self):
+        print(self.log.time())
+
     def display(self):
         print("Not implemented")
 
