@@ -93,8 +93,10 @@ class ArityAnalysis(Analysis):
         self.print_general_info()
         print("")
 
-        for (img, imgaddr), fn_log in self.log.items():
-            fname, int_ar, int_stack_ar, float_ar, float_stack_ar, ret = fn_log
+        for function, fn_log in self.log.get():
+            img, imgaddr, fname = function.split(":")
+            imgaddr = int(imgaddr)
+            int_ar, int_stack_ar, float_ar, float_stack_ar, ret = fn_log
             ar = int_ar + int_stack_ar + float_ar + float_stack_ar
             if fname == "" or fname not in self.protos.keys():
                 continue
