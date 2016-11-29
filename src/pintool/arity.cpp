@@ -469,25 +469,24 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IARG_END);
         }
     }
-
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
-                INS_InsertCall(ins,
+    else if (INS_IsRet(ins)) {
+        INS_InsertCall(ins,
+                    IPOINT_BEFORE,
+                    (AFUNPTR) fn_ret,
+                    IARG_END);
+    }
+    else if (INS_IsIndirectBranchOrCall(ins)) {
+        // XEND Instruction are special branch instructions
+        // which does not have a IARG_BRANCH_TARGET_ADDR
+        if (INS_Opcode(ins) != XED_ICLASS_XEND) {
+            INS_InsertCall(ins,
                         IPOINT_BEFORE,
                         (AFUNPTR) fn_indirect_call,
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_BOOL, true,
                         IARG_END);
-            
         }
-    }
-
-    if (INS_IsRet(ins)) {
-        INS_InsertCall(ins,
-                    IPOINT_BEFORE,
-                    (AFUNPTR) fn_ret,
-                    IARG_END);
     }
 
     trace_leave();
