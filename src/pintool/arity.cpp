@@ -116,6 +116,7 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     // Locking is not implicit in inserted call, as opposed
     // to callback added with *_AddInstrumentFunction().
     //
+    return;
     PIN_LockClient();
     FID fid = fn_lookup_by_address(target);
     if (fid == FID_UNKNOWN) {
@@ -471,7 +472,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
     }
 
     if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins)) {
                 INS_InsertCall(ins,
                         IPOINT_BEFORE,
                         (AFUNPTR) fn_indirect_call,
@@ -482,7 +483,6 @@ VOID instrument_instruction(INS ins, VOID *v) {
             
         }
     }
-
     if (INS_IsRet(ins)) {
         INS_InsertCall(ins,
                     IPOINT_BEFORE,
