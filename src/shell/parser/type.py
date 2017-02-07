@@ -17,7 +17,7 @@ class TypeLogParser(ILogParser):
             self.__fn = dict()
             with open(self.log_path, "r") as log:
                 # Skip first line
-                f.readline()
+                log.readline()
                 for line in log.readlines():
                     l = line[:-1].split(":")
                     name = ":".join(l[:3])
