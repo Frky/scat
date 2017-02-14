@@ -3,7 +3,7 @@
 
 from src.shell.command.i_command import ICommand
 from src.shell.parser.type import TypeLogParser
-from src.shell.parser.memblock import MemblockParser
+from src.shell.parser.memalloc import MemallocParser
 
 from numpy import mean 
 from random import randint
@@ -17,17 +17,40 @@ class MemComb(ICommand):
 
     def __init__(self, mem_log_file, type_log_file, log, pgm):
         super(MemComb, self).__init__()
-        self.__parser = MemblockParser(mem_log_file)
+        self.__parser = MemallocParser(mem_log_file)
         self.__protos = TypeLogParser(type_log_file)
         self.log = log
         self.__pgm = pgm
 
-    def __alloc(self):
+    def __compute_callers(self):
+        call_stack = CallStack(self.__pgm)
+        callers = dict()
+        for block in self.__parser.get():
+            # if block.is_in():
+            #     if not libraries and block.is_from_main():
+            #         callers.setdefault(block.id, 0)
+            #         callers[block.id] += 1
+            if block.is_in():
+                caller = call_stack.top_id()
+                call_stack.push(block)
+            else:
+                call_stack.pop()
+                caller = call_stack.top_id()
+            callers.setdefault(block.id, list())
+            if caller is not None and caller not in callers[block.id]:
+                callers[block.id].append(caller)
+        for k, v in callers.items():
+            if ".plt.got" in [x.split(":")[-1] for x in v]:
+                callers[k] = 3
+            else:
+                callers[k] = len(v)
+        return callers
+
+    def __alloc(self, nb_callers, libraries):
         """
             Try to retrieve the top-level allocator
 
         """
-        return "fun_uaf:4197134:mem_alloc"
         # Number of new addresses outputted by each function
         nb_new_addr = dict()
         # Addresses seen so far
@@ -44,15 +67,17 @@ class MemComb(ICommand):
                 call_stack.expect(block.id, block.date)
                 # if block.id == "libc.so.6:529408:" and call_stack.depth <= 1:
                 #    print call_stack.stack
-                if call_stack.depth > 0:
+                if call_stack.depth > 0 and not libraries:
                     call_stack.pop()
                     continue
                 if block.is_addr():
                     if block.id not in nb_new_addr.keys():
                         nb_new_addr[block.id] = [0, 0]
-                    if not addr_seen.contains(block.val):
-                        nb_new_addr[block.id][0] += 1
-                        addr_seen.add(block.val)
+                    if not addr_seen.contains(block.val): 
+                        if not libraries or nb_callers[block.id] > 1:
+                            if 'ADDR' not in self.__protos.get_proto(block.id)[1:]:
+                                nb_new_addr[block.id][0] += 1
+                                addr_seen.add(block.val)
                     nb_new_addr[block.id][1] += 1
                 call_stack.pop()
         ll = sorted(nb_new_addr.items(), key=lambda a: -a[1][0])
@@ -61,6 +86,7 @@ class MemComb(ICommand):
             if 'ADDR' not in proto[1:]:
                 return f[0]
         return None
+
 
     def __wrappers(self, ALLOC):
         # Number of new addresses outputted by each function
@@ -115,8 +141,7 @@ class MemComb(ICommand):
                 print "Elaged: {0}".format(wrapper[0])
         print WTREE.to_str(0)
 
-    def __free(self, ALLOC):
-        return ["fun_uaf:4197913:mem_fusion"], [1]
+    def __free(self, ALLOC, libraries):
         nb_alloc = 0
         # Number of new addresses outputted by each function
         nb_new_addr = dict()
@@ -124,8 +149,13 @@ class MemComb(ICommand):
         addr_alloc = AddrTable(dic=True)
         # Call stack
         call_stack = CallStack(self.__pgm)
+        # Number of calls
+        nb_calls = dict()
         for block in self.__parser.get():
-            if block.id.split(":")[0] != self.__pgm:
+            if block.is_out():
+                nb_calls.setdefault(block.id, 0)
+                nb_calls[block.id] += 1
+            if block.id.split(":")[0] != self.__pgm and not libraries:
                 continue
             if block.is_addr():
                 if block.is_in() and block.id != ALLOC:
@@ -142,9 +172,6 @@ class MemComb(ICommand):
                 continue
             nb_alloc += call.count(ALLOC)
             candidates = map(lambda a: a[-1], list_split(call, ALLOC))
-            print call
-            print candidates
-            print list_split(call, ALLOC)
             for free in candidates:
                 # while call.count(ALLOC) > 0:
                 # if call.index(ALLOC) == 0:
@@ -160,51 +187,59 @@ class MemComb(ICommand):
                     nb_new_addr[free] = 0
                 nb_new_addr[free] += 1 
                 # call.count(free)
-        print nb_alloc
         free = sorted(nb_new_addr.items(), key=lambda a:-a[1])
-        print free
         free = free[0][0].split("|")
-        return [free[0]], [free[1]]
+        return free[0], free[1]
 
     def compute_blocks(self, ALLOC, FREE, POS):
         mem = Memory(debug=False)
-        size_stack = [(0, -1)]
         for block in self.__parser.get():
-            if block.id.split(":")[0] != self.__pgm:
-                continue
-            if block.id == ALLOC:
-                if block.is_in() and block.is_num() and size_stack[-1][1] != block.date:
-                    size_stack.append((block.val, block.date))
-                elif block.is_out():
-                    if len(size_stack) <= 1:
-                        raise Exception("ALLOC stack inconsistancy at date {0}".format(block.date))
-                    size, date = size_stack.pop(-1)
-                    mem.alloc(block.val, size)
-            else:
-                is_free = False
-                for free, pos in zip(FREE, POS):
-                    if block.id == free and block.pos == int(pos):
-                        if block.is_in():
-                            mem.free(block.val)
-                        is_free = True
-                if not is_free and block.is_addr() and block.is_in() and not mem.is_allocated(block.val):
-                    print "UAF", block.id, block.val, block.date
+            if block.id == ALLOC and block.is_out():
+                mem.alloc(block.val, 1)
+            elif block.id == FREE and block.is_in():
+                mem.free(block.val)
+
+        # size_stack = [(0, -1)]
+        # for block in self.__parser.get():
+        #     if block.id.split(":")[0] != self.__pgm:
+        #         continue
+        #     if block.id == ALLOC:
+        #         # if block.is_in() and block.is_num() and size_stack[-1][1] != block.date:
+        #         #     size_stack.append((block.val, block.date))
+        #         if block.is_out():
+        #             # if len(size_stack) <= 1:
+        #             #     raise Exception("ALLOC stack inconsistancy at date {0}".format(block.date))
+        #             size, date = size_stack.pop(-1)
+        #             mem.alloc(block.val, size)
+        #     else:
+        #         is_free = False
+        #         for free, pos in zip(FREE, POS):
+        #             if block.id == free and block.pos == int(pos):
+        #                 if block.is_in():
+        #                     mem.free(block.val)
+        #                 is_free = True
+        #         if not is_free and block.is_addr() and block.is_in() and not mem.is_allocated(block.val):
+        #             print "UAF", block.id, block.val, block.date
 
         print "[errors] ALLOC: {0} | FREE: {1}".format(mem.errors[0], mem.errors[1])
         print "[allocs] CURR: {0} | TOTAL: {1}".format(*mem.allocated)
         print "[nbcall] ALLOC: {0} | FREE: {1}".format(*mem.nb_calls)
         return
 
-    def run(self, wrappers=True):
-        ALLOC = self.__alloc()
+    def run(self, libraries=False, wrappers=True):
+        if libraries:
+            nb_callers = self.__compute_callers()
+        else:
+            nb_callers = None
+        ALLOC = self.__alloc(nb_callers, libraries)
         self.log("allocator found - {0}".format(ALLOC))
-        FREE, POS = self.__free(ALLOC)
+        FREE, POS = self.__free(ALLOC, libraries)
         self.log("liberator found - {0}".format(FREE))
         self.log("checking consistancy of blocks...")
         self.compute_blocks(ALLOC, FREE, POS)
-        if wrappers:
-            # Detecting suballocators
-            SUBALLOC = self.__wrappers(ALLOC)
+        # if wrappers:
+        #     # Detecting suballocators
+        #     SUBALLOC = self.__wrappers(ALLOC)
         return ALLOC, FREE
 
 
@@ -241,7 +276,14 @@ class CallStack(object):
             raise Exception
 
     def top(self):
+        if self.is_empty():
+            return None
         return self.__stack[-1]
+
+    def top_id(self):
+        if self.is_empty():
+            return None
+        return self.__stack[-1][0].id
 
     def is_empty(self):
         return len(self.__stack) == 0
@@ -261,7 +303,7 @@ class CallStack(object):
 
 class AddrTable(object):
 
-    TABLE_SIZE = 1000000
+    TABLE_SIZE = 10000
 
     def __init__(self, dic=False):
         self.__addr = list()
@@ -354,7 +396,9 @@ class Wrapper(object):
 
 class Memory(object):
 
-    HASH_SIZE = 1000000
+    HASH_SIZE = 10
+    KEY_MASK = 2**HASH_SIZE - 1
+    VALUE_MASK = (2**(64 - HASH_SIZE) - 1) << HASH_SIZE
 
     def __init__(self, debug=False):
         self.__ALLOCATED = list()

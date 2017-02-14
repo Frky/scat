@@ -16,6 +16,7 @@ class ILogParser(object):
     def __init__(self, log_path):
         # Path to log file
         self.log_path = log_path
+        self.fn_table = list()
         with open(self.log_path, "r") as log:
             self.elapsed_time = log.readline()[:-1]
 
@@ -25,6 +26,15 @@ class ILogParser(object):
     @abstractmethod
     def get(self):
         raise NotImplemented
+
+    def read_header(self, f):
+        nb_fid = int(f.readline()[:-1])
+        # First entry (fid = 0) corresponds to nothing
+        self.fn_table.append(None)
+        fid = 1
+        while fid <= nb_fid:
+            self.fn_table.append(f.readline()[:-1])
+            fid += 1
 
     def count_lines(self):
         with open(self.log_path, 'rb') as f:

@@ -20,7 +20,7 @@
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
 #define MAX_VALS_TO_COLLECT     100
-#define NB_CALLS_TO_CONCLUDE    50
+#define NB_CALLS_TO_CONCLUDE    10
 #define THRESHOLD               0.75
 
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");

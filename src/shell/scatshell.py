@@ -529,12 +529,14 @@ class ScatShell(Cmd):
 
     def do_memcomb(self, s):
         # Get log file from last block inference
-        if "memblock" not in self.__pintools.keys():
-            self.stderr("you must run memblock inference first")
+        if "memalloc" not in self.__pintools.keys():
+            self.stderr("you must run memalloc inference first")
             return
-        proto_logfile = self.__pintools["memblock"].get_logfile(s, prev=True)
-        mem_logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
-        MemComb(mem_logfile, proto_logfile, self.out, s).run()
+        s = s.split(" ")
+        libraries = len(s) > 1 and s[1] == "--lib"
+        proto_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=True)
+        mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
+        MemComb(mem_logfile, proto_logfile, self.out, s[0]).run(libraries=libraries)
 
     #========== COUPLE FROM MEMBLOCK ==========
 
