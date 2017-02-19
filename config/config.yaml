@@ -21,6 +21,14 @@ pintool:
         src: ./src/pintool/memblock.cpp
         obj: ./bin/obj-intel64/memblock.so
         prev_step: type
+    memalloc: 
+        src: ./src/pintool/memalloc.cpp
+        obj: ./bin/obj-intel64/memalloc.so
+        prev_step: type
+    checkalloc: 
+        src: ./src/pintool/checkalloc.cpp
+        obj: ./bin/obj-intel64/checkalloc.so
+        prev_step: type
 
 res:
     path: ./res

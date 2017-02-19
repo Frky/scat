@@ -10,7 +10,7 @@
 
 #include "pin.H"
 
-#define NB_CALLS_TO_CONCLUDE    50
+#define NB_CALLS_TO_CONCLUDE    10
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
 #define PARAM_THRESHOLD         0.10
@@ -116,7 +116,6 @@ VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     // Locking is not implicit in inserted call, as opposed
     // to callback added with *_AddInstrumentFunction().
     //
-    return;
     PIN_LockClient();
     FID fid = fn_lookup_by_address(target);
     if (fid == FID_UNKNOWN) {
