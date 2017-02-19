@@ -1,500 +1,348 @@
-#include <list>
-#include <map>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
 
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
+#include <list>
+
+#include "utils/debug.h"
+#include "utils/functions_registry.h"
+#include "utils/hollow_stack.h"
+#include "utils/registers.h"
+#include "log/type.h"
 
 #include "pin.H"
 
 #define NB_FN_MAX               5000
-#define NB_VALS_TO_CONCLUDE     500
-#define NB_CALLS_TO_CONCLUDE    500
+#define MAX_DEPTH               1000
+#define NB_VALS_TO_CONCLUDE     100
 #define SEUIL                   0.8
 
-#define DEBUG_SEGFAULT          0
-
-#define FN_NAME 0
-#define FN_ADDR 1
-
-ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
-ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
-UINT64 FN_MODE;
-KNOB<string> KnobFunctionMode(KNOB_MODE_WRITEONCE, "pintool", "fn", "name", "Specify a function mode");
 
-/* Inferred data address space*/
-UINT64 DATA1_BASE, DATA1_TOP;
-UINT64 DATA2_BASE, DATA2_TOP;
-/* Inferred code address space*/
-UINT64 CODE_BASE, CODE_TOP;
+/* Call stack */
+HollowStack<MAX_DEPTH, FID> call_stack;
+/* Call stack is jump */
+HollowStack<MAX_DEPTH, bool> is_jump_stack;
+/* A stack which keeps track of the program stack pointers */
+HollowStack<MAX_DEPTH, UINT64> sp_stack;
 
-UINT64 counter;
+/* Timecounter to have a chronology of parameter values */
+UINT64 timecounter;
 
-list<ADDRINT> *call_stack;
-unsigned int nb_fn = 0;
+/* Structure for functions */
+typedef struct {
+    /* Number of calls */
+    unsigned int nb_call;
+    /* Number of parameters */
+    unsigned int nb_p;
+    /* Type of parameters */
+    bool *is_addr;
+    /* Accumulator of values */
+    list<ADDRINT> **val;
+    /* Timecounter to know when a parameter occurrec */
+    list<UINT64> **val_timecounter;
+} fn_data_t;
 
-int nb_calls = 0;
-
-ADDRINT *faddr;
-string **fname;
-bool *treated;
-unsigned int *nb_call;
-unsigned int *nb_p;
-list<UINT64> ***param_val;
-list<UINT64> ***param_val_counter;
-int **param_addr;
-
-long int depth = 0;
-
-bool init = false;
-
-
-VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    REG reg;
-    switch (pid) {
-    case 1:
-        reg = REG_RDI;
-        break;
-    case 2:
-        reg = REG_RSI;
-        break;
-    case 3:
-        reg = REG_RDX;
-        break;
-    case 4:
-        reg = REG_RCX;
-        break;
-    case 5:
-        reg = REG_R8;
-        break;
-    case 6:
-        reg = REG_R9;
-        break;
-    default:
-        return;
-    }
-    ADDRINT regv = PIN_GetContextReg(ctxt, reg);
-    param_val[fid][pid]->push_front(regv);
-    param_val_counter[fid][pid]->push_front(counter);
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-}
+/* Function data list */
+fn_data_t **fn_data;
 
 
-VOID call(CONTEXT *ctxt, UINT32 fid) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    counter += 1;
-    depth++;
-    if (treated[fid])
-        return;
-    nb_call[fid]++;
-    for (unsigned int i = 1; i < nb_p[fid]; i++) {
-        if (param_addr[fid][i]) {
-            if (param_val[fid][i]->size() < NB_VALS_TO_CONCLUDE) {
-                add_val(fid, ctxt, i);
+/* Handler for CALL instruction
+ * 
+ * @param ctxt      context of the call (provided by PIN)
+ * @param fid       Identifier of the function being called
+ * @param is_jump   true iif the call is in fact a jump
+ **/
+VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
+    trace_enter();
+
+    timecounter += 1;
+
+    call_stack.push(fid);
+    is_jump_stack.push(is_jump);
+
+    /* Get function */
+    fn_data_t *fn = fn_data[fid];
+
+    /* Increase number of calls */
+    fn->nb_call++;
+
+    /* For each address parameter, accumulate a value */
+    for (unsigned int i = 1; i < fn->nb_p; i++) {
+        if (fn->is_addr[i] && fn->val[i]->size() < NB_VALS_TO_CONCLUDE) {
+            ADDRINT param_val = get_param_value(ctxt, i);
+            if (param_val != 0) {
+                fn->val[i]->push_front(param_val);
+                fn->val_timecounter[i]->push_front(timecounter);
             }
         }
     }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-    return;
+
+    trace_leave();
 }
 
 
-VOID ret(CONTEXT *ctxt, UINT32 fid) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    counter += 1;
-    depth--;
-    ADDRINT regv = PIN_GetContextReg(ctxt, REG_RAX);
-    regv = regv;
-    if (param_val[fid][0]->size() < 2*NB_VALS_TO_CONCLUDE) {
-        param_val[fid][0]->push_front(regv);
-        param_val_counter[fid][0]->push_front(counter);
-    }
-    if (nb_call[fid] >= NB_CALLS_TO_CONCLUDE) {
-        treated[fid] = true;
-    }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-    return;
-}
+/* Handler for indirect CALL instruction
+ * This function gets the function targetted by this 
+ * indirect call from the pointed address, and calls 
+ * fn_call with the corresponding fid.
+ *  
+ * @param ctxt      context of the call (provided by PIN)
+ * @param target    address being called
+ * @param is_jump   true iif the call is in fact a jump
+ **/
+VOID fn_indirect_call(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
+    trace_enter();
 
-
-unsigned int fn_add(ADDRINT addr, string name, unsigned int nb_param, vector<bool> type_param) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-//    std::cerr << "Adding " << addr << " w/ " << n << endl;
-    /* If reached the max number of functions this pintool can handle */
-    if (nb_fn >= NB_FN_MAX - 1)
-        /* Do nothing and return an invalid fid */
-        return 0;
-    /* Else increase the number of functions */
-    nb_fn++;
-    /* Set the fid */
-    unsigned int fid = nb_fn;
-
-    /* Set the address of the function */
-    faddr[fid] = addr;
-    /* Reset the number of calls for this function */
-    nb_call[fid] = 0;
-    /* Set the name of the function */
-    fname[fid] = new string(name);
-    /* Set the number of parameters */
-    nb_p[fid] = nb_param;
-    /* Set the array of booleans indicating which parameter is an ADDR */
-    param_addr[fid] = (int *) calloc(nb_p[fid], sizeof(int));
-    /* Create arrays of lists (one for each parameter, plus one for the return value) */
-    param_val[fid] = (list<UINT64> **) malloc((nb_p[fid]) * sizeof(list<UINT64> *));
-    param_val_counter[fid] = (list<UINT64> **) malloc((nb_p[fid]) * sizeof(list<UINT64> *));
-
-    /* Iteration on parameters */
-    for (unsigned int i = 0; i < nb_p[fid]; i++) {
-        param_val[fid][i] = new list<UINT64>();
-        param_val_counter[fid][i] = new list<UINT64>();
-        if (type_param[i])
-            param_addr[fid][i] = 1;
-        else
-            param_addr[fid][i] = 0;
-    }
-#if DEBUG_SEGFAULT
-    std::cerr << "[LEAVING] " << __func__ << endl;
-#endif
-    return fid;
-}
-
-
-VOID Commence();
-
-
-VOID Routine(RTN rtn, VOID *v) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    if (!init)
-        Commence();
-    unsigned int fid = 0;
-    /* Look for function id */
-    for (unsigned int i = 1; i <= nb_fn; i++) {
-        if (*fname[i] == RTN_Name(rtn)) {
-            fid = i;
-            break;
-        }
-    }
-    if (fid == 0) {
+    /* Indirect call, we have to look up the function each time
+    The functions `fn_lookup` & `fn_register` needs PIN's Lock.
+    Locking is not implicit in inserted call, as opposed
+    to callback added with *_AddInstrumentFunction(). */
+    PIN_LockClient();
+    FID fid = fn_lookup_by_address(target);
+    if (is_jump && fid == FID_UNKNOWN) {
         return;
     }
-    RTN_Open(rtn);
-    RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR) call, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
-    RTN_InsertCall(rtn, IPOINT_AFTER, (AFUNPTR) ret, IARG_CONST_CONTEXT, IARG_UINT32, fid, IARG_END);
-    RTN_Close(rtn);
+    PIN_UnlockClient();
+
+    fn_call(ctxt, fid, is_jump);
+
+    trace_leave();
 }
 
 
-/*  Instrumentation of each instruction
- *  that uses a memory operand
- */
+/* Handler for RET instruction
+ *
+ * @param ctxt      context of the ret (provided by PIN)
+ **/
+VOID fn_ret(CONTEXT *ctxt) {
+    trace_enter();
+
+    if (!call_stack.is_top_forgotten()) {
+        while (is_jump_stack.top()) {
+            timecounter += 1;
+            FID fid = call_stack.top();
+            if (fn_data[fid]->is_addr[0]) {
+                ADDRINT val = get_param_value(ctxt, 0);
+                if (val != 0) {
+                    fn_data[fid]->val[0]->push_front(val);
+                    fn_data[fid]->val_timecounter[0]->push_front(timecounter);
+                }
+            }
+            call_stack.pop();
+            is_jump_stack.pop();
+        }
+        
+        timecounter += 1;
+        FID fid = call_stack.top();
+
+        if (fn_data[fid]->is_addr[0]) {
+            ADDRINT val = get_param_value(ctxt, 0);
+            if (val != 0) {
+                fn_data[fid]->val[0]->push_front(val);
+                fn_data[fid]->val_timecounter[0]->push_front(timecounter);
+            }
+        }
+
+        call_stack.pop();
+        is_jump_stack.pop();
+    }
+
+    trace_leave();
+}
+
+
+/* This function is called once for every function found in the binary by PIN, 
+ * before the execution of the program under analysis starts.
+ * It performs initialisation of data structures used later during the execution. 
+ * 
+ *
+ * @param fid           identifier of the function being treated
+ * @param nb_param      number of parameters the function takes
+ * @param type_param    vector of booleans: for each parameter, the boolean indicates
+ *                      if it is an address (true) or not (false)
+ **/
+void fn_registered(FID fid, unsigned int nb_param, vector<bool> type_param) {
+    trace_enter();
+
+    fn_data_t *fn = (fn_data_t *) malloc(sizeof(fn_data_t));
+    fn->nb_call = 0;
+    fn->nb_p = nb_param;
+
+    fn->is_addr = (bool *) calloc(nb_param, sizeof(bool));
+    fn->val = (list<ADDRINT> **) calloc(nb_param, sizeof(list<ADDRINT> *));
+    fn->val_timecounter = (list<UINT64> **) calloc(nb_param, sizeof(list<UINT64> *));
+    for (unsigned int i = 0; i < nb_param; i++) {
+        fn->is_addr[i] = type_param[i];
+        fn->val[i] = new list<ADDRINT>();
+        fn->val_timecounter[i] = new list<UINT64>();
+    }
+
+    fn_data[fid] = fn;
+    trace_leave();
+}
+
+
+/* This function is called before the program under analysis 
+ * starts being executed. It aims to parse the log file of the previous 
+ * analysis and register functions.
+ **/
+VOID Commence() {
+    trace_enter();
+
+    ifstream ifile;
+    /* Open input log file (result of previous inference) */
+    ifile.open(KnobInputFile.Value().c_str());
+
+    if (ifile.is_open()) {
+        /* Ignore first line (elapsed time) */
+        read_line(ifile);
+        while (ifile) {
+            /* Read the prototype of one function */
+            fn_type_t *fn = read_one_type(ifile);
+            /* Register the function */
+            FID fid = fn_register(fn->img_name, fn->img_addr, fn->name);
+            /* Init data structures for this function */
+            fn_registered(fid, fn->nb_param, fn->type_param);
+            /* Free allocated structure */
+            delete fn; 
+        }
+    }
+
+    /* Close the file */
+    ifile.close();
+
+    trace_leave();
+}
+
+
+/* This function is called at the end of the
+ * execution and aims to log the results of the analysis.
+ * Parameters are provided by PIN, and are not relevant here.
+ **/
+VOID Fini(INT32 code, VOID *v) {
+    trace_enter();
+
+    ofstream ofile;
+    /* Open output log file (result of this inference */
+    ofile.open(KnobOutputFile.Value().c_str());
+
+    FID fid = 1;
+    while (fn_data[fid] != NULL) {
+        fn_data_t *fn = fn_data[fid];
+        for (unsigned int pid = 0; pid < fn->nb_p; pid++) {
+            list<ADDRINT>::iterator senti_val = fn->val[pid]->begin();
+            list<UINT64>::iterator senti_tc = fn->val_timecounter[pid]->begin();
+            while (senti_val != fn->val[pid]->end()) {
+                ofile << fid << ":" << pid << ":" << *senti_val << ":" << *senti_tc << endl;
+                senti_val++;
+                senti_tc++;
+            }
+        }
+        fid++;
+    }
+
+    /* Close log file */
+    ofile.close();
+
+    trace_leave();
+}
+
+
+/* Instrumentation (or not) of each instruction.
+ * We can define here handlers for each particular instruction
+ * we are interested in.
+ * This function will be called before the beginning of the execution
+ * of the program under analysis, once per instruction in the binary.
+ *
+ * @param ins       instruction to instrument or not 
+ * @param v         additional information provided by PIN (not relevant here)
+ **/
 VOID Instruction(INS ins, VOID *v) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-#define OK 0
-#if OK
-    if (INS_IsCall(ins))
+    trace_enter();
+
+    if (INS_IsCall(ins)) {
+        if (INS_IsDirectCall(ins)) {
+            ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
+            FID fid = fn_lookup_by_address(addr);
+
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
-                        (AFUNPTR) call,
+                        (AFUNPTR) fn_call,
+                        IARG_CONST_CONTEXT,
+                        IARG_UINT32, fid,
+                        IARG_BOOL, false,
+                        IARG_END);
+        }
+        else {
+            INS_InsertCall(ins,
+                        IPOINT_BEFORE,
+                        (AFUNPTR) fn_indirect_call,
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
+                        IARG_BOOL, true,
                         IARG_END);
-#endif
-#if 0
-    if (INS_IsDirectCall(ins)) {
-#if OK
+        }
+    }
+
+    if (INS_IsIndirectBranchOrCall(ins)) {
+        if (! INS_IsCall(ins)) {
             INS_InsertCall(ins,
-                        IPOINT_BEFORE,
-                        (AFUNPTR) update_code,
-                        IARG_BRANCH_TARGET_ADDR,
-                        IARG_END);
-#endif
-        ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
-        unsigned int fid;
-        for (fid = 1; fid < nb_fn + 1; fid++) {
-            if (faddr[fid] == addr) {
-                break;
-            } else {
-            }
-        }
-        if (fid == nb_fn + 1) {
-            return;
-        }
-        INS_InsertCall(ins,
                     IPOINT_BEFORE,
-                    (AFUNPTR) fn_call,
+                    (AFUNPTR) fn_indirect_call,
                     IARG_CONST_CONTEXT,
-                    IARG_UINT32, fid,
+                    IARG_BRANCH_TARGET_ADDR,
+                    IARG_BOOL, true,
                     IARG_END);
+        }
     }
-#endif
-#if 0
-    if (INS_IsRet(ins))
+
+    if (INS_IsRet(ins)) {
         INS_InsertCall(ins,
                     IPOINT_BEFORE,
-                    (AFUNPTR) ret,
-                    IARG_ADDRINT, RTN_Address(INS_Rtn(ins)),
+                    (AFUNPTR) fn_ret,
+                    IARG_CONST_CONTEXT,
                     IARG_END);
-#endif
-    return;
-}
-
-
-VOID Commence() {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    /* Init instruction counter */
-    counter = 0;
-    init = true;
-    char m;
-    string _addr, _name;
-    if (ifile.is_open()) {
-        while (ifile) {
-            vector<bool> type_param;
-            _addr = "";
-            _name = "";
-            ifile.read(&m, 1);
-            while (ifile && m != ':') {
-                _addr += m;
-                ifile.read(&m, 1);
-            }
-            /* Read function name */
-            ifile.read(&m, 1);
-            while (ifile && m != ':') {
-                _name += m;
-                ifile.read(&m, 1);
-            }
-            /* Read type of parameters */
-            m = '!';
-            int nb_param = 0;
-            while (ifile && m != '\n') {
-                ifile.read(&m, 1);
-                if (m == 'A')
-                    type_param.push_back(1);
-                else if (m == 'I' || m == 'V')
-                    type_param.push_back(0);
-                else
-                    continue;
-                nb_param += 1;
-                while (ifile && m != '\n' && m != ',')
-                    ifile.read(&m, 1);
-            }
-            if (atol(_addr.c_str()) != 0) {
-                unsigned int fid = fn_add(atol(_addr.c_str()), _name, nb_param, type_param);
-                fid = fid;
-                // std::cerr << _name << " : " << param_addr[fid][0] << ":" << nb_param << endl;
-            }
-        }
-    }
-    return;
-}
-
-#if 0
-/*  This function is called at the end of the
- *  execution
- */
-VOID Fini(INT32 code, VOID *v) {
-    unsigned int i;
-    std::cout << "DATA : [0x" << std::hex << DATA_BASE << " ; 0x" << std::hex << DATA_TOP << "]" << endl;
-    std::cout << "CODE : [0x" << std::hex << CODE_BASE << " ; 0x" << std::hex << CODE_TOP << "]" << endl;
-
-    map<string, func_t>::iterator senti, o_senti;
-    for (senti = fns.begin(); senti != fns.end(); senti++) {
-        if (senti->second.treated) { // || (senti->second.ret_call + senti->second.param_call[0]) > 0) {
-            std::cout << senti->first << "(";
-            float coef = ((float) senti->second.ret_addr) / ((float) senti->second._nb_call);
-            if (coef > SEUIL) {
-                senti->second.ret_is_addr = true;
-            }
-            for (i = 0; i < senti->second._nb_param; i++) {
-                if (((float) senti->second.param_addr[i]) /
-                        ((float) senti->second._nb_call) > SEUIL) {
-                    senti->second.param_is_addr[i] = true;
-                }
-#if 0
-                if (senti->param_call[i] > 0)
-                    std::cout << "FNC";
-#endif
-                if (senti->second.param_is_addr[i])
-                    std::cout << "ADDR";
-                else
-                    std::cout << "INT";
-                if (i < senti->second._nb_param - 1)
-                    std::cout << ", ";
-            }
-            std::cout << ") -> ";
-            if (senti->second.ret_call > 0)
-                std::cout << "FNC";
-            else if (senti->second.ret_is_addr)
-                std::cout << "ADDR";
-            else
-                std::cout << "INT";
-            std::cout << endl;
-        }
     }
 
-    for (senti = fns.begin(); senti != fns.end(); senti++) {
-        if (!senti->second.ret_is_addr)
-            continue;
-        for (o_senti = fns.begin(); o_senti != fns.end(); o_senti++) {
-            if (!(o_senti->second.param_is_addr[0]))
-                continue;
-            list<UINT64>::iterator ret, param;
-            int nb_link = 0;
-            for (
-                    param = o_senti->second.param_val[0].begin();
-                    param != o_senti->second.param_val[0].end();
-                    param++
-                   ) {
-                for (ret = senti->second.ret_val.begin(); ret != senti->second.ret_val.end(); ret++) {
-                    if (*ret == *param) {
-                        nb_link += 1;
-                        break;
-                    }
-                }
-            }
-            if (senti->second._nb_call > 10 && nb_link > 0)
-                std::cout << "[" << std::dec << std::setw(2) << std::setfill('0') << nb_link << "] " << senti->first << " -> " << o_senti->first << endl;
-        }
-    }
-}
-#endif
-
-
-VOID Fini(INT32 code, VOID *v) {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    for (unsigned int fid = 1; fid < nb_fn; fid++) {
-        if (param_addr[fid][0] == 0) {
-            continue;
-        }
-        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
-            continue;
-        }
-        float max_av_dist = -1;
-        for (unsigned int gid = 1; gid < nb_fn; gid++) {
-            if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
-                continue;
-            }
-            for (unsigned int pid = 1; pid < nb_p[gid]; pid++) {
-                if (param_addr[gid][pid] == 0)
-                    continue;
-                list<UINT64>::iterator pv, pc;
-                list<UINT64>::reverse_iterator rv, rc;
-                int nb_link = 0;
-                double av_dist = 0;
-                pc = param_val_counter[gid][pid]->begin();
-                for (
-                        pv = param_val[gid][pid]->begin();
-                        pv != param_val[gid][pid]->end();
-                        pv++
-                       ) {
-                    rc = param_val_counter[fid][0]->rbegin();
-                    for (
-                        rv = param_val[fid][0]->rbegin();
-                        rv != param_val[fid][0]->rend();
-                        rv++) {
-                        if (*rv == *pv && *pc > *rc) {
-                            nb_link += 1;
-                            av_dist += (((*pc) - (*rc)));
-                            std::cerr << *rv << "," << *fname[fid] << "," << *rc << "," << *fname[gid] << "," << *pc << endl;
-                            break;
-                        }
-                        rc++;
-                    }
-                    pc++;
-                }
-                av_dist = av_dist / ((float) nb_link);
-                if (av_dist > max_av_dist) {
-                    max_av_dist = av_dist;
-                }
-                if (nb_link > SEUIL*((float) nb_call[fid])) {
-                    ofile << *fname[fid] << "(" << nb_p[fid] << ")" << " -> " << *fname[gid] << "(" << nb_p[gid] << ")" << "[" << pid << "] - " << ((float) nb_link)/param_val[gid][pid]->size() << endl;
-                }
-            }
-        }
-    }
-    ofile.close();
+    trace_leave();
 }
 
 
 int main(int argc, char * argv[])
 {
-#if DEBUG_SEGFAULT
-    std::cerr << "[ENTERING] " << __func__ << endl;
-#endif
-    DATA1_BASE = 0;
-    DATA2_BASE = 0;
-    DATA1_TOP = 0;
-    DATA2_TOP = 0;
-    CODE_BASE = 0;
-    CODE_TOP = 0;
+    trace_enter();
 
-    faddr = (ADDRINT *) malloc(NB_FN_MAX * sizeof(ADDRINT));
-    treated = (bool *) malloc(NB_FN_MAX * sizeof(bool));
-    nb_call = (unsigned int *) malloc(NB_FN_MAX * sizeof(unsigned int));
-    param_val = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
-    param_val_counter = (list<UINT64> ***) malloc(NB_FN_MAX * sizeof(list<UINT64> **));
-    param_addr = (int **) malloc(NB_FN_MAX * sizeof(int *));
-    nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));
-    fname = (string **) calloc(NB_FN_MAX, sizeof(string *));
-
-    call_stack = new list<ADDRINT>();
-
-    /* Initialize symbol table code,
-       needed for rtn instrumentation */
-    PIN_InitSymbols();
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
 
-    ifile.open(KnobInputFile.Value().c_str());
-    ofile.open(KnobOutputFile.Value().c_str());
+    /* Init function data structure */
+    fn_data = (fn_data_t **) calloc(NB_FN_MAX, sizeof(fn_data_t*));
 
-    // TODO better way to get mode from cli
-    if (strcmp(KnobFunctionMode.Value().c_str(), "name") == 0) {
-        FN_MODE = FN_NAME;
-    } else if (strcmp(KnobFunctionMode.Value().c_str(), "addr") == 0) {
-        FN_MODE = FN_ADDR;
-    } else {
-        /* By default, names are used */
-        FN_MODE = FN_NAME;
-    }
+    /* Init function registry */
+    fn_registry_init(NB_FN_MAX);
+    vector<bool> unknown_type_param;
+    fn_registered(FID_UNKNOWN, 0, unknown_type_param);
 
+    debug_trace_init();
+
+    /* Init timecounter */
+    timecounter = 0;
+
+    /* Parse input file and register functions
+       seen in previous executions */
+    Commence();
+
+    /* Instrument relevant assembly instructions */
     INS_AddInstrumentFunction(Instruction, 0);
-    RTN_AddInstrumentFunction(Routine, 0);
 
     /* Register Fini to be called when the
        application exits */
     PIN_AddFiniFunction(Fini, 0);
 
+    /* Start the execution of the binary under analysis */
     PIN_StartProgram();
 
+    trace_leave();
     return 0;
 }
+

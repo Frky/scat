@@ -182,4 +182,33 @@ string regf_string(REGF regf) {
     }
 }
 
+REG param_reg(unsigned int pid) {
+    switch (pid) {
+    case 0:
+        return REG_RAX;
+    case 1:
+        return REG_RDI;
+    case 2:
+        return REG_RSI;
+    case 3:
+        return REG_RDX;
+    case 4:
+        return REG_RCX;
+    case 5:
+        return REG_R8;
+    case 6:
+        return REG_R9;
+    default:
+        return REG_INVALID();
+    }
+}
+
+ADDRINT get_param_value(CONTEXT *ctxt, unsigned int pid) {
+    if (pid <= 6)
+        return PIN_GetContextReg(ctxt, param_reg(pid));
+    else 
+        /* TODO take stack parameters into account */
+        return 0;
+}
+
 #endif

@@ -33,8 +33,8 @@ class ArityAnalysis(Analysis):
             Analysis.print_general_info_with_data(self, self.data)
 
     def display(self):
-        for (img, imgaddr), fn in self.log.items():
-           print("{} [{}@{}]".format(fn, img, hex(imgaddr)))
+        for fn, ar in self.log.get():
+            print "{}: {} -> {}".format(fn, sum([int(x) for x in ar[0:-1]]), ar[-1])
         print("")
         self.print_general_info()
 
