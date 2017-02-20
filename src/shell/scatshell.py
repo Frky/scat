@@ -538,14 +538,14 @@ class ScatShell(Cmd):
         mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
         MemComb(mem_logfile, proto_logfile, self.out, s[0]).run(libraries=libraries)
 
-    #========== COUPLE FROM MEMBLOCK ==========
+    #========== COUPLE FROM COUPLE (sic)=========
 
     def do_couple(self, s):
         # Get log file from last block inference
-        if "memblock" not in self.__pintools.keys():
+        if "couple" not in self.__pintools.keys():
             self.stderr("you must run memblock inference first")
             return
-        logfile = self.__pintools["memblock"].get_logfile(s, prev=False)
+        logfile = self.__pintools["couple"].get_logfile(s, prev=False)
         Couple(logfile, self.out).run()
 
     #========== DETECT SIMPLIFIED UAF ==========

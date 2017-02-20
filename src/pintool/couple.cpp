@@ -6,6 +6,7 @@
 #include "utils/hollow_stack.h"
 #include "utils/registers.h"
 #include "log/type.h"
+#include "log/ftable.h"
 
 #include "pin.H"
 
@@ -224,6 +225,9 @@ VOID Fini(INT32 code, VOID *v) {
     ofstream ofile;
     /* Open output log file (result of this inference */
     ofile.open(KnobOutputFile.Value().c_str());
+
+    /* First we log the table fid <-> name */
+    log_ftable(ofile);
 
     FID fid = 1;
     while (fn_data[fid] != NULL) {

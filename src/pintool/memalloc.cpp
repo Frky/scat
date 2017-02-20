@@ -16,6 +16,7 @@
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
+#include "log/ftable.h"
 
 #define NB_FN_MAX               100000
 #define MAX_DEPTH               1000
@@ -389,16 +390,8 @@ VOID Fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
-    std::cout << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
-
     /* First, we log the conversion table fid <-> name */
-
-    FID fid = 1;
-    ofile << _fn_nb - 1 << endl;
-    while (fid < _fn_nb) {
-        ofile << fn_img(fid) << ":" << fn_imgaddr(fid) << ":" << fn_name(fid) << endl; 
-        fid++;
-    }
+    log_ftable(ofile);
 
     it = param->rbegin();
 
