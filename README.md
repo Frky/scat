@@ -13,6 +13,8 @@
 
 [How to use it?](#how-to-use-it)
 
+[List of commands](#list-of-commands)
+
 [Current limitations](#current-limitations-of-the-implementation)
 
 ## What is `scat`?
@@ -467,6 +469,33 @@ And that's it. You don't need to actually compile your pintool, compilation will
 
 From now on, you can use the command `launch nopcount $PGM` within `scat` (be sure you ran `make nopcount` in `scat` before
 to compile it).
+
+## List of commands
+
+* `checkconfig`: check if the configuration file is consistant, and in particular if `Pin` is found and executable
+* `make`: compile pintools (optional: the pintool to compile, *e.g.* `make arity` - if not specified, compile all)
+* `launch $INF $PGM $ARGS` where `$PGM` is the program to analyze (full path), `$ARGS` are its arguments
+    * `launch arity $PGM $ARGS`: infer arity of functions
+    * `launch type $PGM $ARGS`: infer type (`ADDR`, `INT` or `FLOAT`) of parameters
+    * `launch couple $PGM $ARGS`: collect data to infer couples (then, see `couple`)
+    * `launch memalloc $PGM $ARGS`: collect data to infer allocators (then, see `memcomb`)
+    * **example:** `launch arity pgm/bin/mupdf-x11 test/input/poc.pdf`
+* `display $PGM $INF` where `$PGM` is the program previously analyzed (basename only)
+    * `display $PGM arity`: show the arity of functions (results of the last analysis)
+    * `display $PGM type`: show the undertyped prototypes (results of the last analysis)
+    * **example:** `display mupdf-x11 arity` 
+* `parsedata $PGM $SRC`: parse the source files in directory `$SRC` for program `$PGM`
+    * **example:** `parsedata pgm/bin/mupdf-x11 pgm/src/mupdf-x11/`
+* `accuracy $PGM $INF` where `$PGM` is the program previously analyzed (basename only) - requires `parsedata`
+    * `accuracy $PGM arity`: display the accuracy of arity inference
+    * `accuracy $PGM type`: display the accuracy of type (`ADDR`, `INT`, `FLOAT`) inference
+    * **example:** `accuracy mupdf-x11 arity`
+* `mismatch $PGM $INF` where `$PGM` is the program previously analyzed (basename only) - requires `parsedata`
+    * `mismatch $PGM arity`: show the functions whose accuracy was retrieved wrongly
+    * `mismatch $PGM type`: show the functions whose parameters were wrongly typed
+    * **example:** `mismatch mupdf-x11 arity`
+* `test $CONFIG`: (wip) test for arity and type on several programs specified in the configuration file (outputs the average accuracy
+for arity and type)
 
 ## Current limitations of the implementation
 `scat` comes with several limitations. Some of them are relative to the approach, but we will detail here only
