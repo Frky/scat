@@ -63,8 +63,7 @@ class ScatShell(Cmd):
         # Testing options
         kwargs = dict()
         kwargs["log"] = self.out
-        if "test" in self.config.keys() and "proto" in self.config["test"]:
-            kwargs["proto"] = self.config["test"]["proto"]
+        kwargs["clang"] = self.config["clang"]
         self.test = ScatTest(**kwargs)
 
         # Init shell
@@ -384,7 +383,15 @@ class ScatShell(Cmd):
     def do_test(self, s):
         # TODO documentation
         # TODO check that config is specified in config file (+template)
-        self.test.proto([self.__pintools["arity"], self.__pintools["type"]])
+        # Check CLANG configuration
+        conf = Confiture("config/templates/clang.yaml")
+        conf.check("config/config.yaml")
+        if s == "":
+            self.stderr("No configuration file provided for test -- aborting")
+            return
+        elif not s.endswith(".yaml"):
+            s += ".yaml"
+        self.test.test_all(self.__pintools["arity"], self.__pintools["type"], s)
 
     #========== accuracy ==========#
 

@@ -38,9 +38,10 @@ class ArityAnalysis(Analysis):
         print("")
         self.print_general_info()
 
-    def accuracy(self):
-        self.print_general_info()
-        print("")
+    def accuracy(self, get=False, verbose=True):
+        if verbose:
+            self.print_general_info()
+            print("")
 
         without_name = 0
         variadic = 0
@@ -76,18 +77,22 @@ class ArityAnalysis(Analysis):
             if self.check_one_ret(fn, ret, proto):
                 ok_ret += 1
 
-        print("Ignored")
-        print("| Without name:            {0}".format(without_name))
-        print("| Variadic:                {0}".format(variadic))
-        print("| Pseudo-Functions:        {0}".format(pseudo_functions))
-        print("- Not in binary/source:    {0}".format(not_found))
-        print("")
+        if verbose:
+            print("Ignored")
+            print("| Without name:            {0}".format(without_name))
+            print("| Variadic:                {0}".format(variadic))
+            print("| Pseudo-Functions:        {0}".format(pseudo_functions))
+            print("- Not in binary/source:    {0}".format(not_found))
+            print("")
 
-        print("Accuracy of inference")
-        print("| Params Ok/Total tested:  {0}/{1}".format(ok_ar, total))
-        print("| Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
-        print("| Ratio params:            {0:.2f}%".format(self.ratio(ok_ar, total)))
-        print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
+            print("Accuracy of inference")
+            print("| Params Ok/Total tested:  {0}/{1}".format(ok_ar, total))
+            print("| Return Ok/Total tested:  {0}/{1}".format(ok_ret, total))
+            print("| Ratio params:            {0:.2f}%".format(self.ratio(ok_ar, total)))
+            print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
+
+        if get:
+            return (ok_ar + ok_ret, 2*total)
 
     def mismatch(self):
         self.print_general_info()

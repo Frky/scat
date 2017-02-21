@@ -1,0 +1,108 @@
+b2sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+base32:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+base64:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+cat:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/coreutils/src/t*.c"
+cksum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+cp:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "-vr test/coreutils/src/t*.c /tmp/scatest"
+du:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "-l -a -c -h -d 1 test/"
+factor:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "200560490130"
+getlimits:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: ""
+groups:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: ""
+hostid:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: ""
+id:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "-a -n -G -z"
+head:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/coreutils/src/head.c -n 50"
+ls:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "-larth test/coreutils/src/"
+md5sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+pinky:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: ""
+pwd:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: ""
+seq:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "1 7 100000"
+sha1sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+sha224sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+sha256sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+sha384sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+sha512sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+sum:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/input/poc.pdf"
+tail:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "test/coreutils/src/tail.c -n 50"
+uname:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "-a"
+uniq:
+    src: "test/coreutils/src"
+    bin: "test/coreutils/bin"
+    args: "-c -u test/coreutils/src/gen-uni-tables.c"

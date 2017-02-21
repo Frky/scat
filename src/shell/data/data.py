@@ -23,7 +23,7 @@ class Data(object):
         return self.dstdir + "/" + self.pgm + ext
 
 
-    def load(self, add_hardcoded=True):
+    def load(self, add_hardcoded=True, verbose=True):
         self.deps = []
         self.protos = dict()
 
@@ -32,7 +32,7 @@ class Data(object):
             self.deps = pickle.load(open(deps_path, "rb"))
             for dep in self.deps:
                 dep_data = Data(self.dstdir, dep)
-                dep_data.load(False)
+                dep_data.load(False, verbose=verbose)
                 self.protos.update(dep_data.protos)
 
         data_path = self.__path(".data")
@@ -40,7 +40,8 @@ class Data(object):
             self.protos_without_libs = pickle.load(open(data_path, "rb"))
         else:
             self.protos_without_libs = dict()
-            print("!! Missing data for {}".format(self.pgm))
+            if verbose:
+                print("!! Missing data for {}".format(self.pgm))
 
         self.protos.update(self.protos_without_libs)
 
@@ -53,8 +54,13 @@ class Data(object):
         pickle.dump(self.protos_without_libs, open(self.__path(".data"), "wb"))
 
 
-    def parse(self, binary, libclang_path, srcdir = None):
-        print(" * Checking dependencies")
+    def parse(self, binary, libclang_path, srcdir = None, force=False, verbose=True):
+        if not force and os.path.exists(self.__path(".data")):
+            if verbose:
+                print "Already infered -- aborting"
+            return False
+        if verbose:
+            print(" * Checking dependencies")
         self.deps = []
         self.protos = dict()
 
@@ -63,27 +69,31 @@ class Data(object):
 
             dynamic = elf_file.get_section_by_name('.dynamic')
             for tag in dynamic.iter_tags('DT_NEEDED'):
-                print("     Found dependency {}".format(tag.needed))
+                if verbose:
+                    print("     Found dependency {}".format(tag.needed))
                 self.deps.append(tag.needed)
 
         for dep in self.deps:
             dep_data = Data(self.dstdir, dep)
-            dep_data.load(False)
+            dep_data.load(False, verbose=verbose)
             self.protos.update(dep_data.protos)
 
         self.protos_without_libs = dict()
 
         if srcdir != None:
-            print(" * Extracting data from source code")
+            if verbose:
+                print(" * Extracting data from source code")
             extractor = ClangExtractor(libclang_path, srcdir)
             self.protos_without_libs.update(extractor.extract())
 
-        print(" * Extracting data from binary debug informations")
+        if verbose:
+            print(" * Extracting data from binary debug informations")
         extractor = DwarfExtractor()
         # self.protos_without_libs.update(extractor.extract(binary))
 
         self.protos.update(self.protos_without_libs)
 
+        return True
 
     def __hardcoded_protos(self):
         """

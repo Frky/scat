@@ -114,9 +114,10 @@ class TypeAnalysis(Analysis):
         print("")
         self.print_general_info()
 
-    def accuracy(self):
-        self.print_general_info()
-        print("")
+    def accuracy(self, get=False, verbose=True):
+        if verbose:
+            self.print_general_info()
+            print("")
 
         without_name = 0
         variadic = 0
@@ -151,18 +152,21 @@ class TypeAnalysis(Analysis):
             params_ok += res[2]
             params_total += res[3]
 
-        print("Ignored")
-        print("| Without name:          {0}".format(without_name))
-        print("| Variadic:              {0}".format(variadic))
-        print("| Pseudo-Functions:      {0}".format(pseudo_functions))
-        print("- Not in binary/source:  {0}".format(not_found))
-        print("")
+        if verbose:
+            print("Ignored")
+            print("| Without name:          {0}".format(without_name))
+            print("| Variadic:              {0}".format(variadic))
+            print("| Pseudo-Functions:      {0}".format(pseudo_functions))
+            print("- Not in binary/source:  {0}".format(not_found))
+            print("")
 
-        print("Accuracy of inference")
-        print("| Params Ok/Total tested:  {0}/{1}".format(params_ok, params_total))
-        print("| Return Ok/Total tested:  {0}/{1}".format(return_ok, return_total))
-        print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
-        print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
+            print("Accuracy of inference")
+            print("| Params Ok/Total tested:  {0}/{1}".format(params_ok, params_total))
+            print("| Return Ok/Total tested:  {0}/{1}".format(return_ok, return_total))
+            print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
+            print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
+        if get:
+            return (params_ok + return_ok, params_total + return_total)
 
     def mismatch(self):
         self.print_general_info()
