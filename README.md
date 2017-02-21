@@ -180,7 +180,7 @@ source code of the binary under inference.
 ### Requirements
 
 * `scat` requires **python 2.7** and is not compatible with **python 3**.
-* You need to have `Pin` installed on your computer.
+* You need to have `Pin` installed on your computer ([official website](https://software.intel.com/en-us/articles/pin-a-dynamic-binary-instrumentation-tool)).
 * If you want to test the results of inference (see [relative section](#accuracy-of-inference)), you also need to have `libclang1-3.4` installed.
 
 ### Installation
