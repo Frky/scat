@@ -98,24 +98,26 @@ class ArityAnalysis(Analysis):
         self.print_general_info()
         print("")
 
-        for (img, imgaddr), fn_log in self.log.items():
-            fname, int_ar, int_stack_ar, float_ar, float_stack_ar, ret = fn_log
+        for function, arity in self.log.get():
+            fn = function.split(":")[-1]
+            img = function.split(":")[0]
+            imgaddr = int(function.split(":")[1])
+            int_ar, int_stack_ar, float_ar, float_stack_ar, ret = arity
             ar = int_ar + int_stack_ar + float_ar + float_stack_ar
-            if fname == "" or fname not in self.protos.keys():
+            if fn == "" or fn not in self.protos.keys():
                 continue
-
-            proto = self.protos[fname]
+            proto = self.protos[fn]
             if self.is_variadic(proto):
                 continue
 
-            arity_ok = self.check_one_arity(fname, ar, proto);
-            return_ok = self.check_one_ret(fname, ret, proto);
+            arity_ok = self.check_one_arity(fn, ar, proto);
+            return_ok = self.check_one_ret(fn, ret, proto);
 
             if arity_ok and return_ok:
                 continue
 
             print("[{}@{}] {} ({}) -> {}".format(img, hex(imgaddr),
-                    fname, ", ".join(proto[1:]), proto[0]))
+                    fn, ", ".join(proto[1:]), proto[0]))
             if not arity_ok:
                 print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
             if not return_ok:

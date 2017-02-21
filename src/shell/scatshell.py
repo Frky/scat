@@ -217,7 +217,9 @@ class ScatShell(Cmd):
             self.__check_path(self.config["pin"]["bin"], isexec=True)
         except ValueError:
             self.config_ok = False
+            self.stderr("check configuration failed -- aborting")
             return
+        self.out("Configuration seems ok")
         self.config_ok = True
 
     #========== setlogdir ==========#
