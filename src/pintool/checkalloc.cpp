@@ -16,7 +16,6 @@
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
-#include "log/ftable.h"
 
 #define NB_FN_MAX               100000
 #define MAX_DEPTH               1000
@@ -29,6 +28,10 @@ ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
+
+FID alloc_id;
+KNOB<UINT64> KnobAlloc(KNOB_MODE_WRITEONCE, "pintool", "a", "0", "");
+FID free_id;
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
@@ -47,7 +50,6 @@ typedef struct {
     UINT64 caller;
     UINT64 counter;
     UINT32 pos;
-    BOOL from_main;
 } param_t;
 
 unsigned int *nb_p;
@@ -111,7 +113,7 @@ ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
 }
 
 
-VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
+VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
     
     trace_enter();
 
@@ -135,12 +137,6 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
             new_param->counter = counter;
             new_param->val = val_from_reg(ctxt, i); 
             new_param->pos = i;
-            if (IMG_Valid(IMG_FindByAddress(inst_addr))) {
-                if (IMG_IsMainExecutable(IMG_FindByAddress(inst_addr)))
-                new_param->from_main = IMG_IsMainExecutable(IMG_FindByAddress(inst_addr));
-            } else {
-                new_param->from_main = 1;
-            }
             param->push_front(new_param);
             param_pushed = true;
         }
@@ -156,11 +152,6 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
         new_addr->counter = counter;
         new_addr->val = 0; 
         new_addr->pos = 99;
-        if (IMG_Valid(IMG_FindByAddress(inst_addr))) {
-            new_addr->from_main = IMG_IsMainExecutable(IMG_FindByAddress(inst_addr));
-        } else {
-            new_addr->from_main = 0;
-        }
         param->push_front(new_addr);
     }
 
@@ -168,7 +159,7 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
     return;
 }
 
-VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump, ADDRINT inst_addr) {
+VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     
     trace_enter();
 
@@ -184,7 +175,7 @@ VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump, ADDRINT inst_addr) {
     }
     PIN_UnlockClient();
 
-    fn_call(ctxt, fid, is_jump, inst_addr);
+    fn_call(ctxt, fid, is_jump);
 
     trace_leave();
     return;
@@ -270,19 +261,17 @@ VOID Instruction(INS ins, VOID *v) {
     if (!init)
         Commence();
 
-    ADDRINT inst_addr = INS_Address(ins);
-
     if (INS_IsCall(ins)) {
         if (INS_IsDirectCall(ins)) {
             ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
             FID fid = fn_lookup_by_address(addr);
+
             INS_InsertCall(ins, 
                         IPOINT_BEFORE, 
                         (AFUNPTR) fn_call, 
                         IARG_CONST_CONTEXT,
                         IARG_UINT32, fid, 
                         IARG_BOOL, false,
-                        IARG_ADDRINT, inst_addr,
                         IARG_END);
         } 
         else {
@@ -292,7 +281,6 @@ VOID Instruction(INS ins, VOID *v) {
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_BOOL, false,
-                        IARG_ADDRINT, inst_addr,
                         IARG_END);
         }
     }
@@ -305,7 +293,6 @@ VOID Instruction(INS ins, VOID *v) {
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
-                    IARG_ADDRINT, inst_addr,
                     IARG_END);
         }
     }
@@ -390,8 +377,16 @@ VOID Fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
+    std::cout << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+
     /* First, we log the conversion table fid <-> name */
-    log_ftable(ofile);
+
+    FID fid = 1;
+    ofile << _fn_nb - 1 << endl;
+    while (fid < _fn_nb) {
+        ofile << fn_img(fid) << ":" << fn_imgaddr(fid) << ":" << fn_name(fid) << endl; 
+        fid++;
+    }
 
     it = param->rbegin();
 
@@ -399,8 +394,7 @@ VOID Fini(INT32 code, VOID *v) {
     ofile << sizeof((*it)->val) << ":";
     ofile << sizeof((*it)->fid) << ":";
     ofile << sizeof((*it)->pos) << ":";
-    ofile << sizeof((*it)->counter) << ":";
-    ofile << sizeof((*it)->from_main) << endl;
+    ofile << sizeof((*it)->counter) << endl;
 
     while (it != param->rend()) {
         param_t *p = *it;
@@ -416,8 +410,7 @@ VOID Fini(INT32 code, VOID *v) {
         ofile.write((char *) &(p->fid), sizeof(p->fid));
         ofile.write((char *) &(p->pos), sizeof(p->pos));
         ofile.write((char *) &(p->counter), sizeof(p->counter));
-        ofile.write((char *) &(p->from_main), sizeof(p->from_main));
-//        std::cerr << p->val << ":" << p->fid << ":" << p->pos << ":" << p->counter << endl;
+        // ofile << p->val << ":" << p->fid << ":" << p->pos << ":" << p->counter << endl;
     }
     ofile.close();
 
@@ -443,7 +436,7 @@ int main(int argc, char * argv[]) {
 
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
-    
+
     // INS_AddInstrumentFunction(Instruction, 0);
     INS_AddInstrumentFunction(Instruction, 0);
 
@@ -455,7 +448,7 @@ int main(int argc, char * argv[]) {
        application exits */
     PIN_AddFiniFunction(Fini, 0);
 
-    PIN_StartProgram();
+    // PIN_StartProgram();
     
     return 0;
 }

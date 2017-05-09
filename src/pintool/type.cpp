@@ -391,6 +391,7 @@ VOID Instruction(INS ins, VOID *v) {
         }
     }
 
+#if 1
     if (INS_IsIndirectBranchOrCall(ins)) {
         if (! INS_IsCall(ins)) {
             INS_InsertCall(ins,
@@ -402,6 +403,7 @@ VOID Instruction(INS ins, VOID *v) {
                     IARG_END);
         }
     }
+#endif
 
     if (INS_IsRet(ins)) {
         INS_InsertCall(ins,

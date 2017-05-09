@@ -431,17 +431,21 @@ VOID instrument_instruction(INS ins, VOID *v) {
             nb_param = nb_param_int_stack;
             nb_param_count = PARAM_INT_STACK_COUNT;
         }
-
+        nb_param = nb_param;
+        nb_param_count = nb_param_count;
+#if 1
         INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR) stack_read,
                 IARG_MEMORYREAD_EA,
                 IARG_MEMORYREAD_SIZE,
                 IARG_PTR, nb_param,
                 IARG_UINT32, nb_param_count,
                 IARG_END);
+#endif
     }
 
     if (INS_IsCall(ins)) {
-        if (INS_IsDirectCall(ins)) {
+        if (INS_IsDirectCall(ins)) { //  || (vOPCode != XED_ICLASS_CALL_FAR)) {
+#if 1
             ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
             FID fid = fn_lookup_by_address(addr);
             if (fid == FID_UNKNOWN) {
@@ -458,8 +462,9 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IARG_UINT32, fid,
                         IARG_BOOL, false,
                         IARG_END);
-        }
-        else {
+#endif
+        } else {
+#if 1
             INS_InsertCall(ins,
                         IPOINT_BEFORE,
                         (AFUNPTR) fn_indirect_call,
@@ -467,11 +472,20 @@ VOID instrument_instruction(INS ins, VOID *v) {
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_BOOL, false,
                         IARG_END);
+#endif
         }
     }
 
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins)) {
+#if 1
+    if (INS_IsIndirectBranchOrCall(ins) && !INS_IsFarCall(ins) && !INS_IsFarJump(ins) && !INS_IsFarRet(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins) 
+                /* This condition fixes runtime crash of pin on some programs
+                   (e.g. git) -- but I am not sure it is a correct answer, it 
+                   might have bad effects on the results of inference */
+#if 1
+                    && (INS_Category(ins) != XED_CATEGORY_COND_BR)
+#endif
+                    ) {
                 INS_InsertCall(ins,
                         IPOINT_BEFORE,
                         (AFUNPTR) fn_indirect_call,
@@ -482,6 +496,7 @@ VOID instrument_instruction(INS ins, VOID *v) {
             
         }
     }
+#endif
     if (INS_IsRet(ins)) {
         INS_InsertCall(ins,
                     IPOINT_BEFORE,

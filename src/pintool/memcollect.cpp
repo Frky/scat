@@ -16,7 +16,6 @@
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
-#include "log/ftable.h"
 
 #define NB_FN_MAX               100000
 #define MAX_DEPTH               1000
@@ -44,16 +43,18 @@ unsigned int nb_fn = 0;
 typedef struct {
     ADDRINT val;
     UINT64 fid;
-    UINT64 caller;
     UINT64 counter;
+    bool is_addr;
     UINT32 pos;
-    BOOL from_main;
 } param_t;
 
 unsigned int *nb_p;
 bool **param_addr;
 bool *is_instrumented;
-list<param_t *> *param;
+list<param_t *> *param_in;
+list<param_t *> *param_out;
+
+bool *pushed_in_log;
 
 bool init = false;
 
@@ -111,11 +112,10 @@ ADDRINT val_from_reg(CONTEXT *ctxt, unsigned int pid) {
 }
 
 
-VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
+VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
     
     trace_enter();
 
-    FID caller = call_stack.top();
     call_stack.push(fid);
     is_jump_stack.push(is_jump);
     counter += 1;
@@ -128,22 +128,16 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
     }
 
     for (unsigned int i = 1; i <= nb_p[fid]; i++) {
-        if (param_addr[fid][i]) {
-            param_t *new_param = (param_t *) malloc(sizeof(param_t));
-            new_param->fid = fid;
-            new_param->caller = caller;
-            new_param->counter = counter;
-            new_param->val = val_from_reg(ctxt, i); 
-            new_param->pos = i;
-            if (IMG_Valid(IMG_FindByAddress(inst_addr))) {
-                if (IMG_IsMainExecutable(IMG_FindByAddress(inst_addr)))
-                new_param->from_main = IMG_IsMainExecutable(IMG_FindByAddress(inst_addr));
-            } else {
-                new_param->from_main = 1;
-            }
-            param->push_front(new_param);
-            param_pushed = true;
-        }
+        if (!param_addr[fid][i])
+            continue;
+        param_t *new_param = (param_t *) malloc(sizeof(param_t));
+        new_param->fid = fid;
+        new_param->counter = counter;
+        new_param->val = val_from_reg(ctxt, i); 
+        new_param->is_addr = param_addr[fid][i];
+        new_param->pos = i;
+        param_in->push_front(new_param);
+        param_pushed = true;
     }
 
     /* If the function is instrumented (ie for instance has an ADDR as
@@ -152,23 +146,18 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
     if (!param_pushed) {
         param_t *new_addr = (param_t *) malloc(sizeof(param_t));
         new_addr->fid = fid;
-        new_addr->caller = caller;
         new_addr->counter = counter;
-        new_addr->val = 0; 
-        new_addr->pos = 99;
-        if (IMG_Valid(IMG_FindByAddress(inst_addr))) {
-            new_addr->from_main = IMG_IsMainExecutable(IMG_FindByAddress(inst_addr));
-        } else {
-            new_addr->from_main = 0;
-        }
-        param->push_front(new_addr);
+        new_addr->val = 0; // val_from_reg(ctxt, i); 
+        new_addr->pos = 0;
+        new_addr->is_addr = false; // true;
+        param_in->push_front(new_addr);
     }
 
     trace_leave();
     return;
 }
 
-VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump, ADDRINT inst_addr) {
+VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump) {
     
     trace_enter();
 
@@ -184,7 +173,7 @@ VOID fn_icall(CONTEXT* ctxt, ADDRINT target, bool is_jump, ADDRINT inst_addr) {
     }
     PIN_UnlockClient();
 
-    fn_call(ctxt, fid, is_jump, inst_addr);
+    fn_call(ctxt, fid, is_jump);
 
     trace_leave();
     return;
@@ -198,35 +187,28 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
     if (!call_stack.is_top_forgotten()) {
         while (is_jump_stack.top()) {
             FID fid = call_stack.top();
-            call_stack.pop();
-            is_jump_stack.pop();
-            FID caller = call_stack.top();
             if (is_instrumented[fid]) {
                 param_t *new_ret = (param_t *) malloc(sizeof(param_t));
                 new_ret->fid = fid;
                 new_ret->counter = counter;
-                new_ret->caller = caller; 
-                if (param_addr[fid][0])
-                    new_ret->val = val_from_reg(ctxt, 0); 
-                else
-                    new_ret->val = 1;
-                new_ret->pos = 0;
-                param->push_front(new_ret);
+                new_ret->val = val_from_reg(ctxt, 0); 
+                new_ret->is_addr = param_addr[fid][0];
+                param_out->push_front(new_ret);
             }
+            call_stack.pop();
+            is_jump_stack.pop();
         }
         FID fid = call_stack.top();
-        call_stack.pop();
-        is_jump_stack.pop();
-            FID caller = call_stack.top();
         if (is_instrumented[fid]) {
             param_t *new_ret = (param_t *) malloc(sizeof(param_t));
             new_ret->fid = fid;
             new_ret->counter = counter;
-            new_ret->caller = caller; 
             new_ret->val = val_from_reg(ctxt, 0); 
-            new_ret->pos = 0;
-            param->push_front(new_ret);
+            new_ret->is_addr = param_addr[fid][0];
+            param_out->push_front(new_ret);
         }
+        call_stack.pop();
+        is_jump_stack.pop();
     }
 
     trace_leave();
@@ -246,6 +228,8 @@ void fn_registered(
     nb_p[fid] = nb_param;
     /* Set the array of booleans indicating which parameter is an ADDR */
     param_addr[fid] = (bool *) calloc(nb_p[fid], sizeof(bool));
+
+    pushed_in_log[fid] = false;
 
     /* Is this function instrumented?*/
     is_instrumented[fid] = false;
@@ -270,19 +254,17 @@ VOID Instruction(INS ins, VOID *v) {
     if (!init)
         Commence();
 
-    ADDRINT inst_addr = INS_Address(ins);
-
     if (INS_IsCall(ins)) {
         if (INS_IsDirectCall(ins)) {
             ADDRINT addr = INS_DirectBranchOrCallTargetAddress(ins);
             FID fid = fn_lookup_by_address(addr);
+
             INS_InsertCall(ins, 
                         IPOINT_BEFORE, 
                         (AFUNPTR) fn_call, 
                         IARG_CONST_CONTEXT,
                         IARG_UINT32, fid, 
                         IARG_BOOL, false,
-                        IARG_ADDRINT, inst_addr,
                         IARG_END);
         } 
         else {
@@ -292,7 +274,6 @@ VOID Instruction(INS ins, VOID *v) {
                         IARG_CONST_CONTEXT,
                         IARG_BRANCH_TARGET_ADDR,
                         IARG_BOOL, false,
-                        IARG_ADDRINT, inst_addr,
                         IARG_END);
         }
     }
@@ -305,7 +286,6 @@ VOID Instruction(INS ins, VOID *v) {
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
-                    IARG_ADDRINT, inst_addr,
                     IARG_END);
         }
     }
@@ -382,7 +362,9 @@ VOID Fini(INT32 code, VOID *v) {
 
     trace_enter();
 
-    list<param_t *>::reverse_iterator it;
+    list<param_t *>::reverse_iterator it_in, it_out;
+    it_in = param_in->rbegin();
+    it_out = param_out->rbegin();
 
     int depth = 0;
     UINT64 last_date = -1;
@@ -390,21 +372,29 @@ VOID Fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
-    /* First, we log the conversion table fid <-> name */
-    log_ftable(ofile);
+    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
 
-    it = param->rbegin();
-
-    /* Size of fields of structure */
-    ofile << sizeof((*it)->val) << ":";
-    ofile << sizeof((*it)->fid) << ":";
-    ofile << sizeof((*it)->pos) << ":";
-    ofile << sizeof((*it)->counter) << ":";
-    ofile << sizeof((*it)->from_main) << endl;
-
-    while (it != param->rend()) {
-        param_t *p = *it;
-        it++;
+    while (it_in != param_in->rend() || it_out != param_out->rend()) {
+        param_t *p;
+        if (it_in == param_in->rend()) {
+            p = *it_out;
+            it_out++;
+            is_in = false;
+        } else if (it_out == param_out->rend() || (*it_out)->counter >= (*it_in)->counter) {
+            p = *it_in;
+            it_in++;
+            is_in = true;
+        } else {
+            p = *it_out;
+            it_out++;
+            is_in = false;
+        }
+#if 0
+        if (p->is_addr)
+            ofile << "a:";
+        else 
+            ofile << "n:";
+#endif
         if (last_date != p->counter) {
             if (is_in)
                 depth++;
@@ -412,12 +402,22 @@ VOID Fini(INT32 code, VOID *v) {
                 depth--;
         }
         last_date = p->counter;
-        ofile.write((char *) &(p->val), sizeof(p->val)); 
-        ofile.write((char *) &(p->fid), sizeof(p->fid));
-        ofile.write((char *) &(p->pos), sizeof(p->pos));
-        ofile.write((char *) &(p->counter), sizeof(p->counter));
-        ofile.write((char *) &(p->from_main), sizeof(p->from_main));
-//        std::cerr << p->val << ":" << p->fid << ":" << p->pos << ":" << p->counter << endl;
+        char head = 0x00;
+        /* Construct the first byte */
+        /* First two bits are for i/o  and addr/not addr */
+        head |= 0x80 & ((is_in?1:0) << 7);
+        head |= 0x40 & ((p->is_addr?1:0) << 6);
+        /* Then we encode the position of the parameter */
+        head |= 0x3F & p->pos;
+        if (!pushed_in_log[p->fid]) {
+            ofile << '\xff' << p->fid << ":" <<  fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << endl;
+            pushed_in_log[p->fid] = true;
+        }
+        ofile << head;
+        ofile << p->fid << ":" << p->counter << ":" << p->val << endl;
+#if 0
+        ofile << p->val << ":" << fn_img(p->fid) << ":" << fn_imgaddr(p->fid) << ":" << fn_name(p->fid) << ":" << p->pos << ":" << p->counter << endl;
+#endif
     }
     ofile.close();
 
@@ -432,7 +432,9 @@ int main(int argc, char * argv[]) {
     param_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
     is_instrumented = (bool *) calloc(NB_FN_MAX, sizeof(bool));
     nb_p = (unsigned int *) calloc(NB_FN_MAX, sizeof(unsigned int));
-    param = new list<param_t *>();
+    param_in = new list<param_t *>();
+    param_out = new list<param_t *>();
+    pushed_in_log = (bool *) calloc(NB_FN_MAX, sizeof(bool));
 
     /* Initialize symbol table code, 
        needed for rtn instrumentation */
