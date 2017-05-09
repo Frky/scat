@@ -1,7 +1,5 @@
 #-*- coding: utf-8 -*-
 
-# import glob
-# import sys
 from cmd2 import Cmd
 from confiture import Confiture, ConfigFileError
 # from datetime import datetime

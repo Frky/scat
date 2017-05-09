@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+import traceback
+
 from .i_command import ICommand
 
 from src.shell.memory.memcomb import MemComb
@@ -24,4 +26,8 @@ class MemCombCmd(ICommand):
         libraries = len(s) > 1 and s[1] == "--lib"
         proto_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=True)
         mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
-        MemComb(mem_logfile, proto_logfile, self.out, s[0]).run(libraries=libraries)
+        try:
+            MemComb(mem_logfile, proto_logfile, self.out, s[0]).run(libraries=libraries)
+        except Exception as e:
+            traceback.print_exc()
+            raise e
