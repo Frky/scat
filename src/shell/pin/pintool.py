@@ -55,7 +55,8 @@ class Pintool(object):
     def __str__(self):
         return self.__name
 
-    def __log(self, msg):
+    def __log(self, msg, *args, **kwargs):
+        #TODO
         print msg
 
     @property

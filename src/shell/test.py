@@ -6,7 +6,6 @@ from src.shell.data.data import Data
 class ScatTest(object):
     
     def __init__(self, *args, **kwargs):
-        self.out = kwargs["log"]
         self.__config = kwargs["clang"]
         self.__accuracy = {"arity": list(), "type": list()}
 
@@ -26,6 +25,9 @@ class ScatTest(object):
                     tot, 
                     ok*100.0/tot
                 )
+
+    def out(self, m):
+        print m
 
     def test_all(self, p_arity, p_type, config):
         conf = Confiture("config/templates/test.yaml")
