@@ -217,7 +217,7 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
         FID fid = call_stack.top();
         call_stack.pop();
         is_jump_stack.pop();
-            FID caller = call_stack.top();
+        FID caller = call_stack.top();
         if (is_instrumented[fid]) {
             param_t *new_ret = (param_t *) malloc(sizeof(param_t));
             new_ret->fid = fid;
@@ -250,14 +250,19 @@ void fn_registered(
     /* Is this function instrumented?*/
     is_instrumented[fid] = false;
 
+
+
+    if (fid == FID_UNKNOWN) return;
+
     /* Iteration on parameters */
     for (unsigned int i = 0; i <= nb_p[fid]; i++) {
         if (type_param[i]) {
             param_addr[fid][i] = true;
             is_instrumented[fid] = true;
         }
-        else
+        else {
             param_addr[fid][i] = false;
+        }
     }
 
     trace_leave();
