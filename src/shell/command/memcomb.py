@@ -27,7 +27,7 @@ class MemCombCmd(ICommand):
         proto_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=True)
         mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
         try:
-            MemComb(mem_logfile, proto_logfile, self.out, s[0]).run(libraries=libraries)
+            MemComb(mem_logfile, proto_logfile, self.stdout, s[0]).run(libraries=libraries)
         except Exception as e:
             traceback.print_exc()
             raise e

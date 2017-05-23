@@ -109,3 +109,19 @@ def get_pgm_and_inf(s, pintools, logdir):
     pintool = pintools[args[1]]
     return pgm, pintool
 
+
+def list_split(l, e):
+    res = list()
+    curr = list()
+    if l.count(e) == 0:
+        return l
+    for a in l[l.index(e):]:
+        if a != e:
+            curr.append(a)
+        elif len(curr) > 0:
+            res.append(curr)
+            curr = list()
+    if len(curr) > 0:
+        res.append(curr)
+    return res
+

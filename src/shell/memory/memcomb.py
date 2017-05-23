@@ -6,6 +6,7 @@ from random import randint
 from src.shell.callstack import CallStack
 from src.shell.parser.type import TypeLogParser
 from src.shell.parser.memalloc import MemallocParser
+from src.shell.utils import list_split
 from .addrtable import AddrTable
 from .memory import Memory
 
