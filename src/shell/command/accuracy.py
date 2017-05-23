@@ -29,8 +29,12 @@ class AccuracyCmd(ICommand):
         except ValueError as e:
             raise e
         except KeyError:
-            self.stderr("Pintool error")
+            self.stderr("Pintool \"{}\" not found".format(s.split(" ")[1]))
             return
+        except TypeError:
+            self.stderr('Wrong argument(s) detected')
+            return
+
         # Check CLANG configuration
         config = Confiture("config/templates/clang.yaml").check_and_get("config/config.yaml")
         try:

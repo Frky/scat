@@ -70,11 +70,16 @@ class LaunchCmd(ICommand):
                 binary = arg
             else:
                 args.append(arg)
+
         # Check the binary (exists? is executable?)
         try:
             checkpath(binary, isdir=False, isexec=True)
         except ValueError:
             return
+        except UnboundLocalError:
+            self.stderr('Missing binary program name as argument')
+            return
+
         # Run inference
         self.stdout("Launching {0} inference on {1}".format(p, binary))
         p.launch(binary, args)
