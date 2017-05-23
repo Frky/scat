@@ -6,7 +6,6 @@ from src.shell.couple.couple import Couple
 
 class CoupleCmd(ICommand):
     """
-
     """
 
     def __init__(self, pintools, *args, **kwargs):

@@ -35,7 +35,7 @@ class ICommand(object):
 
     @abstractmethod
     def help(self, *args, **kwargs):
-        raise NotImplemented
+        print(self.__doc__.replace("\n"+8*" ","\n")[1:-5])
 
     @abstractmethod
     def complete(self, text, line, begidx, endidx):

@@ -4,16 +4,15 @@ from .i_command import ICommand
 
 class MakeCmd(ICommand):
     """
-        (Re)compile pintools. With no argument, this command recompiles
-        every pintool registered.
+        usage: make [OPTION] [pintool1 pintool2 ..]
 
-        You can also specify the pintools you want to compile (e.g. make arity type)
+        Optional arguments:
+            pintool1, pintool2, etc.: list of pintools to compile
+            -t, --trace: compile enabling trace messages at execution
+            -d, --debug: compile enabling debug messages at execution
+            -f, --force, -B: force recompilation
 
-        Options:
-            -f: force recompilation
-            -d: compile enabling debug messages at execution
-            -t: compile enabling trace messages at execution
-
+        If there is no pintool specified, compile all the pintools.
     """
 
     def __init__(self, pintools, *args, **kwargs):
@@ -57,4 +56,3 @@ class MakeCmd(ICommand):
         # Compile pintools
         for p in to_compile:
             p.compile(force, debug, trace)
-

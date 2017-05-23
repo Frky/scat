@@ -5,8 +5,12 @@ from .i_command import ICommand
 
 class DisplayCmd(ICommand):
     """
-        Display results of inference
+        usage: display [program (arity | type)]
 
+            program: program you have previously analysed
+
+        Display results of inference
+        If no argument is given, display all the eligible programs.
     """
 
     def __init__(self, pintools, logdir, *args, **kwargs):
@@ -33,4 +37,3 @@ class DisplayCmd(ICommand):
             if line.find(p) >= 0:
                 return [i for i in inf if i.startswith(text)]
         return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
-

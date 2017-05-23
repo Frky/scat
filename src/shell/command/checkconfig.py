@@ -5,10 +5,11 @@ from src.shell.utils import checkpath
 
 class CheckConfigCmd(ICommand):
     """
+        usage: checkconfig
+
         Check the configuration file, and in particular:
             - the log directory (path, permissions)
             - pin (path, permissions)
-
     """
 
     def __init__(self, logdir, pinpath, *args, **kwargs):
@@ -27,8 +28,3 @@ class CheckConfigCmd(ICommand):
             self.stderr("check configuration failed -- aborting")
             return
         self.stdout("Configuration seems ok")
-
-    def help(self, *args, **kwargs):
-        # print(self.do_setlogdir.__doc__.replace("\n", ""))
-        raise NotImplemented
-

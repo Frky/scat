@@ -8,9 +8,13 @@ from .i_command import ICommand
 
 class AccuracyCmd(ICommand):
     """
+        usage: accuracy [program (arity | type)]
+        \tprogram: the program you have previously analysed
+
         Analyse the results of inference for a given program,
         by comparison with binary and source code.
-
+        Requires parsedata.
+        If no argument is given, display all the eligible programs.
     """
 
     def __init__(self, pintools, logdir, *args, **kwargs):
@@ -45,4 +49,3 @@ class AccuracyCmd(ICommand):
             if line.find(p) >= 0:
                 return [i for i in inf if i.startswith(text)]
         return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
-

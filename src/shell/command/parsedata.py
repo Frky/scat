@@ -8,8 +8,11 @@ from src.shell.data.data import Data
 
 class ParseDataCmd(ICommand):
     """
-        Parse source code to test inference results
+        usage: parsedata program src
 
+        Non-optional arguments:
+            program: program of which you want to analyse source code
+            src: directory of the program's source code
     """
 
     def __init__(self, *args, **kwargs):

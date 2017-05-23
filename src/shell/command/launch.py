@@ -5,7 +5,19 @@ from src.shell.utils import complete_bin, complete_path, checkpath
 
 class LaunchCmd(ICommand):
     """
+        usage: launch [OPTION?] pintool program [args]
 
+        Non-optional arguments:
+            pintool: pintool you want to use
+            program: program you want to analyse
+
+
+        Optional arguments:
+            args: arguments of the program analysed
+            -t, --trace:  <TODO>
+            -d, --debug:  <TODO>
+            -f, --force, -B:  <TODO>
+            -r, --release:  <TODO>
     """
 
     def __init__(self, pintools, *args, **kwargs):
@@ -77,4 +89,3 @@ class LaunchCmd(ICommand):
             return complete_bin(text, line, begidx, endidx)
         else:
             return  complete_path(text, line, begidx, endidx)
-
