@@ -79,7 +79,7 @@ class Data(object):
 
         for dep in self.deps:
             dep_data = Data(self.dstdir, dep)
-            dep_data.load(False, verbose=verbose)
+            dep_data.load(False, verbose=verbose, main_pgm=False)
             self.protos.update(dep_data.protos)
 
         self.protos_without_libs = dict()
