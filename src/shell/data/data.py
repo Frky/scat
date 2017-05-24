@@ -23,7 +23,7 @@ class Data(object):
         return self.dstdir + "/" + self.pgm + ext
 
 
-    def load(self, add_hardcoded=True, verbose=True):
+    def load(self, add_hardcoded=True, verbose=True, main_pgm=True):
         self.deps = []
         self.protos = dict()
 
@@ -32,12 +32,14 @@ class Data(object):
             self.deps = pickle.load(open(deps_path, "rb"))
             for dep in self.deps:
                 dep_data = Data(self.dstdir, dep)
-                dep_data.load(False, verbose=verbose)
+                dep_data.load(False, verbose=verbose, main_pgm=False)
                 self.protos.update(dep_data.protos)
 
         data_path = self.__path(".data")
         if os.path.exists(data_path):
             self.protos_without_libs = pickle.load(open(data_path, "rb"))
+        elif main_pgm:
+            raise IOError
         else:
             self.protos_without_libs = dict()
             if verbose:
