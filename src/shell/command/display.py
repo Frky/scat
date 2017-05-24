@@ -26,7 +26,7 @@ class DisplayCmd(ICommand):
             return
         except KeyError:
             #TODO explicit message (w/ pintool and binary details)
-            self.stderr("Pintool error")
+            self.stderr("Pintool \"{}\" not found".format(s.split(" ")[1]))
             return
 
         pintool.get_analysis(pgm).display()
