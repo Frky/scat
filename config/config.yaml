@@ -41,6 +41,7 @@ clang:
     data-path: ./data/
 
 test:
+    desc: test/test.yaml
     proto:
         root: ./test/proto
         src: ./test/proto/src

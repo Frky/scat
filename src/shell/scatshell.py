@@ -17,6 +17,8 @@ from src.shell.command.accuracy import AccuracyCmd
 from src.shell.command.launch import LaunchCmd
 from src.shell.command.memcomb import MemCombCmd
 from src.shell.command.couple import CoupleCmd
+from src.shell.command.test import TestCmd
+from src.shell.command.mismatch import MismatchCmd
 
 from src.shell.pin.pintool import Pintool
 # from src.shell.test import ScatTest
@@ -86,6 +88,10 @@ class ScatShell(Cmd):
                                         pintools=self.__pintools,
                                         logdir=self.__logdir,
                                     )
+        self.__cmds["mismatch"] = MismatchCmd(
+                                        pintools=self.__pintools,
+                                        logdir=self.__logdir,
+                                    )
         self.__cmds["launch"] = LaunchCmd(
                                         pintools=self.__pintools,
                                     )
@@ -94,6 +100,11 @@ class ScatShell(Cmd):
                                     )
         self.__cmds["memcomb"] = MemCombCmd(
                                         pintools=self.__pintools,
+                                    )
+        self.__cmds["test"] = TestCmd(
+                                        test_conf=self.__config["test"]["desc"],
+                                        pintools=self.__pintools,
+                                        logdir=self.__logdir,
                                     )
 
         # Link methods to scat shell
@@ -176,41 +187,6 @@ class ScatShell(Cmd):
 #         self.test.test_all(self.__pintools["arity"], self.__pintools["type"], s)
 # 
 # 
-#     #========== mismatch ==========#
-# 
-#     def help_mismatch(self):
-#         print(self.do_accuracy.__doc__.replace("\n", ""))
-# 
-#     def complete_mismatch(self, text, line, begidx, endidx):
-#         return self.complete_display(text, line, begidx, endidx)
-# 
-#     def do_mismatch(self, s):
-#         """
-#             Displays all mismatch for a given program,
-#             by comparison with binary and source code.
-# 
-#         """
-#         try:
-#             pgm, pintool = self.__get_pgm_and_inf(s)
-#         except ValueError:
-#             return
-#         except KeyError:
-#             #TODO explicit message (w/ pintool and binary details)
-#             self.stderr("Pintool error")
-# 
-#         # Check CLANG configuration
-#         conf = Confiture("config/templates/clang.yaml")
-#         conf.check("config/config.yaml")
-#         try:
-#             data = Data(self.config["clang"]["data-path"], pgm)
-#             data.load()
-#         except IOError:
-#             data = None
-#         if data is None:
-#             self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
-#             return
-# 
-#         pintool.get_analysis(pgm, data).mismatch()
 # 
 #     #========== new pintool ==========#
 # 

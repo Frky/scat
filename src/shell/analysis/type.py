@@ -166,7 +166,7 @@ class TypeAnalysis(Analysis):
             print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
             print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
         if get:
-            return (params_ok + return_ok, params_total + return_total)
+            return (params_ok, return_ok, params_total, return_total)
 
     def mismatch(self):
         self.print_general_info()

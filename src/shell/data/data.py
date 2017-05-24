@@ -103,6 +103,7 @@ class Data(object):
         self.__hardcoded_glibc_proto('bzero', ['void', 'void*', 'int'])
         self.__hardcoded_glibc_proto('write', ['int', 'int', 'void*', 'int'])
 
+        self.__hardcoded_glibc_proto('malloc', ['void*', 'int'])
         self.__hardcoded_glibc_proto('memchr', ['void*', 'void*', 'int', 'int'])
         self.__hardcoded_glibc_proto('memrchr', ['void*', 'void*', 'int', 'int'])
         self.__hardcoded_glibc_proto('rawmemchr', ['void*', 'void*', 'int', 'int'])

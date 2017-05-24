@@ -10,11 +10,11 @@
 
 #include "pin.H"
 
-#define NB_CALLS_TO_CONCLUDE    10
+#define NB_CALLS_TO_CONCLUDE    20
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
 #define PARAM_THRESHOLD         0.10
-#define RETURN_THRESHOLD        0.05
+#define RETURN_THRESHOLD        0.10
 
 #define PARAM_INT_COUNT          6
 #define PARAM_INT_STACK_COUNT   10

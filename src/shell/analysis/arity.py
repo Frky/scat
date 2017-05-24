@@ -9,7 +9,6 @@ class ArityAnalysis(Analysis):
 
     def __init__(self, pgm, logfile, data=None):
         Analysis.__init__(self, pgm, logfile)
-
         self.data = data
         if data == None:
             self.protos = None
@@ -20,8 +19,14 @@ class ArityAnalysis(Analysis):
         self.log = ArityLogParser(self.logfile)
         return
 
+    def get_one_arity(self, proto):
+        return len(proto) - 1
+
     def check_one_arity(self, fname, ar, proto):
         return ar == len(proto) - 1
+
+    def get_one_ret(self, proto):
+        return (proto[0] != "void")
 
     def check_one_ret(self, fname, ret, proto):
         return (ret > 0) == (proto[0] != "void")
@@ -51,6 +56,10 @@ class ArityAnalysis(Analysis):
         total = 0
         ok_ar = 0
         ok_ret = 0
+        more = 0
+        less = 0
+        out_more = 0
+        out_less = 0
         for function, arity in self.log.get():
             fn = function.split(":")[-1]
             int_ar, int_stack_ar, float_ar, float_stack_ar, ret = arity
@@ -71,11 +80,20 @@ class ArityAnalysis(Analysis):
                 continue
 
             total += 1
-            if self.check_one_arity(fn, ar, proto):
+            real_ar = self.get_one_arity(proto)
+            if real_ar == ar:
                 ok_ar += 1
+            elif real_ar > ar:
+                less += 1
+            else:
+                more += 1
 
-            if self.check_one_ret(fn, ret, proto):
+            if ret and self.get_one_ret(proto):
                 ok_ret += 1
+            elif ret:
+                out_more += 1
+            else: 
+                out_less += 1
 
         if verbose:
             print("Ignored")
@@ -92,7 +110,7 @@ class ArityAnalysis(Analysis):
             print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
 
         if get:
-            return (ok_ar + ok_ret, 2*total)
+            return (ok_ar, ok_ret, more, less, out_more, out_less, total)
 
     def mismatch(self):
         self.print_general_info()

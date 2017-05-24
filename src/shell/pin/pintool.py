@@ -56,8 +56,8 @@ class Pintool(object):
         return self.__name
 
     def __log(self, msg, *args, **kwargs):
-        #TODO
-        print msg
+        if "verbose" in kwargs.keys() and kwargs["verbose"]:
+            print msg
 
     @property
     def prev_step(self):

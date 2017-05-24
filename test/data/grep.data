@@ -1,0 +1,15200 @@
+(dp0
+S'name_to_handle_at'
+p1
+(lp2
+S'int'
+p3
+aS'int'
+p4
+aS'const char *'
+p5
+aS'struct file_handle *'
+p6
+aS'int *'
+p7
+aS'int'
+p8
+asS'wcsftime'
+p9
+(lp10
+S'int'
+p11
+aS'int *restrict'
+p12
+aS'int'
+p13
+aS'const int *restrict'
+p14
+aS'const struct tm *restrict'
+p15
+asS'close_stdout_set_ignore_EPIPE'
+p16
+(lp17
+S'void'
+p18
+aS'int'
+p19
+asS'wctomb'
+p20
+(lp21
+S'int'
+p22
+aS'char *'
+p23
+aS'int'
+p24
+asS'getc_unlocked'
+p25
+(lp26
+S'int'
+p27
+aS'struct _IO_FILE *'
+p28
+asS'sleep'
+p29
+(lp30
+S'unsigned int'
+p31
+aS'unsigned int'
+p32
+asS'pthread_condattr_getpshared'
+p33
+(lp34
+S'int'
+p35
+aS'const pthread_condattr_t *restrict'
+p36
+aS'int *restrict'
+p37
+asS'isprint'
+p38
+(lp39
+S'int'
+p40
+aS'int'
+p41
+asS'group_member'
+p42
+(lp43
+S'int'
+p44
+aS'unsigned int'
+p45
+asS'pthread_key_delete'
+p46
+(lp47
+S'int'
+p48
+aS'unsigned int'
+p49
+asS'iconv'
+p50
+(lp51
+S'int'
+p52
+aS'void *'
+p53
+aS'char **restrict'
+p54
+aS'int *restrict'
+p55
+aS'char **restrict'
+p56
+aS'int *restrict'
+p57
+asS'wcsncasecmp'
+p58
+(lp59
+S'int'
+p60
+aS'const int *'
+p61
+aS'const int *'
+p62
+aS'int'
+p63
+asS'swab'
+p64
+(lp65
+S'void'
+p66
+aS'const void *restrict'
+p67
+aS'void *restrict'
+p68
+aS'long'
+p69
+asS'pthread_attr_getscope'
+p70
+(lp71
+S'int'
+p72
+aS'const union pthread_attr_t *restrict'
+p73
+aS'int *restrict'
+p74
+asS'mdir_name'
+p75
+(lp76
+S'char *'
+p77
+aS'const char *'
+p78
+asS'nlscan'
+p79
+(lp80
+S'void'
+p81
+aS'const char *'
+p82
+asS'umask'
+p83
+(lp84
+S'unsigned int'
+p85
+aS'unsigned int'
+p86
+asS'qecvt'
+p87
+(lp88
+S'char *'
+p89
+aS'long double'
+p90
+aS'int'
+p91
+aS'int *restrict'
+p92
+aS'int *restrict'
+p93
+asS'memchr2'
+p94
+(lp95
+S'void *'
+p96
+aS'const void *'
+p97
+aS'int'
+p98
+aS'int'
+p99
+aS'int'
+p100
+asS'addlists'
+p101
+(lp102
+S'char **'
+p103
+aS'char **'
+p104
+aS'char **'
+p105
+asS'build_state'
+p106
+(lp107
+S'void'
+p108
+aS'int'
+p109
+aS'struct dfa *'
+p110
+asS'__getpgid'
+p111
+(lp112
+S'int'
+p113
+aS'int'
+p114
+asS'leave_dir'
+p115
+(lp116
+S'void'
+p117
+aS'int *'
+p118
+aS'int *'
+p119
+asS'futimens'
+p120
+(lp121
+S'int'
+p122
+aS'int'
+p123
+aS'struct timespec const[2]'
+p124
+asS'__fxstat'
+p125
+(lp126
+S'int'
+p127
+aS'int'
+p128
+aS'int'
+p129
+aS'struct stat *'
+p130
+asS'localtime'
+p131
+(lp132
+S'struct tm *'
+p133
+aS'const long *'
+p134
+asS'rand_r'
+p135
+(lp136
+S'int'
+p137
+aS'unsigned int *'
+p138
+asS'getpt'
+p139
+(lp140
+S'int'
+p141
+asS'iswupper_l'
+p142
+(lp143
+S'int'
+p144
+aS'unsigned int'
+p145
+aS'struct __locale_struct *'
+p146
+asS'calc_eclosure'
+p147
+(lp148
+S'reg_errcode_t'
+p149
+aS'int *'
+p150
+asS'ctime_r'
+p151
+(lp152
+S'char *'
+p153
+aS'const long *restrict'
+p154
+aS'char *restrict'
+p155
+asS'mkstemps'
+p156
+(lp157
+S'int'
+p158
+aS'char *'
+p159
+aS'int'
+p160
+asS'wcstoll'
+p161
+(lp162
+S'long long'
+p163
+aS'const int *restrict'
+p164
+aS'int **restrict'
+p165
+aS'int'
+p166
+asS'verify_func'
+p167
+(lp168
+S'void'
+p169
+aS'int'
+p170
+asS'getppid'
+p171
+(lp172
+S'int'
+p173
+asS'longest_relative_suffix'
+p174
+(lp175
+S'const char *'
+p176
+aS'const char *'
+p177
+asS'getloadavg'
+p178
+(lp179
+S'int'
+p180
+aS'double []'
+p181
+aS'int'
+p182
+asS'iswblank_l'
+p183
+(lp184
+S'int'
+p185
+aS'unsigned int'
+p186
+aS'struct __locale_struct *'
+p187
+asS'lchmod'
+p188
+(lp189
+S'int'
+p190
+aS'const char *'
+p191
+aS'unsigned int'
+p192
+asS'dfastate'
+p193
+(lp194
+S'void'
+p195
+aS'int'
+p196
+aS'struct dfa *'
+p197
+aS'int []'
+p198
+asS'addtok'
+p199
+(lp200
+S'void'
+p201
+aS'int'
+p202
+asS'link_nfa_nodes'
+p203
+(lp204
+S'reg_errcode_t'
+p205
+aS'void *'
+p206
+aS'int *'
+p207
+asS'__sched_cpucount'
+p208
+(lp209
+S'int'
+p210
+aS'int'
+p211
+aS'const cpu_set_t *'
+p212
+asS'c_isdigit'
+p213
+(lp214
+S'int'
+p215
+aS'int'
+p216
+asS'unshare'
+p217
+(lp218
+S'int'
+p219
+aS'int'
+p220
+asS'hash_lookup'
+p221
+(lp222
+S'void *'
+p223
+aS'const int *'
+p224
+aS'const void *'
+p225
+asS'pthread_mutex_consistent_np'
+p226
+(lp227
+S'int'
+p228
+aS'pthread_mutex_t *'
+p229
+asS'sched_get_priority_max'
+p230
+(lp231
+S'int'
+p232
+aS'int'
+p233
+asS'g_debug'
+p234
+(lp235
+S'void'
+p236
+aS'const int *'
+p237
+aS'...'
+p238
+asS'pthread_timedjoin_np'
+p239
+(lp240
+S'int'
+p241
+aS'unsigned long'
+p242
+aS'void **'
+p243
+aS'const struct timespec *'
+p244
+asS'vwscanf'
+p245
+(lp246
+S'int'
+p247
+aS'const int *restrict'
+p248
+aS'int'
+p249
+asS'posix_fallocate'
+p250
+(lp251
+S'int'
+p252
+aS'int'
+p253
+aS'long'
+p254
+aS'long'
+p255
+asS'is_open'
+p256
+(lp257
+S'int'
+p258
+aS'int'
+p259
+asS'fts_compare_ino'
+p260
+(lp261
+S'int'
+p262
+aS'const struct _ftsent **'
+p263
+aS'const struct _ftsent **'
+p264
+asS'gnu_dev_makedev'
+p265
+(lp266
+S'unsigned long long'
+p267
+aS'unsigned int'
+p268
+aS'unsigned int'
+p269
+asS'fputc_unlocked'
+p270
+(lp271
+S'int'
+p272
+aS'int'
+p273
+aS'struct _IO_FILE *'
+p274
+asS'pthread_spin_trylock'
+p275
+(lp276
+S'int'
+p277
+aS'volatile int *'
+p278
+asS'getlogin_r'
+p279
+(lp280
+S'int'
+p281
+aS'char *'
+p282
+aS'int'
+p283
+asS'pcre32_compile'
+p284
+(lp285
+S'struct real_pcre32 *'
+p286
+aS'const unsigned int *'
+p287
+aS'int'
+p288
+aS'const char **'
+p289
+aS'int *'
+p290
+aS'const unsigned char *'
+p291
+asS'hash_clear'
+p292
+(lp293
+S'void'
+p294
+aS'int *'
+p295
+asS'mb_prev_wc'
+p296
+(lp297
+S'unsigned int'
+p298
+aS'const char *'
+p299
+aS'const char *'
+p300
+aS'const char *'
+p301
+asS'memmove'
+p302
+(lp303
+S'void *'
+p304
+asS'wcschr'
+p305
+(lp306
+S'int *'
+p307
+aS'const int *'
+p308
+aS'int'
+p309
+asS'sync'
+p310
+(lp311
+S'void'
+p312
+asS'gl_locale_name'
+p313
+(lp314
+S'const char *'
+p315
+aS'int'
+p316
+aS'const char *'
+p317
+asS'skip_easy_bytes'
+p318
+(lp319
+S'const char *'
+p320
+aS'const char *'
+p321
+asS'mknod'
+p322
+(lp323
+S'int'
+p324
+aS'const char *'
+p325
+aS'unsigned int'
+p326
+aS'unsigned long'
+p327
+asS'pthread_mutex_destroy'
+p328
+(lp329
+S'int'
+p330
+aS'pthread_mutex_t *'
+p331
+asS'quotearg'
+p332
+(lp333
+S'char *'
+p334
+aS'const char *'
+p335
+asS'wcrtomb'
+p336
+(lp337
+S'int'
+p338
+aS'char *restrict'
+p339
+aS'int'
+p340
+aS'__mbstate_t *restrict'
+p341
+asS'feof'
+p342
+(lp343
+S'int'
+p344
+aS'struct _IO_FILE *'
+p345
+asS'dfambcache'
+p346
+(lp347
+S'void'
+p348
+aS'struct dfa *'
+p349
+asS'clock'
+p350
+(lp351
+S'long'
+p352
+asS'pthread_spin_destroy'
+p353
+(lp354
+S'int'
+p355
+aS'volatile int *'
+p356
+asS'xstrtol_fatal'
+p357
+(lp358
+S'void'
+p359
+aS'enum strtol_error'
+p360
+aS'int'
+p361
+aS'char'
+p362
+aS'const struct option *'
+p363
+aS'const char *'
+p364
+asS'pcre_config'
+p365
+(lp366
+S'int'
+p367
+aS'int'
+p368
+aS'void *'
+p369
+asS'pr_sgr_start'
+p370
+(lp371
+S'void'
+p372
+aS'const char *'
+p373
+asS'pcre32_pattern_to_host_byte_order'
+p374
+(lp375
+S'int'
+p376
+aS'struct real_pcre32 *'
+p377
+aS'struct pcre32_extra *'
+p378
+aS'const unsigned char *'
+p379
+asS'__fxstatat64'
+p380
+(lp381
+S'int'
+p382
+aS'int'
+p383
+aS'int'
+p384
+aS'const char *'
+p385
+aS'struct stat64 *'
+p386
+aS'int'
+p387
+asS'__dcgettext'
+p388
+(lp389
+S'char *'
+p390
+aS'const char *'
+p391
+aS'const char *'
+p392
+aS'int'
+p393
+asS'xstrtoimax'
+p394
+(lp395
+S'int'
+p396
+aS'const char *'
+p397
+aS'char **'
+p398
+aS'int'
+p399
+aS'int *'
+p400
+aS'const char *'
+p401
+asS'suppressible_error'
+p402
+(lp403
+S'void'
+p404
+aS'const char *'
+p405
+aS'int'
+p406
+asS'ualarm'
+p407
+(lp408
+S'unsigned int'
+p409
+aS'unsigned int'
+p410
+aS'unsigned int'
+p411
+asS'hash_insert'
+p412
+(lp413
+S'void *'
+p414
+aS'int *'
+p415
+aS'const void *'
+p416
+asS'getdate_r'
+p417
+(lp418
+S'int'
+p419
+aS'const char *restrict'
+p420
+aS'struct tm *restrict'
+p421
+asS'pthread_detach'
+p422
+(lp423
+S'int'
+p424
+aS'unsigned long'
+p425
+asS'set_stat_type'
+p426
+(lp427
+S'void'
+p428
+aS'struct stat *'
+p429
+aS'unsigned int'
+p430
+asS'setpgid'
+p431
+(lp432
+S'int'
+p433
+aS'int'
+p434
+aS'int'
+p435
+asS'vwprintf'
+p436
+(lp437
+S'int'
+p438
+aS'const int *restrict'
+p439
+aS'int'
+p440
+asS'zeroset'
+p441
+(lp442
+S'void'
+p443
+aS'unsigned int [0]'
+p444
+asS'pthread_attr_init'
+p445
+(lp446
+S'int'
+p447
+aS'union pthread_attr_t *'
+p448
+asS'isctype'
+p449
+(lp450
+S'int'
+p451
+aS'int'
+p452
+aS'int'
+p453
+asS'setstate_r'
+p454
+(lp455
+S'int'
+p456
+aS'char *restrict'
+p457
+aS'struct random_data *restrict'
+p458
+asS'pcre16_jit_free_unused_memory'
+p459
+(lp460
+S'void'
+p461
+asS'transit_state_singlebyte'
+p462
+(lp463
+S'status_transit_state'
+p464
+aS'struct dfa *'
+p465
+aS'int'
+p466
+aS'const unsigned char *'
+p467
+aS'int *'
+p468
+asS'getsid'
+p469
+(lp470
+S'int'
+p471
+aS'int'
+p472
+asS'pthread_mutex_setprioceiling'
+p473
+(lp474
+S'int'
+p475
+aS'pthread_mutex_t *restrict'
+p476
+aS'int'
+p477
+aS'int *restrict'
+p478
+asS'getresgid'
+p479
+(lp480
+S'int'
+p481
+aS'unsigned int *'
+p482
+aS'unsigned int *'
+p483
+aS'unsigned int *'
+p484
+asS'wcwidth'
+p485
+(lp486
+S'int'
+p487
+aS'int'
+p488
+asS'wcsxfrm'
+p489
+(lp490
+S'int'
+p491
+aS'int *restrict'
+p492
+aS'const int *restrict'
+p493
+aS'int'
+p494
+asS'_IO_cookie_init'
+p495
+(lp496
+S'void'
+p497
+aS'struct _IO_cookie_file *'
+p498
+aS'int'
+p499
+aS'void *'
+p500
+aS'_IO_cookie_io_functions_t'
+p501
+asS'_gl_register_fd'
+p502
+(lp503
+S'int'
+p504
+aS'int'
+p505
+aS'const char *'
+p506
+asS'pthread_mutexattr_getprotocol'
+p507
+(lp508
+S'int'
+p509
+aS'const pthread_mutexattr_t *restrict'
+p510
+aS'int *restrict'
+p511
+asS'isspace_l'
+p512
+(lp513
+S'int'
+p514
+aS'int'
+p515
+aS'struct __locale_struct *'
+p516
+asS'posix_fadvise64'
+p517
+(lp518
+S'int'
+p519
+aS'int'
+p520
+aS'long'
+p521
+aS'long'
+p522
+aS'int'
+p523
+asS'pthread_rwlock_unlock'
+p524
+(lp525
+S'int'
+p526
+aS'pthread_rwlock_t *'
+p527
+asS'iswalnum'
+p528
+(lp529
+S'int'
+p530
+aS'unsigned int'
+p531
+asS'rename'
+p532
+(lp533
+S'int'
+p534
+aS'const char *'
+p535
+aS'const char *'
+p536
+asS'ispunct_l'
+p537
+(lp538
+S'int'
+p539
+aS'int'
+p540
+aS'struct __locale_struct *'
+p541
+asS'asctime_r'
+p542
+(lp543
+S'char *'
+p544
+aS'const struct tm *restrict'
+p545
+aS'char *restrict'
+p546
+asS'restore_initial_cwd'
+p547
+(lp548
+S'int'
+p549
+aS'int *'
+p550
+asS'do_lstat'
+p551
+(lp552
+S'int'
+p553
+aS'const char *'
+p554
+aS'struct stat *'
+p555
+asS'wcstoq'
+p556
+(lp557
+S'long long'
+p558
+aS'const int *restrict'
+p559
+aS'int **restrict'
+p560
+aS'int'
+p561
+asS'free_token'
+p562
+(lp563
+S'void'
+p564
+aS'int *'
+p565
+asS're_match_2'
+p566
+(lp567
+S'int'
+p568
+aS'struct re_pattern_buffer *'
+p569
+aS'const char *'
+p570
+aS'int'
+p571
+aS'const char *'
+p572
+aS'int'
+p573
+aS'int'
+p574
+aS'struct re_registers *'
+p575
+aS'int'
+p576
+asS'pcre_free_study'
+p577
+(lp578
+S'void'
+p579
+aS'struct pcre_extra *'
+p580
+asS'wcstok'
+p581
+(lp582
+S'int *'
+p583
+aS'int *restrict'
+p584
+aS'const int *restrict'
+p585
+aS'int **restrict'
+p586
+asS'brk'
+p587
+(lp588
+S'int'
+p589
+aS'void *'
+p590
+asS'printf'
+p591
+(lp592
+S'int'
+p593
+aS'const char *restrict'
+p594
+ag238
+asS'unlockpt'
+p595
+(lp596
+S'int'
+p597
+aS'int'
+p598
+asS'pcre_fullinfo'
+p599
+(lp600
+S'int'
+p601
+aS'const struct real_pcre *'
+p602
+aS'const struct pcre_extra *'
+p603
+aS'int'
+p604
+aS'void *'
+p605
+asS'wcstod'
+p606
+(lp607
+S'double'
+p608
+aS'const int *restrict'
+p609
+aS'int **restrict'
+p610
+asS'mbs_to_wchar'
+p611
+(lp612
+S'int'
+p613
+aS'unsigned int *'
+p614
+aS'const char *'
+p615
+aS'int'
+p616
+aS'struct dfa *'
+p617
+asS'wcstof'
+p618
+(lp619
+S'float'
+p620
+aS'const int *restrict'
+p621
+aS'int **restrict'
+p622
+asS'getchar'
+p623
+(lp624
+S'int'
+p625
+asS'build_equiv_class'
+p626
+(lp627
+S'reg_errcode_t'
+p628
+aS'int'
+p629
+aS'const unsigned char *'
+p630
+asS'mktime'
+p631
+(lp632
+S'long'
+p633
+aS'struct tm *'
+p634
+asS'sched_yield'
+p635
+(lp636
+S'int'
+p637
+asS'do_open'
+p638
+(lp639
+S'int'
+p640
+aS'const char *'
+p641
+aS'int'
+p642
+ag238
+asS'pcre32_jit_exec'
+p643
+(lp644
+S'int'
+p645
+aS'const struct real_pcre32 *'
+p646
+aS'const struct pcre32_extra *'
+p647
+aS'const unsigned int *'
+p648
+aS'int'
+p649
+aS'int'
+p650
+aS'int'
+p651
+aS'int *'
+p652
+aS'int'
+p653
+aS'struct real_pcre32_jit_stack *'
+p654
+asS'fputs_unlocked'
+p655
+(lp656
+S'int'
+p657
+aS'const char *restrict'
+p658
+aS'struct _IO_FILE *restrict'
+p659
+asS'str_cd_iconv'
+p660
+(lp661
+S'char *'
+p662
+aS'const char *'
+p663
+aS'void *'
+p664
+asS'getwchar_unlocked'
+p665
+(lp666
+S'unsigned int'
+p667
+asS'isblank_l'
+p668
+(lp669
+S'int'
+p670
+aS'int'
+p671
+aS'struct __locale_struct *'
+p672
+asS'_getopt_initialize'
+p673
+(lp674
+S'const char *'
+p675
+aS'int'
+p676
+aS'char **'
+p677
+aS'const char *'
+p678
+aS'struct _getopt_data *'
+p679
+aS'int'
+p680
+asS'fdatasync'
+p681
+(lp682
+S'int'
+p683
+aS'int'
+p684
+asS'setns'
+p685
+(lp686
+S'int'
+p687
+aS'int'
+p688
+aS'int'
+p689
+asS'qecvt_r'
+p690
+(lp691
+S'int'
+p692
+aS'long double'
+p693
+aS'int'
+p694
+aS'int *restrict'
+p695
+aS'int *restrict'
+p696
+aS'char *restrict'
+p697
+aS'int'
+p698
+asS'unlink'
+p699
+(lp700
+S'int'
+p701
+aS'const char *'
+p702
+asS'safe_read'
+p703
+(lp704
+S'int'
+p705
+aS'int'
+p706
+aS'void *'
+p707
+aS'int'
+p708
+asS'ftello64'
+p709
+(lp710
+S'long'
+p711
+aS'struct _IO_FILE *'
+p712
+asS'hash_get_n_entries'
+p713
+(lp714
+S'int'
+p715
+aS'const int *'
+p716
+asS'eaccess'
+p717
+(lp718
+S'int'
+p719
+aS'const char *'
+p720
+aS'int'
+p721
+asS'__libc_current_sigrtmax'
+p722
+(lp723
+S'int'
+p724
+asS'build_charclass'
+p725
+(lp726
+S'reg_errcode_t'
+p727
+aS'unsigned char *'
+p728
+aS'int'
+p729
+aS'const char *'
+p730
+aS'unsigned long'
+p731
+asS'sigaddset'
+p732
+(lp733
+S'int'
+p734
+aS'__sigset_t *'
+p735
+aS'int'
+p736
+asS'do_stat'
+p737
+(lp738
+S'int'
+p739
+aS'const char *'
+p740
+aS'struct stat *'
+p741
+asS'wcscat'
+p742
+(lp743
+S'int *'
+p744
+aS'int *restrict'
+p745
+aS'const int *restrict'
+p746
+asS'wcstoll_l'
+p747
+(lp748
+S'long long'
+p749
+aS'const int *restrict'
+p750
+aS'int **restrict'
+p751
+aS'int'
+p752
+aS'struct __locale_struct *'
+p753
+asS'pthread_sigmask'
+p754
+(lp755
+S'int'
+p756
+aS'int'
+p757
+aS'const __sigset_t *restrict'
+p758
+aS'__sigset_t *restrict'
+p759
+asS'pthread_rwlockattr_setpshared'
+p760
+(lp761
+S'int'
+p762
+aS'pthread_rwlockattr_t *'
+p763
+aS'int'
+p764
+asS'wcstoull_l'
+p765
+(lp766
+S'unsigned long long'
+p767
+aS'const int *restrict'
+p768
+aS'int **restrict'
+p769
+aS'int'
+p770
+aS'struct __locale_struct *'
+p771
+asS'getwd'
+p772
+(lp773
+S'char *'
+p774
+aS'char *'
+p775
+asS'fopencookie'
+p776
+(lp777
+S'struct _IO_FILE *'
+p778
+aS'void *restrict'
+p779
+aS'const char *restrict'
+p780
+aS'_IO_cookie_io_functions_t'
+p781
+asS'set_quoting_flags'
+p782
+(lp783
+S'int'
+p784
+aS'struct quoting_options *'
+p785
+aS'int'
+p786
+asS'LCO_hash'
+p787
+(lp788
+S'int'
+p789
+aS'const void *'
+p790
+aS'int'
+p791
+asS'_g_log_fallback_handler'
+p792
+(lp793
+S'void'
+p794
+aS'const int *'
+p795
+aS'GLogLevelFlags'
+p796
+aS'const int *'
+p797
+aS'int'
+p798
+asS'strerror'
+p799
+(lp800
+S'char *'
+p801
+aS'int'
+p802
+asS'isspace'
+p803
+(lp804
+S'int'
+p805
+aS'int'
+p806
+asS'catclose'
+p807
+(lp808
+S'int'
+p809
+aS'void *'
+p810
+asS'x2realloc'
+p811
+(lp812
+S'void *'
+p813
+aS'void *'
+p814
+aS'int *'
+p815
+asS'hash_compare_strings'
+p816
+(lp817
+S'int'
+p818
+aS'const void *'
+p819
+aS'const void *'
+p820
+asS'utimensat'
+p821
+(lp822
+S'int'
+p823
+aS'int'
+p824
+aS'const char *'
+p825
+aS'struct timespec const[2]'
+p826
+aS'int'
+p827
+asS'fnmatch'
+p828
+(lp829
+S'int'
+p830
+aS'const char *'
+p831
+aS'const char *'
+p832
+aS'int'
+p833
+asS'ftruncate'
+p834
+(lp835
+S'int'
+p836
+aS'int'
+p837
+aS'long'
+p838
+asS'dfaexec'
+p839
+(lp840
+S'char *'
+p841
+aS'struct dfa *'
+p842
+aS'const char *'
+p843
+aS'char *'
+p844
+aS'int'
+p845
+aS'int *'
+p846
+aS'int *'
+p847
+asS'openat_safer'
+p848
+(lp849
+S'int'
+p850
+aS'int'
+p851
+aS'const char *'
+p852
+aS'int'
+p853
+ag238
+asS'pcre16_utf16_to_host_byte_order'
+p854
+(lp855
+S'int'
+p856
+aS'unsigned short *'
+p857
+aS'const unsigned short *'
+p858
+aS'int'
+p859
+aS'int *'
+p860
+aS'int'
+p861
+asS'is_device_mode'
+p862
+(lp863
+S'int'
+p864
+aS'unsigned int'
+p865
+asS'pthread_mutex_getprioceiling'
+p866
+(lp867
+S'int'
+p868
+aS'const pthread_mutex_t *restrict'
+p869
+aS'int *restrict'
+p870
+asS'internal_fnwmatch'
+p871
+(lp872
+S'int'
+p873
+aS'const int *'
+p874
+aS'const int *'
+p875
+aS'const int *'
+p876
+aS'int'
+p877
+aS'int'
+p878
+asS'cdb_fchdir'
+p879
+(lp880
+S'int'
+p881
+aS'const struct cd_buf *'
+p882
+asS'swprintf'
+p883
+(lp884
+S'int'
+p885
+aS'int *restrict'
+p886
+aS'int'
+p887
+aS'const int *restrict'
+p888
+ag238
+asS'kwsmusts'
+p889
+(lp890
+S'void'
+p891
+asS'rpl_realloc'
+p892
+(lp893
+S'void *'
+p894
+aS'void *'
+p895
+aS'int'
+p896
+asS'strxfrm_l'
+p897
+(lp898
+S'int'
+p899
+aS'char *'
+p900
+aS'const char *'
+p901
+aS'int'
+p902
+aS'struct __locale_struct *'
+p903
+asS'using_simple_locale'
+p904
+(lp905
+S'int'
+p906
+asS'strlen'
+p907
+(lp908
+S'unsigned long'
+p909
+asS'pcre32_refcount'
+p910
+(lp911
+S'int'
+p912
+aS'struct real_pcre32 *'
+p913
+aS'int'
+p914
+asS'pthread_getspecific'
+p915
+(lp916
+S'void *'
+p917
+aS'unsigned int'
+p918
+asS'c_isgraph'
+p919
+(lp920
+S'int'
+p921
+aS'int'
+p922
+asS'getgroups'
+p923
+(lp924
+S'int'
+p925
+aS'int'
+p926
+aS'unsigned int []'
+p927
+asS'pcre_dfa_exec'
+p928
+(lp929
+S'int'
+p930
+aS'const struct real_pcre *'
+p931
+aS'const struct pcre_extra *'
+p932
+aS'const char *'
+p933
+aS'int'
+p934
+aS'int'
+p935
+aS'int'
+p936
+aS'int *'
+p937
+aS'int'
+p938
+aS'int *'
+p939
+aS'int'
+p940
+asS'kwsinit'
+p941
+(lp942
+S'void'
+p943
+aS'struct kwset **'
+p944
+asS'verify'
+p945
+(lp946
+S'int'
+p947
+aS'int'
+p948
+asS'lrand48'
+p949
+(lp950
+S'long'
+p951
+asS'memfrob'
+p952
+(lp953
+S'void *'
+p954
+aS'void *'
+p955
+aS'int'
+p956
+asS'__fxstatat'
+p957
+(lp958
+S'int'
+p959
+aS'int'
+p960
+aS'int'
+p961
+aS'const char *'
+p962
+aS'struct stat *'
+p963
+aS'int'
+p964
+asS'rewind'
+p965
+(lp966
+S'void'
+p967
+aS'struct _IO_FILE *'
+p968
+asS'dup_safer_flag'
+p969
+(lp970
+S'int'
+p971
+aS'int'
+p972
+aS'int'
+p973
+asS'killpg'
+p974
+(lp975
+S'int'
+p976
+aS'int'
+p977
+aS'int'
+p978
+asS'siggetmask'
+p979
+(lp980
+S'int'
+p981
+asS'wcsrchr'
+p982
+(lp983
+S'int *'
+p984
+aS'const int *'
+p985
+aS'int'
+p986
+asS'__pthread_register_cancel'
+p987
+(lp988
+S'void'
+p989
+aS'__pthread_unwind_buf_t *'
+p990
+asS'prline'
+p991
+(lp992
+S'void'
+p993
+aS'const char *'
+p994
+aS'const char *'
+p995
+aS'char'
+p996
+asS'pthread_create'
+p997
+(lp998
+S'int'
+p999
+aS'unsigned long *restrict'
+p1000
+aS'const union pthread_attr_t *restrict'
+p1001
+aS'void *(*)(void *)'
+p1002
+aS'void *restrict'
+p1003
+asS'free_entry'
+p1004
+(lp1005
+S'void'
+p1006
+aS'int *'
+p1007
+aS'struct hash_entry *'
+p1008
+asS'open64'
+p1009
+(lp1010
+S'int'
+p1011
+aS'const char *'
+p1012
+aS'int'
+p1013
+ag238
+asS'openat'
+p1014
+(lp1015
+S'int'
+p1016
+aS'int'
+p1017
+aS'const char *'
+p1018
+aS'int'
+p1019
+ag238
+asS'mrand48_r'
+p1020
+(lp1021
+S'int'
+p1022
+aS'struct drand48_data *restrict'
+p1023
+aS'long *restrict'
+p1024
+asS'sigsetmask'
+p1025
+(lp1026
+S'int'
+p1027
+aS'int'
+p1028
+asS'Pcompile'
+p1029
+(lp1030
+S'void'
+p1031
+aS'const char *'
+p1032
+aS'int'
+p1033
+asS'srand48_r'
+p1034
+(lp1035
+S'int'
+p1036
+aS'long'
+p1037
+aS'struct drand48_data *'
+p1038
+asS'setkey'
+p1039
+(lp1040
+S'void'
+p1041
+aS'const char *'
+p1042
+asS'valloc'
+p1043
+(lp1044
+S'void *'
+p1045
+aS'int'
+p1046
+asS'rpl_symlink'
+p1047
+(lp1048
+S'int'
+p1049
+aS'const char *'
+p1050
+aS'const char *'
+p1051
+asS'at_quick_exit'
+p1052
+(lp1053
+S'int'
+p1054
+aS'void (*)(void)'
+p1055
+asS'posix_fallocate64'
+p1056
+(lp1057
+S'int'
+p1058
+aS'int'
+p1059
+aS'long'
+p1060
+aS'long'
+p1061
+asS'tcgetpgrp'
+p1062
+(lp1063
+S'int'
+p1064
+aS'int'
+p1065
+asS'fn'
+p1066
+(lp1067
+S'reg_errcode_t'
+p1068
+asS'pthread_rwlockattr_getpshared'
+p1069
+(lp1070
+S'int'
+p1071
+aS'const pthread_rwlockattr_t *restrict'
+p1072
+aS'int *restrict'
+p1073
+asS'pcre16_pattern_to_host_byte_order'
+p1074
+(lp1075
+S'int'
+p1076
+aS'struct real_pcre16 *'
+p1077
+aS'struct pcre16_extra *'
+p1078
+aS'const unsigned char *'
+p1079
+asS'__toupper_l'
+p1080
+(lp1081
+S'int'
+p1082
+aS'int'
+p1083
+aS'struct __locale_struct *'
+p1084
+asS'pthread_mutexattr_getprioceiling'
+p1085
+(lp1086
+S'int'
+p1087
+aS'const pthread_mutexattr_t *restrict'
+p1088
+aS'int *restrict'
+p1089
+asS'ext_match'
+p1090
+(lp1091
+S'int'
+p1092
+aS'int'
+p1093
+aS'const char *'
+p1094
+aS'const char *'
+p1095
+aS'const char *'
+p1096
+aS'int'
+p1097
+aS'int'
+p1098
+asS'sigdelset'
+p1099
+(lp1100
+S'int'
+p1101
+aS'__sigset_t *'
+p1102
+aS'int'
+p1103
+asS'strerror_r'
+p1104
+(lp1105
+S'char *'
+p1106
+aS'int'
+p1107
+aS'char *'
+p1108
+aS'int'
+p1109
+asS'isxdigit'
+p1110
+(lp1111
+S'int'
+p1112
+aS'int'
+p1113
+asS'set_program_name'
+p1114
+(lp1115
+S'void'
+p1116
+aS'const char *'
+p1117
+asS'free_dir'
+p1118
+(lp1119
+S'void'
+p1120
+aS'int *'
+p1121
+asS'iscntrl'
+p1122
+(lp1123
+S'int'
+p1124
+aS'int'
+p1125
+asS'get_nondigit_option'
+p1126
+(lp1127
+S'int'
+p1128
+aS'int'
+p1129
+aS'char *const *'
+p1130
+aS'long *'
+p1131
+asS'treedelta'
+p1132
+(lp1133
+S'void'
+p1134
+aS'const struct tree *'
+p1135
+aS'unsigned int'
+p1136
+aS'unsigned char []'
+p1137
+asS'c_isblank'
+p1138
+(lp1139
+S'int'
+p1140
+aS'int'
+p1141
+asS'strerror_l'
+p1142
+(lp1143
+S'char *'
+p1144
+aS'int'
+p1145
+aS'struct __locale_struct *'
+p1146
+asS'vswprintf'
+p1147
+(lp1148
+S'int'
+p1149
+aS'int *restrict'
+p1150
+aS'int'
+p1151
+aS'const int *restrict'
+p1152
+aS'int'
+p1153
+asS'pthread_rwlock_timedwrlock'
+p1154
+(lp1155
+S'int'
+p1156
+aS'pthread_rwlock_t *restrict'
+p1157
+aS'const struct timespec *restrict'
+p1158
+asS'jrand48_r'
+p1159
+(lp1160
+S'int'
+p1161
+aS'unsigned short [3]'
+p1162
+aS'struct drand48_data *restrict'
+p1163
+aS'long *restrict'
+p1164
+asS'version_etc_va'
+p1165
+(lp1166
+S'void'
+p1167
+aS'struct _IO_FILE *'
+p1168
+aS'const char *'
+p1169
+aS'const char *'
+p1170
+aS'const char *'
+p1171
+aS'int'
+p1172
+asS'pcre16_copy_substring'
+p1173
+(lp1174
+S'int'
+p1175
+aS'const unsigned short *'
+p1176
+aS'int *'
+p1177
+aS'int'
+p1178
+aS'int'
+p1179
+aS'unsigned short *'
+p1180
+aS'int'
+p1181
+asS'setrlimit64'
+p1182
+(lp1183
+S'int'
+p1184
+aS'enum __rlimit_resource'
+p1185
+aS'const struct rlimit64 *'
+p1186
+asS'basename'
+p1187
+(lp1188
+S'char *'
+p1189
+aS'const char *'
+p1190
+asS'strtouq'
+p1191
+(lp1192
+S'unsigned long long'
+p1193
+aS'const char *restrict'
+p1194
+aS'char **restrict'
+p1195
+aS'int'
+p1196
+asS'ffs'
+p1197
+(lp1198
+S'int'
+p1199
+aS'int'
+p1200
+asS'argmatch'
+p1201
+(lp1202
+S'int'
+p1203
+aS'const char *'
+p1204
+aS'const char *const *'
+p1205
+aS'const char *'
+p1206
+aS'int'
+p1207
+asS'btowc'
+p1208
+(lp1209
+S'unsigned int'
+p1210
+aS'int'
+p1211
+asS'strcasecmp_l'
+p1212
+(lp1213
+S'int'
+p1214
+aS'const char *'
+p1215
+aS'const char *'
+p1216
+aS'struct __locale_struct *'
+p1217
+asS'strtoul'
+p1218
+(lp1219
+S'unsigned long'
+p1220
+aS'const char *restrict'
+p1221
+aS'char **restrict'
+p1222
+aS'int'
+p1223
+asS'ferror_unlocked'
+p1224
+(lp1225
+S'int'
+p1226
+aS'struct _IO_FILE *'
+p1227
+asS'g_info'
+p1228
+(lp1229
+S'void'
+p1230
+aS'const int *'
+p1231
+ag238
+asS'string_compare'
+p1232
+(lp1233
+S'int'
+p1234
+aS'const void *'
+p1235
+aS'const void *'
+p1236
+asS'readahead'
+p1237
+(lp1238
+S'long'
+p1239
+aS'int'
+p1240
+aS'long'
+p1241
+aS'int'
+p1242
+asS'addtok_wc'
+p1243
+(lp1244
+S'void'
+p1245
+aS'unsigned int'
+p1246
+asS'strtol_l'
+p1247
+(lp1248
+S'long'
+p1249
+aS'const char *restrict'
+p1250
+aS'char **restrict'
+p1251
+aS'int'
+p1252
+aS'struct __locale_struct *'
+p1253
+asS'getsubopt'
+p1254
+(lp1255
+S'int'
+p1256
+aS'char **restrict'
+p1257
+aS'char *const *restrict'
+p1258
+aS'char **restrict'
+p1259
+asS'fwrite'
+p1260
+(lp1261
+S'int'
+p1262
+aS'const void *restrict'
+p1263
+aS'int'
+p1264
+aS'int'
+p1265
+aS'struct _IO_FILE *restrict'
+p1266
+asS'_IO_ftrylockfile'
+p1267
+(lp1268
+S'int'
+p1269
+aS'struct _IO_FILE *'
+p1270
+asS'openat64'
+p1271
+(lp1272
+S'int'
+p1273
+aS'int'
+p1274
+aS'const char *'
+p1275
+aS'int'
+p1276
+ag238
+asS'getpid'
+p1277
+(lp1278
+S'int'
+p1279
+asS'setgid'
+p1280
+(lp1281
+S'int'
+p1282
+aS'unsigned int'
+p1283
+asS'feof_unlocked'
+p1284
+(lp1285
+S'int'
+p1286
+aS'struct _IO_FILE *'
+p1287
+asS'zap_nuls'
+p1288
+(lp1289
+S'void'
+p1290
+aS'char *'
+p1291
+aS'char *'
+p1292
+aS'char'
+p1293
+asS'insert_new'
+p1294
+(lp1295
+S'void'
+p1296
+aS'int *'
+p1297
+aS'const void *'
+p1298
+asS'string_compare_ci'
+p1299
+(lp1300
+S'int'
+p1301
+aS'const void *'
+p1302
+aS'const void *'
+p1303
+asS'sched_setaffinity'
+p1304
+(lp1305
+S'int'
+p1306
+aS'int'
+p1307
+aS'int'
+p1308
+aS'const cpu_set_t *'
+p1309
+asS'sched_get_priority_min'
+p1310
+(lp1311
+S'int'
+p1312
+aS'int'
+p1313
+asS'fchown'
+p1314
+(lp1315
+S'int'
+p1316
+aS'int'
+p1317
+aS'unsigned int'
+p1318
+aS'unsigned int'
+p1319
+asS're_set_fastmap'
+p1320
+(lp1321
+S'void'
+p1322
+aS'char *'
+p1323
+aS'int'
+p1324
+aS'int'
+p1325
+asS'pcre_copy_substring'
+p1326
+(lp1327
+S'int'
+p1328
+aS'const char *'
+p1329
+aS'int *'
+p1330
+aS'int'
+p1331
+aS'int'
+p1332
+aS'char *'
+p1333
+aS'int'
+p1334
+asS'pcre16_jit_exec'
+p1335
+(lp1336
+S'int'
+p1337
+aS'const struct real_pcre16 *'
+p1338
+aS'const struct pcre16_extra *'
+p1339
+aS'const unsigned short *'
+p1340
+aS'int'
+p1341
+aS'int'
+p1342
+aS'int'
+p1343
+aS'int *'
+p1344
+aS'int'
+p1345
+aS'struct real_pcre16_jit_stack *'
+p1346
+asS'vasnprintf'
+p1347
+(lp1348
+S'char *'
+p1349
+aS'char *'
+p1350
+aS'int *'
+p1351
+aS'const char *'
+p1352
+aS'int'
+p1353
+asS'strcoll'
+p1354
+(lp1355
+S'int'
+p1356
+aS'const char *'
+p1357
+aS'const char *'
+p1358
+asS'execl'
+p1359
+(lp1360
+S'int'
+p1361
+aS'const char *'
+p1362
+aS'const char *'
+p1363
+ag238
+asS'pcre16_get_substring'
+p1364
+(lp1365
+S'int'
+p1366
+aS'const unsigned short *'
+p1367
+aS'int *'
+p1368
+aS'int'
+p1369
+aS'int'
+p1370
+aS'const unsigned short **'
+p1371
+asS'vfwscanf'
+p1372
+(lp1373
+S'int'
+p1374
+aS'struct _IO_FILE *restrict'
+p1375
+aS'const int *restrict'
+p1376
+aS'int'
+p1377
+asS'quoting_options_from_style'
+p1378
+(lp1379
+S'struct quoting_options'
+p1380
+aS'enum quoting_style'
+p1381
+asS'gcvt'
+p1382
+(lp1383
+S'char *'
+p1384
+aS'double'
+p1385
+aS'int'
+p1386
+aS'char *'
+p1387
+asS'pthread_cancel'
+p1388
+(lp1389
+S'int'
+p1390
+aS'unsigned long'
+p1391
+asS'string_hasher'
+p1392
+(lp1393
+S'int'
+p1394
+aS'const void *'
+p1395
+aS'int'
+p1396
+asS'tcsetpgrp'
+p1397
+(lp1398
+S'int'
+p1399
+aS'int'
+p1400
+aS'int'
+p1401
+asS'execv'
+p1402
+(lp1403
+S'int'
+p1404
+aS'const char *'
+p1405
+aS'char *const[]'
+p1406
+asS'strverscmp'
+p1407
+(lp1408
+S'int'
+p1409
+aS'const char *'
+p1410
+aS'const char *'
+p1411
+asS'dgettext'
+p1412
+(lp1413
+S'char *'
+p1414
+aS'const char *'
+p1415
+aS'const char *'
+p1416
+asS'pcre32_get_substring'
+p1417
+(lp1418
+S'int'
+p1419
+aS'const unsigned int *'
+p1420
+aS'int *'
+p1421
+aS'int'
+p1422
+aS'int'
+p1423
+aS'const unsigned int **'
+p1424
+asS'test_all'
+p1425
+(lp1426
+S'void'
+p1427
+asS'linkat'
+p1428
+(lp1429
+S'int'
+p1430
+aS'int'
+p1431
+aS'const char *'
+p1432
+aS'int'
+p1433
+aS'const char *'
+p1434
+aS'int'
+p1435
+asS'calc_first'
+p1436
+(lp1437
+S'reg_errcode_t'
+p1438
+aS'void *'
+p1439
+aS'int *'
+p1440
+asS'fd_safer'
+p1441
+(lp1442
+S'int'
+p1443
+aS'int'
+p1444
+asS'pcre_free_substring_list'
+p1445
+(lp1446
+S'void'
+p1447
+aS'const char **'
+p1448
+asS'pthread_getattr_default_np'
+p1449
+(lp1450
+S'int'
+p1451
+aS'union pthread_attr_t *'
+p1452
+asS'pthread_attr_setstack'
+p1453
+(lp1454
+S'int'
+p1455
+aS'union pthread_attr_t *'
+p1456
+aS'void *'
+p1457
+aS'int'
+p1458
+asS'isalnum_l'
+p1459
+(lp1460
+S'int'
+p1461
+aS'int'
+p1462
+aS'struct __locale_struct *'
+p1463
+asS'hash_print_statistics'
+p1464
+(lp1465
+S'void'
+p1466
+aS'const int *'
+p1467
+aS'struct _IO_FILE *'
+p1468
+asS'fileno_unlocked'
+p1469
+(lp1470
+S'int'
+p1471
+aS'struct _IO_FILE *'
+p1472
+asS'pcre_jit_stack_alloc'
+p1473
+(lp1474
+S'struct real_pcre_jit_stack *'
+p1475
+aS'int'
+p1476
+aS'int'
+p1477
+asS'pcre16_jit_stack_free'
+p1478
+(lp1479
+S'void'
+p1480
+aS'struct real_pcre16_jit_stack *'
+p1481
+asS'__strtoll_internal'
+p1482
+(lp1483
+S'long long'
+p1484
+aS'const char *'
+p1485
+aS'char **'
+p1486
+aS'int'
+p1487
+aS'int'
+p1488
+asS'ttyname'
+p1489
+(lp1490
+S'char *'
+p1491
+aS'int'
+p1492
+asS'g_date_time_add_hours'
+p1493
+(lp1494
+S'struct _GDateTime *'
+p1495
+aS'struct _GDateTime *'
+p1496
+aS'int'
+p1497
+asS'putwc_unlocked'
+p1498
+(lp1499
+S'unsigned int'
+p1500
+aS'int'
+p1501
+aS'struct _IO_FILE *'
+p1502
+asS'close_stdout_set_file_name'
+p1503
+(lp1504
+S'void'
+p1505
+aS'const char *'
+p1506
+asS'posix_fadvise'
+p1507
+(lp1508
+S'int'
+p1509
+aS'int'
+p1510
+aS'long'
+p1511
+aS'long'
+p1512
+aS'int'
+p1513
+asS'opendir'
+p1514
+(lp1515
+S'struct __dirstream *'
+p1516
+aS'const char *'
+p1517
+asS'setsid'
+p1518
+(lp1519
+S'int'
+p1520
+asS'vswscanf'
+p1521
+(lp1522
+S'int'
+p1523
+aS'const int *restrict'
+p1524
+aS'const int *restrict'
+p1525
+aS'int'
+p1526
+asS'sprintf'
+p1527
+(lp1528
+S'int'
+p1529
+aS'char *restrict'
+p1530
+aS'const char *restrict'
+p1531
+ag238
+asS'__ctype_b_loc'
+p1532
+(lp1533
+S'const unsigned short **'
+p1534
+asS'strrchr'
+p1535
+(lp1536
+S'char *'
+p1537
+aS'const char *'
+p1538
+aS'int'
+p1539
+asS'regexec'
+p1540
+(lp1541
+S'int'
+p1542
+aS'const struct re_pattern_buffer *restrict'
+p1543
+aS'const char *restrict'
+p1544
+aS'int'
+p1545
+aS'regmatch_t []'
+p1546
+aS'int'
+p1547
+asS'pthread_attr_setstacksize'
+p1548
+(lp1549
+S'int'
+p1550
+aS'union pthread_attr_t *'
+p1551
+aS'int'
+p1552
+asS'pthread_setcancelstate'
+p1553
+(lp1554
+S'int'
+p1555
+aS'int'
+p1556
+aS'int *'
+p1557
+asS'xstrdup'
+p1558
+(lp1559
+S'char *'
+p1560
+aS'const char *'
+p1561
+asS'iswspace_l'
+p1562
+(lp1563
+S'int'
+p1564
+aS'unsigned int'
+p1565
+aS'struct __locale_struct *'
+p1566
+asS'usleep'
+p1567
+(lp1568
+S'int'
+p1569
+aS'unsigned int'
+p1570
+asS'pthread_rwlock_destroy'
+p1571
+(lp1572
+S'int'
+p1573
+aS'pthread_rwlock_t *'
+p1574
+asS'pcre16_get_stringtable_entries'
+p1575
+(lp1576
+S'int'
+p1577
+aS'const struct real_pcre16 *'
+p1578
+aS'const unsigned short *'
+p1579
+aS'unsigned short **'
+p1580
+aS'unsigned short **'
+p1581
+asS'catgets'
+p1582
+(lp1583
+S'char *'
+p1584
+aS'void *'
+p1585
+aS'int'
+p1586
+aS'int'
+p1587
+aS'const char *'
+p1588
+asS'strchrnul'
+p1589
+(lp1590
+S'char *'
+p1591
+aS'const char *'
+p1592
+aS'int'
+p1593
+asS'comsubs'
+p1594
+(lp1595
+S'char **'
+p1596
+aS'char *'
+p1597
+aS'const char *'
+p1598
+asS'wcschrnul'
+p1599
+(lp1600
+S'int *'
+p1601
+aS'const int *'
+p1602
+aS'int'
+p1603
+asS'iswspace'
+p1604
+(lp1605
+S'int'
+p1606
+aS'unsigned int'
+p1607
+asS'pcre_exec'
+p1608
+(lp1609
+S'int'
+p1610
+aS'const struct real_pcre *'
+p1611
+aS'const struct pcre_extra *'
+p1612
+aS'const char *'
+p1613
+aS'int'
+p1614
+aS'int'
+p1615
+aS'int'
+p1616
+aS'int *'
+p1617
+aS'int'
+p1618
+asS'free'
+p1619
+(lp1620
+S'void'
+p1621
+aS'void *'
+p1622
+asS'context_length_arg'
+p1623
+(lp1624
+S'void'
+p1625
+aS'const char *'
+p1626
+aS'long *'
+p1627
+asS'labs'
+p1628
+(lp1629
+S'long'
+p1630
+aS'long'
+p1631
+asS'qsort_r'
+p1632
+(lp1633
+S'void'
+p1634
+aS'void *'
+p1635
+aS'int'
+p1636
+aS'int'
+p1637
+aS'int (*)(const void *, const void *, void *)'
+p1638
+aS'void *'
+p1639
+asS'fts_alloc'
+p1640
+(lp1641
+S'int *'
+p1642
+aS'int *'
+p1643
+aS'const char *'
+p1644
+aS'int'
+p1645
+asS'mknodat'
+p1646
+(lp1647
+S'int'
+p1648
+aS'int'
+p1649
+aS'const char *'
+p1650
+aS'unsigned int'
+p1651
+aS'unsigned long'
+p1652
+asS'hash_rehash'
+p1653
+(lp1654
+S'int'
+p1655
+aS'int *'
+p1656
+aS'int'
+p1657
+asS'putchar'
+p1658
+(lp1659
+S'int'
+p1660
+aS'int'
+p1661
+asS'__strtol_internal'
+p1662
+(lp1663
+S'long'
+p1664
+aS'const char *'
+p1665
+aS'char **'
+p1666
+aS'int'
+p1667
+aS'int'
+p1668
+asS'pcre_assign_jit_stack'
+p1669
+(lp1670
+S'void'
+p1671
+aS'struct pcre_extra *'
+p1672
+aS'struct real_pcre_jit_stack *(*)(void *)'
+p1673
+aS'void *'
+p1674
+asS'char_context'
+p1675
+(lp1676
+S'int'
+p1677
+aS'unsigned char'
+p1678
+asS'quotearg_colon'
+p1679
+(lp1680
+S'char *'
+p1681
+aS'const char *'
+p1682
+asS'free_exclude'
+p1683
+(lp1684
+S'void'
+p1685
+aS'struct exclude *'
+p1686
+asS'pcre16_free_substring_list'
+p1687
+(lp1688
+S'void'
+p1689
+aS'const unsigned short **'
+p1690
+asS'scanf'
+p1691
+(lp1692
+S'int'
+p1693
+aS'const char *restrict'
+p1694
+ag238
+asS'getopt_long'
+p1695
+(lp1696
+S'int'
+p1697
+aS'int'
+p1698
+aS'char *const *'
+p1699
+aS'const char *'
+p1700
+aS'const struct option *'
+p1701
+aS'int *'
+p1702
+asS'rand'
+p1703
+(lp1704
+S'int'
+p1705
+asS'mrand48'
+p1706
+(lp1707
+S'long'
+p1708
+asS'__ctype_tolower_loc'
+p1709
+(lp1710
+S'const int **'
+p1711
+asS'mkdir'
+p1712
+(lp1713
+S'int'
+p1714
+aS'const char *'
+p1715
+aS'unsigned int'
+p1716
+asS'pcre32_get_stringnumber'
+p1717
+(lp1718
+S'int'
+p1719
+aS'const struct real_pcre32 *'
+p1720
+aS'const unsigned int *'
+p1721
+asS'__xstat64'
+p1722
+(lp1723
+S'int'
+p1724
+aS'int'
+p1725
+aS'const char *'
+p1726
+aS'struct stat64 *'
+p1727
+asS'xstrtoul'
+p1728
+(lp1729
+S'int'
+p1730
+aS'const char *'
+p1731
+aS'char **'
+p1732
+aS'int'
+p1733
+aS'unsigned long *'
+p1734
+aS'const char *'
+p1735
+asS'_IO_seekoff'
+p1736
+(lp1737
+S'long'
+p1738
+aS'struct _IO_FILE *'
+p1739
+aS'long'
+p1740
+aS'int'
+p1741
+aS'int'
+p1742
+asS'setbuf'
+p1743
+(lp1744
+S'void'
+p1745
+aS'struct _IO_FILE *restrict'
+p1746
+aS'char *restrict'
+p1747
+asS'print_end_colorize'
+p1748
+(lp1749
+S'void'
+p1750
+aS'const char *'
+p1751
+asS'case_folded_counterparts'
+p1752
+(lp1753
+S'int'
+p1754
+aS'int'
+p1755
+aS'int [21]'
+p1756
+asS'strncpy'
+p1757
+(lp1758
+S'char *'
+p1759
+asS'strtoull_l'
+p1760
+(lp1761
+S'unsigned long long'
+p1762
+aS'const char *restrict'
+p1763
+aS'char **restrict'
+p1764
+aS'int'
+p1765
+aS'struct __locale_struct *'
+p1766
+asS'pcre_free_substring'
+p1767
+(lp1768
+S'void'
+p1769
+aS'const char *'
+p1770
+asS'wcsnlen'
+p1771
+(lp1772
+S'int'
+p1773
+aS'const int *'
+p1774
+aS'int'
+p1775
+asS'isalnum'
+p1776
+(lp1777
+S'int'
+p1778
+aS'int'
+p1779
+asS'qsort'
+p1780
+(lp1781
+S'void'
+p1782
+aS'void *'
+p1783
+aS'int'
+p1784
+aS'int'
+p1785
+aS'int (*)(const void *, const void *)'
+p1786
+asS'rpl_fdopendir'
+p1787
+(lp1788
+S'struct __dirstream *'
+p1789
+aS'int'
+p1790
+asS'faccessat'
+p1791
+(lp1792
+S'int'
+p1793
+aS'int'
+p1794
+aS'const char *'
+p1795
+aS'int'
+p1796
+aS'int'
+p1797
+asS'isalpha'
+p1798
+(lp1799
+S'int'
+p1800
+aS'int'
+p1801
+asS'unlinkat'
+p1802
+(lp1803
+S'int'
+p1804
+aS'int'
+p1805
+aS'const char *'
+p1806
+aS'int'
+p1807
+asS'memcmp'
+p1808
+(lp1809
+S'int'
+p1810
+asS'charclass_context'
+p1811
+(lp1812
+S'int'
+p1813
+aS'unsigned int [0]'
+p1814
+asS'dprintf'
+p1815
+(lp1816
+S'int'
+p1817
+aS'int'
+p1818
+aS'const char *restrict'
+p1819
+ag238
+asS'ecvt_r'
+p1820
+(lp1821
+S'int'
+p1822
+aS'double'
+p1823
+aS'int'
+p1824
+aS'int *restrict'
+p1825
+aS'int *restrict'
+p1826
+aS'char *restrict'
+p1827
+aS'int'
+p1828
+asS'g_date_time_add_weeks'
+p1829
+(lp1830
+S'struct _GDateTime *'
+p1831
+aS'struct _GDateTime *'
+p1832
+aS'int'
+p1833
+asS'setbuffer'
+p1834
+(lp1835
+S'void'
+p1836
+aS'struct _IO_FILE *restrict'
+p1837
+aS'char *restrict'
+p1838
+aS'int'
+p1839
+asS'ttyslot'
+p1840
+(lp1841
+S'int'
+p1842
+asS'tee'
+p1843
+(lp1844
+S'long'
+p1845
+aS'int'
+p1846
+aS'int'
+p1847
+aS'int'
+p1848
+aS'unsigned int'
+p1849
+asS'fts_palloc'
+p1850
+(lp1851
+S'int'
+p1852
+aS'int *'
+p1853
+aS'int'
+p1854
+asS'sched_getparam'
+p1855
+(lp1856
+S'int'
+p1857
+aS'int'
+p1858
+aS'struct sched_param *'
+p1859
+asS'mkostemp'
+p1860
+(lp1861
+S'int'
+p1862
+aS'char *'
+p1863
+aS'int'
+p1864
+asS'scandirat64'
+p1865
+(lp1866
+S'int'
+p1867
+aS'int'
+p1868
+aS'const char *restrict'
+p1869
+aS'struct dirent64 ***restrict'
+p1870
+aS'int (*)(const struct dirent64 *)'
+p1871
+aS'int (*)(const struct dirent64 **, const struct dirent64 **)'
+p1872
+asS'isascii'
+p1873
+(lp1874
+S'int'
+p1875
+aS'int'
+p1876
+asS'__asprintf'
+p1877
+(lp1878
+S'int'
+p1879
+aS'char **restrict'
+p1880
+aS'const char *restrict'
+p1881
+ag238
+asS'_Exit'
+p1882
+(lp1883
+S'void'
+p1884
+aS'int'
+p1885
+asS'alphasort64'
+p1886
+(lp1887
+S'int'
+p1888
+aS'const struct dirent64 **'
+p1889
+aS'const struct dirent64 **'
+p1890
+asS'grep'
+p1891
+(lp1892
+S'long'
+p1893
+aS'int'
+p1894
+aS'const struct stat *'
+p1895
+asS'should_colorize'
+p1896
+(lp1897
+S'int'
+p1898
+asS'to_uchar'
+p1899
+(lp1900
+S'unsigned char'
+p1901
+aS'char'
+p1902
+asS'fstat64'
+p1903
+(lp1904
+S'int'
+p1905
+aS'int'
+p1906
+aS'struct stat64 *'
+p1907
+asS'isalpha_l'
+p1908
+(lp1909
+S'int'
+p1910
+aS'int'
+p1911
+aS'struct __locale_struct *'
+p1912
+asS'zero'
+p1913
+(lp1914
+S'int'
+p1915
+asS'dfainit'
+p1916
+(lp1917
+S'void'
+p1918
+aS'struct dfa *'
+p1919
+asS'wcscpy'
+p1920
+(lp1921
+S'int *'
+p1922
+aS'int *restrict'
+p1923
+aS'const int *restrict'
+p1924
+asS'iswprint'
+p1925
+(lp1926
+S'int'
+p1927
+aS'unsigned int'
+p1928
+asS'sigwait'
+p1929
+(lp1930
+S'int'
+p1931
+aS'const __sigset_t *restrict'
+p1932
+aS'int *restrict'
+p1933
+asS'strcasestr'
+p1934
+(lp1935
+S'char *'
+p1936
+aS'const char *'
+p1937
+aS'const char *'
+p1938
+asS'doChar'
+p1939
+(lp1940
+S'char'
+p1941
+asS'drand48_r'
+p1942
+(lp1943
+S'int'
+p1944
+aS'struct drand48_data *restrict'
+p1945
+aS'double *restrict'
+p1946
+asS'sigqueue'
+p1947
+(lp1948
+S'int'
+p1949
+aS'int'
+p1950
+aS'int'
+p1951
+aS'const union sigval'
+p1952
+asS'tmpfile64'
+p1953
+(lp1954
+S'struct _IO_FILE *'
+p1955
+asS'_IO_peekc_locked'
+p1956
+(lp1957
+S'int'
+p1958
+aS'struct _IO_FILE *'
+p1959
+asS'print_offset'
+p1960
+(lp1961
+S'void'
+p1962
+aS'unsigned long'
+p1963
+aS'int'
+p1964
+aS'const char *'
+p1965
+asS'pthread_attr_getstackaddr'
+p1966
+(lp1967
+S'int'
+p1968
+aS'const union pthread_attr_t *restrict'
+p1969
+aS'void **restrict'
+p1970
+asS'strtok_r'
+p1971
+(lp1972
+S'char *'
+p1973
+aS'char *restrict'
+p1974
+aS'const char *restrict'
+p1975
+aS'char **restrict'
+p1976
+asS'pselect'
+p1977
+(lp1978
+S'int'
+p1979
+aS'int'
+p1980
+aS'fd_set *restrict'
+p1981
+aS'fd_set *restrict'
+p1982
+aS'fd_set *restrict'
+p1983
+aS'const struct timespec *restrict'
+p1984
+aS'const __sigset_t *restrict'
+p1985
+asS'_gl_register_dup'
+p1986
+(lp1987
+S'int'
+p1988
+aS'int'
+p1989
+aS'int'
+p1990
+asS'pthread_once'
+p1991
+(lp1992
+S'int'
+p1993
+aS'int *'
+p1994
+aS'void (*)(void)'
+p1995
+asS'euidaccess'
+p1996
+(lp1997
+S'int'
+p1998
+aS'const char *'
+p1999
+aS'int'
+p2000
+asS'pthread_atfork'
+p2001
+(lp2002
+S'int'
+p2003
+aS'void (*)(void)'
+p2004
+aS'void (*)(void)'
+p2005
+aS'void (*)(void)'
+p2006
+asS'iswgraph'
+p2007
+(lp2008
+S'int'
+p2009
+aS'unsigned int'
+p2010
+asS'gl_lock_define_initialized'
+p2011
+(lp2012
+S'int'
+p2013
+aS'int'
+p2014
+aS'int'
+p2015
+asS'putwchar'
+p2016
+(lp2017
+S'unsigned int'
+p2018
+aS'int'
+p2019
+asS'__libc_current_sigrtmin'
+p2020
+(lp2021
+S'int'
+p2022
+asS'hash_initialize'
+p2023
+(lp2024
+S'int *'
+p2025
+aS'int'
+p2026
+aS'const int *'
+p2027
+aS'int'
+p2028
+aS'int'
+p2029
+aS'int'
+p2030
+asS'get_current_dir_name'
+p2031
+(lp2032
+S'char *'
+p2033
+asS'pthread_attr_destroy'
+p2034
+(lp2035
+S'int'
+p2036
+aS'union pthread_attr_t *'
+p2037
+asS'getrlimit64'
+p2038
+(lp2039
+S'int'
+p2040
+aS'enum __rlimit_resource'
+p2041
+aS'struct rlimit64 *'
+p2042
+asS'grepdesc'
+p2043
+(lp2044
+S'int'
+p2045
+aS'int'
+p2046
+aS'int'
+p2047
+asS'iswdigit_l'
+p2048
+(lp2049
+S'int'
+p2050
+aS'unsigned int'
+p2051
+aS'struct __locale_struct *'
+p2052
+asS'gl_locale_name_thread'
+p2053
+(lp2054
+S'const char *'
+p2055
+aS'int'
+p2056
+aS'const char *'
+p2057
+asS'iswalpha'
+p2058
+(lp2059
+S'int'
+p2060
+aS'unsigned int'
+p2061
+asS'getrlimit'
+p2062
+(lp2063
+S'int'
+p2064
+aS'enum __rlimit_resource'
+p2065
+aS'struct rlimit *'
+p2066
+asS'notset'
+p2067
+(lp2068
+S'void'
+p2069
+aS'unsigned int [0]'
+p2070
+asS'clone_quoting_options'
+p2071
+(lp2072
+S'struct quoting_options *'
+p2073
+aS'struct quoting_options *'
+p2074
+asS'_getopt_long_only_r'
+p2075
+(lp2076
+S'int'
+p2077
+aS'int'
+p2078
+aS'char **'
+p2079
+aS'const char *'
+p2080
+aS'const struct option *'
+p2081
+aS'int *'
+p2082
+aS'struct _getopt_data *'
+p2083
+asS'_toupper'
+p2084
+(lp2085
+S'int'
+p2086
+aS'int'
+p2087
+asS'timer_getoverrun'
+p2088
+(lp2089
+S'int'
+p2090
+aS'void *'
+p2091
+asS'dfa_charclass_index'
+p2092
+(lp2093
+S'int'
+p2094
+aS'struct dfa *'
+p2095
+aS'unsigned int const[0]'
+p2096
+asS'quote'
+p2097
+(lp2098
+S'const char *'
+p2099
+aS'const char *'
+p2100
+asS'catopen'
+p2101
+(lp2102
+S'void *'
+p2103
+aS'const char *'
+p2104
+aS'int'
+p2105
+asS'hash_get_n_buckets'
+p2106
+(lp2107
+S'int'
+p2108
+aS'const int *'
+p2109
+asS'wcsspn'
+p2110
+(lp2111
+S'int'
+p2112
+aS'const int *'
+p2113
+aS'const int *'
+p2114
+asS'rpl_iconv_open'
+p2115
+(lp2116
+S'void *'
+p2117
+aS'const char *'
+p2118
+aS'const char *'
+p2119
+asS'pthread_spin_unlock'
+p2120
+(lp2121
+S'int'
+p2122
+aS'volatile int *'
+p2123
+asS'getwc_unlocked'
+p2124
+(lp2125
+S'unsigned int'
+p2126
+aS'struct _IO_FILE *'
+p2127
+asS'pcre32_maketables'
+p2128
+(lp2129
+S'const unsigned char *'
+p2130
+asS'pthread_rwlock_tryrdlock'
+p2131
+(lp2132
+S'int'
+p2133
+aS'pthread_rwlock_t *'
+p2134
+asS'wcswcs'
+p2135
+(lp2136
+S'int *'
+p2137
+aS'const int *'
+p2138
+aS'const int *'
+p2139
+asS'alarm'
+p2140
+(lp2141
+S'unsigned int'
+p2142
+aS'unsigned int'
+p2143
+asS'readdir64_r'
+p2144
+(lp2145
+S'int'
+p2146
+aS'struct __dirstream *restrict'
+p2147
+aS'struct dirent64 *restrict'
+p2148
+aS'struct dirent64 **restrict'
+p2149
+asS'fseeko64'
+p2150
+(lp2151
+S'int'
+p2152
+aS'struct _IO_FILE *'
+p2153
+aS'long'
+p2154
+aS'int'
+p2155
+asS'xstrtol'
+p2156
+(lp2157
+S'int'
+p2158
+aS'const char *'
+p2159
+aS'char **'
+p2160
+aS'int'
+p2161
+aS'long *'
+p2162
+aS'const char *'
+p2163
+asS'pthread_attr_getdetachstate'
+p2164
+(lp2165
+S'int'
+p2166
+aS'const union pthread_attr_t *'
+p2167
+aS'int *'
+p2168
+asS'setlinebuf'
+p2169
+(lp2170
+S'void'
+p2171
+aS'struct _IO_FILE *'
+p2172
+asS'my_asnprintf'
+p2173
+(lp2174
+S'char *'
+p2175
+aS'char *'
+p2176
+aS'int *'
+p2177
+aS'const char *'
+p2178
+ag238
+asS'gboolean'
+p2179
+(lp2180
+S'int'
+p2181
+asS'setvbuf'
+p2182
+(lp2183
+S'int'
+p2184
+aS'struct _IO_FILE *restrict'
+p2185
+aS'char *restrict'
+p2186
+aS'int'
+p2187
+aS'int'
+p2188
+asS'print_filename'
+p2189
+(lp2190
+S'void'
+p2191
+asS'pthread_getattr_np'
+p2192
+(lp2193
+S'int'
+p2194
+aS'unsigned long'
+p2195
+aS'union pthread_attr_t *'
+p2196
+asS're_compile_pattern'
+p2197
+(lp2198
+S'const char *'
+p2199
+aS'const char *'
+p2200
+aS'int'
+p2201
+aS'struct re_pattern_buffer *'
+p2202
+asS'a64l'
+p2203
+(lp2204
+S'long'
+p2205
+aS'const char *'
+p2206
+asS'random'
+p2207
+(lp2208
+S'long'
+p2209
+asS'__xmknodat'
+p2210
+(lp2211
+S'int'
+p2212
+aS'int'
+p2213
+aS'int'
+p2214
+aS'const char *'
+p2215
+aS'unsigned int'
+p2216
+aS'unsigned long *'
+p2217
+asS'find_non_slash'
+p2218
+(lp2219
+S'char *'
+p2220
+aS'const char *'
+p2221
+asS're_compile_fastmap'
+p2222
+(lp2223
+S'int'
+p2224
+aS'struct re_pattern_buffer *'
+p2225
+asS'contains_encoding_error'
+p2226
+(lp2227
+S'int'
+p2228
+aS'const char *'
+p2229
+aS'int (int *)'
+p2230
+asS'color_cap_mt_fct'
+p2231
+(lp2232
+S'void'
+p2233
+asS'glthread_recursive_lock_lock_multithreaded'
+p2234
+(lp2235
+S'int'
+p2236
+aS'int *'
+p2237
+asS'cwd_advance_fd'
+p2238
+(lp2239
+S'void'
+p2240
+aS'int *'
+p2241
+aS'int'
+p2242
+aS'int'
+p2243
+asS'hash_string'
+p2244
+(lp2245
+S'int'
+p2246
+aS'const char *'
+p2247
+aS'int'
+p2248
+asS'fts_read'
+p2249
+(lp2250
+S'int *'
+p2251
+aS'int *'
+p2252
+asS'__sysv_signal'
+p2253
+(lp2254
+S'void (*)(int)'
+p2255
+aS'int'
+p2256
+aS'void (*)(int)'
+p2257
+asS'xalloc_die'
+p2258
+(lp2259
+S'void'
+p2260
+asS'__underflow'
+p2261
+(lp2262
+S'int'
+p2263
+aS'struct _IO_FILE *'
+p2264
+asS'glthread_recursive_lock_init_multithreaded'
+p2265
+(lp2266
+S'int'
+p2267
+aS'int *'
+p2268
+asS'version_etc_ar'
+p2269
+(lp2270
+S'void'
+p2271
+aS'struct _IO_FILE *'
+p2272
+aS'const char *'
+p2273
+aS'const char *'
+p2274
+aS'const char *'
+p2275
+aS'const char *const *'
+p2276
+asS'g_getenv'
+p2277
+(lp2278
+S'const int *'
+p2279
+aS'const int *'
+p2280
+asS'fgetpos64'
+p2281
+(lp2282
+S'int'
+p2283
+aS'struct _IO_FILE *restrict'
+p2284
+aS'_G_fpos64_t *restrict'
+p2285
+asS'lockf64'
+p2286
+(lp2287
+S'int'
+p2288
+aS'int'
+p2289
+aS'int'
+p2290
+aS'long'
+p2291
+asS'pthread_setconcurrency'
+p2292
+(lp2293
+S'int'
+p2294
+aS'int'
+p2295
+asS'fputs'
+p2296
+(lp2297
+S'int'
+p2298
+aS'const char *restrict'
+p2299
+aS'struct _IO_FILE *restrict'
+p2300
+asS'abs'
+p2301
+(lp2302
+S'int'
+p2303
+aS'int'
+p2304
+asS'strtof_l'
+p2305
+(lp2306
+S'float'
+p2307
+aS'const char *restrict'
+p2308
+aS'char **restrict'
+p2309
+aS'struct __locale_struct *'
+p2310
+asS'grepbuf'
+p2311
+(lp2312
+S'long'
+p2313
+aS'const char *'
+p2314
+aS'const char *'
+p2315
+asS'kwsincr'
+p2316
+(lp2317
+S'void'
+p2318
+aS'struct kwset *'
+p2319
+aS'const char *'
+p2320
+aS'int'
+p2321
+asS'AD_compare'
+p2322
+(lp2323
+S'int'
+p2324
+aS'const void *'
+p2325
+aS'const void *'
+p2326
+asS'xmem_cd_iconv'
+p2327
+(lp2328
+S'int'
+p2329
+aS'const char *'
+p2330
+aS'int'
+p2331
+aS'int'
+p2332
+aS'char **'
+p2333
+aS'int *'
+p2334
+asS'setmatcher'
+p2335
+(lp2336
+S'void'
+p2337
+aS'const char *'
+p2338
+asS'wmemset'
+p2339
+(lp2340
+S'int *'
+p2341
+aS'int *'
+p2342
+aS'int'
+p2343
+aS'int'
+p2344
+asS'iswctype'
+p2345
+(lp2346
+S'int'
+p2347
+aS'unsigned int'
+p2348
+aS'unsigned long'
+p2349
+asS'dup2'
+p2350
+(lp2351
+S'int'
+p2352
+aS'int'
+p2353
+aS'int'
+p2354
+asS'_obstack_allocated_p'
+p2355
+(lp2356
+S'int'
+p2357
+aS'struct obstack *'
+p2358
+aS'void *'
+p2359
+asS'xmemdup'
+p2360
+(lp2361
+S'void *'
+p2362
+aS'const void *'
+p2363
+aS'int'
+p2364
+asS'rawmemchr'
+p2365
+(lp2366
+S'void *'
+p2367
+aS'const void *'
+p2368
+aS'int'
+p2369
+asS'pthread_mutexattr_setrobust'
+p2370
+(lp2371
+S'int'
+p2372
+aS'pthread_mutexattr_t *'
+p2373
+aS'int'
+p2374
+asS'strsep'
+p2375
+(lp2376
+S'char *'
+p2377
+aS'char **restrict'
+p2378
+aS'const char *restrict'
+p2379
+asS'g_message'
+p2380
+(lp2381
+S'void'
+p2382
+aS'const int *'
+p2383
+ag238
+asS'ptsname_r'
+p2384
+(lp2385
+S'int'
+p2386
+aS'int'
+p2387
+aS'char *'
+p2388
+aS'int'
+p2389
+asS'strtod_l'
+p2390
+(lp2391
+S'double'
+p2392
+aS'const char *restrict'
+p2393
+aS'char **restrict'
+p2394
+aS'struct __locale_struct *'
+p2395
+asS'addtok_mb'
+p2396
+(lp2397
+S'void'
+p2398
+aS'int'
+p2399
+aS'int'
+p2400
+asS'quotearg_buffer_restyled'
+p2401
+(lp2402
+S'int'
+p2403
+aS'char *'
+p2404
+aS'int'
+p2405
+aS'const char *'
+p2406
+aS'int'
+p2407
+aS'enum quoting_style'
+p2408
+aS'int'
+p2409
+aS'const unsigned int *'
+p2410
+aS'const char *'
+p2411
+aS'const char *'
+p2412
+asS'sigwaitinfo'
+p2413
+(lp2414
+S'int'
+p2415
+aS'const __sigset_t *restrict'
+p2416
+aS'siginfo_t *restrict'
+p2417
+asS'dfacomp'
+p2418
+(lp2419
+S'void'
+p2420
+aS'const char *'
+p2421
+aS'int'
+p2422
+aS'struct dfa *'
+p2423
+aS'int'
+p2424
+asS'perror'
+p2425
+(lp2426
+S'void'
+p2427
+aS'const char *'
+p2428
+asS'srandom'
+p2429
+(lp2430
+S'void'
+p2431
+aS'unsigned int'
+p2432
+asS'iconv_open'
+p2433
+(lp2434
+S'void *'
+p2435
+aS'const char *'
+p2436
+aS'const char *'
+p2437
+asS'sigrelse'
+p2438
+(lp2439
+S'int'
+p2440
+aS'int'
+p2441
+asS'_tolower'
+p2442
+(lp2443
+S'int'
+p2444
+aS'int'
+p2445
+asS'c_toupper'
+p2446
+(lp2447
+S'int'
+p2448
+aS'int'
+p2449
+asS'fgetwc'
+p2450
+(lp2451
+S'unsigned int'
+p2452
+aS'struct _IO_FILE *'
+p2453
+asS'pr_sgr_start_if'
+p2454
+(lp2455
+S'void'
+p2456
+aS'const char *'
+p2457
+asS'pthread_cond_wait'
+p2458
+(lp2459
+S'int'
+p2460
+aS'pthread_cond_t *restrict'
+p2461
+aS'pthread_mutex_t *restrict'
+p2462
+asS'dysize'
+p2463
+(lp2464
+S'int'
+p2465
+aS'int'
+p2466
+asS'statfs'
+p2467
+(lp2468
+S'int'
+p2469
+aS'const char *'
+p2470
+aS'struct statfs *'
+p2471
+asS'Acompile'
+p2472
+(lp2473
+S'void'
+p2474
+aS'const char *'
+p2475
+aS'int (int *)'
+p2476
+asS'vhangup'
+p2477
+(lp2478
+S'int'
+p2479
+asS'posix_openpt'
+p2480
+(lp2481
+S'int'
+p2482
+aS'int'
+p2483
+asS'fetch_number'
+p2484
+(lp2485
+S'int'
+p2486
+aS'int *'
+p2487
+aS'int *'
+p2488
+aS'unsigned long'
+p2489
+asS'mkdirat'
+p2490
+(lp2491
+S'int'
+p2492
+aS'int'
+p2493
+aS'const char *'
+p2494
+aS'unsigned int'
+p2495
+asS'fgetws'
+p2496
+(lp2497
+S'int *'
+p2498
+aS'int *restrict'
+p2499
+aS'int'
+p2500
+aS'struct _IO_FILE *restrict'
+p2501
+asS'rpl_getcwd'
+p2502
+(lp2503
+S'char *'
+p2504
+aS'char *'
+p2505
+aS'int'
+p2506
+asS'strncmp'
+p2507
+(lp2508
+S'int'
+p2509
+asS'add_exclude_fp'
+p2510
+(lp2511
+S'int'
+p2512
+aS'void (*)(struct exclude *, const char *, int, void *)'
+p2513
+aS'struct exclude *'
+p2514
+aS'struct _IO_FILE *'
+p2515
+aS'int'
+p2516
+aS'char'
+p2517
+aS'void *'
+p2518
+asS'mbtowc'
+p2519
+(lp2520
+S'int'
+p2521
+aS'int *restrict'
+p2522
+aS'const char *restrict'
+p2523
+aS'int'
+p2524
+asS'mkdtemp'
+p2525
+(lp2526
+S'char *'
+p2527
+aS'char *'
+p2528
+asS'iswgraph_l'
+p2529
+(lp2530
+S'int'
+p2531
+aS'unsigned int'
+p2532
+aS'struct __locale_struct *'
+p2533
+asS'pthread_attr_getinheritsched'
+p2534
+(lp2535
+S'int'
+p2536
+aS'const union pthread_attr_t *restrict'
+p2537
+aS'int *restrict'
+p2538
+asS'strcat'
+p2539
+(lp2540
+S'char *'
+p2541
+aS'char *restrict'
+p2542
+aS'const char *restrict'
+p2543
+asS'maybe_realloc'
+p2544
+(lp2545
+S'void *'
+p2546
+aS'void *'
+p2547
+aS'int'
+p2548
+aS'int *'
+p2549
+aS'int'
+p2550
+asS'orig_fstatat'
+p2551
+(lp2552
+S'int'
+p2553
+aS'int'
+p2554
+aS'const char *'
+p2555
+aS'struct stat *'
+p2556
+aS'int'
+p2557
+asS'atexit'
+p2558
+(lp2559
+S'int'
+p2560
+aS'void (*)(void)'
+p2561
+asS'fchownat'
+p2562
+(lp2563
+S'int'
+p2564
+aS'int'
+p2565
+aS'const char *'
+p2566
+aS'unsigned int'
+p2567
+aS'unsigned int'
+p2568
+aS'int'
+p2569
+asS'putwc'
+p2570
+(lp2571
+S'unsigned int'
+p2572
+aS'int'
+p2573
+aS'struct _IO_FILE *'
+p2574
+asS'gpointer'
+p2575
+(lp2576
+S'int'
+p2577
+asS'close'
+p2578
+(lp2579
+S'int'
+p2580
+aS'int'
+p2581
+asS'jrand48'
+p2582
+(lp2583
+S'long'
+p2584
+aS'unsigned short [3]'
+p2585
+asS'g_warning'
+p2586
+(lp2587
+S'void'
+p2588
+aS'const int *'
+p2589
+ag238
+asS'strchr'
+p2590
+(lp2591
+S'char *'
+p2592
+aS'const char *'
+p2593
+aS'int'
+p2594
+asS'pthread_barrier_wait'
+p2595
+(lp2596
+S'int'
+p2597
+aS'pthread_barrier_t *'
+p2598
+asS'pthread_attr_setdetachstate'
+p2599
+(lp2600
+S'int'
+p2601
+aS'union pthread_attr_t *'
+p2602
+aS'int'
+p2603
+asS'hash_free'
+p2604
+(lp2605
+S'void'
+p2606
+aS'int *'
+p2607
+asS'fgetpos'
+p2608
+(lp2609
+S'int'
+p2610
+aS'struct _IO_FILE *restrict'
+p2611
+aS'_G_fpos_t *restrict'
+p2612
+asS'pcre_refcount'
+p2613
+(lp2614
+S'int'
+p2615
+aS'struct real_pcre *'
+p2616
+aS'int'
+p2617
+asS'posix_memalign'
+p2618
+(lp2619
+S'int'
+p2620
+aS'void **'
+p2621
+aS'int'
+p2622
+aS'int'
+p2623
+asS'_IO_padn'
+p2624
+(lp2625
+S'long'
+p2626
+aS'struct _IO_FILE *'
+p2627
+aS'int'
+p2628
+aS'long'
+p2629
+asS'print_start_colorize'
+p2630
+(lp2631
+S'void'
+p2632
+aS'const char *'
+p2633
+aS'const char *'
+p2634
+asS'sigaltstack'
+p2635
+(lp2636
+S'int'
+p2637
+aS'const struct sigaltstack *restrict'
+p2638
+aS'struct sigaltstack *restrict'
+p2639
+asS're_set_syntax'
+p2640
+(lp2641
+S'unsigned long'
+p2642
+aS'unsigned long'
+p2643
+asS'call_addfn'
+p2644
+(lp2645
+S'void'
+p2646
+aS'struct exclude *'
+p2647
+aS'const char *'
+p2648
+aS'int'
+p2649
+aS'void *'
+p2650
+asS'pcre_get_substring_list'
+p2651
+(lp2652
+S'int'
+p2653
+aS'const char *'
+p2654
+aS'int *'
+p2655
+aS'int'
+p2656
+aS'const char ***'
+p2657
+asS'w32_sgr2attr'
+p2658
+(lp2659
+S'int'
+p2660
+aS'const char *'
+p2661
+asS'openat_restore_fail'
+p2662
+(lp2663
+S'void'
+p2664
+aS'int'
+p2665
+asS'sync_file_range'
+p2666
+(lp2667
+S'int'
+p2668
+aS'int'
+p2669
+aS'long'
+p2670
+aS'long'
+p2671
+aS'unsigned int'
+p2672
+asS'__lxstat64'
+p2673
+(lp2674
+S'int'
+p2675
+aS'int'
+p2676
+aS'const char *'
+p2677
+aS'struct stat64 *'
+p2678
+asS'__overflow'
+p2679
+(lp2680
+S'int'
+p2681
+aS'struct _IO_FILE *'
+p2682
+aS'int'
+p2683
+asS'rpl_malloc'
+p2684
+(lp2685
+S'void *'
+p2686
+aS'int'
+p2687
+asS'setresgid'
+p2688
+(lp2689
+S'int'
+p2690
+aS'unsigned int'
+p2691
+aS'unsigned int'
+p2692
+aS'unsigned int'
+p2693
+asS'timelocal'
+p2694
+(lp2695
+S'long'
+p2696
+aS'struct tm *'
+p2697
+asS'glthread_once_singlethreaded'
+p2698
+(lp2699
+S'int'
+p2700
+aS'int *'
+p2701
+asS'getdirentries'
+p2702
+(lp2703
+S'long'
+p2704
+aS'int'
+p2705
+aS'char *restrict'
+p2706
+aS'int'
+p2707
+aS'long *restrict'
+p2708
+asS'ungetwc'
+p2709
+(lp2710
+S'unsigned int'
+p2711
+aS'unsigned int'
+p2712
+aS'struct _IO_FILE *'
+p2713
+asS'set_cloexec_flag'
+p2714
+(lp2715
+S'int'
+p2716
+aS'int'
+p2717
+aS'int'
+p2718
+asS'setbit'
+p2719
+(lp2720
+S'void'
+p2721
+aS'unsigned int'
+p2722
+aS'unsigned int [0]'
+p2723
+asS'seed48_r'
+p2724
+(lp2725
+S'int'
+p2726
+aS'unsigned short [3]'
+p2727
+aS'struct drand48_data *'
+p2728
+asS'futimesat'
+p2729
+(lp2730
+S'int'
+p2731
+aS'int'
+p2732
+aS'const char *'
+p2733
+aS'struct timeval const[2]'
+p2734
+asS'pcre_jit_free_unused_memory'
+p2735
+(lp2736
+S'void'
+p2737
+asS'fstatat'
+p2738
+(lp2739
+S'int'
+p2740
+aS'int'
+p2741
+aS'const char *restrict'
+p2742
+aS'struct stat *restrict'
+p2743
+aS'int'
+p2744
+asS're_match'
+p2745
+(lp2746
+S'int'
+p2747
+aS'struct re_pattern_buffer *'
+p2748
+aS'const char *'
+p2749
+aS'int'
+p2750
+aS'int'
+p2751
+aS'struct re_registers *'
+p2752
+asS'rpl_iconv_close'
+p2753
+(lp2754
+S'int'
+p2755
+aS'void *'
+p2756
+asS'sysv_signal'
+p2757
+(lp2758
+S'void (*)(int)'
+p2759
+aS'int'
+p2760
+aS'void (*)(int)'
+p2761
+asS'timer_settime'
+p2762
+(lp2763
+S'int'
+p2764
+aS'void *'
+p2765
+aS'int'
+p2766
+aS'const struct itimerspec *restrict'
+p2767
+aS'struct itimerspec *restrict'
+p2768
+asS'grepfile'
+p2769
+(lp2770
+S'int'
+p2771
+aS'int'
+p2772
+aS'const char *'
+p2773
+aS'int'
+p2774
+aS'int'
+p2775
+asS'xmalloc'
+p2776
+(lp2777
+S'void *'
+p2778
+aS'int'
+p2779
+asS'wcstoumax'
+p2780
+(lp2781
+S'unsigned long'
+p2782
+aS'const int *restrict'
+p2783
+aS'int **restrict'
+p2784
+aS'int'
+p2785
+asS'mbsinit'
+p2786
+(lp2787
+S'int'
+p2788
+aS'const __mbstate_t *'
+p2789
+asS'gmtime_r'
+p2790
+(lp2791
+S'struct tm *'
+p2792
+aS'const long *restrict'
+p2793
+aS'struct tm *restrict'
+p2794
+asS'__tolower_l'
+p2795
+(lp2796
+S'int'
+p2797
+aS'int'
+p2798
+aS'struct __locale_struct *'
+p2799
+asS'fchdir'
+p2800
+(lp2801
+S'int'
+p2802
+aS'int'
+p2803
+asS'fflush_unlocked'
+p2804
+(lp2805
+S'int'
+p2806
+aS'struct _IO_FILE *'
+p2807
+asS'putwchar_unlocked'
+p2808
+(lp2809
+S'unsigned int'
+p2810
+aS'int'
+p2811
+asS'symlinkat'
+p2812
+(lp2813
+S'int'
+p2814
+aS'const char *'
+p2815
+aS'int'
+p2816
+aS'const char *'
+p2817
+asS'file_pattern_matches'
+p2818
+(lp2819
+S'int'
+p2820
+aS'const struct exclude_segment *'
+p2821
+aS'const char *'
+p2822
+asS'pread'
+p2823
+(lp2824
+S'long'
+p2825
+aS'int'
+p2826
+aS'void *'
+p2827
+aS'int'
+p2828
+aS'long'
+p2829
+asS'pthread_spin_init'
+p2830
+(lp2831
+S'int'
+p2832
+aS'volatile int *'
+p2833
+aS'int'
+p2834
+asS'putw'
+p2835
+(lp2836
+S'int'
+p2837
+aS'int'
+p2838
+aS'struct _IO_FILE *'
+p2839
+asS'gethostname'
+p2840
+(lp2841
+S'int'
+p2842
+aS'char *'
+p2843
+aS'int'
+p2844
+asS'raise'
+p2845
+(lp2846
+S'int'
+p2847
+aS'int'
+p2848
+asS'puts'
+p2849
+(lp2850
+S'int'
+p2851
+aS'const char *'
+p2852
+asS'gl_locale_name_environ'
+p2853
+(lp2854
+S'const char *'
+p2855
+aS'int'
+p2856
+aS'const char *'
+p2857
+asS'fallocate64'
+p2858
+(lp2859
+S'int'
+p2860
+aS'int'
+p2861
+aS'int'
+p2862
+aS'long'
+p2863
+aS'long'
+p2864
+asS'gnu_dev_major'
+p2865
+(lp2866
+S'unsigned int'
+p2867
+aS'unsigned long long'
+p2868
+asS'argmatch_to_argument'
+p2869
+(lp2870
+S'const char *'
+p2871
+aS'const char *'
+p2872
+aS'const char *const *'
+p2873
+aS'const char *'
+p2874
+aS'int'
+p2875
+asS'putc'
+p2876
+(lp2877
+S'int'
+p2878
+aS'int'
+p2879
+aS'struct _IO_FILE *'
+p2880
+asS'test_locale_name_thread'
+p2881
+(lp2882
+S'void'
+p2883
+asS'dup'
+p2884
+(lp2885
+S'int'
+p2886
+aS'int'
+p2887
+asS'readdir64'
+p2888
+(lp2889
+S'struct dirent64 *'
+p2890
+aS'struct __dirstream *'
+p2891
+asS'fts_build'
+p2892
+(lp2893
+S'int *'
+p2894
+aS'int *'
+p2895
+aS'int'
+p2896
+asS'pthread_setaffinity_np'
+p2897
+(lp2898
+S'int'
+p2899
+aS'unsigned long'
+p2900
+aS'int'
+p2901
+aS'const cpu_set_t *'
+p2902
+asS'quotearg_style_mem'
+p2903
+(lp2904
+S'char *'
+p2905
+aS'enum quoting_style'
+p2906
+aS'const char *'
+p2907
+aS'int'
+p2908
+asS'strsignal'
+p2909
+(lp2910
+S'char *'
+p2911
+aS'int'
+p2912
+asS'execvp'
+p2913
+(lp2914
+S'int'
+p2915
+aS'const char *'
+p2916
+aS'char *const[]'
+p2917
+asS'AT_FUNC_NAME'
+p2918
+(lp2919
+S'int'
+p2920
+aS'int'
+p2921
+aS'const char *'
+p2922
+asS'mbsrtowcs'
+p2923
+(lp2924
+S'int'
+p2925
+aS'int *restrict'
+p2926
+aS'const char **restrict'
+p2927
+aS'int'
+p2928
+aS'__mbstate_t *restrict'
+p2929
+asS'optimize_subexps'
+p2930
+(lp2931
+S'reg_errcode_t'
+p2932
+aS'void *'
+p2933
+aS'int *'
+p2934
+asS'pthread_attr_setschedparam'
+p2935
+(lp2936
+S'int'
+p2937
+aS'union pthread_attr_t *restrict'
+p2938
+aS'const struct sched_param *restrict'
+p2939
+asS'prepend_default_options'
+p2940
+(lp2941
+S'int'
+p2942
+aS'const char *'
+p2943
+aS'int *'
+p2944
+aS'char ***'
+p2945
+asS'wcswidth'
+p2946
+(lp2947
+S'int'
+p2948
+aS'const int *'
+p2949
+aS'int'
+p2950
+asS'dup_safer'
+p2951
+(lp2952
+S'int'
+p2953
+aS'int'
+p2954
+asS'hash_delete'
+p2955
+(lp2956
+S'void *'
+p2957
+aS'int *'
+p2958
+aS'const void *'
+p2959
+asS'category_to_name'
+p2960
+(lp2961
+S'const char *'
+p2962
+aS'int'
+p2963
+asS'allocate_entry'
+p2964
+(lp2965
+S'struct hash_entry *'
+p2966
+aS'int *'
+p2967
+asS'open_wmemstream'
+p2968
+(lp2969
+S'struct _IO_FILE *'
+p2970
+aS'int **'
+p2971
+aS'int *'
+p2972
+asS'pthread_getname_np'
+p2973
+(lp2974
+S'int'
+p2975
+aS'unsigned long'
+p2976
+aS'char *'
+p2977
+aS'int'
+p2978
+asS'PAcompile'
+p2979
+(lp2980
+S'void'
+p2981
+aS'const char *'
+p2982
+aS'int (int *)'
+p2983
+asS'swscanf'
+p2984
+(lp2985
+S'int'
+p2986
+aS'const int *restrict'
+p2987
+aS'const int *restrict'
+p2988
+ag238
+asS'TYPE_MINIMUM'
+p2989
+(lp2990
+S'int'
+p2991
+asS'dup_cloexec'
+p2992
+(lp2993
+S'int'
+p2994
+aS'int'
+p2995
+asS'gl_locale_name_posix'
+p2996
+(lp2997
+S'const char *'
+p2998
+aS'int'
+p2999
+aS'const char *'
+p3000
+asS'error'
+p3001
+(lp3002
+S'void'
+p3003
+aS'int'
+p3004
+aS'int'
+p3005
+aS'const char *'
+p3006
+ag238
+asS'fputwc_unlocked'
+p3007
+(lp3008
+S'unsigned int'
+p3009
+aS'int'
+p3010
+aS'struct _IO_FILE *'
+p3011
+asS'strptime_l'
+p3012
+(lp3013
+S'char *'
+p3014
+aS'const char *restrict'
+p3015
+aS'const char *restrict'
+p3016
+aS'struct tm *'
+p3017
+aS'struct __locale_struct *'
+p3018
+asS'clearenv'
+p3019
+(lp3020
+S'int'
+p3021
+asS'add_exclude_file'
+p3022
+(lp3023
+S'int'
+p3024
+aS'void (*)(struct exclude *, const char *, int)'
+p3025
+aS'struct exclude *'
+p3026
+aS'const char *'
+p3027
+aS'int'
+p3028
+aS'char'
+p3029
+asS'chdir_long'
+p3030
+(lp3031
+S'int'
+p3032
+aS'char *'
+p3033
+asS'malloc'
+p3034
+(lp3035
+S'void *'
+p3036
+asS'popen'
+p3037
+(lp3038
+S'struct _IO_FILE *'
+p3039
+aS'const char *'
+p3040
+aS'const char *'
+p3041
+asS'fts_load'
+p3042
+(lp3043
+S'void'
+p3044
+aS'int *'
+p3045
+aS'int *'
+p3046
+asS'pthread_spin_lock'
+p3047
+(lp3048
+S'int'
+p3049
+aS'volatile int *'
+p3050
+asS'c_isascii'
+p3051
+(lp3052
+S'int'
+p3053
+aS'int'
+p3054
+asS'lrand48_r'
+p3055
+(lp3056
+S'int'
+p3057
+aS'struct drand48_data *restrict'
+p3058
+aS'long *restrict'
+p3059
+asS'wmemcpy'
+p3060
+(lp3061
+S'int *'
+p3062
+aS'int *restrict'
+p3063
+aS'const int *restrict'
+p3064
+aS'int'
+p3065
+asS'bm_delta2_search'
+p3066
+(lp3067
+S'int'
+p3068
+aS'const char **'
+p3069
+aS'const char *'
+p3070
+aS'const char *'
+p3071
+aS'int'
+p3072
+aS'const char *'
+p3073
+aS'char'
+p3074
+aS'char'
+p3075
+aS'const unsigned char *'
+p3076
+aS'struct kwset *'
+p3077
+asS'__pthread_unwind_next'
+p3078
+(lp3079
+S'void'
+p3080
+aS'__pthread_unwind_buf_t *'
+p3081
+asS'pcre_maketables'
+p3082
+(lp3083
+S'const unsigned char *'
+p3084
+asS'dngettext'
+p3085
+(lp3086
+S'char *'
+p3087
+aS'const char *'
+p3088
+aS'const char *'
+p3089
+aS'const char *'
+p3090
+aS'unsigned long'
+p3091
+asS'test_locale_name_environ'
+p3092
+(lp3093
+S'void'
+p3094
+asS'imaxabs'
+p3095
+(lp3096
+S'long'
+p3097
+aS'long'
+p3098
+asS'raw_hasher'
+p3099
+(lp3100
+S'int'
+p3101
+aS'const void *'
+p3102
+aS'int'
+p3103
+asS'init_dfa'
+p3104
+(lp3105
+S'reg_errcode_t'
+p3106
+aS'int *'
+p3107
+aS'int'
+p3108
+asS'towlower'
+p3109
+(lp3110
+S'unsigned int'
+p3111
+aS'unsigned int'
+p3112
+asS'_IO_ferror'
+p3113
+(lp3114
+S'int'
+p3115
+aS'struct _IO_FILE *'
+p3116
+asS'pcre32_get_stringtable_entries'
+p3117
+(lp3118
+S'int'
+p3119
+aS'const struct real_pcre32 *'
+p3120
+aS'const unsigned int *'
+p3121
+aS'unsigned int **'
+p3122
+aS'unsigned int **'
+p3123
+asS'raw_comparator'
+p3124
+(lp3125
+S'int'
+p3126
+aS'const void *'
+p3127
+aS'const void *'
+p3128
+asS'dos_unix_byte_offsets'
+p3129
+(lp3130
+S'void'
+p3131
+asS'gsignal'
+p3132
+(lp3133
+S'int'
+p3134
+aS'int'
+p3135
+asS'xstr_iconv'
+p3136
+(lp3137
+S'char *'
+p3138
+aS'const char *'
+p3139
+aS'const char *'
+p3140
+aS'const char *'
+p3141
+asS'pthread_mutexattr_setrobust_np'
+p3142
+(lp3143
+S'int'
+p3144
+aS'pthread_mutexattr_t *'
+p3145
+aS'int'
+p3146
+asS'fnmatch_pattern_has_wildcards'
+p3147
+(lp3148
+S'int'
+p3149
+aS'const char *'
+p3150
+aS'int'
+p3151
+asS'getusershell'
+p3152
+(lp3153
+S'char *'
+p3154
+asS'uc_width'
+p3155
+(lp3156
+S'int'
+p3157
+aS'int'
+p3158
+aS'const char *'
+p3159
+asS'fdopendir'
+p3160
+(lp3161
+S'struct __dirstream *'
+p3162
+aS'int'
+p3163
+asS'isgraph'
+p3164
+(lp3165
+S'int'
+p3166
+aS'int'
+p3167
+asS'pthread_attr_getstack'
+p3168
+(lp3169
+S'int'
+p3170
+aS'const union pthread_attr_t *restrict'
+p3171
+aS'void **restrict'
+p3172
+aS'int *restrict'
+p3173
+asS'pcre_compile2'
+p3174
+(lp3175
+S'struct real_pcre *'
+p3176
+aS'const char *'
+p3177
+aS'int'
+p3178
+aS'int *'
+p3179
+aS'const char **'
+p3180
+aS'int *'
+p3181
+aS'const unsigned char *'
+p3182
+asS'add_utf8_anychar'
+p3183
+(lp3184
+S'void'
+p3185
+asS'clock_getcpuclockid'
+p3186
+(lp3187
+S'int'
+p3188
+aS'int'
+p3189
+aS'int *'
+p3190
+asS'srandom_r'
+p3191
+(lp3192
+S'int'
+p3193
+aS'unsigned int'
+p3194
+aS'struct random_data *'
+p3195
+asS'nl_langinfo'
+p3196
+(lp3197
+S'char *'
+p3198
+aS'int'
+p3199
+asS'call_freefun'
+p3200
+(lp3201
+S'void'
+p3202
+aS'struct obstack *'
+p3203
+aS'void *'
+p3204
+asS'pcre32_get_substring_list'
+p3205
+(lp3206
+S'int'
+p3207
+aS'const unsigned int *'
+p3208
+aS'int *'
+p3209
+aS'int'
+p3210
+aS'const unsigned int ***'
+p3211
+asS'clock_adjtime'
+p3212
+(lp3213
+S'int'
+p3214
+aS'int'
+p3215
+aS'struct timex *'
+p3216
+asS'leaf_optimization_applies'
+p3217
+(lp3218
+S'int'
+p3219
+aS'int'
+p3220
+asS'glthread_rwlock_destroy_multithreaded'
+p3221
+(lp3222
+S'int'
+p3223
+aS'int *'
+p3224
+asS'textbin_is_binary'
+p3225
+(lp3226
+S'int'
+p3227
+aS'enum textbin'
+p3228
+asS'free_cwd'
+p3229
+(lp3230
+S'void'
+p3231
+aS'struct saved_cwd *'
+p3232
+asS'wcstombs'
+p3233
+(lp3234
+S'int'
+p3235
+aS'char *restrict'
+p3236
+aS'const int *restrict'
+p3237
+aS'int'
+p3238
+asS'hash_do_for_each'
+p3239
+(lp3240
+S'int'
+p3241
+aS'const int *'
+p3242
+aS'int'
+p3243
+aS'void *'
+p3244
+asS'iswcntrl_l'
+p3245
+(lp3246
+S'int'
+p3247
+aS'unsigned int'
+p3248
+aS'struct __locale_struct *'
+p3249
+asS'print_line_middle'
+p3250
+(lp3251
+S'const char *'
+p3252
+aS'const char *'
+p3253
+aS'const char *'
+p3254
+aS'const char *'
+p3255
+aS'const char *'
+p3256
+asS'nrand48'
+p3257
+(lp3258
+S'long'
+p3259
+aS'unsigned short [3]'
+p3260
+asS'seekdir'
+p3261
+(lp3262
+S'void'
+p3263
+aS'struct __dirstream *'
+p3264
+aS'long'
+p3265
+asS'textdomain'
+p3266
+(lp3267
+S'char *'
+p3268
+aS'const char *'
+p3269
+asS'IsConsoleHandle'
+p3270
+(lp3271
+S'int'
+p3272
+aS'int'
+p3273
+asS'geteuid'
+p3274
+(lp3275
+S'unsigned int'
+p3276
+asS'mempcpy'
+p3277
+(lp3278
+S'void *'
+p3279
+aS'void *restrict'
+p3280
+aS'const void *restrict'
+p3281
+aS'int'
+p3282
+asS'pthread_mutexattr_setprioceiling'
+p3283
+(lp3284
+S'int'
+p3285
+aS'pthread_mutexattr_t *'
+p3286
+aS'int'
+p3287
+asS'setdomainname'
+p3288
+(lp3289
+S'int'
+p3290
+aS'const char *'
+p3291
+aS'int'
+p3292
+asS'set_custom_quoting'
+p3293
+(lp3294
+S'void'
+p3295
+aS'struct quoting_options *'
+p3296
+aS'const char *'
+p3297
+aS'const char *'
+p3298
+asS'wcpcpy'
+p3299
+(lp3300
+S'int *'
+p3301
+aS'int *restrict'
+p3302
+aS'const int *restrict'
+p3303
+asS'versionsort'
+p3304
+(lp3305
+S'int'
+p3306
+aS'const struct dirent **'
+p3307
+aS'const struct dirent **'
+p3308
+asS'is_char_class'
+p3309
+(lp3310
+S'unsigned long'
+p3311
+aS'const int *'
+p3312
+asS'opendirat'
+p3313
+(lp3314
+S'struct __dirstream *'
+p3315
+aS'int'
+p3316
+aS'const char *'
+p3317
+aS'int'
+p3318
+aS'int *'
+p3319
+asS'print_and_abort'
+p3320
+(lp3321
+S'void'
+p3322
+asS'all_zeros'
+p3323
+(lp3324
+S'int'
+p3325
+aS'const char *'
+p3326
+aS'int (int *)'
+p3327
+asS'__lxstat'
+p3328
+(lp3329
+S'int'
+p3330
+aS'int'
+p3331
+aS'const char *'
+p3332
+aS'struct stat *'
+p3333
+asS'wctrans'
+p3334
+(lp3335
+S'const int *'
+p3336
+aS'const char *'
+p3337
+asS'pthread_condattr_destroy'
+p3338
+(lp3339
+S'int'
+p3340
+aS'pthread_condattr_t *'
+p3341
+asS'pthread_mutexattr_getpshared'
+p3342
+(lp3343
+S'int'
+p3344
+aS'const pthread_mutexattr_t *restrict'
+p3345
+aS'int *restrict'
+p3346
+asS'fflush'
+p3347
+(lp3348
+S'int'
+p3349
+aS'struct _IO_FILE *'
+p3350
+asS'pthread_mutexattr_gettype'
+p3351
+(lp3352
+S'int'
+p3353
+aS'const pthread_mutexattr_t *restrict'
+p3354
+aS'int *restrict'
+p3355
+asS'hasevery'
+p3356
+(lp3357
+S'int'
+p3358
+aS'const struct tree *'
+p3359
+aS'const struct tree *'
+p3360
+asS'w32_clreol'
+p3361
+(lp3362
+S'void'
+p3363
+asS'g_date_time_add_seconds'
+p3364
+(lp3365
+S'struct _GDateTime *'
+p3366
+aS'struct _GDateTime *'
+p3367
+aS'int'
+p3368
+asS'ldiv'
+p3369
+(lp3370
+S'ldiv_t'
+p3371
+aS'long'
+p3372
+aS'long'
+p3373
+asS'pcre32_dfa_exec'
+p3374
+(lp3375
+S'int'
+p3376
+aS'const struct real_pcre32 *'
+p3377
+aS'const struct pcre32_extra *'
+p3378
+aS'const unsigned int *'
+p3379
+aS'int'
+p3380
+aS'int'
+p3381
+aS'int'
+p3382
+aS'int *'
+p3383
+aS'int'
+p3384
+aS'int *'
+p3385
+aS'int'
+p3386
+asS'transit_state'
+p3387
+(lp3388
+S'int'
+p3389
+aS'struct dfa *'
+p3390
+aS'int'
+p3391
+aS'const unsigned char **'
+p3392
+aS'const unsigned char *'
+p3393
+asS'__argmatch_die'
+p3394
+(lp3395
+S'void'
+p3396
+asS'lchown'
+p3397
+(lp3398
+S'int'
+p3399
+aS'const char *'
+p3400
+aS'unsigned int'
+p3401
+aS'unsigned int'
+p3402
+asS'proper_name_utf8'
+p3403
+(lp3404
+S'const char *'
+p3405
+aS'const char *'
+p3406
+aS'const char *'
+p3407
+asS'tmpnam'
+p3408
+(lp3409
+S'char *'
+p3410
+aS'char *'
+p3411
+asS'sigisemptyset'
+p3412
+(lp3413
+S'int'
+p3414
+aS'const __sigset_t *'
+p3415
+asS'pthread_rwlockattr_init'
+p3416
+(lp3417
+S'int'
+p3418
+aS'pthread_rwlockattr_t *'
+p3419
+asS'iswalpha_l'
+p3420
+(lp3421
+S'int'
+p3422
+aS'unsigned int'
+p3423
+aS'struct __locale_struct *'
+p3424
+asS're_search'
+p3425
+(lp3426
+S'int'
+p3427
+aS'struct re_pattern_buffer *'
+p3428
+aS'const char *'
+p3429
+aS'int'
+p3430
+aS'int'
+p3431
+aS'int'
+p3432
+aS'struct re_registers *'
+p3433
+asS'_getopt_internal_r'
+p3434
+(lp3435
+S'int'
+p3436
+aS'int'
+p3437
+aS'char **'
+p3438
+aS'const char *'
+p3439
+aS'const struct option *'
+p3440
+aS'int *'
+p3441
+aS'int'
+p3442
+aS'struct _getopt_data *'
+p3443
+aS'int'
+p3444
+asS'quotearg_n_custom'
+p3445
+(lp3446
+S'char *'
+p3447
+aS'int'
+p3448
+aS'const char *'
+p3449
+aS'const char *'
+p3450
+aS'const char *'
+p3451
+asS'toascii'
+p3452
+(lp3453
+S'int'
+p3454
+aS'int'
+p3455
+asS'dfaparse'
+p3456
+(lp3457
+S'void'
+p3458
+aS'const char *'
+p3459
+aS'int'
+p3460
+aS'struct dfa *'
+p3461
+asS'gnu_dev_minor'
+p3462
+(lp3463
+S'unsigned int'
+p3464
+aS'unsigned long long'
+p3465
+asS'ensure_dirs_slot'
+p3466
+(lp3467
+S'int'
+p3468
+aS'int'
+p3469
+asS'daemon'
+p3470
+(lp3471
+S'int'
+p3472
+aS'int'
+p3473
+aS'int'
+p3474
+asS'strstr'
+p3475
+(lp3476
+S'char *'
+p3477
+aS'const char *'
+p3478
+aS'const char *'
+p3479
+asS'ctime'
+p3480
+(lp3481
+S'char *'
+p3482
+aS'const long *'
+p3483
+asS'__sched_cpualloc'
+p3484
+(lp3485
+S'cpu_set_t *'
+p3486
+aS'int'
+p3487
+asS'newlocale'
+p3488
+(lp3489
+S'struct __locale_struct *'
+p3490
+aS'int'
+p3491
+aS'const char *'
+p3492
+aS'struct __locale_struct *'
+p3493
+asS'signal'
+p3494
+(lp3495
+S'void (*)(int)'
+p3496
+aS'int'
+p3497
+aS'void (*)(int)'
+p3498
+asS'fgetwc_unlocked'
+p3499
+(lp3500
+S'unsigned int'
+p3501
+aS'struct _IO_FILE *'
+p3502
+asS'mblen'
+p3503
+(lp3504
+S'int'
+p3505
+aS'const char *'
+p3506
+aS'int'
+p3507
+asS'setegid'
+p3508
+(lp3509
+S'int'
+p3510
+aS'unsigned int'
+p3511
+asS'close_stdout'
+p3512
+(lp3513
+S'void'
+p3514
+asS'_IO_vfprintf'
+p3515
+(lp3516
+S'int'
+p3517
+aS'struct _IO_FILE *restrict'
+p3518
+aS'const char *restrict'
+p3519
+aS'int'
+p3520
+asS'freopen'
+p3521
+(lp3522
+S'struct _IO_FILE *'
+p3523
+aS'const char *restrict'
+p3524
+aS'const char *restrict'
+p3525
+aS'struct _IO_FILE *restrict'
+p3526
+asS'hash_pjw'
+p3527
+(lp3528
+S'int'
+p3529
+aS'const void *'
+p3530
+aS'int'
+p3531
+asS'bsd_signal'
+p3532
+(lp3533
+S'void (*)(int)'
+p3534
+aS'int'
+p3535
+aS'void (*)(int)'
+p3536
+asS'fread_unlocked'
+p3537
+(lp3538
+S'int'
+p3539
+aS'void *restrict'
+p3540
+aS'int'
+p3541
+aS'int'
+p3542
+aS'struct _IO_FILE *restrict'
+p3543
+asS'tempnam'
+p3544
+(lp3545
+S'char *'
+p3546
+aS'const char *'
+p3547
+aS'const char *'
+p3548
+asS'tmpfile'
+p3549
+(lp3550
+S'struct _IO_FILE *'
+p3551
+asS'rpmatch'
+p3552
+(lp3553
+S'int'
+p3554
+aS'const char *'
+p3555
+asS'c_isspace'
+p3556
+(lp3557
+S'int'
+p3558
+aS'int'
+p3559
+asS'prtext'
+p3560
+(lp3561
+S'void'
+p3562
+aS'const char *'
+p3563
+aS'const char *'
+p3564
+asS'ftruncate64'
+p3565
+(lp3566
+S'int'
+p3567
+aS'int'
+p3568
+aS'long'
+p3569
+asS'iswpunct'
+p3570
+(lp3571
+S'int'
+p3572
+aS'unsigned int'
+p3573
+asS'get_name'
+p3574
+(lp3575
+S'char *'
+p3576
+aS'const char *'
+p3577
+asS'getgid'
+p3578
+(lp3579
+S'unsigned int'
+p3580
+asS'ctermid'
+p3581
+(lp3582
+S'char *'
+p3583
+aS'char *'
+p3584
+asS'end_pattern'
+p3585
+(lp3586
+S'const char *'
+p3587
+aS'const char *'
+p3588
+asS'_IO_feof'
+p3589
+(lp3590
+S'int'
+p3591
+aS'struct _IO_FILE *'
+p3592
+asS'pcre_get_stringtable_entries'
+p3593
+(lp3594
+S'int'
+p3595
+aS'const struct real_pcre *'
+p3596
+aS'const char *'
+p3597
+aS'char **'
+p3598
+aS'char **'
+p3599
+asS'dfafree'
+p3600
+(lp3601
+S'void'
+p3602
+aS'struct dfa *'
+p3603
+asS'abort'
+p3604
+(lp3605
+S'void'
+p3606
+asS'pcre_study'
+p3607
+(lp3608
+S'struct pcre_extra *'
+p3609
+aS'const struct real_pcre *'
+p3610
+aS'int'
+p3611
+aS'const char **'
+p3612
+asS'proper_name'
+p3613
+(lp3614
+S'const char *'
+p3615
+aS'const char *'
+p3616
+asS'strip_trailing_slashes'
+p3617
+(lp3618
+S'int'
+p3619
+aS'char *'
+p3620
+asS'ttyname_r'
+p3621
+(lp3622
+S'int'
+p3623
+aS'int'
+p3624
+aS'char *'
+p3625
+aS'int'
+p3626
+asS'test_locale_name_default'
+p3627
+(lp3628
+S'void'
+p3629
+asS'sighold'
+p3630
+(lp3631
+S'int'
+p3632
+aS'int'
+p3633
+asS'getpagesize'
+p3634
+(lp3635
+S'int'
+p3636
+asS'regerror'
+p3637
+(lp3638
+S'int'
+p3639
+aS'int'
+p3640
+aS'const struct re_pattern_buffer *restrict'
+p3641
+aS'char *restrict'
+p3642
+aS'int'
+p3643
+asS'fchmodat'
+p3644
+(lp3645
+S'int'
+p3646
+aS'int'
+p3647
+aS'const char *'
+p3648
+aS'unsigned int'
+p3649
+aS'int'
+p3650
+asS'pthread_rwlock_trywrlock'
+p3651
+(lp3652
+S'int'
+p3653
+aS'pthread_rwlock_t *'
+p3654
+asS'using_utf8'
+p3655
+(lp3656
+S'int'
+p3657
+asS'u8_mbtoucr'
+p3658
+(lp3659
+S'int'
+p3660
+aS'int *'
+p3661
+aS'const int *'
+p3662
+aS'int'
+p3663
+asS'gmtime'
+p3664
+(lp3665
+S'struct tm *'
+p3666
+aS'const long *'
+p3667
+asS'bmexec'
+p3668
+(lp3669
+S'int'
+p3670
+aS'struct kwset *'
+p3671
+aS'const char *'
+p3672
+aS'int'
+p3673
+asS'fgrep_to_grep_pattern'
+p3674
+(lp3675
+S'void'
+p3676
+aS'int (int *)'
+p3677
+aS'const char *'
+p3678
+aS'int (*)(int *)'
+p3679
+aS'char **'
+p3680
+asS'calc_next'
+p3681
+(lp3682
+S'reg_errcode_t'
+p3683
+aS'void *'
+p3684
+aS'int *'
+p3685
+asS'fcloseall'
+p3686
+(lp3687
+S'int'
+p3688
+asS'sigtimedwait'
+p3689
+(lp3690
+S'int'
+p3691
+aS'const __sigset_t *restrict'
+p3692
+aS'siginfo_t *restrict'
+p3693
+aS'const struct timespec *restrict'
+p3694
+asS'timer_gettime'
+p3695
+(lp3696
+S'int'
+p3697
+aS'void *'
+p3698
+aS'struct itimerspec *'
+p3699
+asS'printf_parse'
+p3700
+(lp3701
+S'int'
+p3702
+aS'const char *'
+p3703
+aS'int *'
+p3704
+aS'int *'
+p3705
+asS'guess_type'
+p3706
+(lp3707
+S'File_type'
+p3708
+aS'char *'
+p3709
+aS'int (int *)'
+p3710
+asS'set_quoting_style'
+p3711
+(lp3712
+S'void'
+p3713
+aS'struct quoting_options *'
+p3714
+aS'enum quoting_style'
+p3715
+asS'wcsftime_l'
+p3716
+(lp3717
+S'int'
+p3718
+aS'int *restrict'
+p3719
+aS'int'
+p3720
+aS'const int *restrict'
+p3721
+aS'const struct tm *restrict'
+p3722
+aS'struct __locale_struct *'
+p3723
+asS'_gl_directory_name'
+p3724
+(lp3725
+S'const char *'
+p3726
+aS'int'
+p3727
+asS'TYPE_MAXIMUM'
+p3728
+(lp3729
+S'int'
+p3730
+asS're_set_registers'
+p3731
+(lp3732
+S'void'
+p3733
+aS'struct re_pattern_buffer *'
+p3734
+aS'struct re_registers *'
+p3735
+aS'unsigned int'
+p3736
+aS'int *'
+p3737
+aS'int *'
+p3738
+asS'canonicalize_file_name'
+p3739
+(lp3740
+S'char *'
+p3741
+aS'const char *'
+p3742
+asS'add_to_interval'
+p3743
+(lp3744
+S'void'
+p3745
+aS'int'
+p3746
+aS'char'
+p3747
+asS'pthread_sigqueue'
+p3748
+(lp3749
+S'int'
+p3750
+aS'unsigned long'
+p3751
+aS'int'
+p3752
+aS'const union sigval'
+p3753
+asS'iswdigit'
+p3754
+(lp3755
+S'int'
+p3756
+aS'unsigned int'
+p3757
+asS'file_name_matches'
+p3758
+(lp3759
+S'int'
+p3760
+aS'const struct exclude_segment *'
+p3761
+aS'const char *'
+p3762
+aS'char *'
+p3763
+asS'bsearch'
+p3764
+(lp3765
+S'void *'
+p3766
+aS'const void *'
+p3767
+aS'const void *'
+p3768
+aS'int'
+p3769
+aS'int'
+p3770
+aS'int (*)(const void *, const void *)'
+p3771
+asS'iswpunct_l'
+p3772
+(lp3773
+S'int'
+p3774
+aS'unsigned int'
+p3775
+aS'struct __locale_struct *'
+p3776
+asS'quotearg_custom'
+p3777
+(lp3778
+S'char *'
+p3779
+aS'const char *'
+p3780
+aS'const char *'
+p3781
+aS'const char *'
+p3782
+asS'copyset'
+p3783
+(lp3784
+S'void'
+p3785
+aS'unsigned int const[0]'
+p3786
+aS'unsigned int [0]'
+p3787
+asS'open_safer'
+p3788
+(lp3789
+S'int'
+p3790
+aS'const char *'
+p3791
+aS'int'
+p3792
+ag238
+asS'Fcompile'
+p3793
+(lp3794
+S'void'
+p3795
+aS'const char *'
+p3796
+aS'int'
+p3797
+asS'setitimer'
+p3798
+(lp3799
+S'int'
+p3800
+aS'enum __itimer_which'
+p3801
+aS'const struct itimerval *restrict'
+p3802
+aS'struct itimerval *restrict'
+p3803
+asS'lower_subexps'
+p3804
+(lp3805
+S'reg_errcode_t'
+p3806
+aS'void *'
+p3807
+aS'int *'
+p3808
+asS'pcre_get_named_substring'
+p3809
+(lp3810
+S'int'
+p3811
+aS'const struct real_pcre *'
+p3812
+aS'const char *'
+p3813
+aS'int *'
+p3814
+aS'int'
+p3815
+aS'const char *'
+p3816
+aS'const char **'
+p3817
+asS'argmatch_invalid'
+p3818
+(lp3819
+S'void'
+p3820
+aS'const char *'
+p3821
+aS'const char *'
+p3822
+aS'int'
+p3823
+asS'getpgid'
+p3824
+(lp3825
+S'int'
+p3826
+aS'int'
+p3827
+asS'gethostid'
+p3828
+(lp3829
+S'long'
+p3830
+asS'fopen'
+p3831
+(lp3832
+S'struct _IO_FILE *'
+p3833
+aS'const char *restrict'
+p3834
+aS'const char *restrict'
+p3835
+asS'check_matching_with_multibyte_ops'
+p3836
+(lp3837
+S'int *'
+p3838
+aS'struct dfa *'
+p3839
+aS'int'
+p3840
+aS'const char *'
+p3841
+aS'unsigned int'
+p3842
+aS'int'
+p3843
+asS'getdelim'
+p3844
+(lp3845
+S'long'
+p3846
+aS'char **restrict'
+p3847
+aS'int *restrict'
+p3848
+aS'int'
+p3849
+aS'struct _IO_FILE *restrict'
+p3850
+asS'memccpy'
+p3851
+(lp3852
+S'void *'
+p3853
+aS'void *restrict'
+p3854
+aS'const void *restrict'
+p3855
+aS'int'
+p3856
+aS'int'
+p3857
+asS'orig_open'
+p3858
+(lp3859
+S'int'
+p3860
+aS'const char *'
+p3861
+aS'int'
+p3862
+aS'unsigned int'
+p3863
+asS'gl_locale_name_thread_unsafe'
+p3864
+(lp3865
+S'const char *'
+p3866
+aS'int'
+p3867
+aS'const char *'
+p3868
+asS'__xargmatch_internal'
+p3869
+(lp3870
+S'int'
+p3871
+aS'const char *'
+p3872
+aS'const char *'
+p3873
+aS'const char *const *'
+p3874
+aS'const char *'
+p3875
+aS'int'
+p3876
+aS'int'
+p3877
+asS'g_date_time_add_minutes'
+p3878
+(lp3879
+S'struct _GDateTime *'
+p3880
+aS'struct _GDateTime *'
+p3881
+aS'int'
+p3882
+asS'towctrans'
+p3883
+(lp3884
+S'unsigned int'
+p3885
+aS'unsigned int'
+p3886
+aS'const int *'
+p3887
+asS'analyze'
+p3888
+(lp3889
+S'reg_errcode_t'
+p3890
+aS'struct re_pattern_buffer *'
+p3891
+asS'pcre_get_stringnumber'
+p3892
+(lp3893
+S'int'
+p3894
+aS'const struct real_pcre *'
+p3895
+aS'const char *'
+p3896
+asS'fork'
+p3897
+(lp3898
+S'int'
+p3899
+asS'dfassbuild'
+p3900
+(lp3901
+S'void'
+p3902
+aS'struct dfa *'
+p3903
+asS'pthread_condattr_getclock'
+p3904
+(lp3905
+S'int'
+p3906
+aS'const pthread_condattr_t *restrict'
+p3907
+aS'int *restrict'
+p3908
+asS'resetmust'
+p3909
+(lp3910
+S'void'
+p3911
+aS'struct must *'
+p3912
+asS'dfawarn'
+p3913
+(lp3914
+S'void'
+p3915
+aS'const char *'
+p3916
+asS'hash_get_next'
+p3917
+(lp3918
+S'void *'
+p3919
+aS'const int *'
+p3920
+aS'const void *'
+p3921
+asS'pthread_setschedprio'
+p3922
+(lp3923
+S'int'
+p3924
+aS'unsigned long'
+p3925
+aS'int'
+p3926
+asS'pthread_barrierattr_init'
+p3927
+(lp3928
+S'int'
+p3929
+aS'pthread_barrierattr_t *'
+p3930
+asS'rpl_lseek'
+p3931
+(lp3932
+S'long'
+p3933
+aS'int'
+p3934
+aS'long'
+p3935
+aS'int'
+p3936
+asS'pcre32_free_study'
+p3937
+(lp3938
+S'void'
+p3939
+aS'struct pcre32_extra *'
+p3940
+asS'atoi'
+p3941
+(lp3942
+S'int'
+p3943
+aS'const char *'
+p3944
+asS'link'
+p3945
+(lp3946
+S'int'
+p3947
+aS'const char *'
+p3948
+aS'const char *'
+p3949
+asS'_IO_funlockfile'
+p3950
+(lp3951
+S'void'
+p3952
+aS'struct _IO_FILE *'
+p3953
+asS'_obstack_memory_used'
+p3954
+(lp3955
+S'int'
+p3956
+aS'struct obstack *'
+p3957
+asS'pthread_mutex_unlock'
+p3958
+(lp3959
+S'int'
+p3960
+aS'pthread_mutex_t *'
+p3961
+asS'allocmust'
+p3962
+(lp3963
+S'struct must *'
+p3964
+aS'struct must *'
+p3965
+asS'atof'
+p3966
+(lp3967
+S'double'
+p3968
+aS'const char *'
+p3969
+asS'strdup'
+p3970
+(lp3971
+S'char *'
+p3972
+aS'const char *'
+p3973
+asS'reset'
+p3974
+(lp3975
+S'int'
+p3976
+aS'int'
+p3977
+aS'const struct stat *'
+p3978
+asS'erand48'
+p3979
+(lp3980
+S'double'
+p3981
+aS'unsigned short [3]'
+p3982
+asS'alloc_position_set'
+p3983
+(lp3984
+S'void'
+p3985
+aS'struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p3986
+aS'int'
+p3987
+asS'match_mb_charset'
+p3988
+(lp3989
+S'int'
+p3990
+aS'struct dfa *'
+p3991
+aS'int'
+p3992
+aS'struct (anonymous at pgm/src/grep/dfa.c:258:9)'
+p3993
+aS'const char *'
+p3994
+aS'unsigned int'
+p3995
+aS'int'
+p3996
+asS'pthread_yield'
+p3997
+(lp3998
+S'int'
+p3999
+asS'pcre16_copy_named_substring'
+p4000
+(lp4001
+S'int'
+p4002
+aS'const struct real_pcre16 *'
+p4003
+aS'const unsigned short *'
+p4004
+aS'int *'
+p4005
+aS'int'
+p4006
+aS'const unsigned short *'
+p4007
+aS'unsigned short *'
+p4008
+aS'int'
+p4009
+asS'rpl_dup'
+p4010
+(lp4011
+S'int'
+p4012
+aS'int'
+p4013
+asS'duplicate_node'
+p4014
+(lp4015
+S'int'
+p4016
+aS'int *'
+p4017
+aS'int'
+p4018
+aS'unsigned int'
+p4019
+asS'sched_setscheduler'
+p4020
+(lp4021
+S'int'
+p4022
+aS'int'
+p4023
+aS'int'
+p4024
+aS'const struct sched_param *'
+p4025
+asS'imaxdiv'
+p4026
+(lp4027
+S'imaxdiv_t'
+p4028
+aS'long'
+p4029
+aS'long'
+p4030
+asS'ungetc'
+p4031
+(lp4032
+S'int'
+p4033
+aS'int'
+p4034
+aS'struct _IO_FILE *'
+p4035
+asS'pcre_jit_exec'
+p4036
+(lp4037
+S'int'
+p4038
+aS'const struct real_pcre *'
+p4039
+aS'const struct pcre_extra *'
+p4040
+aS'const char *'
+p4041
+aS'int'
+p4042
+aS'int'
+p4043
+aS'int'
+p4044
+aS'int *'
+p4045
+aS'int'
+p4046
+aS'struct real_pcre_jit_stack *'
+p4047
+asS'dfamusts'
+p4048
+(lp4049
+S'struct dfamust *'
+p4050
+aS'const struct dfa *'
+p4051
+asS'_gl_unregister_fd'
+p4052
+(lp4053
+S'void'
+p4054
+aS'int'
+p4055
+asS'uselocale'
+p4056
+(lp4057
+S'struct __locale_struct *'
+p4058
+aS'struct __locale_struct *'
+p4059
+asS'psiginfo'
+p4060
+(lp4061
+S'void'
+p4062
+aS'const siginfo_t *'
+p4063
+aS'const char *'
+p4064
+asS'save_cwd'
+p4065
+(lp4066
+S'int'
+p4067
+aS'struct saved_cwd *'
+p4068
+asS'transfer_entries'
+p4069
+(lp4070
+S'int'
+p4071
+aS'int *'
+p4072
+aS'int *'
+p4073
+aS'int'
+p4074
+asS'ffsl'
+p4075
+(lp4076
+S'int'
+p4077
+aS'long'
+p4078
+asS'free_exclude_segment'
+p4079
+(lp4080
+S'void'
+p4081
+aS'struct exclude_segment *'
+p4082
+asS'syscall'
+p4083
+(lp4084
+S'long'
+p4085
+aS'long'
+p4086
+ag238
+asS'pthread_barrierattr_getpshared'
+p4087
+(lp4088
+S'int'
+p4089
+aS'const pthread_barrierattr_t *restrict'
+p4090
+aS'int *restrict'
+p4091
+asS'mbrtowc'
+p4092
+(lp4093
+S'int'
+p4094
+aS'int *restrict'
+p4095
+aS'const char *restrict'
+p4096
+aS'int'
+p4097
+aS'__mbstate_t *restrict'
+p4098
+asS'ftello'
+p4099
+(lp4100
+S'long'
+p4101
+aS'struct _IO_FILE *'
+p4102
+asS'quotearg_n_style'
+p4103
+(lp4104
+S'char *'
+p4105
+aS'int'
+p4106
+aS'enum quoting_style'
+p4107
+aS'const char *'
+p4108
+asS'pcre_copy_named_substring'
+p4109
+(lp4110
+S'int'
+p4111
+aS'const struct real_pcre *'
+p4112
+aS'const char *'
+p4113
+aS'int *'
+p4114
+aS'int'
+p4115
+aS'const char *'
+p4116
+aS'char *'
+p4117
+aS'int'
+p4118
+asS'wctype'
+p4119
+(lp4120
+S'unsigned long'
+p4121
+aS'const char *'
+p4122
+asS'initstate'
+p4123
+(lp4124
+S'char *'
+p4125
+aS'unsigned int'
+p4126
+aS'char *'
+p4127
+aS'int'
+p4128
+asS'pread64'
+p4129
+(lp4130
+S'long'
+p4131
+aS'int'
+p4132
+aS'void *'
+p4133
+aS'int'
+p4134
+aS'long'
+p4135
+asS'check_flags'
+p4136
+(lp4137
+S'void'
+p4138
+asS'isdigit'
+p4139
+(lp4140
+S'int'
+p4141
+aS'int'
+p4142
+asS'isatty'
+p4143
+(lp4144
+S'int'
+p4145
+aS'int'
+p4146
+asS'xzalloc'
+p4147
+(lp4148
+S'void *'
+p4149
+aS'int'
+p4150
+asS'alignof_slot'
+p4151
+(lp4152
+S'int'
+p4153
+asS'stat64'
+p4154
+(lp4155
+S'int'
+p4156
+aS'const char *restrict'
+p4157
+aS'struct stat64 *restrict'
+p4158
+asS'encrypt'
+p4159
+(lp4160
+S'void'
+p4161
+aS'char *'
+p4162
+aS'int'
+p4163
+asS'fillbuf'
+p4164
+(lp4165
+S'int'
+p4166
+aS'int (int *)'
+p4167
+aS'const struct stat *'
+p4168
+asS'creat_safer'
+p4169
+(lp4170
+S'int'
+p4171
+aS'const char *'
+p4172
+aS'unsigned int'
+p4173
+asS'c_isupper'
+p4174
+(lp4175
+S'int'
+p4176
+aS'int'
+p4177
+asS'memmem'
+p4178
+(lp4179
+S'void *'
+p4180
+aS'const void *'
+p4181
+aS'int'
+p4182
+aS'const void *'
+p4183
+aS'int'
+p4184
+asS'crypt'
+p4185
+(lp4186
+S'char *'
+p4187
+aS'const char *'
+p4188
+aS'const char *'
+p4189
+asS'transit_state_consume_1char'
+p4190
+(lp4191
+S'status_transit_state'
+p4192
+aS'struct dfa *'
+p4193
+aS'int'
+p4194
+aS'const unsigned char **'
+p4195
+aS'unsigned int'
+p4196
+aS'int'
+p4197
+aS'int *'
+p4198
+asS'hash_reset_tuning'
+p4199
+(lp4200
+S'void'
+p4201
+aS'int *'
+p4202
+asS'setpriority'
+p4203
+(lp4204
+S'int'
+p4205
+aS'enum __priority_which'
+p4206
+aS'unsigned int'
+p4207
+aS'int'
+p4208
+asS'quotearg_colon_mem'
+p4209
+(lp4210
+S'char *'
+p4211
+aS'const char *'
+p4212
+aS'int'
+p4213
+asS'wcsncpy'
+p4214
+(lp4215
+S'int *'
+p4216
+aS'int *restrict'
+p4217
+aS'const int *restrict'
+p4218
+aS'int'
+p4219
+asS'nice'
+p4220
+(lp4221
+S'int'
+p4222
+aS'int'
+p4223
+asS'__strtoull_internal'
+p4224
+(lp4225
+S'unsigned long long'
+p4226
+aS'const char *'
+p4227
+aS'char **'
+p4228
+aS'int'
+p4229
+aS'int'
+p4230
+asS'g_critical'
+p4231
+(lp4232
+S'void'
+p4233
+aS'const int *'
+p4234
+ag238
+asS'truncate'
+p4235
+(lp4236
+S'int'
+p4237
+aS'const char *'
+p4238
+aS'long'
+p4239
+asS'sigsuspend'
+p4240
+(lp4241
+S'int'
+p4242
+aS'const __sigset_t *'
+p4243
+asS'__ctype_toupper_loc'
+p4244
+(lp4245
+S'const int **'
+p4246
+asS'statfs64'
+p4247
+(lp4248
+S'int'
+p4249
+aS'const char *'
+p4250
+aS'struct statfs64 *'
+p4251
+asS'closedir'
+p4252
+(lp4253
+S'int'
+p4254
+aS'struct __dirstream *'
+p4255
+asS'getegid'
+p4256
+(lp4257
+S'unsigned int'
+p4258
+asS'mkostemp64'
+p4259
+(lp4260
+S'int'
+p4261
+aS'char *'
+p4262
+aS'int'
+p4263
+asS'pcre16_exec'
+p4264
+(lp4265
+S'int'
+p4266
+aS'const struct real_pcre16 *'
+p4267
+aS'const struct pcre16_extra *'
+p4268
+aS'const unsigned short *'
+p4269
+aS'int'
+p4270
+aS'int'
+p4271
+aS'int'
+p4272
+aS'int *'
+p4273
+aS'int'
+p4274
+asS'xcalloc'
+p4275
+(lp4276
+S'void *'
+p4277
+aS'int'
+p4278
+aS'int'
+p4279
+asS'dir_len'
+p4280
+(lp4281
+S'int'
+p4282
+aS'const char *'
+p4283
+asS'dossified_pos'
+p4284
+(lp4285
+S'long'
+p4286
+aS'long'
+p4287
+asS'check_tuning'
+p4288
+(lp4289
+S'int'
+p4290
+aS'int *'
+p4291
+asS'gettimeofday'
+p4292
+(lp4293
+S'int'
+p4294
+aS'struct timeval *restrict'
+p4295
+aS'struct timezone *restrict'
+p4296
+asS'hash_insert_if_absent'
+p4297
+(lp4298
+S'int'
+p4299
+aS'int *'
+p4300
+aS'const void *'
+p4301
+aS'const void **'
+p4302
+asS'print_sep'
+p4303
+(lp4304
+S'void'
+p4305
+aS'char'
+p4306
+asS'time'
+p4307
+(lp4308
+S'long'
+p4309
+aS'long *'
+p4310
+asS'rpl_unsetenv'
+p4311
+(lp4312
+S'int'
+p4313
+aS'const char *'
+p4314
+asS'offsetof'
+p4315
+(lp4316
+S'int'
+p4317
+asS'copytoks'
+p4318
+(lp4319
+S'void'
+p4320
+aS'int'
+p4321
+aS'int'
+p4322
+asS'g_get_user_name'
+p4323
+(lp4324
+S'const int *'
+p4325
+asS'AD_hash'
+p4326
+(lp4327
+S'int'
+p4328
+aS'const void *'
+p4329
+aS'int'
+p4330
+asS'revoke'
+p4331
+(lp4332
+S'int'
+p4333
+aS'const char *'
+p4334
+asS'u8_uctomb_aux'
+p4335
+(lp4336
+S'int'
+p4337
+aS'int *'
+p4338
+aS'int'
+p4339
+aS'int'
+p4340
+asS'pthread_mutex_lock'
+p4341
+(lp4342
+S'int'
+p4343
+aS'pthread_mutex_t *'
+p4344
+asS'iscntrl_l'
+p4345
+(lp4346
+S'int'
+p4347
+aS'int'
+p4348
+aS'struct __locale_struct *'
+p4349
+asS'fclose'
+p4350
+(lp4351
+S'int'
+p4352
+aS'struct _IO_FILE *'
+p4353
+asS'pcre16_refcount'
+p4354
+(lp4355
+S'int'
+p4356
+aS'struct real_pcre16 *'
+p4357
+aS'int'
+p4358
+asS'pthread_barrier_destroy'
+p4359
+(lp4360
+S'int'
+p4361
+aS'pthread_barrier_t *'
+p4362
+asS'freopen64'
+p4363
+(lp4364
+S'struct _IO_FILE *'
+p4365
+aS'const char *restrict'
+p4366
+aS'const char *restrict'
+p4367
+aS'struct _IO_FILE *restrict'
+p4368
+asS'pcre32_get_named_substring'
+p4369
+(lp4370
+S'int'
+p4371
+aS'const struct real_pcre32 *'
+p4372
+aS'const unsigned int *'
+p4373
+aS'int *'
+p4374
+aS'int'
+p4375
+aS'const unsigned int *'
+p4376
+aS'const unsigned int **'
+p4377
+asS'fsetpos'
+p4378
+(lp4379
+S'int'
+p4380
+aS'struct _IO_FILE *'
+p4381
+aS'const _G_fpos_t *'
+p4382
+asS'pthread_getconcurrency'
+p4383
+(lp4384
+S'int'
+p4385
+asS'towlower_l'
+p4386
+(lp4387
+S'unsigned int'
+p4388
+aS'unsigned int'
+p4389
+aS'struct __locale_struct *'
+p4390
+asS'pthread_testcancel'
+p4391
+(lp4392
+S'void'
+p4393
+asS'do_allocation'
+p4394
+(lp4395
+S'void'
+p4396
+aS'int'
+p4397
+asS'duplicate_tree'
+p4398
+(lp4399
+S'int *'
+p4400
+aS'const int *'
+p4401
+aS'int *'
+p4402
+asS'quotearg_char'
+p4403
+(lp4404
+S'char *'
+p4405
+aS'const char *'
+p4406
+aS'char'
+p4407
+asS'c_ispunct'
+p4408
+(lp4409
+S'int'
+p4410
+aS'int'
+p4411
+asS'pthread_getcpuclockid'
+p4412
+(lp4413
+S'int'
+p4414
+aS'unsigned long'
+p4415
+aS'int *'
+p4416
+asS'sched_getaffinity'
+p4417
+(lp4418
+S'int'
+p4419
+aS'int'
+p4420
+aS'int'
+p4421
+aS'cpu_set_t *'
+p4422
+asS'sched_setparam'
+p4423
+(lp4424
+S'int'
+p4425
+aS'int'
+p4426
+aS'const struct sched_param *'
+p4427
+asS'cdb_free'
+p4428
+(lp4429
+S'void'
+p4430
+aS'const struct cd_buf *'
+p4431
+asS'icatalloc'
+p4432
+(lp4433
+S'char *'
+p4434
+aS'char *'
+p4435
+aS'const char *'
+p4436
+asS'g_qsort_with_data'
+p4437
+(lp4438
+S'void'
+p4439
+aS'int'
+p4440
+aS'int'
+p4441
+aS'int'
+p4442
+aS'int'
+p4443
+aS'int'
+p4444
+asS'pthread_setname_np'
+p4445
+(lp4446
+S'int'
+p4447
+aS'unsigned long'
+p4448
+aS'const char *'
+p4449
+asS'__bzero'
+p4450
+(lp4451
+S'void'
+p4452
+aS'void *'
+p4453
+aS'int'
+p4454
+asS'func2'
+p4455
+(lp4456
+S'int'
+p4457
+aS'int'
+p4458
+ag238
+asS'func1'
+p4459
+(lp4460
+S'int'
+p4461
+aS'int'
+p4462
+ag238
+asS'pthread_attr_getaffinity_np'
+p4463
+(lp4464
+S'int'
+p4465
+aS'const union pthread_attr_t *'
+p4466
+aS'int'
+p4467
+aS'cpu_set_t *'
+p4468
+asS'pcre16_fullinfo'
+p4469
+(lp4470
+S'int'
+p4471
+aS'const struct real_pcre16 *'
+p4472
+aS'const struct pcre16_extra *'
+p4473
+aS'int'
+p4474
+aS'void *'
+p4475
+asS'_IO_putc'
+p4476
+(lp4477
+S'int'
+p4478
+aS'int'
+p4479
+aS'struct _IO_FILE *'
+p4480
+asS'pthread_rwlockattr_destroy'
+p4481
+(lp4482
+S'int'
+p4483
+aS'pthread_rwlockattr_t *'
+p4484
+asS'c_iscntrl'
+p4485
+(lp4486
+S'int'
+p4487
+aS'int'
+p4488
+asS'enqueue'
+p4489
+(lp4490
+S'void'
+p4491
+aS'struct tree *'
+p4492
+aS'struct trie **'
+p4493
+asS'charclass_index'
+p4494
+(lp4495
+S'int'
+p4496
+aS'unsigned int const[0]'
+p4497
+asS'chdir'
+p4498
+(lp4499
+S'int'
+p4500
+aS'const char *'
+p4501
+asS'seteuid'
+p4502
+(lp4503
+S'int'
+p4504
+aS'unsigned int'
+p4505
+asS'quotearg_n_style_mem'
+p4506
+(lp4507
+S'char *'
+p4508
+aS'int'
+p4509
+aS'enum quoting_style'
+p4510
+aS'const char *'
+p4511
+aS'int'
+p4512
+asS'cdb_advance_fd'
+p4513
+(lp4514
+S'int'
+p4515
+aS'struct cd_buf *'
+p4516
+aS'const char *'
+p4517
+asS'hash_freer'
+p4518
+(lp4519
+S'void'
+p4520
+aS'void *'
+p4521
+asS'pcre16_compile2'
+p4522
+(lp4523
+S'struct real_pcre16 *'
+p4524
+aS'const unsigned short *'
+p4525
+aS'int'
+p4526
+aS'int *'
+p4527
+aS'const char **'
+p4528
+aS'int *'
+p4529
+aS'const unsigned char *'
+p4530
+asS'getumask'
+p4531
+(lp4532
+S'unsigned int'
+p4533
+asS'bkm_scale'
+p4534
+(lp4535
+S'int'
+p4536
+aS'long *'
+p4537
+aS'int'
+p4538
+asS'strnlen'
+p4539
+(lp4540
+S'int'
+p4541
+aS'const char *'
+p4542
+aS'int'
+p4543
+asS'dfasyntax'
+p4544
+(lp4545
+S'void'
+p4546
+aS'unsigned long'
+p4547
+aS'int'
+p4548
+aS'unsigned char'
+p4549
+asS'create_token_tree'
+p4550
+(lp4551
+S'int *'
+p4552
+aS'int *'
+p4553
+aS'int *'
+p4554
+aS'int *'
+p4555
+aS'const int *'
+p4556
+asS'glthread_recursive_lock_destroy_multithreaded'
+p4557
+(lp4558
+S'int'
+p4559
+aS'int *'
+p4560
+asS'mfile_name_concat'
+p4561
+(lp4562
+S'char *'
+p4563
+aS'const char *'
+p4564
+aS'const char *'
+p4565
+aS'char **'
+p4566
+asS'div'
+p4567
+(lp4568
+S'div_t'
+p4569
+aS'int'
+p4570
+aS'int'
+p4571
+asS'sigorset'
+p4572
+(lp4573
+S'int'
+p4574
+aS'__sigset_t *'
+p4575
+aS'const __sigset_t *'
+p4576
+aS'const __sigset_t *'
+p4577
+asS'isblank'
+p4578
+(lp4579
+S'int'
+p4580
+aS'int'
+p4581
+asS'putchar_unlocked'
+p4582
+(lp4583
+S'int'
+p4584
+aS'int'
+p4585
+asS'pcre32_jit_stack_free'
+p4586
+(lp4587
+S'void'
+p4588
+aS'struct real_pcre32_jit_stack *'
+p4589
+asS'ecvt'
+p4590
+(lp4591
+S'char *'
+p4592
+aS'double'
+p4593
+aS'int'
+p4594
+aS'int *restrict'
+p4595
+aS'int *restrict'
+p4596
+asS'mem_cd_iconv'
+p4597
+(lp4598
+S'int'
+p4599
+aS'const char *'
+p4600
+aS'int'
+p4601
+aS'void *'
+p4602
+aS'char **'
+p4603
+aS'int *'
+p4604
+asS'doPtr'
+p4605
+(lp4606
+S'void *'
+p4607
+asS'memset'
+p4608
+(lp4609
+S'void *'
+p4610
+asS'pcre16_jit_stack_alloc'
+p4611
+(lp4612
+S'struct real_pcre16_jit_stack *'
+p4613
+aS'int'
+p4614
+aS'int'
+p4615
+asS'init_colorize'
+p4616
+(lp4617
+S'void'
+p4618
+asS'obstack_free'
+p4619
+(lp4620
+S'void'
+p4621
+aS'struct obstack *'
+p4622
+aS'void *'
+p4623
+asS'__stpcpy'
+p4624
+(lp4625
+S'char *'
+p4626
+aS'char *restrict'
+p4627
+aS'const char *restrict'
+p4628
+asS'hash_get_first'
+p4629
+(lp4630
+S'void *'
+p4631
+aS'const int *'
+p4632
+asS'vfwprintf'
+p4633
+(lp4634
+S'int'
+p4635
+aS'struct _IO_FILE *restrict'
+p4636
+aS'const int *restrict'
+p4637
+aS'int'
+p4638
+asS'__ctype_get_mb_cur_max'
+p4639
+(lp4640
+S'int'
+p4641
+asS'calc_inveclosure'
+p4642
+(lp4643
+S'reg_errcode_t'
+p4644
+aS'int *'
+p4645
+asS'mktemp'
+p4646
+(lp4647
+S'char *'
+p4648
+aS'char *'
+p4649
+asS'index'
+p4650
+(lp4651
+S'char *'
+p4652
+aS'const char *'
+p4653
+aS'int'
+p4654
+asS'wcscasecmp_l'
+p4655
+(lp4656
+S'int'
+p4657
+aS'const int *'
+p4658
+aS'const int *'
+p4659
+aS'struct __locale_struct *'
+p4660
+asS'bkm_scale_by_power'
+p4661
+(lp4662
+S'int'
+p4663
+aS'long *'
+p4664
+aS'int'
+p4665
+aS'int'
+p4666
+asS'getchar_unlocked'
+p4667
+(lp4668
+S'int'
+p4669
+asS'hash_get_n_buckets_used'
+p4670
+(lp4671
+S'int'
+p4672
+aS'const int *'
+p4673
+asS'scandirat'
+p4674
+(lp4675
+S'int'
+p4676
+aS'int'
+p4677
+aS'const char *restrict'
+p4678
+aS'struct dirent ***restrict'
+p4679
+aS'int (*)(const struct dirent *)'
+p4680
+aS'int (*)(const struct dirent **, const struct dirent **)'
+p4681
+asS'ffsll'
+p4682
+(lp4683
+S'int'
+p4684
+aS'long long'
+p4685
+asS'towupper_l'
+p4686
+(lp4687
+S'unsigned int'
+p4688
+aS'unsigned int'
+p4689
+aS'struct __locale_struct *'
+p4690
+asS'access'
+p4691
+(lp4692
+S'int'
+p4693
+aS'const char *'
+p4694
+aS'int'
+p4695
+asS'grantpt'
+p4696
+(lp4697
+S'int'
+p4698
+aS'int'
+p4699
+asS'wcstol'
+p4700
+(lp4701
+S'long'
+p4702
+aS'const int *restrict'
+p4703
+aS'int **restrict'
+p4704
+aS'int'
+p4705
+asS'settimeofday'
+p4706
+(lp4707
+S'int'
+p4708
+aS'const struct timeval *'
+p4709
+aS'const struct timezone *'
+p4710
+asS'fts_close'
+p4711
+(lp4712
+S'int'
+p4713
+aS'int *'
+p4714
+asS'free_workarea_compile'
+p4715
+(lp4716
+S'void'
+p4717
+aS'struct re_pattern_buffer *'
+p4718
+asS'fputc'
+p4719
+(lp4720
+S'int'
+p4721
+aS'int'
+p4722
+aS'struct _IO_FILE *'
+p4723
+asS'localtime_r'
+p4724
+(lp4725
+S'struct tm *'
+p4726
+aS'const long *restrict'
+p4727
+aS'struct tm *restrict'
+p4728
+asS'locale_charset'
+p4729
+(lp4730
+S'const char *'
+p4731
+asS'open_memstream'
+p4732
+(lp4733
+S'struct _IO_FILE *'
+p4734
+aS'char **'
+p4735
+aS'int *'
+p4736
+asS'setregid'
+p4737
+(lp4738
+S'int'
+p4739
+aS'unsigned int'
+p4740
+aS'unsigned int'
+p4741
+asS'splice'
+p4742
+(lp4743
+S'long'
+p4744
+aS'int'
+p4745
+aS'long *'
+p4746
+aS'int'
+p4747
+aS'long *'
+p4748
+aS'int'
+p4749
+aS'unsigned int'
+p4750
+asS'fsetpos64'
+p4751
+(lp4752
+S'int'
+p4753
+aS'struct _IO_FILE *'
+p4754
+aS'const _G_fpos64_t *'
+p4755
+asS'lex'
+p4756
+(lp4757
+S'int'
+p4758
+asS'fgetws_unlocked'
+p4759
+(lp4760
+S'int *'
+p4761
+aS'int *restrict'
+p4762
+aS'int'
+p4763
+aS'struct _IO_FILE *restrict'
+p4764
+asS'preorder'
+p4765
+(lp4766
+S'reg_errcode_t'
+p4767
+aS'int *'
+p4768
+aS'reg_errcode_t (void *, int *)'
+p4769
+aS'void *'
+p4770
+asS'get_quoting_style'
+p4771
+(lp4772
+S'enum quoting_style'
+p4773
+aS'struct quoting_options *'
+p4774
+asS'fputws'
+p4775
+(lp4776
+S'int'
+p4777
+aS'const int *restrict'
+p4778
+aS'struct _IO_FILE *restrict'
+p4779
+asS'quotearg_n_options'
+p4780
+(lp4781
+S'char *'
+p4782
+aS'int'
+p4783
+aS'const char *'
+p4784
+aS'int'
+p4785
+aS'const struct quoting_options *'
+p4786
+asS'pipe2'
+p4787
+(lp4788
+S'int'
+p4789
+aS'int [2]'
+p4790
+aS'int'
+p4791
+asS'sethostid'
+p4792
+(lp4793
+S'int'
+p4794
+aS'long'
+p4795
+asS'color_cap_ne_fct'
+p4796
+(lp4797
+S'void'
+p4798
+asS'pthread_setattr_default_np'
+p4799
+(lp4800
+S'int'
+p4801
+aS'const union pthread_attr_t *'
+p4802
+asS'atom'
+p4803
+(lp4804
+S'void'
+p4805
+asS'fputwc'
+p4806
+(lp4807
+S'unsigned int'
+p4808
+aS'int'
+p4809
+aS'struct _IO_FILE *'
+p4810
+asS'psignal'
+p4811
+(lp4812
+S'void'
+p4813
+aS'int'
+p4814
+aS'const char *'
+p4815
+asS'pcre32_config'
+p4816
+(lp4817
+S'int'
+p4818
+aS'int'
+p4819
+aS'void *'
+p4820
+asS'wmempcpy'
+p4821
+(lp4822
+S'int *'
+p4823
+aS'int *restrict'
+p4824
+aS'const int *restrict'
+p4825
+aS'int'
+p4826
+asS'parse_expression'
+p4827
+(lp4828
+S'int *'
+p4829
+aS'int *'
+p4830
+aS'struct re_pattern_buffer *'
+p4831
+aS'int *'
+p4832
+aS'unsigned long'
+p4833
+aS'int'
+p4834
+aS'reg_errcode_t *'
+p4835
+asS'realloc'
+p4836
+(lp4837
+S'void *'
+p4838
+asS'pwrite'
+p4839
+(lp4840
+S'long'
+p4841
+aS'int'
+p4842
+aS'const void *'
+p4843
+aS'int'
+p4844
+aS'long'
+p4845
+asS'wcsncasecmp_l'
+p4846
+(lp4847
+S'int'
+p4848
+aS'const int *'
+p4849
+aS'const int *'
+p4850
+aS'int'
+p4851
+aS'struct __locale_struct *'
+p4852
+asS'rpl_fstat'
+p4853
+(lp4854
+S'int'
+p4855
+aS'int'
+p4856
+aS'struct stat *'
+p4857
+asS'get_charset_aliases'
+p4858
+(lp4859
+S'const char *'
+p4860
+asS'fts_safe_changedir'
+p4861
+(lp4862
+S'int'
+p4863
+aS'int *'
+p4864
+aS'int *'
+p4865
+aS'int'
+p4866
+aS'const char *'
+p4867
+asS'sched_rr_get_interval'
+p4868
+(lp4869
+S'int'
+p4870
+aS'int'
+p4871
+aS'struct timespec *'
+p4872
+asS'fmemopen'
+p4873
+(lp4874
+S'struct _IO_FILE *'
+p4875
+aS'void *'
+p4876
+aS'int'
+p4877
+aS'const char *'
+p4878
+asS'treenext'
+p4879
+(lp4880
+S'void'
+p4881
+aS'const struct tree *'
+p4882
+aS'struct trie *[]'
+p4883
+asS'pthread_getaffinity_np'
+p4884
+(lp4885
+S'int'
+p4886
+aS'unsigned long'
+p4887
+aS'int'
+p4888
+aS'cpu_set_t *'
+p4889
+asS'clock_settime'
+p4890
+(lp4891
+S'int'
+p4892
+aS'int'
+p4893
+aS'const struct timespec *'
+p4894
+asS'pthread_equal'
+p4895
+(lp4896
+S'int'
+p4897
+aS'unsigned long'
+p4898
+aS'unsigned long'
+p4899
+asS'scandir64'
+p4900
+(lp4901
+S'int'
+p4902
+aS'const char *restrict'
+p4903
+aS'struct dirent64 ***restrict'
+p4904
+aS'int (*)(const struct dirent64 *)'
+p4905
+aS'int (*)(const struct dirent64 **, const struct dirent64 **)'
+p4906
+asS'rindex'
+p4907
+(lp4908
+S'char *'
+p4909
+aS'const char *'
+p4910
+aS'int'
+p4911
+asS'mb_clen'
+p4912
+(lp4913
+S'int'
+p4914
+aS'const char *'
+p4915
+aS'int'
+p4916
+aS'__mbstate_t *'
+p4917
+asS'mkfifoat'
+p4918
+(lp4919
+S'int'
+p4920
+aS'int'
+p4921
+aS'const char *'
+p4922
+aS'unsigned int'
+p4923
+asS'fchmod'
+p4924
+(lp4925
+S'int'
+p4926
+aS'int'
+p4927
+aS'unsigned int'
+p4928
+asS'free_dfa_content'
+p4929
+(lp4930
+S'void'
+p4931
+aS'int *'
+p4932
+asS'set_char_quoting'
+p4933
+(lp4934
+S'int'
+p4935
+aS'struct quoting_options *'
+p4936
+aS'char'
+p4937
+aS'int'
+p4938
+asS'fallocate'
+p4939
+(lp4940
+S'int'
+p4941
+aS'int'
+p4942
+aS'int'
+p4943
+aS'long'
+p4944
+aS'long'
+p4945
+asS'_Qp_itoq'
+p4946
+(lp4947
+S'void'
+p4948
+aS'long double *'
+p4949
+aS'int'
+p4950
+asS'islower_l'
+p4951
+(lp4952
+S'int'
+p4953
+aS'int'
+p4954
+aS'struct __locale_struct *'
+p4955
+asS'g_bit_lock'
+p4956
+(lp4957
+S'void'
+p4958
+aS'volatile int *'
+p4959
+aS'int'
+p4960
+asS're_compile_fastmap_iter'
+p4961
+(lp4962
+S'void'
+p4963
+aS'struct re_pattern_buffer *'
+p4964
+aS'const int *'
+p4965
+aS'char *'
+p4966
+asS'sigset'
+p4967
+(lp4968
+S'void (*)(int)'
+p4969
+aS'int'
+p4970
+aS'void (*)(int)'
+p4971
+asS'pathconf'
+p4972
+(lp4973
+S'long'
+p4974
+aS'const char *'
+p4975
+aS'int'
+p4976
+asS'isgraph_l'
+p4977
+(lp4978
+S'int'
+p4979
+aS'int'
+p4980
+aS'struct __locale_struct *'
+p4981
+asS'pthread_cond_broadcast'
+p4982
+(lp4983
+S'int'
+p4984
+aS'pthread_cond_t *'
+p4985
+asS'pcre16_maketables'
+p4986
+(lp4987
+S'const unsigned char *'
+p4988
+asS'calc_eclosure_iter'
+p4989
+(lp4990
+S'reg_errcode_t'
+p4991
+aS'int *'
+p4992
+aS'int *'
+p4993
+aS'int'
+p4994
+aS'int'
+p4995
+asS'wcscspn'
+p4996
+(lp4997
+S'int'
+p4998
+aS'const int *'
+p4999
+aS'const int *'
+p5000
+asS'__assert'
+p5001
+(lp5002
+S'void'
+p5003
+aS'const char *'
+p5004
+aS'const char *'
+p5005
+aS'int'
+p5006
+asS'sigstack'
+p5007
+(lp5008
+S'int'
+p5009
+aS'struct sigstack *'
+p5010
+aS'struct sigstack *'
+p5011
+asS'hash_get_entries'
+p5012
+(lp5013
+S'int'
+p5014
+aS'const int *'
+p5015
+aS'void **'
+p5016
+aS'int'
+p5017
+asS'erand48_r'
+p5018
+(lp5019
+S'int'
+p5020
+aS'unsigned short [3]'
+p5021
+aS'struct drand48_data *restrict'
+p5022
+aS'double *restrict'
+p5023
+asS'fts_set'
+p5024
+(lp5025
+S'int'
+p5026
+aS'int *'
+p5027
+aS'int *'
+p5028
+aS'int'
+p5029
+asS'strftime_l'
+p5030
+(lp5031
+S'int'
+p5032
+aS'char *restrict'
+p5033
+aS'int'
+p5034
+aS'const char *restrict'
+p5035
+aS'const struct tm *restrict'
+p5036
+aS'struct __locale_struct *'
+p5037
+asS'ftrylockfile'
+p5038
+(lp5039
+S'int'
+p5040
+aS'struct _IO_FILE *'
+p5041
+asS'__errno_location'
+p5042
+(lp5043
+S'int *'
+p5044
+asS'mkostemps'
+p5045
+(lp5046
+S'int'
+p5047
+aS'char *'
+p5048
+aS'int'
+p5049
+aS'int'
+p5050
+asS'fstat'
+p5051
+(lp5052
+S'int'
+p5053
+aS'int'
+p5054
+aS'struct stat *'
+p5055
+asS'openat_save_fail'
+p5056
+(lp5057
+S'void'
+p5058
+aS'int'
+p5059
+asS'parse_dup_op'
+p5060
+(lp5061
+S'int *'
+p5062
+aS'int *'
+p5063
+aS'int *'
+p5064
+aS'int *'
+p5065
+aS'int *'
+p5066
+aS'unsigned long'
+p5067
+aS'reg_errcode_t *'
+p5068
+asS'setresuid'
+p5069
+(lp5070
+S'int'
+p5071
+aS'unsigned int'
+p5072
+aS'unsigned int'
+p5073
+aS'unsigned int'
+p5074
+asS'rpl_getdtablesize'
+p5075
+(lp5076
+S'int'
+p5077
+asS'version_etc'
+p5078
+(lp5079
+S'void'
+p5080
+aS'struct _IO_FILE *'
+p5081
+aS'const char *'
+p5082
+aS'const char *'
+p5083
+aS'const char *'
+p5084
+ag238
+asS'doInt'
+p5085
+(lp5086
+S'int'
+p5087
+asS'argmatch_valid'
+p5088
+(lp5089
+S'void'
+p5090
+aS'const char *const *'
+p5091
+aS'const char *'
+p5092
+aS'int'
+p5093
+asS'vfork'
+p5094
+(lp5095
+S'int'
+p5096
+asS'dos_binary'
+p5097
+(lp5098
+S'void'
+p5099
+asS'lockf'
+p5100
+(lp5101
+S'int'
+p5102
+aS'int'
+p5103
+aS'int'
+p5104
+aS'long'
+p5105
+asS'sysconf'
+p5106
+(lp5107
+S'long'
+p5108
+aS'int'
+p5109
+asS'pcre_get_substring'
+p5110
+(lp5111
+S'int'
+p5112
+aS'const char *'
+p5113
+aS'int *'
+p5114
+aS'int'
+p5115
+aS'int'
+p5116
+aS'const char **'
+p5117
+asS'rpl_openat'
+p5118
+(lp5119
+S'int'
+p5120
+aS'int'
+p5121
+aS'const char *'
+p5122
+aS'int'
+p5123
+ag238
+asS'wprintf'
+p5124
+(lp5125
+S'int'
+p5126
+aS'const int *restrict'
+p5127
+ag238
+asS'pcre16_dfa_exec'
+p5128
+(lp5129
+S'int'
+p5130
+aS'const struct real_pcre16 *'
+p5131
+aS'const struct pcre16_extra *'
+p5132
+aS'const unsigned short *'
+p5133
+aS'int'
+p5134
+aS'int'
+p5135
+aS'int'
+p5136
+aS'int *'
+p5137
+aS'int'
+p5138
+aS'int *'
+p5139
+aS'int'
+p5140
+asS'__mbrlen'
+p5141
+(lp5142
+S'int'
+p5143
+aS'const char *restrict'
+p5144
+aS'int'
+p5145
+aS'__mbstate_t *restrict'
+p5146
+asS'strtold'
+p5147
+(lp5148
+S'long double'
+p5149
+aS'const char *restrict'
+p5150
+aS'char **restrict'
+p5151
+asS'__fpending'
+p5152
+(lp5153
+S'int'
+p5154
+aS'int *'
+p5155
+asS'fprintf'
+p5156
+(lp5157
+S'int'
+p5158
+aS'struct _IO_FILE *restrict'
+p5159
+aS'const char *restrict'
+p5160
+ag238
+asS'__sigaddset'
+p5161
+(lp5162
+S'int'
+p5163
+aS'__sigset_t *'
+p5164
+aS'int'
+p5165
+asS'mkstemps64'
+p5166
+(lp5167
+S'int'
+p5168
+aS'char *'
+p5169
+aS'int'
+p5170
+asS'xstrtol_error'
+p5171
+(lp5172
+S'void'
+p5173
+aS'enum strtol_error'
+p5174
+aS'int'
+p5175
+aS'char'
+p5176
+aS'const struct option *'
+p5177
+aS'const char *'
+p5178
+aS'int'
+p5179
+asS'strtoll'
+p5180
+(lp5181
+S'long long'
+p5182
+aS'const char *restrict'
+p5183
+aS'char **restrict'
+p5184
+aS'int'
+p5185
+asS'pcre32_exec'
+p5186
+(lp5187
+S'int'
+p5188
+aS'const struct real_pcre32 *'
+p5189
+aS'const struct pcre32_extra *'
+p5190
+aS'const unsigned int *'
+p5191
+aS'int'
+p5192
+aS'int'
+p5193
+aS'int'
+p5194
+aS'int *'
+p5195
+aS'int'
+p5196
+asS'wcstoimax'
+p5197
+(lp5198
+S'long'
+p5199
+aS'const int *restrict'
+p5200
+aS'int **restrict'
+p5201
+aS'int'
+p5202
+asS'lcong48'
+p5203
+(lp5204
+S'void'
+p5205
+aS'unsigned short [7]'
+p5206
+asS'towupper'
+p5207
+(lp5208
+S'unsigned int'
+p5209
+aS'unsigned int'
+p5210
+asS'timespec_get'
+p5211
+(lp5212
+S'int'
+p5213
+aS'struct timespec *'
+p5214
+aS'int'
+p5215
+asS'chroot'
+p5216
+(lp5217
+S'int'
+p5218
+aS'const char *'
+p5219
+asS'clearerr'
+p5220
+(lp5221
+S'void'
+p5222
+aS'struct _IO_FILE *'
+p5223
+asS'dup3'
+p5224
+(lp5225
+S'int'
+p5226
+aS'int'
+p5227
+aS'int'
+p5228
+aS'int'
+p5229
+asS're_search_2_stub'
+p5230
+(lp5231
+S'int'
+p5232
+aS'struct re_pattern_buffer *'
+p5233
+aS'const char *'
+p5234
+aS'int'
+p5235
+aS'const char *'
+p5236
+aS'int'
+p5237
+aS'int'
+p5238
+aS'int'
+p5239
+aS'struct re_registers *'
+p5240
+aS'int'
+p5241
+aS'int'
+p5242
+asS'undossify_input'
+p5243
+(lp5244
+S'int'
+p5245
+aS'char *'
+p5246
+aS'int'
+p5247
+asS'write'
+p5248
+(lp5249
+S'long'
+p5250
+aS'int'
+p5251
+aS'const void *'
+p5252
+aS'int'
+p5253
+asS'Ecompile'
+p5254
+(lp5255
+S'void'
+p5256
+aS'const char *'
+p5257
+aS'int (int *)'
+p5258
+asS'wmemchr'
+p5259
+(lp5260
+S'int *'
+p5261
+aS'const int *'
+p5262
+aS'int'
+p5263
+aS'int'
+p5264
+asS'on_exit'
+p5265
+(lp5266
+S'int'
+p5267
+aS'void (*)(int, void *)'
+p5268
+aS'void *'
+p5269
+asS'pthread_rwlockattr_setkind_np'
+p5270
+(lp5271
+S'int'
+p5272
+aS'pthread_rwlockattr_t *'
+p5273
+aS'int'
+p5274
+asS'setbit_case_fold_c'
+p5275
+(lp5276
+S'void'
+p5277
+aS'int'
+p5278
+aS'unsigned int [0]'
+p5279
+asS'g_on_error_query'
+p5280
+(lp5281
+S'void'
+p5282
+aS'const int *'
+p5283
+asS'flockfile'
+p5284
+(lp5285
+S'void'
+p5286
+aS'struct _IO_FILE *'
+p5287
+asS'vasprintf'
+p5288
+(lp5289
+S'int'
+p5290
+aS'char **restrict'
+p5291
+aS'const char *restrict'
+p5292
+aS'int'
+p5293
+asS'memrchr'
+p5294
+(lp5295
+S'void *'
+p5296
+aS'const void *'
+p5297
+aS'int'
+p5298
+aS'int'
+p5299
+asS'unsetenv'
+p5300
+(lp5301
+S'int'
+p5302
+aS'const char *'
+p5303
+asS'clone'
+p5304
+(lp5305
+S'int'
+p5306
+aS'int (*)(void *)'
+p5307
+aS'void *'
+p5308
+aS'int'
+p5309
+aS'void *'
+p5310
+ag238
+asS'getdirentries64'
+p5311
+(lp5312
+S'long'
+p5313
+aS'int'
+p5314
+aS'char *restrict'
+p5315
+aS'int'
+p5316
+aS'long *restrict'
+p5317
+asS'pthread_condattr_setpshared'
+p5318
+(lp5319
+S'int'
+p5320
+aS'pthread_condattr_t *'
+p5321
+aS'int'
+p5322
+asS'orig_lstat'
+p5323
+(lp5324
+S'int'
+p5325
+aS'const char *'
+p5326
+aS'struct stat *'
+p5327
+asS'string_free'
+p5328
+(lp5329
+S'void'
+p5330
+aS'void *'
+p5331
+asS'iconv_close'
+p5332
+(lp5333
+S'int'
+p5334
+aS'void *'
+p5335
+asS'strncasecmp_l'
+p5336
+(lp5337
+S'int'
+p5338
+aS'const char *'
+p5339
+aS'const char *'
+p5340
+aS'int'
+p5341
+aS'struct __locale_struct *'
+p5342
+asS'strcasecmp'
+p5343
+(lp5344
+S'int'
+p5345
+aS'const char *'
+p5346
+aS'const char *'
+p5347
+asS'Gcompile'
+p5348
+(lp5349
+S'void'
+p5350
+aS'const char *'
+p5351
+aS'int (int *)'
+p5352
+asS'realloc_trans_if_necessary'
+p5353
+(lp5354
+S'void'
+p5355
+aS'struct dfa *'
+p5356
+aS'int'
+p5357
+asS'kwsfree'
+p5358
+(lp5359
+S'void'
+p5360
+aS'struct kwset *'
+p5361
+asS'iswxdigit'
+p5362
+(lp5363
+S'int'
+p5364
+aS'unsigned int'
+p5365
+asS'quotearg_custom_mem'
+p5366
+(lp5367
+S'char *'
+p5368
+aS'const char *'
+p5369
+aS'const char *'
+p5370
+aS'const char *'
+p5371
+aS'int'
+p5372
+asS'dfaexec_mb'
+p5373
+(lp5374
+S'char *'
+p5375
+aS'struct dfa *'
+p5376
+aS'const char *'
+p5377
+aS'char *'
+p5378
+aS'int'
+p5379
+aS'int *'
+p5380
+aS'int *'
+p5381
+asS'pthread_attr_setschedpolicy'
+p5382
+(lp5383
+S'int'
+p5384
+aS'union pthread_attr_t *'
+p5385
+aS'int'
+p5386
+asS'pthread_mutex_consistent'
+p5387
+(lp5388
+S'int'
+p5389
+aS'pthread_mutex_t *'
+p5390
+asS'wctob'
+p5391
+(lp5392
+S'int'
+p5393
+aS'unsigned int'
+p5394
+asS'setpgrp'
+p5395
+(lp5396
+S'int'
+p5397
+asS'wctype_l'
+p5398
+(lp5399
+S'unsigned long'
+p5400
+aS'const char *'
+p5401
+aS'struct __locale_struct *'
+p5402
+asS'__xstat'
+p5403
+(lp5404
+S'int'
+p5405
+aS'int'
+p5406
+aS'const char *'
+p5407
+aS'struct stat *'
+p5408
+asS'wcsncmp'
+p5409
+(lp5410
+S'int'
+p5411
+aS'const int *'
+p5412
+aS'const int *'
+p5413
+aS'int'
+p5414
+asS'tolower'
+p5415
+(lp5416
+S'int'
+p5417
+aS'int'
+p5418
+asS'fcvt'
+p5419
+(lp5420
+S'char *'
+p5421
+aS'double'
+p5422
+aS'int'
+p5423
+aS'int *restrict'
+p5424
+aS'int *restrict'
+p5425
+asS'__mempcpy'
+p5426
+(lp5427
+S'void *'
+p5428
+aS'void *restrict'
+p5429
+aS'const void *restrict'
+p5430
+aS'int'
+p5431
+asS'syncfs'
+p5432
+(lp5433
+S'int'
+p5434
+aS'int'
+p5435
+asS'getdomainname'
+p5436
+(lp5437
+S'int'
+p5438
+aS'char *'
+p5439
+aS'int'
+p5440
+asS'orig_openat'
+p5441
+(lp5442
+S'int'
+p5443
+aS'int'
+p5444
+aS'const char *'
+p5445
+aS'int'
+p5446
+aS'unsigned int'
+p5447
+asS'quote_n_mem'
+p5448
+(lp5449
+S'const char *'
+p5450
+aS'int'
+p5451
+aS'const char *'
+p5452
+aS'int'
+p5453
+asS'execle'
+p5454
+(lp5455
+S'int'
+p5456
+aS'const char *'
+p5457
+aS'const char *'
+p5458
+ag238
+asS'xrealloc'
+p5459
+(lp5460
+S'void *'
+p5461
+aS'void *'
+p5462
+aS'int'
+p5463
+asS'mbrlen'
+p5464
+(lp5465
+S'int'
+p5466
+aS'const char *restrict'
+p5467
+aS'int'
+p5468
+aS'__mbstate_t *restrict'
+p5469
+asS'grepdirent'
+p5470
+(lp5471
+S'int'
+p5472
+aS'int *'
+p5473
+aS'int *'
+p5474
+aS'int'
+p5475
+asS'pthread_kill'
+p5476
+(lp5477
+S'int'
+p5478
+aS'unsigned long'
+p5479
+aS'int'
+p5480
+asS'execlp'
+p5481
+(lp5482
+S'int'
+p5483
+aS'const char *'
+p5484
+aS'const char *'
+p5485
+ag238
+asS'parse_reg_exp'
+p5486
+(lp5487
+S'int *'
+p5488
+aS'int *'
+p5489
+aS'struct re_pattern_buffer *'
+p5490
+aS'int *'
+p5491
+aS'unsigned long'
+p5492
+aS'int'
+p5493
+aS'reg_errcode_t *'
+p5494
+asS'wcsnrtombs'
+p5495
+(lp5496
+S'int'
+p5497
+aS'char *restrict'
+p5498
+aS'const int **restrict'
+p5499
+aS'int'
+p5500
+aS'int'
+p5501
+aS'__mbstate_t *restrict'
+p5502
+asS'restore_cwd'
+p5503
+(lp5504
+S'int'
+p5505
+aS'const struct saved_cwd *'
+p5506
+asS'i_ring_pop'
+p5507
+(lp5508
+S'int'
+p5509
+aS'int *'
+p5510
+asS'is_zero_or_power_of_two'
+p5511
+(lp5512
+S'int'
+p5513
+aS'int'
+p5514
+asS'dfasuperset'
+p5515
+(lp5516
+S'struct dfa *'
+p5517
+aS'const struct dfa *'
+p5518
+asS'obstack_printf'
+p5519
+(lp5520
+S'int'
+p5521
+aS'struct obstack *restrict'
+p5522
+aS'const char *restrict'
+p5523
+ag238
+asS'pcre16_get_stringnumber'
+p5524
+(lp5525
+S'int'
+p5526
+aS'const struct real_pcre16 *'
+p5527
+aS'const unsigned short *'
+p5528
+asS'memcpy'
+p5529
+(lp5530
+S'void *'
+p5531
+asS'clrbit'
+p5532
+(lp5533
+S'void'
+p5534
+aS'unsigned int'
+p5535
+aS'unsigned int [0]'
+p5536
+asS'pcre16_free_substring'
+p5537
+(lp5538
+S'void'
+p5539
+aS'const unsigned short *'
+p5540
+asS'fts_stat'
+p5541
+(lp5542
+S'unsigned short'
+p5543
+aS'int *'
+p5544
+aS'int *'
+p5545
+aS'int'
+p5546
+asS'main'
+p5547
+(lp5548
+S'int'
+p5549
+aS'int'
+p5550
+aS'char **'
+p5551
+asS'dfaalloc'
+p5552
+(lp5553
+S'struct dfa *'
+p5554
+asS'pthread_mutexattr_setpshared'
+p5555
+(lp5556
+S'int'
+p5557
+aS'pthread_mutexattr_t *'
+p5558
+aS'int'
+p5559
+asS'readlinkat'
+p5560
+(lp5561
+S'long'
+p5562
+aS'int'
+p5563
+aS'const char *restrict'
+p5564
+aS'char *restrict'
+p5565
+aS'int'
+p5566
+asS'grep_command_line_arg'
+p5567
+(lp5568
+S'int'
+p5569
+aS'const char *'
+p5570
+asS'strcoll_l'
+p5571
+(lp5572
+S'int'
+p5573
+aS'const char *'
+p5574
+aS'const char *'
+p5575
+aS'struct __locale_struct *'
+p5576
+asS'isxdigit_l'
+p5577
+(lp5578
+S'int'
+p5579
+aS'int'
+p5580
+aS'struct __locale_struct *'
+p5581
+asS'freemust'
+p5582
+(lp5583
+S'void'
+p5584
+aS'struct must *'
+p5585
+asS'GAcompile'
+p5586
+(lp5587
+S'void'
+p5588
+aS'const char *'
+p5589
+aS'int (int *)'
+p5590
+asS'c_strcasecmp'
+p5591
+(lp5592
+S'int'
+p5593
+aS'const char *'
+p5594
+aS'const char *'
+p5595
+asS'rewinddir'
+p5596
+(lp5597
+S'void'
+p5598
+aS'struct __dirstream *'
+p5599
+asS'putc_unlocked'
+p5600
+(lp5601
+S'int'
+p5602
+aS'int'
+p5603
+aS'struct _IO_FILE *'
+p5604
+asS'add_exclude'
+p5605
+(lp5606
+S'void'
+p5607
+aS'struct exclude *'
+p5608
+aS'const char *'
+p5609
+aS'int'
+p5610
+asS'orig_fstat'
+p5611
+(lp5612
+S'int'
+p5613
+aS'int'
+p5614
+aS'struct stat *'
+p5615
+asS'setreuid'
+p5616
+(lp5617
+S'int'
+p5618
+aS'unsigned int'
+p5619
+aS'unsigned int'
+p5620
+asS'seed48'
+p5621
+(lp5622
+S'unsigned short *'
+p5623
+aS'unsigned short [3]'
+p5624
+asS'internal_fnmatch'
+p5625
+(lp5626
+S'int'
+p5627
+aS'const char *'
+p5628
+aS'const char *'
+p5629
+aS'const char *'
+p5630
+aS'int'
+p5631
+aS'int'
+p5632
+asS'pthread_getschedparam'
+p5633
+(lp5634
+S'int'
+p5635
+aS'unsigned long'
+p5636
+aS'int *restrict'
+p5637
+aS'struct sched_param *restrict'
+p5638
+asS'_getopt_long_r'
+p5639
+(lp5640
+S'int'
+p5641
+aS'int'
+p5642
+aS'char **'
+p5643
+aS'const char *'
+p5644
+aS'const struct option *'
+p5645
+aS'int *'
+p5646
+aS'struct _getopt_data *'
+p5647
+asS'buffer_textbin'
+p5648
+(lp5649
+S'enum textbin'
+p5650
+aS'char *'
+p5651
+aS'int (int *)'
+p5652
+asS'mb_goback'
+p5653
+(lp5654
+S'int'
+p5655
+aS'const char **'
+p5656
+aS'const char *'
+p5657
+aS'const char *'
+p5658
+asS'fts_children'
+p5659
+(lp5660
+S'int *'
+p5661
+aS'int *'
+p5662
+aS'int'
+p5663
+asS'memchr'
+p5664
+(lp5665
+S'void *'
+p5666
+asS'clock_gettime'
+p5667
+(lp5668
+S'int'
+p5669
+aS'int'
+p5670
+aS'struct timespec *'
+p5671
+asS'pcre16_compile'
+p5672
+(lp5673
+S'struct real_pcre16 *'
+p5674
+aS'const unsigned short *'
+p5675
+aS'int'
+p5676
+aS'const char **'
+p5677
+aS'int *'
+p5678
+aS'const unsigned char *'
+p5679
+asS'mkfifo'
+p5680
+(lp5681
+S'int'
+p5682
+aS'const char *'
+p5683
+aS'unsigned int'
+p5684
+asS'unescape_pattern'
+p5685
+(lp5686
+S'void'
+p5687
+aS'char *'
+p5688
+asS'pcre16_study'
+p5689
+(lp5690
+S'struct pcre16_extra *'
+p5691
+aS'const struct real_pcre16 *'
+p5692
+aS'int'
+p5693
+aS'const char **'
+p5694
+asS'quote_n'
+p5695
+(lp5696
+S'const char *'
+p5697
+aS'int'
+p5698
+aS'const char *'
+p5699
+asS'fts_maxarglen'
+p5700
+(lp5701
+S'int'
+p5702
+aS'char *const *'
+p5703
+asS'remove'
+p5704
+(lp5705
+S'int'
+p5706
+aS'const char *'
+p5707
+asS'fts_compar'
+p5708
+(lp5709
+S'int'
+p5710
+aS'const void *'
+p5711
+aS'const void *'
+p5712
+asS'fgets_unlocked'
+p5713
+(lp5714
+S'char *'
+p5715
+aS'char *restrict'
+p5716
+aS'int'
+p5717
+aS'struct _IO_FILE *restrict'
+p5718
+asS'LCO_compare'
+p5719
+(lp5720
+S'int'
+p5721
+aS'const void *'
+p5722
+aS'const void *'
+p5723
+asS'initstate_r'
+p5724
+(lp5725
+S'int'
+p5726
+aS'unsigned int'
+p5727
+aS'char *restrict'
+p5728
+aS'int'
+p5729
+aS'struct random_data *restrict'
+p5730
+asS'epsclosure'
+p5731
+(lp5732
+S'void'
+p5733
+aS'struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p5734
+aS'const struct dfa *'
+p5735
+aS'char *'
+p5736
+asS'nl_langinfo_l'
+p5737
+(lp5738
+S'char *'
+p5739
+aS'int'
+p5740
+aS'struct __locale_struct *'
+p5741
+asS'_IO_free_backup_area'
+p5742
+(lp5743
+S'void'
+p5744
+aS'struct _IO_FILE *'
+p5745
+asS'profil'
+p5746
+(lp5747
+S'int'
+p5748
+aS'unsigned short *'
+p5749
+aS'int'
+p5750
+aS'int'
+p5751
+aS'unsigned int'
+p5752
+asS'dirent_inode_sort_may_be_useful'
+p5753
+(lp5754
+S'int'
+p5755
+aS'int'
+p5756
+asS'quote_mem'
+p5757
+(lp5758
+S'const char *'
+p5759
+aS'const char *'
+p5760
+aS'int'
+p5761
+asS'file_textbin'
+p5762
+(lp5763
+S'enum textbin'
+p5764
+aS'char *'
+p5765
+aS'int (int *)'
+p5766
+aS'int'
+p5767
+aS'const struct stat *'
+p5768
+asS'pthread_barrierattr_setpshared'
+p5769
+(lp5770
+S'int'
+p5771
+aS'pthread_barrierattr_t *'
+p5772
+aS'int'
+p5773
+asS'quotearg_buffer'
+p5774
+(lp5775
+S'int'
+p5776
+aS'char *'
+p5777
+aS'int'
+p5778
+aS'const char *'
+p5779
+aS'int'
+p5780
+aS'const struct quoting_options *'
+p5781
+asS'create_initial_state'
+p5782
+(lp5783
+S'reg_errcode_t'
+p5784
+aS'int *'
+p5785
+asS'_getopt_internal'
+p5786
+(lp5787
+S'int'
+p5788
+aS'int'
+p5789
+aS'char **'
+p5790
+aS'const char *'
+p5791
+aS'const struct option *'
+p5792
+aS'int *'
+p5793
+aS'int'
+p5794
+aS'int'
+p5795
+asS'hash_get_max_bucket_length'
+p5796
+(lp5797
+S'int'
+p5798
+aS'const int *'
+p5799
+asS'asprintf'
+p5800
+(lp5801
+S'int'
+p5802
+aS'char **restrict'
+p5803
+aS'const char *restrict'
+p5804
+ag238
+asS'ferror'
+p5805
+(lp5806
+S'int'
+p5807
+aS'struct _IO_FILE *'
+p5808
+asS'getcwd'
+p5809
+(lp5810
+S'char *'
+p5811
+aS'char *'
+p5812
+aS'int'
+p5813
+asS'pcre32_study'
+p5814
+(lp5815
+S'struct pcre32_extra *'
+p5816
+aS'const struct real_pcre32 *'
+p5817
+aS'int'
+p5818
+aS'const char **'
+p5819
+asS'pthread_mutexattr_setprotocol'
+p5820
+(lp5821
+S'int'
+p5822
+aS'pthread_mutexattr_t *'
+p5823
+aS'int'
+p5824
+asS'treefails'
+p5825
+(lp5826
+S'void'
+p5827
+aS'const struct tree *'
+p5828
+aS'const struct trie *'
+p5829
+aS'struct trie *'
+p5830
+asS'sigignore'
+p5831
+(lp5832
+S'int'
+p5833
+aS'int'
+p5834
+asS'nanosleep'
+p5835
+(lp5836
+S'int'
+p5837
+aS'const struct timespec *'
+p5838
+aS'struct timespec *'
+p5839
+asS'sigreturn'
+p5840
+(lp5841
+S'int'
+p5842
+aS'struct sigcontext *'
+p5843
+asS'sigismember'
+p5844
+(lp5845
+S'int'
+p5846
+aS'const __sigset_t *'
+p5847
+aS'int'
+p5848
+asS'toupper_l'
+p5849
+(lp5850
+S'int'
+p5851
+aS'int'
+p5852
+aS'struct __locale_struct *'
+p5853
+asS'fwide'
+p5854
+(lp5855
+S'int'
+p5856
+aS'struct _IO_FILE *'
+p5857
+aS'int'
+p5858
+asS'fseeko'
+p5859
+(lp5860
+S'int'
+p5861
+aS'struct _IO_FILE *'
+p5862
+aS'long'
+p5863
+aS'int'
+p5864
+asS'__uflow'
+p5865
+(lp5866
+S'int'
+p5867
+aS'struct _IO_FILE *'
+p5868
+asS'last_component'
+p5869
+(lp5870
+S'char *'
+p5871
+aS'const char *'
+p5872
+asS'random_r'
+p5873
+(lp5874
+S'int'
+p5875
+aS'struct random_data *restrict'
+p5876
+aS'int *restrict'
+p5877
+asS'sched_getcpu'
+p5878
+(lp5879
+S'int'
+p5880
+asS'glthread_rwlock_init_multithreaded'
+p5881
+(lp5882
+S'int'
+p5883
+aS'int *'
+p5884
+asS'pwrite64'
+p5885
+(lp5886
+S'long'
+p5887
+aS'int'
+p5888
+aS'const void *'
+p5889
+aS'int'
+p5890
+aS'long'
+p5891
+asS'islower'
+p5892
+(lp5893
+S'int'
+p5894
+aS'int'
+p5895
+asS'isupper'
+p5896
+(lp5897
+S'int'
+p5898
+aS'int'
+p5899
+asS'pthread_condattr_init'
+p5900
+(lp5901
+S'int'
+p5902
+aS'pthread_condattr_t *'
+p5903
+asS'build_charclass_op'
+p5904
+(lp5905
+S'int *'
+p5906
+aS'int *'
+p5907
+aS'unsigned char *'
+p5908
+aS'const char *'
+p5909
+aS'const char *'
+p5910
+aS'int'
+p5911
+aS'reg_errcode_t *'
+p5912
+asS'ssignal'
+p5913
+(lp5914
+S'void (*)(int)'
+p5915
+aS'int'
+p5916
+aS'void (*)(int)'
+p5917
+asS'fd_safer_flag'
+p5918
+(lp5919
+S'int'
+p5920
+aS'int'
+p5921
+aS'int'
+p5922
+asS'pthread_join'
+p5923
+(lp5924
+S'int'
+p5925
+aS'unsigned long'
+p5926
+aS'void **'
+p5927
+asS'bcopy'
+p5928
+(lp5929
+S'void'
+p5930
+aS'const void *'
+p5931
+aS'void *'
+p5932
+aS'int'
+p5933
+asS'pthread_attr_getstacksize'
+p5934
+(lp5935
+S'int'
+p5936
+aS'const union pthread_attr_t *restrict'
+p5937
+aS'int *restrict'
+p5938
+asS'get_seed'
+p5939
+(lp5940
+S'int'
+p5941
+aS'const char *'
+p5942
+aS'unsigned int *'
+p5943
+asS'versionsort64'
+p5944
+(lp5945
+S'int'
+p5946
+aS'const struct dirent64 **'
+p5947
+aS'const struct dirent64 **'
+p5948
+asS'rpl_dup2'
+p5949
+(lp5950
+S'int'
+p5951
+aS'int'
+p5952
+aS'int'
+p5953
+asS'acct'
+p5954
+(lp5955
+S'int'
+p5956
+aS'const char *'
+p5957
+asS'open'
+p5958
+(lp5959
+S'int'
+p5960
+aS'const char *'
+p5961
+aS'int'
+p5962
+ag238
+asS'pcre32_jit_stack_alloc'
+p5963
+(lp5964
+S'struct real_pcre32_jit_stack *'
+p5965
+aS'int'
+p5966
+aS'int'
+p5967
+asS'clock_nanosleep'
+p5968
+(lp5969
+S'int'
+p5970
+aS'int'
+p5971
+aS'int'
+p5972
+aS'const struct timespec *'
+p5973
+aS'struct timespec *'
+p5974
+asS'setup_dir'
+p5975
+(lp5976
+S'int'
+p5977
+aS'int *'
+p5978
+asS'duplocale'
+p5979
+(lp5980
+S'struct __locale_struct *'
+p5981
+aS'struct __locale_struct *'
+p5982
+asS'glthread_recursive_lock_unlock_multithreaded'
+p5983
+(lp5984
+S'int'
+p5985
+aS'int *'
+p5986
+asS'strtoll_l'
+p5987
+(lp5988
+S'long long'
+p5989
+aS'const char *restrict'
+p5990
+aS'char **restrict'
+p5991
+aS'int'
+p5992
+aS'struct __locale_struct *'
+p5993
+asS'parse_bracket_element'
+p5994
+(lp5995
+S'reg_errcode_t'
+p5996
+aS'int *'
+p5997
+aS'int *'
+p5998
+aS'int *'
+p5999
+aS'int'
+p6000
+aS'int *'
+p6001
+aS'unsigned long'
+p6002
+aS'int'
+p6003
+asS'system'
+p6004
+(lp6005
+S'int'
+p6006
+aS'const char *'
+p6007
+asS'sigpending'
+p6008
+(lp6009
+S'int'
+p6010
+aS'__sigset_t *'
+p6011
+asS'dcgettext'
+p6012
+(lp6013
+S'char *'
+p6014
+aS'const char *'
+p6015
+aS'const char *'
+p6016
+aS'int'
+p6017
+asS'strfry'
+p6018
+(lp6019
+S'char *'
+p6020
+aS'char *'
+p6021
+asS'exclude_fnmatch'
+p6022
+(lp6023
+S'int'
+p6024
+aS'const char *'
+p6025
+aS'const char *'
+p6026
+aS'int'
+p6027
+asS'postorder'
+p6028
+(lp6029
+S'reg_errcode_t'
+p6030
+aS'int *'
+p6031
+aS'reg_errcode_t (void *, int *)'
+p6032
+aS'void *'
+p6033
+asS'mkstemp64'
+p6034
+(lp6035
+S'int'
+p6036
+aS'char *'
+p6037
+asS'confstr'
+p6038
+(lp6039
+S'int'
+p6040
+aS'int'
+p6041
+aS'char *'
+p6042
+aS'int'
+p6043
+asS'secure_getenv'
+p6044
+(lp6045
+S'char *'
+p6046
+aS'const char *'
+p6047
+asS'is_cloexec'
+p6048
+(lp6049
+S'int'
+p6050
+aS'int'
+p6051
+asS'setbit_wc'
+p6052
+(lp6053
+S'int'
+p6054
+aS'unsigned int'
+p6055
+aS'unsigned int [0]'
+p6056
+asS'snprintf'
+p6057
+(lp6058
+S'int'
+p6059
+ag238
+asS'dcngettext'
+p6060
+(lp6061
+S'char *'
+p6062
+aS'const char *'
+p6063
+aS'const char *'
+p6064
+aS'const char *'
+p6065
+aS'unsigned long'
+p6066
+aS'int'
+p6067
+asS'funlockfile'
+p6068
+(lp6069
+S'void'
+p6070
+aS'struct _IO_FILE *'
+p6071
+asS'safe_hasher'
+p6072
+(lp6073
+S'struct hash_entry *'
+p6074
+aS'const int *'
+p6075
+aS'const void *'
+p6076
+asS'setstate'
+p6077
+(lp6078
+S'char *'
+p6079
+aS'char *'
+p6080
+asS'__sigismember'
+p6081
+(lp6082
+S'int'
+p6083
+aS'const __sigset_t *'
+p6084
+aS'int'
+p6085
+asS'copy'
+p6086
+(lp6087
+S'void'
+p6088
+aS'const struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p6089
+aS'struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p6090
+asS'__pthread_register_cancel_defer'
+p6091
+(lp6092
+S'void'
+p6093
+aS'__pthread_unwind_buf_t *'
+p6094
+asS'rpl_stat'
+p6095
+(lp6096
+S'int'
+p6097
+aS'const char *'
+p6098
+aS'struct stat *'
+p6099
+asS'iswlower_l'
+p6100
+(lp6101
+S'int'
+p6102
+aS'unsigned int'
+p6103
+aS'struct __locale_struct *'
+p6104
+asS'fscanf'
+p6105
+(lp6106
+S'int'
+p6107
+aS'struct _IO_FILE *restrict'
+p6108
+aS'const char *restrict'
+p6109
+ag238
+asS'dfaoptimize'
+p6110
+(lp6111
+S'void'
+p6112
+aS'struct dfa *'
+p6113
+asS'quick_exit'
+p6114
+(lp6115
+S'void'
+p6116
+aS'int'
+p6117
+asS'pthread_setcanceltype'
+p6118
+(lp6119
+S'int'
+p6120
+aS'int'
+p6121
+aS'int *'
+p6122
+asS'fexecve'
+p6123
+(lp6124
+S'int'
+p6125
+aS'int'
+p6126
+aS'char *const[]'
+p6127
+aS'char *const[]'
+p6128
+asS'c_isalnum'
+p6129
+(lp6130
+S'int'
+p6131
+aS'int'
+p6132
+asS'Pexecute'
+p6133
+(lp6134
+S'int'
+p6135
+aS'const char *'
+p6136
+aS'int'
+p6137
+aS'int *'
+p6138
+aS'const char *'
+p6139
+asS'__assert_fail'
+p6140
+(lp6141
+S'void'
+p6142
+aS'const char *'
+p6143
+aS'const char *'
+p6144
+aS'unsigned int'
+p6145
+aS'const char *'
+p6146
+asS'wcstoul'
+p6147
+(lp6148
+S'unsigned long'
+p6149
+aS'const int *restrict'
+p6150
+aS'int **restrict'
+p6151
+aS'int'
+p6152
+asS'pcre16_get_named_substring'
+p6153
+(lp6154
+S'int'
+p6155
+aS'const struct real_pcre16 *'
+p6156
+aS'const unsigned short *'
+p6157
+aS'int *'
+p6158
+aS'int'
+p6159
+aS'const unsigned short *'
+p6160
+aS'const unsigned short **'
+p6161
+asS'renameat'
+p6162
+(lp6163
+S'int'
+p6164
+aS'int'
+p6165
+aS'const char *'
+p6166
+aS'int'
+p6167
+aS'const char *'
+p6168
+asS'getpass'
+p6169
+(lp6170
+S'char *'
+p6171
+aS'const char *'
+p6172
+asS'sigfillset'
+p6173
+(lp6174
+S'int'
+p6175
+aS'__sigset_t *'
+p6176
+asS'wcstouq'
+p6177
+(lp6178
+S'unsigned long long'
+p6179
+aS'const int *restrict'
+p6180
+aS'int **restrict'
+p6181
+aS'int'
+p6182
+asS'clock_getres'
+p6183
+(lp6184
+S'int'
+p6185
+aS'int'
+p6186
+aS'struct timespec *'
+p6187
+asS'EGexecute'
+p6188
+(lp6189
+S'int'
+p6190
+aS'const char *'
+p6191
+aS'int'
+p6192
+aS'int *'
+p6193
+aS'const char *'
+p6194
+asS'bindtextdomain'
+p6195
+(lp6196
+S'char *'
+p6197
+aS'const char *'
+p6198
+aS'const char *'
+p6199
+asS'state_separate_contexts'
+p6200
+(lp6201
+S'int'
+p6202
+aS'const struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p6203
+asS'glthread_rwlock_wrlock_multithreaded'
+p6204
+(lp6205
+S'int'
+p6206
+aS'int *'
+p6207
+asS'c_islower'
+p6208
+(lp6209
+S'int'
+p6210
+aS'int'
+p6211
+asS'gl_locale_name_default'
+p6212
+(lp6213
+S'const char *'
+p6214
+asS'emit_bug_reporting_address'
+p6215
+(lp6216
+S'void'
+p6217
+asS'finish_interval'
+p6218
+(lp6219
+S'void'
+p6220
+asS'fnmatch_no_wildcards'
+p6221
+(lp6222
+S'int'
+p6223
+aS'const char *'
+p6224
+aS'const char *'
+p6225
+aS'int'
+p6226
+asS'strptime'
+p6227
+(lp6228
+S'char *'
+p6229
+aS'const char *restrict'
+p6230
+aS'const char *restrict'
+p6231
+aS'struct tm *'
+p6232
+asS'flush_stdout'
+p6233
+(lp6234
+S'void'
+p6235
+asS'getopt_long_only'
+p6236
+(lp6237
+S'int'
+p6238
+aS'int'
+p6239
+aS'char *const *'
+p6240
+aS'const char *'
+p6241
+aS'const struct option *'
+p6242
+aS'int *'
+p6243
+asS'iswctype_l'
+p6244
+(lp6245
+S'int'
+p6246
+aS'unsigned int'
+p6247
+aS'unsigned long'
+p6248
+aS'struct __locale_struct *'
+p6249
+asS'parse_bracket_symbol'
+p6250
+(lp6251
+S'reg_errcode_t'
+p6252
+aS'int *'
+p6253
+aS'int *'
+p6254
+aS'int *'
+p6255
+asS'doStruct'
+p6256
+(lp6257
+S'struct s'
+p6258
+asS'_obstack_newchunk'
+p6259
+(lp6260
+S'void'
+p6261
+aS'struct obstack *'
+p6262
+aS'int'
+p6263
+asS'realpath'
+p6264
+(lp6265
+S'char *'
+p6266
+aS'const char *restrict'
+p6267
+aS'char *restrict'
+p6268
+asS'getlogin'
+p6269
+(lp6270
+S'char *'
+p6271
+asS'__pthread_unregister_cancel_restore'
+p6272
+(lp6273
+S'void'
+p6274
+aS'__pthread_unwind_buf_t *'
+p6275
+asS'pthread_barrier_init'
+p6276
+(lp6277
+S'int'
+p6278
+aS'pthread_barrier_t *restrict'
+p6279
+aS'const pthread_barrierattr_t *restrict'
+p6280
+aS'unsigned int'
+p6281
+asS'rpl_setenv'
+p6282
+(lp6283
+S'int'
+p6284
+aS'const char *'
+p6285
+aS'const char *'
+p6286
+aS'int'
+p6287
+asS'pthread_setschedparam'
+p6288
+(lp6289
+S'int'
+p6290
+aS'unsigned long'
+p6291
+aS'int'
+p6292
+aS'const struct sched_param *'
+p6293
+asS'skip_remains_mb'
+p6294
+(lp6295
+S'const unsigned char *'
+p6296
+aS'struct dfa *'
+p6297
+aS'const unsigned char *'
+p6298
+aS'const unsigned char *'
+p6299
+aS'const char *'
+p6300
+aS'unsigned int *'
+p6301
+asS'rpl_close'
+p6302
+(lp6303
+S'int'
+p6304
+aS'int'
+p6305
+asS'call_chunkfun'
+p6306
+(lp6307
+S'void *'
+p6308
+aS'struct obstack *'
+p6309
+aS'int'
+p6310
+asS'strpbrk'
+p6311
+(lp6312
+S'char *'
+p6313
+aS'const char *'
+p6314
+aS'const char *'
+p6315
+asS'wcstold'
+p6316
+(lp6317
+S'long double'
+p6318
+aS'const int *restrict'
+p6319
+aS'int **restrict'
+p6320
+asS'pthread_tryjoin_np'
+p6321
+(lp6322
+S'int'
+p6323
+aS'unsigned long'
+p6324
+aS'void **'
+p6325
+asS'wscanf'
+p6326
+(lp6327
+S'int'
+p6328
+aS'const int *restrict'
+p6329
+ag238
+asS're_compile_internal'
+p6330
+(lp6331
+S'int'
+p6332
+aS'int *'
+p6333
+aS'const char *'
+p6334
+aS'int'
+p6335
+aS'int'
+p6336
+asS'iswprint_l'
+p6337
+(lp6338
+S'int'
+p6339
+aS'unsigned int'
+p6340
+aS'struct __locale_struct *'
+p6341
+asS'pthread_cond_init'
+p6342
+(lp6343
+S'int'
+p6344
+aS'pthread_cond_t *restrict'
+p6345
+aS'const pthread_condattr_t *restrict'
+p6346
+asS'c_isprint'
+p6347
+(lp6348
+S'int'
+p6349
+aS'int'
+p6350
+asS'srand48'
+p6351
+(lp6352
+S'void'
+p6353
+aS'long'
+p6354
+asS'quotearg_n'
+p6355
+(lp6356
+S'char *'
+p6357
+aS'int'
+p6358
+aS'const char *'
+p6359
+asS'fts_padjust'
+p6360
+(lp6361
+S'void'
+p6362
+aS'int *'
+p6363
+aS'int *'
+p6364
+asS'getline'
+p6365
+(lp6366
+S'long'
+p6367
+aS'char **restrict'
+p6368
+aS'int *restrict'
+p6369
+aS'struct _IO_FILE *restrict'
+p6370
+asS'enlist'
+p6371
+(lp6372
+S'char **'
+p6373
+aS'char **'
+p6374
+aS'char *'
+p6375
+aS'int'
+p6376
+asS'pipe'
+p6377
+(lp6378
+S'int'
+p6379
+aS'int [2]'
+p6380
+asS'pthread_barrierattr_destroy'
+p6381
+(lp6382
+S'int'
+p6383
+aS'pthread_barrierattr_t *'
+p6384
+asS'strtold_l'
+p6385
+(lp6386
+S'long double'
+p6387
+aS'const char *restrict'
+p6388
+aS'char **restrict'
+p6389
+aS'struct __locale_struct *'
+p6390
+asS'openat_proc_name'
+p6391
+(lp6392
+S'char *'
+p6393
+aS'char'
+p6394
+aS'int'
+p6395
+aS'const char *'
+p6396
+asS'wcsstr'
+p6397
+(lp6398
+S'int *'
+p6399
+aS'const int *'
+p6400
+aS'const int *'
+p6401
+asS'utimes'
+p6402
+(lp6403
+S'int'
+p6404
+aS'const char *'
+p6405
+aS'struct timeval const[2]'
+p6406
+asS'mb_next_wc'
+p6407
+(lp6408
+S'unsigned int'
+p6409
+aS'const char *'
+p6410
+aS'const char *'
+p6411
+asS'scandir'
+p6412
+(lp6413
+S'int'
+p6414
+aS'const char *restrict'
+p6415
+aS'struct dirent ***restrict'
+p6416
+aS'int (*)(const struct dirent *)'
+p6417
+aS'int (*)(const struct dirent **, const struct dirent **)'
+p6418
+asS'obstack_vprintf'
+p6419
+(lp6420
+S'int'
+p6421
+aS'struct obstack *restrict'
+p6422
+aS'const char *restrict'
+p6423
+aS'int'
+p6424
+asS'isprint_l'
+p6425
+(lp6426
+S'int'
+p6427
+aS'int'
+p6428
+aS'struct __locale_struct *'
+p6429
+asS'new_exclude'
+p6430
+(lp6431
+S'struct exclude *'
+p6432
+asS'parse_sub_exp'
+p6433
+(lp6434
+S'int *'
+p6435
+aS'int *'
+p6436
+aS'struct re_pattern_buffer *'
+p6437
+aS'int *'
+p6438
+aS'unsigned long'
+p6439
+aS'int'
+p6440
+aS'reg_errcode_t *'
+p6441
+asS'pcre16_get_substring_list'
+p6442
+(lp6443
+S'int'
+p6444
+aS'const unsigned short *'
+p6445
+aS'int *'
+p6446
+aS'int'
+p6447
+aS'const unsigned short ***'
+p6448
+asS'init_easy_encoding'
+p6449
+(lp6450
+S'void'
+p6451
+asS'cycle_check'
+p6452
+(lp6453
+S'int'
+p6454
+aS'struct cycle_check_state *'
+p6455
+aS'const struct stat *'
+p6456
+asS'timegm'
+p6457
+(lp6458
+S'long'
+p6459
+aS'struct tm *'
+p6460
+asS'nrand48_r'
+p6461
+(lp6462
+S'int'
+p6463
+aS'unsigned short [3]'
+p6464
+aS'struct drand48_data *restrict'
+p6465
+aS'long *restrict'
+p6466
+asS'strtoull'
+p6467
+(lp6468
+S'unsigned long long'
+p6469
+aS'const char *restrict'
+p6470
+aS'char **restrict'
+p6471
+aS'int'
+p6472
+asS'find_pred'
+p6473
+(lp6474
+S'const struct dfa_ctype *'
+p6475
+aS'const char *'
+p6476
+asS'PRINTF_FETCHARGS'
+p6477
+(lp6478
+S'int'
+p6479
+aS'int'
+p6480
+aS'int *'
+p6481
+asS'lseek64'
+p6482
+(lp6483
+S'long'
+p6484
+aS'int'
+p6485
+aS'long'
+p6486
+aS'int'
+p6487
+asS'strtol'
+p6488
+(lp6489
+S'long'
+p6490
+aS'const char *restrict'
+p6491
+aS'char **restrict'
+p6492
+aS'int'
+p6493
+asS'pause'
+p6494
+(lp6495
+S'int'
+p6496
+asS'strtok'
+p6497
+(lp6498
+S'char *'
+p6499
+aS'char *restrict'
+p6500
+aS'const char *restrict'
+p6501
+asS'strtod'
+p6502
+(lp6503
+S'double'
+p6504
+aS'const char *restrict'
+p6505
+aS'char **restrict'
+p6506
+asS'strtof'
+p6507
+(lp6508
+S'float'
+p6509
+aS'const char *restrict'
+p6510
+aS'char **restrict'
+p6511
+asS'pthread_mutex_init'
+p6512
+(lp6513
+S'int'
+p6514
+aS'pthread_mutex_t *'
+p6515
+aS'const pthread_mutexattr_t *'
+p6516
+asS'wcscmp'
+p6517
+(lp6518
+S'int'
+p6519
+aS'const int *'
+p6520
+aS'const int *'
+p6521
+asS'pthread_mutex_trylock'
+p6522
+(lp6523
+S'int'
+p6524
+aS'pthread_mutex_t *'
+p6525
+asS'is_inheritable'
+p6526
+(lp6527
+S'int'
+p6528
+aS'int'
+p6529
+asS'inboth'
+p6530
+(lp6531
+S'char **'
+p6532
+aS'char **'
+p6533
+aS'char **'
+p6534
+asS'ext_wmatch'
+p6535
+(lp6536
+S'int'
+p6537
+aS'unsigned int'
+p6538
+aS'const int *'
+p6539
+aS'const int *'
+p6540
+aS'const int *'
+p6541
+aS'int'
+p6542
+aS'int'
+p6543
+asS'strtoq'
+p6544
+(lp6545
+S'long long'
+p6546
+aS'const char *restrict'
+p6547
+aS'char **restrict'
+p6548
+aS'int'
+p6549
+asS'l64a'
+p6550
+(lp6551
+S'char *'
+p6552
+aS'long'
+p6553
+asS'wcscoll'
+p6554
+(lp6555
+S'int'
+p6556
+aS'const int *'
+p6557
+aS'const int *'
+p6558
+asS'rpl_fcntl'
+p6559
+(lp6560
+S'int'
+p6561
+aS'int'
+p6562
+aS'int'
+p6563
+ag238
+asS'__assert_perror_fail'
+p6564
+(lp6565
+S'void'
+p6566
+aS'int'
+p6567
+aS'const char *'
+p6568
+aS'unsigned int'
+p6569
+aS'const char *'
+p6570
+asS'pcre_version'
+p6571
+(lp6572
+S'const char *'
+p6573
+asS'bcmp'
+p6574
+(lp6575
+S'int'
+p6576
+aS'const void *'
+p6577
+aS'const void *'
+p6578
+aS'int'
+p6579
+asS'quotearg_alloc'
+p6580
+(lp6581
+S'char *'
+p6582
+aS'const char *'
+p6583
+aS'int'
+p6584
+aS'const struct quoting_options *'
+p6585
+asS'getpgrp'
+p6586
+(lp6587
+S'int'
+p6588
+asS'parse_branch'
+p6589
+(lp6590
+S'int *'
+p6591
+aS'int *'
+p6592
+aS'struct re_pattern_buffer *'
+p6593
+aS'int *'
+p6594
+aS'unsigned long'
+p6595
+aS'int'
+p6596
+aS'reg_errcode_t *'
+p6597
+asS'freelocale'
+p6598
+(lp6599
+S'void'
+p6600
+aS'struct __locale_struct *'
+p6601
+asS'closure'
+p6602
+(lp6603
+S'void'
+p6604
+asS'fileno'
+p6605
+(lp6606
+S'int'
+p6607
+aS'struct _IO_FILE *'
+p6608
+asS'g_date_time_add_full'
+p6609
+(lp6610
+S'struct _GDateTime *'
+p6611
+aS'struct _GDateTime *'
+p6612
+aS'int'
+p6613
+aS'int'
+p6614
+aS'int'
+p6615
+aS'int'
+p6616
+aS'int'
+p6617
+aS'int'
+p6618
+asS'str_iconv'
+p6619
+(lp6620
+S'char *'
+p6621
+aS'const char *'
+p6622
+aS'const char *'
+p6623
+aS'const char *'
+p6624
+asS'pthread_mutexattr_init'
+p6625
+(lp6626
+S'int'
+p6627
+aS'pthread_mutexattr_t *'
+p6628
+asS'guint64'
+p6629
+(lp6630
+S'int'
+p6631
+aS'int *'
+p6632
+asS'bind_textdomain_codeset'
+p6633
+(lp6634
+S'char *'
+p6635
+aS'const char *'
+p6636
+aS'const char *'
+p6637
+asS'wcpncpy'
+p6638
+(lp6639
+S'int *'
+p6640
+aS'int *restrict'
+p6641
+aS'const int *restrict'
+p6642
+aS'int'
+p6643
+asS'futimes'
+p6644
+(lp6645
+S'int'
+p6646
+aS'int'
+p6647
+aS'struct timeval const[2]'
+p6648
+asS'pcre32_assign_jit_stack'
+p6649
+(lp6650
+S'void'
+p6651
+aS'struct pcre32_extra *'
+p6652
+aS'struct real_pcre32_jit_stack *(*)(void *)'
+p6653
+aS'void *'
+p6654
+asS'atol'
+p6655
+(lp6656
+S'long'
+p6657
+aS'const char *'
+p6658
+asS'wctrans_l'
+p6659
+(lp6660
+S'const int *'
+p6661
+aS'const char *'
+p6662
+aS'struct __locale_struct *'
+p6663
+asS'diropen'
+p6664
+(lp6665
+S'int'
+p6666
+aS'int'
+p6667
+asS'g_error'
+p6668
+(lp6669
+S'void'
+p6670
+aS'const int *'
+p6671
+ag238
+asS'qgcvt'
+p6672
+(lp6673
+S'char *'
+p6674
+aS'long double'
+p6675
+aS'int'
+p6676
+aS'char *'
+p6677
+asS'lcong48_r'
+p6678
+(lp6679
+S'int'
+p6680
+aS'unsigned short [7]'
+p6681
+aS'struct drand48_data *'
+p6682
+asS'cuserid'
+p6683
+(lp6684
+S'char *'
+p6685
+aS'char *'
+p6686
+asS'stpcpy'
+p6687
+(lp6688
+S'char *'
+p6689
+aS'char *restrict'
+p6690
+aS'const char *restrict'
+p6691
+asS'quotearg_free'
+p6692
+(lp6693
+S'void'
+p6694
+asS'rpl_fdopen'
+p6695
+(lp6696
+S'struct _IO_FILE *'
+p6697
+aS'int'
+p6698
+aS'const char *'
+p6699
+asS'test_locale_name_posix'
+p6700
+(lp6701
+S'void'
+p6702
+asS'g_date_time_add_months'
+p6703
+(lp6704
+S'struct _GDateTime *'
+p6705
+aS'struct _GDateTime *'
+p6706
+aS'int'
+p6707
+asS'lstat'
+p6708
+(lp6709
+S'int'
+p6710
+aS'const char *restrict'
+p6711
+aS'struct stat *restrict'
+p6712
+asS'cdb_init'
+p6713
+(lp6714
+S'void'
+p6715
+aS'struct cd_buf *'
+p6716
+asS'regcomp'
+p6717
+(lp6718
+S'int'
+p6719
+aS'struct re_pattern_buffer *restrict'
+p6720
+aS'const char *restrict'
+p6721
+aS'int'
+p6722
+asS'vdprintf'
+p6723
+(lp6724
+S'int'
+p6725
+aS'int'
+p6726
+aS'const char *restrict'
+p6727
+aS'int'
+p6728
+asS'pthread_rwlock_timedrdlock'
+p6729
+(lp6730
+S'int'
+p6731
+aS'pthread_rwlock_t *restrict'
+p6732
+aS'const struct timespec *restrict'
+p6733
+asS'fcntl'
+p6734
+(lp6735
+S'int'
+p6736
+aS'int'
+p6737
+aS'int'
+p6738
+ag238
+asS'__getdelim'
+p6739
+(lp6740
+S'long'
+p6741
+aS'char **restrict'
+p6742
+aS'int *restrict'
+p6743
+aS'int'
+p6744
+aS'struct _IO_FILE *restrict'
+p6745
+asS'pcre_compile'
+p6746
+(lp6747
+S'struct real_pcre *'
+p6748
+aS'const char *'
+p6749
+aS'int'
+p6750
+aS'const char **'
+p6751
+aS'int *'
+p6752
+aS'const unsigned char *'
+p6753
+asS'test_function'
+p6754
+(lp6755
+S'void'
+p6756
+aS'char *(*)(char *, int *, const char *, ...)'
+p6757
+asS'getwchar'
+p6758
+(lp6759
+S'unsigned int'
+p6760
+asS'stime'
+p6761
+(lp6762
+S'int'
+p6763
+aS'const long *'
+p6764
+asS'getdtablesize'
+p6765
+(lp6766
+S'int'
+p6767
+asS'pthread_attr_setguardsize'
+p6768
+(lp6769
+S'int'
+p6770
+aS'union pthread_attr_t *'
+p6771
+aS'int'
+p6772
+asS'tmpnam_r'
+p6773
+(lp6774
+S'char *'
+p6775
+aS'char *'
+p6776
+asS'pthread_rwlock_init'
+p6777
+(lp6778
+S'int'
+p6779
+aS'pthread_rwlock_t *restrict'
+p6780
+aS'const pthread_rwlockattr_t *restrict'
+p6781
+asS'pcre16_version'
+p6782
+(lp6783
+S'const char *'
+p6784
+asS'i_ring_init'
+p6785
+(lp6786
+S'void'
+p6787
+aS'int *'
+p6788
+aS'int'
+p6789
+asS'equal'
+p6790
+(lp6791
+S'int'
+p6792
+aS'unsigned int const[0]'
+p6793
+aS'unsigned int const[0]'
+p6794
+asS'pcre32_free_substring_list'
+p6795
+(lp6796
+S'void'
+p6797
+aS'const unsigned int **'
+p6798
+asS'c_strncasecmp'
+p6799
+(lp6800
+S'int'
+p6801
+aS'const char *'
+p6802
+aS'const char *'
+p6803
+aS'int'
+p6804
+asS'Fexecute'
+p6805
+(lp6806
+S'int'
+p6807
+aS'const char *'
+p6808
+aS'int'
+p6809
+aS'int *'
+p6810
+aS'const char *'
+p6811
+asS'prlimit64'
+p6812
+(lp6813
+S'int'
+p6814
+aS'int'
+p6815
+aS'enum __rlimit_resource'
+p6816
+aS'const struct rlimit64 *'
+p6817
+aS'struct rlimit64 *'
+p6818
+asS'parse_bracket_exp'
+p6819
+(lp6820
+S'int *'
+p6821
+aS'int *'
+p6822
+aS'int *'
+p6823
+aS'int *'
+p6824
+aS'unsigned long'
+p6825
+aS'reg_errcode_t *'
+p6826
+asS'delete'
+p6827
+(lp6828
+S'void'
+p6829
+aS'struct (anonymous at pgm/src/grep/dfa.c:258:9)'
+p6830
+aS'struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p6831
+asS'strftime'
+p6832
+(lp6833
+S'int'
+p6834
+aS'char *restrict'
+p6835
+aS'int'
+p6836
+aS'const char *restrict'
+p6837
+aS'const struct tm *restrict'
+p6838
+asS'rpl_mbrtowc'
+p6839
+(lp6840
+S'int'
+p6841
+aS'int *'
+p6842
+aS'const char *'
+p6843
+aS'int'
+p6844
+aS'__mbstate_t *'
+p6845
+asS'tzset'
+p6846
+(lp6847
+S'void'
+p6848
+asS'dfamust'
+p6849
+(lp6850
+S'void'
+p6851
+aS'struct dfa *'
+p6852
+asS'chmod'
+p6853
+(lp6854
+S'int'
+p6855
+aS'const char *'
+p6856
+aS'unsigned int'
+p6857
+asS'walk'
+p6858
+(lp6859
+S'int'
+p6860
+aS'void *'
+p6861
+aS'void *'
+p6862
+asS'toupper'
+p6863
+(lp6864
+S'int'
+p6865
+aS'int'
+p6866
+asS'c_isxdigit'
+p6867
+(lp6868
+S'int'
+p6869
+aS'int'
+p6870
+asS'pcre32_jit_free_unused_memory'
+p6871
+(lp6872
+S'void'
+p6873
+asS'sscanf'
+p6874
+(lp6875
+S'int'
+p6876
+aS'const char *restrict'
+p6877
+aS'const char *restrict'
+p6878
+ag238
+asS'_obstack_begin_1'
+p6879
+(lp6880
+S'int'
+p6881
+aS'struct obstack *'
+p6882
+aS'int'
+p6883
+aS'int'
+p6884
+aS'void *(*)(void *, long)'
+p6885
+aS'void (*)(void *, void *)'
+p6886
+aS'void *'
+p6887
+asS'_obstack_begin'
+p6888
+(lp6889
+S'int'
+p6890
+aS'struct obstack *'
+p6891
+aS'int'
+p6892
+aS'int'
+p6893
+aS'void *(*)(long)'
+p6894
+aS'void (*)(void *)'
+p6895
+asS'is_mode'
+p6896
+(lp6897
+S'int'
+p6898
+aS'int'
+p6899
+aS'int'
+p6900
+asS'asnprintf'
+p6901
+(lp6902
+S'char *'
+p6903
+aS'char *'
+p6904
+aS'int *'
+p6905
+aS'const char *'
+p6906
+ag238
+asS'sigprocmask'
+p6907
+(lp6908
+S'int'
+p6909
+aS'int'
+p6910
+aS'const __sigset_t *restrict'
+p6911
+aS'__sigset_t *restrict'
+p6912
+asS'clearerr_unlocked'
+p6913
+(lp6914
+S'void'
+p6915
+aS'struct _IO_FILE *'
+p6916
+asS'_obstack_begin_worker'
+p6917
+(lp6918
+S'int'
+p6919
+aS'struct obstack *'
+p6920
+aS'int'
+p6921
+aS'int'
+p6922
+asS'aligned_alloc'
+p6923
+(lp6924
+S'void *'
+p6925
+aS'int'
+p6926
+aS'int'
+p6927
+asS'getpriority'
+p6928
+(lp6929
+S'int'
+p6930
+aS'enum __priority_which'
+p6931
+aS'unsigned int'
+p6932
+asS'strtoimax'
+p6933
+(lp6934
+S'long'
+p6935
+aS'const char *restrict'
+p6936
+aS'char **restrict'
+p6937
+aS'int'
+p6938
+asS'fcvt_r'
+p6939
+(lp6940
+S'int'
+p6941
+aS'double'
+p6942
+aS'int'
+p6943
+aS'int *restrict'
+p6944
+aS'int *restrict'
+p6945
+aS'char *restrict'
+p6946
+aS'int'
+p6947
+asS'g_date_time_add_days'
+p6948
+(lp6949
+S'struct _GDateTime *'
+p6950
+aS'struct _GDateTime *'
+p6951
+aS'int'
+p6952
+asS'mb_case_map_apply'
+p6953
+(lp6954
+S'void'
+p6955
+aS'const signed char *'
+p6956
+aS'int *'
+p6957
+aS'int *'
+p6958
+asS'execvpe'
+p6959
+(lp6960
+S'int'
+p6961
+aS'const char *'
+p6962
+aS'char *const[]'
+p6963
+aS'char *const[]'
+p6964
+asS'enter_dir'
+p6965
+(lp6966
+S'int'
+p6967
+aS'int *'
+p6968
+aS'int *'
+p6969
+asS'execve'
+p6970
+(lp6971
+S'int'
+p6972
+aS'const char *'
+p6973
+aS'char *const[]'
+p6974
+aS'char *const[]'
+p6975
+asS'wcstoul_l'
+p6976
+(lp6977
+S'unsigned long'
+p6978
+aS'const int *restrict'
+p6979
+aS'int **restrict'
+p6980
+aS'int'
+p6981
+aS'struct __locale_struct *'
+p6982
+asS'rpl_iconv'
+p6983
+(lp6984
+S'int'
+p6985
+aS'void *'
+p6986
+aS'char **'
+p6987
+aS'int *'
+p6988
+aS'char **'
+p6989
+aS'int *'
+p6990
+asS'lstat64'
+p6991
+(lp6992
+S'int'
+p6993
+aS'const char *restrict'
+p6994
+aS'struct stat64 *restrict'
+p6995
+asS'__sched_cpufree'
+p6996
+(lp6997
+S'void'
+p6998
+aS'cpu_set_t *'
+p6999
+asS'mmalloca'
+p7000
+(lp7001
+S'void *'
+p7002
+aS'int'
+p7003
+asS'vmsplice'
+p7004
+(lp7005
+S'long'
+p7006
+aS'int'
+p7007
+aS'const struct iovec *'
+p7008
+aS'int'
+p7009
+aS'unsigned int'
+p7010
+asS'_obstack_free'
+p7011
+(lp7012
+S'void'
+p7013
+aS'struct obstack *'
+p7014
+aS'void *'
+p7015
+asS'pr_sgr_end'
+p7016
+(lp7017
+S'void'
+p7018
+aS'const char *'
+p7019
+asS'towctrans_l'
+p7020
+(lp7021
+S'unsigned int'
+p7022
+aS'unsigned int'
+p7023
+aS'const int *'
+p7024
+aS'struct __locale_struct *'
+p7025
+asS'pcre_jit_stack_free'
+p7026
+(lp7027
+S'void'
+p7028
+aS'struct real_pcre_jit_stack *'
+p7029
+asS'pthread_attr_setstackaddr'
+p7030
+(lp7031
+S'int'
+p7032
+aS'union pthread_attr_t *'
+p7033
+aS'void *'
+p7034
+asS'drand48'
+p7035
+(lp7036
+S'double'
+p7037
+asS'quotearg_n_mem'
+p7038
+(lp7039
+S'char *'
+p7040
+aS'int'
+p7041
+aS'const char *'
+p7042
+aS'int'
+p7043
+asS'strerror_override'
+p7044
+(lp7045
+S'const char *'
+p7046
+aS'int'
+p7047
+asS'GEAcompile'
+p7048
+(lp7049
+S'void'
+p7050
+aS'const char *'
+p7051
+aS'int'
+p7052
+aS'unsigned long'
+p7053
+asS'free_mbdata'
+p7054
+(lp7055
+S'void'
+p7056
+aS'struct dfa *'
+p7057
+asS'end_wpattern'
+p7058
+(lp7059
+S'const int *'
+p7060
+aS'const int *'
+p7061
+asS'getrusage'
+p7062
+(lp7063
+S'int'
+p7064
+aS'enum __rusage_who'
+p7065
+aS'struct rusage *'
+p7066
+asS'pthread_attr_getschedpolicy'
+p7067
+(lp7068
+S'int'
+p7069
+aS'const union pthread_attr_t *restrict'
+p7070
+aS'int *restrict'
+p7071
+asS'qfcvt'
+p7072
+(lp7073
+S'char *'
+p7074
+aS'long double'
+p7075
+aS'int'
+p7076
+aS'int *restrict'
+p7077
+aS'int *restrict'
+p7078
+asS'telldir'
+p7079
+(lp7080
+S'long'
+p7081
+aS'struct __dirstream *'
+p7082
+asS'wordchar'
+p7083
+(lp7084
+S'int'
+p7085
+aS'unsigned int'
+p7086
+asS'check_character'
+p7087
+(lp7088
+S'void'
+p7089
+aS'const char *'
+p7090
+aS'int'
+p7091
+asS'setuid'
+p7092
+(lp7093
+S'int'
+p7094
+aS'unsigned int'
+p7095
+asS'cfree'
+p7096
+(lp7097
+S'void'
+p7098
+aS'void *'
+p7099
+asS'prpending'
+p7100
+(lp7101
+S'void'
+p7102
+aS'const char *'
+p7103
+asS'srand'
+p7104
+(lp7105
+S'void'
+p7106
+aS'unsigned int'
+p7107
+asS'string_hasher_ci'
+p7108
+(lp7109
+S'int'
+p7110
+aS'const void *'
+p7111
+aS'int'
+p7112
+asS'fwrite_unlocked'
+p7113
+(lp7114
+S'int'
+p7115
+aS'const void *restrict'
+p7116
+aS'int'
+p7117
+aS'int'
+p7118
+aS'struct _IO_FILE *restrict'
+p7119
+asS'parse'
+p7120
+(lp7121
+S'int *'
+p7122
+aS'int *'
+p7123
+aS'struct re_pattern_buffer *'
+p7124
+aS'unsigned long'
+p7125
+aS'reg_errcode_t *'
+p7126
+asS'pcre32_free_substring'
+p7127
+(lp7128
+S'void'
+p7129
+aS'const unsigned int *'
+p7130
+asS'lutimes'
+p7131
+(lp7132
+S'int'
+p7133
+aS'const char *'
+p7134
+aS'struct timeval const[2]'
+p7135
+asS'hash_table_ok'
+p7136
+(lp7137
+S'int'
+p7138
+aS'const int *'
+p7139
+asS'exclude_patopts'
+p7140
+(lp7141
+S'int'
+p7142
+aS'const struct patopts *'
+p7143
+aS'const char *'
+p7144
+asS'freelist'
+p7145
+(lp7146
+S'void'
+p7147
+aS'char **'
+p7148
+asS'getwc'
+p7149
+(lp7150
+S'unsigned int'
+p7151
+aS'struct _IO_FILE *'
+p7152
+asS'excluded_file_name'
+p7153
+(lp7154
+S'int'
+p7155
+aS'const struct exclude *'
+p7156
+aS'const char *'
+p7157
+asS'pthread_attr_setscope'
+p7158
+(lp7159
+S'int'
+p7160
+aS'union pthread_attr_t *'
+p7161
+aS'int'
+p7162
+asS'iswxdigit_l'
+p7163
+(lp7164
+S'int'
+p7165
+aS'unsigned int'
+p7166
+aS'struct __locale_struct *'
+p7167
+asS'_IO_seekpos'
+p7168
+(lp7169
+S'long'
+p7170
+aS'struct _IO_FILE *'
+p7171
+aS'long'
+p7172
+aS'int'
+p7173
+asS'getc'
+p7174
+(lp7175
+S'int'
+p7176
+aS'struct _IO_FILE *'
+p7177
+asS'qfcvt_r'
+p7178
+(lp7179
+S'int'
+p7180
+aS'long double'
+p7181
+aS'int'
+p7182
+aS'int *restrict'
+p7183
+aS'int *restrict'
+p7184
+aS'char *restrict'
+p7185
+aS'int'
+p7186
+asS'tr'
+p7187
+(lp7188
+S'char'
+p7189
+aS'const char *'
+p7190
+aS'char'
+p7191
+asS'getenv'
+p7192
+(lp7193
+S'char *'
+p7194
+aS'const char *'
+p7195
+asS'pipe_safer'
+p7196
+(lp7197
+S'int'
+p7198
+aS'int [2]'
+p7199
+asS'pthread_mutex_timedlock'
+p7200
+(lp7201
+S'int'
+p7202
+aS'pthread_mutex_t *restrict'
+p7203
+aS'const struct timespec *restrict'
+p7204
+asS'wcstol_l'
+p7205
+(lp7206
+S'long'
+p7207
+aS'const int *restrict'
+p7208
+aS'int **restrict'
+p7209
+aS'int'
+p7210
+aS'struct __locale_struct *'
+p7211
+asS'getw'
+p7212
+(lp7213
+S'int'
+p7214
+aS'struct _IO_FILE *'
+p7215
+asS'pthread_mutexattr_getrobust'
+p7216
+(lp7217
+S'int'
+p7218
+aS'const pthread_mutexattr_t *'
+p7219
+aS'int *'
+p7220
+asS'dfaerror'
+p7221
+(lp7222
+S'void'
+p7223
+aS'const char *'
+p7224
+asS'pthread_rwlock_wrlock'
+p7225
+(lp7226
+S'int'
+p7227
+aS'pthread_rwlock_t *'
+p7228
+asS'kwsprep'
+p7229
+(lp7230
+S'void'
+p7231
+aS'struct kwset *'
+p7232
+asS'free_tree'
+p7233
+(lp7234
+S'reg_errcode_t'
+p7235
+aS'void *'
+p7236
+aS'int *'
+p7237
+asS'pthread_condattr_setclock'
+p7238
+(lp7239
+S'int'
+p7240
+aS'pthread_condattr_t *'
+p7241
+aS'int'
+p7242
+asS'mbslen'
+p7243
+(lp7244
+S'int'
+p7245
+aS'const char *'
+p7246
+asS'sigandset'
+p7247
+(lp7248
+S'int'
+p7249
+aS'__sigset_t *'
+p7250
+aS'const __sigset_t *'
+p7251
+aS'const __sigset_t *'
+p7252
+asS'pthread_rwlock_rdlock'
+p7253
+(lp7254
+S'int'
+p7255
+aS'pthread_rwlock_t *'
+p7256
+asS'sched_getscheduler'
+p7257
+(lp7258
+S'int'
+p7259
+aS'int'
+p7260
+asS'isupper_l'
+p7261
+(lp7262
+S'int'
+p7263
+aS'int'
+p7264
+aS'struct __locale_struct *'
+p7265
+asS'setlogin'
+p7266
+(lp7267
+S'int'
+p7268
+aS'const char *'
+p7269
+asS'i_ring_push'
+p7270
+(lp7271
+S'int'
+p7272
+aS'int *'
+p7273
+aS'int'
+p7274
+asS'pthread_attr_getguardsize'
+p7275
+(lp7276
+S'int'
+p7277
+aS'const union pthread_attr_t *'
+p7278
+aS'int *'
+p7279
+asS're_search_2'
+p7280
+(lp7281
+S'int'
+p7282
+aS'struct re_pattern_buffer *'
+p7283
+aS'const char *'
+p7284
+aS'int'
+p7285
+aS'const char *'
+p7286
+aS'int'
+p7287
+aS'int'
+p7288
+aS'int'
+p7289
+aS'struct re_registers *'
+p7290
+aS'int'
+p7291
+asS'orig_stat'
+p7292
+(lp7293
+S'int'
+p7294
+aS'const char *'
+p7295
+aS'struct stat *'
+p7296
+asS'is_nonblocking'
+p7297
+(lp7298
+S'int'
+p7299
+aS'int'
+p7300
+asS'sigblock'
+p7301
+(lp7302
+S'int'
+p7303
+aS'int'
+p7304
+asS'pcre32_copy_substring'
+p7305
+(lp7306
+S'int'
+p7307
+aS'const unsigned int *'
+p7308
+aS'int *'
+p7309
+aS'int'
+p7310
+aS'int'
+p7311
+aS'unsigned int *'
+p7312
+aS'int'
+p7313
+asS'print_errno_message'
+p7314
+(lp7315
+S'void'
+p7316
+aS'int'
+p7317
+asS'fts_open'
+p7318
+(lp7319
+S'int *'
+p7320
+aS'char *const *'
+p7321
+aS'int'
+p7322
+aS'int (*)(int)'
+p7323
+asS'fopen64'
+p7324
+(lp7325
+S'struct _IO_FILE *'
+p7326
+aS'const char *restrict'
+p7327
+aS'const char *restrict'
+p7328
+asS'create_tree'
+p7329
+(lp7330
+S'int *'
+p7331
+aS'int *'
+p7332
+aS'int *'
+p7333
+aS'int *'
+p7334
+aS'int'
+p7335
+asS'lseek'
+p7336
+(lp7337
+S'long'
+p7338
+aS'int'
+p7339
+aS'long'
+p7340
+aS'int'
+p7341
+asS'i_ring_empty'
+p7342
+(lp7343
+S'int'
+p7344
+aS'int'
+p7345
+asS'wmemcmp'
+p7346
+(lp7347
+S'int'
+p7348
+aS'const int *'
+p7349
+aS'const int *'
+p7350
+aS'int'
+p7351
+asS'fputws_unlocked'
+p7352
+(lp7353
+S'int'
+p7354
+aS'const int *restrict'
+p7355
+aS'struct _IO_FILE *restrict'
+p7356
+asS'fread'
+p7357
+(lp7358
+S'int'
+p7359
+aS'void *restrict'
+p7360
+aS'int'
+p7361
+aS'int'
+p7362
+aS'struct _IO_FILE *restrict'
+p7363
+asS'_IO_flockfile'
+p7364
+(lp7365
+S'void'
+p7366
+aS'struct _IO_FILE *'
+p7367
+asS'creat64'
+p7368
+(lp7369
+S'int'
+p7370
+aS'const char *'
+p7371
+aS'unsigned int'
+p7372
+asS'truncate64'
+p7373
+(lp7374
+S'int'
+p7375
+aS'const char *'
+p7376
+aS'long'
+p7377
+asS'wcsxfrm_l'
+p7378
+(lp7379
+S'int'
+p7380
+aS'int *'
+p7381
+aS'const int *'
+p7382
+aS'int'
+p7383
+aS'struct __locale_struct *'
+p7384
+asS'pcre32_copy_named_substring'
+p7385
+(lp7386
+S'int'
+p7387
+aS'const struct real_pcre32 *'
+p7388
+aS'const unsigned int *'
+p7389
+aS'int *'
+p7390
+aS'int'
+p7391
+aS'const unsigned int *'
+p7392
+aS'unsigned int *'
+p7393
+aS'int'
+p7394
+asS'select'
+p7395
+(lp7396
+S'int'
+p7397
+aS'int'
+p7398
+aS'fd_set *restrict'
+p7399
+aS'fd_set *restrict'
+p7400
+aS'fd_set *restrict'
+p7401
+aS'struct timeval *restrict'
+p7402
+asS'kill'
+p7403
+(lp7404
+S'int'
+p7405
+aS'int'
+p7406
+aS'int'
+p7407
+asS'link_count_optimize_ok'
+p7408
+(lp7409
+S'int'
+p7410
+aS'int'
+p7411
+asS'merge'
+p7412
+(lp7413
+S'void'
+p7414
+aS'const struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p7415
+aS'const struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p7416
+aS'struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p7417
+asS'g_date_time_add_years'
+p7418
+(lp7419
+S'struct _GDateTime *'
+p7420
+aS'struct _GDateTime *'
+p7421
+aS'int'
+p7422
+asS'print_no_progname'
+p7423
+(lp7424
+S'void'
+p7425
+asS'atoll'
+p7426
+(lp7427
+S'long long'
+p7428
+aS'const char *'
+p7429
+asS'prlimit'
+p7430
+(lp7431
+S'int'
+p7432
+aS'int'
+p7433
+aS'enum __rlimit_resource'
+p7434
+aS'const struct rlimit *'
+p7435
+aS'struct rlimit *'
+p7436
+asS'pthread_mutexattr_getrobust_np'
+p7437
+(lp7438
+S'int'
+p7439
+aS'const pthread_mutexattr_t *'
+p7440
+aS'int *'
+p7441
+asS'__xmknod'
+p7442
+(lp7443
+S'int'
+p7444
+aS'int'
+p7445
+aS'const char *'
+p7446
+aS'unsigned int'
+p7447
+aS'unsigned long *'
+p7448
+asS'sethostname'
+p7449
+(lp7450
+S'int'
+p7451
+aS'const char *'
+p7452
+aS'int'
+p7453
+asS'timer_delete'
+p7454
+(lp7455
+S'int'
+p7456
+aS'void *'
+p7457
+asS'hash_insert0'
+p7458
+(lp7459
+S'int'
+p7460
+aS'int *'
+p7461
+aS'const void *'
+p7462
+aS'const void **'
+p7463
+asS'ptsname'
+p7464
+(lp7465
+S'char *'
+p7466
+aS'int'
+p7467
+asS'build_mbclen_cache'
+p7468
+(lp7469
+S'void'
+p7470
+asS'parse_grep_colors'
+p7471
+(lp7472
+S'void'
+p7473
+asS'setenv'
+p7474
+(lp7475
+S'int'
+p7476
+aS'const char *'
+p7477
+aS'const char *'
+p7478
+aS'int'
+p7479
+asS'usage'
+p7480
+(lp7481
+S'void'
+p7482
+aS'int'
+p7483
+asS'setrlimit'
+p7484
+(lp7485
+S'int'
+p7486
+aS'enum __rlimit_resource'
+p7487
+aS'const struct rlimit *'
+p7488
+asS'pcre32_version'
+p7489
+(lp7490
+S'const char *'
+p7491
+asS'wcspbrk'
+p7492
+(lp7493
+S'int *'
+p7494
+aS'const int *'
+p7495
+aS'const int *'
+p7496
+asS'read'
+p7497
+(lp7498
+S'long'
+p7499
+aS'int'
+p7500
+aS'void *'
+p7501
+aS'int'
+p7502
+asS'_IO_sgetn'
+p7503
+(lp7504
+S'int'
+p7505
+aS'struct _IO_FILE *'
+p7506
+aS'void *'
+p7507
+aS'int'
+p7508
+asS'mbtoupper'
+p7509
+(lp7510
+S'char *'
+p7511
+aS'const char *'
+p7512
+aS'int *'
+p7513
+aS'signed char **'
+p7514
+asS'print_line_head'
+p7515
+(lp7516
+S'void'
+p7517
+aS'const char *'
+p7518
+aS'const char *'
+p7519
+aS'char'
+p7520
+asS'search_duplicated_node'
+p7521
+(lp7522
+S'int'
+p7523
+aS'const int *'
+p7524
+aS'int'
+p7525
+aS'unsigned int'
+p7526
+asS'insert'
+p7527
+(lp7528
+S'void'
+p7529
+aS'struct (anonymous at pgm/src/grep/dfa.c:258:9)'
+p7530
+aS'struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p7531
+asS'fts_set_stat_required'
+p7532
+(lp7533
+S'void'
+p7534
+aS'int *'
+p7535
+aS'int'
+p7536
+asS'trim2'
+p7537
+(lp7538
+S'char *'
+p7539
+aS'const char *'
+p7540
+aS'int'
+p7541
+asS'lower_subexp'
+p7542
+(lp7543
+S'int *'
+p7544
+aS'reg_errcode_t *'
+p7545
+aS'struct re_pattern_buffer *'
+p7546
+aS'int *'
+p7547
+asS'fsync'
+p7548
+(lp7549
+S'int'
+p7550
+aS'int'
+p7551
+asS'__pthread_unregister_cancel'
+p7552
+(lp7553
+S'void'
+p7554
+aS'__pthread_unwind_buf_t *'
+p7555
+asS'quotearg_char_mem'
+p7556
+(lp7557
+S'char *'
+p7558
+aS'const char *'
+p7559
+aS'int'
+p7560
+aS'char'
+p7561
+asS'dfaanalyze'
+p7562
+(lp7563
+S'void'
+p7564
+aS'struct dfa *'
+p7565
+aS'int'
+p7566
+asS'exchange'
+p7567
+(lp7568
+S'void'
+p7569
+aS'char **'
+p7570
+aS'struct _getopt_data *'
+p7571
+asS'_unsetenv'
+p7572
+(lp7573
+S'int'
+p7574
+aS'const char *'
+p7575
+asS'timer_create'
+p7576
+(lp7577
+S'int'
+p7578
+aS'int'
+p7579
+aS'struct sigevent *restrict'
+p7580
+aS'void **restrict'
+p7581
+asS'strcmp'
+p7582
+(lp7583
+S'int'
+p7584
+aS'const char *'
+p7585
+aS'const char *'
+p7586
+asS'ctype_codeset'
+p7587
+(lp7588
+S'char *'
+p7589
+asS'lldiv'
+p7590
+(lp7591
+S'lldiv_t'
+p7592
+aS'long long'
+p7593
+aS'long long'
+p7594
+asS'dfaexec_sb'
+p7595
+(lp7596
+S'char *'
+p7597
+aS'struct dfa *'
+p7598
+aS'const char *'
+p7599
+aS'char *'
+p7600
+aS'int'
+p7601
+aS'int *'
+p7602
+aS'int *'
+p7603
+asS'glthread_rwlock_unlock_multithreaded'
+p7604
+(lp7605
+S'int'
+p7606
+aS'int *'
+p7607
+asS'fgetc'
+p7608
+(lp7609
+S'int'
+p7610
+aS'struct _IO_FILE *'
+p7611
+asS'g_uri_unescape_string'
+p7612
+(lp7613
+S'char *'
+p7614
+aS'const char *'
+p7615
+aS'const char *'
+p7616
+asS'pclose'
+p7617
+(lp7618
+S'int'
+p7619
+aS'struct _IO_FILE *'
+p7620
+asS'strnlen1'
+p7621
+(lp7622
+S'int'
+p7623
+aS'const char *'
+p7624
+aS'int'
+p7625
+asS'llabs'
+p7626
+(lp7627
+S'long long'
+p7628
+aS'long long'
+p7629
+asS'readdir'
+p7630
+(lp7631
+S'struct dirent *'
+p7632
+aS'struct __dirstream *'
+p7633
+asS'pthread_attr_getschedparam'
+p7634
+(lp7635
+S'int'
+p7636
+aS'const union pthread_attr_t *restrict'
+p7637
+aS'struct sched_param *restrict'
+p7638
+asS'getresuid'
+p7639
+(lp7640
+S'int'
+p7641
+aS'unsigned int *'
+p7642
+aS'unsigned int *'
+p7643
+aS'unsigned int *'
+p7644
+asS'wcstod_l'
+p7645
+(lp7646
+S'double'
+p7647
+aS'const int *restrict'
+p7648
+aS'int **restrict'
+p7649
+aS'struct __locale_struct *'
+p7650
+asS'fgets'
+p7651
+(lp7652
+S'char *'
+p7653
+aS'char *restrict'
+p7654
+aS'int'
+p7655
+aS'struct _IO_FILE *restrict'
+p7656
+asS'pcre16_free_study'
+p7657
+(lp7658
+S'void'
+p7659
+aS'struct pcre16_extra *'
+p7660
+asS'memchr_kwset'
+p7661
+(lp7662
+S'const char *'
+p7663
+aS'const char *'
+p7664
+aS'int'
+p7665
+aS'struct kwset *'
+p7666
+asS'match_anychar'
+p7667
+(lp7668
+S'int'
+p7669
+aS'struct dfa *'
+p7670
+aS'int'
+p7671
+aS'struct (anonymous at pgm/src/grep/dfa.c:258:9)'
+p7672
+aS'unsigned int'
+p7673
+aS'int'
+p7674
+asS'regfree'
+p7675
+(lp7676
+S'void'
+p7677
+aS'struct re_pattern_buffer *'
+p7678
+asS'fgetc_unlocked'
+p7679
+(lp7680
+S'int'
+p7681
+aS'struct _IO_FILE *'
+p7682
+asS'clean_up_stdout'
+p7683
+(lp7684
+S'void'
+p7685
+asS'base_len'
+p7686
+(lp7687
+S'int'
+p7688
+aS'const char *'
+p7689
+asS'print_line_tail'
+p7690
+(lp7691
+S'const char *'
+p7692
+aS'const char *'
+p7693
+aS'const char *'
+p7694
+aS'const char *'
+p7695
+asS'ftell'
+p7696
+(lp7697
+S'long'
+p7698
+aS'struct _IO_FILE *'
+p7699
+asS'exit'
+p7700
+(lp7701
+S'void'
+p7702
+aS'int'
+p7703
+asS'pthread_setspecific'
+p7704
+(lp7705
+S'int'
+p7706
+aS'unsigned int'
+p7707
+aS'const void *'
+p7708
+asS'asctime'
+p7709
+(lp7710
+S'char *'
+p7711
+aS'const struct tm *'
+p7712
+asS'usable_st_size'
+p7713
+(lp7714
+S'int'
+p7715
+aS'const struct stat *'
+p7716
+asS'freea'
+p7717
+(lp7718
+S'void'
+p7719
+aS'void *'
+p7720
+asS'mbstowcs'
+p7721
+(lp7722
+S'int'
+p7723
+aS'int *restrict'
+p7724
+aS'const char *restrict'
+p7725
+aS'int'
+p7726
+asS'rpl_lstat'
+p7727
+(lp7728
+S'int'
+p7729
+aS'const char *'
+p7730
+aS'struct stat *'
+p7731
+asS'close_stream'
+p7732
+(lp7733
+S'int'
+p7734
+aS'int *'
+p7735
+asS'version_etc_arn'
+p7736
+(lp7737
+S'void'
+p7738
+aS'struct _IO_FILE *'
+p7739
+aS'const char *'
+p7740
+aS'const char *'
+p7741
+aS'const char *'
+p7742
+aS'const char *const *'
+p7743
+aS'int'
+p7744
+asS'pthread_exit'
+p7745
+(lp7746
+S'void'
+p7747
+aS'void *'
+p7748
+asS'getitimer'
+p7749
+(lp7750
+S'int'
+p7751
+aS'enum __itimer_which'
+p7752
+aS'struct itimerval *'
+p7753
+asS'__dgettext'
+p7754
+(lp7755
+S'char *'
+p7756
+aS'const char *'
+p7757
+aS'const char *'
+p7758
+asS'fstatfs64'
+p7759
+(lp7760
+S'int'
+p7761
+aS'int'
+p7762
+aS'struct statfs64 *'
+p7763
+asS'fstatat64'
+p7764
+(lp7765
+S'int'
+p7766
+aS'int'
+p7767
+aS'const char *restrict'
+p7768
+aS'struct stat64 *restrict'
+p7769
+aS'int'
+p7770
+asS'c_tolower'
+p7771
+(lp7772
+S'int'
+p7773
+aS'int'
+p7774
+asS'symlink'
+p7775
+(lp7776
+S'int'
+p7777
+aS'const char *'
+p7778
+aS'const char *'
+p7779
+asS'__strtoul_internal'
+p7780
+(lp7781
+S'unsigned long'
+p7782
+aS'const char *'
+p7783
+aS'char **'
+p7784
+aS'int'
+p7785
+aS'int'
+p7786
+asS'new_exclude_segment'
+p7787
+(lp7788
+S'void'
+p7789
+aS'struct exclude *'
+p7790
+aS'enum exclude_type'
+p7791
+aS'int'
+p7792
+asS'dirfd'
+p7793
+(lp7794
+S'int'
+p7795
+aS'struct __dirstream *'
+p7796
+asS'__stpncpy'
+p7797
+(lp7798
+S'char *'
+p7799
+aS'char *restrict'
+p7800
+aS'const char *restrict'
+p7801
+aS'int'
+p7802
+asS'prepend_args'
+p7803
+(lp7804
+S'int'
+p7805
+aS'const char *'
+p7806
+aS'char *'
+p7807
+aS'char **'
+p7808
+asS'regexp'
+p7809
+(lp7810
+S'void'
+p7811
+asS'pcre32_compile2'
+p7812
+(lp7813
+S'struct real_pcre32 *'
+p7814
+aS'const unsigned int *'
+p7815
+aS'int'
+p7816
+aS'int *'
+p7817
+aS'const char **'
+p7818
+aS'int *'
+p7819
+aS'const unsigned char *'
+p7820
+asS'pcre_pattern_to_host_byte_order'
+p7821
+(lp7822
+S'int'
+p7823
+aS'struct real_pcre *'
+p7824
+aS'struct pcre_extra *'
+p7825
+aS'const unsigned char *'
+p7826
+asS'g_date_time_add'
+p7827
+(lp7828
+S'struct _GDateTime *'
+p7829
+aS'struct _GDateTime *'
+p7830
+aS'int'
+p7831
+asS'mark_opt_subexp'
+p7832
+(lp7833
+S'reg_errcode_t'
+p7834
+aS'void *'
+p7835
+aS'int *'
+p7836
+asS'fts_sort'
+p7837
+(lp7838
+S'int *'
+p7839
+aS'int *'
+p7840
+aS'int *'
+p7841
+aS'int'
+p7842
+asS'mkostemps64'
+p7843
+(lp7844
+S'int'
+p7845
+aS'char *'
+p7846
+aS'int'
+p7847
+aS'int'
+p7848
+asS'siginterrupt'
+p7849
+(lp7850
+S'int'
+p7851
+aS'int'
+p7852
+aS'int'
+p7853
+asS'fseek'
+p7854
+(lp7855
+S'int'
+p7856
+aS'struct _IO_FILE *'
+p7857
+aS'long'
+p7858
+aS'int'
+p7859
+asS'quotearg_mem'
+p7860
+(lp7861
+S'char *'
+p7862
+aS'const char *'
+p7863
+aS'int'
+p7864
+asS'struniq'
+p7865
+(lp7866
+S'const char *'
+p7867
+aS'const char *'
+p7868
+asS'strcpy'
+p7869
+(lp7870
+S'char *'
+p7871
+aS'char *restrict'
+p7872
+aS'const char *restrict'
+p7873
+asS'pcre32_utf32_to_host_byte_order'
+p7874
+(lp7875
+S'int'
+p7876
+aS'unsigned int *'
+p7877
+aS'const unsigned int *'
+p7878
+aS'int'
+p7879
+aS'int *'
+p7880
+aS'int'
+p7881
+asS'_exit'
+p7882
+(lp7883
+S'void'
+p7884
+aS'int'
+p7885
+asS'state_index'
+p7886
+(lp7887
+S'int'
+p7888
+aS'struct dfa *'
+p7889
+aS'const struct (anonymous at pgm/src/grep/dfa.c:265:9) *'
+p7890
+aS'int'
+p7891
+asS'pcre16_assign_jit_stack'
+p7892
+(lp7893
+S'void'
+p7894
+aS'struct pcre16_extra *'
+p7895
+aS'struct real_pcre16_jit_stack *(*)(void *)'
+p7896
+aS'void *'
+p7897
+asS'endusershell'
+p7898
+(lp7899
+S'void'
+p7900
+asS'wmemmove'
+p7901
+(lp7902
+S'int *'
+p7903
+aS'int *'
+p7904
+aS'const int *'
+p7905
+aS'int'
+p7906
+asS'wchar_context'
+p7907
+(lp7908
+S'int'
+p7909
+aS'unsigned int'
+p7910
+asS'setlocale'
+p7911
+(lp7912
+S'char *'
+p7913
+aS'int'
+p7914
+aS'const char *'
+p7915
+asS'stat_func'
+p7916
+(lp7917
+S'int'
+p7918
+aS'const char *'
+p7919
+aS'struct stat *'
+p7920
+asS'wcscasecmp'
+p7921
+(lp7922
+S'int'
+p7923
+aS'const int *'
+p7924
+aS'const int *'
+p7925
+asS'opendir_safer'
+p7926
+(lp7927
+S'int *'
+p7928
+aS'const char *'
+p7929
+asS'exclude_add_pattern_buffer'
+p7930
+(lp7931
+S'void'
+p7932
+aS'struct exclude *'
+p7933
+aS'char *'
+p7934
+asS'sigemptyset'
+p7935
+(lp7936
+S'int'
+p7937
+aS'__sigset_t *'
+p7938
+asS'__fxstat64'
+p7939
+(lp7940
+S'int'
+p7941
+aS'int'
+p7942
+aS'int'
+p7943
+aS'struct stat64 *'
+p7944
+asS'_g_utf8_make_valid'
+p7945
+(lp7946
+S'int *'
+p7947
+aS'const int *'
+p7948
+asS'putenv'
+p7949
+(lp7950
+S'int'
+p7951
+aS'char *'
+p7952
+asS'fdopen'
+p7953
+(lp7954
+S'struct _IO_FILE *'
+p7955
+aS'int'
+p7956
+aS'const char *'
+p7957
+asS'pthread_key_create'
+p7958
+(lp7959
+S'int'
+p7960
+aS'unsigned int *'
+p7961
+aS'void (*)(void *)'
+p7962
+asS'wcslen'
+p7963
+(lp7964
+S'int'
+p7965
+aS'const int *'
+p7966
+asS'wcscoll_l'
+p7967
+(lp7968
+S'int'
+p7969
+aS'const int *'
+p7970
+aS'const int *'
+p7971
+aS'struct __locale_struct *'
+p7972
+asS'wcsncat'
+p7973
+(lp7974
+S'int *'
+p7975
+aS'int *restrict'
+p7976
+aS'const int *restrict'
+p7977
+aS'int'
+p7978
+asS'rmdir'
+p7979
+(lp7980
+S'int'
+p7981
+aS'const char *'
+p7982
+asS'pthread_mutexattr_destroy'
+p7983
+(lp7984
+S'int'
+p7985
+aS'pthread_mutexattr_t *'
+p7986
+asS'pthread_cond_timedwait'
+p7987
+(lp7988
+S'int'
+p7989
+aS'pthread_cond_t *restrict'
+p7990
+aS'pthread_mutex_t *restrict'
+p7991
+aS'const struct timespec *restrict'
+p7992
+asS'cycle_check_init'
+p7993
+(lp7994
+S'void'
+p7995
+aS'struct cycle_check_state *'
+p7996
+asS'mbscasecmp'
+p7997
+(lp7998
+S'int'
+p7999
+aS'const char *'
+p8000
+aS'const char *'
+p8001
+asS'function'
+p8002
+(lp8003
+S'int'
+p8004
+aS'int'
+p8005
+asS'pthread_rwlockattr_getkind_np'
+p8006
+(lp8007
+S'int'
+p8008
+aS'const pthread_rwlockattr_t *restrict'
+p8009
+aS'int *restrict'
+p8010
+asS'c_isalpha'
+p8011
+(lp8012
+S'int'
+p8013
+aS'int'
+p8014
+asS'strtoul_l'
+p8015
+(lp8016
+S'unsigned long'
+p8017
+aS'const char *restrict'
+p8018
+aS'char **restrict'
+p8019
+aS'int'
+p8020
+aS'struct __locale_struct *'
+p8021
+asS'alphasort'
+p8022
+(lp8023
+S'int'
+p8024
+aS'const struct dirent **'
+p8025
+aS'const struct dirent **'
+p8026
+asS'xstr_cd_iconv'
+p8027
+(lp8028
+S'char *'
+p8029
+aS'const char *'
+p8030
+aS'int'
+p8031
+asS'ngettext'
+p8032
+(lp8033
+S'char *'
+p8034
+aS'const char *'
+p8035
+aS'const char *'
+p8036
+aS'unsigned long'
+p8037
+asS'rpl_setlocale'
+p8038
+(lp8039
+S'char *'
+p8040
+aS'int'
+p8041
+aS'const char *'
+p8042
+asS'sigpause'
+p8043
+(lp8044
+S'int'
+p8045
+aS'int'
+p8046
+asS'tstbit'
+p8047
+(lp8048
+S'int'
+p8049
+aS'unsigned int'
+p8050
+aS'unsigned int const[0]'
+p8051
+asS'iswblank'
+p8052
+(lp8053
+S'int'
+p8054
+aS'unsigned int'
+p8055
+asS'iswupper'
+p8056
+(lp8057
+S'int'
+p8058
+aS'unsigned int'
+p8059
+asS'wcstold_l'
+p8060
+(lp8061
+S'long double'
+p8062
+aS'const int *restrict'
+p8063
+aS'int **restrict'
+p8064
+aS'struct __locale_struct *'
+p8065
+asS'getdate'
+p8066
+(lp8067
+S'struct tm *'
+p8068
+aS'const char *'
+p8069
+asS'fts_lfree'
+p8070
+(lp8071
+S'void'
+p8072
+aS'int *'
+p8073
+asS'wcstof_l'
+p8074
+(lp8075
+S'float'
+p8076
+aS'const int *restrict'
+p8077
+aS'int **restrict'
+p8078
+aS'struct __locale_struct *'
+p8079
+asS'fd_ring_clear'
+p8080
+(lp8081
+S'void'
+p8082
+aS'int *'
+p8083
+asS'_IO_getc'
+p8084
+(lp8085
+S'int'
+p8086
+aS'struct _IO_FILE *'
+p8087
+asS'sbrk'
+p8088
+(lp8089
+S'void *'
+p8090
+aS'long'
+p8091
+asS'pthread_cond_signal'
+p8092
+(lp8093
+S'int'
+p8094
+aS'pthread_cond_t *'
+p8095
+asS'knuth_morris_pratt_multibyte'
+p8096
+(lp8097
+S'int'
+p8098
+aS'const char *'
+p8099
+aS'const char *'
+p8100
+aS'const char **'
+p8101
+asS'localeconv'
+p8102
+(lp8103
+S'struct lconv *'
+p8104
+asS'pcre16_config'
+p8105
+(lp8106
+S'int'
+p8107
+aS'int'
+p8108
+aS'void *'
+p8109
+asS'tolower_l'
+p8110
+(lp8111
+S'int'
+p8112
+aS'int'
+p8113
+aS'struct __locale_struct *'
+p8114
+asS'dfaexec_main'
+p8115
+(lp8116
+S'char *'
+p8117
+aS'struct dfa *'
+p8118
+aS'const char *'
+p8119
+aS'char *'
+p8120
+aS'int'
+p8121
+aS'int *'
+p8122
+aS'int *'
+p8123
+aS'int'
+p8124
+asS'mbsstr_trimmed_wordbounded'
+p8125
+(lp8126
+S'int'
+p8127
+aS'const char *'
+p8128
+aS'const char *'
+p8129
+asS'_IO_vfscanf'
+p8130
+(lp8131
+S'int'
+p8132
+aS'struct _IO_FILE *restrict'
+p8133
+aS'const char *restrict'
+p8134
+aS'int'
+p8135
+aS'int *restrict'
+p8136
+asS'mbsstr'
+p8137
+(lp8138
+S'char *'
+p8139
+aS'const char *'
+p8140
+aS'const char *'
+p8141
+asS'doOff'
+p8142
+(lp8143
+S'long'
+p8144
+asS'wcstoull'
+p8145
+(lp8146
+S'unsigned long long'
+p8147
+aS'const int *restrict'
+p8148
+aS'int **restrict'
+p8149
+aS'int'
+p8150
+asS'hash_find_entry'
+p8151
+(lp8152
+S'void *'
+p8153
+aS'int *'
+p8154
+aS'const void *'
+p8155
+aS'struct hash_entry **'
+p8156
+aS'int'
+p8157
+asS'creat'
+p8158
+(lp8159
+S'int'
+p8160
+aS'const char *'
+p8161
+aS'unsigned int'
+p8162
+asS'__sigdelset'
+p8163
+(lp8164
+S'int'
+p8165
+aS'__sigset_t *'
+p8166
+aS'int'
+p8167
+asS'strtoumax'
+p8168
+(lp8169
+S'unsigned long'
+p8170
+aS'const char *restrict'
+p8171
+aS'char **restrict'
+p8172
+aS'int'
+p8173
+asS'pthread_mutexattr_settype'
+p8174
+(lp8175
+S'int'
+p8176
+aS'pthread_mutexattr_t *'
+p8177
+aS'int'
+p8178
+asS'pthread_cond_destroy'
+p8179
+(lp8180
+S'int'
+p8181
+aS'pthread_cond_t *'
+p8182
+asS'ispunct'
+p8183
+(lp8184
+S'int'
+p8185
+aS'int'
+p8186
+asS'glthread_rwlock_rdlock_multithreaded'
+p8187
+(lp8188
+S'int'
+p8189
+aS'int *'
+p8190
+asS'fstatfs'
+p8191
+(lp8192
+S'int'
+p8193
+aS'int'
+p8194
+aS'struct statfs *'
+p8195
+asS'pthread_attr_setaffinity_np'
+p8196
+(lp8197
+S'int'
+p8198
+aS'union pthread_attr_t *'
+p8199
+aS'int'
+p8200
+aS'const cpu_set_t *'
+p8201
+asS'fpathconf'
+p8202
+(lp8203
+S'long'
+p8204
+aS'int'
+p8205
+aS'int'
+p8206
+asS'dfaisfast'
+p8207
+(lp8208
+S'int'
+p8209
+aS'const struct dfa *'
+p8210
+asS'gettext_quote'
+p8211
+(lp8212
+S'const char *'
+p8213
+aS'const char *'
+p8214
+aS'enum quoting_style'
+p8215
+asS'fwscanf'
+p8216
+(lp8217
+S'int'
+p8218
+aS'struct _IO_FILE *restrict'
+p8219
+aS'const int *restrict'
+p8220
+ag238
+asS'pr_sgr_end_if'
+p8221
+(lp8222
+S'void'
+p8223
+aS'const char *'
+p8224
+asS'gettext'
+p8225
+(lp8226
+S'char *'
+p8227
+aS'const char *'
+p8228
+asS'iswcntrl'
+p8229
+(lp8230
+S'int'
+p8231
+aS'unsigned int'
+p8232
+asS'iswalnum_l'
+p8233
+(lp8234
+S'int'
+p8235
+aS'unsigned int'
+p8236
+aS'struct __locale_struct *'
+p8237
+asS'sigaction'
+p8238
+(lp8239
+S'int'
+p8240
+aS'int'
+p8241
+aS'const struct sigaction *restrict'
+p8242
+aS'struct sigaction *restrict'
+p8243
+asS'iswlower'
+p8244
+(lp8245
+S'int'
+p8246
+aS'unsigned int'
+p8247
+asS'branch'
+p8248
+(lp8249
+S'void'
+p8250
+asS'getopt'
+p8251
+(lp8252
+S'int'
+p8253
+aS'int'
+p8254
+aS'char *const *'
+p8255
+aS'const char *'
+p8256
+asS'mkstemp'
+p8257
+(lp8258
+S'int'
+p8259
+aS'char *'
+p8260
+asS'wcsrtombs'
+p8261
+(lp8262
+S'int'
+p8263
+aS'char *restrict'
+p8264
+aS'const int **restrict'
+p8265
+aS'int'
+p8266
+aS'__mbstate_t *restrict'
+p8267
+asS'error_at_line'
+p8268
+(lp8269
+S'void'
+p8270
+aS'int'
+p8271
+aS'int'
+p8272
+aS'const char *'
+p8273
+aS'unsigned int'
+p8274
+aS'const char *'
+p8275
+ag238
+asS'add_count'
+p8276
+(lp8277
+S'unsigned long'
+p8278
+aS'unsigned long'
+p8279
+aS'unsigned long'
+p8280
+asS'stat'
+p8281
+(lp8282
+S'int'
+p8283
+aS'const char *restrict'
+p8284
+aS'struct stat *restrict'
+p8285
+asS'color_cap_rv_fct'
+p8286
+(lp8287
+S'void'
+p8288
+asS'readdir_r'
+p8289
+(lp8290
+S'int'
+p8291
+aS'struct __dirstream *restrict'
+p8292
+aS'struct dirent *restrict'
+p8293
+aS'struct dirent **restrict'
+p8294
+asS'open_symlink_nofollow_error'
+p8295
+(lp8296
+S'int'
+p8297
+aS'int'
+p8298
+asS'pthread_attr_setinheritsched'
+p8299
+(lp8300
+S'int'
+p8301
+aS'union pthread_attr_t *'
+p8302
+aS'int'
+p8303
+asS'setusershell'
+p8304
+(lp8305
+S'void'
+p8306
+asS'isdigit_l'
+p8307
+(lp8308
+S'int'
+p8309
+aS'int'
+p8310
+aS'struct __locale_struct *'
+p8311
+asS'readlink'
+p8312
+(lp8313
+S'long'
+p8314
+aS'const char *restrict'
+p8315
+aS'char *restrict'
+p8316
+aS'int'
+p8317
+asS'wcsdup'
+p8318
+(lp8319
+S'int *'
+p8320
+aS'const int *'
+p8321
+asS'skipped_file'
+p8322
+(lp8323
+S'int'
+p8324
+aS'const char *'
+p8325
+aS'int'
+p8326
+aS'int'
+p8327
+asS'__strtok_r'
+p8328
+(lp8329
+S'char *'
+p8330
+aS'char *restrict'
+p8331
+aS'const char *restrict'
+p8332
+aS'char **restrict'
+p8333
+asS'__sigsetjmp'
+p8334
+(lp8335
+S'int'
+p8336
+aS'struct __jmp_buf_tag *'
+p8337
+aS'int'
+p8338
+asS'getuid'
+p8339
+(lp8340
+S'unsigned int'
+p8341
+asS'test_locale_name'
+p8342
+(lp8343
+S'void'
+p8344
+asS'open_by_handle_at'
+p8345
+(lp8346
+S'int'
+p8347
+aS'int'
+p8348
+aS'struct file_handle *'
+p8349
+aS'int'
+p8350
+asS'difftime'
+p8351
+(lp8352
+S'double'
+p8353
+aS'long'
+p8354
+aS'long'
+p8355
+asS'quotearg_style'
+p8356
+(lp8357
+S'char *'
+p8358
+aS'enum quoting_style'
+p8359
+aS'const char *'
+p8360
+asS'kwsalloc'
+p8361
+(lp8362
+S'struct kwset *'
+p8363
+aS'const char *'
+p8364
+asS'chown'
+p8365
+(lp8366
+S'int'
+p8367
+aS'const char *'
+p8368
+aS'unsigned int'
+p8369
+aS'unsigned int'
+p8370
+asS'adjtime'
+p8371
+(lp8372
+S'int'
+p8373
+aS'const struct timeval *'
+p8374
+aS'struct timeval *'
+p8375
+asS'pcre32_fullinfo'
+p8376
+(lp8377
+S'int'
+p8378
+aS'const struct real_pcre32 *'
+p8379
+aS'const struct pcre32_extra *'
+p8380
+aS'int'
+p8381
+aS'void *'
+p8382
+asS'pthread_self'
+p8383
+(lp8384
+S'unsigned long'
+p8385
+asS'fwprintf'
+p8386
+(lp8387
+S'int'
+p8388
+aS'struct _IO_FILE *restrict'
+p8389
+aS'const int *restrict'
+p8390
+ag238
+asS'mbsnrtowcs'
+p8391
+(lp8392
+S'int'
+p8393
+aS'int *restrict'
+p8394
+aS'const char **restrict'
+p8395
+aS'int'
+p8396
+aS'int'
+p8397
+aS'__mbstate_t *restrict'
+p8398
+as.
