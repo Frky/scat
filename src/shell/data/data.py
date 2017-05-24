@@ -50,6 +50,8 @@ class Data(object):
 
 
     def dump(self):
+        if not(os.path.exists(self.dstdir)):
+            os.makedirs(self.dstdir)
         pickle.dump(self.deps, open(self.__path(".deps"), "wb"))
         pickle.dump(self.protos_without_libs, open(self.__path(".data"), "wb"))
 
