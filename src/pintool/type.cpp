@@ -19,14 +19,27 @@
 
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
-#define MAX_VALS_TO_COLLECT     100
-#define NB_CALLS_TO_CONCLUDE    10
-#define THRESHOLD               0.75
 
+#define MIN_VALS_DEFAULT        "10"
+#define MAX_VALS_DEFAULT        "100"
+#define ADDR_THRESHOLD_DEFAULT  "0.5"
+
+/* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
+unsigned int MIN_VALS;
+KNOB<string> KnobMinVals(KNOB_MODE_WRITEONCE, "pintool", "minvals", MIN_VALS_DEFAULT, "Specify a number for MIN_VALS_DEFAULT");
+unsigned int MAX_VALS;
+KNOB<string> KnobMaxVals(KNOB_MODE_WRITEONCE, "pintool", "maxvals", MAX_VALS_DEFAULT, "Specify a number for MAX_VALS_DEFAULT");
+float ADDR_THRESHOLD; 
+KNOB<string> KnobAddrThreshold(KNOB_MODE_WRITEONCE, "pintool", "addrthresh", ADDR_THRESHOLD_DEFAULT, "Specify a number for ADDR_THRESHOLD");
+
+/* In file to get results from previous analysis */
+ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+/* Out file to store analysis results */
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
 
+/* Time of instrumentation */
 struct timeval start, stop; 
 
 /* Call stack */
@@ -116,7 +129,6 @@ string read_part(ifstream& ifile, char* c) {
 }
 
 VOID register_functions_from_arity_log() {
-    ifstream ifile;
     ifile.open(KnobInputFile.Value().c_str());
 
     if (ifile.is_open()) {
@@ -185,7 +197,7 @@ REG param_reg(unsigned int pid) {
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid, UINT64 sp) {
     trace_enter();
 
-    if (param_val[fid][pid]->size() >= MAX_VALS_TO_COLLECT) {
+    if (param_val[fid][pid]->size() >= MAX_VALS) {
         trace_leave();
         return;
     }
@@ -446,7 +458,7 @@ VOID Fini(INT32 code, VOID *v) {
     ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
 
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
-        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE)
+        if (nb_call[fid] < MIN_VALS)
             continue;
 
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
@@ -488,7 +500,7 @@ VOID Fini(INT32 code, VOID *v) {
                 }
 
                 float coef = ((float) param_addr) / ((float) param_val[fid][pid]->size());
-                append_type(coef > THRESHOLD ? "ADDR" : "INT");
+                append_type(coef > ADDR_THRESHOLD ? "ADDR" : "INT");
 
                 ofile << "(" << coef << ")";
             }
@@ -527,6 +539,11 @@ int main(int argc, char * argv[]) {
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
+
+    /* Get parameters of analysis from command line */
+    MIN_VALS = std::stoi(KnobMinVals.Value());
+    MAX_VALS = std::stoi(KnobMaxVals.Value());
+    ADDR_THRESHOLD = std::stof(KnobAddrThreshold.Value());
 
     ofile.open(KnobOutputFile.Value().c_str());
 
