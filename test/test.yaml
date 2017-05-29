@@ -130,11 +130,11 @@ cp:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 csplit:
-    args: 'test/test.yaml /\:/ {*}'
+    args: 'test/test.yaml --prefix=SCATSPLIT /\:/ {*}'
     bin: "test/bin/csplit"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    post: 'rm test/xx*'
+    post: 'rm ./SCATSPLIT*'
 cut:
     args: ""
     bin: "test/bin/cut"
@@ -151,7 +151,7 @@ dcgen:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 dd:
-    args: "if=/dev/urandom of=/dev/null count=100 bs=50K"
+    args: "if=/dev/urandom of=/dev/null count=100 bs=50K status=none"
     bin: "test/bin/dd"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -256,7 +256,7 @@ id:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 join:
-    args: "test/bin/base32 test/bin/base64"
+    args: "--nocheck-order test/bin/base32 test/bin/base64"
     bin: "test/bin/join"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -266,17 +266,17 @@ kill:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 link:
-    args: "test/input/poc.pdf /tmp/poc.link"
+    args: "test/input/poc.pdf test/tmp/poc.link"
     bin: "test/bin/link"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    post: "rm /tmp/poc.link"
+    post: "rm test/tmp/poc.link"
 ln:
-    args: "test/input/poc.pdf /tmp/poc.link"
+    args: "test/input/poc.pdf test/tmp/poc.link"
     bin: "test/bin/ln"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    post: "rm /tmp/poc.link"
+    post: "rm test/tmp/poc.link"
 logname:
     args: " "
     bin: "test/bin/logname"
@@ -318,13 +318,13 @@ mktemp:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 mv:
-    args: "-v /tmp/bin /tmp/binold"
+    args: "test/tmp/bin test/tmp/binold"
     bin: "test/bin/mv"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    pre: "cp -vr test/bin /tmp/bin"
+    pre: "cp -r test/bin test/tmp/bin"
 nice:
-    args: "fun"
+    args: "test/input/fun"
     bin: "test/bin/nice"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -353,11 +353,11 @@ od:
     bin: "test/bin/od"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-paste:
-    args: " "
-    bin: "test/bin/paste"
-    data: "test/data/coreutils.data"
-    deps: "test/data/coreutils.deps"
+# paste:
+#     args: " "
+#     bin: "test/bin/paste"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
 pathchk:
     args: "test/test.yaml"
     bin: "test/bin/pathchk"
@@ -410,11 +410,11 @@ rm:
     deps: "test/data/coreutils.deps"
     pre: "cp -vr test/bin /tmp/test_bin"
 rmdir:
-    args: "/tmp/test_bin"
+    args: "test/tmp/emptydir"
     bin: "test/bin/rmdir"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    pre: "mkdir /tmp/test_bin"
+    pre: "mkdir test/tmp/emptydir"
 runcon:
     args: ""
     bin: "test/bin/runcon"
@@ -476,7 +476,7 @@ split:
     bin: "test/bin/split"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    post: "rm SCATSPLIT*"
+    post: "rm ./SCATSPLIT*"
 stat:
     args: "test/input/poc.pdf"
     bin: "test/bin/stat"
@@ -503,7 +503,7 @@ sync:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 tac:
-    args: "test/bin/*"
+    args: "test/bin/cat"
     bin: "test/bin/tac"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -513,7 +513,7 @@ tail:
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
 tee:
-    args: "test/input/poc.pdf"
+    args: "< test/input/poc.pdf"
     bin: "test/bin/tee"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"

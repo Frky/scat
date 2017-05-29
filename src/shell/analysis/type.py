@@ -26,22 +26,43 @@ class TypeAnalysis(Analysis):
             Analysis.print_general_info_with_data(self, self.data)
 
     def check_function(self, fname, args, proto, undef_as_int = False):
-        return_ok, return_tot = 0, 1
-        params_ok, params_tot = 0, 0
+        ret_fp, ret_fn = 0, 0
+        param_fp, param_fn = 0, 0
+        ret_tot, param_tot = 1, 0
 
+        real_ret = self.get_one(proto[0])
         if self.check_one(proto[0], args[0], undef_as_int):
             return_ok = 1
+        elif real_ret == 'ADDR':
+            ret_fn += 1
+        else:
+            ret_fp += 1
 
         ar = min(len(args), len(proto))
         for ref, inf in zip(proto[1:ar], args[1:ar]):
             if ref == "...":
                 break
 
-            params_tot += 1
+            param_tot += 1
+            real_param = self.get_one(ref)
             if self.check_one(ref, inf, undef_as_int):
-                params_ok += 1
+                pass
+            elif real_param == 'ADDR':
+                param_fn += 1
+            else:
+                param_fp += 1
 
-        return (return_ok, return_tot, params_ok, params_tot)
+        return (param_fp, param_fn, param_tot, ret_fp, ret_fn, ret_tot)
+
+    def get_one(self, ref):
+        if '*' in ref or '[' in ref:
+            return 'ADDR'
+        elif ref == 'float' or ref == 'double':
+            return 'FLOAT'
+        elif ref == 'void':
+            return 'VOID'
+        else:
+            return 'INT'
 
     def check_one(self, ref, inf, undef_as_int):
         if inf == 'UNDEF':
@@ -126,8 +147,12 @@ class TypeAnalysis(Analysis):
 
         return_ok = 0
         return_total = 0
+        return_fp = 0
+        return_fn = 0
         params_ok = 0
         params_total = 0
+        param_fp = 0
+        param_fn = 0
 
         for function, args in self.log.get():
             fn = function.split(":")[-1]
@@ -146,11 +171,15 @@ class TypeAnalysis(Analysis):
                 variadic += 1
                 continue
 
-            res = self.check_function(fn, args, proto, undef_as_int = True)
-            return_ok += res[0]
-            return_total += res[1]
-            params_ok += res[2]
-            params_total += res[3]
+            pfp, pfn, ptot, rfp, rfn, rtot = self.check_function(fn, args, proto, undef_as_int = True)
+            params_ok += (ptot - pfn - pfp)
+            params_total += ptot
+            return_ok += (rtot - rfn - rfp)
+            return_total += rtot
+            return_fp += rfp
+            return_fn += rfn
+            param_fp += pfp
+            param_fn += pfn
 
         if verbose:
             print("Ignored")
@@ -166,7 +195,7 @@ class TypeAnalysis(Analysis):
             print("| Ratio params:            {0:.2f}%".format(self.ratio(params_ok, params_total)))
             print("- Ratio return:            {0:.2f}%".format(self.ratio(return_ok, return_total)))
         if get:
-            return (params_ok, return_ok, params_total, return_total)
+            return (params_ok, return_ok, param_fp, param_fn, return_fp, return_fn, params_total, return_total)
 
     def mismatch(self):
         self.print_general_info()

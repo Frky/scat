@@ -110,7 +110,7 @@ class ArityAnalysis(Analysis):
             print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
 
         if get:
-            return (ok_ar, ok_ret, more, less, out_more, out_less, total)
+            return (ok_ar, ok_ret, more, less, out_more, out_less, total, total)
 
     def mismatch(self):
         self.print_general_info()

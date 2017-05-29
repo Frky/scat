@@ -1,14 +1,15 @@
 #-*- coding: utf-8 -*-
 
-from subprocess import call
-
+from collections import OrderedDict
 from confiture import Confiture 
+from subprocess import call
+import os
 
 from src.shell.analysis.arity import ArityAnalysis
 from src.shell.analysis.type import TypeAnalysis
 from src.shell.data.data import Data
+from src.shell.test.res.accuracy import AccuracyRes
 from src.shell.pin.pintool import Pintool
-from collections import OrderedDict
 
 class TestAccuracy(object):
 
@@ -22,9 +23,10 @@ class TestAccuracy(object):
     def __run_arity(self):
         res = AccuracyRes()
         ignored = 0
+        FNULL = open(os.devnull, "w")
         for pgm, param in OrderedDict(sorted(self.conf.items(), key=lambda a:a[0])).items():
             if "pre" in param.keys():
-                call(param["pre"].split(" "))
+                call(param["pre"], stdout=FNULL, shell=True)
             # launch program arity
             if param["args"] == "":
                 ignored += 1
@@ -45,15 +47,18 @@ class TestAccuracy(object):
             ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)
             res.add(ar.accuracy(get=True, verbose=False), pgm=pgm, verbose=True)
             if "post" in param.keys():
-                call(param["post"].split(" "))
+                call(param["post"], stdout=FNULL, shell=True)
 
         print res
         print "IGNORED: {}".format(ignored)
 
     def __run_type(self):
+        res = AccuracyRes()
+        ignored = 0
+        FNULL = open(os.devnull, "w")
         for pgm, param in OrderedDict(sorted(self.conf.items(), key=lambda a:a[0])).items():
             if "pre" in param.keys():
-                call(param["pre"].split(" "))
+                call(param["pre"], stdout=FNULL, shell=True)
             # launch program type
             if param["args"] == "":
                 ignored += 1
@@ -72,64 +77,14 @@ class TestAccuracy(object):
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
             ty = TypeAnalysis(pgm, self.__type.get_logfile(pgm, prev=False), data)
-            print ty.accuracy(get=True, verbose=False)
+            res.add(ty.accuracy(get=True, verbose=False), pgm=pgm)
             if "post" in param.keys():
-                call(param["post"].split(" "))
+                call(param["post"], stdout=FNULL, shell=True)
+
+        print res
+        print "IGNORED: {}".format(ignored)
 
     def run(self):
-        # self.__run_arity()
+        self.__run_arity()
         self.__run_type()
-
-class AccuracyRes(object):
-
-    def __init__(self):
-        self.__in = {
-                        "ok": 0,
-                        "less": 0,
-                        "more": 0,
-                        "tot": 0,
-                    }                    
-        self.__out = {
-                        "ok": 0,
-                        "less": 0,
-                        "more": 0,
-                        "tot": 0,
-                    }
-
-    def add(self, res, pgm="", verbose=True):
-        self.__in["ok"] += res[0]
-        self.__in["more"] += res[2]
-        self.__in["less"] += res[3]
-        self.__in["tot"] += res[-1]
-        self.__out["ok"] += res[1]
-        self.__out["more"] += res[4]
-        self.__out["less"] += res[5]
-        self.__out["tot"] += res[-1]
-        if verbose:
-            try:
-                print "{}: {}/{} {:.2f}% ({} fn, {} fp) - {}/{} {:.2f}%".format(
-                        pgm, 
-                        res[0],
-                        res[-1],
-                        res[0]*100./res[-1],
-                        res[3],
-                        res[2],
-                        res[1],
-                        res[-1],
-                        res[1]*100./res[-1],
-                            )
-            except Exception:
-                print "{}: n.c.".format(pgm)
-    def __str__(self):
-        return "{}: {}/{} {:.2f}% ({} fn, {} fp) - {}/{} {:.2f}%".format(
-                    "TOTAL", 
-                    self.__in["ok"], 
-                    self.__in["tot"], 
-                    self.__in["ok"]*100./self.__in["tot"],
-                    self.__in["less"],
-                    self.__in["more"],
-                    self.__out["ok"], 
-                    self.__out["tot"], 
-                    self.__out["ok"]*100./self.__out["tot"],
-                )
 
