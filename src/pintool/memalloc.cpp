@@ -24,7 +24,7 @@
 #define NB_CALLS_TO_CONCLUDE    500
 #define SEUIL                   0.8
 #define IGNORE_LIBRARIES        1
-#define COUPLE_THRESHOLD        0.75
+#define COUPLE_THRESHOLD        0.8
 
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
@@ -359,10 +359,11 @@ VOID Commence() {
             }
             img_addr = atol(read_part(&m).c_str());
             name = read_part(&m);
+
             float rho = atof(read_part(&m).c_str());
             unsigned char param_pos = atoi(read_part(&m).c_str());
 
-            for (unsigned int pos = 0 ; pos < param_pos ; pos++) {
+            for (unsigned char pos = 0 ; pos < param_pos ; pos++) {
                 type_param.push_back(false);
             }
             type_param.push_back(true);
