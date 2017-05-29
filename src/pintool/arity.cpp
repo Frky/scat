@@ -10,11 +10,12 @@
 
 #include "pin.H"
 
-#define NB_CALLS_TO_CONCLUDE    20
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
-#define PARAM_THRESHOLD         0.10
-#define RETURN_THRESHOLD        0.10
+
+#define MIN_CALLS_DEFAULT       "20"
+#define PARAM_THRESHOLD_DEFAULT "0.10"
+#define RET_THRESHOLD_DEFAULT   "0.10"
 
 #define PARAM_INT_COUNT          6
 #define PARAM_INT_STACK_COUNT   10
@@ -26,12 +27,23 @@
 #include "utils/registers.h"
 #include "utils/hollow_stack.h"
 
-ofstream ofile;
-// TODO change "mouaha"
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
+/* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
+unsigned int MIN_CALLS;
+KNOB<string> KnobMinCalls(KNOB_MODE_WRITEONCE, "pintool", "mincalls", MIN_CALLS_DEFAULT, "Specify a number for MIN_CALLS");
+float PARAM_THRESHOLD; 
+KNOB<string> KnobParamThreshold(KNOB_MODE_WRITEONCE, "pintool", "paramthresh", PARAM_THRESHOLD_DEFAULT, "Specify a number for PARAM_THRESHOLD");
+float RET_THRESHOLD; 
+KNOB<string> KnobRetThreshold(KNOB_MODE_WRITEONCE, "pintool", "retthresh", RET_THRESHOLD_DEFAULT, "Specify a number for RET_THRESHOLD");
 
+
+/* Out file to store analysis results */
+ofstream ofile;
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "/dev/null", "Specify an output file");
+
+/* Time of instrumentation */
 struct timeval start, stop; 
 
+/* Address of the Global Offset Table */
 ADDRINT got_beg = 0;
 ADDRINT got_end = 0;
 
@@ -534,7 +546,7 @@ VOID fini(INT32 code, VOID *v) {
     int dismissed = 0;
 
     for (FID fid = 1; fid <= fn_nb(); fid++) {
-        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
+        if (nb_call[fid] < MIN_CALLS) {
             dismissed++;
             continue;
         }
@@ -542,7 +554,7 @@ VOID fini(INT32 code, VOID *v) {
         inferred++;
 
         UINT64 param_threshold = (UINT64) ceil(nb_call[fid] * PARAM_THRESHOLD);
-        UINT64 return_threshold = (UINT64) ceil(nb_call[fid] * RETURN_THRESHOLD);
+        UINT64 return_threshold = (UINT64) ceil(nb_call[fid] * RET_THRESHOLD);
 
         UINT64 int_arity = detected_arity(param_threshold,
                 nb_param_int[fid], PARAM_INT_COUNT);
@@ -615,6 +627,11 @@ int main(int argc, char * argv[]) {
     PIN_InitSymbolsAlt(DEBUG_OR_EXPORT_SYMBOLS);
 
     if (PIN_Init(argc, argv)) return 1;
+
+    /* Get parameters of analysis from command line */
+    MIN_CALLS = std::atoi(KnobMinCalls.Value().c_str());
+    PARAM_THRESHOLD = std::atof(KnobParamThreshold.Value().c_str());
+    RET_THRESHOLD = std::atof(KnobRetThreshold.Value().c_str());
 
     // We need to open this file early (even though
     // it is only needed in the end) because PIN seems
