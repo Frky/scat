@@ -7,6 +7,7 @@ from datetime import datetime
 from src.shell.analysis.arity import ArityAnalysis
 from src.shell.analysis.type import TypeAnalysis
 from src.shell.analysis.couple import CoupleAnalysis
+from src.shell.analysis.analysis import Analysis
 
 class Pintool(object):
 

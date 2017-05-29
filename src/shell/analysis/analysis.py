@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from datetime import datetime
+from abc import ABCMeta, abstractmethod
 import re
 
 class Analysis(object):
@@ -75,11 +76,18 @@ class Analysis(object):
     def time(self):
         print(self.log.time())
 
+    @abstractmethod
     def display(self):
-        print("Not implemented")
+        print("Display not implemented for this pintool")
 
+    @abstractmethod
     def accuracy(self):
-        print("Not implemented")
+        print("Accuracy not implemented for this pintool")
 
+    @abstractmethod
     def mismatch(self):
-        print("Not implemented")
+        print("Mismatch not implemented for this pintool")
+
+    @abstractmethod
+    def parse_log(self):
+        print("Parse_log not implemented for this pintool")
