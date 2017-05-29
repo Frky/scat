@@ -20,4 +20,3 @@ class CoupleCmd(ICommand):
             return
         logfile = self.__pintools["couple"].get_logfile(s, prev=False)
         Couple(logfile, s, self.stdout).run()
-
