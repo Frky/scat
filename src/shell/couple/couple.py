@@ -2,6 +2,7 @@
 
 from src.shell.command.i_command import ICommand
 from src.shell.parser.couple import CoupleLogParser
+from time import time
 
 class Couple(ICommand):
     """
@@ -47,10 +48,15 @@ class Couple(ICommand):
                 nb = 0
                 not_nb = 0
                 out_idx = 0
+                pos_couple = dict()
                 for param in param_in:
                     not_nb += 1
                     for out_p in param_out[param.val % NROUND]:
                         if out_p.val == param.val and out_p.date < param.date:
+                            try:
+                                pos_couple[param.pos] += 1
+                            except KeyError:
+                                pos_couple[param.pos] = 1
                             nb += 1
                             not_nb -= 1
                             break
@@ -58,10 +64,11 @@ class Couple(ICommand):
                         break
                 rho = float(nb) / float(len(param_in))
                 if rho > 0.5:
-                    couples.append((f, g, rho))
-        with open("log/couple_res_{}.log".format(self.__pgm), "w") as f:
+                    param_pos = max(pos_couple.items(), key=lambda x: x[1])[0]
+                    couples.append((f, g, rho, param_pos))
+        with open("log/couple_res_{}_{}.log".format(self.__pgm, int(time())), "w") as f:
             for c in couples:
-                print "{} -- ({:.2f}) --> {}".format(c[0], c[2], c[1])
-                f.write("{}:{}:{}\n".format(*c))
+                print "{} -- ({:.2f}) --> {} (param position : {})".format(c[0], c[2], c[1], c[3])
+                f.write("{}:{}:{}:{}\n".format(*c))
         return
 
