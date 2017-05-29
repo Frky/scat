@@ -3,7 +3,7 @@ pin:
     bin: /usr/bin/pin/pin
     function-mode: name
     compile-flags: -std=c++11 -fabi-version=2 -D_GLIBCXX_USE_CXX11_ABI=0
-    cli-options: "-ifeellucky"
+#    cli-options: "-ifeellucky"
 
 pintool:
     arity:
@@ -24,7 +24,7 @@ pintool:
     memalloc: 
         src: ./src/pintool/memalloc.cpp
         obj: ./bin/obj-intel64/memalloc.so
-        prev_step: type
+        prev_step: couple_res
     checkalloc: 
         src: ./src/pintool/checkalloc.cpp
         obj: ./bin/obj-intel64/checkalloc.so
