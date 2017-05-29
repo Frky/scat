@@ -9,10 +9,11 @@ class Couple(ICommand):
 
     """
 
-    def __init__(self, log_file, log):
+    def __init__(self, log_file, pgm, log):
         super(Couple, self).__init__()
         self.__parser = CoupleLogParser(log_file)
         self.log = log
+        self.__pgm = pgm
 
     def run(self):
         inp = dict()
@@ -58,7 +59,9 @@ class Couple(ICommand):
                 rho = float(nb) / float(len(param_in))
                 if rho > 0.5:
                     couples.append((f, g, rho))
-        for c in couples:
-            print "{} -- ({:.2f}) --> {}".format(c[0], c[2], c[1])
+        with open("log/couple_res_{}.log".format(self.__pgm), "w") as f:
+            for c in couples:
+                print "{} -- ({:.2f}) --> {}".format(c[0], c[2], c[1])
+                f.write("{}:{}:{}\n".format(*c))
         return
 
