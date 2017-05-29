@@ -24,7 +24,7 @@ pintool:
     memalloc: 
         src: ./src/pintool/memalloc.cpp
         obj: ./bin/obj-intel64/memalloc.so
-        prev_step: type
+        prev_step: couple_res
     checkalloc: 
         src: ./src/pintool/checkalloc.cpp
         obj: ./bin/obj-intel64/checkalloc.so

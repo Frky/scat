@@ -375,7 +375,6 @@ VOID Commence() {
                 }
             }
 
-            read_part(&m);
         }
     }
 

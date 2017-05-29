@@ -24,7 +24,7 @@ class MemCombCmd(ICommand):
             return
         s = s.split(" ")
         libraries = len(s) > 1 and s[1] == "--lib"
-        proto_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=True)
+        proto_logfile = self.__pintools["type"].get_logfile(s[0], prev=False)
         mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
         try:
             MemComb(mem_logfile, proto_logfile, self.stdout, s[0]).run(libraries=libraries)
