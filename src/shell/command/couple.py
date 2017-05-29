@@ -19,5 +19,4 @@ class CoupleCmd(ICommand):
             self.stderr("you must run memblock inference first")
             return
         logfile = self.__pintools["couple"].get_logfile(s, prev=False)
-        Couple(logfile, self.stdout).run()
-
+        Couple(logfile, s, self.stdout).run()
