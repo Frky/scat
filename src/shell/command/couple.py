@@ -6,6 +6,12 @@ from src.shell.couple.couple import Couple
 
 class CoupleCmd(ICommand):
     """
+        usage: couple program
+
+        Non-optional argument:
+            program: program you want to compute couples on
+
+        couple must be used only after using successfully `launch couple`
     """
 
     def __init__(self, pintools, *args, **kwargs):

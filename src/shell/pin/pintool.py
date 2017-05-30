@@ -140,7 +140,11 @@ class Pintool(object):
                 candidates,
         )
         if len(candidates) == 0:
-            self.stderr("Cannot find file result from {0} inference - ensure that you did run every step in order (arity > type > couple) for this binary".format(self))
+            self.stderr(
+                "Cannot find file result from {0} inference and looking     \
+                for {} log file - ensure that you did run every step in order \
+                (arity > type > couple > memalloc) for this binary (\"{}\")."
+                .format(self, inf, binary))
             raise IOError
         return max(candidates, key=os.path.getmtime)
 
