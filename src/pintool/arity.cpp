@@ -545,6 +545,8 @@ VOID fini(INT32 code, VOID *v) {
     int inferred = 0;
     int dismissed = 0;
 
+    ofile << "MIN_CALLS=" << MIN_CALLS << ":PARAM_THRESHOLD=" << PARAM_THRESHOLD << ":RET_THRESHOLD=" << RET_THRESHOLD << endl;
+
     for (FID fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < MIN_CALLS) {
             dismissed++;

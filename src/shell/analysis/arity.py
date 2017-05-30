@@ -9,6 +9,7 @@ class ArityAnalysis(Analysis):
 
     def __init__(self, pgm, logfile, data=None):
         Analysis.__init__(self, pgm, logfile)
+        self.__pgm = pgm
         self.data = data
         if data == None:
             self.protos = None
@@ -43,7 +44,7 @@ class ArityAnalysis(Analysis):
         print("")
         self.print_general_info()
 
-    def accuracy(self, get=False, verbose=True):
+    def accuracy(self, get=False, verbose=True, log=None):
         if verbose:
             self.print_general_info()
             print("")
@@ -109,8 +110,25 @@ class ArityAnalysis(Analysis):
             print("| Ratio params:            {0:.2f}%".format(self.ratio(ok_ar, total)))
             print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
 
+        if log is not None:
+            params = self.log.get_params()
+            with open(log, "a") as f:
+                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
+                        self.__pgm,
+                        params["MIN_CALLS"],
+                        params["PARAM_THRESHOLD"],
+                        params["RET_THRESHOLD"],
+                        less, 
+                        more, 
+                        total, 
+                        out_less, 
+                        out_more, 
+                        total,
+                    ))
+
         if get:
             return (ok_ar, ok_ret, more, less, out_more, out_less, total, total)
+
 
     def mismatch(self):
         self.print_general_info()

@@ -10,6 +10,7 @@ class ArityLogParser(ILogParser):
 
     def __init__(self, *args, **kwargs):
         self.__fn = None
+        self.__params = dict()
         super(ArityLogParser, self).__init__(*args, **kwargs)
 
     def get(self):
@@ -18,6 +19,10 @@ class ArityLogParser(ILogParser):
             with open(self.log_path, "r") as log:
                 # Skip first line
                 log.readline()
+                # Read parameters
+                for p in log.readline()[:-1].split(":"):
+                    k, v = p.split("=")
+                    self.__params[k] = v
                 for line in log.readlines():
                     l = line[:-1].split(":")[:-1]
                     name = ":".join(l[:3])
@@ -41,3 +46,5 @@ class ArityLogParser(ILogParser):
             print "ERROR: {0} not found -- aborting".format(fname)
             raise Exception
 
+    def get_params(self):
+        return self.__params
