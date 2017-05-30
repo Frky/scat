@@ -24,7 +24,7 @@
 #define NB_CALLS_TO_CONCLUDE    500
 #define SEUIL                   0.8
 #define IGNORE_LIBRARIES        1
-#define COUPLE_THRESHOLD        0.8
+#define COUPLE_THRESHOLD        0.9
 
 ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
