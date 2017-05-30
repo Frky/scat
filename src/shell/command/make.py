@@ -55,4 +55,4 @@ class MakeCmd(ICommand):
 
         # Compile pintools
         for p in to_compile:
-            p.compile(force, debug, trace)
+            p.compile(force, debug, trace, verbose=True)
