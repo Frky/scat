@@ -69,7 +69,7 @@ class Pintool(object):
         """
         return self.__prev_step
 
-    def __cmd(self, binary, args, logfile, debugfile, infile=None):
+    def __cmd(self, binary, args, logfile, debugfile, infile=None, pin_args=""):
         if infile is not None:
             infile_opt = "-i {0}".format(infile)
         else:
@@ -78,13 +78,14 @@ class Pintool(object):
             cli_options = self.__pinconf["cli-options"]
         else:
             cli_options = ""
-        return "{} {} -t {} -o {} -logfile {} {} -- {} {}".format(
+        return "{} {} -t {} -o {} -logfile {} {} {} -- {} {}".format(
                 self.__pinconf["bin"],
                 cli_options,
                 self.__obj_path,
                 logfile,
                 debugfile,
                 infile_opt,
+                pin_args,
                 binary,
                 " ".join(args),
         )
@@ -142,7 +143,7 @@ class Pintool(object):
             raise IOError
         return max(candidates, key=os.path.getmtime)
 
-    def launch(self, binary, args, verbose=True):
+    def launch(self, binary, args, params=None, verbose=True):
         """
             Launch specified inference on binary given in parameter
 
@@ -150,6 +151,9 @@ class Pintool(object):
                             an executable)
 
             @param args     arguments to give to the binary
+
+            @param params   dictionnary of (parameter, value) values to set parameters
+                            for the analysis
 
             @param verbose  if True, print intermediate steps
 
@@ -161,7 +165,11 @@ class Pintool(object):
             infile = self.get_logfile(binary)
         else:
             infile = None
-        cmd = self.__cmd(binary, args, logfile, debugfile, infile)
+        if params is not None:
+            pin_args = " ".join(["-{} {}".format(k, v) for k, v in params.items()])
+        else:
+            pin_args = ""
+        cmd = self.__cmd(binary, args, logfile, debugfile, infile, pin_args)
         self.stdout(cmd, verbose)
         start = datetime.now()
         subprocess.call(cmd, shell=True)

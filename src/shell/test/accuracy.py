@@ -51,7 +51,7 @@ class TestAccuracy(object):
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
             ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)
-            res.add(ar.accuracy(get=True, verbose=False), pgm=pgm, verbose=True)
+            res.add(ar.accuracy(get=True, verbose=False, log="test/log/arity.res"), pgm=pgm, verbose=True)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
 
