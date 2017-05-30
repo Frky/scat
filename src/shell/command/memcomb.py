@@ -22,10 +22,22 @@ class MemCombCmd(ICommand):
         if "memalloc" not in self.__pintools.keys():
             self.stderr("you must run memalloc inference first")
             return
-        s = s.split(" ")
         libraries = len(s) > 1 and s[1] == "--lib"
-        proto_logfile = self.__pintools["type"].get_logfile(s[0], prev=False)
-        mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
+
+        if len(s) == 0:
+            self.stderr("You must give at least one argument (pgm)")
+            return
+
+
+        s = s.split()
+
+        try:
+            proto_logfile = self.__pintools["type"].get_logfile(s[0], prev=False)
+            mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
+        except IOError:
+            self.stderr("Logs for binary \"{}\" not found".format(s[0]))
+            return
+
         try:
             MemComb(mem_logfile, proto_logfile, self.stdout, s[0]).run(libraries=libraries)
         except Exception as e:
