@@ -16,9 +16,10 @@ class MemComb(object):
 
     """
 
-    def __init__(self, mem_log_file, type_log_file, log, pgm):
+    def __init__(self, mem_log_file, type_log_file, log, pgm,
+            cli_ignore=None, cli_libmatch=None):
         super(MemComb, self).__init__()
-        self.__parser = MemallocParser(mem_log_file)
+        self.__parser = MemallocParser(mem_log_file, cli_ignore, cli_libmatch)
         self.__protos = TypeLogParser(type_log_file)
         self.log = log
         self.__pgm = pgm
@@ -242,7 +243,7 @@ class MemComb(object):
         print "{},{},{},{},{},{}".format(ALLOC, FREE, mem.nb_calls[0], mem.nb_calls[1], *mem.errors)
         return
 
-    def run(self, libraries=False, wrappers=True):
+    def run(self, libraries=False, wrappers=True, ignore=None, cli_ignore=None):
         if libraries:
             nb_callers = self.__compute_callers()
         else:
