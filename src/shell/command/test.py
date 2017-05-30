@@ -23,7 +23,12 @@ class TestCmd(ICommand):
         
         command = split[0]
 
+        if len(split) > 1:
+            subcommand = split[1]
+        else:
+            subcommand = None
+
         # Test accuracy
         if command == "accuracy":
-            TestAccuracy(self.__conf_path, self.__pintools["arity"], self.__pintools["type"], self.__logdir).run()
+            TestAccuracy(self.__conf_path, self.__pintools["arity"], self.__pintools["type"], self.__logdir).run(subcommand)
         return

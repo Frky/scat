@@ -14,7 +14,13 @@ from src.shell.pin.pintool import Pintool
 class TestAccuracy(object):
 
     def __init__(self, test_conf, arity, typ, logdir, *args, **kwargs):
-        self.conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
+        self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
+        # Inlcude sub configuration files
+        for k, v in self.__conf.items():
+            if "config" in v.keys():
+                subconf = Confiture("config/templates/empty.yaml").check_and_get(v["config"])
+                self.__conf.pop(k)
+                self.__conf.update(subconf)
         self.__arity = arity
         self.__type = typ
         self.__logdir = logdir
@@ -24,7 +30,7 @@ class TestAccuracy(object):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
-        for pgm, param in OrderedDict(sorted(self.conf.items(), key=lambda a:a[0])).items():
+        for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if "pre" in param.keys():
                 call(param["pre"], stdout=FNULL, shell=True)
             # launch program arity
@@ -56,7 +62,7 @@ class TestAccuracy(object):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
-        for pgm, param in OrderedDict(sorted(self.conf.items(), key=lambda a:a[0])).items():
+        for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if "pre" in param.keys():
                 call(param["pre"], stdout=FNULL, shell=True)
             # launch program type
@@ -84,7 +90,9 @@ class TestAccuracy(object):
         print res
         print "IGNORED: {}".format(ignored)
 
-    def run(self):
-        self.__run_arity()
-        self.__run_type()
+    def run(self, subcommand=None):
+        if subcommand is None or subcommand == "arity":
+            self.__run_arity()
+        if subcommand is None or subcommand == "type":
+            self.__run_type()
 
