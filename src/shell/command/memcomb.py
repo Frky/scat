@@ -9,7 +9,17 @@ from src.shell.utils import complete_bin, complete_path, checkpath
 
 class MemCombCmd(ICommand):
     """
+        usage: memcomb program [OPTION]
 
+        Optional arguments:
+            --lib: search also in the library used by the binary
+            --ignore=<keyword1,keyword2,..>: ignore all the memory blocks
+                containig at least one of the keywords
+            --libmatch=<keyword1,keyword2,..>: keep only the memory blocks
+                that matches at least one of the keywords
+
+        memcomb must be used only after using succesfully `launch type` and
+        `launch memalloc`
     """
 
     def __init__(self, pintools, *args, **kwargs):
