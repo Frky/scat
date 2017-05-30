@@ -66,7 +66,7 @@ class Couple(ICommand):
                 if rho > 0.5:
                     param_pos = max(pos_couple.items(), key=lambda x: x[1])[0]
                     couples.append((f, g, rho, param_pos))
-        with open("log/{}_couple_res_{}.log".format(self.__pgm, int(time())), "w") as f:
+        with open("log/{}_coupleres_{}.log".format(self.__pgm, int(time())), "w") as f:
             for c in couples:
                 print "{} -- ({:.2f}) --> {} (param position : {})".format(c[0], c[2], c[1], c[3])
                 f.write("{}:{}:{}:{}\n".format(*c))

@@ -112,7 +112,7 @@ class Pintool(object):
 
 
     def match_logfile(self, inf, binary, candidate):
-        name = "{2}/{0}_{1}".format(os.path.basename(binary), inf, self.__logdir)
+        name = "{2}/{0}_{1}_".format(os.path.basename(binary), inf, self.__logdir)
         return candidate.startswith(name) and candidate.endswith(".log")
 
 
