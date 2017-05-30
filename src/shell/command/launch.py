@@ -26,7 +26,7 @@ class LaunchCmd(ICommand):
         return
 
     def run(self, s, *args, **kwargs):
-        split = s.split(" ")
+        split = s.split()
         index = 0
 
         release = False
