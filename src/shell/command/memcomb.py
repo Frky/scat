@@ -22,7 +22,6 @@ class MemCombCmd(ICommand):
         if "memalloc" not in self.__pintools.keys():
             self.stderr("you must run memalloc inference first")
             return
-        libraries = len(s) > 1 and s[1] == "--lib"
 
         if len(s) == 0:
             self.stderr("You must give at least one argument (pgm)")
@@ -30,6 +29,17 @@ class MemCombCmd(ICommand):
 
 
         s = s.split()
+        cli_ignore = None
+        cli_libmatch = None
+        libraries = False
+        for i in s:
+            if "--ignore=" in i:
+                cli_ignore = i.replace("--ignore=","").split(",")
+            if "--libmatch=" in i:
+                cli_libmatch = i.replace("--libmatch=","").split(",")
+            if i == "--lib":
+                libraries = True
+
 
         try:
             proto_logfile = self.__pintools["type"].get_logfile(s[0], prev=False)
@@ -39,7 +49,7 @@ class MemCombCmd(ICommand):
             return
 
         try:
-            MemComb(mem_logfile, proto_logfile, self.stdout, s[0]).run(libraries=libraries)
+            MemComb(mem_logfile, proto_logfile, self.stdout, s[0], cli_ignore, cli_libmatch).run(libraries=libraries)
         except Exception as e:
             traceback.print_exc()
             raise e

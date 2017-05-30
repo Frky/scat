@@ -64,8 +64,10 @@ class MemallocParser(ILogParser):
     # Size of the hash table
     DATA_SIZE = 100000
 
-    def __init__(self, log_file):
+    def __init__(self, log_file, cli_ignore=None, cli_libmatch=None):
         super(MemallocParser, self).__init__(log_file)
+        self.__ignore = cli_ignore
+        self.__libmatch = cli_libmatch
 
     def get(self, ret_only=False, param_only=False, ALLOC=""):
         with open(self.log_path, 'r') as f:
@@ -88,6 +90,10 @@ class MemallocParser(ILogParser):
                 if not buf:
                     break
                 block = Block(buf, fmt, self.fn_table)
+                if self.__ignore != None and any([i in block.id for i in self.__ignore]):
+                    continue
+                if self.__libmatch != None and not any([i in block.id.split(':')[0] for i in self.__libmatch]):
+                    continue
                 if ret_only and block.is_in():
                     continue
                 if param_only and block.is_out() and block.id != ALLOC:
