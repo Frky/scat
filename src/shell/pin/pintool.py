@@ -57,7 +57,8 @@ class Pintool(object):
         return self.__name
 
     def __log(self, msg, *args, **kwargs):
-        print msg
+        if "verbose" in kwargs.keys() and kwargs["verbose"]:
+            print msg
 
     @property
     def prev_step(self):
@@ -169,7 +170,7 @@ class Pintool(object):
         self.stdout("Execution time: {0}.{1}s".format(duration.seconds, duration.microseconds), verbose)
 
 
-    def compile(self, force, debug, trace):
+    def compile(self, force, debug, trace, verbose):
         """
             Compile all pintools needed
 
@@ -215,7 +216,7 @@ class Pintool(object):
                 obj_build_path,
                 obj_build_name)
 
-        self.stdout("Compiling pintool: {0} ...".format(src_name[:-4]))
+        self.stdout("Compiling pintool: {0} ...".format(src_name[:-4]), verbose=verbose)
         with open("/dev/null", 'w') as fnull:
             try:
                 subprocess.check_call(cmd, cwd=src_path, shell=True, stdout=fnull)
@@ -224,12 +225,12 @@ class Pintool(object):
                         '{}/{}.so'.format(obj_build_path, obj_build_name),
                         '{}/{}'.format(obj_path, obj_name))
                 if mtime_before == mtime_now:
-                    self.stdout("\t=> Up to date !")
+                    self.stdout("\t=> Up to date !", verbose=verbose)
                 else:
-                    self.stdout("\t=> Done !")
+                    self.stdout("\t=> Done !", verbose)
                 return True
             except subprocess.CalledProcessError as error:
-                self.stdout("/!\ Compilation exited with non-zero status {} /!\\\n\n".format(error.returncode))
+                self.stdout("/!\ Compilation exited with non-zero status {} /!\\\n\n".format(error.returncode), verbose=verbose)
                 return False
 
     def get_analysis(self, pgm, data = None):
