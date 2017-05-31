@@ -5,7 +5,7 @@ from src.shell.utils import complete_bin, complete_path, checkpath
 
 class LaunchCmd(ICommand):
     """
-        usage: launch [OPTION?] pintool program [args]
+        usage: launch [OPTION?] (all | pintool) program [args]
 
         Non-optional arguments:
             pintool: pintool you want to use
@@ -14,49 +14,77 @@ class LaunchCmd(ICommand):
 
         Optional arguments:
             args: arguments of the program analysed
-            -t, --trace:  <TODO>
-            -d, --debug:  <TODO>
-            -f, --force, -B:  <TODO>
-            -r, --release:  <TODO>
+            all: Launch all the stable pintool in the right order (arity, type,
+                couple)
+            OPTION : 
+                -t, --trace:  <TODO>
+                -d, --debug:  <TODO>
+                -f, --force, -B:  <TODO>
+                -r, --release:  <TODO>
+                --alt_prev: use the alternative previous step as defined in the
+                    file to perform the analysis
     """
 
     def __init__(self, pintools, *args, **kwargs):
         self.__pintools = pintools
         super(LaunchCmd, self).__init__(*args, **kwargs)
+        self.__options_dict = {"release":False, "force":False, "debug":False,
+                "trace":False, "alt_prev":False}
         return
 
     def run(self, s, *args, **kwargs):
         split = s.split()
         index = 0
 
-        release = False
-        force = False
-        debug = False
-        trace = False
-        alt_prev = False
         while index < len(split) and split[index].startswith("-"):
             arg = split[index]
             if arg == '-f' or arg == '--force' or arg == '-B':
-                force = True
+                self.__options_dict["force"] = True
             elif arg == '-r' or arg == '--release':
-                release = True
+                self.__options_dict["release"] = True
             elif arg == '-d' or arg == '--debug':
-                debug = True
+                self.__options_dict["debug"] = True
             elif arg == '-t' or arg == '--trace':
-                trace = True
+                self.__options_dict["trace"] = True
             elif arg == '--alt_prev':
-                alt_prev = True
+                self.__options_dict["alt_prev"] = True
             index += 1
 
         inf = split[index]
         index += 1
 
-        if inf not in self.__pintools.keys():
+        if inf == "all":
+            for pintool in ["arity", "type", "couple"]:
+                self.launch_pintool(pintool, split[index:], self.__options_dict)
+        elif inf not in self.__pintools.keys():
             self.stderr('Unknown inference "{}"'.format(inf))
             return
+        else:
+            self.launch_pintool(inf, split[index:], self.__options_dict)
 
-        p = self.__pintools[inf]
 
+    def complete(self, text, line, begidx, endidx):
+        if len(line.split(" ")) < 3:
+            return filter(
+                            lambda x: x.startswith(text),
+                            map(lambda x: str(x), self.__pintools),
+                        )
+        elif len(line.split(" ")) < 4:
+            return complete_bin(text, line, begidx, endidx)
+        else:
+            return  complete_path(text, line, begidx, endidx)
+
+    def launch_pintool(self, pintool, binary_and_args, options_dict):
+        """
+        """
+
+        p = self.__pintools[pintool]
+
+        release = options_dict["release"]
+        trace = options_dict["trace"]
+        debug = options_dict["debug"]
+        force = options_dict["force"]
+        alt_prev = options_dict["alt_prev"]
         if release or debug or trace:
             if not p.compile(force, debug, trace):
                 return
@@ -65,7 +93,7 @@ class LaunchCmd(ICommand):
 
         # Parse command into binary + args
         args =  list()
-        for i, arg in enumerate(split[index:]):
+        for i, arg in enumerate(binary_and_args):
             if arg[0] == "\"":
                 arg = arg[1:]
             if arg[-1] == "\"":
@@ -86,15 +114,4 @@ class LaunchCmd(ICommand):
 
         # Run inference
         self.stdout("Launching {0} inference on {1}".format(p, binary))
-        p.launch(binary, args, alt_prev=alt_prev)
-
-    def complete(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
-            return filter(
-                            lambda x: x.startswith(text),
-                            map(lambda x: str(x), self.__pintools),
-                        )
-        elif len(line.split(" ")) < 4:
-            return complete_bin(text, line, begidx, endidx)
-        else:
-            return  complete_path(text, line, begidx, endidx)
+        p.launch(binary, args, alt_prev=alt_prev)       
