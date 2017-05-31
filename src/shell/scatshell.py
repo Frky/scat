@@ -50,6 +50,11 @@ class ScatShell(Cmd):
                 prev_step = self.__config["pintool"][pintool]["prev_step"]
             else:
                 prev_step = None
+
+            if "alt_prev_step" in self.__config["pintool"][pintool].keys():
+                alt_prev_step = self.__config["pintool"][pintool]["alt_prev_step"]
+            else:
+                alt_prev_step = None
             # Create pintool object
             pintool_obj = Pintool(
                                     name=pintool,
@@ -60,6 +65,7 @@ class ScatShell(Cmd):
                                     # stderr=self.out,
                                     log_dir=self.__logdir,
                                     prev_step=prev_step,
+                                    alt_prev_step=alt_prev_step
                                 )
             self.__pintools[pintool] = pintool_obj
 

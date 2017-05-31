@@ -33,6 +33,7 @@ class LaunchCmd(ICommand):
         force = False
         debug = False
         trace = False
+        alt_prev = False
         while index < len(split) and split[index].startswith("-"):
             arg = split[index]
             if arg == '-f' or arg == '--force' or arg == '-B':
@@ -43,6 +44,8 @@ class LaunchCmd(ICommand):
                 debug = True
             elif arg == '-t' or arg == '--trace':
                 trace = True
+            elif arg == '--alt_prev':
+                alt_prev = True
             index += 1
 
         inf = split[index]
@@ -53,6 +56,7 @@ class LaunchCmd(ICommand):
             return
 
         p = self.__pintools[inf]
+
         if release or debug or trace:
             if not p.compile(force, debug, trace):
                 return
@@ -82,7 +86,7 @@ class LaunchCmd(ICommand):
 
         # Run inference
         self.stdout("Launching {0} inference on {1}".format(p, binary))
-        p.launch(binary, args)
+        p.launch(binary, args, alt_prev=alt_prev)
 
     def complete(self, text, line, begidx, endidx):
         if len(line.split(" ")) < 3:

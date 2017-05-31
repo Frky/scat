@@ -45,6 +45,11 @@ class Pintool(object):
         else:
             self.__prev_step = None
 
+        if "alt_prev_step" in kwargs.keys():
+            self.__alt_prev_step = kwargs["alt_prev_step"]
+        else:
+            self.__alt_prev_step = None
+
         # Set pintool code
         self.__code = Pintool.nb_pintools
         # Increment number of pintools created
@@ -70,7 +75,15 @@ class Pintool(object):
         """
         return self.__prev_step
 
-    def __cmd(self, binary, args, logfile, debugfile, infile=None, pin_args=""):
+    @property
+    def alt_prev_step(self):
+        return self.__alt_prev_step
+
+    def __cmd(self, binary, args, logfile, debugfile, infile=None, pin_args="", 
+            alt_prev=False):
+        additional_options = ""
+        if alt_prev and self.__alt_prev_step == "coupleres":
+            additional_options += "-couple "
         if infile is not None:
             infile_opt = "-i {0}".format(infile)
         else:
@@ -79,7 +92,7 @@ class Pintool(object):
             cli_options = self.__pinconf["cli-options"]
         else:
             cli_options = ""
-        return "{} {} -t {} -o {} -logfile {} {} {} -- {} {}".format(
+        return "{} {} -t {} -o {} -logfile {} {} {} {} -- {} {}".format(
                 self.__pinconf["bin"],
                 cli_options,
                 self.__obj_path,
@@ -87,6 +100,7 @@ class Pintool(object):
                 debugfile,
                 infile_opt,
                 pin_args,
+                additional_options,
                 binary,
                 " ".join(args),
         )
@@ -116,7 +130,7 @@ class Pintool(object):
         return candidate.startswith(name) and candidate.endswith(".log")
 
 
-    def get_logfile(self, binary, prev=True):
+    def get_logfile(self, binary, prev=True, alt_prev=False):
         """
             Retrieve the most recent logfile from the given step of inference.
 
@@ -131,6 +145,13 @@ class Pintool(object):
 
         """
         inf = self.__prev_step if prev else self
+        if alt_prev:
+            inf = self.__alt_prev_step
+        elif prev:
+            inf = self.__prev_step
+        else:
+            inf = self
+
         candidates = map(
                 lambda x: "{0}/{1}".format(self.__logdir, x),
                 os.listdir(self.__logdir),
@@ -147,7 +168,11 @@ class Pintool(object):
             raise IOError
         return max(candidates, key=os.path.getmtime)
 
+<<<<<<< HEAD
     def launch(self, binary, args, params=None, verbose=True):
+=======
+    def launch(self, binary, args, verbose=True, alt_prev=False):
+>>>>>>> Integrate a new option in `launch` command (#15)
         """
             Launch specified inference on binary given in parameter
 
@@ -166,14 +191,19 @@ class Pintool(object):
         logfile = self.__gen_outputfile(binary, timestamp, "log")
         debugfile = self.__gen_outputfile(binary, timestamp, "dbg")
         if self.__prev_step is not None:
-            infile = self.get_logfile(binary)
+            infile = self.get_logfile(binary, alt_prev=alt_prev)
         else:
             infile = None
+<<<<<<< HEAD
         if params is not None:
             pin_args = " ".join(["-{} {}".format(k, v) for k, v in params.items()])
         else:
             pin_args = ""
         cmd = self.__cmd(binary, args, logfile, debugfile, infile, pin_args)
+=======
+        cmd = self.__cmd(binary, args, logfile, debugfile, infile,
+                alt_prev=alt_prev)
+>>>>>>> Integrate a new option in `launch` command (#15)
         self.stdout(cmd, verbose)
         start = datetime.now()
         subprocess.call(cmd, shell=True)
