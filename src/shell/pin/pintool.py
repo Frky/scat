@@ -145,7 +145,7 @@ class Pintool(object):
 
         """
         inf = self.__prev_step if prev else self
-        if alt_prev:
+        if alt_prev and self.__alt_prev_step is not None:
             inf = self.__alt_prev_step
         elif prev:
             inf = self.__prev_step
