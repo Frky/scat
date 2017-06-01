@@ -1,0 +1,6 @@
+(lp0
+S'libc.so.6'
+p1
+aS'ld-linux-x86-64.so.2'
+p2
+a.
