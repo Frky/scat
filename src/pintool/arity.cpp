@@ -29,11 +29,11 @@
 
 /* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
 unsigned int MIN_CALLS;
-KNOB<string> KnobMinCalls(KNOB_MODE_WRITEONCE, "pintool", "mincalls", MIN_CALLS_DEFAULT, "Specify a number for MIN_CALLS");
+KNOB<string> KnobMinCalls(KNOB_MODE_WRITEONCE, "pintool", "min_calls", MIN_CALLS_DEFAULT, "Specify a number for MIN_CALLS");
 float PARAM_THRESHOLD; 
-KNOB<string> KnobParamThreshold(KNOB_MODE_WRITEONCE, "pintool", "paramthresh", PARAM_THRESHOLD_DEFAULT, "Specify a number for PARAM_THRESHOLD");
+KNOB<string> KnobParamThreshold(KNOB_MODE_WRITEONCE, "pintool", "param_threshold", PARAM_THRESHOLD_DEFAULT, "Specify a number for PARAM_THRESHOLD");
 float RET_THRESHOLD; 
-KNOB<string> KnobRetThreshold(KNOB_MODE_WRITEONCE, "pintool", "retthresh", RET_THRESHOLD_DEFAULT, "Specify a number for RET_THRESHOLD");
+KNOB<string> KnobRetThreshold(KNOB_MODE_WRITEONCE, "pintool", "ret_threshold", RET_THRESHOLD_DEFAULT, "Specify a number for RET_THRESHOLD");
 
 
 /* Out file to store analysis results */

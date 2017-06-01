@@ -26,11 +26,11 @@
 
 /* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
 unsigned int MIN_VALS;
-KNOB<string> KnobMinVals(KNOB_MODE_WRITEONCE, "pintool", "minvals", MIN_VALS_DEFAULT, "Specify a number for MIN_VALS_DEFAULT");
+KNOB<string> KnobMinVals(KNOB_MODE_WRITEONCE, "pintool", "min_vals", MIN_VALS_DEFAULT, "Specify a number for MIN_VALS_DEFAULT");
 unsigned int MAX_VALS;
-KNOB<string> KnobMaxVals(KNOB_MODE_WRITEONCE, "pintool", "maxvals", MAX_VALS_DEFAULT, "Specify a number for MAX_VALS_DEFAULT");
+KNOB<string> KnobMaxVals(KNOB_MODE_WRITEONCE, "pintool", "max_vals", MAX_VALS_DEFAULT, "Specify a number for MAX_VALS_DEFAULT");
 float ADDR_THRESHOLD; 
-KNOB<string> KnobAddrThreshold(KNOB_MODE_WRITEONCE, "pintool", "addrthresh", ADDR_THRESHOLD_DEFAULT, "Specify a number for ADDR_THRESHOLD");
+KNOB<string> KnobAddrThreshold(KNOB_MODE_WRITEONCE, "pintool", "addr_threshold", ADDR_THRESHOLD_DEFAULT, "Specify a number for ADDR_THRESHOLD");
 
 /* In file to get results from previous analysis */
 ifstream ifile;
@@ -174,6 +174,7 @@ VOID register_functions_from_arity_log() {
 }
 
 REG param_reg(unsigned int pid) {
+    trace_enter();
     switch (pid) {
     case 0:
         return REG_RAX;
@@ -192,6 +193,7 @@ REG param_reg(unsigned int pid) {
     default:
         return REG_INVALID();
     }
+    trace_leave();
 }
 
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid, UINT64 sp) {
@@ -296,6 +298,8 @@ VOID fn_ret(CONTEXT *ctxt) {
 }
 
 bool is_addr(UINT64 candidate) {
+    trace_enter();
+
     bool small = candidate <= 0xFF;
     bool small_negative32 = candidate >= 0xFFFFFFF0 && candidate <= 0xFFFFFFFF;
     if (small || small_negative32) {
@@ -310,6 +314,7 @@ bool is_addr(UINT64 candidate) {
             return true;
     }
 
+    trace_leave();
     return false;
 }
 
@@ -404,16 +409,19 @@ VOID Instruction(INS ins, VOID *v) {
     }
 
 #if 1
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
-            INS_InsertCall(ins,
+    if (INS_IsIndirectBranchOrCall(ins) && !INS_IsFarCall(ins) && !INS_IsFarJump(ins) && !INS_IsFarRet(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins) 
+                /* This condition fixes runtime crash of pin on some programs
+                   (e.g. git) -- but I am not sure it is a correct answer, it 
+                   might have bad effects on the results of inference */
+                    && (INS_Category(ins) != XED_CATEGORY_COND_BR))
+                INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_indirect_call,
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
                     IARG_END);
-        }
     }
 #endif
 
@@ -456,6 +464,8 @@ VOID Fini(INT32 code, VOID *v) {
     gettimeofday(&stop, NULL);
 
     ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+
+    ofile << "MIN_VALS=" << MIN_VALS << ":MAX_VALS=" << MAX_VALS << ":ADDR_THRESHOLD=" << ADDR_THRESHOLD << endl;
 
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < MIN_VALS)
