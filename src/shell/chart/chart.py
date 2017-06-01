@@ -4,36 +4,62 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import pandas as pd  
 
-class ArityChart(object):
+class Chart(object):
 
-    colors = [(31, 119, 180), (174, 199, 232), (255, 127, 14), (255, 187, 120),    
-        (44, 160, 44), (152, 223, 138), (214, 39, 40), (255, 152, 150),    
-        (148, 103, 189), (197, 176, 213), (140, 86, 75), (196, 156, 148),    
-        (227, 119, 194), (247, 182, 210), (127, 127, 127), (199, 199, 199),    
-        (188, 189, 34), (219, 219, 141), (23, 190, 207), (158, 218, 229)]
+    colors = [
+                (0.12156862745098039, 0.4666666666666667, 0.7058823529411765), 
+                (0.6823529411764706, 0.7803921568627451, 0.9098039215686274), 
+                (1.0, 0.4980392156862745, 0.054901960784313725), 
+                (1.0, 0.7333333333333333, 0.47058823529411764), 
+                (0.17254901960784313, 0.6274509803921569, 0.17254901960784313), 
+                (0.596078431372549, 0.8745098039215686, 0.5411764705882353), 
+                (0.8392156862745098, 0.15294117647058825, 0.1568627450980392), 
+                (1.0, 0.596078431372549, 0.5882352941176471), 
+                (0.5803921568627451, 0.403921568627451, 0.7411764705882353), 
+                (0.7725490196078432, 0.6901960784313725, 0.8352941176470589), 
+                (0.5490196078431373, 0.33725490196078434, 0.29411764705882354), 
+                (0.7686274509803922, 0.611764705882353, 0.5803921568627451), 
+                (0.8901960784313725, 0.4666666666666667, 0.7607843137254902), 
+                (0.9686274509803922, 0.7137254901960784, 0.8235294117647058), 
+                (0.4980392156862745, 0.4980392156862745, 0.4980392156862745), 
+                (0.7803921568627451, 0.7803921568627451, 0.7803921568627451), 
+                (0.7372549019607844, 0.7411764705882353, 0.13333333333333333), 
+                (0.8588235294117647, 0.8588235294117647, 0.5529411764705883), 
+                (0.09019607843137255, 0.7450980392156863, 0.8117647058823529), 
+                (0.6196078431372549, 0.8549019607843137, 0.8980392156862745)
+            ]
 
     def __init__(self, logfile):
-        self.__log = logfile
-        self.__data = dict()
-        self.__parse_log()
-        self.__data = sum(self.__data.values(), list())
+        self._log = logfile
+        self._analysis = ""
+        self._data = dict()
 
-    def __parse_log(self):
-        with open(self.__log, "r") as f:
-            for line in f.readlines():
-                pgm = line.split(":")[0]
-                self.__data.setdefault(pgm, list())
-                entry = ArityEntry(line)
-                self.__data[pgm].append(entry)
+    def contains(self, pgm, vals):
+        for e in self._data:
+            if e.pgm == pgm:
+                same = True
+                for k, v in vals.items():
+                    if e.get(k) != v:
+                        same = False
+                if same:
+                    return True
+        return False
 
-    def get(self, param):
-        self.__data.sort(key=lambda a: a.get(param))
+    def get(self, param, defaults):
+        self._data.sort(key=lambda a: a.get(param))
         data = dict()
-        val = self.__data[0].get(param)
+        val = self._data[0].get(param)
         tot = 0
         fp = 0
         fn = 0
-        for e in self.__data:
+        for e in self._data:
+            skip = False
+            for k, v in defaults.items():
+                if k != param and e.get(k) != v:
+                    skip = True
+                    break
+            if skip:
+                continue
             if e.get(param) != val and tot != 0:
                 data[val] = ((tot - fp - fn) / float(tot), fp, fn, tot)
                 val = e.get(param)
@@ -43,17 +69,18 @@ class ArityChart(object):
             fn += e.fn_in
             fp += e.fp_in
             tot += e.tot_in
+        data[val] = ((tot - fp - fn) / float(tot), fp, fn, tot)
         return data
 
-    def draw(self, data):
+    def draw(self, data, name):
         plt.figure(figsize=(12, 9)) 
         ax = plt.subplot(111)    
         ax.spines["top"].set_visible(False)    
         ax.spines["bottom"].set_visible(False)
         ax.spines["right"].set_visible(False)    
-        ax.spines["left"].set_visible(True)
-        plt.plot(data.keys(), [1] * len(data.keys()), "-", lw=0.5, color="black")
-        plt.plot(data.keys(), [0] * len(data.keys()), "-", lw=0.5, color="black")
+        ax.spines["left"].set_visible(False)
+        plt.plot([0, max(data.keys())*1.05], [1, 1], "-", lw=0.5, color="black")
+        plt.plot([0, max(data.keys())*1.05], [0, 0], "-", lw=0.5, color="black")
         # Ensure that the axis ticks only show up on the bottom and left of the plot.    
         # Ticks on the right and top of the plot are generally unnecessary chartjunk.    
         ax.get_xaxis().tick_bottom()    
@@ -62,67 +89,21 @@ class ArityChart(object):
         # Limit the range of the plot to only where the data is.    
         # Avoid unnecessary whitespace.    
         plt.ylim(-0.1, 1.1)    
-        plt.xlim(-1, max(data.keys()) + 1)
+        plt.xlim(0, max(data.keys()) * 1.05)
 
         plt.tick_params(axis="both", which="both", bottom="off", top="off",    
                 labelbottom="on", left="off", right="off", labelleft="on") 
         acc = [v[0] for v in data.values()]
-        fn = [v[1] for v in data.values()]
-        norm = colors.Normalize(0, max(fn))
-        fn = map(lambda a: norm(a), fn)
-        fp = [v[2] for v in data.values()]
-        norm = colors.Normalize(0, max(fp))
-        fp = map(lambda a: norm(a), fp)
+        fp = [v[1]/float(v[3]) for v in data.values()]
+        fn = [v[2]/float(v[3]) for v in data.values()]
         tot = [v[3] for v in data.values()]
         norm = colors.Normalize(0, max(tot))
         tot = map(lambda a: norm(a), tot)
-        plt.plot(data.keys(), acc, 'x', lw=1, color="blue", label="accuracy")
-        plt.plot(data.keys(), fn, 'x', lw=1, color="red", label="false negatives")
-        plt.plot(data.keys(), fp, 'x', lw=1, color="green", label="false positives")
-        plt.plot(data.keys(), tot, 'x', lw=1, color="orange", label="number of functions")
+        plt.plot(data.keys(), acc, 'o', lw=1, color=Chart.colors[1], label="accuracy")
+        plt.plot(data.keys(), tot, 'o', lw=1, color=Chart.colors[3], label="number of functions")
+        plt.plot(data.keys(), fn, 'o', lw=1, color=Chart.colors[7], label="false negatives (% of total)")
+        plt.plot(data.keys(), fp, 'o', lw=1, color=Chart.colors[6], label="false positives (% of total)")
         plt.legend()
 
-        plt.show()
-        plt.savefig("percent-bachelors-degrees-women-usa.png", bbox_inches="tight") 
-
-class ArityEntry(object):
-
-    def __init__(self, line, *args, **kwargs):
-        l = line[:-1].split(":")
-        self.__mincalls, self.__paramth, self.__retth = l[1:4]
-        self.__fn_in, self.__fp_in, self.__tot_in = l[4:7]
-        self.__fn_out, self.__fp_out, self.__tot_out = l[7:]
-        super(ArityEntry, self).__init__(*args, **kwargs)
-
-    @property
-    def min_calls(self):
-        return int(self.__mincalls)
-        
-    @property
-    def param_threshold(self):
-        return self.__paramth
-
-    @property
-    def ret_threshold(self):
-        return self.__retth
-
-    @property
-    def fn_in(self):
-        return int(self.__fn_in)
-    
-    @property
-    def fp_in(self):
-        return int(self.__fp_in)
-        
-    @property
-    def tot_in(self):
-        return int(self.__tot_in)
-
-    def get(self, param):
-        if param == "min_calls":
-            return self.min_calls
-        elif param == "ret_threshold":
-            return self.ret_threshold
-        elif param == "param_threshold":
-            return self.param_threshold
+        plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 

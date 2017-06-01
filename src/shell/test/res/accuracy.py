@@ -49,14 +49,12 @@ class AccuracyRes(object):
                     "TOTAL", 
                     self.__in["ok"], 
                     self.__in["tot"], 
-                    self.__in["ok"]*100./self.__in["tot"],
+                    self.__in["ok"]*100./self.__in["tot"] if self.__in["tot"] else 0.0,
                     self.__in["falseneg"],
                     self.__in["falsepos"],
                     self.__out["ok"], 
                     self.__out["tot"], 
-                    self.__out["ok"]*100./self.__out["tot"],
+                    self.__out["ok"]*100./self.__out["tot"] if self.__out["tot"] else 0.0,
                     self.__out["falseneg"],
                     self.__out["falsepos"], 
                 )
-
-

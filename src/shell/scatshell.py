@@ -111,6 +111,7 @@ class ScatShell(Cmd):
                                     )
         self.__cmds["chart"] = ChartCmd(
                                         resdir=self.__config["test"]["res"],
+                                        conf=self.__config["test"]["param"],
                                     )
 
         # Link methods to scat shell

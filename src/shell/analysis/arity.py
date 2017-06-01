@@ -9,7 +9,6 @@ class ArityAnalysis(Analysis):
 
     def __init__(self, pgm, logfile, data=None):
         Analysis.__init__(self, pgm, logfile)
-        self.__pgm = pgm
         self.data = data
         if data == None:
             self.protos = None
@@ -114,7 +113,7 @@ class ArityAnalysis(Analysis):
             params = self.log.get_params()
             with open(log, "a") as f:
                 f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
-                        self.__pgm,
+                        self.pgm,
                         params["MIN_CALLS"],
                         params["PARAM_THRESHOLD"],
                         params["RET_THRESHOLD"],
