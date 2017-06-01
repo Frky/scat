@@ -2,6 +2,7 @@
 
 from .i_command import ICommand
 from src.shell.utils import complete_bin, complete_path, checkpath
+import os
 
 class LaunchCmd(ICommand):
     """
@@ -55,7 +56,7 @@ class LaunchCmd(ICommand):
 
         if inf == "all":
             for pintool in ["arity", "type", "couple", "memalloc"]:
-                continuing = self.launch_pintool(pintool, split[index:])
+                continuing = self.launch_pintool(pintool, split[index:], verify=True)
                 if not continuing:
                     break
         elif inf not in self.__pintools.keys():
@@ -76,12 +77,12 @@ class LaunchCmd(ICommand):
         else:
             return  complete_path(text, line, begidx, endidx)
 
-    def launch_pintool(self, pintool, binary_and_args):
+    def launch_pintool(self, pintool, binary_and_args, verify=False):
         """
         """
 
         options_dict = self.__options_dict
-        if self.check_pintool_prev(pintool, binary_and_args):
+        if verify and self.check_pintool_prev(pintool, binary_and_args):
             return False
         p = self.__pintools[pintool]
 
@@ -138,6 +139,6 @@ class LaunchCmd(ICommand):
             if manual_mode_needed:
                 self.stderr("You need to manually run \"couple {}\" before"
                         " running \"launch --alt_prev memalloc {}\""
-                        .format(binary_and_args[0], " ".join(binary_and_args)))
+                        .format(os.path.basename(binary_and_args[0]), " ".join(binary_and_args)))
 
             return manual_mode_needed
