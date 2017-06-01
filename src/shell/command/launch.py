@@ -54,13 +54,15 @@ class LaunchCmd(ICommand):
         index += 1
 
         if inf == "all":
-            for pintool in ["arity", "type", "couple"]:
-                self.launch_pintool(pintool, split[index:], self.__options_dict)
+            for pintool in ["arity", "type", "couple", "memalloc"]:
+                continuing = self.launch_pintool(pintool, split[index:])
+                if not continuing:
+                    break
         elif inf not in self.__pintools.keys():
             self.stderr('Unknown inference "{}"'.format(inf))
             return
         else:
-            self.launch_pintool(inf, split[index:], self.__options_dict)
+            self.launch_pintool(inf, split[index:])
 
 
     def complete(self, text, line, begidx, endidx):
@@ -74,10 +76,13 @@ class LaunchCmd(ICommand):
         else:
             return  complete_path(text, line, begidx, endidx)
 
-    def launch_pintool(self, pintool, binary_and_args, options_dict):
+    def launch_pintool(self, pintool, binary_and_args):
         """
         """
 
+        options_dict = self.__options_dict
+        if self.check_pintool_prev(pintool, binary_and_args):
+            return False
         p = self.__pintools[pintool]
 
         release = options_dict["release"]
@@ -115,3 +120,24 @@ class LaunchCmd(ICommand):
         # Run inference
         self.stdout("Launching {0} inference on {1}".format(p, binary))
         p.launch(binary, args, alt_prev=alt_prev)       
+        return True
+
+    def check_pintool_prev(self, pintool, binary_and_args):
+            alt_prev_option = self.__options_dict["alt_prev"]
+
+            prev_step = self.__pintools[pintool].prev_step
+            alt_prev_step = self.__pintools[pintool].alt_prev_step
+
+            non_launch_steps = ["coupleres", "memcomb"]
+
+            manual_mode_needed = ((prev_step in non_launch_steps
+                and not alt_prev_option)
+                or (alt_prev_step in non_launch_steps
+                and alt_prev_option))
+
+            if manual_mode_needed:
+                self.stderr("You need to manually run \"couple {}\" before"
+                        " running \"launch --alt_prev memalloc {}\""
+                        .format(binary_and_args[0], " ".join(binary_and_args)))
+
+            return manual_mode_needed
