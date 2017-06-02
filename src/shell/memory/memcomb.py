@@ -17,10 +17,14 @@ class MemComb(object):
     """
 
     def __init__(self, mem_log_file, type_log_file, log, pgm,
-            cli_ignore=None, cli_libmatch=None):
+            cli_ignore=None, cli_libmatch=None, coupleres_log_file=None):
         super(MemComb, self).__init__()
         self.__parser = MemallocParser(mem_log_file, cli_ignore, cli_libmatch)
         self.__protos = TypeLogParser(type_log_file)
+        if coupleres_log_file is not None:
+            self.__couples_file = coupleres_log_file
+        else:
+            self.__couples_file = None
         self.log = log
         self.__pgm = pgm
 
@@ -163,6 +167,16 @@ class MemComb(object):
         # Number of calls
         nb_calls = dict()
         for block in self.__parser.get():
+            if self.__couples_file is not None:
+                with open(self.__couples_file, 'r') as f:
+                    line = f.readline()
+                    found = False
+                    while line and not found:
+                        found = block.id in line and ALLOC in line
+                        line = f.readline()
+                if not found:
+                    continue
+
             if block.is_out():
                 nb_calls.setdefault(block.id, 0)
                 nb_calls[block.id] += 1
@@ -243,7 +257,8 @@ class MemComb(object):
         print "{},{},{},{},{},{}".format(ALLOC, FREE, mem.nb_calls[0], mem.nb_calls[1], *mem.errors)
         return
 
-    def run(self, libraries=False, wrappers=True, ignore=None, cli_ignore=None):
+    def run(self, libraries=False, wrappers=True, ignore=None,
+            cli_ignore=None):
         if libraries:
             nb_callers = self.__compute_callers()
         else:
