@@ -42,6 +42,7 @@ class MemCombCmd(ICommand):
         cli_ignore = None
         cli_libmatch = None
         libraries = False
+        couple = False
         for i in s:
             if "--ignore=" in i:
                 cli_ignore = i.replace("--ignore=","").split(",")
@@ -49,17 +50,25 @@ class MemCombCmd(ICommand):
                 cli_libmatch = i.replace("--libmatch=","").split(",")
             if i == "--lib":
                 libraries = True
+            if i == "--couple":
+                couple = True
 
 
         try:
             proto_logfile = self.__pintools["type"].get_logfile(s[0], prev=False)
             mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
+            if couple:
+                coupleres_logfile = self.__pintools["memalloc"].get_logfile(
+                        s[0], alt_prev=True)
+            else:
+                coupleres_logfile = None
         except IOError:
             self.stderr("Logs for binary \"{}\" not found".format(s[0]))
             return
 
         try:
-            MemComb(mem_logfile, proto_logfile, self.stdout, s[0], cli_ignore, cli_libmatch).run(libraries=libraries)
+            MemComb(mem_logfile, proto_logfile, self.stdout, s[0], cli_ignore,
+                    cli_libmatch, coupleres_logfile).run(libraries=libraries)
         except Exception as e:
             traceback.print_exc()
             raise e
