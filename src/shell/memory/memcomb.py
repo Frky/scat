@@ -240,6 +240,9 @@ class MemComb(object):
     def compute_blocks(self, ALLOC, FREE, POS):
         mem = Memory(debug=False)
         for i, block in enumerate(self.__parser.get()):
+            if (self.__couples_file is not None
+                    and self.block_not_in_couple(ALLOC, block)):
+                        continue
             if block.id == ALLOC and block.is_out():
                 mem.alloc(block.val, 1)
             elif block.id == FREE and block.is_in():
