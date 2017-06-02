@@ -27,6 +27,7 @@ class MemComb(object):
             self.__couples_file = None
         self.log = log
         self.__pgm = pgm
+        self.__free_candidates = dict()
 
     def __compute_callers(self):
         call_stack = CallStack(self.__pgm)
@@ -156,6 +157,30 @@ class MemComb(object):
                 print "Elaged: {0}".format(wrapper[0])
         print WTREE.to_str(0)
 
+    def candidates_from_couples(self, alloc_id):
+        if self.__free_candidates.get(alloc_id) is None:
+        #Iter on  the coupleres file ton find function who are candidates
+        #to be the liberator
+            free_candidates = dict()
+            with open(self.__couples_file, 'r') as f:
+                line = f.readline().split(':')
+                while line != ['']:
+                    if line[1] == alloc_id:
+                        free_candidates[line[4]] = True
+                    line = f.readline().split(':')
+            self.__free_candidates[alloc_id] = free_candidates
+        return self.__free_candidates[alloc_id]
+
+    def block_not_in_couple(self, alloc, block):
+        """
+            Check that the block doesn't correspond to a couple between its
+            function and the guessed allocator
+        """
+        function_id = block.id.split(':')[1]
+        alloc_id = alloc.split(':')[1]
+        r = self.candidates_from_couples(alloc_id).get(function_id) is None
+        return r and (function_id != alloc_id)
+
     def __free(self, ALLOC, libraries):
         nb_alloc = 0
         # Number of new addresses outputted by each function
@@ -166,16 +191,11 @@ class MemComb(object):
         call_stack = CallStack(self.__pgm)
         # Number of calls
         nb_calls = dict()
+
         for block in self.__parser.get():
-            if self.__couples_file is not None:
-                with open(self.__couples_file, 'r') as f:
-                    line = f.readline()
-                    found = False
-                    while line and not found:
-                        found = block.id in line and ALLOC in line
-                        line = f.readline()
-                if not found:
-                    continue
+            if (self.__couples_file is not None
+                    and self.block_not_in_couple(ALLOC, block)):
+                continue
 
             if block.is_out():
                 nb_calls.setdefault(block.id, 0)
@@ -283,7 +303,12 @@ class MemComb(object):
             ALLOC_ADDR = hex(int(ALLOC.split(":")[1]))
             self.log("allocator found - {0}:{1}:{2}".format(ALLOC_IMAGE, ALLOC_ADDR, ALLOC_NAME))
             FREES = self.__free(ALLOC, libraries)
-            FREE_IMAGE, FREE_ADDR, FREE_NAME = FREES[0][0].split(":")
+            try:
+                FREE_IMAGE, FREE_ADDR, FREE_NAME = FREES[0][0].split(":")
+            except IndexError:
+                if self.__couples_file is not None:
+                    self.log("Liberator not found in couples, aborting")
+                    return
             FREE_ADDR = hex(int(FREE_ADDR))
             self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
             self.log("checking consistancy of blocks...")
