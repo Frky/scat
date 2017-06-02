@@ -26,10 +26,13 @@ class ArityAnalysis(Analysis):
         return ar == len(proto) - 1
 
     def get_one_ret(self, proto):
-        return (proto[0] != "void")
+        if (proto[0] != "void"):
+            return 1
+        else:
+            return 0
 
     def check_one_ret(self, fname, ret, proto):
-        return (ret > 0) == (proto[0] != "void")
+        return (ret == 1) == (proto[0] != "void")
 
     def print_general_info(self):
         if self.data is None:
@@ -88,12 +91,13 @@ class ArityAnalysis(Analysis):
             else:
                 more += 1
 
-            if ret and self.get_one_ret(proto):
+            if ret == self.get_one_ret(proto):
                 ok_ret += 1
-            elif ret:
-                out_more += 1
-            else: 
-                out_less += 1
+            else:
+                if ret:
+                    out_more += 1
+                else: 
+                    out_less += 1
 
         if verbose:
             print("Ignored")
@@ -156,8 +160,5 @@ class ArityAnalysis(Analysis):
             if not arity_ok:
                 print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
             if not return_ok:
-                if ret:
-                    print("   Return : Expected 0 got 1")
-                else:
-                    print("   Return : Expected 1 got 0")
+                print("   Return : Expected {} got {}".format(self.get_one_ret(proto), str(ret)))
 

@@ -34,10 +34,12 @@ class Chart(object):
         self._analysis = ""
         self._data = dict()
 
-    def contains(self, pgm, vals):
+    def contains(self, pgm=None, vals=None):
         for e in self._data:
-            if e.pgm == pgm:
+            if pgm is None or e.pgm == pgm:
                 same = True
+                if vals is None: 
+                    return True
                 for k, v in vals.items():
                     if e.get(k) != v:
                         same = False
@@ -107,3 +109,34 @@ class Chart(object):
 
         plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 
+    def get_accuracy(self):
+        return self._data
+
+    def draw_accuracy(self, data, name):
+        plt.figure(figsize=(12, 9)) 
+        ax = plt.subplot(111)    
+        ax.spines["top"].set_visible(False)    
+        ax.spines["bottom"].set_visible(False)
+        ax.spines["right"].set_visible(False)    
+        ax.spines["left"].set_visible(False)
+        # plt.plot([0, max(data.keys())*1.05], [1, 1], "-", lw=0.5, color="black")
+        # plt.plot([0, max(data.keys())*1.05], [0, 0], "-", lw=0.5, color="black")
+        # Ensure that the axis ticks only show up on the bottom and left of the plot.    
+        # Ticks on the right and top of the plot are generally unnecessary chartjunk.    
+        ax.get_xaxis().tick_bottom()    
+        ax.get_yaxis().tick_left()    
+
+        # Limit the range of the plot to only where the data is.    
+        # Avoid unnecessary whitespace.    
+        plt.ylim(-0.1, 1.1)    
+        # plt.xlim(0, max(data.keys()) * 1.05)
+
+        plt.tick_params(axis="both", which="both", bottom="off", top="off",    
+                labelbottom="on", left="off", right="off", labelleft="on") 
+
+        for c, e in enumerate(data):
+            plt.plot([8*c], [e.acc_in], 'o', color=Chart.colors[1])
+            plt.plot([8*c+2], [float(e.fn_in)/e.tot_in], 'o', color=Chart.colors[7])
+            plt.plot([8*c+4], [float(e.fp_in)/e.tot_in], 'o', color=Chart.colors[6])
+
+        plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 

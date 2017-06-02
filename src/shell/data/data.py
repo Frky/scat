@@ -108,6 +108,7 @@ class Data(object):
         self.__hardcoded_glibc_proto('write', ['int', 'int', 'void*', 'int'])
 
         self.__hardcoded_glibc_proto('malloc', ['void*', 'int'])
+        self.__hardcoded_glibc_proto('calloc', ['void*', 'int', 'int'])
         self.__hardcoded_glibc_proto('memchr', ['void*', 'void*', 'int', 'int'])
         self.__hardcoded_glibc_proto('memrchr', ['void*', 'void*', 'int', 'int'])
         self.__hardcoded_glibc_proto('rawmemchr', ['void*', 'void*', 'int', 'int'])
@@ -126,6 +127,8 @@ class Data(object):
         self.__hardcoded_glibc_proto('strcpy', ['char*', 'char*', 'char*'])
         self.__hardcoded_glibc_proto('stpcpy', ['char*', 'char*', 'char*'])
         self.__hardcoded_glibc_proto('strlen', ['int', 'char*'])
+
+        self.__hardcoded_glibc_proto('vsnprintf', ['int', 'char*', 'char*', '...'])
 
 
     def __hardcoded_glibc_proto(self, name, proto):

@@ -35,7 +35,7 @@ class TestCmd(ICommand):
                 subcommand = split[1]
             else:
                 subcommand = None
-            TestAccuracy(self.__conf_path, self.__pintools["arity"], self.__pintools["type"], self.__logdir).run(subcommand)
+            TestAccuracy(self.__conf_path, self.__pintools["arity"], self.__pintools["type"], self.__logdir, resdir=self.__resdir).run(subcommand)
         elif command == "param":
             if len(split) < 2 or split[1] not in ["arity", "type"]: 
                 self.stderr("Unknown or missing analysis (arity, type) -- aborting")

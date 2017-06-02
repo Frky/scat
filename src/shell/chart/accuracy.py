@@ -4,11 +4,11 @@ import os
 
 from src.shell.chart.chart import Chart
 
-class ArityChart(Chart):
+class AccuracyChart(Chart):
 
-    def __init__(self, *args, **kwargs):
-        super(ArityChart, self).__init__(*args, **kwargs)
-        self._analysis = "arity"
+    def __init__(self, analysis, *args, **kwargs):
+        super(AccuracyChart, self).__init__(*args, **kwargs)
+        self._analysis = analysis
         self.__parse_log()
         self._data = sum(self._data.values(), list())
 
@@ -21,7 +21,6 @@ class ArityChart(Chart):
                 self._data.setdefault(pgm, list())
                 entry = ArityEntry(line)
                 self._data[pgm].append(entry)
-
 
 class ArityEntry(object):
 
@@ -61,14 +60,6 @@ class ArityEntry(object):
     @property
     def tot_in(self):
         return int(self.__tot_in)
-
-    @property
-    def acc_in(self):
-        return float(self.tot_in - self.fp_in - self.fn_in)/self.tot_in
-
-#    @property
-#    def acc_out(self):
-#        return float(self.tot_out - self.fp_out - self.fn_out)/self.tot_out
 
     def get(self, param):
         if param == "min_calls":

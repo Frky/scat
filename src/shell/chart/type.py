@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+import os
+
 from src.shell.chart.chart import Chart
 
 class TypeChart(Chart):
@@ -11,6 +13,8 @@ class TypeChart(Chart):
         self._data = sum(self._data.values(), list())
 
     def __parse_log(self):
+        if not os.path.exists(self._log):
+            return
         with open(self._log, "r") as f:
             for line in f.readlines():
                 pgm = line.split(":")[0]
