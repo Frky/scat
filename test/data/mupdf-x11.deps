@@ -1,0 +1,12 @@
+(lp0
+S'libm.so.6'
+p1
+aS'libcrypto.so.1.0.0'
+p2
+aS'libX11.so.6'
+p3
+aS'libXext.so.6'
+p4
+aS'libc.so.6'
+p5
+a.

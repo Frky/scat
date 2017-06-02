@@ -1,15 +1,20 @@
+grep:
+    args: "-r def src/ 1>/dev/null"
+    bin: "test/bin/grep"
+    data: "test/data/grep.data"
+    deps: "test/data/grep.deps"
+mupdf:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/mupdf-x11"
+    data: "test/data/mupdf-x11.data"
+    deps: "test/data/mupdf-x11.deps"
+
 coreutils:
     config: "test/coreutils.yaml"
 
+# 8cc:
+#     config: "test/8cc.yaml"
 
-# grep:
-#     args: "-r def src/ 1>/dev/null"
-#     bin: "test/bin/grep"
-#     data: "test/data/"
-# mupdf:
-#     args: "test/input/poc.pdf"
-#     bin: "test/bin/mupdf-x11"
-#     data: "test/data/mupdf-x11"
 # vim:
 #     args: "./scat.py"
 #     bin: "test/bin/vim"

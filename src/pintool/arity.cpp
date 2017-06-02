@@ -170,18 +170,22 @@ VOID fn_ret() {
     if (!call_stack.is_top_forgotten()) {
         while (is_jump_stack.top()) {
             // std::cerr << "unjumping" << endl;
+#if 0
             if (reg_maybe_return[REGF_AX])
                 nb_ret_int[call_stack.top()]++;
             else if (reg_maybe_return[REGF_XMM0])
                 nb_ret_float[call_stack.top()]++;
+#endif
             call_stack.pop();
             is_jump_stack.pop();
             sp_stack.pop();
         }
+#if 0
         if (reg_maybe_return[REGF_AX])
             nb_ret_int[call_stack.top()]++;
         else if (reg_maybe_return[REGF_XMM0])
             nb_ret_float[call_stack.top()]++;
+#endif
         call_stack.pop();
         is_jump_stack.pop();
         sp_stack.pop();

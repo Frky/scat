@@ -1,0 +1,8259 @@
+(dp0
+S'set_intersection'
+p1
+(lp2
+S'struct Set *'
+p3
+aS'struct Set *'
+p4
+aS'struct Set *'
+p5
+asS'do_make_map'
+p6
+(lp7
+S'struct Map *'
+p8
+aS'struct Map *'
+p9
+aS'int'
+p10
+asS'revoke'
+p11
+(lp12
+S'int'
+p13
+aS'const char *'
+p14
+asS'make_ast'
+p15
+(lp16
+S'struct Node *'
+p17
+aS'struct Node *'
+p18
+asS'emit_toplevel'
+p19
+(lp20
+S'void'
+p21
+aS'struct Node *'
+p22
+asS'wctomb'
+p23
+(lp24
+S'int'
+p25
+aS'char *'
+p26
+aS'int'
+p27
+asS'iscntrl_l'
+p28
+(lp29
+S'int'
+p30
+aS'int'
+p31
+aS'struct __locale_struct *'
+p32
+asS'fclose'
+p33
+(lp34
+S'int'
+p35
+aS'struct _IO_FILE *'
+p36
+asS'ctime'
+p37
+(lp38
+S'char *'
+p39
+aS'const long *'
+p40
+asS'sleep'
+p41
+(lp42
+S'unsigned int'
+p43
+aS'unsigned int'
+p44
+asS'isxdigit'
+p45
+(lp46
+S'int'
+p47
+aS'int'
+p48
+asS'emit_compound_stmt'
+p49
+(lp50
+S'void'
+p51
+aS'struct Node *'
+p52
+asS'read_array_initializer'
+p53
+(lp54
+S'void'
+p55
+aS'Vector *'
+p56
+aS'struct Type *'
+p57
+aS'int'
+p58
+aS'int'
+p59
+asS'handle_line_macro'
+p60
+(lp61
+S'void'
+p62
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p63
+asS'umask'
+p64
+(lp65
+S'unsigned int'
+p66
+aS'unsigned int'
+p67
+asS'ftell'
+p68
+(lp69
+S'long'
+p70
+aS'struct _IO_FILE *'
+p71
+asS'qecvt'
+p72
+(lp73
+S'char *'
+p74
+aS'long double'
+p75
+aS'int'
+p76
+aS'int *restrict'
+p77
+aS'int *restrict'
+p78
+asS'emit_computed_goto'
+p79
+(lp80
+S'void'
+p81
+aS'struct Node *'
+p82
+asS'mktime'
+p83
+(lp84
+S'long'
+p85
+aS'struct tm *'
+p86
+asS'make_cond_incl'
+p87
+(lp88
+S'struct (anonymous at /tmp/8cc/cpp.c:31:9) *'
+p89
+aS'int'
+p90
+asS'__getpgid'
+p91
+(lp92
+S'int'
+p93
+aS'int'
+p94
+asS'futimens'
+p95
+(lp96
+S'int'
+p97
+aS'int'
+p98
+aS'struct timespec const[2]'
+p99
+asS'__fxstat'
+p100
+(lp101
+S'int'
+p102
+aS'int'
+p103
+aS'int'
+p104
+aS'struct stat *'
+p105
+asS'exit'
+p106
+(lp107
+S'void'
+p108
+aS'int'
+p109
+asS'make_buffer'
+p110
+(lp111
+S'Buffer *'
+p112
+asS'__bzero'
+p113
+(lp114
+S'void'
+p115
+aS'void *'
+p116
+aS'int'
+p117
+asS'localtime'
+p118
+(lp119
+S'struct tm *'
+p120
+aS'const long *'
+p121
+asS'ast_compound_stmt'
+p122
+(lp123
+S'struct Node *'
+p124
+aS'Vector *'
+p125
+asS'emit_lvar'
+p126
+(lp127
+S'void'
+p128
+aS'struct Node *'
+p129
+asS'random'
+p130
+(lp131
+S'long'
+p132
+asS'rand_r'
+p133
+(lp134
+S'int'
+p135
+aS'unsigned int *'
+p136
+asS'ctime_r'
+p137
+(lp138
+S'char *'
+p139
+aS'const long *restrict'
+p140
+aS'char *restrict'
+p141
+asS'getc_unlocked'
+p142
+(lp143
+S'int'
+p144
+aS'struct _IO_FILE *'
+p145
+asS'getppid'
+p146
+(lp147
+S'int'
+p148
+asS'vec_body'
+p149
+(lp150
+S'void *'
+p151
+aS'Vector *'
+p152
+asS'__ctype_b_loc'
+p153
+(lp154
+S'const unsigned short **'
+p155
+asS'getloadavg'
+p156
+(lp157
+S'int'
+p158
+aS'double []'
+p159
+aS'int'
+p160
+asS'chdir'
+p161
+(lp162
+S'int'
+p163
+aS'const char *'
+p164
+asS'seteuid'
+p165
+(lp166
+S'int'
+p167
+aS'unsigned int'
+p168
+asS'emit_comma'
+p169
+(lp170
+S'void'
+p171
+aS'struct Node *'
+p172
+asS'strnlen'
+p173
+(lp174
+S'int'
+p175
+aS'const char *'
+p176
+aS'int'
+p177
+asS't8'
+p178
+(lp179
+S'int'
+p180
+aS'int'
+p181
+aS'...'
+p182
+asS'read_from_string'
+p183
+(lp184
+S'void'
+p185
+aS'char *'
+p186
+asS'emit_assign_deref'
+p187
+(lp188
+S'void'
+p189
+aS'struct Node *'
+p190
+asS'emit_goto'
+p191
+(lp192
+S'void'
+p193
+aS'struct Node *'
+p194
+asS'maybe_convert_keyword'
+p195
+(lp196
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p197
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p198
+asS'write32'
+p199
+(lp200
+S'void'
+p201
+aS'Buffer *'
+p202
+aS'unsigned int'
+p203
+asS'setlogin'
+p204
+(lp205
+S'int'
+p206
+aS'const char *'
+p207
+asS'div'
+p208
+(lp209
+S'div_t'
+p210
+aS'int'
+p211
+aS'int'
+p212
+asS'ftrylockfile'
+p213
+(lp214
+S'int'
+p215
+aS'struct _IO_FILE *'
+p216
+asS'fputc_unlocked'
+p217
+(lp218
+S'int'
+p219
+aS'int'
+p220
+aS'struct _IO_FILE *'
+p221
+asS'ttyname'
+p222
+(lp223
+S'char *'
+p224
+aS'int'
+p225
+asS'emit_je'
+p226
+(lp227
+S'void'
+p228
+aS'char *'
+p229
+asS'getlogin_r'
+p230
+(lp231
+S'int'
+p232
+aS'char *'
+p233
+aS'int'
+p234
+asS'binop_to_string'
+p235
+(lp236
+S'void'
+p237
+aS'Buffer *'
+p238
+aS'char *'
+p239
+aS'struct Node *'
+p240
+asS'ecvt'
+p241
+(lp242
+S'char *'
+p243
+aS'double'
+p244
+aS'int'
+p245
+aS'int *restrict'
+p246
+aS'int *restrict'
+p247
+asS'getpagesize'
+p248
+(lp249
+S'int'
+p250
+asS'read_label'
+p251
+(lp252
+S'struct Node *'
+p253
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p254
+asS'strtoull'
+p255
+(lp256
+S'unsigned long long'
+p257
+aS'const char *restrict'
+p258
+aS'char **restrict'
+p259
+aS'int'
+p260
+asS'sync'
+p261
+(lp262
+S'void'
+p263
+asS'gethostid'
+p264
+(lp265
+S'long'
+p266
+asS'get_base_file'
+p267
+(lp268
+S'char *'
+p269
+asS'__stpcpy'
+p270
+(lp271
+S'char *'
+p272
+aS'char *restrict'
+p273
+aS'const char *restrict'
+p274
+asS'mknod'
+p275
+(lp276
+S'int'
+p277
+aS'const char *'
+p278
+aS'unsigned int'
+p279
+aS'unsigned long'
+p280
+asS'init_now'
+p281
+(lp282
+S'void'
+p283
+asS'__ctype_get_mb_cur_max'
+p284
+(lp285
+S'int'
+p286
+asS'warnf'
+p287
+(lp288
+S'void'
+p289
+aS'char *'
+p290
+aS'char *'
+p291
+aS'char *'
+p292
+ag182
+asS'mktemp'
+p293
+(lp294
+S'char *'
+p295
+aS'char *'
+p296
+asS'index'
+p297
+(lp298
+S'char *'
+p299
+aS'const char *'
+p300
+aS'int'
+p301
+asS'read_decl'
+p302
+(lp303
+S'void'
+p304
+aS'Vector *'
+p305
+aS'int'
+p306
+asS'getchar_unlocked'
+p307
+(lp308
+S'int'
+p309
+asS'fchmodat'
+p310
+(lp311
+S'int'
+p312
+aS'int'
+p313
+aS'const char *'
+p314
+aS'unsigned int'
+p315
+aS'int'
+p316
+asS'clock'
+p317
+(lp318
+S'long'
+p319
+asS'sum'
+p320
+(lp321
+S'int'
+p322
+aS'MyType'
+p323
+asS'tempnam'
+p324
+(lp325
+S'char *'
+p326
+aS'const char *'
+p327
+aS'const char *'
+p328
+asS'access'
+p329
+(lp330
+S'int'
+p331
+aS'const char *'
+p332
+aS'int'
+p333
+asS'abs'
+p334
+(lp335
+S'int'
+p336
+aS'int'
+p337
+asS'errorf'
+p338
+(lp339
+S'void'
+p340
+aS'char *'
+p341
+aS'char *'
+p342
+aS'char *'
+p343
+ag182
+asS'ualarm'
+p344
+(lp345
+S'unsigned int'
+p346
+aS'unsigned int'
+p347
+aS'unsigned int'
+p348
+asS'read_bitsize'
+p349
+(lp350
+S'int'
+p351
+aS'char *'
+p352
+aS'struct Type *'
+p353
+asS'make_static_label'
+p354
+(lp355
+S'char *'
+p356
+aS'char *'
+p357
+asS'map_put'
+p358
+(lp359
+S'void'
+p360
+aS'struct Map *'
+p361
+aS'char *'
+p362
+aS'void *'
+p363
+asS'glue_push'
+p364
+(lp365
+S'void'
+p366
+aS'Vector *'
+p367
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p368
+asS'hash'
+p369
+(lp370
+S'unsigned int'
+p371
+aS'char *'
+p372
+asS'setpgid'
+p373
+(lp374
+S'int'
+p375
+aS'int'
+p376
+aS'int'
+p377
+asS'getcwd'
+p378
+(lp379
+S'char *'
+p380
+aS'char *'
+p381
+aS'int'
+p382
+asS'localtime_r'
+p383
+(lp384
+S'struct tm *'
+p385
+aS'const long *restrict'
+p386
+aS'struct tm *restrict'
+p387
+asS'gmtime'
+p388
+(lp389
+S'struct tm *'
+p390
+aS'const long *'
+p391
+asS'pause'
+p392
+(lp393
+S'int'
+p394
+asS'open_memstream'
+p395
+(lp396
+S'struct _IO_FILE *'
+p397
+aS'char **'
+p398
+aS'int *'
+p399
+asS'setregid'
+p400
+(lp401
+S'int'
+p402
+aS'unsigned int'
+p403
+aS'unsigned int'
+p404
+asS'fchdir'
+p405
+(lp406
+S'int'
+p407
+aS'int'
+p408
+asS'ftruncate'
+p409
+(lp410
+S'int'
+p411
+aS'int'
+p412
+aS'long'
+p413
+asS'lex'
+p414
+(lp415
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p416
+asS'vec_push'
+p417
+(lp418
+S'void'
+p419
+aS'Vector *'
+p420
+aS'void *'
+p421
+asS'read_expand'
+p422
+(lp423
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p424
+asS'getsid'
+p425
+(lp426
+S'int'
+p427
+aS'int'
+p428
+asS'wait'
+p429
+(lp430
+S'int'
+p431
+aS'__WAIT_STATUS'
+p432
+asS'ast_struct_ref'
+p433
+(lp434
+S'struct Node *'
+p435
+aS'struct Type *'
+p436
+aS'struct Node *'
+p437
+aS'char *'
+p438
+asS'fopen'
+p439
+(lp440
+S'struct _IO_FILE *'
+p441
+aS'const char *restrict'
+p442
+aS'const char *restrict'
+p443
+asS'recursive'
+p444
+(lp445
+S'double'
+p446
+aS'double'
+p447
+asS'sethostid'
+p448
+(lp449
+S'int'
+p450
+aS'long'
+p451
+asS'popen'
+p452
+(lp453
+S'struct _IO_FILE *'
+p454
+aS'const char *'
+p455
+aS'const char *'
+p456
+asS'_IO_ferror'
+p457
+(lp458
+S'int'
+p459
+aS'struct _IO_FILE *'
+p460
+asS'isspace_l'
+p461
+(lp462
+S'int'
+p463
+aS'int'
+p464
+aS'struct __locale_struct *'
+p465
+asS'vec_head'
+p466
+(lp467
+S'void *'
+p468
+aS'Vector *'
+p469
+asS'ast_static_lvar'
+p470
+(lp471
+S'struct Node *'
+p472
+aS'struct Type *'
+p473
+aS'char *'
+p474
+asS'psignal'
+p475
+(lp476
+S'void'
+p477
+aS'int'
+p478
+aS'const char *'
+p479
+asS'read_rep'
+p480
+(lp481
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p482
+aS'char'
+p483
+aS'int'
+p484
+aS'int'
+p485
+asS'rename'
+p486
+(lp487
+S'int'
+p488
+aS'const char *'
+p489
+aS'const char *'
+p490
+asS'emit_args'
+p491
+(lp492
+S'int'
+p493
+aS'Vector *'
+p494
+asS'emit_binop'
+p495
+(lp496
+S'void'
+p497
+aS'struct Node *'
+p498
+asS'squash_unnamed_struct'
+p499
+(lp500
+S'void'
+p501
+aS'Dict *'
+p502
+aS'struct Type *'
+p503
+aS'int'
+p504
+asS'replace_suffix'
+p505
+(lp506
+S'char *'
+p507
+aS'char *'
+p508
+aS'char'
+p509
+asS'vec_get'
+p510
+(lp511
+S'void *'
+p512
+aS'Vector *'
+p513
+aS'int'
+p514
+asS'readc'
+p515
+(lp516
+S'int'
+p517
+asS'usual_arith_conv'
+p518
+(lp519
+S'struct Type *'
+p520
+aS'struct Type *'
+p521
+aS'struct Type *'
+p522
+asS'timer_gettime'
+p523
+(lp524
+S'int'
+p525
+aS'void *'
+p526
+aS'struct itimerspec *'
+p527
+asS'ast_typedef'
+p528
+(lp529
+S'struct Node *'
+p530
+aS'struct Type *'
+p531
+aS'char *'
+p532
+asS'brk'
+p533
+(lp534
+S'int'
+p535
+aS'void *'
+p536
+asS'read_abstract_declarator'
+p537
+(lp538
+S'struct Type *'
+p539
+aS'struct Type *'
+p540
+asS'printf'
+p541
+(lp542
+S'int'
+p543
+aS'const char *restrict'
+p544
+ag182
+asS'fmemopen'
+p545
+(lp546
+S'struct _IO_FILE *'
+p547
+aS'void *'
+p548
+aS'int'
+p549
+aS'const char *'
+p550
+asS'clock_settime'
+p551
+(lp552
+S'int'
+p553
+aS'int'
+p554
+aS'const struct timespec *'
+p555
+asS'ttyname_r'
+p556
+(lp557
+S'int'
+p558
+aS'int'
+p559
+aS'char *'
+p560
+aS'int'
+p561
+asS'getchar'
+p562
+(lp563
+S'int'
+p564
+asS'symlink'
+p565
+(lp566
+S'int'
+p567
+aS'const char *'
+p568
+aS'const char *'
+p569
+asS'read_struct_initializer'
+p570
+(lp571
+S'void'
+p572
+aS'Vector *'
+p573
+aS'struct Type *'
+p574
+aS'int'
+p575
+aS'int'
+p576
+asS'emit_gsave'
+p577
+(lp578
+S'void'
+p579
+aS'char *'
+p580
+aS'struct Type *'
+p581
+aS'int'
+p582
+asS'fputs'
+p583
+(lp584
+S'int'
+p585
+aS'const char *restrict'
+p586
+aS'struct _IO_FILE *restrict'
+p587
+asS'rindex'
+p588
+(lp589
+S'char *'
+p590
+aS'const char *'
+p591
+aS'int'
+p592
+asS'sigreturn'
+p593
+(lp594
+S'int'
+p595
+aS'struct sigcontext *'
+p596
+asS'make_tempname'
+p597
+(lp598
+S'char *'
+p599
+asS'is_digit_sequence'
+p600
+(lp601
+S'int'
+p602
+aS'char *'
+p603
+asS'lrand48_r'
+p604
+(lp605
+S'int'
+p606
+aS'struct drand48_data *restrict'
+p607
+aS'long *restrict'
+p608
+asS'isblank_l'
+p609
+(lp610
+S'int'
+p611
+aS'int'
+p612
+aS'struct __locale_struct *'
+p613
+asS'strdup'
+p614
+(lp615
+S'char *'
+p616
+aS'const char *'
+p617
+asS'mknodat'
+p618
+(lp619
+S'int'
+p620
+aS'int'
+p621
+aS'const char *'
+p622
+aS'unsigned int'
+p623
+aS'unsigned long'
+p624
+asS'ast_funcptr_call'
+p625
+(lp626
+S'struct Node *'
+p627
+aS'struct Node *'
+p628
+aS'Vector *'
+p629
+asS'emit_bss'
+p630
+(lp631
+S'void'
+p632
+aS'struct Node *'
+p633
+asS'stream_stash'
+p634
+(lp635
+S'void'
+p636
+aS'File *'
+p637
+asS'islower_l'
+p638
+(lp639
+S'int'
+p640
+aS'int'
+p641
+aS'struct __locale_struct *'
+p642
+asS'isatty'
+p643
+(lp644
+S'int'
+p645
+aS'int'
+p646
+asS'toupper_l'
+p647
+(lp648
+S'int'
+p649
+aS'int'
+p650
+aS'struct __locale_struct *'
+p651
+asS'__libc_current_sigrtmax'
+p652
+(lp653
+S'int'
+p654
+asS'pathconf'
+p655
+(lp656
+S'long'
+p657
+aS'const char *'
+p658
+aS'int'
+p659
+asS'isgraph_l'
+p660
+(lp661
+S'int'
+p662
+aS'int'
+p663
+aS'struct __locale_struct *'
+p664
+asS'eval_intexpr'
+p665
+(lp666
+S'int'
+p667
+aS'struct Node *'
+p668
+aS'struct Node **'
+p669
+asS'fseeko'
+p670
+(lp671
+S'int'
+p672
+aS'struct _IO_FILE *'
+p673
+aS'long'
+p674
+aS'int'
+p675
+asS'fwrite_unlocked'
+p676
+(lp677
+S'int'
+p678
+aS'const void *restrict'
+p679
+aS'int'
+p680
+aS'int'
+p681
+aS'struct _IO_FILE *restrict'
+p682
+asS'vec_tail'
+p683
+(lp684
+S'void *'
+p685
+aS'Vector *'
+p686
+asS'pthread_sigmask'
+p687
+(lp688
+S'int'
+p689
+aS'int'
+p690
+aS'const __sigset_t *restrict'
+p691
+aS'__sigset_t *restrict'
+p692
+asS'__assert'
+p693
+(lp694
+S'void'
+p695
+aS'const char *'
+p696
+aS'const char *'
+p697
+aS'int'
+p698
+asS'sigstack'
+p699
+(lp700
+S'int'
+p701
+aS'struct sigstack *'
+p702
+aS'struct sigstack *'
+p703
+asS'erand48_r'
+p704
+(lp705
+S'int'
+p706
+aS'unsigned short [3]'
+p707
+aS'struct drand48_data *restrict'
+p708
+aS'double *restrict'
+p709
+asS'ast_jump'
+p710
+(lp711
+S'struct Node *'
+p712
+aS'char *'
+p713
+asS'compute_padding'
+p714
+(lp715
+S'int'
+p716
+aS'int'
+p717
+aS'int'
+p718
+asS'strftime_l'
+p719
+(lp720
+S'int'
+p721
+aS'char *restrict'
+p722
+aS'int'
+p723
+aS'const char *restrict'
+p724
+aS'const struct tm *restrict'
+p725
+aS'struct __locale_struct *'
+p726
+asS'read_token'
+p727
+(lp728
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p729
+asS'parseopt'
+p730
+(lp731
+S'void'
+p732
+aS'int'
+p733
+aS'char **'
+p734
+asS'set_output_file'
+p735
+(lp736
+S'void'
+p737
+aS'struct _IO_FILE *'
+p738
+asS'__errno_location'
+p739
+(lp740
+S'int *'
+p741
+asS'strerror'
+p742
+(lp743
+S'char *'
+p744
+aS'int'
+p745
+asS'update_oldstyle_param_type'
+p746
+(lp747
+S'void'
+p748
+aS'Vector *'
+p749
+aS'Vector *'
+p750
+asS'read_label_addr'
+p751
+(lp752
+S'struct Node *'
+p753
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p754
+asS'utimensat'
+p755
+(lp756
+S'int'
+p757
+aS'int'
+p758
+aS'const char *'
+p759
+aS'struct timespec const[2]'
+p760
+aS'int'
+p761
+asS'ensure_arithtype'
+p762
+(lp763
+S'void'
+p764
+aS'struct Node *'
+p765
+asS'read_funclike_macro_params'
+p766
+(lp767
+S'int'
+p768
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p769
+aS'struct Map *'
+p770
+asS'vfork'
+p771
+(lp772
+S'int'
+p773
+asS'lockf'
+p774
+(lp775
+S'int'
+p776
+aS'int'
+p777
+aS'int'
+p778
+aS'long'
+p779
+asS'__va_arg_gp'
+p780
+(lp781
+S'void *'
+p782
+aS'__va_elem *'
+p783
+asS'sysconf'
+p784
+(lp785
+S'long'
+p786
+aS'int'
+p787
+asS'char_type'
+p788
+(lp789
+S'struct Type *'
+p790
+aS'int'
+p791
+asS'strtold'
+p792
+(lp793
+S'long double'
+p794
+aS'const char *restrict'
+p795
+aS'char **restrict'
+p796
+asS'abort'
+p797
+(lp798
+S'void'
+p799
+asS'fprintf'
+p800
+(lp801
+S'int'
+p802
+aS'struct _IO_FILE *restrict'
+p803
+aS'const char *restrict'
+p804
+ag182
+asS'__sigaddset'
+p805
+(lp806
+S'int'
+p807
+aS'__sigset_t *'
+p808
+aS'int'
+p809
+asS'do_emit_data'
+p810
+(lp811
+S'void'
+p812
+aS'Vector *'
+p813
+aS'int'
+p814
+aS'int'
+p815
+aS'int'
+p816
+asS'vec_pop'
+p817
+(lp818
+S'void *'
+p819
+aS'Vector *'
+p820
+asS'strtoll'
+p821
+(lp822
+S'long long'
+p823
+aS'const char *restrict'
+p824
+aS'char **restrict'
+p825
+aS'int'
+p826
+asS'read_number'
+p827
+(lp828
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p829
+aS'char'
+p830
+asS'feof'
+p831
+(lp832
+S'int'
+p833
+aS'struct _IO_FILE *'
+p834
+asS'get_pos'
+p835
+(lp836
+S'Pos'
+p837
+aS'int'
+p838
+asS'read_array_initializer_sub'
+p839
+(lp840
+S'void'
+p841
+aS'Vector *'
+p842
+aS'struct Type *'
+p843
+aS'int'
+p844
+aS'int'
+p845
+asS'timespec_get'
+p846
+(lp847
+S'int'
+p848
+aS'struct timespec *'
+p849
+aS'int'
+p850
+asS'test_if2'
+p851
+(lp852
+S'int'
+p853
+asS'test_if3'
+p854
+(lp855
+S'int'
+p856
+asS'chroot'
+p857
+(lp858
+S'int'
+p859
+aS'const char *'
+p860
+asS'clearerr'
+p861
+(lp862
+S'void'
+p863
+aS'struct _IO_FILE *'
+p864
+asS'getgroups'
+p865
+(lp866
+S'int'
+p867
+aS'int'
+p868
+aS'unsigned int []'
+p869
+asS'test_if4'
+p870
+(lp871
+S'int'
+p872
+asS'eval_struct_ref'
+p873
+(lp874
+S'int'
+p875
+aS'struct Node *'
+p876
+aS'int'
+p877
+asS'lcong48'
+p878
+(lp879
+S'void'
+p880
+aS'unsigned short [7]'
+p881
+asS'lrand48'
+p882
+(lp883
+S'long'
+p884
+asS'test_if9'
+p885
+(lp886
+S'int'
+p887
+asS'__fxstatat'
+p888
+(lp889
+S'int'
+p890
+aS'int'
+p891
+aS'int'
+p892
+aS'const char *'
+p893
+aS'struct stat *'
+p894
+aS'int'
+p895
+asS'write'
+p896
+(lp897
+S'long'
+p898
+aS'int'
+p899
+aS'const void *'
+p900
+aS'int'
+p901
+asS'make_vector1'
+p902
+(lp903
+S'Vector *'
+p904
+aS'void *'
+p905
+asS'is_keyword'
+p906
+(lp907
+S'int'
+p908
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p909
+aS'int'
+p910
+asS'rewind'
+p911
+(lp912
+S'void'
+p913
+aS'struct _IO_FILE *'
+p914
+asS'on_exit'
+p915
+(lp916
+S'int'
+p917
+aS'void (*)(int, void *)'
+p918
+aS'void *'
+p919
+asS'putc_unlocked'
+p920
+(lp921
+S'int'
+p922
+aS'int'
+p923
+aS'struct _IO_FILE *'
+p924
+asS'make_invalid'
+p925
+(lp926
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p927
+aS'char'
+p928
+asS'flockfile'
+p929
+(lp930
+S'void'
+p931
+aS'struct _IO_FILE *'
+p932
+asS'do_emit_assign_deref'
+p933
+(lp934
+S'void'
+p935
+aS'struct Type *'
+p936
+aS'int'
+p937
+asS'_IO_free_backup_area'
+p938
+(lp939
+S'void'
+p940
+aS'struct _IO_FILE *'
+p941
+asS'unsetenv'
+p942
+(lp943
+S'int'
+p944
+aS'const char *'
+p945
+asS'max'
+p946
+(lp947
+S'int'
+p948
+aS'int'
+p949
+aS'int'
+p950
+asS'mrand48_r'
+p951
+(lp952
+S'int'
+p953
+aS'struct drand48_data *restrict'
+p954
+aS'long *restrict'
+p955
+asS'add_include_path'
+p956
+(lp957
+S'void'
+p958
+aS'char *'
+p959
+asS'set_has'
+p960
+(lp961
+S'int'
+p962
+aS'struct Set *'
+p963
+aS'char *'
+p964
+asS'read_cpp_header_name'
+p965
+(lp966
+S'char *'
+p967
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p968
+aS'int *'
+p969
+asS'is_valid_ucn'
+p970
+(lp971
+S'int'
+p972
+aS'unsigned int'
+p973
+asS'random_r'
+p974
+(lp975
+S'int'
+p976
+aS'struct random_data *restrict'
+p977
+aS'int *restrict'
+p978
+asS'test_if1'
+p979
+(lp980
+S'int'
+p981
+asS'assert_null2'
+p982
+(lp983
+S'void'
+p984
+aS'int'
+p985
+aS'void *'
+p986
+asS'valloc'
+p987
+(lp988
+S'void *'
+p989
+aS'int'
+p990
+asS'ast_computed_goto'
+p991
+(lp992
+S'struct Node *'
+p993
+aS'struct Node *'
+p994
+asS'vec_reverse'
+p995
+(lp996
+S'Vector *'
+p997
+aS'Vector *'
+p998
+asS'unlink'
+p999
+(lp1000
+S'int'
+p1001
+aS'const char *'
+p1002
+asS'tcgetpgrp'
+p1003
+(lp1004
+S'int'
+p1005
+aS'int'
+p1006
+asS'read_func_args'
+p1007
+(lp1008
+S'Vector *'
+p1009
+aS'Vector *'
+p1010
+asS'set_reg_nums'
+p1011
+(lp1012
+S'void'
+p1013
+aS'Vector *'
+p1014
+asS'funlockfile'
+p1015
+(lp1016
+S'void'
+p1017
+aS'struct _IO_FILE *'
+p1018
+asS'emit_gvar'
+p1019
+(lp1020
+S'void'
+p1021
+aS'struct Node *'
+p1022
+asS'strerror_r'
+p1023
+(lp1024
+S'int'
+p1025
+aS'int'
+p1026
+aS'char *'
+p1027
+aS'int'
+p1028
+asS'make_token_pushback'
+p1029
+(lp1030
+S'void'
+p1031
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1032
+aS'int'
+p1033
+aS'char *'
+p1034
+asS'read_break_stmt'
+p1035
+(lp1036
+S'struct Node *'
+p1037
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1038
+asS'test_if5'
+p1039
+(lp1040
+S'int'
+p1041
+asS'iscntrl'
+p1042
+(lp1043
+S'int'
+p1044
+aS'int'
+p1045
+asS'lex_init'
+p1046
+(lp1047
+S'void'
+p1048
+aS'char *'
+p1049
+asS'setpgrp'
+p1050
+(lp1051
+S'int'
+p1052
+asS'ensure_assignable'
+p1053
+(lp1054
+S'void'
+p1055
+aS'struct Type *'
+p1056
+aS'struct Type *'
+p1057
+asS'emit_builtin_return_address'
+p1058
+(lp1059
+S'void'
+p1060
+aS'struct Node *'
+p1061
+asS'strerror_l'
+p1062
+(lp1063
+S'char *'
+p1064
+aS'int'
+p1065
+aS'struct __locale_struct *'
+p1066
+asS'__xstat'
+p1067
+(lp1068
+S'int'
+p1069
+aS'int'
+p1070
+aS'const char *'
+p1071
+aS'struct stat *'
+p1072
+asS'make_keyword'
+p1073
+(lp1074
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1075
+aS'int'
+p1076
+asS'test_if8'
+p1077
+(lp1078
+S'int'
+p1079
+asS'getc'
+p1080
+(lp1081
+S'int'
+p1082
+aS'struct _IO_FILE *'
+p1083
+asS'getdomainname'
+p1084
+(lp1085
+S'int'
+p1086
+aS'char *'
+p1087
+aS'int'
+p1088
+asS'getpgrp'
+p1089
+(lp1090
+S'int'
+p1091
+asS'rand'
+p1092
+(lp1093
+S'int'
+p1094
+asS'read_conditional_expr'
+p1095
+(lp1096
+S'struct Node *'
+p1097
+asS'strtouq'
+p1098
+(lp1099
+S'unsigned long long'
+p1100
+aS'const char *restrict'
+p1101
+aS'char **restrict'
+p1102
+aS'int'
+p1103
+asS'execle'
+p1104
+(lp1105
+S'int'
+p1106
+aS'const char *'
+p1107
+aS'const char *'
+p1108
+ag182
+asS'expects'
+p1109
+(lp1110
+S'void'
+p1111
+aS'short'
+p1112
+aS'short'
+p1113
+asS'make_map_parent'
+p1114
+(lp1115
+S'struct Map *'
+p1116
+aS'struct Map *'
+p1117
+asS'set_add'
+p1118
+(lp1119
+S'struct Set *'
+p1120
+aS'struct Set *'
+p1121
+aS'char *'
+p1122
+asS'token_buffer_stash'
+p1123
+(lp1124
+S'void'
+p1125
+aS'Vector *'
+p1126
+asS'qfcvt_r'
+p1127
+(lp1128
+S'int'
+p1129
+aS'long double'
+p1130
+aS'int'
+p1131
+aS'int *restrict'
+p1132
+aS'int *restrict'
+p1133
+aS'char *restrict'
+p1134
+aS'int'
+p1135
+asS'strtoul'
+p1136
+(lp1137
+S'unsigned long'
+p1138
+aS'const char *restrict'
+p1139
+aS'char **restrict'
+p1140
+aS'int'
+p1141
+asS'ferror_unlocked'
+p1142
+(lp1143
+S'int'
+p1144
+aS'struct _IO_FILE *'
+p1145
+asS'__xpg_basename'
+p1146
+(lp1147
+S'char *'
+p1148
+aS'char *'
+p1149
+asS'execlp'
+p1150
+(lp1151
+S'int'
+p1152
+aS'const char *'
+p1153
+aS'const char *'
+p1154
+ag182
+asS'skip_cond_incl'
+p1155
+(lp1156
+S'void'
+p1157
+asS'seed48'
+p1158
+(lp1159
+S'unsigned short *'
+p1160
+aS'unsigned short [3]'
+p1161
+asS'emit_bitnot'
+p1162
+(lp1163
+S'void'
+p1164
+aS'struct Node *'
+p1165
+asS'skip_block_comment'
+p1166
+(lp1167
+S'void'
+p1168
+asS'fwrite'
+p1169
+(lp1170
+S'int'
+p1171
+aS'const void *restrict'
+p1172
+aS'int'
+p1173
+aS'int'
+p1174
+aS'struct _IO_FILE *restrict'
+p1175
+asS'hashhash_check'
+p1176
+(lp1177
+S'void'
+p1178
+aS'Vector *'
+p1179
+asS'_IO_ftrylockfile'
+p1180
+(lp1181
+S'int'
+p1182
+aS'struct _IO_FILE *'
+p1183
+asS'read_warning'
+p1184
+(lp1185
+S'void'
+p1186
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1187
+asS'read_boolean_expr'
+p1188
+(lp1189
+S'struct Node *'
+p1190
+asS'getpid'
+p1191
+(lp1192
+S'int'
+p1193
+asS'setgid'
+p1194
+(lp1195
+S'int'
+p1196
+aS'unsigned int'
+p1197
+asS'feof_unlocked'
+p1198
+(lp1199
+S'int'
+p1200
+aS'struct _IO_FILE *'
+p1201
+asS'main'
+p1202
+(lp1203
+S'int'
+p1204
+aS'int'
+p1205
+aS'char **'
+p1206
+asS'strftime'
+p1207
+(lp1208
+S'int'
+p1209
+aS'char *restrict'
+p1210
+aS'int'
+p1211
+aS'const char *restrict'
+p1212
+aS'const struct tm *restrict'
+p1213
+asS'read_label_tail'
+p1214
+(lp1215
+S'struct Node *'
+p1216
+aS'struct Node *'
+p1217
+asS'lchmod'
+p1218
+(lp1219
+S'int'
+p1220
+aS'const char *'
+p1221
+aS'unsigned int'
+p1222
+asS'bcopy'
+p1223
+(lp1224
+S'void'
+p1225
+aS'const void *'
+p1226
+aS'void *'
+p1227
+aS'int'
+p1228
+asS'ast_label_addr'
+p1229
+(lp1230
+S'struct Node *'
+p1231
+aS'char *'
+p1232
+asS'strcoll_l'
+p1233
+(lp1234
+S'int'
+p1235
+aS'const char *'
+p1236
+aS'const char *'
+p1237
+aS'struct __locale_struct *'
+p1238
+asS'is_inttype'
+p1239
+(lp1240
+S'int'
+p1241
+aS'struct Type *'
+p1242
+asS'ast_dest'
+p1243
+(lp1244
+S'struct Node *'
+p1245
+aS'char *'
+p1246
+asS'isxdigit_l'
+p1247
+(lp1248
+S'int'
+p1249
+aS'int'
+p1250
+aS'struct __locale_struct *'
+p1251
+asS'test_float'
+p1252
+(lp1253
+S'void'
+p1254
+aS'float'
+p1255
+ag182
+asS'strcoll'
+p1256
+(lp1257
+S'int'
+p1258
+aS'const char *'
+p1259
+aS'const char *'
+p1260
+asS'align'
+p1261
+(lp1262
+S'int'
+p1263
+aS'int'
+p1264
+aS'int'
+p1265
+asS'srandom'
+p1266
+(lp1267
+S'void'
+p1268
+aS'unsigned int'
+p1269
+asS'execl'
+p1270
+(lp1271
+S'int'
+p1272
+aS'const char *'
+p1273
+aS'const char *'
+p1274
+ag182
+asS'stringize'
+p1275
+(lp1276
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1277
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1278
+aS'Vector *'
+p1279
+asS'fexpectl'
+p1280
+(lp1281
+S'void'
+p1282
+aS'char *'
+p1283
+aS'int'
+p1284
+aS'long'
+p1285
+aS'long'
+p1286
+asS'pos_string'
+p1287
+(lp1288
+S'char *'
+p1289
+aS'Pos *'
+p1290
+asS'ast_init'
+p1291
+(lp1292
+S'struct Node *'
+p1293
+aS'struct Node *'
+p1294
+aS'struct Type *'
+p1295
+aS'int'
+p1296
+asS'fexpectf'
+p1297
+(lp1298
+S'void'
+p1299
+aS'char *'
+p1300
+aS'int'
+p1301
+aS'float'
+p1302
+aS'float'
+p1303
+asS'setreuid'
+p1304
+(lp1305
+S'int'
+p1306
+aS'unsigned int'
+p1307
+aS'unsigned int'
+p1308
+asS'gcvt'
+p1309
+(lp1310
+S'char *'
+p1311
+aS'double'
+p1312
+aS'int'
+p1313
+aS'char *'
+p1314
+asS'isspace'
+p1315
+(lp1316
+S'int'
+p1317
+aS'int'
+p1318
+asS'tcsetpgrp'
+p1319
+(lp1320
+S'int'
+p1321
+aS'int'
+p1322
+aS'int'
+p1323
+asS'execv'
+p1324
+(lp1325
+S'int'
+p1326
+aS'const char *'
+p1327
+aS'char *const[]'
+p1328
+asS'getw'
+p1329
+(lp1330
+S'int'
+p1331
+aS'struct _IO_FILE *'
+p1332
+asS'siggetmask'
+p1333
+(lp1334
+S'int'
+p1335
+asS'linkat'
+p1336
+(lp1337
+S'int'
+p1338
+aS'int'
+p1339
+aS'const char *'
+p1340
+aS'int'
+p1341
+aS'const char *'
+p1342
+aS'int'
+p1343
+asS'_tolower'
+p1344
+(lp1345
+S'int'
+p1346
+aS'int'
+p1347
+asS'ispunct_l'
+p1348
+(lp1349
+S'int'
+p1350
+aS'int'
+p1351
+aS'struct __locale_struct *'
+p1352
+asS'cpp_init'
+p1353
+(lp1354
+S'void'
+p1355
+asS't2'
+p1356
+(lp1357
+S'void'
+p1358
+aS'int'
+p1359
+asS't3'
+p1360
+(lp1361
+S'void'
+p1362
+aS'int'
+p1363
+aS'int'
+p1364
+aS'int'
+p1365
+aS'int'
+p1366
+aS'int'
+p1367
+aS'int'
+p1368
+asS'isalnum_l'
+p1369
+(lp1370
+S'int'
+p1371
+aS'int'
+p1372
+aS'struct __locale_struct *'
+p1373
+asS'expect'
+p1374
+(lp1375
+S'void'
+p1376
+aS'char'
+p1377
+asS'fileno_unlocked'
+p1378
+(lp1379
+S'int'
+p1380
+aS'struct _IO_FILE *'
+p1381
+asS'dirname'
+p1382
+(lp1383
+S'char *'
+p1384
+aS'char *'
+p1385
+asS'initstate_r'
+p1386
+(lp1387
+S'int'
+p1388
+aS'unsigned int'
+p1389
+aS'char *restrict'
+p1390
+aS'int'
+p1391
+aS'struct random_data *restrict'
+p1392
+asS'isdigit_l'
+p1393
+(lp1394
+S'int'
+p1395
+aS'int'
+p1396
+aS'struct __locale_struct *'
+p1397
+asS'token_pos'
+p1398
+(lp1399
+S'char *'
+p1400
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1401
+asS'sethostname'
+p1402
+(lp1403
+S'int'
+p1404
+aS'const char *'
+p1405
+aS'int'
+p1406
+asS'vec_copy'
+p1407
+(lp1408
+S'Vector *'
+p1409
+aS'Vector *'
+p1410
+asS'profil'
+p1411
+(lp1412
+S'int'
+p1413
+aS'unsigned short *'
+p1414
+aS'int'
+p1415
+aS'int'
+p1416
+aS'unsigned int'
+p1417
+asS'add_hide_set'
+p1418
+(lp1419
+S'Vector *'
+p1420
+aS'Vector *'
+p1421
+aS'struct Set *'
+p1422
+asS'setsid'
+p1423
+(lp1424
+S'int'
+p1425
+asS'sprintf'
+p1426
+(lp1427
+S'int'
+p1428
+aS'char *restrict'
+p1429
+aS'const char *restrict'
+p1430
+ag182
+asS'print'
+p1431
+(lp1432
+S'void'
+p1433
+aS'Buffer *'
+p1434
+aS'char'
+p1435
+asS'strrchr'
+p1436
+(lp1437
+S'char *'
+p1438
+aS'const char *'
+p1439
+aS'int'
+p1440
+asS'fmtint'
+p1441
+(lp1442
+S'char *'
+p1443
+aS'int'
+p1444
+asS'make_strtok'
+p1445
+(lp1446
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1447
+aS'char *'
+p1448
+aS'int'
+p1449
+aS'int'
+p1450
+asS'read_func_body'
+p1451
+(lp1452
+S'struct Node *'
+p1453
+aS'struct Type *'
+p1454
+aS'char *'
+p1455
+aS'Vector *'
+p1456
+asS'emit_label_addr'
+p1457
+(lp1458
+S'void'
+p1459
+aS'struct Node *'
+p1460
+asS'ferror'
+p1461
+(lp1462
+S'int'
+p1463
+aS'struct _IO_FILE *'
+p1464
+asS'read_linemarker'
+p1465
+(lp1466
+S'void'
+p1467
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1468
+asS'free'
+p1469
+(lp1470
+S'void'
+p1471
+aS'void *'
+p1472
+asS'labs'
+p1473
+(lp1474
+S'long'
+p1475
+aS'long'
+p1476
+asS'base'
+p1477
+(lp1478
+S'char *'
+p1479
+aS'char *'
+p1480
+asS'ast_lvar'
+p1481
+(lp1482
+S'struct Node *'
+p1483
+aS'struct Type *'
+p1484
+aS'char *'
+p1485
+asS'asctime_r'
+p1486
+(lp1487
+S'char *'
+p1488
+aS'const struct tm *restrict'
+p1489
+aS'char *restrict'
+p1490
+asS'map_len'
+p1491
+(lp1492
+S'int'
+p1493
+aS'struct Map *'
+p1494
+asS'make_func_type'
+p1495
+(lp1496
+S'struct Type *'
+p1497
+aS'struct Type *'
+p1498
+aS'Vector *'
+p1499
+aS'int'
+p1500
+aS'int'
+p1501
+asS'vhangup'
+p1502
+(lp1503
+S'int'
+p1504
+asS'do_read_if'
+p1505
+(lp1506
+S'void'
+p1507
+aS'int'
+p1508
+asS'emit_builtin_va_start'
+p1509
+(lp1510
+S'void'
+p1511
+aS'struct Node *'
+p1512
+asS'srand48_r'
+p1513
+(lp1514
+S'int'
+p1515
+aS'long'
+p1516
+aS'struct drand48_data *'
+p1517
+asS'emit_deref'
+p1518
+(lp1519
+S'void'
+p1520
+aS'struct Node *'
+p1521
+asS'testmain'
+p1522
+(lp1523
+S'void'
+p1524
+asS'putchar'
+p1525
+(lp1526
+S'int'
+p1527
+aS'int'
+p1528
+asS'putenv'
+p1529
+(lp1530
+S'int'
+p1531
+aS'char *'
+p1532
+asS'do_read_conditional_expr'
+p1533
+(lp1534
+S'struct Node *'
+p1535
+aS'struct Node *'
+p1536
+asS'fsync'
+p1537
+(lp1538
+S'int'
+p1539
+aS'int'
+p1540
+asS'gnu_dev_makedev'
+p1541
+(lp1542
+S'unsigned long long'
+p1543
+aS'unsigned int'
+p1544
+aS'unsigned int'
+p1545
+asS'unreadc'
+p1546
+(lp1547
+S'void'
+p1548
+aS'int'
+p1549
+asS'vec_len'
+p1550
+(lp1551
+S'int'
+p1552
+aS'Vector *'
+p1553
+asS'sigsetmask'
+p1554
+(lp1555
+S'int'
+p1556
+aS'int'
+p1557
+asS'islower'
+p1558
+(lp1559
+S'int'
+p1560
+aS'int'
+p1561
+asS'isupper'
+p1562
+(lp1563
+S'int'
+p1564
+aS'int'
+p1565
+asS'scanf'
+p1566
+(lp1567
+S'int'
+p1568
+aS'const char *restrict'
+p1569
+ag182
+asS'push_func_params'
+p1570
+(lp1571
+S'void'
+p1572
+aS'Vector *'
+p1573
+aS'int'
+p1574
+asS'make_macro_token'
+p1575
+(lp1576
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1577
+aS'int'
+p1578
+aS'int'
+p1579
+asS'is_flotype'
+p1580
+(lp1581
+S'int'
+p1582
+aS'struct Type *'
+p1583
+asS'qsort'
+p1584
+(lp1585
+S'void'
+p1586
+aS'void *'
+p1587
+aS'int'
+p1588
+aS'int'
+p1589
+aS'int (*)(const void *, const void *)'
+p1590
+asS'stream_depth'
+p1591
+(lp1592
+S'int'
+p1593
+asS'parse_f_arg'
+p1594
+(lp1595
+S'void'
+p1596
+aS'char *'
+p1597
+asS'pop'
+p1598
+(lp1599
+S'void'
+p1600
+aS'char *'
+p1601
+asS'ffail'
+p1602
+(lp1603
+S'void'
+p1604
+aS'char *'
+p1605
+aS'int'
+p1606
+aS'char *'
+p1607
+asS'unget_all'
+p1608
+(lp1609
+S'void'
+p1610
+aS'Vector *'
+p1611
+asS'_IO_seekoff'
+p1612
+(lp1613
+S'long'
+p1614
+aS'struct _IO_FILE *'
+p1615
+aS'long'
+p1616
+aS'int'
+p1617
+aS'int'
+p1618
+asS'fmtdbl'
+p1619
+(lp1620
+S'char *'
+p1621
+aS'double'
+p1622
+asS'acct'
+p1623
+(lp1624
+S'int'
+p1625
+aS'const char *'
+p1626
+asS'read_declarator_params_oldstyle'
+p1627
+(lp1628
+S'void'
+p1629
+aS'Vector *'
+p1630
+asS'tf1'
+p1631
+(lp1632
+S'float'
+p1633
+aS'float'
+p1634
+asS'ensure_inttype'
+p1635
+(lp1636
+S'void'
+p1637
+aS'struct Node *'
+p1638
+asS'emit_data_charptr'
+p1639
+(lp1640
+S'void'
+p1641
+aS'char *'
+p1642
+aS'int'
+p1643
+asS'tf2'
+p1644
+(lp1645
+S'float'
+p1646
+aS'double'
+p1647
+asS'usleep'
+p1648
+(lp1649
+S'int'
+p1650
+aS'unsigned int'
+p1651
+asS'param_types'
+p1652
+(lp1653
+S'Vector *'
+p1654
+aS'Vector *'
+p1655
+asS'iswhitespace'
+p1656
+(lp1657
+S'int'
+p1658
+aS'int'
+p1659
+asS'isalnum'
+p1660
+(lp1661
+S'int'
+p1662
+aS'int'
+p1663
+asS'duplocale'
+p1664
+(lp1665
+S'struct __locale_struct *'
+p1666
+aS'struct __locale_struct *'
+p1667
+asS'fmt'
+p1668
+(lp1669
+S'char *'
+p1670
+aS'char *'
+p1671
+ag182
+asS'mkdir'
+p1672
+(lp1673
+S'int'
+p1674
+aS'const char *'
+p1675
+aS'unsigned int'
+p1676
+asS'system'
+p1677
+(lp1678
+S'int'
+p1679
+aS'const char *'
+p1680
+asS'sigpending'
+p1681
+(lp1682
+S'int'
+p1683
+aS'__sigset_t *'
+p1684
+asS'strcasecmp'
+p1685
+(lp1686
+S'int'
+p1687
+aS'const char *'
+p1688
+aS'const char *'
+p1689
+asS'faccessat'
+p1690
+(lp1691
+S'int'
+p1692
+aS'int'
+p1693
+aS'const char *'
+p1694
+aS'int'
+p1695
+aS'int'
+p1696
+asS'emit_nostack'
+p1697
+(lp1698
+S'void'
+p1699
+aS'char *'
+p1700
+ag182
+asS'fexpect_string'
+p1701
+(lp1702
+S'void'
+p1703
+aS'char *'
+p1704
+aS'int'
+p1705
+aS'char *'
+p1706
+aS'char *'
+p1707
+asS'make_label'
+p1708
+(lp1709
+S'char *'
+p1710
+asS'test_if6'
+p1711
+(lp1712
+S'int'
+p1713
+asS'dprintf'
+p1714
+(lp1715
+S'int'
+p1716
+aS'int'
+p1717
+aS'const char *restrict'
+p1718
+ag182
+asS'read_header_file_name'
+p1719
+(lp1720
+S'char *'
+p1721
+aS'int *'
+p1722
+asS'ecvt_r'
+p1723
+(lp1724
+S'int'
+p1725
+aS'double'
+p1726
+aS'int'
+p1727
+aS'int *restrict'
+p1728
+aS'int *restrict'
+p1729
+aS'char *restrict'
+p1730
+aS'int'
+p1731
+asS'emit_zero'
+p1732
+(lp1733
+S'void'
+p1734
+aS'int'
+p1735
+asS'confstr'
+p1736
+(lp1737
+S'int'
+p1738
+aS'int'
+p1739
+aS'char *'
+p1740
+aS'int'
+p1741
+asS'binop'
+p1742
+(lp1743
+S'struct Node *'
+p1744
+aS'int'
+p1745
+aS'struct Node *'
+p1746
+aS'struct Node *'
+p1747
+asS'memcmp'
+p1748
+(lp1749
+S'int'
+p1750
+asS'is_ident'
+p1751
+(lp1752
+S'int'
+p1753
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1754
+aS'char *'
+p1755
+asS'buf_len'
+p1756
+(lp1757
+S'int'
+p1758
+aS'Buffer *'
+p1759
+asS'emit_lognot'
+p1760
+(lp1761
+S'void'
+p1762
+aS'struct Node *'
+p1763
+asS'pwrite'
+p1764
+(lp1765
+S'long'
+p1766
+aS'int'
+p1767
+aS'const void *'
+p1768
+aS'int'
+p1769
+aS'long'
+p1770
+asS'isascii'
+p1771
+(lp1772
+S'int'
+p1773
+aS'int'
+p1774
+asS'_Exit'
+p1775
+(lp1776
+S'void'
+p1777
+aS'int'
+p1778
+asS'read_decl_init'
+p1779
+(lp1780
+S'Vector *'
+p1781
+aS'struct Type *'
+p1782
+asS'make_number'
+p1783
+(lp1784
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1785
+aS'char *'
+p1786
+asS'sigdelset'
+p1787
+(lp1788
+S'int'
+p1789
+aS'__sigset_t *'
+p1790
+aS'int'
+p1791
+asS'isalpha_l'
+p1792
+(lp1793
+S'int'
+p1794
+aS'int'
+p1795
+aS'struct __locale_struct *'
+p1796
+asS'fchownat'
+p1797
+(lp1798
+S'int'
+p1799
+aS'int'
+p1800
+aS'const char *'
+p1801
+aS'unsigned int'
+p1802
+aS'unsigned int'
+p1803
+aS'int'
+p1804
+asS'setbuffer'
+p1805
+(lp1806
+S'void'
+p1807
+aS'struct _IO_FILE *restrict'
+p1808
+aS'char *restrict'
+p1809
+aS'int'
+p1810
+asS'emit_copy_struct'
+p1811
+(lp1812
+S'void'
+p1813
+aS'struct Node *'
+p1814
+aS'struct Node *'
+p1815
+asS'comp_init'
+p1816
+(lp1817
+S'int'
+p1818
+aS'const void *'
+p1819
+aS'const void *'
+p1820
+asS'fexecve'
+p1821
+(lp1822
+S'int'
+p1823
+aS'int'
+p1824
+aS'char *const[]'
+p1825
+aS'char *const[]'
+p1826
+asS'dup2'
+p1827
+(lp1828
+S'int'
+p1829
+aS'int'
+p1830
+aS'int'
+p1831
+asS'minus'
+p1832
+(lp1833
+S'int'
+p1834
+aS'int'
+p1835
+aS'int'
+p1836
+asS'sigqueue'
+p1837
+(lp1838
+S'int'
+p1839
+aS'int'
+p1840
+aS'int'
+p1841
+aS'const union sigval'
+p1842
+asS'vsnprintf'
+p1843
+(lp1844
+S'int'
+p1845
+asS'read_decl_or_stmt'
+p1846
+(lp1847
+S'void'
+p1848
+aS'Vector *'
+p1849
+asS'__assert_fail'
+p1850
+(lp1851
+S'void'
+p1852
+aS'const char *'
+p1853
+aS'const char *'
+p1854
+aS'unsigned int'
+p1855
+aS'const char *'
+p1856
+asS'update_struct_offset'
+p1857
+(lp1858
+S'Dict *'
+p1859
+aS'int *'
+p1860
+aS'int *'
+p1861
+aS'Vector *'
+p1862
+asS'ast_return'
+p1863
+(lp1864
+S'struct Node *'
+p1865
+aS'struct Node *'
+p1866
+asS'pop_int_args'
+p1867
+(lp1868
+S'void'
+p1869
+aS'int'
+p1870
+asS'strtok_r'
+p1871
+(lp1872
+S'char *'
+p1873
+aS'char *restrict'
+p1874
+aS'const char *restrict'
+p1875
+aS'char **restrict'
+p1876
+asS'pselect'
+p1877
+(lp1878
+S'int'
+p1879
+aS'int'
+p1880
+aS'fd_set *restrict'
+p1881
+aS'fd_set *restrict'
+p1882
+aS'fd_set *restrict'
+p1883
+aS'const struct timespec *restrict'
+p1884
+aS'const __sigset_t *restrict'
+p1885
+asS'getpass'
+p1886
+(lp1887
+S'char *'
+p1888
+aS'const char *'
+p1889
+asS'ptrtest3'
+p1890
+(lp1891
+S'float'
+p1892
+aS'float'
+p1893
+asS'sigfillset'
+p1894
+(lp1895
+S'int'
+p1896
+aS'__sigset_t *'
+p1897
+asS'same_arith_type'
+p1898
+(lp1899
+S'int'
+p1900
+aS'struct Type *'
+p1901
+aS'struct Type *'
+p1902
+asS'emit_store'
+p1903
+(lp1904
+S'void'
+p1905
+aS'struct Node *'
+p1906
+asS'ptrtest4'
+p1907
+(lp1908
+S'int'
+p1909
+aS'int (int)'
+p1910
+aS'int'
+p1911
+asS'close'
+p1912
+(lp1913
+S'int'
+p1914
+aS'int'
+p1915
+asS'clock_getres'
+p1916
+(lp1917
+S'int'
+p1918
+aS'int'
+p1919
+aS'struct timespec *'
+p1920
+asS'classify_args'
+p1921
+(lp1922
+S'void'
+p1923
+aS'Vector *'
+p1924
+aS'Vector *'
+p1925
+aS'Vector *'
+p1926
+aS'Vector *'
+p1927
+asS'next_token'
+p1928
+(lp1929
+S'int'
+p1930
+aS'int'
+p1931
+asS'read_octal_char'
+p1932
+(lp1933
+S'int'
+p1934
+aS'int'
+p1935
+asS'read_static_local_var'
+p1936
+(lp1937
+S'void'
+p1938
+aS'struct Type *'
+p1939
+aS'char *'
+p1940
+asS'ast_goto'
+p1941
+(lp1942
+S'struct Node *'
+p1943
+aS'char *'
+p1944
+asS'read_default_label'
+p1945
+(lp1946
+S'struct Node *'
+p1947
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1948
+asS'input_position'
+p1949
+(lp1950
+S'char *'
+p1951
+asS'geteuid'
+p1952
+(lp1953
+S'unsigned int'
+p1954
+asS'__libc_current_sigrtmin'
+p1955
+(lp1956
+S'int'
+p1957
+asS'assign_string'
+p1958
+(lp1959
+S'void'
+p1960
+aS'Vector *'
+p1961
+aS'struct Type *'
+p1962
+aS'char *'
+p1963
+aS'int'
+p1964
+asS'vformat'
+p1965
+(lp1966
+S'char *'
+p1967
+aS'char *'
+p1968
+aS'int'
+p1969
+asS'restore_arg_regs'
+p1970
+(lp1971
+S'void'
+p1972
+aS'int'
+p1973
+aS'int'
+p1974
+asS'uop_to_string'
+p1975
+(lp1976
+S'void'
+p1977
+aS'Buffer *'
+p1978
+aS'char *'
+p1979
+aS'struct Node *'
+p1980
+asS'read_case_label'
+p1981
+(lp1982
+S'struct Node *'
+p1983
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p1984
+asS'read'
+p1985
+(lp1986
+S'long'
+p1987
+aS'int'
+p1988
+aS'void *'
+p1989
+aS'int'
+p1990
+asS'ast_ternary'
+p1991
+(lp1992
+S'struct Node *'
+p1993
+aS'struct Type *'
+p1994
+aS'struct Node *'
+p1995
+aS'struct Node *'
+p1996
+aS'struct Node *'
+p1997
+asS'read_struct_initializer_sub'
+p1998
+(lp1999
+S'void'
+p2000
+aS'Vector *'
+p2001
+aS'struct Type *'
+p2002
+aS'int'
+p2003
+aS'int'
+p2004
+asS'realpath'
+p2005
+(lp2006
+S'char *'
+p2007
+aS'const char *restrict'
+p2008
+aS'char *restrict'
+p2009
+asS'ast_label'
+p2010
+(lp2011
+S'struct Node *'
+p2012
+aS'char *'
+p2013
+asS'timer_getoverrun'
+p2014
+(lp2015
+S'int'
+p2016
+aS'void *'
+p2017
+asS'tolower'
+p2018
+(lp2019
+S'int'
+p2020
+aS'int'
+p2021
+asS'emit_cast'
+p2022
+(lp2023
+S'void'
+p2024
+aS'struct Node *'
+p2025
+asS'quote'
+p2026
+(lp2027
+S'char *'
+p2028
+aS'char'
+p2029
+asS'handle_counter_macro'
+p2030
+(lp2031
+S'void'
+p2032
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2033
+asS'read_subscript_expr'
+p2034
+(lp2035
+S'struct Node *'
+p2036
+aS'struct Node *'
+p2037
+asS'emit_binop_float_arith'
+p2038
+(lp2039
+S'void'
+p2040
+aS'struct Node *'
+p2041
+asS'test_if7'
+p2042
+(lp2043
+S'int'
+p2044
+asS'map_get'
+p2045
+(lp2046
+S'void *'
+p2047
+aS'struct Map *'
+p2048
+aS'char *'
+p2049
+asS'strpbrk'
+p2050
+(lp2051
+S'char *'
+p2052
+aS'const char *'
+p2053
+aS'const char *'
+p2054
+asS'read_funcall'
+p2055
+(lp2056
+S'struct Node *'
+p2057
+aS'struct Node *'
+p2058
+asS'emit_return'
+p2059
+(lp2060
+S'void'
+p2061
+aS'struct Node *'
+p2062
+asS'perror'
+p2063
+(lp2064
+S'void'
+p2065
+aS'const char *'
+p2066
+asS'srand48'
+p2067
+(lp2068
+S'void'
+p2069
+aS'long'
+p2070
+asS'emit_decl_init'
+p2071
+(lp2072
+S'void'
+p2073
+aS'Vector *'
+p2074
+aS'int'
+p2075
+aS'int'
+p2076
+asS'save_arg_regs'
+p2077
+(lp2078
+S'void'
+p2079
+aS'int'
+p2080
+aS'int'
+p2081
+asS'alarm'
+p2082
+(lp2083
+S'unsigned int'
+p2084
+aS'unsigned int'
+p2085
+asS'do_make_vector'
+p2086
+(lp2087
+S'Vector *'
+p2088
+aS'int'
+p2089
+asS'getline'
+p2090
+(lp2091
+S'long'
+p2092
+aS'char **restrict'
+p2093
+aS'int *restrict'
+p2094
+aS'struct _IO_FILE *restrict'
+p2095
+asS'pop_xmm'
+p2096
+(lp2097
+S'void'
+p2098
+aS'int'
+p2099
+asS'pipe'
+p2100
+(lp2101
+S'int'
+p2102
+aS'int [2]'
+p2103
+asS'read_rectype_fields'
+p2104
+(lp2105
+S'Dict *'
+p2106
+aS'int *'
+p2107
+aS'int *'
+p2108
+aS'int'
+p2109
+asS'emit_conv'
+p2110
+(lp2111
+S'void'
+p2112
+aS'struct Node *'
+p2113
+asS'clean'
+p2114
+(lp2115
+S'char *'
+p2116
+aS'char *'
+p2117
+asS'setlinebuf'
+p2118
+(lp2119
+S'void'
+p2120
+aS'struct _IO_FILE *'
+p2121
+asS'rmdir'
+p2122
+(lp2123
+S'int'
+p2124
+aS'const char *'
+p2125
+asS'setvbuf'
+p2126
+(lp2127
+S'int'
+p2128
+aS'struct _IO_FILE *restrict'
+p2129
+aS'char *restrict'
+p2130
+aS'int'
+p2131
+aS'int'
+p2132
+asS'_IO_funlockfile'
+p2133
+(lp2134
+S'void'
+p2135
+aS'struct _IO_FILE *'
+p2136
+asS'handle_timestamp_macro'
+p2137
+(lp2138
+S'void'
+p2139
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2140
+asS'setdomainname'
+p2141
+(lp2142
+S'int'
+p2143
+aS'const char *'
+p2144
+aS'int'
+p2145
+asS'fgetpos'
+p2146
+(lp2147
+S'int'
+p2148
+aS'struct _IO_FILE *restrict'
+p2149
+aS'_G_fpos_t *restrict'
+p2150
+asS'isprint_l'
+p2151
+(lp2152
+S'int'
+p2153
+aS'int'
+p2154
+aS'struct __locale_struct *'
+p2155
+asS'a64l'
+p2156
+(lp2157
+S'long'
+p2158
+aS'const char *'
+p2159
+asS'emit_save_literal'
+p2160
+(lp2161
+S'void'
+p2162
+aS'struct Node *'
+p2163
+aS'struct Type *'
+p2164
+aS'int'
+p2165
+asS'copy_token'
+p2166
+(lp2167
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2168
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2169
+asS'__xmknodat'
+p2170
+(lp2171
+S'int'
+p2172
+aS'int'
+p2173
+aS'int'
+p2174
+aS'const char *'
+p2175
+aS'unsigned int'
+p2176
+aS'unsigned long *'
+p2177
+asS'getopt'
+p2178
+(lp2179
+S'int'
+p2180
+aS'int'
+p2181
+aS'char *const *'
+p2182
+aS'const char *'
+p2183
+asS'timegm'
+p2184
+(lp2185
+S'long'
+p2186
+aS'struct tm *'
+p2187
+asS'read_unary_incdec'
+p2188
+(lp2189
+S'struct Node *'
+p2190
+aS'int'
+p2191
+asS'expect_newline'
+p2192
+(lp2193
+S'void'
+p2194
+asS'nrand48_r'
+p2195
+(lp2196
+S'int'
+p2197
+aS'unsigned short [3]'
+p2198
+aS'struct drand48_data *restrict'
+p2199
+aS'long *restrict'
+p2200
+asS'parse_m_arg'
+p2201
+(lp2202
+S'void'
+p2203
+aS'char *'
+p2204
+asS'emit_data_primtype'
+p2205
+(lp2206
+S'void'
+p2207
+aS'struct Type *'
+p2208
+aS'struct Node *'
+p2209
+aS'int'
+p2210
+asS'buf_append'
+p2211
+(lp2212
+S'void'
+p2213
+aS'Buffer *'
+p2214
+aS'char *'
+p2215
+aS'int'
+p2216
+asS'check_case_duplicates'
+p2217
+(lp2218
+S'void'
+p2219
+aS'Vector *'
+p2220
+asS'strtol'
+p2221
+(lp2222
+S'long'
+p2223
+aS'const char *restrict'
+p2224
+aS'char **restrict'
+p2225
+aS'int'
+p2226
+asS'__sysv_signal'
+p2227
+(lp2228
+S'void (*)(int)'
+p2229
+aS'int'
+p2230
+aS'void (*)(int)'
+p2231
+asS'__underflow'
+p2232
+(lp2233
+S'int'
+p2234
+aS'struct _IO_FILE *'
+p2235
+asS'booltest1'
+p2236
+(lp2237
+S'int'
+p2238
+aS'int'
+p2239
+asS'strtok'
+p2240
+(lp2241
+S'char *'
+p2242
+aS'char *restrict'
+p2243
+aS'const char *restrict'
+p2244
+asS'strtod'
+p2245
+(lp2246
+S'double'
+p2247
+aS'const char *restrict'
+p2248
+aS'char **restrict'
+p2249
+asS'atof'
+p2250
+(lp2251
+S'double'
+p2252
+aS'const char *'
+p2253
+asS'strtof'
+p2254
+(lp2255
+S'float'
+p2256
+aS'const char *restrict'
+p2257
+aS'char **restrict'
+p2258
+asS'putw'
+p2259
+(lp2260
+S'int'
+p2261
+aS'int'
+p2262
+aS'struct _IO_FILE *'
+p2263
+asS'try_include'
+p2264
+(lp2265
+S'int'
+p2266
+aS'char *'
+p2267
+aS'char *'
+p2268
+aS'int'
+p2269
+asS'mkstemps'
+p2270
+(lp2271
+S'int'
+p2272
+aS'char *'
+p2273
+aS'int'
+p2274
+asS'is_string'
+p2275
+(lp2276
+S'int'
+p2277
+aS'struct Type *'
+p2278
+asS'fchmod'
+p2279
+(lp2280
+S'int'
+p2281
+aS'int'
+p2282
+aS'unsigned int'
+p2283
+asS'ast_string'
+p2284
+(lp2285
+S'struct Node *'
+p2286
+aS'int'
+p2287
+aS'char *'
+p2288
+aS'int'
+p2289
+asS'__va_arg_fp'
+p2290
+(lp2291
+S'void *'
+p2292
+aS'__va_elem *'
+p2293
+asS'strtoq'
+p2294
+(lp2295
+S'long long'
+p2296
+aS'const char *restrict'
+p2297
+aS'char **restrict'
+p2298
+aS'int'
+p2299
+asS'emit_padding'
+p2300
+(lp2301
+S'void'
+p2302
+aS'struct Node *'
+p2303
+aS'int'
+p2304
+asS'wait4'
+p2305
+(lp2306
+S'int'
+p2307
+aS'int'
+p2308
+aS'__WAIT_STATUS'
+p2309
+aS'int'
+p2310
+aS'struct rusage *'
+p2311
+asS'read_universal_char'
+p2312
+(lp2313
+S'int'
+p2314
+aS'int'
+p2315
+asS'l64a'
+p2316
+(lp2317
+S'char *'
+p2318
+aS'long'
+p2319
+asS'get'
+p2320
+(lp2321
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2322
+asS'read_directive'
+p2323
+(lp2324
+S'void'
+p2325
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2326
+asS'sigaltstack'
+p2327
+(lp2328
+S'int'
+p2329
+aS'const struct sigaltstack *restrict'
+p2330
+aS'struct sigaltstack *restrict'
+p2331
+asS'__assert_perror_fail'
+p2332
+(lp2333
+S'void'
+p2334
+aS'int'
+p2335
+aS'const char *'
+p2336
+aS'unsigned int'
+p2337
+aS'const char *'
+p2338
+asS'maybe_print_source_loc'
+p2339
+(lp2340
+S'void'
+p2341
+aS'struct Node *'
+p2342
+asS'dict_get'
+p2343
+(lp2344
+S'void *'
+p2345
+aS'Dict *'
+p2346
+aS'char *'
+p2347
+asS'maybe_rehash'
+p2348
+(lp2349
+S'void'
+p2350
+aS'struct Map *'
+p2351
+asS'emit_load_convert'
+p2352
+(lp2353
+S'void'
+p2354
+aS'struct Type *'
+p2355
+aS'struct Type *'
+p2356
+asS'bcmp'
+p2357
+(lp2358
+S'int'
+p2359
+aS'const void *'
+p2360
+aS'const void *'
+p2361
+aS'int'
+p2362
+asS'strxfrm_l'
+p2363
+(lp2364
+S'int'
+p2365
+aS'char *'
+p2366
+aS'const char *'
+p2367
+aS'int'
+p2368
+aS'struct __locale_struct *'
+p2369
+asS'strsep'
+p2370
+(lp2371
+S'char *'
+p2372
+aS'char **restrict'
+p2373
+aS'const char *restrict'
+p2374
+asS'ast_uop'
+p2375
+(lp2376
+S'struct Node *'
+p2377
+aS'int'
+p2378
+aS'struct Type *'
+p2379
+aS'struct Node *'
+p2380
+asS'parse_init'
+p2381
+(lp2382
+S'void'
+p2383
+asS'memcpy'
+p2384
+(lp2385
+S'void *'
+p2386
+asS'sigwaitinfo'
+p2387
+(lp2388
+S'int'
+p2389
+aS'const __sigset_t *restrict'
+p2390
+aS'siginfo_t *restrict'
+p2391
+asS'ty2s'
+p2392
+(lp2393
+S'char *'
+p2394
+aS'struct Type *'
+p2395
+asS'fileno'
+p2396
+(lp2397
+S'int'
+p2398
+aS'struct _IO_FILE *'
+p2399
+asS'maybe_emit_bitshift_save'
+p2400
+(lp2401
+S'void'
+p2402
+aS'struct Type *'
+p2403
+aS'char *'
+p2404
+asS'to_utf16'
+p2405
+(lp2406
+S'Buffer *'
+p2407
+aS'char *'
+p2408
+aS'int'
+p2409
+asS'assert_true2'
+p2410
+(lp2411
+S'void'
+p2412
+aS'int'
+p2413
+aS'char *'
+p2414
+aS'int'
+p2415
+asS'is_same_struct'
+p2416
+(lp2417
+S'int'
+p2418
+aS'struct Type *'
+p2419
+aS'struct Type *'
+p2420
+asS'map_remove'
+p2421
+(lp2422
+S'void'
+p2423
+aS'struct Map *'
+p2424
+aS'char *'
+p2425
+asS'fscanf'
+p2426
+(lp2427
+S'int'
+p2428
+aS'struct _IO_FILE *restrict'
+p2429
+aS'const char *restrict'
+p2430
+ag182
+asS'emit_literal'
+p2431
+(lp2432
+S'void'
+p2433
+aS'struct Node *'
+p2434
+asS'remove'
+p2435
+(lp2436
+S'int'
+p2437
+aS'const char *'
+p2438
+asS'vec_append'
+p2439
+(lp2440
+S'void'
+p2441
+aS'Vector *'
+p2442
+aS'Vector *'
+p2443
+asS'read_declarator_func'
+p2444
+(lp2445
+S'struct Type *'
+p2446
+aS'struct Type *'
+p2447
+aS'Vector *'
+p2448
+asS'dysize'
+p2449
+(lp2450
+S'int'
+p2451
+aS'int'
+p2452
+asS'buf_body'
+p2453
+(lp2454
+S'char *'
+p2455
+aS'Buffer *'
+p2456
+asS'sigismember'
+p2457
+(lp2458
+S'int'
+p2459
+aS'const __sigset_t *'
+p2460
+aS'int'
+p2461
+asS'mkdirat'
+p2462
+(lp2463
+S'int'
+p2464
+aS'int'
+p2465
+aS'const char *'
+p2466
+aS'unsigned int'
+p2467
+asS'booltest2'
+p2468
+(lp2469
+S'int'
+p2470
+aS'int'
+p2471
+asS'strncmp'
+p2472
+(lp2473
+S'int'
+p2474
+asS'mbtowc'
+p2475
+(lp2476
+S'int'
+p2477
+aS'int *restrict'
+p2478
+aS'const char *restrict'
+p2479
+aS'int'
+p2480
+asS'concatenate_string'
+p2481
+(lp2482
+S'void'
+p2483
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2484
+asS'fputc'
+p2485
+(lp2486
+S'int'
+p2487
+aS'int'
+p2488
+aS'struct _IO_FILE *'
+p2489
+asS'read_args'
+p2490
+(lp2491
+S'Vector *'
+p2492
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2493
+aS'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p2494
+asS'is_poweroftwo'
+p2495
+(lp2496
+S'int'
+p2497
+aS'int'
+p2498
+asS'pthread_kill'
+p2499
+(lp2500
+S'int'
+p2501
+aS'unsigned long'
+p2502
+aS'int'
+p2503
+asS'stream_push'
+p2504
+(lp2505
+S'void'
+p2506
+aS'File *'
+p2507
+asS'strcat'
+p2508
+(lp2509
+S'char *'
+p2510
+aS'char *restrict'
+p2511
+aS'const char *restrict'
+p2512
+asS'node2s'
+p2513
+(lp2514
+S'char *'
+p2515
+aS'struct Node *'
+p2516
+asS'qgcvt'
+p2517
+(lp2518
+S'char *'
+p2519
+aS'long double'
+p2520
+aS'int'
+p2521
+aS'char *'
+p2522
+asS'atexit'
+p2523
+(lp2524
+S'int'
+p2525
+aS'void (*)(void)'
+p2526
+asS'quick_exit'
+p2527
+(lp2528
+S'void'
+p2529
+aS'int'
+p2530
+asS'emit_bitor'
+p2531
+(lp2532
+S'void'
+p2533
+aS'struct Node *'
+p2534
+asS'stpcpy'
+p2535
+(lp2536
+S'char *'
+p2537
+aS'char *restrict'
+p2538
+aS'const char *restrict'
+p2539
+asS'jrand48'
+p2540
+(lp2541
+S'long'
+p2542
+aS'unsigned short [3]'
+p2543
+asS'a2s_declinit'
+p2544
+(lp2545
+S'void'
+p2546
+aS'Buffer *'
+p2547
+aS'Vector *'
+p2548
+asS'fsetpos'
+p2549
+(lp2550
+S'int'
+p2551
+aS'struct _IO_FILE *'
+p2552
+aS'const _G_fpos_t *'
+p2553
+asS'strchr'
+p2554
+(lp2555
+S'char *'
+p2556
+aS'const char *'
+p2557
+aS'int'
+p2558
+asS'copy_type'
+p2559
+(lp2560
+S'struct Type *'
+p2561
+aS'struct Type *'
+p2562
+asS'make_macro'
+p2563
+(lp2564
+S'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p2565
+aS'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p2566
+asS'make_ptr_type'
+p2567
+(lp2568
+S'struct Type *'
+p2569
+aS'struct Type *'
+p2570
+asS'emit_func_call'
+p2571
+(lp2572
+S'void'
+p2573
+aS'struct Node *'
+p2574
+asS'_IO_seekpos'
+p2575
+(lp2576
+S'long'
+p2577
+aS'struct _IO_FILE *'
+p2578
+aS'long'
+p2579
+aS'int'
+p2580
+asS'read_func_param_list'
+p2581
+(lp2582
+S'struct Type *'
+p2583
+aS'Vector *'
+p2584
+aS'struct Type *'
+p2585
+asS'decorate_int'
+p2586
+(lp2587
+S'char *'
+p2588
+aS'char *'
+p2589
+aS'struct Type *'
+p2590
+asS'make_file_string'
+p2591
+(lp2592
+S'File *'
+p2593
+aS'char *'
+p2594
+asS'posix_memalign'
+p2595
+(lp2596
+S'int'
+p2597
+aS'void **'
+p2598
+aS'int'
+p2599
+aS'int'
+p2600
+asS'_IO_padn'
+p2601
+(lp2602
+S'long'
+p2603
+aS'struct _IO_FILE *'
+p2604
+aS'int'
+p2605
+aS'long'
+p2606
+asS'read_declarator'
+p2607
+(lp2608
+S'struct Type *'
+p2609
+aS'char **'
+p2610
+aS'struct Type *'
+p2611
+aS'Vector *'
+p2612
+aS'int'
+p2613
+asS'many_floats'
+p2614
+(lp2615
+S'void'
+p2616
+aS'float'
+p2617
+aS'float'
+p2618
+aS'float'
+p2619
+aS'float'
+p2620
+aS'float'
+p2621
+aS'float'
+p2622
+aS'float'
+p2623
+aS'float'
+p2624
+aS'float'
+p2625
+aS'float'
+p2626
+aS'float'
+p2627
+aS'float'
+p2628
+aS'float'
+p2629
+aS'float'
+p2630
+aS'float'
+p2631
+aS'float'
+p2632
+aS'float'
+p2633
+asS'vdprintf'
+p2634
+(lp2635
+S'int'
+p2636
+aS'int'
+p2637
+aS'const char *restrict'
+p2638
+aS'int'
+p2639
+asS'buf_printf'
+p2640
+(lp2641
+S'void'
+p2642
+aS'Buffer *'
+p2643
+aS'char *'
+p2644
+ag182
+asS'at_quick_exit'
+p2645
+(lp2646
+S'int'
+p2647
+aS'void (*)(void)'
+p2648
+asS'close_output_file'
+p2649
+(lp2650
+S'void'
+p2651
+asS'__getdelim'
+p2652
+(lp2653
+S'long'
+p2654
+aS'char **restrict'
+p2655
+aS'int *restrict'
+p2656
+aS'int'
+p2657
+aS'struct _IO_FILE *restrict'
+p2658
+asS'extend'
+p2659
+(lp2660
+S'void'
+p2661
+aS'Vector *'
+p2662
+aS'int'
+p2663
+asS'lstat'
+p2664
+(lp2665
+S'int'
+p2666
+aS'const char *restrict'
+p2667
+aS'struct stat *restrict'
+p2668
+asS'read_decl_spec_opt'
+p2669
+(lp2670
+S'struct Type *'
+p2671
+aS'int *'
+p2672
+asS'read_char'
+p2673
+(lp2674
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2675
+aS'int'
+p2676
+asS'sigwait'
+p2677
+(lp2678
+S'int'
+p2679
+aS'const __sigset_t *restrict'
+p2680
+aS'int *restrict'
+p2681
+asS'timelocal'
+p2682
+(lp2683
+S'long'
+p2684
+aS'struct tm *'
+p2685
+asS'ast_floattype'
+p2686
+(lp2687
+S'struct Node *'
+p2688
+aS'struct Type *'
+p2689
+aS'double'
+p2690
+asS'ast_if'
+p2691
+(lp2692
+S'struct Node *'
+p2693
+aS'struct Node *'
+p2694
+aS'struct Node *'
+p2695
+aS'struct Node *'
+p2696
+asS'stime'
+p2697
+(lp2698
+S'int'
+p2699
+aS'const long *'
+p2700
+asS't7'
+p2701
+(lp2702
+S'int'
+p2703
+aS'int'
+p2704
+aS'int'
+p2705
+asS'read_struct_field'
+p2706
+(lp2707
+S'struct Node *'
+p2708
+aS'struct Node *'
+p2709
+asS'getdtablesize'
+p2710
+(lp2711
+S'int'
+p2712
+asS'sigaction'
+p2713
+(lp2714
+S'int'
+p2715
+aS'int'
+p2716
+aS'const struct sigaction *restrict'
+p2717
+aS'struct sigaction *restrict'
+p2718
+asS'tmpnam_r'
+p2719
+(lp2720
+S'char *'
+p2721
+aS'char *'
+p2722
+asS'seed48_r'
+p2723
+(lp2724
+S'int'
+p2725
+aS'unsigned short [3]'
+p2726
+aS'struct drand48_data *'
+p2727
+asS'copy_incomplete_type'
+p2728
+(lp2729
+S'struct Type *'
+p2730
+aS'struct Type *'
+p2731
+asS'lcong48_r'
+p2732
+(lp2733
+S'int'
+p2734
+aS'unsigned short [7]'
+p2735
+aS'struct drand48_data *'
+p2736
+asS'psiginfo'
+p2737
+(lp2738
+S'void'
+p2739
+aS'const siginfo_t *'
+p2740
+aS'const char *'
+p2741
+asS'count_leading_ones'
+p2742
+(lp2743
+S'int'
+p2744
+aS'char'
+p2745
+asS'make_rectype'
+p2746
+(lp2747
+S'struct Type *'
+p2748
+aS'int'
+p2749
+asS'__sigismember'
+p2750
+(lp2751
+S'int'
+p2752
+aS'const __sigset_t *'
+p2753
+aS'int'
+p2754
+asS'sort_inits'
+p2755
+(lp2756
+S'void'
+p2757
+aS'Vector *'
+p2758
+asS'strncasecmp'
+p2759
+(lp2760
+S'int'
+p2761
+asS'timer_settime'
+p2762
+(lp2763
+S'int'
+p2764
+aS'void *'
+p2765
+aS'int'
+p2766
+aS'const struct itimerspec *restrict'
+p2767
+aS'struct itimerspec *restrict'
+p2768
+asS'fix_rectype_flexible_member'
+p2769
+(lp2770
+S'void'
+p2771
+aS'Vector *'
+p2772
+asS'write16'
+p2773
+(lp2774
+S'void'
+p2775
+aS'Buffer *'
+p2776
+aS'unsigned short'
+p2777
+asS'emit_binop_int_arith'
+p2778
+(lp2779
+S'void'
+p2780
+aS'struct Node *'
+p2781
+asS'make_map'
+p2782
+(lp2783
+S'struct Map *'
+p2784
+asS'read_unary_bitnot'
+p2785
+(lp2786
+S'struct Node *'
+p2787
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2788
+asS'quote_cstring'
+p2789
+(lp2790
+S'char *'
+p2791
+aS'char *'
+p2792
+asS'gmtime_r'
+p2793
+(lp2794
+S'struct tm *'
+p2795
+aS'const long *restrict'
+p2796
+aS'struct tm *restrict'
+p2797
+asS'__tolower_l'
+p2798
+(lp2799
+S'int'
+p2800
+aS'int'
+p2801
+aS'struct __locale_struct *'
+p2802
+asS'tzset'
+p2803
+(lp2804
+S'void'
+p2805
+asS'setstate_r'
+p2806
+(lp2807
+S'int'
+p2808
+aS'char *restrict'
+p2809
+aS'struct random_data *restrict'
+p2810
+asS'fflush_unlocked'
+p2811
+(lp2812
+S'int'
+p2813
+aS'struct _IO_FILE *'
+p2814
+asS'maybe_convert_bool'
+p2815
+(lp2816
+S'void'
+p2817
+aS'struct Type *'
+p2818
+asS'stream_unstash'
+p2819
+(lp2820
+S'void'
+p2821
+asS'chmod'
+p2822
+(lp2823
+S'int'
+p2824
+aS'const char *'
+p2825
+aS'unsigned int'
+p2826
+asS'emit_global_var'
+p2827
+(lp2828
+S'void'
+p2829
+aS'struct Node *'
+p2830
+asS'define_obj_macro'
+p2831
+(lp2832
+S'void'
+p2833
+aS'char *'
+p2834
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2835
+asS'_IO_peekc_locked'
+p2836
+(lp2837
+S'int'
+p2838
+aS'struct _IO_FILE *'
+p2839
+asS'update_union_offset'
+p2840
+(lp2841
+S'Dict *'
+p2842
+aS'int *'
+p2843
+aS'int *'
+p2844
+aS'Vector *'
+p2845
+asS'__uflow'
+p2846
+(lp2847
+S'int'
+p2848
+aS'struct _IO_FILE *'
+p2849
+asS'toupper'
+p2850
+(lp2851
+S'int'
+p2852
+aS'int'
+p2853
+asS'ast_conv'
+p2854
+(lp2855
+S'struct Node *'
+p2856
+aS'struct Type *'
+p2857
+aS'struct Node *'
+p2858
+asS'read_funclike_macro_body'
+p2859
+(lp2860
+S'Vector *'
+p2861
+aS'struct Map *'
+p2862
+asS'make_char'
+p2863
+(lp2864
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2865
+aS'int'
+p2866
+aS'int'
+p2867
+asS't5b'
+p2868
+(lp2869
+S'void'
+p2870
+aS'int []'
+p2871
+asS'type_compatible'
+p2872
+(lp2873
+S'int'
+p2874
+aS'struct Type *'
+p2875
+aS'struct Type *'
+p2876
+asS'read_unary_deref'
+p2877
+(lp2878
+S'struct Node *'
+p2879
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2880
+asS'emit_load_struct_ref'
+p2881
+(lp2882
+S'void'
+p2883
+aS'struct Node *'
+p2884
+aS'struct Type *'
+p2885
+aS'int'
+p2886
+asS'gethostname'
+p2887
+(lp2888
+S'int'
+p2889
+aS'char *'
+p2890
+aS'int'
+p2891
+asS'emit_lsave'
+p2892
+(lp2893
+S'void'
+p2894
+aS'struct Type *'
+p2895
+aS'int'
+p2896
+asS'puts'
+p2897
+(lp2898
+S'int'
+p2899
+aS'const char *'
+p2900
+asS'clearerr_unlocked'
+p2901
+(lp2902
+S'void'
+p2903
+aS'struct _IO_FILE *'
+p2904
+asS'nanosleep'
+p2905
+(lp2906
+S'int'
+p2907
+aS'const struct timespec *'
+p2908
+aS'struct timespec *'
+p2909
+asS'aligned_alloc'
+p2910
+(lp2911
+S'void *'
+p2912
+aS'int'
+p2913
+aS'int'
+p2914
+asS'dict_keys'
+p2915
+(lp2916
+S'Vector *'
+p2917
+aS'Dict *'
+p2918
+asS'emit_fill_holes'
+p2919
+(lp2920
+S'void'
+p2921
+aS'Vector *'
+p2922
+aS'int'
+p2923
+aS'int'
+p2924
+asS'read_declarator_array'
+p2925
+(lp2926
+S'struct Type *'
+p2927
+aS'struct Type *'
+p2928
+asS'gnu_dev_major'
+p2929
+(lp2930
+S'unsigned int'
+p2931
+aS'unsigned long long'
+p2932
+asS'propagate_space'
+p2933
+(lp2934
+S'void'
+p2935
+aS'Vector *'
+p2936
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2937
+asS'strtoimax'
+p2938
+(lp2939
+S'long'
+p2940
+aS'const char *restrict'
+p2941
+aS'char **restrict'
+p2942
+aS'int'
+p2943
+asS'dup'
+p2944
+(lp2945
+S'int'
+p2946
+aS'int'
+p2947
+asS'read_assignment_expr'
+p2948
+(lp2949
+S'struct Node *'
+p2950
+asS'fcvt_r'
+p2951
+(lp2952
+S'int'
+p2953
+aS'double'
+p2954
+aS'int'
+p2955
+aS'int *restrict'
+p2956
+aS'int *restrict'
+p2957
+aS'char *restrict'
+p2958
+aS'int'
+p2959
+asS'handle_base_file_macro'
+p2960
+(lp2961
+S'void'
+p2962
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p2963
+asS'strtoumax'
+p2964
+(lp2965
+S'unsigned long'
+p2966
+aS'const char *restrict'
+p2967
+aS'char **restrict'
+p2968
+aS'int'
+p2969
+asS'fread'
+p2970
+(lp2971
+S'int'
+p2972
+aS'void *restrict'
+p2973
+aS'int'
+p2974
+aS'int'
+p2975
+aS'struct _IO_FILE *restrict'
+p2976
+asS'strsignal'
+p2977
+(lp2978
+S'char *'
+p2979
+aS'int'
+p2980
+asS'read_source_file'
+p2981
+(lp2982
+S'char **'
+p2983
+aS'char *'
+p2984
+asS'isalpha'
+p2985
+(lp2986
+S'int'
+p2987
+aS'int'
+p2988
+asS'quote_char'
+p2989
+(lp2990
+S'char *'
+p2991
+aS'char'
+p2992
+asS'execvp'
+p2993
+(lp2994
+S'int'
+p2995
+aS'const char *'
+p2996
+aS'char *const[]'
+p2997
+asS'read_int_suffix'
+p2998
+(lp2999
+S'struct Type *'
+p3000
+aS'char *'
+p3001
+asS'pop_float_args'
+p3002
+(lp3003
+S'void'
+p3004
+aS'int'
+p3005
+asS'execve'
+p3006
+(lp3007
+S'int'
+p3008
+aS'const char *'
+p3009
+aS'char *const[]'
+p3010
+aS'char *const[]'
+p3011
+asS'ptrtest2'
+p3012
+(lp3013
+S'int'
+p3014
+aS'int'
+p3015
+asS'drand48'
+p3016
+(lp3017
+S'double'
+p3018
+asS'emit_data'
+p3019
+(lp3020
+S'void'
+p3021
+aS'struct Node *'
+p3022
+aS'int'
+p3023
+aS'int'
+p3024
+asS'jrand48_r'
+p3025
+(lp3026
+S'int'
+p3027
+aS'unsigned short [3]'
+p3028
+aS'struct drand48_data *restrict'
+p3029
+aS'long *restrict'
+p3030
+asS'emit_to_bool'
+p3031
+(lp3032
+S'void'
+p3033
+aS'struct Type *'
+p3034
+asS't4a'
+p3035
+(lp3036
+S'int'
+p3037
+aS'int *'
+p3038
+asS'fstatat'
+p3039
+(lp3040
+S'int'
+p3041
+aS'int'
+p3042
+aS'const char *restrict'
+p3043
+aS'struct stat *restrict'
+p3044
+aS'int'
+p3045
+asS'qfcvt'
+p3046
+(lp3047
+S'char *'
+p3048
+aS'long double'
+p3049
+aS'int'
+p3050
+aS'int *restrict'
+p3051
+aS'int *restrict'
+p3052
+asS'clock_gettime'
+p3053
+(lp3054
+S'int'
+p3055
+aS'int'
+p3056
+aS'struct timespec *'
+p3057
+asS'fullpath'
+p3058
+(lp3059
+S'char *'
+p3060
+aS'char *'
+p3061
+asS'vsprintf'
+p3062
+(lp3063
+S'int'
+p3064
+asS'read_declarator_tail'
+p3065
+(lp3066
+S'struct Type *'
+p3067
+aS'struct Type *'
+p3068
+aS'Vector *'
+p3069
+asS'setuid'
+p3070
+(lp3071
+S'int'
+p3072
+aS'unsigned int'
+p3073
+asS'malloc'
+p3074
+(lp3075
+S'void *'
+p3076
+asS'many_ints'
+p3077
+(lp3078
+S'void'
+p3079
+aS'int'
+p3080
+aS'int'
+p3081
+aS'int'
+p3082
+aS'int'
+p3083
+aS'int'
+p3084
+aS'int'
+p3085
+aS'int'
+p3086
+aS'int'
+p3087
+aS'int'
+p3088
+asS'conv'
+p3089
+(lp3090
+S'struct Node *'
+p3091
+aS'struct Node *'
+p3092
+asS'cfree'
+p3093
+(lp3094
+S'void'
+p3095
+aS'void *'
+p3096
+asS'read_unary_expr'
+p3097
+(lp3098
+S'struct Node *'
+p3099
+asS'srand'
+p3100
+(lp3101
+S'void'
+p3102
+aS'unsigned int'
+p3103
+asS'_IO_putc'
+p3104
+(lp3105
+S'int'
+p3106
+aS'int'
+p3107
+aS'struct _IO_FILE *'
+p3108
+asS'make_vector'
+p3109
+(lp3110
+S'Vector *'
+p3111
+asS'getwd'
+p3112
+(lp3113
+S'char *'
+p3114
+aS'char *'
+p3115
+asS'make_func_macro'
+p3116
+(lp3117
+S'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p3118
+aS'Vector *'
+p3119
+aS'int'
+p3120
+aS'int'
+p3121
+asS'make_token'
+p3122
+(lp3123
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3124
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3125
+asS'atoll'
+p3126
+(lp3127
+S'long long'
+p3128
+aS'const char *'
+p3129
+asS'isblank'
+p3130
+(lp3131
+S'int'
+p3132
+aS'int'
+p3133
+asS'maybe_print_source_line'
+p3134
+(lp3135
+S'void'
+p3136
+aS'char *'
+p3137
+aS'int'
+p3138
+asS'encoding_prefix'
+p3139
+(lp3140
+S'char *'
+p3141
+aS'int'
+p3142
+asS'read_funclike_macro'
+p3143
+(lp3144
+S'void'
+p3145
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3146
+asS'emit_logor'
+p3147
+(lp3148
+S'void'
+p3149
+aS'struct Node *'
+p3150
+asS'read_else'
+p3151
+(lp3152
+S'void'
+p3153
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3154
+asS'emit_comp'
+p3155
+(lp3156
+S'void'
+p3157
+aS'char *'
+p3158
+aS'char *'
+p3159
+aS'struct Node *'
+p3160
+asS'make_numtype'
+p3161
+(lp3162
+S'struct Type *'
+p3163
+aS'int'
+p3164
+aS'int'
+p3165
+asS'verify'
+p3166
+(lp3167
+S'void'
+p3168
+aS'int *'
+p3169
+aS'int *'
+p3170
+aS'int'
+p3171
+asS'read_endif'
+p3172
+(lp3173
+S'void'
+p3174
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3175
+asS'uselocale'
+p3176
+(lp3177
+S'struct __locale_struct *'
+p3178
+aS'struct __locale_struct *'
+p3179
+asS'split'
+p3180
+(lp3181
+S'char **'
+p3182
+aS'char *'
+p3183
+asS'test_mix'
+p3184
+(lp3185
+S'void'
+p3186
+aS'char *'
+p3187
+ag182
+asS'waitpid'
+p3188
+(lp3189
+S'int'
+p3190
+aS'int'
+p3191
+aS'int *'
+p3192
+aS'int'
+p3193
+asS'assert_string2'
+p3194
+(lp3195
+S'void'
+p3196
+aS'int'
+p3197
+aS'char *'
+p3198
+aS'char *'
+p3199
+asS'setstate'
+p3200
+(lp3201
+S'char *'
+p3202
+aS'char *'
+p3203
+asS'ssignal'
+p3204
+(lp3205
+S'void (*)(int)'
+p3206
+aS'int'
+p3207
+aS'void (*)(int)'
+p3208
+asS'read_expr_opt'
+p3209
+(lp3210
+S'struct Node *'
+p3211
+asS'emit_lload'
+p3212
+(lp3213
+S'void'
+p3214
+aS'struct Type *'
+p3215
+aS'char *'
+p3216
+aS'int'
+p3217
+asS'gsignal'
+p3218
+(lp3219
+S'int'
+p3220
+aS'int'
+p3221
+asS'time'
+p3222
+(lp3223
+S'long'
+p3224
+aS'long *'
+p3225
+asS'vec_set'
+p3226
+(lp3227
+S'void'
+p3228
+aS'Vector *'
+p3229
+aS'int'
+p3230
+aS'void *'
+p3231
+asS'emit_ternary'
+p3232
+(lp3233
+S'void'
+p3234
+aS'struct Node *'
+p3235
+asS'__strtok_r'
+p3236
+(lp3237
+S'char *'
+p3238
+aS'char *restrict'
+p3239
+aS'const char *restrict'
+p3240
+aS'char **restrict'
+p3241
+asS'__va_arg_mem'
+p3242
+(lp3243
+S'void *'
+p3244
+aS'__va_elem *'
+p3245
+asS'getusershell'
+p3246
+(lp3247
+S'char *'
+p3248
+asS'read_expr'
+p3249
+(lp3250
+S'struct Node *'
+p3251
+asS'isgraph'
+p3252
+(lp3253
+S'int'
+p3254
+aS'int'
+p3255
+asS'make_array_type'
+p3256
+(lp3257
+S'struct Type *'
+p3258
+aS'struct Type *'
+p3259
+aS'int'
+p3260
+asS'__ctype_tolower_loc'
+p3261
+(lp3262
+S'const int **'
+p3263
+asS'clock_getcpuclockid'
+p3264
+(lp3265
+S'int'
+p3266
+aS'int'
+p3267
+aS'int *'
+p3268
+asS'calloc'
+p3269
+(lp3270
+S'void *'
+p3271
+asS'setbuf'
+p3272
+(lp3273
+S'void'
+p3274
+aS'struct _IO_FILE *restrict'
+p3275
+aS'char *restrict'
+p3276
+asS'read_string'
+p3277
+(lp3278
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3279
+aS'int'
+p3280
+asS'readlink'
+p3281
+(lp3282
+S'long'
+p3283
+aS'const char *restrict'
+p3284
+aS'char *restrict'
+p3285
+aS'int'
+p3286
+asS'unlinkat'
+p3287
+(lp3288
+S'int'
+p3289
+aS'int'
+p3290
+aS'const char *'
+p3291
+aS'int'
+p3292
+asS'ttyslot'
+p3293
+(lp3294
+S'int'
+p3295
+asS'wcstombs'
+p3296
+(lp3297
+S'int'
+p3298
+aS'char *restrict'
+p3299
+aS'const int *restrict'
+p3300
+aS'int'
+p3301
+asS'drand48_r'
+p3302
+(lp3303
+S'int'
+p3304
+aS'struct drand48_data *restrict'
+p3305
+aS'double *restrict'
+p3306
+asS'set_union'
+p3307
+(lp3308
+S'struct Set *'
+p3309
+aS'struct Set *'
+p3310
+aS'struct Set *'
+p3311
+asS'sigblock'
+p3312
+(lp3313
+S'int'
+p3314
+aS'int'
+p3315
+asS'nrand48'
+p3316
+(lp3317
+S'long'
+p3318
+aS'unsigned short [3]'
+p3319
+asS'make_special_macro'
+p3320
+(lp3321
+S'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p3322
+aS'void (*)(struct (anonymous at /tmp/8cc/8cc.h:81:9) *)'
+p3323
+asS'make_file'
+p3324
+(lp3325
+S'File *'
+p3326
+aS'struct _IO_FILE *'
+p3327
+aS'char *'
+p3328
+asS'toascii'
+p3329
+(lp3330
+S'int'
+p3331
+aS'int'
+p3332
+asS'emit_assign'
+p3333
+(lp3334
+S'void'
+p3335
+aS'struct Node *'
+p3336
+asS'wcstoumax'
+p3337
+(lp3338
+S'unsigned long'
+p3339
+aS'const int *restrict'
+p3340
+aS'int **restrict'
+p3341
+aS'int'
+p3342
+asS'handle_file_macro'
+p3343
+(lp3344
+S'void'
+p3345
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3346
+asS'read_generic_list'
+p3347
+(lp3348
+S'Vector *'
+p3349
+aS'struct Node **'
+p3350
+asS'test_if11'
+p3351
+(lp3352
+S'int'
+p3353
+asS'read_rectype_def'
+p3354
+(lp3355
+S'struct Type *'
+p3356
+aS'int'
+p3357
+asS'read_initializer_list'
+p3358
+(lp3359
+S'void'
+p3360
+aS'Vector *'
+p3361
+aS'struct Type *'
+p3362
+aS'int'
+p3363
+aS'int'
+p3364
+asS'read_include_next'
+p3365
+(lp3366
+S'void'
+p3367
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3368
+aS'File *'
+p3369
+asS'emit_jmp'
+p3370
+(lp3371
+S'void'
+p3372
+aS'char *'
+p3373
+asS'emit_toint'
+p3374
+(lp3375
+S'void'
+p3376
+aS'struct Type *'
+p3377
+asS'lseek'
+p3378
+(lp3379
+S'long'
+p3380
+aS'int'
+p3381
+aS'long'
+p3382
+aS'int'
+p3383
+asS'fseek'
+p3384
+(lp3385
+S'int'
+p3386
+aS'struct _IO_FILE *'
+p3387
+aS'long'
+p3388
+aS'int'
+p3389
+asS'emit_logand'
+p3390
+(lp3391
+S'void'
+p3392
+aS'struct Node *'
+p3393
+asS'readlinkat'
+p3394
+(lp3395
+S'long'
+p3396
+aS'int'
+p3397
+aS'const char *restrict'
+p3398
+aS'char *restrict'
+p3399
+aS'int'
+p3400
+asS'emit_expr'
+p3401
+(lp3402
+S'void'
+p3403
+aS'struct Node *'
+p3404
+asS'_IO_flockfile'
+p3405
+(lp3406
+S'void'
+p3407
+aS'struct _IO_FILE *'
+p3408
+asS'valid_pointer_binop'
+p3409
+(lp3410
+S'int'
+p3411
+aS'int'
+p3412
+asS'__lxstat'
+p3413
+(lp3414
+S'int'
+p3415
+aS'int'
+p3416
+aS'const char *'
+p3417
+aS'struct stat *'
+p3418
+asS'kill'
+p3419
+(lp3420
+S'int'
+p3421
+aS'int'
+p3422
+aS'int'
+p3423
+asS'ast_funcall'
+p3424
+(lp3425
+S'struct Node *'
+p3426
+aS'struct Type *'
+p3427
+aS'char *'
+p3428
+aS'Vector *'
+p3429
+asS'read_comma_expr'
+p3430
+(lp3431
+S'struct Node *'
+p3432
+asS'fflush'
+p3433
+(lp3434
+S'int'
+p3435
+aS'struct _IO_FILE *'
+p3436
+asS'oldstyle4'
+p3437
+(lp3438
+S'int'
+p3439
+aS'int'
+p3440
+aS'double'
+p3441
+asS'oldstyle3'
+p3442
+(lp3443
+S'int'
+p3444
+aS'int'
+p3445
+asS'oldstyle1'
+p3446
+(lp3447
+S'int'
+p3448
+aS'int'
+p3449
+aS'int'
+p3450
+asS'get_load_inst'
+p3451
+(lp3452
+S'char *'
+p3453
+aS'struct Type *'
+p3454
+asS'assert_int2'
+p3455
+(lp3456
+S'void'
+p3457
+aS'int'
+p3458
+aS'long'
+p3459
+aS'long'
+p3460
+asS'__xmknod'
+p3461
+(lp3462
+S'int'
+p3463
+aS'int'
+p3464
+aS'const char *'
+p3465
+aS'unsigned int'
+p3466
+aS'unsigned long *'
+p3467
+asS'make_case'
+p3468
+(lp3469
+S'Case *'
+p3470
+aS'int'
+p3471
+aS'int'
+p3472
+aS'char *'
+p3473
+asS'ldiv'
+p3474
+(lp3475
+S'ldiv_t'
+p3476
+aS'long'
+p3477
+aS'long'
+p3478
+asS'timer_delete'
+p3479
+(lp3480
+S'int'
+p3481
+aS'void *'
+p3482
+asS'setenv'
+p3483
+(lp3484
+S'int'
+p3485
+aS'const char *'
+p3486
+aS'const char *'
+p3487
+aS'int'
+p3488
+asS'ensure_lvar_init'
+p3489
+(lp3490
+S'void'
+p3491
+aS'struct Node *'
+p3492
+asS'lchown'
+p3493
+(lp3494
+S'int'
+p3495
+aS'const char *'
+p3496
+aS'unsigned int'
+p3497
+aS'unsigned int'
+p3498
+asS'join_paths'
+p3499
+(lp3500
+S'char *'
+p3501
+aS'Vector *'
+p3502
+asS'usage'
+p3503
+(lp3504
+S'void'
+p3505
+aS'int'
+p3506
+asS'ast_decl'
+p3507
+(lp3508
+S'struct Node *'
+p3509
+aS'struct Node *'
+p3510
+aS'Vector *'
+p3511
+asS'handle_date_macro'
+p3512
+(lp3513
+S'void'
+p3514
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3515
+asS'make_ident'
+p3516
+(lp3517
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3518
+aS'char *'
+p3519
+asS'handle_include_level_macro'
+p3520
+(lp3521
+S'void'
+p3522
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3523
+asS'emit_intcast'
+p3524
+(lp3525
+S'void'
+p3526
+aS'struct Type *'
+p3527
+asS'ensure_not_void'
+p3528
+(lp3529
+S'void'
+p3530
+aS'struct Type *'
+p3531
+asS'format'
+p3532
+(lp3533
+S'char *'
+p3534
+aS'char *'
+p3535
+ag182
+asS'imaxabs'
+p3536
+(lp3537
+S'long'
+p3538
+aS'long'
+p3539
+asS'_IO_sgetn'
+p3540
+(lp3541
+S'int'
+p3542
+aS'struct _IO_FILE *'
+p3543
+aS'void *'
+p3544
+aS'int'
+p3545
+asS'srandom_r'
+p3546
+(lp3547
+S'int'
+p3548
+aS'unsigned int'
+p3549
+aS'struct random_data *'
+p3550
+asS'ensure_lvalue'
+p3551
+(lp3552
+S'void'
+p3553
+aS'struct Node *'
+p3554
+asS'read_int'
+p3555
+(lp3556
+S'struct Node *'
+p3557
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3558
+asS'read_compound_literal'
+p3559
+(lp3560
+S'struct Node *'
+p3561
+aS'struct Type *'
+p3562
+asS'close_file'
+p3563
+(lp3564
+S'void'
+p3565
+aS'File *'
+p3566
+asS'read_var_or_func'
+p3567
+(lp3568
+S'struct Node *'
+p3569
+aS'char *'
+p3570
+asS'gnu_dev_minor'
+p3571
+(lp3572
+S'unsigned int'
+p3573
+aS'unsigned long long'
+p3574
+asS'daemon'
+p3575
+(lp3576
+S'int'
+p3577
+aS'int'
+p3578
+aS'int'
+p3579
+asS'strstr'
+p3580
+(lp3581
+S'char *'
+p3582
+aS'const char *'
+p3583
+aS'const char *'
+p3584
+asS'renameat'
+p3585
+(lp3586
+S'int'
+p3587
+aS'int'
+p3588
+aS'const char *'
+p3589
+aS'int'
+p3590
+aS'const char *'
+p3591
+asS'expand_all'
+p3592
+(lp3593
+S'Vector *'
+p3594
+aS'Vector *'
+p3595
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3596
+asS'print_error'
+p3597
+(lp3598
+S'void'
+p3599
+aS'char *'
+p3600
+aS'char *'
+p3601
+aS'char *'
+p3602
+aS'char *'
+p3603
+aS'int'
+p3604
+asS'newlocale'
+p3605
+(lp3606
+S'struct __locale_struct *'
+p3607
+aS'int'
+p3608
+aS'const char *'
+p3609
+aS'struct __locale_struct *'
+p3610
+asS'signal'
+p3611
+(lp3612
+S'void (*)(int)'
+p3613
+aS'int'
+p3614
+aS'void (*)(int)'
+p3615
+asS'mblen'
+p3616
+(lp3617
+S'int'
+p3618
+aS'const char *'
+p3619
+aS'int'
+p3620
+asS'setegid'
+p3621
+(lp3622
+S'int'
+p3623
+aS'unsigned int'
+p3624
+asS'symlinkat'
+p3625
+(lp3626
+S'int'
+p3627
+aS'const char *'
+p3628
+aS'int'
+p3629
+aS'const char *'
+p3630
+asS'emit_gload'
+p3631
+(lp3632
+S'void'
+p3633
+aS'struct Type *'
+p3634
+aS'char *'
+p3635
+aS'int'
+p3636
+asS'freopen'
+p3637
+(lp3638
+S'struct _IO_FILE *'
+p3639
+aS'const char *restrict'
+p3640
+aS'const char *restrict'
+p3641
+aS'struct _IO_FILE *restrict'
+p3642
+asS'ast_func'
+p3643
+(lp3644
+S'struct Node *'
+p3645
+aS'struct Type *'
+p3646
+aS'char *'
+p3647
+aS'Vector *'
+p3648
+aS'struct Node *'
+p3649
+aS'Vector *'
+p3650
+asS'sscanf'
+p3651
+(lp3652
+S'int'
+p3653
+aS'const char *restrict'
+p3654
+aS'const char *restrict'
+p3655
+ag182
+asS'isupper_l'
+p3656
+(lp3657
+S'int'
+p3658
+aS'int'
+p3659
+aS'struct __locale_struct *'
+p3660
+asS'fread_unlocked'
+p3661
+(lp3662
+S'int'
+p3663
+aS'void *restrict'
+p3664
+aS'int'
+p3665
+aS'int'
+p3666
+aS'struct _IO_FILE *restrict'
+p3667
+asS'strcmp'
+p3668
+(lp3669
+S'int'
+p3670
+aS'const char *'
+p3671
+aS'const char *'
+p3672
+asS'read_toplevels'
+p3673
+(lp3674
+S'Vector *'
+p3675
+asS'tmpfile'
+p3676
+(lp3677
+S'struct _IO_FILE *'
+p3678
+asS'fexpectd'
+p3679
+(lp3680
+S'void'
+p3681
+aS'char *'
+p3682
+aS'int'
+p3683
+aS'double'
+p3684
+aS'double'
+p3685
+asS'lldiv'
+p3686
+(lp3687
+S'lldiv_t'
+p3688
+aS'long long'
+p3689
+aS'long long'
+p3690
+asS'rpmatch'
+p3691
+(lp3692
+S'int'
+p3693
+aS'const char *'
+p3694
+asS'fgetc'
+p3695
+(lp3696
+S'int'
+p3697
+aS'struct _IO_FILE *'
+p3698
+asS'pop_function'
+p3699
+(lp3700
+S'void'
+p3701
+aS'void *'
+p3702
+asS'pclose'
+p3703
+(lp3704
+S'int'
+p3705
+aS'struct _IO_FILE *'
+p3706
+asS'mrand48'
+p3707
+(lp3708
+S'long'
+p3709
+asS'read_stmt'
+p3710
+(lp3711
+S'struct Node *'
+p3712
+asS'peek_token'
+p3713
+(lp3714
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3715
+asS'getdelim'
+p3716
+(lp3717
+S'long'
+p3718
+aS'char **restrict'
+p3719
+aS'int *restrict'
+p3720
+aS'int'
+p3721
+aS'struct _IO_FILE *restrict'
+p3722
+asS'getlogin'
+p3723
+(lp3724
+S'char *'
+p3725
+asS'current_file'
+p3726
+(lp3727
+S'File *'
+p3728
+asS't5a'
+p3729
+(lp3730
+S'void'
+p3731
+aS'int *'
+p3732
+asS'td3'
+p3733
+(lp3734
+S'double'
+p3735
+aS'int'
+p3736
+asS'td2'
+p3737
+(lp3738
+S'double'
+p3739
+aS'double'
+p3740
+asS'td1'
+p3741
+(lp3742
+S'double'
+p3743
+aS'float'
+p3744
+asS'make_pair'
+p3745
+(lp3746
+S'void *'
+p3747
+aS'void *'
+p3748
+aS'void *'
+p3749
+asS'ctermid'
+p3750
+(lp3751
+S'char *'
+p3752
+aS'char *'
+p3753
+asS'ast_inttype'
+p3754
+(lp3755
+S'struct Node *'
+p3756
+aS'struct Type *'
+p3757
+aS'long'
+p3758
+asS'_IO_feof'
+p3759
+(lp3760
+S'int'
+p3761
+aS'struct _IO_FILE *'
+p3762
+asS'emit_decl'
+p3763
+(lp3764
+S'void'
+p3765
+aS'struct Node *'
+p3766
+asS'qecvt_r'
+p3767
+(lp3768
+S'int'
+p3769
+aS'long double'
+p3770
+aS'int'
+p3771
+aS'int *restrict'
+p3772
+aS'int *restrict'
+p3773
+aS'char *restrict'
+p3774
+aS'int'
+p3775
+asS'emit_pointer_arith'
+p3776
+(lp3777
+S'void'
+p3778
+aS'char'
+p3779
+aS'struct Node *'
+p3780
+aS'struct Node *'
+p3781
+asS'_IO_vfprintf'
+p3782
+(lp3783
+S'int'
+p3784
+aS'struct _IO_FILE *restrict'
+p3785
+aS'const char *restrict'
+p3786
+aS'int'
+p3787
+asS't10'
+p3788
+(lp3789
+S'int'
+p3790
+aS'int'
+p3791
+aS'double'
+p3792
+asS'select'
+p3793
+(lp3794
+S'int'
+p3795
+aS'int'
+p3796
+aS'fd_set *restrict'
+p3797
+aS'fd_set *restrict'
+p3798
+aS'fd_set *restrict'
+p3799
+aS'struct timeval *restrict'
+p3800
+asS'asctime'
+p3801
+(lp3802
+S'char *'
+p3803
+aS'const struct tm *'
+p3804
+asS'finish_bitfield'
+p3805
+(lp3806
+S'void'
+p3807
+aS'int *'
+p3808
+aS'int *'
+p3809
+asS'mbstowcs'
+p3810
+(lp3811
+S'int'
+p3812
+aS'int *restrict'
+p3813
+aS'const char *restrict'
+p3814
+aS'int'
+p3815
+asS'waitid'
+p3816
+(lp3817
+S'int'
+p3818
+aS'idtype_t'
+p3819
+aS'unsigned int'
+p3820
+aS'siginfo_t *'
+p3821
+aS'int'
+p3822
+asS'do_node2s'
+p3823
+(lp3824
+S'void'
+p3825
+aS'Buffer *'
+p3826
+aS'struct Node *'
+p3827
+asS'mkdtemp'
+p3828
+(lp3829
+S'char *'
+p3830
+aS'char *'
+p3831
+asS'peek'
+p3832
+(lp3833
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3834
+asS'sigsuspend'
+p3835
+(lp3836
+S'int'
+p3837
+aS'const __sigset_t *'
+p3838
+asS'timer_create'
+p3839
+(lp3840
+S'int'
+p3841
+aS'int'
+p3842
+aS'struct sigevent *restrict'
+p3843
+aS'void **restrict'
+p3844
+asS'parse_pragma_operand'
+p3845
+(lp3846
+S'void'
+p3847
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3848
+asS'emitf'
+p3849
+(lp3850
+S'void'
+p3851
+aS'int'
+p3852
+aS'char *'
+p3853
+ag182
+asS'verify_short'
+p3854
+(lp3855
+S'void'
+p3856
+aS'short *'
+p3857
+aS'short *'
+p3858
+aS'int'
+p3859
+asS'lex_string'
+p3860
+(lp3861
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3862
+aS'char *'
+p3863
+asS'read_error'
+p3864
+(lp3865
+S'void'
+p3866
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3867
+asS'ast_binop'
+p3868
+(lp3869
+S'struct Node *'
+p3870
+aS'struct Type *'
+p3871
+aS'int'
+p3872
+aS'struct Node *'
+p3873
+aS'struct Node *'
+p3874
+asS'__ctype_toupper_loc'
+p3875
+(lp3876
+S'const int **'
+p3877
+asS'do_read_args'
+p3878
+(lp3879
+S'Vector *'
+p3880
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3881
+aS'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p3882
+asS'__stpncpy'
+p3883
+(lp3884
+S'char *'
+p3885
+aS'char *restrict'
+p3886
+aS'const char *restrict'
+p3887
+aS'int'
+p3888
+asS'sigtimedwait'
+p3889
+(lp3890
+S'int'
+p3891
+aS'const __sigset_t *restrict'
+p3892
+aS'siginfo_t *restrict'
+p3893
+aS'const struct timespec *restrict'
+p3894
+asS'is_type'
+p3895
+(lp3896
+S'int'
+p3897
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3898
+asS'getsubopt'
+p3899
+(lp3900
+S'int'
+p3901
+aS'char **restrict'
+p3902
+aS'char *const *restrict'
+p3903
+aS'char **restrict'
+p3904
+asS'strlen'
+p3905
+(lp3906
+S'unsigned long'
+p3907
+asS'emit_bitand'
+p3908
+(lp3909
+S'void'
+p3910
+aS'struct Node *'
+p3911
+asS'putchar_unlocked'
+p3912
+(lp3913
+S'int'
+p3914
+aS'int'
+p3915
+asS'mkfifoat'
+p3916
+(lp3917
+S'int'
+p3918
+aS'int'
+p3919
+aS'const char *'
+p3920
+aS'unsigned int'
+p3921
+asS'raise'
+p3922
+(lp3923
+S'int'
+p3924
+aS'int'
+p3925
+asS'roundup'
+p3926
+(lp3927
+S'int'
+p3928
+aS'int'
+p3929
+asS'maybe_booleanize_retval'
+p3930
+(lp3931
+S'void'
+p3932
+aS'struct Type *'
+p3933
+asS'fexpect'
+p3934
+(lp3935
+S'void'
+p3936
+aS'char *'
+p3937
+aS'int'
+p3938
+aS'int'
+p3939
+aS'int'
+p3940
+asS'read_cast_type'
+p3941
+(lp3942
+S'struct Type *'
+p3943
+asS'siginterrupt'
+p3944
+(lp3945
+S'int'
+p3946
+aS'int'
+p3947
+aS'int'
+p3948
+asS'buf_write'
+p3949
+(lp3950
+S'void'
+p3951
+aS'Buffer *'
+p3952
+aS'char'
+p3953
+asS'read_include'
+p3954
+(lp3955
+S'void'
+p3956
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p3957
+aS'File *'
+p3958
+aS'int'
+p3959
+asS'define_special_macro'
+p3960
+(lp3961
+S'void'
+p3962
+aS'char *'
+p3963
+aS'void (*)(struct (anonymous at /tmp/8cc/8cc.h:81:9) *)'
+p3964
+asS'strcpy'
+p3965
+(lp3966
+S'char *'
+p3967
+aS'char *restrict'
+p3968
+aS'const char *restrict'
+p3969
+asS'plus'
+p3970
+(lp3971
+S'int'
+p3972
+aS'int'
+p3973
+aS'int'
+p3974
+asS'bsearch'
+p3975
+(lp3976
+S'void *'
+p3977
+aS'const void *'
+p3978
+aS'const void *'
+p3979
+aS'int'
+p3980
+aS'int'
+p3981
+aS'int (*)(const void *, const void *)'
+p3982
+asS'read_postfix_expr_tail'
+p3983
+(lp3984
+S'struct Node *'
+p3985
+aS'struct Node *'
+p3986
+asS'mixed'
+p3987
+(lp3988
+S'void'
+p3989
+aS'float'
+p3990
+aS'int'
+p3991
+aS'float'
+p3992
+aS'int'
+p3993
+aS'float'
+p3994
+aS'int'
+p3995
+aS'float'
+p3996
+aS'int'
+p3997
+aS'float'
+p3998
+aS'int'
+p3999
+aS'float'
+p4000
+aS'int'
+p4001
+aS'float'
+p4002
+aS'int'
+p4003
+aS'float'
+p4004
+aS'int'
+p4005
+aS'float'
+p4006
+aS'int'
+p4007
+aS'float'
+p4008
+aS'int'
+p4009
+aS'float'
+p4010
+aS'int'
+p4011
+aS'float'
+p4012
+aS'int'
+p4013
+aS'float'
+p4014
+aS'int'
+p4015
+aS'float'
+p4016
+aS'int'
+p4017
+aS'float'
+p4018
+aS'int'
+p4019
+aS'float'
+p4020
+aS'int'
+p4021
+aS'float'
+p4022
+aS'int'
+p4023
+aS'float'
+p4024
+aS'int'
+p4025
+aS'float'
+p4026
+aS'int'
+p4027
+aS'float'
+p4028
+aS'int'
+p4029
+asS'emit_builtin_reg_class'
+p4030
+(lp4031
+S'void'
+p4032
+aS'struct Node *'
+p4033
+asS'guarded'
+p4034
+(lp4035
+S'int'
+p4036
+aS'char *'
+p4037
+asS'read_compound_stmt'
+p4038
+(lp4039
+S'struct Node *'
+p4040
+asS'read_initializer_elem'
+p4041
+(lp4042
+S'void'
+p4043
+aS'Vector *'
+p4044
+aS'struct Type *'
+p4045
+aS'int'
+p4046
+aS'int'
+p4047
+asS'freelocale'
+p4048
+(lp4049
+S'void'
+p4050
+aS'struct __locale_struct *'
+p4051
+asS'ffs'
+p4052
+(lp4053
+S'int'
+p4054
+aS'int'
+p4055
+asS'fcvt'
+p4056
+(lp4057
+S'char *'
+p4058
+aS'double'
+p4059
+aS'int'
+p4060
+aS'int *restrict'
+p4061
+aS'int *restrict'
+p4062
+asS'endusershell'
+p4063
+(lp4064
+S'void'
+p4065
+asS'get_typedef'
+p4066
+(lp4067
+S'struct Type *'
+p4068
+aS'char *'
+p4069
+asS'setlocale'
+p4070
+(lp4071
+S'char *'
+p4072
+aS'int'
+p4073
+aS'const char *'
+p4074
+asS'read_float'
+p4075
+(lp4076
+S'struct Node *'
+p4077
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4078
+asS'isprint'
+p4079
+(lp4080
+S'int'
+p4081
+aS'int'
+p4082
+asS'getpgid'
+p4083
+(lp4084
+S'int'
+p4085
+aS'int'
+p4086
+asS'glue_tokens'
+p4087
+(lp4088
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4089
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4090
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4091
+asS'wrap'
+p4092
+(lp4093
+S'struct Node *'
+p4094
+aS'struct Type *'
+p4095
+aS'struct Node *'
+p4096
+asS'sigemptyset'
+p4097
+(lp4098
+S'int'
+p4099
+aS'__sigset_t *'
+p4100
+asS'tok2s'
+p4101
+(lp4102
+S'char *'
+p4103
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4104
+asS'next'
+p4105
+(lp4106
+S'int'
+p4107
+aS'int'
+p4108
+asS'read_func_param'
+p4109
+(lp4110
+S'struct Type *'
+p4111
+aS'char **'
+p4112
+aS'int'
+p4113
+asS'tf3'
+p4114
+(lp4115
+S'float'
+p4116
+aS'int'
+p4117
+asS'memccpy'
+p4118
+(lp4119
+S'void *'
+p4120
+aS'void *restrict'
+p4121
+aS'const void *restrict'
+p4122
+aS'int'
+p4123
+aS'int'
+p4124
+asS'getegid'
+p4125
+(lp4126
+S'unsigned int'
+p4127
+asS'sigprocmask'
+p4128
+(lp4129
+S'int'
+p4130
+aS'int'
+p4131
+aS'const __sigset_t *restrict'
+p4132
+aS'__sigset_t *restrict'
+p4133
+asS'fdopen'
+p4134
+(lp4135
+S'struct _IO_FILE *'
+p4136
+aS'int'
+p4137
+aS'const char *'
+p4138
+asS't6a'
+p4139
+(lp4140
+S'void'
+p4141
+aS'int'
+p4142
+aS'int [][3]'
+p4143
+asS'do_ty2s'
+p4144
+(lp4145
+S'char *'
+p4146
+aS'Dict *'
+p4147
+aS'struct Type *'
+p4148
+asS'mkfifo'
+p4149
+(lp4150
+S'int'
+p4151
+aS'const char *'
+p4152
+aS'unsigned int'
+p4153
+asS'subst'
+p4154
+(lp4155
+S'Vector *'
+p4156
+aS'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p4157
+aS'Vector *'
+p4158
+aS'struct Set *'
+p4159
+asS'push_xmm'
+p4160
+(lp4161
+S'void'
+p4162
+aS'int'
+p4163
+asS'cmpinit'
+p4164
+(lp4165
+S'int'
+p4166
+aS'const void *'
+p4167
+aS'const void *'
+p4168
+asS'clock_nanosleep'
+p4169
+(lp4170
+S'int'
+p4171
+aS'int'
+p4172
+aS'int'
+p4173
+aS'const struct timespec *'
+p4174
+aS'struct timespec *'
+p4175
+asS'fork'
+p4176
+(lp4177
+S'int'
+p4178
+asS'map_get_nostack'
+p4179
+(lp4180
+S'void *'
+p4181
+aS'struct Map *'
+p4182
+aS'char *'
+p4183
+asS'putc'
+p4184
+(lp4185
+S'int'
+p4186
+aS'int'
+p4187
+aS'struct _IO_FILE *'
+p4188
+asS'dict_put'
+p4189
+(lp4190
+S'void'
+p4191
+aS'Dict *'
+p4192
+aS'char *'
+p4193
+aS'void *'
+p4194
+asS'write_utf8'
+p4195
+(lp4196
+S'void'
+p4197
+aS'Buffer *'
+p4198
+aS'unsigned int'
+p4199
+asS'fstat'
+p4200
+(lp4201
+S'int'
+p4202
+aS'int'
+p4203
+aS'struct stat *'
+p4204
+asS'make_type'
+p4205
+(lp4206
+S'struct Type *'
+p4207
+aS'struct Type *'
+p4208
+asS'getenv'
+p4209
+(lp4210
+S'char *'
+p4211
+aS'const char *'
+p4212
+asS'atoi'
+p4213
+(lp4214
+S'int'
+p4215
+aS'const char *'
+p4216
+asS'link'
+p4217
+(lp4218
+S'int'
+p4219
+aS'const char *'
+p4220
+aS'const char *'
+p4221
+asS'emit_assign_struct_ref'
+p4222
+(lp4223
+S'void'
+p4224
+aS'struct Node *'
+p4225
+aS'struct Type *'
+p4226
+aS'int'
+p4227
+asS'atol'
+p4228
+(lp4229
+S'long'
+p4230
+aS'const char *'
+p4231
+asS'push_struct'
+p4232
+(lp4233
+S'int'
+p4234
+aS'int'
+p4235
+asS'getuid'
+p4236
+(lp4237
+S'unsigned int'
+p4238
+asS'fchown'
+p4239
+(lp4240
+S'int'
+p4241
+aS'int'
+p4242
+aS'unsigned int'
+p4243
+aS'unsigned int'
+p4244
+asS'fdatasync'
+p4245
+(lp4246
+S'int'
+p4247
+aS'int'
+p4248
+asS'get_compound_assign_op'
+p4249
+(lp4250
+S'int'
+p4251
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4252
+asS'wcstoimax'
+p4253
+(lp4254
+S'long'
+p4255
+aS'const int *restrict'
+p4256
+aS'int **restrict'
+p4257
+aS'int'
+p4258
+asS'__overflow'
+p4259
+(lp4260
+S'int'
+p4261
+aS'struct _IO_FILE *'
+p4262
+aS'int'
+p4263
+asS'erand48'
+p4264
+(lp4265
+S'double'
+p4266
+aS'unsigned short [3]'
+p4267
+asS'_IO_getc'
+p4268
+(lp4269
+S'int'
+p4270
+aS'struct _IO_FILE *'
+p4271
+asS'sbrk'
+p4272
+(lp4273
+S'void *'
+p4274
+aS'long'
+p4275
+asS'wait3'
+p4276
+(lp4277
+S'int'
+p4278
+aS'__WAIT_STATUS'
+p4279
+aS'int'
+p4280
+aS'struct rusage *'
+p4281
+asS'localeconv'
+p4282
+(lp4283
+S'struct lconv *'
+p4284
+asS'is_arithtype'
+p4285
+(lp4286
+S'int'
+p4287
+aS'struct Type *'
+p4288
+asS'emit_addr'
+p4289
+(lp4290
+S'void'
+p4291
+aS'struct Node *'
+p4292
+asS'tolower_l'
+p4293
+(lp4294
+S'int'
+p4295
+aS'int'
+p4296
+aS'struct __locale_struct *'
+p4297
+asS'read_declarator_params'
+p4298
+(lp4299
+S'void'
+p4300
+aS'Vector *'
+p4301
+aS'Vector *'
+p4302
+aS'int *'
+p4303
+asS'imaxdiv'
+p4304
+(lp4305
+S'imaxdiv_t'
+p4306
+aS'long'
+p4307
+aS'long'
+p4308
+asS'_IO_vfscanf'
+p4309
+(lp4310
+S'int'
+p4311
+aS'struct _IO_FILE *restrict'
+p4312
+aS'const char *restrict'
+p4313
+aS'int'
+p4314
+aS'int *restrict'
+p4315
+asS'readc_string'
+p4316
+(lp4317
+S'int'
+p4318
+aS'File *'
+p4319
+asS'ungetc'
+p4320
+(lp4321
+S'int'
+p4322
+aS'int'
+p4323
+aS'struct _IO_FILE *'
+p4324
+asS'emit_data_addr'
+p4325
+(lp4326
+S'void'
+p4327
+aS'struct Node *'
+p4328
+aS'int'
+p4329
+asS'test_if10'
+p4330
+(lp4331
+S'int'
+p4332
+asS'get_int_reg'
+p4333
+(lp4334
+S'char *'
+p4335
+aS'struct Type *'
+p4336
+aS'char'
+p4337
+asS'read_oldstyle_param_type'
+p4338
+(lp4339
+S'void'
+p4340
+aS'Vector *'
+p4341
+asS'ast_gvar'
+p4342
+(lp4343
+S'struct Node *'
+p4344
+aS'struct Type *'
+p4345
+aS'char *'
+p4346
+asS'llabs'
+p4347
+(lp4348
+S'long long'
+p4349
+aS'long long'
+p4350
+asS'ast_funcdesg'
+p4351
+(lp4352
+S'struct Node *'
+p4353
+aS'struct Type *'
+p4354
+aS'char *'
+p4355
+asS'make_obj_macro'
+p4356
+(lp4357
+S'struct (anonymous at /tmp/8cc/cpp.c:38:9) *'
+p4358
+aS'Vector *'
+p4359
+asS'emit_label'
+p4360
+(lp4361
+S'void'
+p4362
+aS'char *'
+p4363
+asS'syscall'
+p4364
+(lp4365
+S'long'
+p4366
+aS'long'
+p4367
+ag182
+asS'__sigdelset'
+p4368
+(lp4369
+S'int'
+p4370
+aS'__sigset_t *'
+p4371
+aS'int'
+p4372
+asS'ftello'
+p4373
+(lp4374
+S'long'
+p4375
+aS'struct _IO_FILE *'
+p4376
+asS'make_dict'
+p4377
+(lp4378
+S'Dict *'
+p4379
+asS'fgets'
+p4380
+(lp4381
+S'char *'
+p4382
+aS'char *restrict'
+p4383
+aS'int'
+p4384
+aS'struct _IO_FILE *restrict'
+p4385
+asS'handle_pragma_macro'
+p4386
+(lp4387
+S'void'
+p4388
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4389
+asS'initstate'
+p4390
+(lp4391
+S'char *'
+p4392
+aS'unsigned int'
+p4393
+aS'char *'
+p4394
+aS'int'
+p4395
+asS'read_obj_macro'
+p4396
+(lp4397
+S'void'
+p4398
+aS'char *'
+p4399
+asS'emit_zero_filler'
+p4400
+(lp4401
+S'void'
+p4402
+aS'int'
+p4403
+aS'int'
+p4404
+asS'isdigit'
+p4405
+(lp4406
+S'int'
+p4407
+aS'int'
+p4408
+asS'ispunct'
+p4409
+(lp4410
+S'int'
+p4411
+aS'int'
+p4412
+asS'pread'
+p4413
+(lp4414
+S'long'
+p4415
+aS'int'
+p4416
+aS'void *'
+p4417
+aS'int'
+p4418
+aS'long'
+p4419
+asS'getgid'
+p4420
+(lp4421
+S'unsigned int'
+p4422
+asS'emit_post_inc_dec'
+p4423
+(lp4424
+S'void'
+p4425
+aS'struct Node *'
+p4426
+aS'char *'
+p4427
+asS'read_decl_spec'
+p4428
+(lp4429
+S'struct Type *'
+p4430
+aS'int *'
+p4431
+asS'read_one_arg'
+p4432
+(lp4433
+S'Vector *'
+p4434
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4435
+aS'int *'
+p4436
+aS'int'
+p4437
+asS'tmpnam'
+p4438
+(lp4439
+S'char *'
+p4440
+aS'char *'
+p4441
+asS'emit_func_prologue'
+p4442
+(lp4443
+S'void'
+p4444
+aS'struct Node *'
+p4445
+asS'realloc_body'
+p4446
+(lp4447
+S'void'
+p4448
+aS'Buffer *'
+p4449
+asS'read_continue_stmt'
+p4450
+(lp4451
+S'struct Node *'
+p4452
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4453
+asS'clearenv'
+p4454
+(lp4455
+S'int'
+p4456
+asS'mkstemp'
+p4457
+(lp4458
+S'int'
+p4459
+aS'char *'
+p4460
+asS'define_builtin'
+p4461
+(lp4462
+S'void'
+p4463
+aS'char *'
+p4464
+aS'struct Type *'
+p4465
+aS'Vector *'
+p4466
+asS'read_rune'
+p4467
+(lp4468
+S'int'
+p4469
+aS'unsigned int *'
+p4470
+aS'char *'
+p4471
+aS'char *'
+p4472
+asS'nice'
+p4473
+(lp4474
+S'int'
+p4475
+aS'int'
+p4476
+asS'stat'
+p4477
+(lp4478
+S'int'
+p4479
+aS'const char *restrict'
+p4480
+aS'struct stat *restrict'
+p4481
+asS'quote_cstring_len'
+p4482
+(lp4483
+S'char *'
+p4484
+aS'char *'
+p4485
+aS'int'
+p4486
+asS'handle_time_macro'
+p4487
+(lp4488
+S'void'
+p4489
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4490
+asS'truncate'
+p4491
+(lp4492
+S'int'
+p4493
+aS'const char *'
+p4494
+aS'long'
+p4495
+asS'killpg'
+p4496
+(lp4497
+S'int'
+p4498
+aS'int'
+p4499
+aS'int'
+p4500
+asS'unget_token'
+p4501
+(lp4502
+S'void'
+p4503
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4504
+asS'emit_pre_inc_dec'
+p4505
+(lp4506
+S'void'
+p4507
+aS'struct Node *'
+p4508
+aS'char *'
+p4509
+asS'readc_file'
+p4510
+(lp4511
+S'int'
+p4512
+aS'File *'
+p4513
+asS'sigaddset'
+p4514
+(lp4515
+S'int'
+p4516
+aS'__sigset_t *'
+p4517
+aS'int'
+p4518
+asS'parse_warnings_arg'
+p4519
+(lp4520
+S'void'
+p4521
+aS'char *'
+p4522
+asS'setusershell'
+p4523
+(lp4524
+S'void'
+p4525
+asS'read_cast_expr'
+p4526
+(lp4527
+S'struct Node *'
+p4528
+asS'make_switch_jump'
+p4529
+(lp4530
+S'struct Node *'
+p4531
+aS'struct Node *'
+p4532
+aS'Case *'
+p4533
+asS'_toupper'
+p4534
+(lp4535
+S'int'
+p4536
+aS'int'
+p4537
+asS'read_ident'
+p4538
+(lp4539
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4540
+aS'char'
+p4541
+asS'_exit'
+p4542
+(lp4543
+S'void'
+p4544
+aS'int'
+p4545
+asS'read_elif'
+p4546
+(lp4547
+S'void'
+p4548
+aS'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4549
+asS'read_rep2'
+p4550
+(lp4551
+S'struct (anonymous at /tmp/8cc/8cc.h:81:9) *'
+p4552
+aS'char'
+p4553
+aS'int'
+p4554
+aS'char'
+p4555
+aS'int'
+p4556
+aS'char'
+p4557
+asS'difftime'
+p4558
+(lp4559
+S'double'
+p4560
+aS'long'
+p4561
+aS'long'
+p4562
+asS'to_utf32'
+p4563
+(lp4564
+S'Buffer *'
+p4565
+aS'char *'
+p4566
+aS'int'
+p4567
+asS'fpathconf'
+p4568
+(lp4569
+S'long'
+p4570
+aS'int'
+p4571
+aS'int'
+p4572
+asS'chown'
+p4573
+(lp4574
+S'int'
+p4575
+aS'const char *'
+p4576
+aS'unsigned int'
+p4577
+aS'unsigned int'
+p4578
+asS'__toupper_l'
+p4579
+(lp4580
+S'int'
+p4581
+aS'int'
+p4582
+aS'struct __locale_struct *'
+p4583
+asS'skip_parentheses'
+p4584
+(lp4585
+S'void'
+p4586
+aS'Vector *'
+p4587
+asS'fgetc_unlocked'
+p4588
+(lp4589
+S'int'
+p4590
+aS'struct _IO_FILE *'
+p4591
+asS'push'
+p4592
+(lp4593
+S'void'
+p4594
+aS'char *'
+p4595
+asS'maybe_emit_bitshift_load'
+p4596
+(lp4597
+S'void'
+p4598
+aS'struct Type *'
+p4599
+asS'maybe_emit_builtin'
+p4600
+(lp4601
+S'int'
+p4602
+aS'struct Node *'
+p4603
+asS'test_int'
+p4604
+(lp4605
+S'void'
+p4606
+aS'int'
+p4607
+ag182
+as.
