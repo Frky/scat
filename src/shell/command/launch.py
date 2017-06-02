@@ -29,14 +29,13 @@ class LaunchCmd(ICommand):
     def __init__(self, pintools, *args, **kwargs):
         self.__pintools = pintools
         super(LaunchCmd, self).__init__(*args, **kwargs)
-        self.__options_dict = {"release":False, "force":False, "debug":False,
-                "trace":False, "alt_prev":False}
         return
 
     def run(self, s, *args, **kwargs):
         split = s.split()
         index = 0
-
+        self.__options_dict = {"release":False, "force":False, "debug":False,
+                "trace":False, "alt_prev":False}
         while index < len(split) and split[index].startswith("-"):
             arg = split[index]
             if arg == '-f' or arg == '--force' or arg == '-B':
