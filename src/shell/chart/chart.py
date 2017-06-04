@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 
+import sys
 import matplotlib.pyplot as plt  
 import matplotlib.colors as colors
 import pandas as pd  
@@ -110,9 +111,57 @@ class Chart(object):
         plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 
     def get_accuracy(self):
-        return self._data
+        with open("test/coreutils.txt", "r") as f:
+            coreutils = [line[:-1] for line in f.readlines()]
+        data = list(self._data)
+        coreres = [d for d in data if d.pgm in coreutils]
+        data = [d for d in data if d.pgm not in coreutils]
+        data.append(reduce(lambda a, b: a.merge(b), coreres[1:], coreres[0]))
+        data[-1].set_pgm("coreutils")
+        cc = [d for d in data if "8cc" in d.pgm]
+        data = [d for d in data if not "8cc" in d.pgm]
+        data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
+        data[-1].set_pgm("8cc")
+        return data
 
     def draw_accuracy(self, data, name):
+        tab = dict()
+        tab["tot_in"] = dict()
+        tab["fp_in"] = dict()
+        tab["fn_in"] = dict()
+        tab["acc_in"] = dict()
+        tab["tot_out"] = dict()
+        tab["fp_out"] = dict()
+        tab["fn_out"] = dict()
+        tab["acc_out"] = dict()
+        for c, e in enumerate(data):
+            for k in tab.keys():
+                tab[k].setdefault(e.pgm, e.get(k))
+        for k in tab["tot_in"].keys():
+            sys.stdout.write("{} & ".format(k))
+        sys.stdout.write("TOTAL \\\\\n")
+        for k in tab.keys():
+            sys.stdout.write("{} & ".format(k))
+            average = 0
+            for p in tab[k]:
+                if isinstance(tab[k][p], int):
+                    sys.stdout.write("{} & ".format(tab[k][p]))
+                else: 
+                    sys.stdout.write("{0:.2f} & ".format(tab[k][p]))
+            if k == "acc_in":
+                total = map(lambda a: a[0] * a[1], zip(tab[k].values(), tab["tot_in"].values()))
+                total = sum(total)/float(sum(tab["tot_in"].values()))
+            elif k == "acc_out":
+                total = map(lambda a: a[0] * a[1], zip(tab[k].values(), tab["tot_out"].values()))
+                total = sum(total)/float(sum(tab["tot_out"].values()))
+            else:
+                total = sum(tab[k].values())
+            if isinstance(total, int):
+                sys.stdout.write("{} \\\\\n".format(total))
+            else:
+                sys.stdout.write("{0:.2f} \\\\\n".format(total))
+        return
+
         plt.figure(figsize=(12, 9)) 
         ax = plt.subplot(111)    
         ax.spines["top"].set_visible(False)    

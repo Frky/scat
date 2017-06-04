@@ -468,8 +468,9 @@ VOID Fini(INT32 code, VOID *v) {
     ofile << "MIN_VALS=" << MIN_VALS << ":MAX_VALS=" << MAX_VALS << ":ADDR_THRESHOLD=" << ADDR_THRESHOLD << endl;
 
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
-        if (nb_call[fid] < MIN_VALS)
+        if (nb_call[fid] < MIN_VALS) {
             continue;
+        }
 
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)

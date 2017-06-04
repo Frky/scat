@@ -13,7 +13,7 @@
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
 
-#define MIN_CALLS_DEFAULT       "20"
+#define MIN_CALLS_DEFAULT       "5"
 #define PARAM_THRESHOLD_DEFAULT "0.10"
 #define RET_THRESHOLD_DEFAULT   "0.10"
 
