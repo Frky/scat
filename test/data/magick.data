@@ -1,0 +1,16280 @@
+(dp0
+S''
+p1
+(lp2
+S'char *'
+p3
+asS'FindColor'
+p4
+(lp5
+S'int'
+p6
+aS'int *'
+p7
+asS'wctomb'
+p8
+(lp9
+S'int'
+p10
+aS'char *'
+p11
+aS'int'
+p12
+asS'getc_unlocked'
+p13
+(lp14
+S'int'
+p15
+aS'struct _IO_FILE *'
+p16
+asS'Quadratic'
+p17
+(lp18
+S'double'
+p19
+aS'const double'
+p20
+aS'const int *()'
+p21
+asS'PopDoublePixel'
+p22
+(lp23
+S'unsigned char *'
+p24
+aS'int *'
+p25
+aS'const double'
+p26
+aS'unsigned char *'
+p27
+asS'acosh'
+p28
+(lp29
+S'double'
+p30
+aS'double'
+p31
+asS'acosf'
+p32
+(lp33
+S'float'
+p34
+aS'float'
+p35
+asS'ReadVIDImage'
+p36
+(lp37
+S'int *'
+p38
+aS'const int *'
+p39
+aS'int *'
+p40
+asS'IsPDFRendered'
+p41
+(lp42
+S'int'
+p43
+aS'const char *'
+p44
+asS'ParseKernelArray'
+p45
+(lp46
+S'int *'
+p47
+aS'const char *'
+p48
+asS'renameat'
+p49
+(lp50
+S'int'
+p51
+aS'int'
+p52
+aS'const char *'
+p53
+aS'int'
+p54
+aS'const char *'
+p55
+asS'hypotf'
+p56
+(lp57
+S'float'
+p58
+aS'float'
+p59
+aS'float'
+p60
+asS'ilogb'
+p61
+(lp62
+S'int'
+p63
+aS'double'
+p64
+asS'IsVIFF'
+p65
+(lp66
+S'int'
+p67
+aS'const unsigned char *'
+p68
+aS'const int'
+p69
+asS'qecvt'
+p70
+(lp71
+S'char *'
+p72
+aS'long double'
+p73
+aS'int'
+p74
+aS'int *restrict'
+p75
+aS'int *restrict'
+p76
+asS'PushShortPixel'
+p77
+(lp78
+S'const unsigned char *'
+p79
+aS'const int'
+p80
+aS'const unsigned char *'
+p81
+aS'unsigned short *'
+p82
+asS'__logbl'
+p83
+(lp84
+S'long double'
+p85
+aS'long double'
+p86
+asS'GetEXIFProperty'
+p87
+(lp88
+S'int'
+p89
+aS'const int *'
+p90
+aS'const char *'
+p91
+aS'int *'
+p92
+asS'futimens'
+p93
+(lp94
+S'int'
+p95
+aS'int'
+p96
+aS'struct timespec const[2]'
+p97
+asS'__fxstat'
+p98
+(lp99
+S'int'
+p100
+aS'int'
+p101
+aS'int'
+p102
+aS'struct stat *'
+p103
+asS'__logbf'
+p104
+(lp105
+S'float'
+p106
+aS'float'
+p107
+asS'localtime'
+p108
+(lp109
+S'struct tm *'
+p110
+aS'const long *'
+p111
+asS'SetPixelChannels'
+p112
+(lp113
+S'void'
+p114
+aS'int *'
+p115
+aS'const int'
+p116
+asS'rand_r'
+p117
+(lp118
+S'int'
+p119
+aS'unsigned int *'
+p120
+asS'IsMGK'
+p121
+(lp122
+S'int'
+p123
+aS'const unsigned char *'
+p124
+aS'const int'
+p125
+asS'ctime_r'
+p126
+(lp127
+S'char *'
+p128
+aS'const long *restrict'
+p129
+aS'char *restrict'
+p130
+asS'mkstemps'
+p131
+(lp132
+S'int'
+p133
+aS'char *'
+p134
+aS'int'
+p135
+asS'VectorAdd'
+p136
+(lp137
+S'void'
+p138
+aS'const struct _DDSVector4'
+p139
+aS'const struct _DDSVector4'
+p140
+aS'struct _DDSVector4 *'
+p141
+asS'ExtractPostscript'
+p142
+(lp143
+S'int *'
+p144
+aS'int *'
+p145
+aS'const int *'
+p146
+aS'int'
+p147
+aS'int'
+p148
+aS'int *'
+p149
+asS'__ceil'
+p150
+(lp151
+S'double'
+p152
+aS'double'
+p153
+asS'ScaleAnyToQuantum'
+p154
+(lp155
+S'int'
+p156
+aS'const int'
+p157
+aS'const int'
+p158
+asS'getloadavg'
+p159
+(lp160
+S'int'
+p161
+aS'double []'
+p162
+aS'int'
+p163
+asS'truncl'
+p164
+(lp165
+S'long double'
+p166
+aS'long double'
+p167
+asS'__sqrt'
+p168
+(lp169
+S'double'
+p170
+aS'double'
+p171
+asS'lchmod'
+p172
+(lp173
+S'int'
+p174
+aS'const char *'
+p175
+aS'unsigned int'
+p176
+asS'ReadPICTImage'
+p177
+(lp178
+S'int *'
+p179
+aS'const int *'
+p180
+aS'int *'
+p181
+asS'__significand'
+p182
+(lp183
+S'double'
+p184
+aS'double'
+p185
+asS'TranslateSFWMarker'
+p186
+(lp187
+S'void'
+p188
+aS'unsigned char *'
+p189
+asS'AcquireDelegateCache'
+p190
+(lp191
+S'int *'
+p192
+aS'const char *'
+p193
+aS'int *'
+p194
+asS'SkipXMPValue'
+p195
+(lp196
+S'int'
+p197
+aS'const char *'
+p198
+asS'GetPixelAlpha'
+p199
+(lp200
+S'int'
+p201
+aS'const int *'
+p202
+asS'IsMNG'
+p203
+(lp204
+S'int'
+p205
+aS'const unsigned char *'
+p206
+aS'const int'
+p207
+asS'opendir'
+p208
+(lp209
+S'struct __dirstream *'
+p210
+aS'const char *'
+p211
+asS'acosl'
+p212
+(lp213
+S'long double'
+p214
+aS'long double'
+p215
+asS'__sqrtf'
+p216
+(lp217
+S'float'
+p218
+aS'float'
+p219
+asS'posix_fallocate'
+p220
+(lp221
+S'int'
+p222
+aS'int'
+p223
+aS'long'
+p224
+aS'long'
+p225
+asS'WritePSImage'
+p226
+(lp227
+S'int'
+p228
+aS'const int *'
+p229
+aS'int *'
+p230
+aS'int *'
+p231
+asS'gnu_dev_makedev'
+p232
+(lp233
+S'unsigned long long'
+p234
+aS'unsigned int'
+p235
+aS'unsigned int'
+p236
+asS'WriteUncompressed'
+p237
+(lp238
+S'void'
+p239
+aS'int *'
+p240
+aS'int *'
+p241
+asS'__sqrtl'
+p242
+(lp243
+S'long double'
+p244
+aS'long double'
+p245
+asS'Jinc'
+p246
+(lp247
+S'double'
+p248
+aS'const double'
+p249
+aS'const int *()'
+p250
+asS'WriteGRAYImage'
+p251
+(lp252
+S'int'
+p253
+aS'const int *'
+p254
+aS'int *'
+p255
+aS'int *'
+p256
+asS'mknod'
+p257
+(lp258
+S'int'
+p259
+aS'const char *'
+p260
+aS'unsigned int'
+p261
+aS'unsigned long'
+p262
+asS'ImportGrayAlphaQuantum'
+p263
+(lp264
+S'void'
+p265
+aS'const int *'
+p266
+aS'int *'
+p267
+aS'const int'
+p268
+aS'const unsigned char *'
+p269
+asS'PushRunlengthPacket'
+p270
+(lp271
+S'void'
+p272
+aS'int *'
+p273
+aS'const unsigned char *'
+p274
+aS'int *'
+p275
+aS'int *'
+p276
+aS'int *'
+p277
+asS'InitializeMagickMutex'
+p278
+(lp279
+S'void'
+p280
+asS'GetPixelReadMaskTraits'
+p281
+(lp282
+S'int'
+p283
+aS'const int *'
+p284
+asS'PrintChannelMoments'
+p285
+(lp286
+S'int'
+p287
+aS'int *'
+p288
+aS'const int'
+p289
+aS'const char *'
+p290
+aS'const double'
+p291
+aS'const int *'
+p292
+asS'ReadPCDImage'
+p293
+(lp294
+S'int *'
+p295
+aS'const int *'
+p296
+aS'int *'
+p297
+asS'asin'
+p298
+(lp299
+S'double'
+p300
+aS'double'
+p301
+asS'__lrintf'
+p302
+(lp303
+S'long'
+p304
+aS'float'
+p305
+asS'ReadUYVYImage'
+p306
+(lp307
+S'int *'
+p308
+aS'const int *'
+p309
+aS'int *'
+p310
+asS'clock'
+p311
+(lp312
+S'long'
+p313
+asS'__lrintl'
+p314
+(lp315
+S'long'
+p316
+aS'long double'
+p317
+asS'y1f'
+p318
+(lp319
+S'float'
+p320
+aS'float'
+p321
+asS'nanf'
+p322
+(lp323
+S'float'
+p324
+aS'const char *'
+p325
+asS'__expm1l'
+p326
+(lp327
+S'long double'
+p328
+aS'long double'
+p329
+asS'llroundl'
+p330
+(lp331
+S'long long'
+p332
+aS'long double'
+p333
+asS'__j0l'
+p334
+(lp335
+S'long double'
+p336
+aS'long double'
+p337
+asS'ReadPropertyUnsignedLong'
+p338
+(lp339
+S'unsigned int'
+p340
+aS'const int'
+p341
+aS'const unsigned char *'
+p342
+asS'__expm1f'
+p343
+(lp344
+S'float'
+p345
+aS'float'
+p346
+asS'getcwd_utf8'
+p347
+(lp348
+S'void'
+p349
+aS'char *'
+p350
+aS'int'
+p351
+asS'AnimateUsage'
+p352
+(lp353
+S'int'
+p354
+asS'llroundf'
+p355
+(lp356
+S'long long'
+p357
+aS'float'
+p358
+asS'__j0f'
+p359
+(lp360
+S'float'
+p361
+aS'float'
+p362
+asS'ReadTIMImage'
+p363
+(lp364
+S'int *'
+p365
+aS'const int *'
+p366
+aS'int *'
+p367
+asS'copysign'
+p368
+(lp369
+S'double'
+p370
+aS'double'
+p371
+aS'double'
+p372
+asS'drem'
+p373
+(lp374
+S'double'
+p375
+aS'double'
+p376
+aS'double'
+p377
+asS'free'
+p378
+(lp379
+S'void'
+p380
+aS'void *'
+p381
+asS'setstate_r'
+p382
+(lp383
+S'int'
+p384
+aS'char *restrict'
+p385
+aS'struct random_data *restrict'
+p386
+asS'telldir'
+p387
+(lp388
+S'long'
+p389
+aS'struct __dirstream *'
+p390
+asS'QuantumTick'
+p391
+(lp392
+S'int'
+p393
+aS'const int'
+p394
+aS'const int'
+p395
+asS'getpwuid'
+p396
+(lp397
+S'struct passwd *'
+p398
+aS'unsigned int'
+p399
+asS'j1l'
+p400
+(lp401
+S'long double'
+p402
+aS'long double'
+p403
+asS'popen'
+p404
+(lp405
+S'struct _IO_FILE *'
+p406
+aS'const char *'
+p407
+aS'const char *'
+p408
+asS'_IO_ferror'
+p409
+(lp410
+S'int'
+p411
+aS'struct _IO_FILE *'
+p412
+asS'ReadMASKImage'
+p413
+(lp414
+S'int *'
+p415
+aS'const int *'
+p416
+aS'int *'
+p417
+asS'ReadSFWImage'
+p418
+(lp419
+S'int *'
+p420
+aS'const int *'
+p421
+aS'int *'
+p422
+asS'ImportIndexQuantum'
+p423
+(lp424
+S'void'
+p425
+aS'const int *'
+p426
+aS'int *'
+p427
+aS'const int'
+p428
+aS'const unsigned char *'
+p429
+asS'TraceSquareLinecap'
+p430
+(lp431
+S'void'
+p432
+aS'int *'
+p433
+aS'const int'
+p434
+aS'const double'
+p435
+asS'IsWMF'
+p436
+(lp437
+S'int'
+p438
+aS'const unsigned char *'
+p439
+aS'const int'
+p440
+asS'ispunct_l'
+p441
+(lp442
+S'int'
+p443
+aS'int'
+p444
+aS'struct __locale_struct *'
+p445
+asS'umask'
+p446
+(lp447
+S'unsigned int'
+p448
+aS'unsigned int'
+p449
+asS'GetPixelb'
+p450
+(lp451
+S'int'
+p452
+aS'const int *'
+p453
+asS'WriteICONImage'
+p454
+(lp455
+S'int'
+p456
+aS'const int *'
+p457
+aS'int *'
+p458
+aS'int *'
+p459
+asS'GetFITSPixel'
+p460
+(lp461
+S'double'
+p462
+aS'int *'
+p463
+aS'int'
+p464
+asS'printf'
+p465
+(lp466
+S'int'
+p467
+aS'const char *restrict'
+p468
+aS'...'
+p469
+asS'UnpackWPG2Raster'
+p470
+(lp471
+S'int'
+p472
+aS'int *'
+p473
+aS'int'
+p474
+aS'int *'
+p475
+asS'IsBoundsCleared'
+p476
+(lp477
+S'int'
+p478
+aS'const int *'
+p479
+aS'const int *'
+p480
+aS'int *'
+p481
+aS'int *'
+p482
+asS'ConvertYPbPrToRGB'
+p483
+(lp484
+S'void'
+p485
+aS'const double'
+p486
+aS'const double'
+p487
+aS'const double'
+p488
+aS'double *'
+p489
+aS'double *'
+p490
+aS'double *'
+p491
+asS'hue_to_rgb'
+p492
+(lp493
+S'int'
+p494
+aS'int'
+p495
+aS'int'
+p496
+aS'int'
+p497
+asS'AcquireSemaphoreMemory'
+p498
+(lp499
+S'void *'
+p500
+aS'const int'
+p501
+aS'const int'
+p502
+asS'lutimes'
+p503
+(lp504
+S'int'
+p505
+aS'const char *'
+p506
+aS'struct timeval const[2]'
+p507
+asS'getchar'
+p508
+(lp509
+S'int'
+p510
+asS'__modff'
+p511
+(lp512
+S'float'
+p513
+aS'float'
+p514
+aS'float *'
+p515
+asS'mktime'
+p516
+(lp517
+S'long'
+p518
+aS'struct tm *'
+p519
+asS'sigreturn'
+p520
+(lp521
+S'int'
+p522
+aS'struct sigcontext *'
+p523
+asS'SetImageProgress'
+p524
+(lp525
+S'int'
+p526
+aS'const int *'
+p527
+aS'const char *'
+p528
+aS'const int'
+p529
+aS'const int'
+p530
+asS'ReadPGXImage'
+p531
+(lp532
+S'int *'
+p533
+aS'const int *'
+p534
+aS'int *'
+p535
+asS'__modfl'
+p536
+(lp537
+S'long double'
+p538
+aS'long double'
+p539
+aS'long double *'
+p540
+asS'IsDIB'
+p541
+(lp542
+S'int'
+p543
+aS'const unsigned char *'
+p544
+aS'const int'
+p545
+asS'cfree'
+p546
+(lp547
+S'void'
+p548
+aS'void *'
+p549
+asS'formatIPTC'
+p550
+(lp551
+S'int'
+p552
+aS'int *'
+p553
+aS'int *'
+p554
+asS'isblank_l'
+p555
+(lp556
+S'int'
+p557
+aS'int'
+p558
+aS'struct __locale_struct *'
+p559
+asS'ReadRAWImage'
+p560
+(lp561
+S'int *'
+p562
+aS'const int *'
+p563
+aS'int *'
+p564
+asS'mknodat'
+p565
+(lp566
+S'int'
+p567
+aS'int'
+p568
+aS'const char *'
+p569
+aS'unsigned int'
+p570
+aS'unsigned long'
+p571
+asS'IsGIF'
+p572
+(lp573
+S'int'
+p574
+aS'const unsigned char *'
+p575
+aS'const int'
+p576
+asS'ScaleQuantumToAny'
+p577
+(lp578
+S'int'
+p579
+aS'const int'
+p580
+aS'const int'
+p581
+asS'__llrint'
+p582
+(lp583
+S'long long'
+p584
+aS'double'
+p585
+asS'ReadPlasmaImage'
+p586
+(lp587
+S'int *'
+p588
+aS'const int *'
+p589
+aS'int *'
+p590
+asS'log10f'
+p591
+(lp592
+S'float'
+p593
+aS'float'
+p594
+asS'poly_basis_fn'
+p595
+(lp596
+S'double'
+p597
+aS'int'
+p598
+aS'double'
+p599
+aS'double'
+p600
+asS'ConvertRGBToLab'
+p601
+(lp602
+S'void'
+p603
+aS'const double'
+p604
+aS'const double'
+p605
+aS'const double'
+p606
+aS'double *'
+p607
+aS'double *'
+p608
+aS'double *'
+p609
+asS'__libc_current_sigrtmax'
+p610
+(lp611
+S'int'
+p612
+asS'GetUTFOctets'
+p613
+(lp614
+S'unsigned int'
+p615
+aS'const char *'
+p616
+asS'sigaddset'
+p617
+(lp618
+S'int'
+p619
+aS'__sigset_t *'
+p620
+aS'int'
+p621
+asS'ConnectPixelCacheServer'
+p622
+(lp623
+S'int'
+p624
+aS'const char *'
+p625
+aS'const int'
+p626
+aS'int *'
+p627
+aS'int *'
+p628
+asS'ReadJNXImage'
+p629
+(lp630
+S'int *'
+p631
+aS'const int *'
+p632
+aS'int *'
+p633
+asS'__lgamma'
+p634
+(lp635
+S'double'
+p636
+aS'double'
+p637
+asS'pthread_sigmask'
+p638
+(lp639
+S'int'
+p640
+aS'int'
+p641
+aS'const __sigset_t *restrict'
+p642
+aS'__sigset_t *restrict'
+p643
+asS'__scalbl'
+p644
+(lp645
+S'long double'
+p646
+aS'long double'
+p647
+aS'long double'
+p648
+asS'ExpandRotateKernelInfo'
+p649
+(lp650
+S'void'
+p651
+aS'int *'
+p652
+aS'const double'
+p653
+asS'__lgamma_r'
+p654
+(lp655
+S'double'
+p656
+aS'double'
+p657
+aS'int *'
+p658
+asS'SiPrefixToDoubleInterval'
+p659
+(lp660
+S'double'
+p661
+aS'const char *'
+p662
+aS'const double'
+p663
+asS'strerror'
+p664
+(lp665
+S'char *'
+p666
+aS'int'
+p667
+asS'__bzero'
+p668
+(lp669
+S'void'
+p670
+aS'void *'
+p671
+aS'int'
+p672
+asS'erf'
+p673
+(lp674
+S'double'
+p675
+aS'double'
+p676
+asS'utimensat'
+p677
+(lp678
+S'int'
+p679
+aS'int'
+p680
+aS'const char *'
+p681
+aS'struct timespec const[2]'
+p682
+aS'int'
+p683
+asS'format8BIM'
+p684
+(lp685
+S'int'
+p686
+aS'int *'
+p687
+aS'int *'
+p688
+asS'ReadPSDChannel'
+p689
+(lp690
+S'int'
+p691
+aS'int *'
+p692
+aS'const int *'
+p693
+aS'const struct _PSDInfo *'
+p694
+aS'struct _LayerInfo *'
+p695
+aS'const int'
+p696
+aS'const PSDCompressionType'
+p697
+aS'int *'
+p698
+asS'ReadPropertyUnsignedShort'
+p699
+(lp700
+S'unsigned short'
+p701
+aS'const int'
+p702
+aS'const unsigned char *'
+p703
+asS'sixel_node_del'
+p704
+(lp705
+S'void'
+p706
+aS'struct sixel_output *const'
+p707
+aS'struct sixel_node *'
+p708
+asS'Bohman'
+p709
+(lp710
+S'double'
+p711
+aS'const double'
+p712
+aS'const int *()'
+p713
+asS'IsGrayColorspace'
+p714
+(lp715
+S'int'
+p716
+aS'const int'
+p717
+asS'__sysv_signal'
+p718
+(lp719
+S'void (*)(int)'
+p720
+aS'int'
+p721
+aS'void (*)(int)'
+p722
+asS'ConvertLatin1ToUTF8'
+p723
+(lp724
+S'unsigned char *'
+p725
+aS'const unsigned char *'
+p726
+asS'__trunc'
+p727
+(lp728
+S'double'
+p729
+aS'double'
+p730
+asS'ColorToNodeId'
+p731
+(lp732
+S'int'
+p733
+aS'const int *'
+p734
+aS'const int *'
+p735
+aS'int'
+p736
+asS'SetPixelRed'
+p737
+(lp738
+S'void'
+p739
+aS'const int *'
+p740
+asS'SetPixelL'
+p741
+(lp742
+S'void'
+p743
+aS'const int *'
+p744
+asS'DestroyQuantumPixels'
+p745
+(lp746
+S'void'
+p747
+aS'int *'
+p748
+asS'__fpclassifyl'
+p749
+(lp750
+S'int'
+p751
+aS'long double'
+p752
+asS'HorizontalFilter'
+p753
+(lp754
+S'int'
+p755
+aS'const int *'
+p756
+aS'const int *'
+p757
+aS'int *'
+p758
+aS'const double'
+p759
+aS'const int'
+p760
+aS'int *'
+p761
+aS'int *'
+p762
+asS'IsPixelInfoEquivalent'
+p763
+(lp764
+S'int'
+p765
+aS'const int *'
+p766
+asS'__fpclassifyf'
+p767
+(lp768
+S'int'
+p769
+aS'float'
+p770
+asS'strlen'
+p771
+(lp772
+S'unsigned long'
+p773
+asS'remove_utf8'
+p774
+(lp775
+S'int'
+p776
+aS'const char *'
+p777
+asS'ReadPNMImage'
+p778
+(lp779
+S'int *'
+p780
+aS'const int *'
+p781
+aS'int *'
+p782
+asS'GetVirtualPixelStream'
+p783
+(lp784
+S'const int *'
+p785
+aS'const int *'
+p786
+aS'const int'
+p787
+aS'const int'
+p788
+aS'const int'
+p789
+aS'const int'
+p790
+aS'const int'
+p791
+aS'int *'
+p792
+asS'GetPixelAlphaTraits'
+p793
+(lp794
+S'int'
+p795
+aS'const int *'
+p796
+asS'IsJP2'
+p797
+(lp798
+S'int'
+p799
+aS'const unsigned char *'
+p800
+aS'const int'
+p801
+asS'lrand48'
+p802
+(lp803
+S'long'
+p804
+asS'atanh'
+p805
+(lp806
+S'double'
+p807
+aS'double'
+p808
+asS'__atan2'
+p809
+(lp810
+S'double'
+p811
+aS'double'
+p812
+aS'double'
+p813
+asS'__fxstatat'
+p814
+(lp815
+S'int'
+p816
+aS'int'
+p817
+aS'int'
+p818
+aS'const char *'
+p819
+aS'struct stat *'
+p820
+aS'int'
+p821
+asS'sixel_decode'
+p822
+(lp823
+S'int'
+p824
+aS'unsigned char *'
+p825
+aS'unsigned char **'
+p826
+aS'int *'
+p827
+aS'int *'
+p828
+aS'unsigned char **'
+p829
+aS'int *'
+p830
+asS'VerticalFilter'
+p831
+(lp832
+S'int'
+p833
+aS'const int *'
+p834
+aS'const int *'
+p835
+aS'int *'
+p836
+aS'const double'
+p837
+aS'const int'
+p838
+aS'int *'
+p839
+aS'int *'
+p840
+asS'__atanhl'
+p841
+(lp842
+S'long double'
+p843
+aS'long double'
+p844
+asS'PopFloatPixel'
+p845
+(lp846
+S'unsigned char *'
+p847
+aS'int *'
+p848
+aS'const float'
+p849
+aS'unsigned char *'
+p850
+asS'rewind'
+p851
+(lp852
+S'void'
+p853
+aS'struct _IO_FILE *'
+p854
+asS'WriteIndices'
+p855
+(lp856
+S'void'
+p857
+aS'int *'
+p858
+aS'const struct _DDSVector3'
+p859
+aS'const struct _DDSVector3'
+p860
+aS'unsigned char *'
+p861
+asS'siggetmask'
+p862
+(lp863
+S'int'
+p864
+asS'__atanhf'
+p865
+(lp866
+S'float'
+p867
+aS'float'
+p868
+asS'ConvertLuvToXYZ'
+p869
+(lp870
+S'void'
+p871
+aS'const double'
+p872
+aS'const double'
+p873
+aS'const double'
+p874
+aS'double *'
+p875
+aS'double *'
+p876
+aS'double *'
+p877
+asS'DefaultWarningHandler'
+p878
+(lp879
+S'void'
+p880
+aS'const int'
+p881
+aS'const char *'
+p882
+aS'const char *'
+p883
+asS'GetPixelLabel'
+p884
+(lp885
+S'int'
+p886
+aS'const int *'
+p887
+asS'__cos'
+p888
+(lp889
+S'double'
+p890
+aS'double'
+p891
+asS'__remainderf'
+p892
+(lp893
+S'float'
+p894
+aS'float'
+p895
+aS'float'
+p896
+asS'openat'
+p897
+(lp898
+S'int'
+p899
+aS'int'
+p900
+aS'const char *'
+p901
+aS'int'
+p902
+ag469
+asS'mrand48_r'
+p903
+(lp904
+S'int'
+p905
+aS'struct drand48_data *restrict'
+p906
+aS'long *restrict'
+p907
+asS'scanf'
+p908
+(lp909
+S'int'
+p910
+aS'const char *restrict'
+p911
+ag469
+asS'__remainderl'
+p912
+(lp913
+S'long double'
+p914
+aS'long double'
+p915
+aS'long double'
+p916
+asS'srand48_r'
+p917
+(lp918
+S'int'
+p919
+aS'long'
+p920
+aS'struct drand48_data *'
+p921
+asS'SetPixelY'
+p922
+(lp923
+S'void'
+p924
+aS'const int *'
+p925
+asS'WriteHTMLImage'
+p926
+(lp927
+S'int'
+p928
+aS'const int *'
+p929
+aS'int *'
+p930
+aS'int *'
+p931
+asS'ImportOpacityQuantum'
+p932
+(lp933
+S'void'
+p934
+aS'const int *'
+p935
+aS'int *'
+p936
+aS'const int'
+p937
+aS'const unsigned char *'
+p938
+asS'valloc'
+p939
+(lp940
+S'void *'
+p941
+aS'int'
+p942
+asS'at_quick_exit'
+p943
+(lp944
+S'int'
+p945
+aS'void (*)(void)'
+p946
+asS'__llround'
+p947
+(lp948
+S'long long'
+p949
+aS'double'
+p950
+asS'DestroyTypeNode'
+p951
+(lp952
+S'void *'
+p953
+aS'void *'
+p954
+asS'__toupper_l'
+p955
+(lp956
+S'int'
+p957
+aS'int'
+p958
+aS'struct __locale_struct *'
+p959
+asS'funlockfile'
+p960
+(lp961
+S'void'
+p962
+aS'struct _IO_FILE *'
+p963
+asS'__fdim'
+p964
+(lp965
+S'double'
+p966
+aS'double'
+p967
+aS'double'
+p968
+asS'setpwent'
+p969
+(lp970
+S'void'
+p971
+asS'TypeCompare'
+p972
+(lp973
+S'int'
+p974
+aS'const void *'
+p975
+aS'const void *'
+p976
+asS'sigdelset'
+p977
+(lp978
+S'int'
+p979
+aS'__sigset_t *'
+p980
+aS'int'
+p981
+asS'strerror_r'
+p982
+(lp983
+S'int'
+p984
+aS'int'
+p985
+aS'char *'
+p986
+aS'int'
+p987
+asS'SetPixelCb'
+p988
+(lp989
+S'void'
+p990
+aS'const int *'
+p991
+asS'GetPixelGreenTraits'
+p992
+(lp993
+S'int'
+p994
+aS'const int *'
+p995
+asS'iscntrl'
+p996
+(lp997
+S'int'
+p998
+aS'int'
+p999
+asS'atan2'
+p1000
+(lp1001
+S'double'
+p1002
+aS'double'
+p1003
+aS'double'
+p1004
+asS'ExportBGRQuantum'
+p1005
+(lp1006
+S'void'
+p1007
+aS'const int *'
+p1008
+aS'int *'
+p1009
+aS'const int'
+p1010
+aS'const int *'
+p1011
+asS'__atanl'
+p1012
+(lp1013
+S'long double'
+p1014
+aS'long double'
+p1015
+asS'strerror_l'
+p1016
+(lp1017
+S'char *'
+p1018
+aS'int'
+p1019
+aS'struct __locale_struct *'
+p1020
+asS'SetPixelChannelTraits'
+p1021
+(lp1022
+S'void'
+p1023
+aS'int *'
+p1024
+aS'const int'
+p1025
+aS'const int'
+p1026
+asS'__atanf'
+p1027
+(lp1028
+S'float'
+p1029
+aS'float'
+p1030
+asS'ConvertXYZToLuv'
+p1031
+(lp1032
+S'void'
+p1033
+aS'const double'
+p1034
+aS'const double'
+p1035
+aS'const double'
+p1036
+aS'double *'
+p1037
+aS'double *'
+p1038
+aS'double *'
+p1039
+asS'PNMComment'
+p1040
+(lp1041
+S'int'
+p1042
+aS'int *'
+p1043
+aS'int *'
+p1044
+asS'coshf'
+p1045
+(lp1046
+S'float'
+p1047
+aS'float'
+p1048
+asS'coshl'
+p1049
+(lp1050
+S'long double'
+p1051
+aS'long double'
+p1052
+asS'fopen_utf8'
+p1053
+(lp1054
+S'int *'
+p1055
+aS'const char *'
+p1056
+aS'const char *'
+p1057
+asS'strtouq'
+p1058
+(lp1059
+S'unsigned long long'
+p1060
+aS'const char *restrict'
+p1061
+aS'char **restrict'
+p1062
+aS'int'
+p1063
+asS'ffs'
+p1064
+(lp1065
+S'int'
+p1066
+aS'int'
+p1067
+asS'sinh'
+p1068
+(lp1069
+S'double'
+p1070
+aS'double'
+p1071
+asS'InvertPerspectiveCoefficients'
+p1072
+(lp1073
+S'void'
+p1074
+aS'const double *'
+p1075
+aS'double *'
+p1076
+asS'strtoul'
+p1077
+(lp1078
+S'unsigned long'
+p1079
+aS'const char *restrict'
+p1080
+aS'char **restrict'
+p1081
+aS'int'
+p1082
+asS'ferror_unlocked'
+p1083
+(lp1084
+S'int'
+p1085
+aS'struct _IO_FILE *'
+p1086
+asS'y1'
+p1087
+(lp1088
+S'double'
+p1089
+aS'double'
+p1090
+asS'y0'
+p1091
+(lp1092
+S'double'
+p1093
+aS'double'
+p1094
+asS'__lround'
+p1095
+(lp1096
+S'long'
+p1097
+aS'double'
+p1098
+asS'finitel'
+p1099
+(lp1100
+S'int'
+p1101
+aS'long double'
+p1102
+asS'__sinhf'
+p1103
+(lp1104
+S'float'
+p1105
+aS'float'
+p1106
+asS'IsSIXEL'
+p1107
+(lp1108
+S'int'
+p1109
+aS'const unsigned char *'
+p1110
+aS'const int'
+p1111
+asS'__exp'
+p1112
+(lp1113
+S'double'
+p1114
+aS'double'
+p1115
+asS'WriteEPTImage'
+p1116
+(lp1117
+S'int'
+p1118
+aS'const int *'
+p1119
+aS'int *'
+p1120
+aS'int *'
+p1121
+asS'fwrite'
+p1122
+(lp1123
+S'int'
+p1124
+aS'const void *restrict'
+p1125
+aS'int'
+p1126
+aS'int'
+p1127
+aS'struct _IO_FILE *restrict'
+p1128
+asS'_IO_ftrylockfile'
+p1129
+(lp1130
+S'int'
+p1131
+aS'struct _IO_FILE *'
+p1132
+asS'__acos'
+p1133
+(lp1134
+S'double'
+p1135
+aS'double'
+p1136
+asS'__remquo'
+p1137
+(lp1138
+S'double'
+p1139
+aS'double'
+p1140
+aS'double'
+p1141
+aS'int *'
+p1142
+asS'PopLongPixel'
+p1143
+(lp1144
+S'unsigned char *'
+p1145
+aS'const int'
+p1146
+aS'const unsigned int'
+p1147
+aS'unsigned char *'
+p1148
+asS'feof_unlocked'
+p1149
+(lp1150
+S'int'
+p1151
+aS'struct _IO_FILE *'
+p1152
+asS'sixel_put_node'
+p1153
+(lp1154
+S'int'
+p1155
+aS'struct sixel_output *const'
+p1156
+aS'int'
+p1157
+aS'struct sixel_node *'
+p1158
+aS'int'
+p1159
+aS'int'
+p1160
+asS'GetPolicyInfo'
+p1161
+(lp1162
+S'int *'
+p1163
+aS'const char *'
+p1164
+aS'int *'
+p1165
+asS'ReadMPCImage'
+p1166
+(lp1167
+S'int *'
+p1168
+aS'const int *'
+p1169
+aS'int *'
+p1170
+asS'yn'
+p1171
+(lp1172
+S'double'
+p1173
+aS'int'
+p1174
+aS'double'
+p1175
+asS'bcopy'
+p1176
+(lp1177
+S'void'
+p1178
+aS'const void *'
+p1179
+aS'void *'
+p1180
+aS'int'
+p1181
+asS'ReadSCREENSHOTImage'
+p1182
+(lp1183
+S'int *'
+p1184
+aS'const int *'
+p1185
+aS'int *'
+p1186
+asS'WriteMTVImage'
+p1187
+(lp1188
+S'int'
+p1189
+aS'const int *'
+p1190
+aS'int *'
+p1191
+aS'int *'
+p1192
+asS'ReadNULLImage'
+p1193
+(lp1194
+S'int *'
+p1195
+aS'const int *'
+p1196
+aS'int *'
+p1197
+asS'ReadBlobStringWithLongSize'
+p1198
+(lp1199
+S'char *'
+p1200
+aS'int *'
+p1201
+aS'char *'
+p1202
+aS'int'
+p1203
+aS'int *'
+p1204
+asS'ReadDCMSignedShort'
+p1205
+(lp1206
+S'short'
+p1207
+aS'struct _DCMStreamInfo *'
+p1208
+aS'int *'
+p1209
+asS'strcoll'
+p1210
+(lp1211
+S'int'
+p1212
+aS'const char *'
+p1213
+aS'const char *'
+p1214
+asS'fputc'
+p1215
+(lp1216
+S'int'
+p1217
+aS'int'
+p1218
+aS'struct _IO_FILE *'
+p1219
+asS'ynl'
+p1220
+(lp1221
+S'long double'
+p1222
+aS'int'
+p1223
+aS'long double'
+p1224
+asS'isspace_l'
+p1225
+(lp1226
+S'int'
+p1227
+aS'int'
+p1228
+aS'struct __locale_struct *'
+p1229
+asS'__asinhl'
+p1230
+(lp1231
+S'long double'
+p1232
+aS'long double'
+p1233
+asS'MVGPrintf'
+p1234
+(lp1235
+S'int'
+p1236
+aS'int *'
+p1237
+aS'const char *'
+p1238
+ag469
+asS'ConsolidateCrossings'
+p1239
+(lp1240
+S'void'
+p1241
+aS'struct _ZeroCrossing *'
+p1242
+aS'const int'
+p1243
+asS'WriteJSONImage'
+p1244
+(lp1245
+S'int'
+p1246
+aS'const int *'
+p1247
+aS'int *'
+p1248
+aS'int *'
+p1249
+asS'ynf'
+p1250
+(lp1251
+S'float'
+p1252
+aS'int'
+p1253
+aS'float'
+p1254
+asS'gcvt'
+p1255
+(lp1256
+S'char *'
+p1257
+aS'double'
+p1258
+aS'int'
+p1259
+aS'char *'
+p1260
+asS'ImportRGBAQuantum'
+p1261
+(lp1262
+S'void'
+p1263
+aS'const int *'
+p1264
+aS'int *'
+p1265
+aS'const int'
+p1266
+aS'const unsigned char *'
+p1267
+asS'CompositeHCL'
+p1268
+(lp1269
+S'void'
+p1270
+aS'const int'
+p1271
+aS'const int'
+p1272
+aS'const int'
+p1273
+aS'int *'
+p1274
+aS'int *'
+p1275
+aS'int *'
+p1276
+asS'ApplyEvaluateOperator'
+p1277
+(lp1278
+S'double'
+p1279
+aS'int *'
+p1280
+aS'const int'
+p1281
+aS'const int'
+p1282
+aS'const double'
+p1283
+asS'fmod'
+p1284
+(lp1285
+S'double'
+p1286
+aS'double'
+p1287
+aS'double'
+p1288
+asS'AcquirePixelThreadSet'
+p1289
+(lp1290
+S'struct _PixelChannels **'
+p1291
+aS'const int *'
+p1292
+asS'GetPixelChannel'
+p1293
+(lp1294
+S'int'
+p1295
+aS'const int *'
+p1296
+asS'VectorMultiply'
+p1297
+(lp1298
+S'void'
+p1299
+aS'const struct _DDSVector4'
+p1300
+aS'const struct _DDSVector4'
+p1301
+aS'struct _DDSVector4 *'
+p1302
+asS'StringToLong'
+p1303
+(lp1304
+S'long'
+p1305
+aS'const char *'
+p1306
+asS'ReadVICARImage'
+p1307
+(lp1308
+S'int *'
+p1309
+aS'const int *'
+p1310
+aS'int *'
+p1311
+asS'PruneLevel'
+p1312
+(lp1313
+S'void'
+p1314
+aS'struct _CubeInfo *'
+p1315
+aS'const struct _NodeInfo *'
+p1316
+asS'__sin'
+p1317
+(lp1318
+S'double'
+p1319
+aS'double'
+p1320
+asS'IsSCT'
+p1321
+(lp1322
+S'int'
+p1323
+aS'const unsigned char *'
+p1324
+aS'const int'
+p1325
+asS'ReadPSDRLESizes'
+p1326
+(lp1327
+S'int *'
+p1328
+aS'int *'
+p1329
+aS'const struct _PSDInfo *'
+p1330
+aS'const int'
+p1331
+asS'logf'
+p1332
+(lp1333
+S'float'
+p1334
+aS'float'
+p1335
+asS'isalnum_l'
+p1336
+(lp1337
+S'int'
+p1338
+aS'int'
+p1339
+aS'struct __locale_struct *'
+p1340
+asS'Cosine'
+p1341
+(lp1342
+S'double'
+p1343
+aS'const double'
+p1344
+aS'const int *()'
+p1345
+asS'logb'
+p1346
+(lp1347
+S'double'
+p1348
+aS'double'
+p1349
+asS'sinhf'
+p1350
+(lp1351
+S'float'
+p1352
+aS'float'
+p1353
+asS'fileno_unlocked'
+p1354
+(lp1355
+S'int'
+p1356
+aS'struct _IO_FILE *'
+p1357
+asS'longjmp'
+p1358
+(lp1359
+S'void'
+p1360
+aS'struct __jmp_buf_tag [1]'
+p1361
+aS'int'
+p1362
+asS'logl'
+p1363
+(lp1364
+S'long double'
+p1365
+aS'long double'
+p1366
+asS'ImportRedQuantum'
+p1367
+(lp1368
+S'void'
+p1369
+aS'const int *'
+p1370
+aS'int *'
+p1371
+aS'const int'
+p1372
+aS'const unsigned char *'
+p1373
+asS'DestroyMagickMutex'
+p1374
+(lp1375
+S'void'
+p1376
+asS'posix_fadvise'
+p1377
+(lp1378
+S'int'
+p1379
+aS'int'
+p1380
+aS'long'
+p1381
+aS'long'
+p1382
+aS'int'
+p1383
+asS'IsDJVU'
+p1384
+(lp1385
+S'int'
+p1386
+aS'const unsigned char *'
+p1387
+aS'const int'
+p1388
+asS'IsEMF'
+p1389
+(lp1390
+S'int'
+p1391
+aS'const unsigned char *'
+p1392
+aS'const int'
+p1393
+asS'ceill'
+p1394
+(lp1395
+S'long double'
+p1396
+aS'long double'
+p1397
+asS'DegreesToRadians'
+p1398
+(lp1399
+S'double'
+p1400
+aS'const double'
+p1401
+asS'AcquirePixelList'
+p1402
+(lp1403
+S'struct _PixelList *'
+p1404
+aS'const int'
+p1405
+aS'const int'
+p1406
+asS'sprintf'
+p1407
+(lp1408
+S'int'
+p1409
+aS'char *restrict'
+p1410
+aS'const char *restrict'
+p1411
+ag469
+asS'ConvertRGBToLuv'
+p1412
+(lp1413
+S'void'
+p1414
+aS'const double'
+p1415
+aS'const double'
+p1416
+aS'const double'
+p1417
+aS'double *'
+p1418
+aS'double *'
+p1419
+aS'double *'
+p1420
+asS'__ctype_b_loc'
+p1421
+(lp1422
+S'const unsigned short **'
+p1423
+asS'strrchr'
+p1424
+(lp1425
+S'char *'
+p1426
+aS'const char *'
+p1427
+aS'int'
+p1428
+asS'RemapIndices'
+p1429
+(lp1430
+S'void'
+p1431
+aS'const int *'
+p1432
+aS'const unsigned char *'
+p1433
+aS'unsigned char *'
+p1434
+asS'__strtok_r'
+p1435
+(lp1436
+S'char *'
+p1437
+aS'char *restrict'
+p1438
+aS'const char *restrict'
+p1439
+aS'char **restrict'
+p1440
+asS'IsPSD'
+p1441
+(lp1442
+S'int'
+p1443
+aS'const unsigned char *'
+p1444
+aS'const int'
+p1445
+asS'IsPNG'
+p1446
+(lp1447
+S'int'
+p1448
+aS'const unsigned char *'
+p1449
+aS'const int'
+p1450
+asS'__sinf'
+p1451
+(lp1452
+S'float'
+p1453
+aS'float'
+p1454
+asS'__sinh'
+p1455
+(lp1456
+S'double'
+p1457
+aS'double'
+p1458
+asS'PrintChannelLocations'
+p1459
+(lp1460
+S'int'
+p1461
+aS'int *'
+p1462
+aS'const int *'
+p1463
+aS'const int'
+p1464
+aS'const char *'
+p1465
+aS'const int'
+p1466
+aS'const int'
+p1467
+aS'const int *'
+p1468
+asS'__sinl'
+p1469
+(lp1470
+S'long double'
+p1471
+aS'long double'
+p1472
+asS'labs'
+p1473
+(lp1474
+S'long'
+p1475
+aS'long'
+p1476
+asS'SetPixelMagentaTraits'
+p1477
+(lp1478
+S'void'
+p1479
+aS'int *'
+p1480
+aS'const int'
+p1481
+asS'GetPixela'
+p1482
+(lp1483
+S'int'
+p1484
+aS'const int *'
+p1485
+asS'__fmodf'
+p1486
+(lp1487
+S'float'
+p1488
+aS'float'
+p1489
+aS'float'
+p1490
+asS'ModeToString'
+p1491
+(lp1492
+S'const char *'
+p1493
+aS'PSDImageType'
+p1494
+asS'RandomX'
+p1495
+(lp1496
+S'int'
+p1497
+aS'int *'
+p1498
+aS'const int'
+p1499
+asS'RandomY'
+p1500
+(lp1501
+S'int'
+p1502
+aS'int *'
+p1503
+aS'const int'
+p1504
+asS'ReadMVGImage'
+p1505
+(lp1506
+S'int *'
+p1507
+aS'const int *'
+p1508
+aS'int *'
+p1509
+asS'WriteCINImage'
+p1510
+(lp1511
+S'int'
+p1512
+aS'const int *'
+p1513
+aS'int *'
+p1514
+aS'int *'
+p1515
+asS'__fmodl'
+p1516
+(lp1517
+S'long double'
+p1518
+aS'long double'
+p1519
+aS'long double'
+p1520
+asS'CompositeImageList'
+p1521
+(lp1522
+S'int'
+p1523
+aS'int *'
+p1524
+aS'int **'
+p1525
+aS'int *'
+p1526
+aS'struct _CompositeOptions *'
+p1527
+aS'int *'
+p1528
+asS'putchar'
+p1529
+(lp1530
+S'int'
+p1531
+aS'int'
+p1532
+asS'ValidateImageFormatsOnDisk'
+p1533
+(lp1534
+S'int'
+p1535
+aS'int *'
+p1536
+aS'const char *'
+p1537
+aS'const char *'
+p1538
+aS'int *'
+p1539
+aS'int *'
+p1540
+asS'ImportIndexAlphaQuantum'
+p1541
+(lp1542
+S'void'
+p1543
+aS'const int *'
+p1544
+aS'int *'
+p1545
+aS'const int'
+p1546
+aS'const unsigned char *'
+p1547
+asS'GetPixelY'
+p1548
+(lp1549
+S'int'
+p1550
+aS'const int *'
+p1551
+asS'isblank'
+p1552
+(lp1553
+S'int'
+p1554
+aS'int'
+p1555
+asS'erff'
+p1556
+(lp1557
+S'float'
+p1558
+aS'float'
+p1559
+asS'FxOperatorPrecedence'
+p1560
+(lp1561
+S'const char *'
+p1562
+aS'const char *'
+p1563
+aS'int *'
+p1564
+asS'isinff'
+p1565
+(lp1566
+S'int'
+p1567
+aS'float'
+p1568
+asS'erfc'
+p1569
+(lp1570
+S'double'
+p1571
+aS'double'
+p1572
+asS'fputc_unlocked'
+p1573
+(lp1574
+S'int'
+p1575
+aS'int'
+p1576
+aS'struct _IO_FILE *'
+p1577
+asS'exp2'
+p1578
+(lp1579
+S'double'
+p1580
+aS'double'
+p1581
+asS'GetPixelL'
+p1582
+(lp1583
+S'int'
+p1584
+aS'const int *'
+p1585
+asS'erfl'
+p1586
+(lp1587
+S'long double'
+p1588
+aS'long double'
+p1589
+asS'GetOpenMPMaximumThreads'
+p1590
+(lp1591
+S'int'
+p1592
+asS'SetImageProfileInternal'
+p1593
+(lp1594
+S'int'
+p1595
+aS'int *'
+p1596
+aS'const char *'
+p1597
+aS'const int *'
+p1598
+aS'const int'
+p1599
+aS'int *'
+p1600
+asS'rand'
+p1601
+(lp1602
+S'int'
+p1603
+asS'BesselOrderOne'
+p1604
+(lp1605
+S'double'
+p1606
+aS'double'
+p1607
+asS'__ctype_tolower_loc'
+p1608
+(lp1609
+S'const int **'
+p1610
+asS'floorf'
+p1611
+(lp1612
+S'float'
+p1613
+aS'float'
+p1614
+asS'ImportBlueQuantum'
+p1615
+(lp1616
+S'void'
+p1617
+aS'const int *'
+p1618
+aS'int *'
+p1619
+aS'const int'
+p1620
+aS'const unsigned char *'
+p1621
+asS'WriteSingleColorFit'
+p1622
+(lp1623
+S'void'
+p1624
+aS'int *'
+p1625
+aS'const struct _DDSVector4 *'
+p1626
+aS'const int *'
+p1627
+asS'GetMagickThreadSignature'
+p1628
+(lp1629
+S'int'
+p1630
+asS'clock_getcpuclockid'
+p1631
+(lp1632
+S'int'
+p1633
+aS'int'
+p1634
+aS'int *'
+p1635
+asS'floorl'
+p1636
+(lp1637
+S'long double'
+p1638
+aS'long double'
+p1639
+asS'__sinhl'
+p1640
+(lp1641
+S'long double'
+p1642
+aS'long double'
+p1643
+asS'__atan2f'
+p1644
+(lp1645
+S'float'
+p1646
+aS'float'
+p1647
+aS'float'
+p1648
+asS'CalcKernelMetaData'
+p1649
+(lp1650
+S'void'
+p1651
+aS'int *'
+p1652
+asS'_IO_seekoff'
+p1653
+(lp1654
+S'long'
+p1655
+aS'struct _IO_FILE *'
+p1656
+aS'long'
+p1657
+aS'int'
+p1658
+aS'int'
+p1659
+asS'setbuf'
+p1660
+(lp1661
+S'void'
+p1662
+aS'struct _IO_FILE *restrict'
+p1663
+aS'char *restrict'
+p1664
+asS'RelinquishSemaphoreMemory'
+p1665
+(lp1666
+S'void *'
+p1667
+aS'void *'
+p1668
+asS'__y0f'
+p1669
+(lp1670
+S'float'
+p1671
+aS'float'
+p1672
+asS'__atan2l'
+p1673
+(lp1674
+S'long double'
+p1675
+aS'long double'
+p1676
+aS'long double'
+p1677
+asS'Classify'
+p1678
+(lp1679
+S'int'
+p1680
+aS'int *'
+p1681
+aS'short **'
+p1682
+aS'const double'
+p1683
+aS'const double'
+p1684
+aS'const int'
+p1685
+aS'int *'
+p1686
+asS'ReadUncompressedRGBA'
+p1687
+(lp1688
+S'int'
+p1689
+aS'int *'
+p1690
+aS'struct _DDSInfo *'
+p1691
+aS'int *'
+p1692
+asS'AcquirePolicyCache'
+p1693
+(lp1694
+S'int *'
+p1695
+aS'const char *'
+p1696
+aS'int *'
+p1697
+asS'isalnum'
+p1698
+(lp1699
+S'int'
+p1700
+aS'int'
+p1701
+asS'SetPixelGreenTraits'
+p1702
+(lp1703
+S'void'
+p1704
+aS'int *'
+p1705
+aS'const int'
+p1706
+asS'qsort'
+p1707
+(lp1708
+S'void'
+p1709
+aS'void *'
+p1710
+aS'int'
+p1711
+aS'int'
+p1712
+aS'int (*)(const void *, const void *)'
+p1713
+asS'isalpha'
+p1714
+(lp1715
+S'int'
+p1716
+aS'int'
+p1717
+asS'ReadHDRImage'
+p1718
+(lp1719
+S'int *'
+p1720
+aS'const int *'
+p1721
+aS'int *'
+p1722
+asS'memcmp'
+p1723
+(lp1724
+S'int'
+p1725
+asS'dprintf'
+p1726
+(lp1727
+S'int'
+p1728
+aS'int'
+p1729
+aS'const char *restrict'
+p1730
+ag469
+asS'getpwnam_r'
+p1731
+(lp1732
+S'int'
+p1733
+aS'const char *restrict'
+p1734
+aS'struct passwd *restrict'
+p1735
+aS'char *restrict'
+p1736
+aS'int'
+p1737
+aS'struct passwd **restrict'
+p1738
+asS'ecvt_r'
+p1739
+(lp1740
+S'int'
+p1741
+aS'double'
+p1742
+aS'int'
+p1743
+aS'int *restrict'
+p1744
+aS'int *restrict'
+p1745
+aS'char *restrict'
+p1746
+aS'int'
+p1747
+asS'nearbyintl'
+p1748
+(lp1749
+S'long double'
+p1750
+aS'long double'
+p1751
+asS'WriteMVGImage'
+p1752
+(lp1753
+S'int'
+p1754
+aS'const int *'
+p1755
+aS'int *'
+p1756
+aS'int *'
+p1757
+asS'GetStandardDeviationPixelList'
+p1758
+(lp1759
+S'void'
+p1760
+aS'struct _PixelList *'
+p1761
+aS'int *'
+p1762
+asS'setbuffer'
+p1763
+(lp1764
+S'void'
+p1765
+aS'struct _IO_FILE *restrict'
+p1766
+aS'char *restrict'
+p1767
+aS'int'
+p1768
+asS'nearbyintf'
+p1769
+(lp1770
+S'float'
+p1771
+aS'float'
+p1772
+asS'ConvertCMYKToRGB'
+p1773
+(lp1774
+S'void'
+p1775
+aS'int *'
+p1776
+asS'SFWScan'
+p1777
+(lp1778
+S'unsigned char *'
+p1779
+aS'const unsigned char *'
+p1780
+aS'const unsigned char *'
+p1781
+aS'const unsigned char *'
+p1782
+aS'const int'
+p1783
+asS'ReadDCMPixels'
+p1784
+(lp1785
+S'int'
+p1786
+aS'int *'
+p1787
+aS'struct _DCMInfo *'
+p1788
+aS'struct _DCMStreamInfo *'
+p1789
+aS'int'
+p1790
+aS'int *'
+p1791
+asS'ReadBlobDoublesMSB'
+p1792
+(lp1793
+S'void'
+p1794
+aS'int *'
+p1795
+aS'int'
+p1796
+aS'double *'
+p1797
+asS'isascii'
+p1798
+(lp1799
+S'int'
+p1800
+aS'int'
+p1801
+asS'IsFloatDefined'
+p1802
+(lp1803
+S'int'
+p1804
+aS'const float'
+p1805
+asS'PushFloatPixel'
+p1806
+(lp1807
+S'const unsigned char *'
+p1808
+aS'int *'
+p1809
+aS'const unsigned char *'
+p1810
+asS'_Exit'
+p1811
+(lp1812
+S'void'
+p1813
+aS'int'
+p1814
+asS'ComputePrincipleComponent'
+p1815
+(lp1816
+S'void'
+p1817
+aS'const float *'
+p1818
+aS'struct _DDSVector3 *'
+p1819
+asS'WritePICTImage'
+p1820
+(lp1821
+S'int'
+p1822
+aS'const int *'
+p1823
+aS'int *'
+p1824
+aS'int *'
+p1825
+asS'ReadSGIImage'
+p1826
+(lp1827
+S'int *'
+p1828
+aS'const int *'
+p1829
+aS'int *'
+p1830
+asS'isalpha_l'
+p1831
+(lp1832
+S'int'
+p1833
+aS'int'
+p1834
+aS'struct __locale_struct *'
+p1835
+asS'__tgammaf'
+p1836
+(lp1837
+S'float'
+p1838
+aS'float'
+p1839
+asS'ComputeEndPoints'
+p1840
+(lp1841
+S'void'
+p1842
+aS'const struct _DDSSingleColourLookup *[]'
+p1843
+aS'const unsigned char *'
+p1844
+aS'struct _DDSVector3 *'
+p1845
+aS'struct _DDSVector3 *'
+p1846
+aS'unsigned char *'
+p1847
+asS'y0f'
+p1848
+(lp1849
+S'float'
+p1850
+aS'float'
+p1851
+asS'__j1l'
+p1852
+(lp1853
+S'long double'
+p1854
+aS'long double'
+p1855
+asS'sigwait'
+p1856
+(lp1857
+S'int'
+p1858
+aS'const __sigset_t *restrict'
+p1859
+aS'int *restrict'
+p1860
+asS'__tgammal'
+p1861
+(lp1862
+S'long double'
+p1863
+aS'long double'
+p1864
+asS'__j1f'
+p1865
+(lp1866
+S'float'
+p1867
+aS'float'
+p1868
+asS'expf'
+p1869
+(lp1870
+S'float'
+p1871
+aS'float'
+p1872
+asS'y0l'
+p1873
+(lp1874
+S'long double'
+p1875
+aS'long double'
+p1876
+asS'ExportCMYKAQuantum'
+p1877
+(lp1878
+S'void'
+p1879
+aS'const int *'
+p1880
+aS'int *'
+p1881
+aS'const int'
+p1882
+aS'const int *'
+p1883
+asS'__erfc'
+p1884
+(lp1885
+S'double'
+p1886
+aS'double'
+p1887
+asS'_IO_peekc_locked'
+p1888
+(lp1889
+S'int'
+p1890
+aS'struct _IO_FILE *'
+p1891
+asS'__fabs'
+p1892
+(lp1893
+S'double'
+p1894
+aS'double'
+p1895
+asS'ExportRGBAQuantum'
+p1896
+(lp1897
+S'void'
+p1898
+aS'const int *'
+p1899
+aS'int *'
+p1900
+aS'const int'
+p1901
+aS'const int *'
+p1902
+asS'ScaleSpace'
+p1903
+(lp1904
+S'void'
+p1905
+aS'const int *'
+p1906
+aS'const double'
+p1907
+aS'double *'
+p1908
+asS'pselect'
+p1909
+(lp1910
+S'int'
+p1911
+aS'int'
+p1912
+aS'fd_set *restrict'
+p1913
+aS'fd_set *restrict'
+p1914
+aS'fd_set *restrict'
+p1915
+aS'const struct timespec *restrict'
+p1916
+aS'const __sigset_t *restrict'
+p1917
+asS'__ctype_get_mb_cur_max'
+p1918
+(lp1919
+S'int'
+p1920
+asS'chmod'
+p1921
+(lp1922
+S'int'
+p1923
+aS'const char *'
+p1924
+aS'unsigned int'
+p1925
+asS'WriteNULLImage'
+p1926
+(lp1927
+S'int'
+p1928
+aS'const int *'
+p1929
+aS'int *'
+p1930
+aS'int *'
+p1931
+asS'SparseColorOption'
+p1932
+(lp1933
+S'int *'
+p1934
+aS'const int *'
+p1935
+aS'const int'
+p1936
+aS'const char *'
+p1937
+aS'int *'
+p1938
+asS'IsWEBP'
+p1939
+(lp1940
+S'int'
+p1941
+aS'const unsigned char *'
+p1942
+aS'const int'
+p1943
+asS'ProfileInteger'
+p1944
+(lp1945
+S'int'
+p1946
+aS'int *'
+p1947
+aS'short *'
+p1948
+asS'ReadMGKImage'
+p1949
+(lp1950
+S'int *'
+p1951
+aS'const int *'
+p1952
+aS'int *'
+p1953
+asS'IsSGI'
+p1954
+(lp1955
+S'int'
+p1956
+aS'const unsigned char *'
+p1957
+aS'const int'
+p1958
+asS'SetPixelViaPixelInfo'
+p1959
+(lp1960
+S'void'
+p1961
+aS'const int *'
+p1962
+asS'Triangle'
+p1963
+(lp1964
+S'double'
+p1965
+aS'const double'
+p1966
+aS'const int *()'
+p1967
+asS'parse8BIMW'
+p1968
+(lp1969
+S'int'
+p1970
+aS'int *'
+p1971
+aS'int *'
+p1972
+asS'RadiansToDegrees'
+p1973
+(lp1974
+S'double'
+p1975
+aS'const double'
+p1976
+asS'__libc_current_sigrtmin'
+p1977
+(lp1978
+S'int'
+p1979
+asS'GetPixelChannelChannel'
+p1980
+(lp1981
+S'int'
+p1982
+aS'const int *'
+p1983
+asS'WriteUILImage'
+p1984
+(lp1985
+S'int'
+p1986
+aS'const int *'
+p1987
+aS'int *'
+p1988
+aS'int *'
+p1989
+asS'__jn'
+p1990
+(lp1991
+S'double'
+p1992
+aS'int'
+p1993
+aS'double'
+p1994
+asS'GetPixelInfoChannel'
+p1995
+(lp1996
+S'int'
+p1997
+aS'const int *'
+p1998
+asS'IsMagickTreeInstantiated'
+p1999
+(lp2000
+S'int'
+p2001
+aS'int *'
+p2002
+asS'ReadAAIImage'
+p2003
+(lp2004
+S'int *'
+p2005
+aS'const int *'
+p2006
+aS'int *'
+p2007
+asS'IsDCX'
+p2008
+(lp2009
+S'int'
+p2010
+aS'const unsigned char *'
+p2011
+aS'const int'
+p2012
+asS'PopQuantumLongPixel'
+p2013
+(lp2014
+S'unsigned char *'
+p2015
+aS'int *'
+p2016
+aS'const int'
+p2017
+aS'unsigned char *'
+p2018
+asS'FaxReadG3'
+p2019
+(lp2020
+S'int *'
+p2021
+aS'int *'
+p2022
+aS'int *'
+p2023
+asS'ImportBGRQuantum'
+p2024
+(lp2025
+S'void'
+p2026
+aS'const int *'
+p2027
+aS'int *'
+p2028
+aS'const int'
+p2029
+aS'const unsigned char *'
+p2030
+asS'ChannelImage'
+p2031
+(lp2032
+S'int'
+p2033
+aS'int *'
+p2034
+aS'const int'
+p2035
+aS'const ChannelFx'
+p2036
+aS'const int *'
+p2037
+aS'const int'
+p2038
+aS'const int'
+p2039
+aS'int *'
+p2040
+asS'FaxReadG4'
+p2041
+(lp2042
+S'int *'
+p2043
+aS'int *'
+p2044
+aS'const int *'
+p2045
+aS'int *'
+p2046
+asS'SetPixelBlue'
+p2047
+(lp2048
+S'void'
+p2049
+aS'const int *'
+p2050
+asS'ReadBlobDoublesLSB'
+p2051
+(lp2052
+S'void'
+p2053
+aS'int *'
+p2054
+aS'int'
+p2055
+aS'double *'
+p2056
+asS'timer_getoverrun'
+p2057
+(lp2058
+S'int'
+p2059
+aS'void *'
+p2060
+asS'WritePSDImage'
+p2061
+(lp2062
+S'int'
+p2063
+aS'const int *'
+p2064
+aS'int *'
+p2065
+aS'int *'
+p2066
+asS'significand'
+p2067
+(lp2068
+S'double'
+p2069
+aS'double'
+p2070
+asS'y1l'
+p2071
+(lp2072
+S'long double'
+p2073
+aS'long double'
+p2074
+asS'GetOneAuthenticPixelFromCache'
+p2075
+(lp2076
+S'int'
+p2077
+aS'int *'
+p2078
+aS'const int'
+p2079
+aS'const int'
+p2080
+aS'int *'
+p2081
+aS'int *'
+p2082
+asS'setjmp'
+p2083
+(lp2084
+S'int'
+p2085
+aS'struct __jmp_buf_tag [1]'
+p2086
+asS'__copysign'
+p2087
+(lp2088
+S'double'
+p2089
+aS'double'
+p2090
+aS'double'
+p2091
+asS'IsCIN'
+p2092
+(lp2093
+S'int'
+p2094
+aS'const unsigned char *'
+p2095
+aS'const int'
+p2096
+asS'DecodeImage'
+p2097
+(lp2098
+S'int'
+p2099
+aS'int *'
+p2100
+aS'unsigned char *'
+p2101
+aS'unsigned char *'
+p2102
+aS'unsigned char *'
+p2103
+aS'int *'
+p2104
+asS'getchar_unlocked'
+p2105
+(lp2106
+S'int'
+p2107
+asS'ResetLZWInfo'
+p2108
+(lp2109
+S'void'
+p2110
+aS'struct _LZWInfo *'
+p2111
+asS'PushLZWStack'
+p2112
+(lp2113
+S'void'
+p2114
+aS'struct _LZWStack *'
+p2115
+aS'const int'
+p2116
+asS'__lgammaf_r'
+p2117
+(lp2118
+S'float'
+p2119
+aS'float'
+p2120
+aS'int *'
+p2121
+asS'nanl'
+p2122
+(lp2123
+S'long double'
+p2124
+aS'const char *'
+p2125
+asS'__log10l'
+p2126
+(lp2127
+S'long double'
+p2128
+aS'long double'
+p2129
+asS'GetVirtualPixelCache'
+p2130
+(lp2131
+S'const int *'
+p2132
+aS'const int *'
+p2133
+aS'const int'
+p2134
+aS'const int'
+p2135
+aS'const int'
+p2136
+aS'const int'
+p2137
+aS'const int'
+p2138
+aS'int *'
+p2139
+asS'WriteMETAImage'
+p2140
+(lp2141
+S'int'
+p2142
+aS'const int *'
+p2143
+aS'int *'
+p2144
+aS'int *'
+p2145
+asS'__log10f'
+p2146
+(lp2147
+S'float'
+p2148
+aS'float'
+p2149
+asS'__j0'
+p2150
+(lp2151
+S'double'
+p2152
+aS'double'
+p2153
+asS'__j1'
+p2154
+(lp2155
+S'double'
+p2156
+aS'double'
+p2157
+asS'__cosl'
+p2158
+(lp2159
+S'long double'
+p2160
+aS'long double'
+p2161
+asS'ReadUncompressedRGB'
+p2162
+(lp2163
+S'int'
+p2164
+aS'int *'
+p2165
+aS'struct _DDSInfo *'
+p2166
+aS'int *'
+p2167
+asS'ResetPixelList'
+p2168
+(lp2169
+S'void'
+p2170
+aS'struct _PixelList *'
+p2171
+asS'exp'
+p2172
+(lp2173
+S'double'
+p2174
+aS'double'
+p2175
+asS'__cosh'
+p2176
+(lp2177
+S'double'
+p2178
+aS'double'
+p2179
+asS'__cosf'
+p2180
+(lp2181
+S'float'
+p2182
+aS'float'
+p2183
+asS'setlinebuf'
+p2184
+(lp2185
+S'void'
+p2186
+aS'struct _IO_FILE *'
+p2187
+asS'scalbnf'
+p2188
+(lp2189
+S'float'
+p2190
+aS'float'
+p2191
+aS'int'
+p2192
+asS'__tgamma'
+p2193
+(lp2194
+S'double'
+p2195
+aS'double'
+p2196
+asS'setvbuf'
+p2197
+(lp2198
+S'int'
+p2199
+aS'struct _IO_FILE *restrict'
+p2200
+aS'char *restrict'
+p2201
+aS'int'
+p2202
+aS'int'
+p2203
+asS'__scalbf'
+p2204
+(lp2205
+S'float'
+p2206
+aS'float'
+p2207
+aS'float'
+p2208
+asS'WritePCLImage'
+p2209
+(lp2210
+S'int'
+p2211
+aS'const int *'
+p2212
+aS'int *'
+p2213
+aS'int *'
+p2214
+asS'__sigismember'
+p2215
+(lp2216
+S'int'
+p2217
+aS'const __sigset_t *'
+p2218
+aS'int'
+p2219
+asS'log10'
+p2220
+(lp2221
+S'double'
+p2222
+aS'double'
+p2223
+asS'a64l'
+p2224
+(lp2225
+S'long'
+p2226
+aS'const char *'
+p2227
+asS'random'
+p2228
+(lp2229
+S'long'
+p2230
+asS'_IO_putc'
+p2231
+(lp2232
+S'int'
+p2233
+aS'int'
+p2234
+aS'struct _IO_FILE *'
+p2235
+asS'SetOpenMPNested'
+p2236
+(lp2237
+S'void'
+p2238
+aS'const int'
+p2239
+asS'__log1pl'
+p2240
+(lp2241
+S'long double'
+p2242
+aS'long double'
+p2243
+asS'__underflow'
+p2244
+(lp2245
+S'int'
+p2246
+aS'struct _IO_FILE *'
+p2247
+asS'WriteRAWImage'
+p2248
+(lp2249
+S'int'
+p2250
+aS'const int *'
+p2251
+aS'int *'
+p2252
+aS'int *'
+p2253
+asS'__fpclassify'
+p2254
+(lp2255
+S'int'
+p2256
+aS'double'
+p2257
+asS'__log1pf'
+p2258
+(lp2259
+S'float'
+p2260
+aS'float'
+p2261
+asS'fputs'
+p2262
+(lp2263
+S'int'
+p2264
+aS'const char *restrict'
+p2265
+aS'struct _IO_FILE *restrict'
+p2266
+asS'abs'
+p2267
+(lp2268
+S'int'
+p2269
+aS'int'
+p2270
+asS'__jnf'
+p2271
+(lp2272
+S'float'
+p2273
+aS'int'
+p2274
+aS'float'
+p2275
+asS'sixel_encode_impl'
+p2276
+(lp2277
+S'int'
+p2278
+aS'unsigned char *'
+p2279
+aS'int'
+p2280
+aS'int'
+p2281
+aS'unsigned char *'
+p2282
+aS'int'
+p2283
+aS'int'
+p2284
+aS'struct sixel_output *'
+p2285
+asS'SetPixelYTraits'
+p2286
+(lp2287
+S'void'
+p2288
+aS'int *'
+p2289
+aS'const int'
+p2290
+asS'fstat'
+p2291
+(lp2292
+S'int'
+p2293
+aS'int'
+p2294
+aS'struct stat *'
+p2295
+asS'hls_to_rgb'
+p2296
+(lp2297
+S'int'
+p2298
+aS'int'
+p2299
+aS'int'
+p2300
+aS'int'
+p2301
+asS'load_tile_rle'
+p2302
+(lp2303
+S'int'
+p2304
+aS'int *'
+p2305
+aS'int *'
+p2306
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:111:9) *'
+p2307
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:129:9) *'
+p2308
+aS'int'
+p2309
+aS'int *'
+p2310
+asS'lgammaf'
+p2311
+(lp2312
+S'float'
+p2313
+aS'float'
+p2314
+asS'IsDDS'
+p2315
+(lp2316
+S'int'
+p2317
+aS'const unsigned char *'
+p2318
+aS'const int'
+p2319
+asS'WriteTGAImage'
+p2320
+(lp2321
+S'int'
+p2322
+aS'const int *'
+p2323
+aS'int *'
+p2324
+aS'int *'
+p2325
+asS'tgamma'
+p2326
+(lp2327
+S'double'
+p2328
+aS'double'
+p2329
+asS'ReadINLINEImage'
+p2330
+(lp2331
+S'int *'
+p2332
+aS'const int *'
+p2333
+aS'int *'
+p2334
+asS'lgammal'
+p2335
+(lp2336
+S'long double'
+p2337
+aS'long double'
+p2338
+asS'ceil'
+p2339
+(lp2340
+S'double'
+p2341
+aS'double'
+p2342
+asS'__log'
+p2343
+(lp2344
+S'double'
+p2345
+aS'double'
+p2346
+asS'strsep'
+p2347
+(lp2348
+S'char *'
+p2349
+aS'char **restrict'
+p2350
+aS'const char *restrict'
+p2351
+asS'llrint'
+p2352
+(lp2353
+S'long long'
+p2354
+aS'double'
+p2355
+asS'__ldexp'
+p2356
+(lp2357
+S'double'
+p2358
+aS'double'
+p2359
+aS'int'
+p2360
+asS'sigwaitinfo'
+p2361
+(lp2362
+S'int'
+p2363
+aS'const __sigset_t *restrict'
+p2364
+aS'siginfo_t *restrict'
+p2365
+asS'ReadSUNImage'
+p2366
+(lp2367
+S'int *'
+p2368
+aS'const int *'
+p2369
+aS'int *'
+p2370
+asS'InsertRow'
+p2371
+(lp2372
+S'void'
+p2373
+aS'int *'
+p2374
+aS'int'
+p2375
+aS'unsigned char *'
+p2376
+aS'int'
+p2377
+aS'int *'
+p2378
+asS'AcquireCoderCache'
+p2379
+(lp2380
+S'int *'
+p2381
+aS'const char *'
+p2382
+aS'int *'
+p2383
+asS'IsTIFF'
+p2384
+(lp2385
+S'int'
+p2386
+aS'const unsigned char *'
+p2387
+aS'const int'
+p2388
+asS'perror'
+p2389
+(lp2390
+S'void'
+p2391
+aS'const char *'
+p2392
+asS'srandom'
+p2393
+(lp2394
+S'void'
+p2395
+aS'unsigned int'
+p2396
+asS'SincFast'
+p2397
+(lp2398
+S'double'
+p2399
+aS'const double'
+p2400
+aS'const int *'
+p2401
+asS'GetOpenMPThreadId'
+p2402
+(lp2403
+S'int'
+p2404
+asS'_tolower'
+p2405
+(lp2406
+S'int'
+p2407
+aS'int'
+p2408
+asS'FixLogical'
+p2409
+(lp2410
+S'void'
+p2411
+aS'unsigned char *'
+p2412
+aS'int'
+p2413
+asS'ReadVIPSImage'
+p2414
+(lp2415
+S'int *'
+p2416
+aS'const int *'
+p2417
+aS'int *'
+p2418
+asS'__isinff'
+p2419
+(lp2420
+S'int'
+p2421
+aS'float'
+p2422
+asS'ExportRGBQuantum'
+p2423
+(lp2424
+S'void'
+p2425
+aS'const int *'
+p2426
+aS'int *'
+p2427
+aS'const int'
+p2428
+aS'const int *'
+p2429
+asS'__lgammal_r'
+p2430
+(lp2431
+S'long double'
+p2432
+aS'long double'
+p2433
+aS'int *'
+p2434
+asS'dysize'
+p2435
+(lp2436
+S'int'
+p2437
+aS'int'
+p2438
+asS'__hypotf'
+p2439
+(lp2440
+S'float'
+p2441
+aS'float'
+p2442
+aS'float'
+p2443
+asS'WritePixelCacheRegion'
+p2444
+(lp2445
+S'int'
+p2446
+aS'const int *'
+p2447
+asS'ImportBGROQuantum'
+p2448
+(lp2449
+S'void'
+p2450
+aS'const int *'
+p2451
+aS'int *'
+p2452
+aS'const int'
+p2453
+aS'const unsigned char *'
+p2454
+asS'ExportRGBOQuantum'
+p2455
+(lp2456
+S'void'
+p2457
+aS'const int *'
+p2458
+aS'int *'
+p2459
+aS'const int'
+p2460
+aS'const int *'
+p2461
+asS'mkdirat'
+p2462
+(lp2463
+S'int'
+p2464
+aS'int'
+p2465
+aS'const char *'
+p2466
+aS'unsigned int'
+p2467
+asS'ReadMETAImage'
+p2468
+(lp2469
+S'int *'
+p2470
+aS'const int *'
+p2471
+aS'int *'
+p2472
+asS'strncmp'
+p2473
+(lp2474
+S'int'
+p2475
+asS'ImportBlackQuantum'
+p2476
+(lp2477
+S'void'
+p2478
+aS'const int *'
+p2479
+aS'int *'
+p2480
+aS'const int'
+p2481
+aS'const unsigned char *'
+p2482
+asS'mbtowc'
+p2483
+(lp2484
+S'int'
+p2485
+aS'int *restrict'
+p2486
+aS'const char *restrict'
+p2487
+aS'int'
+p2488
+asS'mkdtemp'
+p2489
+(lp2490
+S'char *'
+p2491
+aS'char *'
+p2492
+asS'GetPixelBlue'
+p2493
+(lp2494
+S'int'
+p2495
+aS'const int *'
+p2496
+asS'strcat'
+p2497
+(lp2498
+S'char *'
+p2499
+aS'char *restrict'
+p2500
+aS'const char *restrict'
+p2501
+asS'atexit'
+p2502
+(lp2503
+S'int'
+p2504
+aS'void (*)(void)'
+p2505
+asS'ReadGRADIENTImage'
+p2506
+(lp2507
+S'int *'
+p2508
+aS'const int *'
+p2509
+aS'int *'
+p2510
+asS'SetPixelCrTraits'
+p2511
+(lp2512
+S'void'
+p2513
+aS'int *'
+p2514
+aS'const int'
+p2515
+asS'ReadCALSImage'
+p2516
+(lp2517
+S'int *'
+p2518
+aS'const int *'
+p2519
+aS'int *'
+p2520
+asS'ValidateCompareCommand'
+p2521
+(lp2522
+S'int'
+p2523
+aS'int *'
+p2524
+aS'const char *'
+p2525
+aS'const char *'
+p2526
+aS'int *'
+p2527
+aS'int *'
+p2528
+asS'jrand48'
+p2529
+(lp2530
+S'long'
+p2531
+aS'unsigned short [3]'
+p2532
+asS'MagickMain'
+p2533
+(lp2534
+S'int'
+p2535
+aS'int'
+p2536
+aS'char **'
+p2537
+asS'strchr'
+p2538
+(lp2539
+S'char *'
+p2540
+aS'const char *'
+p2541
+aS'int'
+p2542
+asS'WriteMATTEImage'
+p2543
+(lp2544
+S'int'
+p2545
+aS'const int *'
+p2546
+aS'int *'
+p2547
+aS'int *'
+p2548
+asS'IsPICT'
+p2549
+(lp2550
+S'int'
+p2551
+aS'const unsigned char *'
+p2552
+aS'const int'
+p2553
+asS'ReadSCRImage'
+p2554
+(lp2555
+S'int *'
+p2556
+aS'const int *'
+p2557
+aS'int *'
+p2558
+asS'ReadPropertySignedLong'
+p2559
+(lp2560
+S'int'
+p2561
+aS'const int'
+p2562
+aS'const unsigned char *'
+p2563
+asS'VectorTruncate'
+p2564
+(lp2565
+S'void'
+p2566
+aS'struct _DDSVector4 *'
+p2567
+asS'fgetpos'
+p2568
+(lp2569
+S'int'
+p2570
+aS'struct _IO_FILE *restrict'
+p2571
+aS'_G_fpos_t *restrict'
+p2572
+asS'__fmax'
+p2573
+(lp2574
+S'double'
+p2575
+aS'double'
+p2576
+aS'double'
+p2577
+asS'__tanhl'
+p2578
+(lp2579
+S'long double'
+p2580
+aS'long double'
+p2581
+asS'__fmaf'
+p2582
+(lp2583
+S'float'
+p2584
+aS'float'
+p2585
+aS'float'
+p2586
+aS'float'
+p2587
+asS'erfcf'
+p2588
+(lp2589
+S'float'
+p2590
+aS'float'
+p2591
+asS'posix_memalign'
+p2592
+(lp2593
+S'int'
+p2594
+aS'void **'
+p2595
+aS'int'
+p2596
+aS'int'
+p2597
+asS'_IO_padn'
+p2598
+(lp2599
+S'long'
+p2600
+aS'struct _IO_FILE *'
+p2601
+aS'int'
+p2602
+aS'long'
+p2603
+asS'DefaultErrorHandler'
+p2604
+(lp2605
+S'void'
+p2606
+aS'const int'
+p2607
+aS'const char *'
+p2608
+aS'const char *'
+p2609
+asS'sigaltstack'
+p2610
+(lp2611
+S'int'
+p2612
+aS'const struct sigaltstack *restrict'
+p2613
+aS'struct sigaltstack *restrict'
+p2614
+asS'__llroundl'
+p2615
+(lp2616
+S'long long'
+p2617
+aS'long double'
+p2618
+asS'erfcl'
+p2619
+(lp2620
+S'long double'
+p2621
+aS'long double'
+p2622
+asS'freelocale'
+p2623
+(lp2624
+S'void'
+p2625
+aS'struct __locale_struct *'
+p2626
+asS'clock_getres'
+p2627
+(lp2628
+S'int'
+p2629
+aS'int'
+p2630
+aS'struct timespec *'
+p2631
+asS'remainderf'
+p2632
+(lp2633
+S'float'
+p2634
+aS'float'
+p2635
+aS'float'
+p2636
+asS'__y1l'
+p2637
+(lp2638
+S'long double'
+p2639
+aS'long double'
+p2640
+asS'GetImageChannels'
+p2641
+(lp2642
+S'int'
+p2643
+aS'const int *'
+p2644
+asS'__overflow'
+p2645
+(lp2646
+S'int'
+p2647
+aS'struct _IO_FILE *'
+p2648
+aS'int'
+p2649
+asS'lstat'
+p2650
+(lp2651
+S'int'
+p2652
+aS'const char *restrict'
+p2653
+aS'struct stat *restrict'
+p2654
+asS'__nextafterf'
+p2655
+(lp2656
+S'float'
+p2657
+aS'float'
+p2658
+aS'float'
+p2659
+asS'GetVirtualMetacontentFromCache'
+p2660
+(lp2661
+S'const void *'
+p2662
+aS'const int *'
+p2663
+asS'WriteDIBImage'
+p2664
+(lp2665
+S'int'
+p2666
+aS'const int *'
+p2667
+aS'int *'
+p2668
+aS'int *'
+p2669
+asS'timelocal'
+p2670
+(lp2671
+S'long'
+p2672
+aS'struct tm *'
+p2673
+asS'GetNextLZWCode'
+p2674
+(lp2675
+S'int'
+p2676
+aS'struct _LZWInfo *'
+p2677
+aS'const int'
+p2678
+asS'__exp2f'
+p2679
+(lp2680
+S'float'
+p2681
+aS'float'
+p2682
+asS'localtime_r'
+p2683
+(lp2684
+S'struct tm *'
+p2685
+aS'const long *restrict'
+p2686
+aS'struct tm *restrict'
+p2687
+asS'ReadARTImage'
+p2688
+(lp2689
+S'int *'
+p2690
+aS'const int *'
+p2691
+aS'int *'
+p2692
+asS'__exp2l'
+p2693
+(lp2694
+S'long double'
+p2695
+aS'long double'
+p2696
+asS'ImportRGBQuantum'
+p2697
+(lp2698
+S'void'
+p2699
+aS'const int *'
+p2700
+aS'int *'
+p2701
+aS'const int'
+p2702
+aS'const unsigned char *'
+p2703
+asS'IsPolicyCacheInstantiated'
+p2704
+(lp2705
+S'int'
+p2706
+aS'int *'
+p2707
+asS'seed48_r'
+p2708
+(lp2709
+S'int'
+p2710
+aS'unsigned short [3]'
+p2711
+aS'struct drand48_data *'
+p2712
+asS'cos'
+p2713
+(lp2714
+S'double'
+p2715
+aS'double'
+p2716
+asS'TraceStrokePolygon'
+p2717
+(lp2718
+S'int *'
+p2719
+aS'const int *'
+p2720
+aS'const int *'
+p2721
+asS'ReadRectangle'
+p2722
+(lp2723
+S'int'
+p2724
+aS'int *'
+p2725
+aS'struct _PICTRectangle *'
+p2726
+asS'fstatat'
+p2727
+(lp2728
+S'int'
+p2729
+aS'int'
+p2730
+aS'const char *restrict'
+p2731
+aS'struct stat *restrict'
+p2732
+aS'int'
+p2733
+asS'ReadCUTImage'
+p2734
+(lp2735
+S'int *'
+p2736
+aS'const int *'
+p2737
+aS'int *'
+p2738
+asS'VirtualPixelModulo'
+p2739
+(lp2740
+S'struct _MagickModulo'
+p2741
+aS'const int'
+p2742
+aS'const int'
+p2743
+asS'ldiv'
+p2744
+(lp2745
+S'ldiv_t'
+p2746
+aS'long'
+p2747
+aS'long'
+p2748
+asS'ConvertPSDCompression'
+p2749
+(lp2750
+S'int'
+p2751
+aS'PSDCompressionType'
+p2752
+asS'getpwent_r'
+p2753
+(lp2754
+S'int'
+p2755
+aS'struct passwd *restrict'
+p2756
+aS'char *restrict'
+p2757
+aS'int'
+p2758
+aS'struct passwd **restrict'
+p2759
+asS'TraceArcPath'
+p2760
+(lp2761
+S'void'
+p2762
+aS'int *'
+p2763
+aS'const int'
+p2764
+aS'const int'
+p2765
+aS'const int'
+p2766
+aS'const double'
+p2767
+aS'const int'
+p2768
+aS'const int'
+p2769
+asS'gmtime_r'
+p2770
+(lp2771
+S'struct tm *'
+p2772
+aS'const long *restrict'
+p2773
+aS'struct tm *restrict'
+p2774
+asS'__tolower_l'
+p2775
+(lp2776
+S'int'
+p2777
+aS'int'
+p2778
+aS'struct __locale_struct *'
+p2779
+asS'lrintf'
+p2780
+(lp2781
+S'long'
+p2782
+aS'float'
+p2783
+asS'fabsf'
+p2784
+(lp2785
+S'float'
+p2786
+aS'float'
+p2787
+asS'IsConfigureCacheInstantiated'
+p2788
+(lp2789
+S'int'
+p2790
+aS'int *'
+p2791
+asS'fmaxf'
+p2792
+(lp2793
+S'float'
+p2794
+aS'float'
+p2795
+aS'float'
+p2796
+asS'DerivativeHistogram'
+p2797
+(lp2798
+S'void'
+p2799
+aS'const double *'
+p2800
+aS'double *'
+p2801
+asS'fmaxl'
+p2802
+(lp2803
+S'long double'
+p2804
+aS'long double'
+p2805
+aS'long double'
+p2806
+asS'fabsl'
+p2807
+(lp2808
+S'long double'
+p2809
+aS'long double'
+p2810
+asS'ReadMIFFImage'
+p2811
+(lp2812
+S'int *'
+p2813
+aS'const int *'
+p2814
+aS'int *'
+p2815
+asS'ReadTGAImage'
+p2816
+(lp2817
+S'int *'
+p2818
+aS'const int *'
+p2819
+aS'int *'
+p2820
+asS'__nearbyint'
+p2821
+(lp2822
+S'double'
+p2823
+aS'double'
+p2824
+asS'putw'
+p2825
+(lp2826
+S'int'
+p2827
+aS'int'
+p2828
+aS'struct _IO_FILE *'
+p2829
+asS'SetPixelBlack'
+p2830
+(lp2831
+S'void'
+p2832
+aS'const int *'
+p2833
+asS'raise'
+p2834
+(lp2835
+S'int'
+p2836
+aS'int'
+p2837
+asS'puts'
+p2838
+(lp2839
+S'int'
+p2840
+aS'const char *'
+p2841
+asS'hypotl'
+p2842
+(lp2843
+S'long double'
+p2844
+aS'long double'
+p2845
+aS'long double'
+p2846
+asS'acoshl'
+p2847
+(lp2848
+S'long double'
+p2849
+aS'long double'
+p2850
+asS'GetMinimumPixelList'
+p2851
+(lp2852
+S'void'
+p2853
+aS'struct _PixelList *'
+p2854
+aS'int *'
+p2855
+asS'__finite'
+p2856
+(lp2857
+S'int'
+p2858
+aS'double'
+p2859
+asS'WriteMIFFImage'
+p2860
+(lp2861
+S'int'
+p2862
+aS'const int *'
+p2863
+aS'int *'
+p2864
+aS'int *'
+p2865
+asS'__lgammal'
+p2866
+(lp2867
+S'long double'
+p2868
+aS'long double'
+p2869
+asS'gnu_dev_major'
+p2870
+(lp2871
+S'unsigned int'
+p2872
+aS'unsigned long long'
+p2873
+asS'fminf'
+p2874
+(lp2875
+S'float'
+p2876
+aS'float'
+p2877
+aS'float'
+p2878
+asS'putc'
+p2879
+(lp2880
+S'int'
+p2881
+aS'int'
+p2882
+aS'struct _IO_FILE *'
+p2883
+asS'__lgammaf'
+p2884
+(lp2885
+S'float'
+p2886
+aS'float'
+p2887
+asS'trunc'
+p2888
+(lp2889
+S'double'
+p2890
+aS'double'
+p2891
+asS'__isnan'
+p2892
+(lp2893
+S'int'
+p2894
+aS'double'
+p2895
+asS'fminl'
+p2896
+(lp2897
+S'long double'
+p2898
+aS'long double'
+p2899
+aS'long double'
+p2900
+asS'asinh'
+p2901
+(lp2902
+S'double'
+p2903
+aS'double'
+p2904
+asS'strsignal'
+p2905
+(lp2906
+S'char *'
+p2907
+aS'int'
+p2908
+asS'j0l'
+p2909
+(lp2910
+S'long double'
+p2911
+aS'long double'
+p2912
+asS'asinl'
+p2913
+(lp2914
+S'long double'
+p2915
+aS'long double'
+p2916
+asS'CalculateColors'
+p2917
+(lp2918
+S'void'
+p2919
+aS'unsigned short'
+p2920
+aS'unsigned short'
+p2921
+aS'struct _DDSColors *'
+p2922
+aS'int'
+p2923
+asS'asinf'
+p2924
+(lp2925
+S'float'
+p2926
+aS'float'
+p2927
+asS'j0f'
+p2928
+(lp2929
+S'float'
+p2930
+aS'float'
+p2931
+asS'__scalbln'
+p2932
+(lp2933
+S'double'
+p2934
+aS'double'
+p2935
+aS'long'
+p2936
+asS'adjtime'
+p2937
+(lp2938
+S'int'
+p2939
+aS'const struct timeval *'
+p2940
+aS'struct timeval *'
+p2941
+asS'strtok_r'
+p2942
+(lp2943
+S'char *'
+p2944
+aS'char *restrict'
+p2945
+aS'const char *restrict'
+p2946
+aS'char **restrict'
+p2947
+asS'ReadYUVImage'
+p2948
+(lp2949
+S'int *'
+p2950
+aS'const int *'
+p2951
+aS'int *'
+p2952
+asS'SetPixelCacheExtent'
+p2953
+(lp2954
+S'int'
+p2955
+aS'int *'
+p2956
+aS'int'
+p2957
+asS'__powl'
+p2958
+(lp2959
+S'long double'
+p2960
+aS'long double'
+p2961
+aS'long double'
+p2962
+asS'RadonTransform'
+p2963
+(lp2964
+S'int'
+p2965
+aS'const int *'
+p2966
+aS'const double'
+p2967
+aS'int *'
+p2968
+aS'int *'
+p2969
+asS'GetPixelYellowTraits'
+p2970
+(lp2971
+S'int'
+p2972
+aS'const int *'
+p2973
+asS'PushDoublePixel'
+p2974
+(lp2975
+S'const unsigned char *'
+p2976
+aS'int *'
+p2977
+aS'const unsigned char *'
+p2978
+asS'tanl'
+p2979
+(lp2980
+S'long double'
+p2981
+aS'long double'
+p2982
+asS'MagickOver_'
+p2983
+(lp2984
+S'double'
+p2985
+aS'const double'
+p2986
+aS'const double'
+p2987
+aS'const double'
+p2988
+aS'const double'
+p2989
+asS'tanh'
+p2990
+(lp2991
+S'double'
+p2992
+aS'double'
+p2993
+asS'tanf'
+p2994
+(lp2995
+S'float'
+p2996
+aS'float'
+p2997
+asS'_IO_seekpos'
+p2998
+(lp2999
+S'long'
+p3000
+aS'struct _IO_FILE *'
+p3001
+aS'long'
+p3002
+aS'int'
+p3003
+asS'PingGIFImage'
+p3004
+(lp3005
+S'int'
+p3006
+aS'int *'
+p3007
+aS'int *'
+p3008
+asS'__ceill'
+p3009
+(lp3010
+S'long double'
+p3011
+aS'long double'
+p3012
+asS'CRC32'
+p3013
+(lp3014
+S'unsigned int'
+p3015
+aS'const unsigned char *'
+p3016
+aS'const int'
+p3017
+asS'sigismember'
+p3018
+(lp3019
+S'int'
+p3020
+aS'const __sigset_t *'
+p3021
+aS'int'
+p3022
+asS'__ceilf'
+p3023
+(lp3024
+S'float'
+p3025
+aS'float'
+p3026
+asS'ReadHRZImage'
+p3027
+(lp3028
+S'int *'
+p3029
+aS'const int *'
+p3030
+aS'int *'
+p3031
+asS'clearenv'
+p3032
+(lp3033
+S'int'
+p3034
+asS'strtof'
+p3035
+(lp3036
+S'float'
+p3037
+aS'const char *restrict'
+p3038
+aS'char **restrict'
+p3039
+asS'__tanf'
+p3040
+(lp3041
+S'float'
+p3042
+aS'float'
+p3043
+asS'IsVICAR'
+p3044
+(lp3045
+S'int'
+p3046
+aS'const unsigned char *'
+p3047
+aS'const int'
+p3048
+asS'VectorTruncate3'
+p3049
+(lp3050
+S'void'
+p3051
+aS'struct _DDSVector3 *'
+p3052
+asS'__tanl'
+p3053
+(lp3054
+S'long double'
+p3055
+aS'long double'
+p3056
+asS'__cbrt'
+p3057
+(lp3058
+S'double'
+p3059
+aS'double'
+p3060
+asS'__tanh'
+p3061
+(lp3062
+S'double'
+p3063
+aS'double'
+p3064
+asS'GetImageTransferCharacteristic'
+p3065
+(lp3066
+S'const char *'
+p3067
+aS'const DPXTransferCharacteristic'
+p3068
+asS'RoundToUnity'
+p3069
+(lp3070
+S'double'
+p3071
+aS'const double'
+p3072
+asS'TracePath'
+p3073
+(lp3074
+S'int'
+p3075
+aS'int *'
+p3076
+aS'const char *'
+p3077
+asS'WriteMAPImage'
+p3078
+(lp3079
+S'int'
+p3080
+aS'const int *'
+p3081
+aS'int *'
+p3082
+aS'int *'
+p3083
+asS'__llroundf'
+p3084
+(lp3085
+S'long long'
+p3086
+aS'float'
+p3087
+asS'__asinhf'
+p3088
+(lp3089
+S'float'
+p3090
+aS'float'
+p3091
+asS'ReadXPSImage'
+p3092
+(lp3093
+S'int *'
+p3094
+aS'const int *'
+p3095
+aS'int *'
+p3096
+asS'jpeg_transfer_1'
+p3097
+(lp3098
+S'int'
+p3099
+aS'int *'
+p3100
+aS'int *'
+p3101
+asS'waitpid'
+p3102
+(lp3103
+S'int'
+p3104
+aS'int'
+p3105
+aS'int *'
+p3106
+aS'int'
+p3107
+asS'nextafter'
+p3108
+(lp3109
+S'double'
+p3110
+aS'double'
+p3111
+aS'double'
+p3112
+asS'IsIPL'
+p3113
+(lp3114
+S'int'
+p3115
+aS'const unsigned char *'
+p3116
+aS'const int'
+p3117
+asS'ceilf'
+p3118
+(lp3119
+S'float'
+p3120
+aS'float'
+p3121
+asS'gsignal'
+p3122
+(lp3123
+S'int'
+p3124
+aS'int'
+p3125
+asS'ReadPropertyByte'
+p3126
+(lp3127
+S'int'
+p3128
+aS'const unsigned char **'
+p3129
+aS'int *'
+p3130
+asS'AbsolutePixelValue'
+p3131
+(lp3132
+S'int'
+p3133
+aS'const int'
+p3134
+asS'ExportGreenQuantum'
+p3135
+(lp3136
+S'void'
+p3137
+aS'const int *'
+p3138
+aS'int *'
+p3139
+aS'const int'
+p3140
+aS'const int *'
+p3141
+asS'IssRGBCompatibleColorspace'
+p3142
+(lp3143
+S'int'
+p3144
+aS'const int'
+p3145
+asS'ConvertXYZToRGB'
+p3146
+(lp3147
+S'void'
+p3148
+aS'const double'
+p3149
+aS'const double'
+p3150
+aS'const double'
+p3151
+aS'double *'
+p3152
+aS'double *'
+p3153
+aS'double *'
+p3154
+asS'VectorCopy43'
+p3155
+(lp3156
+S'void'
+p3157
+aS'const struct _DDSVector4'
+p3158
+aS'struct _DDSVector3 *'
+p3159
+asS'fdopendir'
+p3160
+(lp3161
+S'struct __dirstream *'
+p3162
+aS'int'
+p3163
+asS'isgraph'
+p3164
+(lp3165
+S'int'
+p3166
+aS'int'
+p3167
+asS'AcquireColorCache'
+p3168
+(lp3169
+S'int *'
+p3170
+aS'const char *'
+p3171
+aS'int *'
+p3172
+asS'GetPixelIndex'
+p3173
+(lp3174
+S'int'
+p3175
+aS'const int *'
+p3176
+asS'VectorCopy44'
+p3177
+(lp3178
+S'void'
+p3179
+aS'const struct _DDSVector4'
+p3180
+aS'struct _DDSVector4 *'
+p3181
+asS'CoefficientsToAffineArgs'
+p3182
+(lp3183
+S'void'
+p3184
+aS'double *'
+p3185
+asS'SigmoidalContrast'
+p3186
+(lp3187
+S'int'
+p3188
+aS'int *'
+p3189
+aS'const long'
+p3190
+aS'const int'
+p3191
+aS'void *'
+p3192
+asS'isinfl'
+p3193
+(lp3194
+S'int'
+p3195
+aS'long double'
+p3196
+asS'__fabsl'
+p3197
+(lp3198
+S'long double'
+p3199
+aS'long double'
+p3200
+asS'ReadPCLImage'
+p3201
+(lp3202
+S'int *'
+p3203
+aS'const int *'
+p3204
+aS'int *'
+p3205
+asS'IsMagickThreadEqual'
+p3206
+(lp3207
+S'int'
+p3208
+aS'const int'
+p3209
+asS'ClassifyImageColors'
+p3210
+(lp3211
+S'struct _CubeInfo *'
+p3212
+aS'const int *'
+p3213
+aS'int *'
+p3214
+asS'setitimer'
+p3215
+(lp3216
+S'int'
+p3217
+aS'int'
+p3218
+aS'const struct itimerval *restrict'
+p3219
+aS'struct itimerval *restrict'
+p3220
+asS'wcstombs'
+p3221
+(lp3222
+S'int'
+p3223
+aS'char *restrict'
+p3224
+aS'const int *restrict'
+p3225
+aS'int'
+p3226
+asS'IsPS'
+p3227
+(lp3228
+S'int'
+p3229
+aS'const unsigned char *'
+p3230
+aS'const int'
+p3231
+asS'nrand48'
+p3232
+(lp3233
+S'long'
+p3234
+aS'unsigned short [3]'
+p3235
+asS'seekdir'
+p3236
+(lp3237
+S'void'
+p3238
+aS'struct __dirstream *'
+p3239
+aS'long'
+p3240
+asS'WriteVIFFImage'
+p3241
+(lp3242
+S'int'
+p3243
+aS'const int *'
+p3244
+aS'int *'
+p3245
+aS'int *'
+p3246
+asS'__nexttoward'
+p3247
+(lp3248
+S'double'
+p3249
+aS'double'
+p3250
+aS'long double'
+p3251
+asS'NextXPMLine'
+p3252
+(lp3253
+S'char *'
+p3254
+aS'char *'
+p3255
+asS'GetCubeInfo'
+p3256
+(lp3257
+S'struct _CubeInfo *'
+p3258
+asS'ImportCMYKAQuantum'
+p3259
+(lp3260
+S'void'
+p3261
+aS'const int *'
+p3262
+aS'int *'
+p3263
+aS'const int'
+p3264
+aS'const unsigned char *'
+p3265
+asS'GetLocationStatistics'
+p3266
+(lp3267
+S'int *'
+p3268
+aS'const int *'
+p3269
+aS'const int'
+p3270
+aS'int *'
+p3271
+asS'ConvertRGBToYUV'
+p3272
+(lp3273
+S'void'
+p3274
+aS'const double'
+p3275
+aS'const double'
+p3276
+aS'const double'
+p3277
+aS'double *'
+p3278
+aS'double *'
+p3279
+aS'double *'
+p3280
+asS'GetRootMeanSquarePixelList'
+p3281
+(lp3282
+S'void'
+p3283
+aS'struct _PixelList *'
+p3284
+aS'int *'
+p3285
+asS'fseek'
+p3286
+(lp3287
+S'int'
+p3288
+aS'struct _IO_FILE *'
+p3289
+aS'long'
+p3290
+aS'int'
+p3291
+asS'GetPixelGrayTraits'
+p3292
+(lp3293
+S'int'
+p3294
+aS'const int *'
+p3295
+asS'WriteVICARImage'
+p3296
+(lp3297
+S'int'
+p3298
+aS'const int *'
+p3299
+aS'int *'
+p3300
+aS'int *'
+p3301
+asS'__hypot'
+p3302
+(lp3303
+S'double'
+p3304
+aS'double'
+p3305
+aS'double'
+p3306
+asS'__lxstat'
+p3307
+(lp3308
+S'int'
+p3309
+aS'int'
+p3310
+aS'const char *'
+p3311
+aS'struct stat *'
+p3312
+asS'CopyXPMColor'
+p3313
+(lp3314
+S'int'
+p3315
+aS'char *'
+p3316
+aS'const char *'
+p3317
+aS'int'
+p3318
+asS'ReadLABELImage'
+p3319
+(lp3320
+S'int *'
+p3321
+aS'const int *'
+p3322
+aS'int *'
+p3323
+asS'dreml'
+p3324
+(lp3325
+S'long double'
+p3326
+aS'long double'
+p3327
+aS'long double'
+p3328
+asS'fflush'
+p3329
+(lp3330
+S'int'
+p3331
+aS'struct _IO_FILE *'
+p3332
+asS'convertHTMLcodes'
+p3333
+(lp3334
+S'int'
+p3335
+aS'char *'
+p3336
+aS'const int'
+p3337
+asS'CompressClusterFit'
+p3338
+(lp3339
+S'void'
+p3340
+aS'const int'
+p3341
+aS'const struct _DDSVector4 *'
+p3342
+aS'const int *'
+p3343
+aS'const struct _DDSVector3'
+p3344
+aS'const struct _DDSVector4'
+p3345
+aS'struct _DDSVector3 *'
+p3346
+aS'struct _DDSVector3 *'
+p3347
+aS'unsigned char *'
+p3348
+asS'GetMagickPropertyLetter'
+p3349
+(lp3350
+S'const char *'
+p3351
+aS'int *'
+p3352
+aS'int *'
+p3353
+aS'const char'
+p3354
+aS'int *'
+p3355
+asS'_longjmp'
+p3356
+(lp3357
+S'void'
+p3358
+aS'struct __jmp_buf_tag [1]'
+p3359
+aS'int'
+p3360
+asS'WriteCLIPImage'
+p3361
+(lp3362
+S'int'
+p3363
+aS'const int *'
+p3364
+aS'int *'
+p3365
+aS'int *'
+p3366
+asS'GetPixelBlackTraits'
+p3367
+(lp3368
+S'int'
+p3369
+aS'const int *'
+p3370
+asS'WritePDFImage'
+p3371
+(lp3372
+S'int'
+p3373
+aS'const int *'
+p3374
+aS'int *'
+p3375
+aS'int *'
+p3376
+asS'ReadPropertyMSBLong'
+p3377
+(lp3378
+S'int'
+p3379
+aS'const unsigned char **'
+p3380
+aS'int *'
+p3381
+asS'tmpnam'
+p3382
+(lp3383
+S'char *'
+p3384
+aS'char *'
+p3385
+asS'ExportBlackQuantum'
+p3386
+(lp3387
+S'void'
+p3388
+aS'const int *'
+p3389
+aS'int *'
+p3390
+aS'const int'
+p3391
+aS'const int *'
+p3392
+asS'SetPixelBlackTraits'
+p3393
+(lp3394
+S'void'
+p3395
+aS'int *'
+p3396
+aS'const int'
+p3397
+asS'gnu_dev_minor'
+p3398
+(lp3399
+S'unsigned int'
+p3400
+aS'unsigned long long'
+p3401
+asS'_setjmp'
+p3402
+(lp3403
+S'int'
+p3404
+aS'struct __jmp_buf_tag [1]'
+p3405
+asS'IsSFW'
+p3406
+(lp3407
+S'int'
+p3408
+aS'const unsigned char *'
+p3409
+aS'const int'
+p3410
+asS'LoadWPG2Flags'
+p3411
+(lp3412
+S'unsigned int'
+p3413
+aS'int *'
+p3414
+aS'char'
+p3415
+aS'float *'
+p3416
+aS'float (*)[3][3]'
+p3417
+asS'jpeg_nextmarker'
+p3418
+(lp3419
+S'int'
+p3420
+aS'int *'
+p3421
+aS'int *'
+p3422
+asS'toascii'
+p3423
+(lp3424
+S'int'
+p3425
+aS'int'
+p3426
+asS'ReadPALMImage'
+p3427
+(lp3428
+S'int *'
+p3429
+aS'const int *'
+p3430
+aS'int *'
+p3431
+asS'SetPixelGreen'
+p3432
+(lp3433
+S'void'
+p3434
+aS'const int *'
+p3435
+asS'ComputeWeightedCovariance'
+p3436
+(lp3437
+S'void'
+p3438
+aS'const int'
+p3439
+aS'const struct _DDSVector4 *'
+p3440
+aS'float *'
+p3441
+asS'OptimalTau'
+p3442
+(lp3443
+S'double'
+p3444
+aS'const int *'
+p3445
+aS'const double'
+p3446
+aS'const double'
+p3447
+aS'const double'
+p3448
+aS'const double'
+p3449
+aS'short *'
+p3450
+asS'__floor'
+p3451
+(lp3452
+S'double'
+p3453
+aS'double'
+p3454
+asS'__drem'
+p3455
+(lp3456
+S'double'
+p3457
+aS'double'
+p3458
+aS'double'
+p3459
+asS'IsMimeCacheInstantiated'
+p3460
+(lp3461
+S'int'
+p3462
+aS'int *'
+p3463
+asS'IsJ2K'
+p3464
+(lp3465
+S'int'
+p3466
+aS'const unsigned char *'
+p3467
+aS'const int'
+p3468
+asS'SetPixelYellowTraits'
+p3469
+(lp3470
+S'void'
+p3471
+aS'int *'
+p3472
+aS'const int'
+p3473
+asS'strstr'
+p3474
+(lp3475
+S'char *'
+p3476
+aS'const char *'
+p3477
+aS'const char *'
+p3478
+asS'ctime'
+p3479
+(lp3480
+S'char *'
+p3481
+aS'const long *'
+p3482
+asS'newlocale'
+p3483
+(lp3484
+S'struct __locale_struct *'
+p3485
+aS'int'
+p3486
+aS'const char *'
+p3487
+aS'struct __locale_struct *'
+p3488
+asS'signal'
+p3489
+(lp3490
+S'void (*)(int)'
+p3491
+aS'int'
+p3492
+aS'void (*)(int)'
+p3493
+asS'IsPathDirectory'
+p3494
+(lp3495
+S'int'
+p3496
+aS'const char *'
+p3497
+asS'_IO_vfprintf'
+p3498
+(lp3499
+S'int'
+p3500
+aS'struct _IO_FILE *restrict'
+p3501
+aS'const char *restrict'
+p3502
+aS'int'
+p3503
+asS'freopen'
+p3504
+(lp3505
+S'struct _IO_FILE *'
+p3506
+aS'const char *restrict'
+p3507
+aS'const char *restrict'
+p3508
+aS'struct _IO_FILE *restrict'
+p3509
+asS'ExportIndexQuantum'
+p3510
+(lp3511
+S'void'
+p3512
+aS'const int *'
+p3513
+aS'int *'
+p3514
+aS'const int'
+p3515
+aS'const int *'
+p3516
+asS'frexpf'
+p3517
+(lp3518
+S'float'
+p3519
+aS'float'
+p3520
+aS'int *'
+p3521
+asS'fread_unlocked'
+p3522
+(lp3523
+S'int'
+p3524
+aS'void *restrict'
+p3525
+aS'int'
+p3526
+aS'int'
+p3527
+aS'struct _IO_FILE *restrict'
+p3528
+asS'remquol'
+p3529
+(lp3530
+S'long double'
+p3531
+aS'long double'
+p3532
+aS'long double'
+p3533
+aS'int *'
+p3534
+asS'tempnam'
+p3535
+(lp3536
+S'char *'
+p3537
+aS'const char *'
+p3538
+aS'const char *'
+p3539
+asS'__fmin'
+p3540
+(lp3541
+S'double'
+p3542
+aS'double'
+p3543
+aS'double'
+p3544
+asS'GetStrokeColor'
+p3545
+(lp3546
+S'void'
+p3547
+aS'const int *'
+p3548
+aS'const int'
+p3549
+aS'const int'
+p3550
+aS'int *'
+p3551
+aS'int *'
+p3552
+asS'rpmatch'
+p3553
+(lp3554
+S'int'
+p3555
+aS'const char *'
+p3556
+asS'WritePS2Image'
+p3557
+(lp3558
+S'int'
+p3559
+aS'const int *'
+p3560
+aS'int *'
+p3561
+aS'int *'
+p3562
+asS'mrand48'
+p3563
+(lp3564
+S'long'
+p3565
+asS'WritePALMImage'
+p3566
+(lp3567
+S'int'
+p3568
+aS'const int *'
+p3569
+aS'int *'
+p3570
+aS'int *'
+p3571
+asS'hypot'
+p3572
+(lp3573
+S'double'
+p3574
+aS'double'
+p3575
+aS'double'
+p3576
+asS'fmemopen'
+p3577
+(lp3578
+S'struct _IO_FILE *'
+p3579
+aS'void *'
+p3580
+aS'int'
+p3581
+aS'const char *'
+p3582
+asS'mblen'
+p3583
+(lp3584
+S'int'
+p3585
+aS'const char *'
+p3586
+aS'int'
+p3587
+asS'ctermid'
+p3588
+(lp3589
+S'char *'
+p3590
+aS'char *'
+p3591
+asS'GetPixelCbTraits'
+p3592
+(lp3593
+S'int'
+p3594
+aS'const int *'
+p3595
+asS'__rint'
+p3596
+(lp3597
+S'double'
+p3598
+aS'double'
+p3599
+asS'_IO_feof'
+p3600
+(lp3601
+S'int'
+p3602
+aS'struct _IO_FILE *'
+p3603
+asS'scalb'
+p3604
+(lp3605
+S'double'
+p3606
+aS'double'
+p3607
+aS'double'
+p3608
+asS'SinglePrecisionToHalf'
+p3609
+(lp3610
+S'unsigned short'
+p3611
+aS'const float'
+p3612
+asS'GetMagickThreadId'
+p3613
+(lp3614
+S'int'
+p3615
+asS'qecvt_r'
+p3616
+(lp3617
+S'int'
+p3618
+aS'long double'
+p3619
+aS'int'
+p3620
+aS'int *restrict'
+p3621
+aS'int *restrict'
+p3622
+aS'char *restrict'
+p3623
+aS'int'
+p3624
+asS'__signbitf'
+p3625
+(lp3626
+S'int'
+p3627
+aS'float'
+p3628
+asS'ConcatenateImages'
+p3629
+(lp3630
+S'int'
+p3631
+aS'int'
+p3632
+aS'char **'
+p3633
+aS'int *'
+p3634
+asS'select'
+p3635
+(lp3636
+S'int'
+p3637
+aS'int'
+p3638
+aS'fd_set *restrict'
+p3639
+aS'fd_set *restrict'
+p3640
+aS'fd_set *restrict'
+p3641
+aS'struct timeval *restrict'
+p3642
+asS'ValidateCompositeCommand'
+p3643
+(lp3644
+S'int'
+p3645
+aS'int *'
+p3646
+aS'const char *'
+p3647
+aS'const char *'
+p3648
+aS'int *'
+p3649
+aS'int *'
+p3650
+asS'__signbitl'
+p3651
+(lp3652
+S'int'
+p3653
+aS'long double'
+p3654
+asS'ReadPESImage'
+p3655
+(lp3656
+S'int *'
+p3657
+aS'const int *'
+p3658
+aS'int *'
+p3659
+asS'ReadDIBImage'
+p3660
+(lp3661
+S'int *'
+p3662
+aS'const int *'
+p3663
+aS'int *'
+p3664
+asS'waitid'
+p3665
+(lp3666
+S'int'
+p3667
+aS'idtype_t'
+p3668
+aS'unsigned int'
+p3669
+aS'siginfo_t *'
+p3670
+aS'int'
+p3671
+asS'CopyBlob'
+p3672
+(lp3673
+S'void'
+p3674
+aS'int *'
+p3675
+aS'int *'
+p3676
+asS'ExportGrayQuantum'
+p3677
+(lp3678
+S'void'
+p3679
+aS'const int *'
+p3680
+aS'int *'
+p3681
+aS'const int'
+p3682
+aS'const int *'
+p3683
+asS'GetPixelGreen'
+p3684
+(lp3685
+S'int'
+p3686
+aS'const int *'
+p3687
+asS'GetUTFCode'
+p3688
+(lp3689
+S'int'
+p3690
+aS'const char *'
+p3691
+asS'GetPixelCr'
+p3692
+(lp3693
+S'int'
+p3694
+aS'const int *'
+p3695
+asS'fchmodat'
+p3696
+(lp3697
+S'int'
+p3698
+aS'int'
+p3699
+aS'const char *'
+p3700
+aS'unsigned int'
+p3701
+aS'int'
+p3702
+asS'__y1f'
+p3703
+(lp3704
+S'float'
+p3705
+aS'float'
+p3706
+asS'gmtime'
+p3707
+(lp3708
+S'struct tm *'
+p3709
+aS'const long *'
+p3710
+asS'ConvertRGBToYCbCr'
+p3711
+(lp3712
+S'void'
+p3713
+aS'const double'
+p3714
+aS'const double'
+p3715
+aS'const double'
+p3716
+aS'double *'
+p3717
+aS'double *'
+p3718
+aS'double *'
+p3719
+asS'DestroyResampleFilterThreadSet'
+p3720
+(lp3721
+S'int **'
+p3722
+aS'int **'
+p3723
+asS'GetPixelCb'
+p3724
+(lp3725
+S'int'
+p3726
+aS'const int *'
+p3727
+asS'sigtimedwait'
+p3728
+(lp3729
+S'int'
+p3730
+aS'const __sigset_t *restrict'
+p3731
+aS'siginfo_t *restrict'
+p3732
+aS'const struct timespec *restrict'
+p3733
+asS'timer_gettime'
+p3734
+(lp3735
+S'int'
+p3736
+aS'void *'
+p3737
+aS'struct itimerspec *'
+p3738
+asS'__asin'
+p3739
+(lp3740
+S'double'
+p3741
+aS'double'
+p3742
+asS'ClampToQuantum'
+p3743
+(lp3744
+S'int'
+p3745
+aS'const int'
+p3746
+asS'putchar_unlocked'
+p3747
+(lp3748
+S'int'
+p3749
+aS'int'
+p3750
+asS'mkfifoat'
+p3751
+(lp3752
+S'int'
+p3753
+aS'int'
+p3754
+aS'const char *'
+p3755
+aS'unsigned int'
+p3756
+asS'GetPixelMagenta'
+p3757
+(lp3758
+S'int'
+p3759
+aS'const int *'
+p3760
+asS'IsPCX'
+p3761
+(lp3762
+S'int'
+p3763
+aS'const unsigned char *'
+p3764
+aS'const int'
+p3765
+asS'WritePS3Image'
+p3766
+(lp3767
+S'int'
+p3768
+aS'const int *'
+p3769
+aS'int *'
+p3770
+aS'int *'
+p3771
+asS'fflush_unlocked'
+p3772
+(lp3773
+S'int'
+p3774
+aS'struct _IO_FILE *'
+p3775
+asS'IsPCD'
+p3776
+(lp3777
+S'int'
+p3778
+aS'const unsigned char *'
+p3779
+aS'const int'
+p3780
+asS'WriteXBMImage'
+p3781
+(lp3782
+S'int'
+p3783
+aS'const int *'
+p3784
+aS'int *'
+p3785
+aS'int *'
+p3786
+asS'ExportAlphaQuantum'
+p3787
+(lp3788
+S'void'
+p3789
+aS'const int *'
+p3790
+aS'int *'
+p3791
+aS'const int'
+p3792
+aS'const int *'
+p3793
+asS'GetPixelWriteMask'
+p3794
+(lp3795
+S'int'
+p3796
+aS'const int *'
+p3797
+asS'bsearch'
+p3798
+(lp3799
+S'void *'
+p3800
+aS'const void *'
+p3801
+aS'const void *'
+p3802
+aS'int'
+p3803
+aS'int'
+p3804
+aS'int (*)(const void *, const void *)'
+p3805
+asS'fmin'
+p3806
+(lp3807
+S'double'
+p3808
+aS'double'
+p3809
+aS'double'
+p3810
+asS'llround'
+p3811
+(lp3812
+S'long long'
+p3813
+aS'double'
+p3814
+asS'IsPCL'
+p3815
+(lp3816
+S'int'
+p3817
+aS'const unsigned char *'
+p3818
+aS'const int'
+p3819
+asS'ReadPATTERNImage'
+p3820
+(lp3821
+S'int *'
+p3822
+aS'const int *'
+p3823
+aS'int *'
+p3824
+asS'acos'
+p3825
+(lp3826
+S'double'
+p3827
+aS'double'
+p3828
+asS'IsTypeTreeInstantiated'
+p3829
+(lp3830
+S'int'
+p3831
+aS'int *'
+p3832
+asS'gamma'
+p3833
+(lp3834
+S'double'
+p3835
+aS'double'
+p3836
+asS'CompositePixelInfoAreaBlend'
+p3837
+(lp3838
+S'void'
+p3839
+aS'const int *'
+p3840
+aS'const double'
+p3841
+aS'const int *'
+p3842
+aS'const double'
+p3843
+aS'const double'
+p3844
+aS'int *'
+p3845
+asS'VectorSubtract'
+p3846
+(lp3847
+S'void'
+p3848
+aS'const struct _DDSVector4'
+p3849
+aS'const struct _DDSVector4'
+p3850
+aS'struct _DDSVector4 *'
+p3851
+asS'roundf'
+p3852
+(lp3853
+S'float'
+p3854
+aS'float'
+p3855
+asS'ilogbl'
+p3856
+(lp3857
+S'int'
+p3858
+aS'long double'
+p3859
+asS'tmpfile'
+p3860
+(lp3861
+S'struct _IO_FILE *'
+p3862
+asS'WriteINFOImage'
+p3863
+(lp3864
+S'int'
+p3865
+aS'const int *'
+p3866
+aS'int *'
+p3867
+aS'int *'
+p3868
+asS'GetImageBackgroundColor'
+p3869
+(lp3870
+S'void'
+p3871
+aS'int *'
+p3872
+aS'const int'
+p3873
+aS'int *'
+p3874
+asS'atanl'
+p3875
+(lp3876
+S'long double'
+p3877
+aS'long double'
+p3878
+asS'sqrtl'
+p3879
+(lp3880
+S'long double'
+p3881
+aS'long double'
+p3882
+asS'ValidateColorspaces'
+p3883
+(lp3884
+S'int'
+p3885
+aS'int *'
+p3886
+aS'int *'
+p3887
+aS'int *'
+p3888
+asS'fopen'
+p3889
+(lp3890
+S'struct _IO_FILE *'
+p3891
+aS'const char *restrict'
+p3892
+aS'const char *restrict'
+p3893
+asS'sqrtf'
+p3894
+(lp3895
+S'float'
+p3896
+aS'float'
+p3897
+asS'ExportBlueQuantum'
+p3898
+(lp3899
+S'void'
+p3900
+aS'const int *'
+p3901
+aS'int *'
+p3902
+aS'const int'
+p3903
+aS'const int *'
+p3904
+asS'GetPixelCyanTraits'
+p3905
+(lp3906
+S'int'
+p3907
+aS'const int *'
+p3908
+asS'PSDBlendModeToCompositeOperator'
+p3909
+(lp3910
+S'int'
+p3911
+aS'const char *'
+p3912
+asS'memccpy'
+p3913
+(lp3914
+S'void *'
+p3915
+aS'void *restrict'
+p3916
+aS'const void *restrict'
+p3917
+aS'int'
+p3918
+aS'int'
+p3919
+asS'Hann'
+p3920
+(lp3921
+S'double'
+p3922
+aS'const double'
+p3923
+aS'const int *()'
+p3924
+asS'super_fgets_w'
+p3925
+(lp3926
+S'char *'
+p3927
+aS'char **'
+p3928
+aS'int *'
+p3929
+aS'int *'
+p3930
+asS'lround'
+p3931
+(lp3932
+S'long'
+p3933
+aS'double'
+p3934
+asS'ParseKernelName'
+p3935
+(lp3936
+S'int *'
+p3937
+aS'const char *'
+p3938
+aS'int *'
+p3939
+asS'__fabsf'
+p3940
+(lp3941
+S'float'
+p3942
+aS'float'
+p3943
+asS'jpeg_skip_variable'
+p3944
+(lp3945
+S'int'
+p3946
+aS'int *'
+p3947
+aS'int *'
+p3948
+asS'ConstructOrdering'
+p3949
+(lp3950
+S'int'
+p3951
+aS'const int'
+p3952
+aS'const struct _DDSVector4 *'
+p3953
+aS'const struct _DDSVector3'
+p3954
+aS'struct _DDSVector4 *'
+p3955
+aS'struct _DDSVector4 *'
+p3956
+aS'unsigned char *'
+p3957
+aS'int'
+p3958
+asS'remquof'
+p3959
+(lp3960
+S'float'
+p3961
+aS'float'
+p3962
+aS'float'
+p3963
+aS'int *'
+p3964
+asS'StreamUsage'
+p3965
+(lp3966
+S'int'
+p3967
+asS'GetPixelInfoLuminance'
+p3968
+(lp3969
+S'int'
+p3970
+aS'const int *'
+p3971
+asS'__finitel'
+p3972
+(lp3973
+S'int'
+p3974
+aS'long double'
+p3975
+asS'stat_utf8'
+p3976
+(lp3977
+S'int'
+p3978
+aS'const char *'
+p3979
+aS'struct stat *'
+p3980
+asS'atoi'
+p3981
+(lp3982
+S'int'
+p3983
+aS'const char *'
+p3984
+asS'_IO_funlockfile'
+p3985
+(lp3986
+S'void'
+p3987
+aS'struct _IO_FILE *'
+p3988
+asS'atol'
+p3989
+(lp3990
+S'long'
+p3991
+aS'const char *'
+p3992
+asS'FxGCD'
+p3993
+(lp3994
+S'int'
+p3995
+aS'int'
+p3996
+aS'int'
+p3997
+asS'SetPixelReadMask'
+p3998
+(lp3999
+S'void'
+p4000
+aS'const int *'
+p4001
+asS'__finitef'
+p4002
+(lp4003
+S'int'
+p4004
+aS'float'
+p4005
+asS'atof'
+p4006
+(lp4007
+S'double'
+p4008
+aS'const char *'
+p4009
+asS'strdup'
+p4010
+(lp4011
+S'char *'
+p4012
+aS'const char *'
+p4013
+asS'IsVIPS'
+p4014
+(lp4015
+S'int'
+p4016
+aS'const unsigned char *'
+p4017
+aS'const int'
+p4018
+asS'wait4'
+p4019
+(lp4020
+S'int'
+p4021
+aS'int'
+p4022
+aS'__WAIT_STATUS'
+p4023
+aS'int'
+p4024
+aS'struct rusage *'
+p4025
+asS'drand48'
+p4026
+(lp4027
+S'double'
+p4028
+asS'erand48'
+p4029
+(lp4030
+S'double'
+p4031
+aS'unsigned short [3]'
+p4032
+asS'__ilogbl'
+p4033
+(lp4034
+S'int'
+p4035
+aS'long double'
+p4036
+asS'wait3'
+p4037
+(lp4038
+S'int'
+p4039
+aS'__WAIT_STATUS'
+p4040
+aS'int'
+p4041
+aS'struct rusage *'
+p4042
+asS'fgetpwent_r'
+p4043
+(lp4044
+S'int'
+p4045
+aS'struct _IO_FILE *restrict'
+p4046
+aS'struct passwd *restrict'
+p4047
+aS'char *restrict'
+p4048
+aS'int'
+p4049
+aS'struct passwd **restrict'
+p4050
+asS'sixel_output_create'
+p4051
+(lp4052
+S'struct sixel_output *'
+p4053
+aS'int *'
+p4054
+asS'__ilogb'
+p4055
+(lp4056
+S'int'
+p4057
+aS'double'
+p4058
+asS'__ilogbf'
+p4059
+(lp4060
+S'int'
+p4061
+aS'float'
+p4062
+asS'ReadDXT5'
+p4063
+(lp4064
+S'int'
+p4065
+aS'int *'
+p4066
+aS'struct _DDSInfo *'
+p4067
+aS'int *'
+p4068
+asS'ReadBMPImage'
+p4069
+(lp4070
+S'int *'
+p4071
+aS'const int *'
+p4072
+aS'int *'
+p4073
+asS'uselocale'
+p4074
+(lp4075
+S'struct __locale_struct *'
+p4076
+aS'struct __locale_struct *'
+p4077
+asS'psiginfo'
+p4078
+(lp4079
+S'void'
+p4080
+aS'const siginfo_t *'
+p4081
+aS'const char *'
+p4082
+asS'IsHDR'
+p4083
+(lp4084
+S'int'
+p4085
+aS'const unsigned char *'
+p4086
+aS'const int'
+p4087
+asS'ConvertRGBToXYZ'
+p4088
+(lp4089
+S'void'
+p4090
+aS'const double'
+p4091
+aS'const double'
+p4092
+aS'const double'
+p4093
+aS'double *'
+p4094
+aS'double *'
+p4095
+aS'double *'
+p4096
+asS'InitializeDcrawOpenCL'
+p4097
+(lp4098
+S'void'
+p4099
+aS'int *()'
+p4100
+asS'fread'
+p4101
+(lp4102
+S'int'
+p4103
+aS'void *restrict'
+p4104
+aS'int'
+p4105
+aS'int'
+p4106
+aS'struct _IO_FILE *restrict'
+p4107
+asS'ftello'
+p4108
+(lp4109
+S'long'
+p4110
+aS'struct _IO_FILE *'
+p4111
+asS'ValidateImageFormatsInMemory'
+p4112
+(lp4113
+S'int'
+p4114
+aS'int *'
+p4115
+aS'const char *'
+p4116
+aS'const char *'
+p4117
+aS'int *'
+p4118
+aS'int *'
+p4119
+asS'putpwent'
+p4120
+(lp4121
+S'int'
+p4122
+aS'const struct passwd *restrict'
+p4123
+aS'struct _IO_FILE *restrict'
+p4124
+asS'initstate'
+p4125
+(lp4126
+S'char *'
+p4127
+aS'unsigned int'
+p4128
+aS'char *'
+p4129
+aS'int'
+p4130
+asS'isdigit'
+p4131
+(lp4132
+S'int'
+p4133
+aS'int'
+p4134
+asS'ReadDXT3'
+p4135
+(lp4136
+S'int'
+p4137
+aS'int *'
+p4138
+aS'struct _DDSInfo *'
+p4139
+aS'int *'
+p4140
+asS'__scalb'
+p4141
+(lp4142
+S'double'
+p4143
+aS'double'
+p4144
+aS'double'
+p4145
+asS'poly_number_terms'
+p4146
+(lp4147
+S'int'
+p4148
+aS'double'
+p4149
+asS'isupper_l'
+p4150
+(lp4151
+S'int'
+p4152
+aS'int'
+p4153
+aS'struct __locale_struct *'
+p4154
+asS'floor'
+p4155
+(lp4156
+S'double'
+p4157
+aS'double'
+p4158
+asS'__lrint'
+p4159
+(lp4160
+S'long'
+p4161
+aS'double'
+p4162
+asS'DestroyLocaleNode'
+p4163
+(lp4164
+S'void *'
+p4165
+aS'void *'
+p4166
+asS'StopTimer'
+p4167
+(lp4168
+S'void'
+p4169
+aS'int *'
+p4170
+asS'PopCharPixel'
+p4171
+(lp4172
+S'unsigned char *'
+p4173
+aS'const unsigned char'
+p4174
+aS'unsigned char *'
+p4175
+asS'GetPSDSize'
+p4176
+(lp4177
+S'int'
+p4178
+aS'const struct _PSDInfo *'
+p4179
+aS'int *'
+p4180
+asS'WBMPReadInteger'
+p4181
+(lp4182
+S'int'
+p4183
+aS'int *'
+p4184
+aS'int *'
+p4185
+asS'setenv'
+p4186
+(lp4187
+S'int'
+p4188
+aS'const char *'
+p4189
+aS'const char *'
+p4190
+aS'int'
+p4191
+asS'fmodf'
+p4192
+(lp4193
+S'float'
+p4194
+aS'float'
+p4195
+aS'float'
+p4196
+asS'SetPixelb'
+p4197
+(lp4198
+S'void'
+p4199
+aS'const int *'
+p4200
+asS'ReadDCMImage'
+p4201
+(lp4202
+S'int *'
+p4203
+aS'const int *'
+p4204
+aS'int *'
+p4205
+asS'SetPixelBackgoundColor'
+p4206
+(lp4207
+S'void'
+p4208
+aS'const int *'
+p4209
+asS'__fma'
+p4210
+(lp4211
+S'double'
+p4212
+aS'double'
+p4213
+aS'double'
+p4214
+aS'double'
+p4215
+asS'ValidateMontageCommand'
+p4216
+(lp4217
+S'int'
+p4218
+aS'int *'
+p4219
+aS'const char *'
+p4220
+aS'const char *'
+p4221
+aS'int *'
+p4222
+aS'int *'
+p4223
+asS'ImportGreenQuantum'
+p4224
+(lp4225
+S'void'
+p4226
+aS'const int *'
+p4227
+aS'int *'
+p4228
+aS'const int'
+p4229
+aS'const unsigned char *'
+p4230
+asS'__scalbn'
+p4231
+(lp4232
+S'double'
+p4233
+aS'double'
+p4234
+aS'int'
+p4235
+asS'__ctype_toupper_loc'
+p4236
+(lp4237
+S'const int **'
+p4238
+asS'closedir'
+p4239
+(lp4240
+S'int'
+p4241
+aS'struct __dirstream *'
+p4242
+asS'ParseImageResourceBlocks'
+p4243
+(lp4244
+S'void'
+p4245
+aS'int *'
+p4246
+aS'const unsigned char *'
+p4247
+aS'int'
+p4248
+aS'int *'
+p4249
+aS'int *'
+p4250
+asS'CropToFitImage'
+p4251
+(lp4252
+S'int'
+p4253
+aS'int **'
+p4254
+aS'const double'
+p4255
+aS'const double'
+p4256
+aS'const double'
+p4257
+aS'const double'
+p4258
+aS'const int'
+p4259
+aS'int *'
+p4260
+asS'__nearbyintl'
+p4261
+(lp4262
+S'long double'
+p4263
+aS'long double'
+p4264
+asS'VectorClamp'
+p4265
+(lp4266
+S'void'
+p4267
+aS'struct _DDSVector4 *'
+p4268
+asS'__nearbyintf'
+p4269
+(lp4270
+S'float'
+p4271
+aS'float'
+p4272
+asS'parse8BIM'
+p4273
+(lp4274
+S'int'
+p4275
+aS'int *'
+p4276
+aS'int *'
+p4277
+asS'ReadGIFImage'
+p4278
+(lp4279
+S'int *'
+p4280
+aS'const int *'
+p4281
+aS'int *'
+p4282
+asS'IsXWD'
+p4283
+(lp4284
+S'int'
+p4285
+aS'const unsigned char *'
+p4286
+aS'const int'
+p4287
+asS'GetPixelMagentaTraits'
+p4288
+(lp4289
+S'int'
+p4290
+aS'const int *'
+p4291
+asS'PopShortPixel'
+p4292
+(lp4293
+S'unsigned char *'
+p4294
+aS'const int'
+p4295
+aS'const unsigned short'
+p4296
+aS'unsigned char *'
+p4297
+asS'SetPixelMetacontentExtent'
+p4298
+(lp4299
+S'void'
+p4300
+aS'int *'
+p4301
+aS'const int'
+p4302
+asS'ScaleColor5to8'
+p4303
+(lp4304
+S'unsigned char'
+p4305
+aS'const unsigned int'
+p4306
+asS'SetPixelIndex'
+p4307
+(lp4308
+S'void'
+p4309
+aS'const int *'
+p4310
+asS'__isinfl'
+p4311
+(lp4312
+S'int'
+p4313
+aS'long double'
+p4314
+asS'readdir_r'
+p4315
+(lp4316
+S'int'
+p4317
+aS'struct __dirstream *restrict'
+p4318
+aS'struct dirent *restrict'
+p4319
+aS'struct dirent **restrict'
+p4320
+asS'__gamma'
+p4321
+(lp4322
+S'double'
+p4323
+aS'double'
+p4324
+asS'cbrtf'
+p4325
+(lp4326
+S'float'
+p4327
+aS'float'
+p4328
+asS'nearbyint'
+p4329
+(lp4330
+S'double'
+p4331
+aS'double'
+p4332
+asS'iscntrl_l'
+p4333
+(lp4334
+S'int'
+p4335
+aS'int'
+p4336
+aS'struct __locale_struct *'
+p4337
+asS'fclose'
+p4338
+(lp4339
+S'int'
+p4340
+aS'struct _IO_FILE *'
+p4341
+asS'cbrtl'
+p4342
+(lp4343
+S'long double'
+p4344
+aS'long double'
+p4345
+asS'ReadPropertyMSBShort'
+p4346
+(lp4347
+S'short'
+p4348
+aS'const unsigned char **'
+p4349
+aS'int *'
+p4350
+asS'memset'
+p4351
+(lp4352
+S'void *'
+p4353
+asS'expm1f'
+p4354
+(lp4355
+S'float'
+p4356
+aS'float'
+p4357
+asS'dpc_read'
+p4358
+(lp4359
+S'int'
+p4360
+aS'int'
+p4361
+aS'const int'
+p4362
+aS'unsigned char *'
+p4363
+asS'fsetpos'
+p4364
+(lp4365
+S'int'
+p4366
+aS'struct _IO_FILE *'
+p4367
+aS'const _G_fpos_t *'
+p4368
+asS'DestroyCubeInfo'
+p4369
+(lp4370
+S'struct _CubeInfo *'
+p4371
+aS'const int *'
+p4372
+aS'struct _CubeInfo *'
+p4373
+asS'expm1l'
+p4374
+(lp4375
+S'long double'
+p4376
+aS'long double'
+p4377
+asS'WritePGXImage'
+p4378
+(lp4379
+S'int'
+p4380
+aS'const int *'
+p4381
+aS'int *'
+p4382
+aS'int *'
+p4383
+asS'log2f'
+p4384
+(lp4385
+S'float'
+p4386
+aS'float'
+p4387
+asS'GetVirtualPixelsCache'
+p4388
+(lp4389
+S'const int *'
+p4390
+aS'const int *'
+p4391
+asS'__scalblnf'
+p4392
+(lp4393
+S'float'
+p4394
+aS'float'
+p4395
+aS'long'
+p4396
+asS'log2l'
+p4397
+(lp4398
+S'long double'
+p4399
+aS'long double'
+p4400
+asS'GetPixelLuma'
+p4401
+(lp4402
+S'int'
+p4403
+aS'const int *'
+p4404
+asS'__scalblnl'
+p4405
+(lp4406
+S'long double'
+p4407
+aS'long double'
+p4408
+aS'long'
+p4409
+asS'ReadMATImage'
+p4410
+(lp4411
+S'int *'
+p4412
+aS'const int *'
+p4413
+aS'int *'
+p4414
+asS'__frexp'
+p4415
+(lp4416
+S'double'
+p4417
+aS'double'
+p4418
+aS'int *'
+p4419
+asS'GenerateEntropicChaos'
+p4420
+(lp4421
+S'int *'
+p4422
+aS'int *'
+p4423
+asS'load_hierarchy'
+p4424
+(lp4425
+S'int'
+p4426
+aS'int *'
+p4427
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:111:9) *'
+p4428
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:129:9) *'
+p4429
+aS'int *'
+p4430
+asS'CompositePixelInfoBlend'
+p4431
+(lp4432
+S'void'
+p4433
+aS'const int *'
+p4434
+aS'const double'
+p4435
+aS'const int *'
+p4436
+aS'const double'
+p4437
+aS'int *'
+p4438
+asS'IsPostscriptRendered'
+p4439
+(lp4440
+S'int'
+p4441
+aS'const char *'
+p4442
+asS'isspace'
+p4443
+(lp4444
+S'int'
+p4445
+aS'int'
+p4446
+asS'WriteVIPSImage'
+p4447
+(lp4448
+S'int'
+p4449
+aS'const int *'
+p4450
+aS'int *'
+p4451
+aS'int *'
+p4452
+asS'WriteHISTOGRAMImage'
+p4453
+(lp4454
+S'int'
+p4455
+aS'const int *'
+p4456
+aS'int *'
+p4457
+aS'int *'
+p4458
+asS'ValidateStreamCommand'
+p4459
+(lp4460
+S'int'
+p4461
+aS'int *'
+p4462
+aS'const char *'
+p4463
+aS'const char *'
+p4464
+aS'int *'
+p4465
+aS'int *'
+p4466
+asS'__xmknodat'
+p4467
+(lp4468
+S'int'
+p4469
+aS'int'
+p4470
+aS'int'
+p4471
+aS'const char *'
+p4472
+aS'unsigned int'
+p4473
+aS'unsigned long *'
+p4474
+asS'ExportCbYCrYQuantum'
+p4475
+(lp4476
+S'void'
+p4477
+aS'const int *'
+p4478
+aS'int *'
+p4479
+aS'const int'
+p4480
+aS'const int *'
+p4481
+asS'scalbnl'
+p4482
+(lp4483
+S'long double'
+p4484
+aS'long double'
+p4485
+aS'int'
+p4486
+asS'StreamImagePixels'
+p4487
+(lp4488
+S'int'
+p4489
+aS'const int *'
+p4490
+aS'const int *'
+p4491
+aS'int *'
+p4492
+asS'CompositePixelInfoOver'
+p4493
+(lp4494
+S'void'
+p4495
+aS'const int *'
+p4496
+aS'const double'
+p4497
+aS'const int *'
+p4498
+aS'const double'
+p4499
+aS'int *'
+p4500
+asS'PruneToCubeDepth'
+p4501
+(lp4502
+S'void'
+p4503
+aS'struct _CubeInfo *'
+p4504
+aS'const struct _NodeInfo *'
+p4505
+asS'LockMagickMutex'
+p4506
+(lp4507
+S'void'
+p4508
+asS'ReadXCFImage'
+p4509
+(lp4510
+S'int *'
+p4511
+aS'const int *'
+p4512
+aS'int *'
+p4513
+asS'analyzeImage'
+p4514
+(lp4515
+S'int'
+p4516
+aS'int **'
+p4517
+aS'const int'
+p4518
+aS'const char **'
+p4519
+aS'int *'
+p4520
+asS'ReadSIXELImage'
+p4521
+(lp4522
+S'int *'
+p4523
+aS'const int *'
+p4524
+aS'int *'
+p4525
+asS'WriteMatrixElements'
+p4526
+(lp4527
+S'int'
+p4528
+aS'const int *'
+p4529
+asS'ClearBounds'
+p4530
+(lp4531
+S'void'
+p4532
+aS'int *'
+p4533
+aS'int *'
+p4534
+aS'int *'
+p4535
+asS'__roundf'
+p4536
+(lp4537
+S'float'
+p4538
+aS'float'
+p4539
+asS'strnlen'
+p4540
+(lp4541
+S'int'
+p4542
+aS'const char *'
+p4543
+aS'int'
+p4544
+asS'IsRGBColorspace'
+p4545
+(lp4546
+S'int'
+p4547
+aS'const int'
+p4548
+asS'InitXCFImage'
+p4549
+(lp4550
+S'void'
+p4551
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:129:9) *'
+p4552
+aS'int *'
+p4553
+asS'siglongjmp'
+p4554
+(lp4555
+S'void'
+p4556
+aS'struct __jmp_buf_tag [1]'
+p4557
+aS'int'
+p4558
+asS'__roundl'
+p4559
+(lp4560
+S'long double'
+p4561
+aS'long double'
+p4562
+asS'IsXBM'
+p4563
+(lp4564
+S'int'
+p4565
+aS'const unsigned char *'
+p4566
+aS'const int'
+p4567
+asS'AcquireLocaleSplayTree'
+p4568
+(lp4569
+S'int *'
+p4570
+aS'const char *'
+p4571
+aS'const char *'
+p4572
+aS'int *'
+p4573
+asS'IsCALS'
+p4574
+(lp4575
+S'int'
+p4576
+aS'const unsigned char *'
+p4577
+aS'const int'
+p4578
+asS'div'
+p4579
+(lp4580
+S'div_t'
+p4581
+aS'int'
+p4582
+aS'int'
+p4583
+asS'round'
+p4584
+(lp4585
+S'double'
+p4586
+aS'double'
+p4587
+asS'nrand48_r'
+p4588
+(lp4589
+S'int'
+p4590
+aS'unsigned short [3]'
+p4591
+aS'struct drand48_data *restrict'
+p4592
+aS'long *restrict'
+p4593
+asS'system'
+p4594
+(lp4595
+S'int'
+p4596
+aS'const char *'
+p4597
+asS'cosf'
+p4598
+(lp4599
+S'float'
+p4600
+aS'float'
+p4601
+asS'Rd_WP_DWORD'
+p4602
+(lp4603
+S'void'
+p4604
+aS'int *'
+p4605
+aS'int *'
+p4606
+asS'nexttoward'
+p4607
+(lp4608
+S'double'
+p4609
+aS'double'
+p4610
+aS'long double'
+p4611
+asS'ecvt'
+p4612
+(lp4613
+S'char *'
+p4614
+aS'double'
+p4615
+aS'int'
+p4616
+aS'int *restrict'
+p4617
+aS'int *restrict'
+p4618
+asS'__errno_location'
+p4619
+(lp4620
+S'int *'
+p4621
+asS'ImportRGBOQuantum'
+p4622
+(lp4623
+S'void'
+p4624
+aS'const int *'
+p4625
+aS'int *'
+p4626
+aS'const int'
+p4627
+aS'const unsigned char *'
+p4628
+asS'cosl'
+p4629
+(lp4630
+S'long double'
+p4631
+aS'long double'
+p4632
+asS'ReadRGFImage'
+p4633
+(lp4634
+S'int *'
+p4635
+aS'const int *'
+p4636
+aS'int *'
+p4637
+asS'__y0l'
+p4638
+(lp4639
+S'long double'
+p4640
+aS'long double'
+p4641
+asS'cosh'
+p4642
+(lp4643
+S'double'
+p4644
+aS'double'
+p4645
+asS'__stpcpy'
+p4646
+(lp4647
+S'char *'
+p4648
+aS'char *restrict'
+p4649
+aS'const char *restrict'
+p4650
+asS'PushCharPixel'
+p4651
+(lp4652
+S'const unsigned char *'
+p4653
+aS'const unsigned char *'
+p4654
+aS'unsigned char *'
+p4655
+asS'WriteMAGICKImage'
+p4656
+(lp4657
+S'int'
+p4658
+aS'const int *'
+p4659
+aS'int *'
+p4660
+aS'int *'
+p4661
+asS'__nan'
+p4662
+(lp4663
+S'double'
+p4664
+aS'const char *'
+p4665
+asS'index'
+p4666
+(lp4667
+S'char *'
+p4668
+aS'const char *'
+p4669
+aS'int'
+p4670
+asS'ReadICONImage'
+p4671
+(lp4672
+S'int *'
+p4673
+aS'const int *'
+p4674
+aS'int *'
+p4675
+asS'GetHostname'
+p4676
+(lp4677
+S'char *'
+p4678
+aS'int *'
+p4679
+aS'int *'
+p4680
+asS'ConvertYUVToRGB'
+p4681
+(lp4682
+S'void'
+p4683
+aS'const double'
+p4684
+aS'const double'
+p4685
+aS'const double'
+p4686
+aS'double *'
+p4687
+aS'double *'
+p4688
+aS'double *'
+p4689
+asS'__truncf'
+p4690
+(lp4691
+S'float'
+p4692
+aS'float'
+p4693
+asS'IsDPX'
+p4694
+(lp4695
+S'int'
+p4696
+aS'const unsigned char *'
+p4697
+aS'const int'
+p4698
+asS'__acoshf'
+p4699
+(lp4700
+S'float'
+p4701
+aS'float'
+p4702
+asS'IsPDB'
+p4703
+(lp4704
+S'int'
+p4705
+aS'const unsigned char *'
+p4706
+aS'const int'
+p4707
+asS'IsPDF'
+p4708
+(lp4709
+S'int'
+p4710
+aS'const unsigned char *'
+p4711
+aS'const int'
+p4712
+asS'__acoshl'
+p4713
+(lp4714
+S'long double'
+p4715
+aS'long double'
+p4716
+asS'WritePDBImage'
+p4717
+(lp4718
+S'int'
+p4719
+aS'const int *'
+p4720
+aS'int *'
+p4721
+aS'int *'
+p4722
+asS'settimeofday'
+p4723
+(lp4724
+S'int'
+p4725
+aS'const struct timeval *'
+p4726
+aS'const struct timezone *'
+p4727
+asS'strtol'
+p4728
+(lp4729
+S'long'
+p4730
+aS'const char *restrict'
+p4731
+aS'char **restrict'
+p4732
+aS'int'
+p4733
+asS'significandl'
+p4734
+(lp4735
+S'long double'
+p4736
+aS'long double'
+p4737
+asS'fmax'
+p4738
+(lp4739
+S'double'
+p4740
+aS'double'
+p4741
+aS'double'
+p4742
+asS'matherr'
+p4743
+(lp4744
+S'int'
+p4745
+aS'struct exception *'
+p4746
+asS'significandf'
+p4747
+(lp4748
+S'float'
+p4749
+aS'float'
+p4750
+asS'ScribbleImage'
+p4751
+(lp4752
+S'int'
+p4753
+aS'int *'
+p4754
+asS'PopLZWStack'
+p4755
+(lp4756
+S'int'
+p4757
+aS'struct _LZWStack *'
+p4758
+asS'sinl'
+p4759
+(lp4760
+S'long double'
+p4761
+aS'long double'
+p4762
+asS'__dremf'
+p4763
+(lp4764
+S'float'
+p4765
+aS'float'
+p4766
+aS'float'
+p4767
+asS'timer_settime'
+p4768
+(lp4769
+S'int'
+p4770
+aS'void *'
+p4771
+aS'int'
+p4772
+aS'const struct itimerspec *restrict'
+p4773
+aS'struct itimerspec *restrict'
+p4774
+asS'ReadXCImage'
+p4775
+(lp4776
+S'int *'
+p4777
+aS'const int *'
+p4778
+aS'int *'
+p4779
+asS'fmaf'
+p4780
+(lp4781
+S'float'
+p4782
+aS'float'
+p4783
+aS'float'
+p4784
+aS'float'
+p4785
+asS'ConvertRGBToCMYK'
+p4786
+(lp4787
+S'void'
+p4788
+aS'int *'
+p4789
+asS'sinf'
+p4790
+(lp4791
+S'float'
+p4792
+aS'float'
+p4793
+asS'__dreml'
+p4794
+(lp4795
+S'long double'
+p4796
+aS'long double'
+p4797
+aS'long double'
+p4798
+asS'fmal'
+p4799
+(lp4800
+S'long double'
+p4801
+aS'long double'
+p4802
+aS'long double'
+p4803
+aS'long double'
+p4804
+asS'ParseXPMColor'
+p4805
+(lp4806
+S'char *'
+p4807
+aS'char *'
+p4808
+aS'int'
+p4809
+asS'wait'
+p4810
+(lp4811
+S'int'
+p4812
+aS'__WAIT_STATUS'
+p4813
+asS'Hamming'
+p4814
+(lp4815
+S'double'
+p4816
+aS'const double'
+p4817
+aS'const int *()'
+p4818
+asS'lroundf'
+p4819
+(lp4820
+S'long'
+p4821
+aS'float'
+p4822
+asS'lroundl'
+p4823
+(lp4824
+S'long'
+p4825
+aS'long double'
+p4826
+asS'super_fgets'
+p4827
+(lp4828
+S'char *'
+p4829
+aS'char **'
+p4830
+aS'int *'
+p4831
+aS'int *'
+p4832
+asS'AcquireLZWInfo'
+p4833
+(lp4834
+S'struct _LZWInfo *'
+p4835
+aS'int *'
+p4836
+aS'const int'
+p4837
+asS'dremf'
+p4838
+(lp4839
+S'float'
+p4840
+aS'float'
+p4841
+aS'float'
+p4842
+asS'MVGAppendPointsCommand'
+p4843
+(lp4844
+S'void'
+p4845
+aS'int *'
+p4846
+aS'const char *'
+p4847
+aS'const int'
+p4848
+aS'const int *'
+p4849
+asS'ScaleColor8to5'
+p4850
+(lp4851
+S'unsigned int'
+p4852
+aS'const unsigned char'
+p4853
+asS'ScaleColor8to6'
+p4854
+(lp4855
+S'unsigned int'
+p4856
+aS'const unsigned char'
+p4857
+asS'psignal'
+p4858
+(lp4859
+S'void'
+p4860
+aS'int'
+p4861
+aS'const char *'
+p4862
+asS'RelinquishLZWInfo'
+p4863
+(lp4864
+S'struct _LZWInfo *'
+p4865
+aS'struct _LZWInfo *'
+p4866
+asS'__cbrtf'
+p4867
+(lp4868
+S'float'
+p4869
+aS'float'
+p4870
+asS'IsJPEG'
+p4871
+(lp4872
+S'int'
+p4873
+aS'const unsigned char *'
+p4874
+aS'const int'
+p4875
+asS'IsUTFValid'
+p4876
+(lp4877
+S'int'
+p4878
+aS'int'
+p4879
+asS'__cbrtl'
+p4880
+(lp4881
+S'long double'
+p4882
+aS'long double'
+p4883
+asS'ReadBlobLZWByte'
+p4884
+(lp4885
+S'int'
+p4886
+aS'struct _LZWInfo *'
+p4887
+asS'GetPixelOpacity'
+p4888
+(lp4889
+S'int'
+p4890
+aS'const int *'
+p4891
+asS'AcquireRandomInfoThreadSet'
+p4892
+(lp4893
+S'int **'
+p4894
+asS'__jnl'
+p4895
+(lp4896
+S'long double'
+p4897
+aS'int'
+p4898
+aS'long double'
+p4899
+asS'TraceLine'
+p4900
+(lp4901
+S'void'
+p4902
+aS'int *'
+p4903
+aS'const int'
+p4904
+aS'const int'
+p4905
+asS'ReadCAPTIONImage'
+p4906
+(lp4907
+S'int *'
+p4908
+aS'const int *'
+p4909
+aS'int *'
+p4910
+asS'AssignImageColors'
+p4911
+(lp4912
+S'int'
+p4913
+aS'int *'
+p4914
+aS'struct _CubeInfo *'
+p4915
+aS'int *'
+p4916
+asS'clock_settime'
+p4917
+(lp4918
+S'int'
+p4919
+aS'int'
+p4920
+aS'const struct timespec *'
+p4921
+asS'AcquireMagicCache'
+p4922
+(lp4923
+S'int *'
+p4924
+aS'const char *'
+p4925
+aS'int *'
+p4926
+asS'OverviewImage'
+p4927
+(lp4928
+S'int *'
+p4929
+aS'const int *'
+p4930
+aS'int *'
+p4931
+aS'int *'
+p4932
+asS'fdimf'
+p4933
+(lp4934
+S'float'
+p4935
+aS'float'
+p4936
+aS'float'
+p4937
+asS'rindex'
+p4938
+(lp4939
+S'char *'
+p4940
+aS'const char *'
+p4941
+aS'int'
+p4942
+asS'fdiml'
+p4943
+(lp4944
+S'long double'
+p4945
+aS'long double'
+p4946
+aS'long double'
+p4947
+asS'IsPixelGray'
+p4948
+(lp4949
+S'int'
+p4950
+aS'const int *'
+p4951
+asS'get_params'
+p4952
+(lp4953
+S'unsigned char *'
+p4954
+aS'unsigned char *'
+p4955
+aS'int *'
+p4956
+aS'int *'
+p4957
+asS'lrand48_r'
+p4958
+(lp4959
+S'int'
+p4960
+aS'struct drand48_data *restrict'
+p4961
+aS'long *restrict'
+p4962
+asS'InsertComplexDoubleRow'
+p4963
+(lp4964
+S'void'
+p4965
+aS'int *'
+p4966
+aS'double *'
+p4967
+aS'int'
+p4968
+aS'double'
+p4969
+aS'double'
+p4970
+aS'int *'
+p4971
+asS'PrintChannelPerceptualHash'
+p4972
+(lp4973
+S'int'
+p4974
+aS'int *'
+p4975
+aS'int *'
+p4976
+aS'const int *'
+p4977
+asS'__fmod'
+p4978
+(lp4979
+S'double'
+p4980
+aS'double'
+p4981
+aS'double'
+p4982
+asS'ConvertRGBToYDbDr'
+p4983
+(lp4984
+S'void'
+p4985
+aS'const double'
+p4986
+aS'const double'
+p4987
+aS'const double'
+p4988
+aS'double *'
+p4989
+aS'double *'
+p4990
+aS'double *'
+p4991
+asS'ldexpl'
+p4992
+(lp4993
+S'long double'
+p4994
+aS'long double'
+p4995
+aS'int'
+p4996
+asS'ExportRedQuantum'
+p4997
+(lp4998
+S'void'
+p4999
+aS'const int *'
+p5000
+aS'int *'
+p5001
+aS'const int'
+p5002
+aS'const int *'
+p5003
+asS'IsPixelMonochrome'
+p5004
+(lp5005
+S'int'
+p5006
+aS'const int *'
+p5007
+asS'islower_l'
+p5008
+(lp5009
+S'int'
+p5010
+aS'int'
+p5011
+aS'struct __locale_struct *'
+p5012
+asS'nexttowardf'
+p5013
+(lp5014
+S'float'
+p5015
+aS'float'
+p5016
+aS'long double'
+p5017
+asS'SetPixelAlphaTraits'
+p5018
+(lp5019
+S'void'
+p5020
+aS'int *'
+p5021
+aS'const int'
+p5022
+asS'ReadYCBCRImage'
+p5023
+(lp5024
+S'int *'
+p5025
+aS'const int *'
+p5026
+aS'int *'
+p5027
+asS'isgraph_l'
+p5028
+(lp5029
+S'int'
+p5030
+aS'int'
+p5031
+aS'struct __locale_struct *'
+p5032
+asS'nexttowardl'
+p5033
+(lp5034
+S'long double'
+p5035
+aS'long double'
+p5036
+aS'long double'
+p5037
+asS'ReadPCXImage'
+p5038
+(lp5039
+S'int *'
+p5040
+aS'const int *'
+p5041
+aS'int *'
+p5042
+asS'gettimeofday'
+p5043
+(lp5044
+S'int'
+p5045
+aS'struct timeval *restrict'
+p5046
+aS'struct timezone *restrict'
+p5047
+asS'llrintl'
+p5048
+(lp5049
+S'long long'
+p5050
+aS'long double'
+p5051
+asS'__assert'
+p5052
+(lp5053
+S'void'
+p5054
+aS'const char *'
+p5055
+aS'const char *'
+p5056
+aS'int'
+p5057
+asS'sigstack'
+p5058
+(lp5059
+S'int'
+p5060
+aS'struct sigstack *'
+p5061
+aS'struct sigstack *'
+p5062
+asS'llrintf'
+p5063
+(lp5064
+S'long long'
+p5065
+aS'float'
+p5066
+asS'erand48_r'
+p5067
+(lp5068
+S'int'
+p5069
+aS'unsigned short [3]'
+p5070
+aS'struct drand48_data *restrict'
+p5071
+aS'double *restrict'
+p5072
+asS'GetPixelBlueTraits'
+p5073
+(lp5074
+S'int'
+p5075
+aS'const int *'
+p5076
+asS'__floorf'
+p5077
+(lp5078
+S'float'
+p5079
+aS'float'
+p5080
+asS'VectorSubtract3'
+p5081
+(lp5082
+S'void'
+p5083
+aS'const struct _DDSVector3'
+p5084
+aS'const struct _DDSVector3'
+p5085
+aS'struct _DDSVector3 *'
+p5086
+asS'ftrylockfile'
+p5087
+(lp5088
+S'int'
+p5089
+aS'struct _IO_FILE *'
+p5090
+asS'__floorl'
+p5091
+(lp5092
+S'long double'
+p5093
+aS'long double'
+p5094
+asS'GetAuthenticPixelsCache'
+p5095
+(lp5096
+S'int *'
+p5097
+aS'int *'
+p5098
+aS'const int'
+p5099
+aS'const int'
+p5100
+aS'const int'
+p5101
+aS'const int'
+p5102
+aS'int *'
+p5103
+asS'VectorMultiplyAdd3'
+p5104
+(lp5105
+S'void'
+p5106
+aS'const struct _DDSVector3'
+p5107
+aS'const struct _DDSVector3'
+p5108
+aS'const struct _DDSVector3'
+p5109
+aS'struct _DDSVector3 *'
+p5110
+asS'IsBMP'
+p5111
+(lp5112
+S'int'
+p5113
+aS'const unsigned char *'
+p5114
+aS'const int'
+p5115
+asS'IsColorCacheInstantiated'
+p5116
+(lp5117
+S'int'
+p5118
+aS'int *'
+p5119
+asS'GetFillColor'
+p5120
+(lp5121
+S'void'
+p5122
+aS'const int *'
+p5123
+aS'const int'
+p5124
+aS'const int'
+p5125
+aS'int *'
+p5126
+aS'int *'
+p5127
+asS'ReadTEXTImage'
+p5128
+(lp5129
+S'int *'
+p5130
+aS'const int *'
+p5131
+aS'int *'
+p5132
+asS'ReadDCMByte'
+p5133
+(lp5134
+S'int'
+p5135
+aS'struct _DCMStreamInfo *'
+p5136
+aS'int *'
+p5137
+asS'SetPixelYellow'
+p5138
+(lp5139
+S'void'
+p5140
+aS'const int *'
+p5141
+asS'strftime_l'
+p5142
+(lp5143
+S'int'
+p5144
+aS'char *restrict'
+p5145
+aS'int'
+p5146
+aS'const char *restrict'
+p5147
+aS'const struct tm *restrict'
+p5148
+aS'struct __locale_struct *'
+p5149
+asS'abort'
+p5150
+(lp5151
+S'void'
+p5152
+asS'fprintf'
+p5153
+(lp5154
+S'int'
+p5155
+aS'struct _IO_FILE *restrict'
+p5156
+aS'const char *restrict'
+p5157
+ag469
+asS'__sigaddset'
+p5158
+(lp5159
+S'int'
+p5160
+aS'__sigset_t *'
+p5161
+aS'int'
+p5162
+asS'__logl'
+p5163
+(lp5164
+S'long double'
+p5165
+aS'long double'
+p5166
+asS'__logb'
+p5167
+(lp5168
+S'double'
+p5169
+aS'double'
+p5170
+asS'strtoll'
+p5171
+(lp5172
+S'long long'
+p5173
+aS'const char *restrict'
+p5174
+aS'char **restrict'
+p5175
+aS'int'
+p5176
+asS'tan'
+p5177
+(lp5178
+S'double'
+p5179
+aS'double'
+p5180
+asS'__logf'
+p5181
+(lp5182
+S'float'
+p5183
+aS'float'
+p5184
+asS'timespec_get'
+p5185
+(lp5186
+S'int'
+p5187
+aS'struct timespec *'
+p5188
+aS'int'
+p5189
+asS'Get8BIMProperty'
+p5190
+(lp5191
+S'int'
+p5192
+aS'const int *'
+p5193
+aS'const char *'
+p5194
+aS'int *'
+p5195
+asS'sigqueue'
+p5196
+(lp5197
+S'int'
+p5198
+aS'int'
+p5199
+aS'int'
+p5200
+aS'const union sigval'
+p5201
+asS'clearerr'
+p5202
+(lp5203
+S'void'
+p5204
+aS'struct _IO_FILE *'
+p5205
+asS'InvokePostscriptDelegate'
+p5206
+(lp5207
+S'int'
+p5208
+aS'const int'
+p5209
+aS'const char *'
+p5210
+aS'char *'
+p5211
+aS'int *'
+p5212
+asS'UserTime'
+p5213
+(lp5214
+S'double'
+p5215
+asS'lcong48'
+p5216
+(lp5217
+S'void'
+p5218
+aS'unsigned short [7]'
+p5219
+asS'WriteCMYKImage'
+p5220
+(lp5221
+S'int'
+p5222
+aS'const int *'
+p5223
+aS'int *'
+p5224
+aS'int *'
+p5225
+asS'CompareMagickInfoSize'
+p5226
+(lp5227
+S'int'
+p5228
+aS'const void *'
+p5229
+aS'const void *'
+p5230
+asS'WriteUYVYImage'
+p5231
+(lp5232
+S'int'
+p5233
+aS'const int *'
+p5234
+aS'int *'
+p5235
+aS'int *'
+p5236
+asS'ReadPSDLayersInternal'
+p5237
+(lp5238
+S'int'
+p5239
+aS'int *'
+p5240
+aS'const int *'
+p5241
+aS'const struct _PSDInfo *'
+p5242
+aS'const int'
+p5243
+aS'int *'
+p5244
+asS'GetFITSPixelExtrema'
+p5245
+(lp5246
+S'int'
+p5247
+aS'int *'
+p5248
+aS'const int'
+p5249
+aS'double *'
+p5250
+aS'double *'
+p5251
+asS'on_exit'
+p5252
+(lp5253
+S'int'
+p5254
+aS'void (*)(int, void *)'
+p5255
+aS'void *'
+p5256
+asS'sin'
+p5257
+(lp5258
+S'double'
+p5259
+aS'double'
+p5260
+asS'DestroyPixelList'
+p5261
+(lp5262
+S'struct _PixelList *'
+p5263
+aS'struct _PixelList *'
+p5264
+asS'__ldexpf'
+p5265
+(lp5266
+S'float'
+p5267
+aS'float'
+p5268
+aS'int'
+p5269
+asS'flockfile'
+p5270
+(lp5271
+S'void'
+p5272
+aS'struct _IO_FILE *'
+p5273
+asS'GetPSDPacketSize'
+p5274
+(lp5275
+S'int'
+p5276
+aS'int *'
+p5277
+asS'atan'
+p5278
+(lp5279
+S'double'
+p5280
+aS'double'
+p5281
+asS'_IO_free_backup_area'
+p5282
+(lp5283
+S'void'
+p5284
+aS'struct _IO_FILE *'
+p5285
+asS'__log2'
+p5286
+(lp5287
+S'double'
+p5288
+aS'double'
+p5289
+asS'LogInfoCompare'
+p5290
+(lp5291
+S'int'
+p5292
+aS'const void *'
+p5293
+aS'const void *'
+p5294
+asS'RelinquishCompositeOptions'
+p5295
+(lp5296
+S'void'
+p5297
+aS'struct _CompositeOptions *'
+p5298
+asS'WriteDEBUGImage'
+p5299
+(lp5300
+S'int'
+p5301
+aS'const int *'
+p5302
+aS'int *'
+p5303
+aS'int *'
+p5304
+asS'sixel_put_flash'
+p5305
+(lp5306
+S'int'
+p5307
+aS'struct sixel_output *const'
+p5308
+asS'__scalbnf'
+p5309
+(lp5310
+S'float'
+p5311
+aS'float'
+p5312
+aS'int'
+p5313
+asS'ConvertYDbDrToRGB'
+p5314
+(lp5315
+S'void'
+p5316
+aS'const double'
+p5317
+aS'const double'
+p5318
+aS'const double'
+p5319
+aS'double *'
+p5320
+aS'double *'
+p5321
+aS'double *'
+p5322
+asS'CompositeUsage'
+p5323
+(lp5324
+S'int'
+p5325
+asS'gammal'
+p5326
+(lp5327
+S'long double'
+p5328
+aS'long double'
+p5329
+asS'strcasecmp'
+p5330
+(lp5331
+S'int'
+p5332
+aS'const char *'
+p5333
+aS'const char *'
+p5334
+asS'atanf'
+p5335
+(lp5336
+S'float'
+p5337
+aS'float'
+p5338
+asS'Gaussian'
+p5339
+(lp5340
+S'double'
+p5341
+aS'const double'
+p5342
+aS'const int *'
+p5343
+asS'__sigsetjmp'
+p5344
+(lp5345
+S'int'
+p5346
+aS'struct __jmp_buf_tag [1]'
+p5347
+aS'int'
+p5348
+asS'ConvertLabToRGB'
+p5349
+(lp5350
+S'void'
+p5351
+aS'const double'
+p5352
+aS'const double'
+p5353
+aS'const double'
+p5354
+aS'double *'
+p5355
+aS'double *'
+p5356
+aS'double *'
+p5357
+asS'__lroundf'
+p5358
+(lp5359
+S'long'
+p5360
+aS'float'
+p5361
+asS'__xstat'
+p5362
+(lp5363
+S'int'
+p5364
+aS'int'
+p5365
+aS'const char *'
+p5366
+aS'struct stat *'
+p5367
+asS'ReadRGBImage'
+p5368
+(lp5369
+S'int *'
+p5370
+aS'const int *'
+p5371
+aS'int *'
+p5372
+asS'ExpandBuffer'
+p5373
+(lp5374
+S'unsigned char *'
+p5375
+aS'unsigned char *'
+p5376
+aS'int *'
+p5377
+aS'const unsigned int'
+p5378
+asS'AffineArgsToCoefficients'
+p5379
+(lp5380
+S'void'
+p5381
+aS'double *'
+p5382
+asS'__llrintl'
+p5383
+(lp5384
+S'long long'
+p5385
+aS'long double'
+p5386
+asS'Kaiser'
+p5387
+(lp5388
+S'double'
+p5389
+aS'const double'
+p5390
+aS'const int *'
+p5391
+asS'IsSVG'
+p5392
+(lp5393
+S'int'
+p5394
+aS'const unsigned char *'
+p5395
+aS'const int'
+p5396
+asS'WritePICONImage'
+p5397
+(lp5398
+S'int'
+p5399
+aS'const int *'
+p5400
+aS'int *'
+p5401
+aS'int *'
+p5402
+asS'IsMagicCacheInstantiated'
+p5403
+(lp5404
+S'int'
+p5405
+aS'int *'
+p5406
+asS'IsJNG'
+p5407
+(lp5408
+S'int'
+p5409
+aS'const unsigned char *'
+p5410
+aS'const int'
+p5411
+asS'roundl'
+p5412
+(lp5413
+S'long double'
+p5414
+aS'long double'
+p5415
+asS'ReadPSDChannelPixels'
+p5416
+(lp5417
+S'int'
+p5418
+aS'int *'
+p5419
+aS'const int'
+p5420
+aS'const int'
+p5421
+aS'const int'
+p5422
+aS'const unsigned char *'
+p5423
+aS'int *'
+p5424
+asS'TraceRoundRectangle'
+p5425
+(lp5426
+S'void'
+p5427
+aS'int *'
+p5428
+aS'const int'
+p5429
+aS'const int'
+p5430
+aS'int'
+p5431
+asS'jnf'
+p5432
+(lp5433
+S'float'
+p5434
+aS'int'
+p5435
+aS'float'
+p5436
+asS'pthread_kill'
+p5437
+(lp5438
+S'int'
+p5439
+aS'unsigned long'
+p5440
+aS'int'
+p5441
+asS'size_t'
+p5442
+(lp5443
+S'int'
+p5444
+asS'ReadHALDImage'
+p5445
+(lp5446
+S'int *'
+p5447
+aS'const int *'
+p5448
+aS'int *'
+p5449
+asS'open_utf8'
+p5450
+(lp5451
+S'int'
+p5452
+aS'const char *'
+p5453
+aS'int'
+p5454
+aS'int'
+p5455
+asS'jnl'
+p5456
+(lp5457
+S'long double'
+p5458
+aS'int'
+p5459
+aS'long double'
+p5460
+asS'ReduceImageColors'
+p5461
+(lp5462
+S'void'
+p5463
+aS'const int *'
+p5464
+aS'struct _CubeInfo *'
+p5465
+asS'GetPixelRed'
+p5466
+(lp5467
+S'int'
+p5468
+aS'const int *'
+p5469
+asS'GetIPTCProperty'
+p5470
+(lp5471
+S'int'
+p5472
+aS'const int *'
+p5473
+aS'const char *'
+p5474
+aS'int *'
+p5475
+asS'IsXCF'
+p5476
+(lp5477
+S'int'
+p5478
+aS'const unsigned char *'
+p5479
+aS'const int'
+p5480
+asS'setlocale'
+p5481
+(lp5482
+S'char *'
+p5483
+aS'int'
+p5484
+aS'const char *'
+p5485
+asS'IsFAX'
+p5486
+(lp5487
+S'int'
+p5488
+aS'const unsigned char *'
+p5489
+aS'const int'
+p5490
+asS'ConvertLabToXYZ'
+p5491
+(lp5492
+S'void'
+p5493
+aS'const double'
+p5494
+aS'const double'
+p5495
+aS'const double'
+p5496
+aS'double *'
+p5497
+aS'double *'
+p5498
+aS'double *'
+p5499
+asS'memcpy'
+p5500
+(lp5501
+S'void *'
+p5502
+asS'PerceptibleReciprocal'
+p5503
+(lp5504
+S'double'
+p5505
+aS'const double'
+p5506
+asS'j1f'
+p5507
+(lp5508
+S'float'
+p5509
+aS'float'
+p5510
+asS'__asinh'
+p5511
+(lp5512
+S'double'
+p5513
+aS'double'
+p5514
+asS'__asinl'
+p5515
+(lp5516
+S'long double'
+p5517
+aS'long double'
+p5518
+asS'main'
+p5519
+(lp5520
+S'int'
+p5521
+aS'int'
+p5522
+aS'char **'
+p5523
+asS'__asinf'
+p5524
+(lp5525
+S'float'
+p5526
+aS'float'
+p5527
+asS'Sinc'
+p5528
+(lp5529
+S'double'
+p5530
+aS'const double'
+p5531
+aS'const int *'
+p5532
+asS'StringToDoubleInterval'
+p5533
+(lp5534
+S'double'
+p5535
+aS'const char *'
+p5536
+aS'const double'
+p5537
+asS'__ldexpl'
+p5538
+(lp5539
+S'long double'
+p5540
+aS'long double'
+p5541
+aS'int'
+p5542
+asS'DefineImageHistogram'
+p5543
+(lp5544
+S'void'
+p5545
+aS'const int *'
+p5546
+aS'struct _NodeInfo *'
+p5547
+aS'int **'
+p5548
+asS'SetPixelMagenta'
+p5549
+(lp5550
+S'void'
+p5551
+aS'const int *'
+p5552
+asS'GetLogInfo'
+p5553
+(lp5554
+S'int *'
+p5555
+aS'const char *'
+p5556
+aS'int *'
+p5557
+asS'DestroyOptions'
+p5558
+(lp5559
+S'void *'
+p5560
+aS'void *'
+p5561
+asS'strcoll_l'
+p5562
+(lp5563
+S'int'
+p5564
+aS'const char *'
+p5565
+aS'const char *'
+p5566
+aS'struct __locale_struct *'
+p5567
+asS'CompressRangeFit'
+p5568
+(lp5569
+S'void'
+p5570
+aS'const int'
+p5571
+aS'const struct _DDSVector4 *'
+p5572
+aS'const int *'
+p5573
+aS'const struct _DDSVector3'
+p5574
+aS'const struct _DDSVector4'
+p5575
+aS'struct _DDSVector3 *'
+p5576
+aS'struct _DDSVector3 *'
+p5577
+aS'unsigned char *'
+p5578
+asS'PushQuantumLongPixel'
+p5579
+(lp5580
+S'const unsigned char *'
+p5581
+aS'int *'
+p5582
+aS'const unsigned char *'
+p5583
+asS'ReadMATImageV4'
+p5584
+(lp5585
+S'int *'
+p5586
+aS'const int *'
+p5587
+aS'int *'
+p5588
+aS'int *'
+p5589
+asS'isxdigit_l'
+p5590
+(lp5591
+S'int'
+p5592
+aS'int'
+p5593
+aS'struct __locale_struct *'
+p5594
+asS'getpwnam'
+p5595
+(lp5596
+S'struct passwd *'
+p5597
+aS'const char *'
+p5598
+asS'IsEXR'
+p5599
+(lp5600
+S'int'
+p5601
+aS'const unsigned char *'
+p5602
+aS'const int'
+p5603
+asS'PopQuantumPixel'
+p5604
+(lp5605
+S'unsigned char *'
+p5606
+aS'int *'
+p5607
+aS'const int'
+p5608
+aS'unsigned char *'
+p5609
+asS'ClampPixel'
+p5610
+(lp5611
+S'int'
+p5612
+aS'const int'
+p5613
+asS'rewinddir'
+p5614
+(lp5615
+S'void'
+p5616
+aS'struct __dirstream *'
+p5617
+asS'putc_unlocked'
+p5618
+(lp5619
+S'int'
+p5620
+aS'int'
+p5621
+aS'struct _IO_FILE *'
+p5622
+asS'ldexpf'
+p5623
+(lp5624
+S'float'
+p5625
+aS'float'
+p5626
+aS'int'
+p5627
+asS'DefaultFatalErrorHandler'
+p5628
+(lp5629
+S'void'
+p5630
+aS'const int'
+p5631
+aS'const char *'
+p5632
+aS'const char *'
+p5633
+asS'ZeroCrossHistogram'
+p5634
+(lp5635
+S'void'
+p5636
+aS'double *'
+p5637
+aS'const double'
+p5638
+aS'short *'
+p5639
+asS'getdelim'
+p5640
+(lp5641
+S'long'
+p5642
+aS'char **restrict'
+p5643
+aS'int *restrict'
+p5644
+aS'int'
+p5645
+aS'struct _IO_FILE *restrict'
+p5646
+asS'SetPixelWriteMask'
+p5647
+(lp5648
+S'void'
+p5649
+aS'const int *'
+p5650
+asS'__coshf'
+p5651
+(lp5652
+S'float'
+p5653
+aS'float'
+p5654
+asS'SetPSDPixel'
+p5655
+(lp5656
+S'void'
+p5657
+aS'int *'
+p5658
+aS'const int'
+p5659
+aS'const int'
+p5660
+aS'const int'
+p5661
+aS'const int'
+p5662
+aS'int *'
+p5663
+aS'int *'
+p5664
+asS'WritePNMImage'
+p5665
+(lp5666
+S'int'
+p5667
+aS'const int *'
+p5668
+aS'int *'
+p5669
+aS'int *'
+p5670
+asS'ValidateUsage'
+p5671
+(lp5672
+S'int'
+p5673
+asS'__coshl'
+p5674
+(lp5675
+S'long double'
+p5676
+aS'long double'
+p5677
+asS'WriteAAIImage'
+p5678
+(lp5679
+S'int'
+p5680
+aS'const int *'
+p5681
+aS'int *'
+p5682
+aS'int *'
+p5683
+asS'InitializeHistogram'
+p5684
+(lp5685
+S'void'
+p5686
+aS'const int *'
+p5687
+aS'int **'
+p5688
+aS'int *'
+p5689
+asS'rename_utf8'
+p5690
+(lp5691
+S'int'
+p5692
+aS'const char *'
+p5693
+aS'const char *'
+p5694
+asS'load_tile'
+p5695
+(lp5696
+S'int'
+p5697
+aS'int *'
+p5698
+aS'int *'
+p5699
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:111:9) *'
+p5700
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:129:9) *'
+p5701
+aS'int'
+p5702
+aS'int *'
+p5703
+asS'jpeg_read_remaining'
+p5704
+(lp5705
+S'int'
+p5706
+aS'int *'
+p5707
+aS'int *'
+p5708
+asS'TraceRectangle'
+p5709
+(lp5710
+S'void'
+p5711
+aS'int *'
+p5712
+aS'const int'
+p5713
+aS'const int'
+p5714
+asS'clock_gettime'
+p5715
+(lp5716
+S'int'
+p5717
+aS'int'
+p5718
+aS'struct timespec *'
+p5719
+asS'IsUTFSpace'
+p5720
+(lp5721
+S'int'
+p5722
+aS'int'
+p5723
+asS'mkfifo'
+p5724
+(lp5725
+S'int'
+p5726
+aS'const char *'
+p5727
+aS'unsigned int'
+p5728
+asS'ConjureUsage'
+p5729
+(lp5730
+S'int'
+p5731
+asS'mktemp'
+p5732
+(lp5733
+S'char *'
+p5734
+aS'char *'
+p5735
+asS'__atan'
+p5736
+(lp5737
+S'double'
+p5738
+aS'double'
+p5739
+asS'GetPixelMetacontentExtent'
+p5740
+(lp5741
+S'int'
+p5742
+aS'const int *'
+p5743
+asS'__log10'
+p5744
+(lp5745
+S'double'
+p5746
+aS'double'
+p5747
+asS'IsSUN'
+p5748
+(lp5749
+S'int'
+p5750
+aS'const unsigned char *'
+p5751
+aS'const int'
+p5752
+asS'TraceCircle'
+p5753
+(lp5754
+S'void'
+p5755
+aS'int *'
+p5756
+aS'const int'
+p5757
+aS'const int'
+p5758
+asS'GetImageCache'
+p5759
+(lp5760
+S'int *'
+p5761
+aS'const int *'
+p5762
+aS'const char *'
+p5763
+aS'int *'
+p5764
+asS'GetPixelMetaChannels'
+p5765
+(lp5766
+S'int'
+p5767
+aS'const int *'
+p5768
+asS'DitherImage'
+p5769
+(lp5770
+S'int'
+p5771
+aS'int *'
+p5772
+aS'struct _CubeInfo *'
+p5773
+aS'int *'
+p5774
+asS'ReadPropertySignedShort'
+p5775
+(lp5776
+S'short'
+p5777
+aS'const int'
+p5778
+aS'const unsigned char *'
+p5779
+asS'initstate_r'
+p5780
+(lp5781
+S'int'
+p5782
+aS'unsigned int'
+p5783
+aS'char *restrict'
+p5784
+aS'int'
+p5785
+aS'struct random_data *restrict'
+p5786
+asS'isdigit_l'
+p5787
+(lp5788
+S'int'
+p5789
+aS'int'
+p5790
+aS'struct __locale_struct *'
+p5791
+asS'ExportCMYKOQuantum'
+p5792
+(lp5793
+S'void'
+p5794
+aS'const int *'
+p5795
+aS'int *'
+p5796
+aS'const int'
+p5797
+aS'const int *'
+p5798
+asS'jpeg_embed'
+p5799
+(lp5800
+S'int'
+p5801
+aS'int *'
+p5802
+aS'int *'
+p5803
+aS'int *'
+p5804
+asS'__fdimf'
+p5805
+(lp5806
+S'float'
+p5807
+aS'float'
+p5808
+aS'float'
+p5809
+asS'GetPixelYTraits'
+p5810
+(lp5811
+S'int'
+p5812
+aS'const int *'
+p5813
+asS'GetNodeInfo'
+p5814
+(lp5815
+S'struct _NodeInfo *'
+p5816
+aS'struct _CubeInfo *'
+p5817
+aS'const int'
+p5818
+asS'__fdiml'
+p5819
+(lp5820
+S'long double'
+p5821
+aS'long double'
+p5822
+aS'long double'
+p5823
+asS'unsetenv'
+p5824
+(lp5825
+S'int'
+p5826
+aS'const char *'
+p5827
+asS'atan2l'
+p5828
+(lp5829
+S'long double'
+p5830
+aS'long double'
+p5831
+aS'long double'
+p5832
+asS'IsHTML'
+p5833
+(lp5834
+S'int'
+p5835
+aS'const unsigned char *'
+p5836
+aS'const int'
+p5837
+asS'asinhf'
+p5838
+(lp5839
+S'float'
+p5840
+aS'float'
+p5841
+asS'atan2f'
+p5842
+(lp5843
+S'float'
+p5844
+aS'float'
+p5845
+aS'float'
+p5846
+asS'ConvertHSIToRGB'
+p5847
+(lp5848
+S'void'
+p5849
+aS'const double'
+p5850
+aS'const double'
+p5851
+aS'const double'
+p5852
+aS'double *'
+p5853
+aS'double *'
+p5854
+aS'double *'
+p5855
+asS'SetPixela'
+p5856
+(lp5857
+S'void'
+p5858
+aS'const int *'
+p5859
+asS'__signbit'
+p5860
+(lp5861
+S'int'
+p5862
+aS'double'
+p5863
+asS'DestroyLayerInfo'
+p5864
+(lp5865
+S'struct _LayerInfo *'
+p5866
+aS'struct _LayerInfo *'
+p5867
+aS'const int'
+p5868
+asS'LogCompare'
+p5869
+(lp5870
+S'int'
+p5871
+aS'const void *'
+p5872
+aS'const void *'
+p5873
+asS'ferror'
+p5874
+(lp5875
+S'int'
+p5876
+aS'struct _IO_FILE *'
+p5877
+asS'WriteTo8BimProfile'
+p5878
+(lp5879
+S'void'
+p5880
+aS'int *'
+p5881
+aS'const char *'
+p5882
+aS'const int *'
+p5883
+asS'GetMedianPixelList'
+p5884
+(lp5885
+S'void'
+p5886
+aS'struct _PixelList *'
+p5887
+aS'int *'
+p5888
+asS'__log1p'
+p5889
+(lp5890
+S'double'
+p5891
+aS'double'
+p5892
+asS'ConvertRGBToYPbPr'
+p5893
+(lp5894
+S'void'
+p5895
+aS'const double'
+p5896
+aS'const double'
+p5897
+aS'const double'
+p5898
+aS'double *'
+p5899
+aS'double *'
+p5900
+aS'double *'
+p5901
+asS'asctime_r'
+p5902
+(lp5903
+S'char *'
+p5904
+aS'const struct tm *restrict'
+p5905
+aS'char *restrict'
+p5906
+asS'GetBytesPerRow'
+p5907
+(lp5908
+S'int'
+p5909
+aS'const int'
+p5910
+aS'const int'
+p5911
+aS'const int'
+p5912
+aS'const int'
+p5913
+asS'IssRGBColorspace'
+p5914
+(lp5915
+S'int'
+p5916
+aS'const int'
+p5917
+asS'remainder'
+p5918
+(lp5919
+S'double'
+p5920
+aS'double'
+p5921
+aS'double'
+p5922
+asS'IsLocaleTreeInstantiated'
+p5923
+(lp5924
+S'int'
+p5925
+aS'int *'
+p5926
+asS'ConvertRGBToLCHab'
+p5927
+(lp5928
+S'void'
+p5929
+aS'const double'
+p5930
+aS'const double'
+p5931
+aS'const double'
+p5932
+aS'double *'
+p5933
+aS'double *'
+p5934
+aS'double *'
+p5935
+asS'log'
+p5936
+(lp5937
+S'double'
+p5938
+aS'double'
+p5939
+asS'toupper_l'
+p5940
+(lp5941
+S'int'
+p5942
+aS'int'
+p5943
+aS'struct __locale_struct *'
+p5944
+asS'expm1'
+p5945
+(lp5946
+S'double'
+p5947
+aS'double'
+p5948
+asS'fseeko'
+p5949
+(lp5950
+S'int'
+p5951
+aS'struct _IO_FILE *'
+p5952
+aS'long'
+p5953
+aS'int'
+p5954
+asS'__uflow'
+p5955
+(lp5956
+S'int'
+p5957
+aS'struct _IO_FILE *'
+p5958
+asS'IsSupportedCombination'
+p5959
+(lp5960
+S'int'
+p5961
+aS'const VIPSBandFormat'
+p5962
+aS'const VIPSType'
+p5963
+asS'gammaf'
+p5964
+(lp5965
+S'float'
+p5966
+aS'float'
+p5967
+asS'__hypotl'
+p5968
+(lp5969
+S'long double'
+p5970
+aS'long double'
+p5971
+aS'long double'
+p5972
+asS'ReadIPLImage'
+p5973
+(lp5974
+S'int *'
+p5975
+aS'const int *'
+p5976
+aS'int *'
+p5977
+asS'random_r'
+p5978
+(lp5979
+S'int'
+p5980
+aS'struct random_data *restrict'
+p5981
+aS'int *restrict'
+p5982
+asS'fdopen'
+p5983
+(lp5984
+S'struct _IO_FILE *'
+p5985
+aS'int'
+p5986
+aS'const char *'
+p5987
+asS'GetXMPProperty'
+p5988
+(lp5989
+S'int'
+p5990
+aS'const int *'
+p5991
+aS'const char *'
+p5992
+asS'TraceEllipse'
+p5993
+(lp5994
+S'void'
+p5995
+aS'int *'
+p5996
+aS'const int'
+p5997
+aS'const int'
+p5998
+aS'const int'
+p5999
+asS'UnpackWPGRaster'
+p6000
+(lp6001
+S'int'
+p6002
+aS'int *'
+p6003
+aS'int'
+p6004
+aS'int *'
+p6005
+asS'sigsetmask'
+p6006
+(lp6007
+S'int'
+p6008
+aS'int'
+p6009
+asS'islower'
+p6010
+(lp6011
+S'int'
+p6012
+aS'int'
+p6013
+asS'isupper'
+p6014
+(lp6015
+S'int'
+p6016
+aS'int'
+p6017
+asS'ldexp'
+p6018
+(lp6019
+S'double'
+p6020
+aS'double'
+p6021
+aS'int'
+p6022
+asS'sinhl'
+p6023
+(lp6024
+S'long double'
+p6025
+aS'long double'
+p6026
+asS'__log2l'
+p6027
+(lp6028
+S'long double'
+p6029
+aS'long double'
+p6030
+asS'rint'
+p6031
+(lp6032
+S'double'
+p6033
+aS'double'
+p6034
+asS'GetCompositeOptions'
+p6035
+(lp6036
+S'void'
+p6037
+aS'struct _CompositeOptions *'
+p6038
+asS'MontageUsage'
+p6039
+(lp6040
+S'int'
+p6041
+asS'ReadPSImage'
+p6042
+(lp6043
+S'int *'
+p6044
+aS'const int *'
+p6045
+aS'int *'
+p6046
+asS'Upsample'
+p6047
+(lp6048
+S'void'
+p6049
+aS'const int'
+p6050
+aS'const int'
+p6051
+aS'const int'
+p6052
+aS'unsigned char *'
+p6053
+asS'__scalbnl'
+p6054
+(lp6055
+S'long double'
+p6056
+aS'long double'
+p6057
+aS'int'
+p6058
+asS'__remquol'
+p6059
+(lp6060
+S'long double'
+p6061
+aS'long double'
+p6062
+aS'long double'
+p6063
+aS'int *'
+p6064
+asS'__pow'
+p6065
+(lp6066
+S'double'
+p6067
+aS'double'
+p6068
+aS'double'
+p6069
+asS'ReadDDSImage'
+p6070
+(lp6071
+S'int *'
+p6072
+aS'const int *'
+p6073
+aS'int *'
+p6074
+asS'ImportCMYKOQuantum'
+p6075
+(lp6076
+S'void'
+p6077
+aS'const int *'
+p6078
+aS'int *'
+p6079
+aS'const int'
+p6080
+aS'const unsigned char *'
+p6081
+asS'open'
+p6082
+(lp6083
+S'int'
+p6084
+aS'const char *'
+p6085
+aS'int'
+p6086
+ag469
+asS'__remquof'
+p6087
+(lp6088
+S'float'
+p6089
+aS'float'
+p6090
+aS'float'
+p6091
+aS'int *'
+p6092
+asS'GetNextUTFCode'
+p6093
+(lp6094
+S'int'
+p6095
+aS'const char *'
+p6096
+aS'unsigned int *'
+p6097
+asS'ConvertLCHuvToXYZ'
+p6098
+(lp6099
+S'void'
+p6100
+aS'const double'
+p6101
+aS'const double'
+p6102
+aS'const double'
+p6103
+aS'double *'
+p6104
+aS'double *'
+p6105
+aS'double *'
+p6106
+asS'PreservePSDOpacityMask'
+p6107
+(lp6108
+S'void'
+p6109
+aS'int *'
+p6110
+aS'struct _LayerInfo *'
+p6111
+aS'int *'
+p6112
+asS'clock_nanosleep'
+p6113
+(lp6114
+S'int'
+p6115
+aS'int'
+p6116
+aS'int'
+p6117
+aS'const struct timespec *'
+p6118
+aS'struct timespec *'
+p6119
+asS'ReadURLImage'
+p6120
+(lp6121
+S'int *'
+p6122
+aS'const int *'
+p6123
+aS'int *'
+p6124
+asS'duplocale'
+p6125
+(lp6126
+S'struct __locale_struct *'
+p6127
+aS'struct __locale_struct *'
+p6128
+asS'copysignl'
+p6129
+(lp6130
+S'long double'
+p6131
+aS'long double'
+p6132
+aS'long double'
+p6133
+asS'IsPNM'
+p6134
+(lp6135
+S'int'
+p6136
+aS'const unsigned char *'
+p6137
+aS'const int'
+p6138
+asS'mkdir'
+p6139
+(lp6140
+S'int'
+p6141
+aS'const char *'
+p6142
+aS'unsigned int'
+p6143
+asS'AcquirePixelListThreadSet'
+p6144
+(lp6145
+S'struct _PixelList **'
+p6146
+aS'const int'
+p6147
+aS'const int'
+p6148
+asS'sigpending'
+p6149
+(lp6150
+S'int'
+p6151
+aS'__sigset_t *'
+p6152
+asS'__round'
+p6153
+(lp6154
+S'double'
+p6155
+aS'double'
+p6156
+asS'IsPixelAtDepth'
+p6157
+(lp6158
+S'int'
+p6159
+aS'const int'
+p6160
+aS'const int'
+p6161
+asS'WriteMATImage'
+p6162
+(lp6163
+S'int'
+p6164
+aS'const int *'
+p6165
+aS'int *'
+p6166
+aS'int *'
+p6167
+asS'ReadBlobFloatsLSB'
+p6168
+(lp6169
+S'void'
+p6170
+aS'int *'
+p6171
+aS'int'
+p6172
+aS'float *'
+p6173
+asS'__frexpf'
+p6174
+(lp6175
+S'float'
+p6176
+aS'float'
+p6177
+aS'int *'
+p6178
+asS'CloneMagickWandFromImages'
+p6179
+(lp6180
+S'int *'
+p6181
+aS'const int *'
+p6182
+aS'int *'
+p6183
+asS'ExportCMYKQuantum'
+p6184
+(lp6185
+S'void'
+p6186
+aS'const int *'
+p6187
+aS'int *'
+p6188
+aS'const int'
+p6189
+aS'const int *'
+p6190
+asS'__frexpl'
+p6191
+(lp6192
+S'long double'
+p6193
+aS'long double'
+p6194
+aS'int *'
+p6195
+asS'IsAuthenticPixel'
+p6196
+(lp6197
+S'int'
+p6198
+aS'const int *'
+p6199
+aS'const int'
+p6200
+aS'const int'
+p6201
+asS'fma'
+p6202
+(lp6203
+S'double'
+p6204
+aS'double'
+p6205
+aS'double'
+p6206
+aS'double'
+p6207
+asS'WriteFAXImage'
+p6208
+(lp6209
+S'int'
+p6210
+aS'const int *'
+p6211
+aS'int *'
+p6212
+aS'int *'
+p6213
+asS'__significandl'
+p6214
+(lp6215
+S'long double'
+p6216
+aS'long double'
+p6217
+asS'FxSubexpression'
+p6218
+(lp6219
+S'const char *'
+p6220
+aS'const char *'
+p6221
+aS'int *'
+p6222
+asS'__erff'
+p6223
+(lp6224
+S'float'
+p6225
+aS'float'
+p6226
+asS'ConvertYCbCrToRGB'
+p6227
+(lp6228
+S'void'
+p6229
+aS'const double'
+p6230
+aS'const double'
+p6231
+aS'const double'
+p6232
+aS'double *'
+p6233
+aS'double *'
+p6234
+aS'double *'
+p6235
+asS'GetPixelGray'
+p6236
+(lp6237
+S'int'
+p6238
+aS'const int *'
+p6239
+asS'__erfl'
+p6240
+(lp6241
+S'long double'
+p6242
+aS'long double'
+p6243
+asS'feof'
+p6244
+(lp6245
+S'int'
+p6246
+aS'struct _IO_FILE *'
+p6247
+asS'atanhf'
+p6248
+(lp6249
+S'float'
+p6250
+aS'float'
+p6251
+asS'ReadBlobFloatsMSB'
+p6252
+(lp6253
+S'void'
+p6254
+aS'int *'
+p6255
+aS'int'
+p6256
+aS'float *'
+p6257
+asS'ConvertXYZToLMS'
+p6258
+(lp6259
+S'void'
+p6260
+aS'const double'
+p6261
+aS'const double'
+p6262
+aS'const double'
+p6263
+aS'double *'
+p6264
+aS'double *'
+p6265
+aS'double *'
+p6266
+asS'IsPES'
+p6267
+(lp6268
+S'int'
+p6269
+aS'const unsigned char *'
+p6270
+aS'const int'
+p6271
+asS'fscanf'
+p6272
+(lp6273
+S'int'
+p6274
+aS'struct _IO_FILE *restrict'
+p6275
+aS'const char *restrict'
+p6276
+ag469
+asS'WritePCDImage'
+p6277
+(lp6278
+S'int'
+p6279
+aS'const int *'
+p6280
+aS'int *'
+p6281
+aS'int *'
+p6282
+asS'ReadPDFImage'
+p6283
+(lp6284
+S'int *'
+p6285
+aS'const int *'
+p6286
+aS'int *'
+p6287
+asS'quick_exit'
+p6288
+(lp6289
+S'void'
+p6290
+aS'int'
+p6291
+asS'SetDXT1Pixels'
+p6292
+(lp6293
+S'int'
+p6294
+aS'int *'
+p6295
+aS'int'
+p6296
+aS'int'
+p6297
+aS'struct _DDSColors'
+p6298
+aS'int'
+p6299
+aS'int *'
+p6300
+asS'EncodeImage'
+p6301
+(lp6302
+S'int'
+p6303
+aS'int *'
+p6304
+aS'const unsigned char *'
+p6305
+aS'const int'
+p6306
+aS'unsigned char *'
+p6307
+asS'NegateCMYK'
+p6308
+(lp6309
+S'int'
+p6310
+aS'int *'
+p6311
+aS'int *'
+p6312
+asS'InsertComplexFloatRow'
+p6313
+(lp6314
+S'void'
+p6315
+aS'int *'
+p6316
+aS'float *'
+p6317
+aS'int'
+p6318
+aS'double'
+p6319
+aS'double'
+p6320
+aS'int *'
+p6321
+asS'XBMInteger'
+p6322
+(lp6323
+S'unsigned int'
+p6324
+aS'int *'
+p6325
+aS'short *'
+p6326
+asS'GetModePixelList'
+p6327
+(lp6328
+S'void'
+p6329
+aS'struct _PixelList *'
+p6330
+aS'int *'
+p6331
+asS'ReadGRAYImage'
+p6332
+(lp6333
+S'int *'
+p6334
+aS'const int *'
+p6335
+aS'int *'
+p6336
+asS'ReadCLIPImage'
+p6337
+(lp6338
+S'int *'
+p6339
+aS'const int *'
+p6340
+aS'int *'
+p6341
+asS'IsPixelEquivalent'
+p6342
+(lp6343
+S'int'
+p6344
+aS'const int *'
+p6345
+asS'sigfillset'
+p6346
+(lp6347
+S'int'
+p6348
+aS'__sigset_t *'
+p6349
+asS'WriteSVGImage'
+p6350
+(lp6351
+S'int'
+p6352
+aS'const int *'
+p6353
+aS'int *'
+p6354
+aS'int *'
+p6355
+asS'readWordFromBuffer'
+p6356
+(lp6357
+S'int'
+p6358
+aS'char **'
+p6359
+aS'int *'
+p6360
+asS'AcquireConfigureCache'
+p6361
+(lp6362
+S'int *'
+p6363
+aS'const char *'
+p6364
+aS'int *'
+p6365
+asS'GetQuantumRange'
+p6366
+(lp6367
+S'int'
+p6368
+aS'const int'
+p6369
+asS'GetFITSPixelRange'
+p6370
+(lp6371
+S'double'
+p6372
+aS'const int'
+p6373
+asS'CompositePixelInfoPlus'
+p6374
+(lp6375
+S'void'
+p6376
+aS'const int *'
+p6377
+aS'const double'
+p6378
+aS'const int *'
+p6379
+aS'const double'
+p6380
+aS'int *'
+p6381
+asS'GetPixelInfoLuma'
+p6382
+(lp6383
+S'int'
+p6384
+aS'const int *'
+p6385
+asS'ConvertRGBToLMS'
+p6386
+(lp6387
+S'void'
+p6388
+aS'const double'
+p6389
+aS'const double'
+p6390
+aS'const double'
+p6391
+aS'double *'
+p6392
+aS'double *'
+p6393
+aS'double *'
+p6394
+asS'RadonProjection'
+p6395
+(lp6396
+S'void'
+p6397
+aS'const int *'
+p6398
+aS'int *'
+p6399
+aS'int *'
+p6400
+aS'const int'
+p6401
+aS'int *'
+p6402
+asS'DestroyPixelThreadSet'
+p6403
+(lp6404
+S'struct _PixelChannels **'
+p6405
+aS'struct _PixelChannels **'
+p6406
+asS'ReadOneLayer'
+p6407
+(lp6408
+S'int'
+p6409
+aS'const int *'
+p6410
+aS'int *'
+p6411
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:111:9) *'
+p6412
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:129:9) *'
+p6413
+aS'const int'
+p6414
+aS'int *'
+p6415
+asS'frexpl'
+p6416
+(lp6417
+S'long double'
+p6418
+aS'long double'
+p6419
+aS'int *'
+p6420
+asS'ReadMAPImage'
+p6421
+(lp6422
+S'int *'
+p6423
+aS'const int *'
+p6424
+aS'int *'
+p6425
+asS'WriteHRZImage'
+p6426
+(lp6427
+S'int'
+p6428
+aS'const int *'
+p6429
+aS'int *'
+p6430
+aS'int *'
+p6431
+asS'ReadMPEGImage'
+p6432
+(lp6433
+S'int *'
+p6434
+aS'const int *'
+p6435
+aS'int *'
+p6436
+asS'realpath'
+p6437
+(lp6438
+S'char *'
+p6439
+aS'const char *restrict'
+p6440
+aS'char *restrict'
+p6441
+asS'tolower'
+p6442
+(lp6443
+S'int'
+p6444
+aS'int'
+p6445
+asS'__atanh'
+p6446
+(lp6447
+S'double'
+p6448
+aS'double'
+p6449
+asS'SetPixelGrayTraits'
+p6450
+(lp6451
+S'void'
+p6452
+aS'int *'
+p6453
+aS'const int'
+p6454
+asS'strpbrk'
+p6455
+(lp6456
+S'char *'
+p6457
+aS'const char *'
+p6458
+aS'const char *'
+p6459
+asS'logbf'
+p6460
+(lp6461
+S'float'
+p6462
+aS'float'
+p6463
+asS'__rintf'
+p6464
+(lp6465
+S'float'
+p6466
+aS'float'
+p6467
+asS'SetPixelCr'
+p6468
+(lp6469
+S'void'
+p6470
+aS'const int *'
+p6471
+asS'IsPWP'
+p6472
+(lp6473
+S'int'
+p6474
+aS'const unsigned char *'
+p6475
+aS'const int'
+p6476
+asS'logbl'
+p6477
+(lp6478
+S'long double'
+p6479
+aS'long double'
+p6480
+asS'cbrt'
+p6481
+(lp6482
+S'double'
+p6483
+aS'double'
+p6484
+asS'__rintl'
+p6485
+(lp6486
+S'long double'
+p6487
+aS'long double'
+p6488
+asS'PushLongPixel'
+p6489
+(lp6490
+S'const unsigned char *'
+p6491
+aS'const int'
+p6492
+aS'const unsigned char *'
+p6493
+aS'unsigned int *'
+p6494
+asS'ReadPSDLayer'
+p6495
+(lp6496
+S'int'
+p6497
+aS'int *'
+p6498
+aS'const int *'
+p6499
+aS'const struct _PSDInfo *'
+p6500
+aS'struct _LayerInfo *'
+p6501
+aS'int *'
+p6502
+asS'SetPixelGray'
+p6503
+(lp6504
+S'void'
+p6505
+aS'const int *'
+p6506
+asS'WriteRGBImage'
+p6507
+(lp6508
+S'int'
+p6509
+aS'const int *'
+p6510
+aS'int *'
+p6511
+aS'int *'
+p6512
+asS'srand48'
+p6513
+(lp6514
+S'void'
+p6515
+aS'long'
+p6516
+asS'sixel_advance'
+p6517
+(lp6518
+S'void'
+p6519
+aS'struct sixel_output *'
+p6520
+aS'int'
+p6521
+asS'WriteINLINEImage'
+p6522
+(lp6523
+S'int'
+p6524
+aS'const int *'
+p6525
+aS'int *'
+p6526
+aS'int *'
+p6527
+asS'_IO_flockfile'
+p6528
+(lp6529
+S'void'
+p6530
+aS'struct _IO_FILE *'
+p6531
+asS'IsMPC'
+p6532
+(lp6533
+S'int'
+p6534
+aS'const unsigned char *'
+p6535
+aS'const int'
+p6536
+asS'ReadMAGICKImage'
+p6537
+(lp6538
+S'int *'
+p6539
+aS'const int *'
+p6540
+aS'int *'
+p6541
+asS'getline'
+p6542
+(lp6543
+S'long'
+p6544
+aS'char **restrict'
+p6545
+aS'int *restrict'
+p6546
+aS'struct _IO_FILE *restrict'
+p6547
+asS'IsSkipTag'
+p6548
+(lp6549
+S'int'
+p6550
+aS'const char *'
+p6551
+asS'WriteDPXImage'
+p6552
+(lp6553
+S'int'
+p6554
+aS'const int *'
+p6555
+aS'int *'
+p6556
+aS'int *'
+p6557
+asS'__acosh'
+p6558
+(lp6559
+S'double'
+p6560
+aS'double'
+p6561
+asS'TraceArc'
+p6562
+(lp6563
+S'void'
+p6564
+aS'int *'
+p6565
+aS'const int'
+p6566
+aS'const int'
+p6567
+aS'const int'
+p6568
+asS'__acosl'
+p6569
+(lp6570
+S'long double'
+p6571
+aS'long double'
+p6572
+asS'SetMatrixExtent'
+p6573
+(lp6574
+S'int'
+p6575
+aS'int *'
+p6576
+asS'utimes'
+p6577
+(lp6578
+S'int'
+p6579
+aS'const char *'
+p6580
+aS'struct timeval const[2]'
+p6581
+asS'__acosf'
+p6582
+(lp6583
+S'float'
+p6584
+aS'float'
+p6585
+asS'fact'
+p6586
+(lp6587
+S'int'
+p6588
+aS'int'
+p6589
+asS'scandir'
+p6590
+(lp6591
+S'int'
+p6592
+aS'const char *restrict'
+p6593
+aS'struct dirent ***restrict'
+p6594
+aS'int (*)(const struct dirent *)'
+p6595
+aS'int (*)(const struct dirent **, const struct dirent **)'
+p6596
+asS'isprint_l'
+p6597
+(lp6598
+S'int'
+p6599
+aS'int'
+p6600
+aS'struct __locale_struct *'
+p6601
+asS'ExportBGRAQuantum'
+p6602
+(lp6603
+S'void'
+p6604
+aS'const int *'
+p6605
+aS'int *'
+p6606
+aS'const int'
+p6607
+aS'const int *'
+p6608
+asS'CompareXPMColor'
+p6609
+(lp6610
+S'int'
+p6611
+aS'const void *'
+p6612
+aS'const void *'
+p6613
+asS'IsMIFF'
+p6614
+(lp6615
+S'int'
+p6616
+aS'const unsigned char *'
+p6617
+aS'const int'
+p6618
+asS'timegm'
+p6619
+(lp6620
+S'long'
+p6621
+aS'struct tm *'
+p6622
+asS'log2'
+p6623
+(lp6624
+S'double'
+p6625
+aS'double'
+p6626
+asS'__fmaxl'
+p6627
+(lp6628
+S'long double'
+p6629
+aS'long double'
+p6630
+aS'long double'
+p6631
+asS'strtoull'
+p6632
+(lp6633
+S'unsigned long long'
+p6634
+aS'const char *restrict'
+p6635
+aS'char **restrict'
+p6636
+aS'int'
+p6637
+asS'WriteBMPImage'
+p6638
+(lp6639
+S'int'
+p6640
+aS'const int *'
+p6641
+aS'int *'
+p6642
+aS'int *'
+p6643
+asS'__ynf'
+p6644
+(lp6645
+S'float'
+p6646
+aS'int'
+p6647
+aS'float'
+p6648
+asS'ReadWBMPImage'
+p6649
+(lp6650
+S'int *'
+p6651
+aS'const int *'
+p6652
+aS'int *'
+p6653
+asS'__fmaxf'
+p6654
+(lp6655
+S'float'
+p6656
+aS'float'
+p6657
+aS'float'
+p6658
+asS'WriteRGFImage'
+p6659
+(lp6660
+S'int'
+p6661
+aS'const int *'
+p6662
+aS'int *'
+p6663
+aS'int *'
+p6664
+asS'OpenPixelCache'
+p6665
+(lp6666
+S'int'
+p6667
+aS'int *'
+p6668
+aS'const int'
+p6669
+aS'int *'
+p6670
+asS'strtok'
+p6671
+(lp6672
+S'char *'
+p6673
+aS'char *restrict'
+p6674
+aS'const char *restrict'
+p6675
+asS'strtod'
+p6676
+(lp6677
+S'double'
+p6678
+aS'const char *restrict'
+p6679
+aS'char **restrict'
+p6680
+asS'lrint'
+p6681
+(lp6682
+S'long'
+p6683
+aS'double'
+p6684
+asS'WriteImageData'
+p6685
+(lp6686
+S'void'
+p6687
+aS'int *'
+p6688
+aS'const int'
+p6689
+aS'const int'
+p6690
+aS'const int'
+p6691
+aS'const int'
+p6692
+aS'int *'
+p6693
+asS'ApplyPSDOpacityMask'
+p6694
+(lp6695
+S'int'
+p6696
+aS'int *'
+p6697
+aS'const int *'
+p6698
+aS'int'
+p6699
+aS'int'
+p6700
+aS'int *'
+p6701
+asS'WriteFITSImage'
+p6702
+(lp6703
+S'int'
+p6704
+aS'const int *'
+p6705
+aS'int *'
+p6706
+aS'int *'
+p6707
+asS'frexp'
+p6708
+(lp6709
+S'double'
+p6710
+aS'double'
+p6711
+aS'int *'
+p6712
+asS'SetOpenMPMaximumThreads'
+p6713
+(lp6714
+S'void'
+p6715
+aS'const int'
+p6716
+asS'ParseLogHandlers'
+p6717
+(lp6718
+S'LogHandlerType'
+p6719
+aS'const char *'
+p6720
+asS'strtoq'
+p6721
+(lp6722
+S'long long'
+p6723
+aS'const char *restrict'
+p6724
+aS'char **restrict'
+p6725
+aS'int'
+p6726
+asS'ReadPIXImage'
+p6727
+(lp6728
+S'int *'
+p6729
+aS'const int *'
+p6730
+aS'int *'
+p6731
+asS'l64a'
+p6732
+(lp6733
+S'char *'
+p6734
+aS'long'
+p6735
+asS'SetPixelAlpha'
+p6736
+(lp6737
+S'void'
+p6738
+aS'const int *'
+p6739
+asS'__assert_perror_fail'
+p6740
+(lp6741
+S'void'
+p6742
+aS'int'
+p6743
+aS'const char *'
+p6744
+aS'unsigned int'
+p6745
+aS'const char *'
+p6746
+asS'GetFuzzyColorDistance'
+p6747
+(lp6748
+S'double'
+p6749
+aS'const int *'
+p6750
+aS'const int *'
+p6751
+asS'__fmal'
+p6752
+(lp6753
+S'long double'
+p6754
+aS'long double'
+p6755
+aS'long double'
+p6756
+aS'long double'
+p6757
+asS'bcmp'
+p6758
+(lp6759
+S'int'
+p6760
+aS'const void *'
+p6761
+aS'const void *'
+p6762
+aS'int'
+p6763
+asS'strxfrm_l'
+p6764
+(lp6765
+S'int'
+p6766
+aS'char *'
+p6767
+aS'const char *'
+p6768
+aS'int'
+p6769
+aS'struct __locale_struct *'
+p6770
+asS'FxGetSymbol'
+p6771
+(lp6772
+S'double'
+p6773
+aS'int *'
+p6774
+aS'const int'
+p6775
+aS'const int'
+p6776
+aS'const int'
+p6777
+aS'const char *'
+p6778
+aS'int *'
+p6779
+asS'sqrt'
+p6780
+(lp6781
+S'double'
+p6782
+aS'double'
+p6783
+asS'ReadEPTImage'
+p6784
+(lp6785
+S'int *'
+p6786
+aS'const int *'
+p6787
+aS'int *'
+p6788
+asS'ExportIndexAlphaQuantum'
+p6789
+(lp6790
+S'void'
+p6791
+aS'const int *'
+p6792
+aS'int *'
+p6793
+aS'const int'
+p6794
+aS'const int *'
+p6795
+asS'PushQuantumPixel'
+p6796
+(lp6797
+S'const unsigned char *'
+p6798
+aS'int *'
+p6799
+aS'const unsigned char *'
+p6800
+asS'fileno'
+p6801
+(lp6802
+S'int'
+p6803
+aS'struct _IO_FILE *'
+p6804
+asS'WriteMPEGImage'
+p6805
+(lp6806
+S'int'
+p6807
+aS'const int *'
+p6808
+aS'int *'
+p6809
+aS'int *'
+p6810
+asS'VectorClamp3'
+p6811
+(lp6812
+S'void'
+p6813
+aS'struct _DDSVector3 *'
+p6814
+asS'fdim'
+p6815
+(lp6816
+S'double'
+p6817
+aS'double'
+p6818
+aS'double'
+p6819
+asS'ReadTILEImage'
+p6820
+(lp6821
+S'int *'
+p6822
+aS'const int *'
+p6823
+aS'int *'
+p6824
+asS'ImportAlphaQuantum'
+p6825
+(lp6826
+S'void'
+p6827
+aS'const int *'
+p6828
+aS'int *'
+p6829
+aS'const int'
+p6830
+aS'const unsigned char *'
+p6831
+asS'localeconv'
+p6832
+(lp6833
+S'struct lconv *'
+p6834
+asS'DisplayUsage'
+p6835
+(lp6836
+S'int'
+p6837
+asS'futimes'
+p6838
+(lp6839
+S'int'
+p6840
+aS'int'
+p6841
+aS'struct timeval const[2]'
+p6842
+asS'__significandf'
+p6843
+(lp6844
+S'float'
+p6845
+aS'float'
+p6846
+asS'nextafterl'
+p6847
+(lp6848
+S'long double'
+p6849
+aS'long double'
+p6850
+aS'long double'
+p6851
+asS'finitef'
+p6852
+(lp6853
+S'int'
+p6854
+aS'float'
+p6855
+asS'nextafterf'
+p6856
+(lp6857
+S'float'
+p6858
+aS'float'
+p6859
+aS'float'
+p6860
+asS'__log2f'
+p6861
+(lp6862
+S'float'
+p6863
+aS'float'
+p6864
+asS'j0'
+p6865
+(lp6866
+S'double'
+p6867
+aS'double'
+p6868
+asS'j1'
+p6869
+(lp6870
+S'double'
+p6871
+aS'double'
+p6872
+asS'TypeInfoCompare'
+p6873
+(lp6874
+S'int'
+p6875
+aS'const void *'
+p6876
+aS'const void *'
+p6877
+asS'VectorMultiplyAdd'
+p6878
+(lp6879
+S'void'
+p6880
+aS'const struct _DDSVector4'
+p6881
+aS'const struct _DDSVector4'
+p6882
+aS'const struct _DDSVector4'
+p6883
+aS'struct _DDSVector4 *'
+p6884
+asS'qgcvt'
+p6885
+(lp6886
+S'char *'
+p6887
+aS'long double'
+p6888
+aS'int'
+p6889
+aS'char *'
+p6890
+asS'VectorReciprocal'
+p6891
+(lp6892
+S'void'
+p6893
+aS'const struct _DDSVector4'
+p6894
+aS'struct _DDSVector4 *'
+p6895
+asS'__nextafterl'
+p6896
+(lp6897
+S'long double'
+p6898
+aS'long double'
+p6899
+aS'long double'
+p6900
+asS'GetCutColors'
+p6901
+(lp6902
+S'int'
+p6903
+aS'int *'
+p6904
+aS'int *'
+p6905
+asS'ReadMTVImage'
+p6906
+(lp6907
+S'int *'
+p6908
+aS'const int *'
+p6909
+aS'int *'
+p6910
+asS'__assert_fail'
+p6911
+(lp6912
+S'void'
+p6913
+aS'const char *'
+p6914
+aS'const char *'
+p6915
+aS'unsigned int'
+p6916
+aS'const char *'
+p6917
+asS'ReadBGRImage'
+p6918
+(lp6919
+S'int *'
+p6920
+aS'const int *'
+p6921
+aS'int *'
+p6922
+asS'stpcpy'
+p6923
+(lp6924
+S'char *'
+p6925
+aS'char *restrict'
+p6926
+aS'const char *restrict'
+p6927
+asS'ApplyPSDLayerOpacity'
+p6928
+(lp6929
+S'int'
+p6930
+aS'int *'
+p6931
+aS'int'
+p6932
+aS'int'
+p6933
+aS'int *'
+p6934
+asS'MVGAutoWrapPrintf'
+p6935
+(lp6936
+S'int'
+p6937
+aS'int *'
+p6938
+aS'const char *'
+p6939
+ag469
+asS'ReadBlobBlock'
+p6940
+(lp6941
+S'int'
+p6942
+aS'int *'
+p6943
+aS'unsigned char *'
+p6944
+asS'ConvertLMSToXYZ'
+p6945
+(lp6946
+S'void'
+p6947
+aS'const double'
+p6948
+aS'const double'
+p6949
+aS'const double'
+p6950
+aS'double *'
+p6951
+aS'double *'
+p6952
+aS'double *'
+p6953
+asS'isnan'
+p6954
+(lp6955
+S'int'
+p6956
+aS'double'
+p6957
+asS'ConvertHSVToRGB'
+p6958
+(lp6959
+S'void'
+p6960
+aS'const double'
+p6961
+aS'const double'
+p6962
+aS'const double'
+p6963
+aS'double *'
+p6964
+aS'double *'
+p6965
+aS'double *'
+p6966
+asS'GetPixelCyan'
+p6967
+(lp6968
+S'int'
+p6969
+aS'const int *'
+p6970
+asS'CalcMinMax'
+p6971
+(lp6972
+S'void'
+p6973
+aS'int *'
+p6974
+aS'int'
+p6975
+aS'int'
+p6976
+aS'int'
+p6977
+aS'int'
+p6978
+aS'unsigned int'
+p6979
+aS'void *'
+p6980
+aS'double *'
+p6981
+aS'double *'
+p6982
+asS'ImportGrayQuantum'
+p6983
+(lp6984
+S'void'
+p6985
+aS'const int *'
+p6986
+aS'int *'
+p6987
+aS'const int'
+p6988
+aS'const unsigned char *'
+p6989
+asS'InsertPixelList'
+p6990
+(lp6991
+S'void'
+p6992
+aS'const int'
+p6993
+aS'struct _PixelList *'
+p6994
+asS'TransformSignature'
+p6995
+(lp6996
+S'void'
+p6997
+aS'int *'
+p6998
+asS'EvaluateMax'
+p6999
+(lp7000
+S'double'
+p7001
+aS'const double'
+p7002
+aS'const double'
+p7003
+asS'ReadPWPImage'
+p7004
+(lp7005
+S'int *'
+p7006
+aS'const int *'
+p7007
+aS'int *'
+p7008
+asS'lgammal_r'
+p7009
+(lp7010
+S'long double'
+p7011
+aS'long double'
+p7012
+aS'int *'
+p7013
+asS'ClosestColor'
+p7014
+(lp7015
+S'void'
+p7016
+aS'const int *'
+p7017
+aS'struct _CubeInfo *'
+p7018
+aS'const struct _NodeInfo *'
+p7019
+asS'vdprintf'
+p7020
+(lp7021
+S'int'
+p7022
+aS'int'
+p7023
+aS'const char *restrict'
+p7024
+aS'int'
+p7025
+asS'ConvertXYZToLCHab'
+p7026
+(lp7027
+S'void'
+p7028
+aS'const double'
+p7029
+aS'const double'
+p7030
+aS'const double'
+p7031
+aS'double *'
+p7032
+aS'double *'
+p7033
+aS'double *'
+p7034
+asS'fcntl'
+p7035
+(lp7036
+S'int'
+p7037
+aS'int'
+p7038
+aS'int'
+p7039
+ag469
+asS'__getdelim'
+p7040
+(lp7041
+S'long'
+p7042
+aS'char **restrict'
+p7043
+aS'int *restrict'
+p7044
+aS'int'
+p7045
+aS'struct _IO_FILE *restrict'
+p7046
+asS'scalbln'
+p7047
+(lp7048
+S'double'
+p7049
+aS'double'
+p7050
+aS'long'
+p7051
+asS'InvertAffineCoefficients'
+p7052
+(lp7053
+S'void'
+p7054
+aS'const double *'
+p7055
+aS'double *'
+p7056
+asS'SplaySplayTree'
+p7057
+(lp7058
+S'void'
+p7059
+aS'int *'
+p7060
+aS'const void *'
+p7061
+asS'ReadPDBImage'
+p7062
+(lp7063
+S'int *'
+p7064
+aS'const int *'
+p7065
+aS'int *'
+p7066
+asS'WriteFourCC'
+p7067
+(lp7068
+S'void'
+p7069
+aS'int *'
+p7070
+aS'const int'
+p7071
+aS'const int'
+p7072
+aS'const int'
+p7073
+aS'int *'
+p7074
+asS'ungetc'
+p7075
+(lp7076
+S'int'
+p7077
+aS'int'
+p7078
+aS'struct _IO_FILE *'
+p7079
+asS'jn'
+p7080
+(lp7081
+S'double'
+p7082
+aS'int'
+p7083
+aS'double'
+p7084
+asS'poly_basis_dy'
+p7085
+(lp7086
+S'double'
+p7087
+aS'int'
+p7088
+aS'double'
+p7089
+aS'double'
+p7090
+asS'WriteHDRImage'
+p7091
+(lp7092
+S'int'
+p7093
+aS'const int *'
+p7094
+aS'int *'
+p7095
+aS'int *'
+p7096
+asS'DitherY'
+p7097
+(lp7098
+S'int'
+p7099
+aS'const int'
+p7100
+aS'const int'
+p7101
+asS'DestroyRandomInfoThreadSet'
+p7102
+(lp7103
+S'int **'
+p7104
+aS'int **'
+p7105
+asS'IsPixelInfoMonochrome'
+p7106
+(lp7107
+S'int'
+p7108
+aS'const int *'
+p7109
+asS'ilogbf'
+p7110
+(lp7111
+S'int'
+p7112
+aS'float'
+p7113
+asS'sigaction'
+p7114
+(lp7115
+S'int'
+p7116
+aS'int'
+p7117
+aS'const struct sigaction *restrict'
+p7118
+aS'struct sigaction *restrict'
+p7119
+asS'tmpnam_r'
+p7120
+(lp7121
+S'char *'
+p7122
+aS'char *'
+p7123
+asS'atanhl'
+p7124
+(lp7125
+S'long double'
+p7126
+aS'long double'
+p7127
+asS'AdjustAffine'
+p7128
+(lp7129
+S'void'
+p7130
+aS'int *'
+p7131
+aS'const int *'
+p7132
+asS'__fminl'
+p7133
+(lp7134
+S'long double'
+p7135
+aS'long double'
+p7136
+aS'long double'
+p7137
+asS'lcong48_r'
+p7138
+(lp7139
+S'int'
+p7140
+aS'unsigned short [7]'
+p7141
+aS'struct drand48_data *'
+p7142
+asS'TraceEdges'
+p7143
+(lp7144
+S'int'
+p7145
+aS'int *'
+p7146
+aS'int *'
+p7147
+aS'int *'
+p7148
+aS'const int'
+p7149
+aS'const int'
+p7150
+aS'const double'
+p7151
+aS'int *'
+p7152
+asS'IsLogCacheInstantiated'
+p7153
+(lp7154
+S'int'
+p7155
+aS'int *'
+p7156
+asS'__fminf'
+p7157
+(lp7158
+S'float'
+p7159
+aS'float'
+p7160
+aS'float'
+p7161
+asS'GetPixelCrTraits'
+p7162
+(lp7163
+S'int'
+p7164
+aS'const int *'
+p7165
+asS'UnlockMagickMutex'
+p7166
+(lp7167
+S'void'
+p7168
+asS'WriteVIDImage'
+p7169
+(lp7170
+S'int'
+p7171
+aS'const int *'
+p7172
+aS'int *'
+p7173
+aS'int *'
+p7174
+asS'GetPixelYellow'
+p7175
+(lp7176
+S'int'
+p7177
+aS'const int *'
+p7178
+asS'ExportBGROQuantum'
+p7179
+(lp7180
+S'void'
+p7181
+aS'const int *'
+p7182
+aS'int *'
+p7183
+aS'const int'
+p7184
+aS'const int *'
+p7185
+asS'strftime'
+p7186
+(lp7187
+S'int'
+p7188
+aS'char *restrict'
+p7189
+aS'int'
+p7190
+aS'const char *restrict'
+p7191
+aS'const struct tm *restrict'
+p7192
+asS'stime'
+p7193
+(lp7194
+S'int'
+p7195
+aS'const long *'
+p7196
+asS'load_level'
+p7197
+(lp7198
+S'int'
+p7199
+aS'int *'
+p7200
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:111:9) *'
+p7201
+aS'struct (anonymous at /home/degoerdf/Downloads/ImageMagick-7.0.5-10/coders/xcf.c:129:9) *'
+p7202
+aS'int *'
+p7203
+asS'ConvertXYZToLab'
+p7204
+(lp7205
+S'void'
+p7206
+aS'const double'
+p7207
+aS'const double'
+p7208
+aS'const double'
+p7209
+aS'double *'
+p7210
+aS'double *'
+p7211
+aS'double *'
+p7212
+asS'tzset'
+p7213
+(lp7214
+S'void'
+p7215
+asS'getdirentries'
+p7216
+(lp7217
+S'long'
+p7218
+aS'int'
+p7219
+aS'char *restrict'
+p7220
+aS'int'
+p7221
+aS'long *restrict'
+p7222
+asS'CCObjectInfoCompare'
+p7223
+(lp7224
+S'int'
+p7225
+aS'const void *'
+p7226
+aS'const void *'
+p7227
+asS'pow'
+p7228
+(lp7229
+S'double'
+p7230
+aS'double'
+p7231
+aS'double'
+p7232
+asS'ReadRLEImage'
+p7233
+(lp7234
+S'int *'
+p7235
+aS'const int *'
+p7236
+aS'int *'
+p7237
+asS'DitherX'
+p7238
+(lp7239
+S'int'
+p7240
+aS'const int'
+p7241
+aS'const int'
+p7242
+asS'poly_basis_str'
+p7243
+(lp7244
+S'const char *'
+p7245
+aS'int'
+p7246
+asS'ConvertRGBToYIQ'
+p7247
+(lp7248
+S'void'
+p7249
+aS'const double'
+p7250
+aS'const double'
+p7251
+aS'const double'
+p7252
+aS'double *'
+p7253
+aS'double *'
+p7254
+aS'double *'
+p7255
+asS'jpeg_skip_variable2'
+p7256
+(lp7257
+S'int'
+p7258
+aS'int *'
+p7259
+aS'int *'
+p7260
+asS'toupper'
+p7261
+(lp7262
+S'int'
+p7263
+aS'int'
+p7264
+asS'GetPixelReadMask'
+p7265
+(lp7266
+S'int'
+p7267
+aS'const int *'
+p7268
+asS'CompressAlpha'
+p7269
+(lp7270
+S'int'
+p7271
+aS'const int'
+p7272
+aS'const int'
+p7273
+aS'const int'
+p7274
+aS'const int *'
+p7275
+aS'unsigned char *'
+p7276
+asS'IsCoderTreeInstantiated'
+p7277
+(lp7278
+S'int'
+p7279
+aS'int *'
+p7280
+asS'sigprocmask'
+p7281
+(lp7282
+S'int'
+p7283
+aS'int'
+p7284
+aS'const __sigset_t *restrict'
+p7285
+aS'__sigset_t *restrict'
+p7286
+asS'GetMeanPixelList'
+p7287
+(lp7288
+S'void'
+p7289
+aS'struct _PixelList *'
+p7290
+aS'int *'
+p7291
+asS'ReadMPRImage'
+p7292
+(lp7293
+S'int *'
+p7294
+aS'const int *'
+p7295
+aS'int *'
+p7296
+asS'__copysignl'
+p7297
+(lp7298
+S'long double'
+p7299
+aS'long double'
+p7300
+aS'long double'
+p7301
+asS'clearerr_unlocked'
+p7302
+(lp7303
+S'void'
+p7304
+aS'struct _IO_FILE *'
+p7305
+asS'nanosleep'
+p7306
+(lp7307
+S'int'
+p7308
+aS'const struct timespec *'
+p7309
+aS'struct timespec *'
+p7310
+asS'aligned_alloc'
+p7311
+(lp7312
+S'void *'
+p7313
+aS'int'
+p7314
+aS'int'
+p7315
+asS'RenderType'
+p7316
+(lp7317
+S'int'
+p7318
+aS'int *'
+p7319
+aS'const int *'
+p7320
+aS'const int *'
+p7321
+aS'int *'
+p7322
+aS'int *'
+p7323
+asS'ConvertRGBToCMY'
+p7324
+(lp7325
+S'void'
+p7326
+aS'const double'
+p7327
+aS'const double'
+p7328
+aS'const double'
+p7329
+aS'double *'
+p7330
+aS'double *'
+p7331
+aS'double *'
+p7332
+asS'Box'
+p7333
+(lp7334
+S'double'
+p7335
+aS'const double ()'
+p7336
+aS'const int *()'
+p7337
+asS'ImportCbYCrYQuantum'
+p7338
+(lp7339
+S'void'
+p7340
+aS'const int *'
+p7341
+aS'int *'
+p7342
+aS'const int'
+p7343
+aS'const unsigned char *'
+p7344
+asS'fcvt_r'
+p7345
+(lp7346
+S'int'
+p7347
+aS'double'
+p7348
+aS'int'
+p7349
+aS'int *restrict'
+p7350
+aS'int *restrict'
+p7351
+aS'char *restrict'
+p7352
+aS'int'
+p7353
+asS'__nanl'
+p7354
+(lp7355
+S'long double'
+p7356
+aS'const char *'
+p7357
+asS'ConvertRGBToHSV'
+p7358
+(lp7359
+S'void'
+p7360
+aS'const double'
+p7361
+aS'const double'
+p7362
+aS'const double'
+p7363
+aS'double *'
+p7364
+aS'double *'
+p7365
+aS'double *'
+p7366
+asS'formatIPTCfromBuffer'
+p7367
+(lp7368
+S'int'
+p7369
+aS'int *'
+p7370
+aS'char *'
+p7371
+aS'int'
+p7372
+asS'WriteMASKImage'
+p7373
+(lp7374
+S'int'
+p7375
+aS'const int *'
+p7376
+aS'int *'
+p7377
+aS'int *'
+p7378
+asS'__nanf'
+p7379
+(lp7380
+S'float'
+p7381
+aS'const char *'
+p7382
+asS'IdentifyUsage'
+p7383
+(lp7384
+S'int'
+p7385
+asS'ConvertRGBToHSI'
+p7386
+(lp7387
+S'void'
+p7388
+aS'const double'
+p7389
+aS'const double'
+p7390
+aS'const double'
+p7391
+aS'double *'
+p7392
+aS'double *'
+p7393
+aS'double *'
+p7394
+asS'ReadDCMShort'
+p7395
+(lp7396
+S'unsigned short'
+p7397
+aS'struct _DCMStreamInfo *'
+p7398
+aS'int *'
+p7399
+asS'SetHeaderFromIPL'
+p7400
+(lp7401
+S'void'
+p7402
+aS'int *'
+p7403
+aS'struct _IPLInfo *'
+p7404
+asS'poly_basis_dx'
+p7405
+(lp7406
+S'double'
+p7407
+aS'int'
+p7408
+aS'double'
+p7409
+aS'double'
+p7410
+asS'__copysignf'
+p7411
+(lp7412
+S'float'
+p7413
+aS'float'
+p7414
+aS'float'
+p7415
+asS'WriteBGRImage'
+p7416
+(lp7417
+S'int'
+p7418
+aS'const int *'
+p7419
+aS'int *'
+p7420
+aS'int *'
+p7421
+asS'ValidateIdentifyCommand'
+p7422
+(lp7423
+S'int'
+p7424
+aS'int *'
+p7425
+aS'const char *'
+p7426
+aS'const char *'
+p7427
+aS'int *'
+p7428
+aS'int *'
+p7429
+asS'scalblnf'
+p7430
+(lp7431
+S'float'
+p7432
+aS'float'
+p7433
+aS'long'
+p7434
+asS'ExportOpacityQuantum'
+p7435
+(lp7436
+S'void'
+p7437
+aS'const int *'
+p7438
+aS'int *'
+p7439
+aS'const int'
+p7440
+aS'const int *'
+p7441
+asS'ConvertLuvToRGB'
+p7442
+(lp7443
+S'void'
+p7444
+aS'const double'
+p7445
+aS'const double'
+p7446
+aS'const double'
+p7447
+aS'double *'
+p7448
+aS'double *'
+p7449
+aS'double *'
+p7450
+asS'scalblnl'
+p7451
+(lp7452
+S'long double'
+p7453
+aS'long double'
+p7454
+aS'long'
+p7455
+asS'truncf'
+p7456
+(lp7457
+S'float'
+p7458
+aS'float'
+p7459
+asS'lgamma'
+p7460
+(lp7461
+S'double'
+p7462
+aS'double'
+p7463
+asS'AutoResizeImage'
+p7464
+(lp7465
+S'int *'
+p7466
+aS'const int *'
+p7467
+aS'const char *'
+p7468
+aS'int *'
+p7469
+aS'int *'
+p7470
+asS'qfcvt'
+p7471
+(lp7472
+S'char *'
+p7473
+aS'long double'
+p7474
+aS'int'
+p7475
+aS'int *restrict'
+p7476
+aS'int *restrict'
+p7477
+asS'lgammaf_r'
+p7478
+(lp7479
+S'float'
+p7480
+aS'float'
+p7481
+aS'int *'
+p7482
+asS'ReadCMYKImage'
+p7483
+(lp7484
+S'int *'
+p7485
+aS'const int *'
+p7486
+aS'int *'
+p7487
+asS'remquo'
+p7488
+(lp7489
+S'double'
+p7490
+aS'double'
+p7491
+aS'double'
+p7492
+aS'int *'
+p7493
+asS'ReadXBMImage'
+p7494
+(lp7495
+S'int *'
+p7496
+aS'const int *'
+p7497
+aS'int *'
+p7498
+asS'IsDelegateCacheInstantiated'
+p7499
+(lp7500
+S'int'
+p7501
+aS'int *'
+p7502
+asS'MVGAppendColor'
+p7503
+(lp7504
+S'void'
+p7505
+aS'int *'
+p7506
+aS'const int *'
+p7507
+asS'rename'
+p7508
+(lp7509
+S'int'
+p7510
+aS'const char *'
+p7511
+aS'const char *'
+p7512
+asS'log10l'
+p7513
+(lp7514
+S'long double'
+p7515
+aS'long double'
+p7516
+asS'SetPixelChannelChannel'
+p7517
+(lp7518
+S'void'
+p7519
+aS'const int *'
+p7520
+asS'srand'
+p7521
+(lp7522
+S'void'
+p7523
+aS'unsigned int'
+p7524
+asS'PNMInteger'
+p7525
+(lp7526
+S'unsigned int'
+p7527
+aS'int *'
+p7528
+aS'const unsigned int'
+p7529
+aS'int *'
+p7530
+asS'fwrite_unlocked'
+p7531
+(lp7532
+S'int'
+p7533
+aS'const void *restrict'
+p7534
+aS'int'
+p7535
+aS'int'
+p7536
+aS'struct _IO_FILE *restrict'
+p7537
+asS'IsXPM'
+p7538
+(lp7539
+S'int'
+p7540
+aS'const unsigned char *'
+p7541
+aS'const int'
+p7542
+asS'ConvertXYZToLCHuv'
+p7543
+(lp7544
+S'void'
+p7545
+aS'const double'
+p7546
+aS'const double'
+p7547
+aS'const double'
+p7548
+aS'double *'
+p7549
+aS'double *'
+p7550
+aS'double *'
+p7551
+asS'EdgeX'
+p7552
+(lp7553
+S'int'
+p7554
+aS'const int'
+p7555
+aS'const int'
+p7556
+asS'EdgeY'
+p7557
+(lp7558
+S'int'
+p7559
+aS'const int'
+p7560
+aS'const int'
+p7561
+asS'WriteSIXELImage'
+p7562
+(lp7563
+S'int'
+p7564
+aS'const int *'
+p7565
+aS'int *'
+p7566
+aS'int *'
+p7567
+asS'CompositeOperatorToPSDBlendMode'
+p7568
+(lp7569
+S'const char *'
+p7570
+aS'int'
+p7571
+asS'GIMPBlendModeToCompositeOperator'
+p7572
+(lp7573
+S'int'
+p7574
+aS'int'
+p7575
+asS'fabs'
+p7576
+(lp7577
+S'double'
+p7578
+aS'double'
+p7579
+asS'ReadTXTImage'
+p7580
+(lp7581
+S'int *'
+p7582
+aS'const int *'
+p7583
+aS'int *'
+p7584
+asS'I0'
+p7585
+(lp7586
+S'double'
+p7587
+aS'double'
+p7588
+asS'getc'
+p7589
+(lp7590
+S'int'
+p7591
+aS'struct _IO_FILE *'
+p7592
+asS'qfcvt_r'
+p7593
+(lp7594
+S'int'
+p7595
+aS'long double'
+p7596
+aS'int'
+p7597
+aS'int *restrict'
+p7598
+aS'int *restrict'
+p7599
+aS'char *restrict'
+p7600
+aS'int'
+p7601
+asS'SGIDecode'
+p7602
+(lp7603
+S'int'
+p7604
+aS'const int'
+p7605
+aS'int'
+p7606
+aS'unsigned char *'
+p7607
+aS'int'
+p7608
+aS'unsigned char *'
+p7609
+asS'GetPixelBlack'
+p7610
+(lp7611
+S'int'
+p7612
+aS'const int *'
+p7613
+asS'WritePCXImage'
+p7614
+(lp7615
+S'int'
+p7616
+aS'const int *'
+p7617
+aS'int *'
+p7618
+aS'int *'
+p7619
+asS'ReadFITSImage'
+p7620
+(lp7621
+S'int *'
+p7622
+aS'const int *'
+p7623
+aS'int *'
+p7624
+asS'finite'
+p7625
+(lp7626
+S'int'
+p7627
+aS'double'
+p7628
+asS'MonitorProgress'
+p7629
+(lp7630
+S'int'
+p7631
+aS'const char *'
+p7632
+aS'const int'
+p7633
+aS'const int'
+p7634
+aS'void *()'
+p7635
+asS'setstate'
+p7636
+(lp7637
+S'char *'
+p7638
+aS'char *'
+p7639
+asS'ssignal'
+p7640
+(lp7641
+S'void (*)(int)'
+p7642
+aS'int'
+p7643
+aS'void (*)(int)'
+p7644
+asS'__gammaf'
+p7645
+(lp7646
+S'float'
+p7647
+aS'float'
+p7648
+asS'IsUTFAscii'
+p7649
+(lp7650
+S'int'
+p7651
+aS'int'
+p7652
+asS'WriteTXTImage'
+p7653
+(lp7654
+S'int'
+p7655
+aS'const int *'
+p7656
+aS'int *'
+p7657
+aS'int *'
+p7658
+asS'ConvertRGBToxyY'
+p7659
+(lp7660
+S'void'
+p7661
+aS'const double'
+p7662
+aS'const double'
+p7663
+aS'const double'
+p7664
+aS'double *'
+p7665
+aS'double *'
+p7666
+aS'double *'
+p7667
+asS'lockf'
+p7668
+(lp7669
+S'int'
+p7670
+aS'int'
+p7671
+aS'int'
+p7672
+aS'long'
+p7673
+asS'__gammal'
+p7674
+(lp7675
+S'long double'
+p7676
+aS'long double'
+p7677
+asS'ReadVIPSPixelNONE'
+p7678
+(lp7679
+S'int'
+p7680
+aS'int *'
+p7681
+aS'const VIPSBandFormat'
+p7682
+aS'const VIPSType'
+p7683
+asS'IsCMYKColorspace'
+p7684
+(lp7685
+S'int'
+p7686
+aS'const int'
+p7687
+asS'WriteGIFImage'
+p7688
+(lp7689
+S'int'
+p7690
+aS'const int *'
+p7691
+aS'int *'
+p7692
+aS'int *'
+p7693
+asS'ReadVIFFImage'
+p7694
+(lp7695
+S'int *'
+p7696
+aS'const int *'
+p7697
+aS'int *'
+p7698
+asS'isnanf'
+p7699
+(lp7700
+S'int'
+p7701
+aS'float'
+p7702
+asS'GetICCProperty'
+p7703
+(lp7704
+S'int'
+p7705
+aS'const int *'
+p7706
+aS'const char *'
+p7707
+aS'int *'
+p7708
+asS'IsEPT'
+p7709
+(lp7710
+S'int'
+p7711
+aS'const unsigned char *'
+p7712
+aS'const int'
+p7713
+asS'WriteBRAILLEImage'
+p7714
+(lp7715
+S'int'
+p7716
+aS'const int *'
+p7717
+aS'int *'
+p7718
+aS'int *'
+p7719
+asS'ReadAVSImage'
+p7720
+(lp7721
+S'int *'
+p7722
+aS'const int *'
+p7723
+aS'int *'
+p7724
+asS'isnanl'
+p7725
+(lp7726
+S'int'
+p7727
+aS'long double'
+p7728
+asS'acoshf'
+p7729
+(lp7730
+S'float'
+p7731
+aS'float'
+p7732
+asS'WriteMONOImage'
+p7733
+(lp7734
+S'int'
+p7735
+aS'const int *'
+p7736
+aS'int *'
+p7737
+aS'int *'
+p7738
+asS'AcquireTypeCache'
+p7739
+(lp7740
+S'int *'
+p7741
+aS'const char *'
+p7742
+aS'int *'
+p7743
+asS'WriteCIPImage'
+p7744
+(lp7745
+S'int'
+p7746
+aS'const int *'
+p7747
+aS'int *'
+p7748
+aS'int *'
+p7749
+asS'WriteARTImage'
+p7750
+(lp7751
+S'int'
+p7752
+aS'const int *'
+p7753
+aS'int *'
+p7754
+aS'int *'
+p7755
+asS'drand48_r'
+p7756
+(lp7757
+S'int'
+p7758
+aS'struct drand48_data *restrict'
+p7759
+aS'double *restrict'
+p7760
+asS'sigblock'
+p7761
+(lp7762
+S'int'
+p7763
+aS'int'
+p7764
+asS'powl'
+p7765
+(lp7766
+S'long double'
+p7767
+aS'long double'
+p7768
+aS'long double'
+p7769
+asS'Welch'
+p7770
+(lp7771
+S'double'
+p7772
+aS'const double'
+p7773
+aS'const int *()'
+p7774
+asS'IsMPEG'
+p7775
+(lp7776
+S'int'
+p7777
+aS'const unsigned char *'
+p7778
+aS'const int'
+p7779
+asS'powf'
+p7780
+(lp7781
+S'float'
+p7782
+aS'float'
+p7783
+aS'float'
+p7784
+asS'ReadMONOImage'
+p7785
+(lp7786
+S'int *'
+p7787
+aS'const int *'
+p7788
+aS'int *'
+p7789
+asS'getw'
+p7790
+(lp7791
+S'int'
+p7792
+aS'struct _IO_FILE *'
+p7793
+asS'getpwent'
+p7794
+(lp7795
+S'struct passwd *'
+p7796
+asS'rintf'
+p7797
+(lp7798
+S'float'
+p7799
+aS'float'
+p7800
+asS'strtold'
+p7801
+(lp7802
+S'long double'
+p7803
+aS'const char *restrict'
+p7804
+aS'char **restrict'
+p7805
+asS'sixel_put_pixel'
+p7806
+(lp7807
+S'void'
+p7808
+aS'struct sixel_output *const'
+p7809
+aS'int'
+p7810
+asS'nan'
+p7811
+(lp7812
+S'double'
+p7813
+aS'const char *'
+p7814
+asS'ReadDPXImage'
+p7815
+(lp7816
+S'int *'
+p7817
+aS'const int *'
+p7818
+aS'int *'
+p7819
+asS'ImportBGRAQuantum'
+p7820
+(lp7821
+S'void'
+p7822
+aS'const int *'
+p7823
+aS'int *'
+p7824
+aS'const int'
+p7825
+aS'const unsigned char *'
+p7826
+asS'rintl'
+p7827
+(lp7828
+S'long double'
+p7829
+aS'long double'
+p7830
+asS'WriteTHUMBNAILImage'
+p7831
+(lp7832
+S'int'
+p7833
+aS'const int *'
+p7834
+aS'int *'
+p7835
+aS'int *'
+p7836
+asS'Riemersma'
+p7837
+(lp7838
+S'void'
+p7839
+aS'int *'
+p7840
+aS'int *'
+p7841
+aS'struct _CubeInfo *'
+p7842
+aS'const int'
+p7843
+aS'const unsigned int'
+p7844
+aS'int *'
+p7845
+asS'DestroyColorCube'
+p7846
+(lp7847
+S'void'
+p7848
+aS'const int *'
+p7849
+aS'struct _NodeInfo *'
+p7850
+asS'HCLComposite'
+p7851
+(lp7852
+S'void'
+p7853
+aS'const int'
+p7854
+aS'const int'
+p7855
+aS'const int'
+p7856
+aS'int *'
+p7857
+aS'int *'
+p7858
+aS'int *'
+p7859
+asS'GetNonpeakPixelList'
+p7860
+(lp7861
+S'void'
+p7862
+aS'struct _PixelList *'
+p7863
+aS'int *'
+p7864
+asS'kill'
+p7865
+(lp7866
+S'int'
+p7867
+aS'int'
+p7868
+aS'int'
+p7869
+asS'WriteWBMPImage'
+p7870
+(lp7871
+S'int'
+p7872
+aS'const int *'
+p7873
+aS'int *'
+p7874
+aS'int *'
+p7875
+asS'atoll'
+p7876
+(lp7877
+S'long long'
+p7878
+aS'const char *'
+p7879
+asS'lrintl'
+p7880
+(lp7881
+S'long'
+p7882
+aS'long double'
+p7883
+asS'WriteSGIImage'
+p7884
+(lp7885
+S'int'
+p7886
+aS'const int *'
+p7887
+aS'int *'
+p7888
+aS'int *'
+p7889
+asS'ReadDNGImage'
+p7890
+(lp7891
+S'int *'
+p7892
+aS'const int *'
+p7893
+aS'int *'
+p7894
+asS'__xmknod'
+p7895
+(lp7896
+S'int'
+p7897
+aS'int'
+p7898
+aS'const char *'
+p7899
+aS'unsigned int'
+p7900
+aS'unsigned long *'
+p7901
+asS'__nextafter'
+p7902
+(lp7903
+S'double'
+p7904
+aS'double'
+p7905
+aS'double'
+p7906
+asS'timer_delete'
+p7907
+(lp7908
+S'int'
+p7909
+aS'void *'
+p7910
+asS'SetPixelIndexTraits'
+p7911
+(lp7912
+S'void'
+p7913
+aS'int *'
+p7914
+aS'const int'
+p7915
+asS'sRGBTransformImage'
+p7916
+(lp7917
+S'int'
+p7918
+aS'int *'
+p7919
+aS'const int'
+p7920
+aS'int *'
+p7921
+asS'CorrectPSDAlphaBlend'
+p7922
+(lp7923
+S'int'
+p7924
+aS'const int *'
+p7925
+aS'int *'
+p7926
+aS'int *'
+p7927
+asS'StringToDouble'
+p7928
+(lp7929
+S'double'
+p7930
+aS'const char *'
+p7931
+asS'WriteMPCImage'
+p7932
+(lp7933
+S'int'
+p7934
+aS'const int *'
+p7935
+aS'int *'
+p7936
+aS'int *'
+p7937
+asS'scalbf'
+p7938
+(lp7939
+S'float'
+p7940
+aS'float'
+p7941
+aS'float'
+p7942
+asS'scalbl'
+p7943
+(lp7944
+S'long double'
+p7945
+aS'long double'
+p7946
+aS'long double'
+p7947
+asS'_IO_sgetn'
+p7948
+(lp7949
+S'int'
+p7950
+aS'struct _IO_FILE *'
+p7951
+aS'void *'
+p7952
+aS'int'
+p7953
+asS'scalbn'
+p7954
+(lp7955
+S'double'
+p7956
+aS'double'
+p7957
+aS'int'
+p7958
+asS'SetPixelChannel'
+p7959
+(lp7960
+S'void'
+p7961
+aS'const int *'
+p7962
+asS'QueueAuthenticPixelsStream'
+p7963
+(lp7964
+S'int *'
+p7965
+aS'int *'
+p7966
+aS'const int'
+p7967
+aS'const int'
+p7968
+aS'const int'
+p7969
+aS'const int'
+p7970
+aS'int *'
+p7971
+asS'srandom_r'
+p7972
+(lp7973
+S'int'
+p7974
+aS'unsigned int'
+p7975
+aS'struct random_data *'
+p7976
+asS'stringnicmp'
+p7977
+(lp7978
+S'int'
+p7979
+aS'const char *'
+p7980
+aS'const char *'
+p7981
+aS'int'
+p7982
+asS'DestroyCoderNode'
+p7983
+(lp7984
+S'void *'
+p7985
+aS'void *'
+p7986
+asS'SetFITSUnsignedPixels'
+p7987
+(lp7988
+S'void'
+p7989
+aS'const int'
+p7990
+aS'const int'
+p7991
+aS'const int'
+p7992
+aS'unsigned char *'
+p7993
+asS'IsMVG'
+p7994
+(lp7995
+S'int'
+p7996
+aS'const unsigned char *'
+p7997
+aS'const int'
+p7998
+asS'ReadCINImage'
+p7999
+(lp8000
+S'int *'
+p8001
+aS'const int *'
+p8002
+aS'int *'
+p8003
+asS'MagickUsage'
+p8004
+(lp8005
+S'void'
+p8006
+aS'int'
+p8007
+asS'open_memstream'
+p8008
+(lp8009
+S'struct _IO_FILE *'
+p8010
+aS'char **'
+p8011
+aS'int *'
+p8012
+asS'fgetpwent'
+p8013
+(lp8014
+S'struct passwd *'
+p8015
+aS'struct _IO_FILE *'
+p8016
+asS'CompareUsage'
+p8017
+(lp8018
+S'int'
+p8019
+asS'memmove'
+p8020
+(lp8021
+S'void *'
+p8022
+asS'DestroyPixelListThreadSet'
+p8023
+(lp8024
+S'struct _PixelList **'
+p8025
+aS'struct _PixelList **'
+p8026
+asS'RotateKernelInfo'
+p8027
+(lp8028
+S'void'
+p8029
+aS'int *'
+p8030
+aS'double'
+p8031
+asS'WriteDDSInfo'
+p8032
+(lp8033
+S'void'
+p8034
+aS'int *'
+p8035
+aS'const int'
+p8036
+aS'const int'
+p8037
+aS'const int'
+p8038
+asS'GetPSDRowSize'
+p8039
+(lp8040
+S'int'
+p8041
+aS'int *'
+p8042
+asS'timer_create'
+p8043
+(lp8044
+S'int'
+p8045
+aS'int'
+p8046
+aS'struct sigevent *restrict'
+p8047
+aS'void **restrict'
+p8048
+asS'Lagrange'
+p8049
+(lp8050
+S'double'
+p8051
+aS'const double'
+p8052
+aS'const int *'
+p8053
+asS'GetPixelInfoPixel'
+p8054
+(lp8055
+S'void'
+p8056
+aS'const int *'
+p8057
+asS'fmodl'
+p8058
+(lp8059
+S'long double'
+p8060
+aS'long double'
+p8061
+aS'long double'
+p8062
+asS'strcmp'
+p8063
+(lp8064
+S'int'
+p8065
+aS'const char *'
+p8066
+aS'const char *'
+p8067
+asS'tanhl'
+p8068
+(lp8069
+S'long double'
+p8070
+aS'long double'
+p8071
+asS'SetPixelBlueTraits'
+p8072
+(lp8073
+S'void'
+p8074
+aS'int *'
+p8075
+aS'const int'
+p8076
+asS'AcquireContributionThreadSet'
+p8077
+(lp8078
+S'int **'
+p8079
+aS'const int'
+p8080
+asS'lldiv'
+p8081
+(lp8082
+S'lldiv_t'
+p8083
+aS'long long'
+p8084
+aS'long long'
+p8085
+asS'fgetc'
+p8086
+(lp8087
+S'int'
+p8088
+aS'struct _IO_FILE *'
+p8089
+asS'__y0'
+p8090
+(lp8091
+S'double'
+p8092
+aS'double'
+p8093
+asS'tanhf'
+p8094
+(lp8095
+S'float'
+p8096
+aS'float'
+p8097
+asS'IterateOverSplayTree'
+p8098
+(lp8099
+S'int'
+p8100
+aS'int *'
+p8101
+aS'int (*)(struct _NodeInfo *, const void *)'
+p8102
+aS'const void *'
+p8103
+asS'llabs'
+p8104
+(lp8105
+S'long long'
+p8106
+aS'long long'
+p8107
+asS'MagickReadDirectory'
+p8108
+(lp8109
+S'int'
+p8110
+aS'int *'
+p8111
+aS'struct dirent *'
+p8112
+aS'struct dirent **'
+p8113
+asS'seed48'
+p8114
+(lp8115
+S'unsigned short *'
+p8116
+aS'unsigned short [3]'
+p8117
+asS'GetMaximumPixelList'
+p8118
+(lp8119
+S'void'
+p8120
+aS'struct _PixelList *'
+p8121
+aS'int *'
+p8122
+asS'Blackman'
+p8123
+(lp8124
+S'double'
+p8125
+aS'const double'
+p8126
+aS'const int *()'
+p8127
+asS'fgets'
+p8128
+(lp8129
+S'char *'
+p8130
+aS'char *restrict'
+p8131
+aS'int'
+p8132
+aS'struct _IO_FILE *restrict'
+p8133
+asS'LastKernelInfo'
+p8134
+(lp8135
+S'int *'
+p8136
+aS'int *'
+p8137
+asS'ReadFDImage'
+p8138
+(lp8139
+S'int *'
+p8140
+aS'const int *'
+p8141
+aS'int *'
+p8142
+asS'VectorMultiply3'
+p8143
+(lp8144
+S'void'
+p8145
+aS'const struct _DDSVector3'
+p8146
+aS'const struct _DDSVector3'
+p8147
+aS'struct _DDSVector3 *'
+p8148
+asS'exp2f'
+p8149
+(lp8150
+S'float'
+p8151
+aS'float'
+p8152
+asS'fgetc_unlocked'
+p8153
+(lp8154
+S'int'
+p8155
+aS'struct _IO_FILE *'
+p8156
+asS'__erf'
+p8157
+(lp8158
+S'double'
+p8159
+aS'double'
+p8160
+asS'exp2l'
+p8161
+(lp8162
+S'long double'
+p8163
+aS'long double'
+p8164
+asS'isxdigit'
+p8165
+(lp8166
+S'int'
+p8167
+aS'int'
+p8168
+asS'SetPixelOpacity'
+p8169
+(lp8170
+S'void'
+p8171
+aS'const int *'
+p8172
+asS'ftell'
+p8173
+(lp8174
+S'long'
+p8175
+aS'struct _IO_FILE *'
+p8176
+asS'exit'
+p8177
+(lp8178
+S'void'
+p8179
+aS'int'
+p8180
+asS'asctime'
+p8181
+(lp8182
+S'char *'
+p8183
+aS'const struct tm *'
+p8184
+asS'SetPixelCyan'
+p8185
+(lp8186
+S'void'
+p8187
+aS'const int *'
+p8188
+asS'mbstowcs'
+p8189
+(lp8190
+S'int'
+p8191
+aS'int *restrict'
+p8192
+aS'const char *restrict'
+p8193
+aS'int'
+p8194
+asS'ReadSTEGANOImage'
+p8195
+(lp8196
+S'int *'
+p8197
+aS'const int *'
+p8198
+aS'int *'
+p8199
+asS'StringToUnsignedLong'
+p8200
+(lp8201
+S'unsigned long'
+p8202
+aS'const char *'
+p8203
+asS'log1pl'
+p8204
+(lp8205
+S'long double'
+p8206
+aS'long double'
+p8207
+asS'sigsuspend'
+p8208
+(lp8209
+S'int'
+p8210
+aS'const __sigset_t *'
+p8211
+asS'getitimer'
+p8212
+(lp8213
+S'int'
+p8214
+aS'int'
+p8215
+aS'struct itimerval *'
+p8216
+asS'tgammal'
+p8217
+(lp8218
+S'long double'
+p8219
+aS'long double'
+p8220
+asS'WriteSUNImage'
+p8221
+(lp8222
+S'int'
+p8223
+aS'const int *'
+p8224
+aS'int *'
+p8225
+aS'int *'
+p8226
+asS'log1pf'
+p8227
+(lp8228
+S'float'
+p8229
+aS'float'
+p8230
+asS'tgammaf'
+p8231
+(lp8232
+S'float'
+p8233
+aS'float'
+p8234
+asS'DefineRegion'
+p8235
+(lp8236
+S'int'
+p8237
+aS'const short *'
+p8238
+aS'struct _ExtentPacket *'
+p8239
+asS'DefineImageColormap'
+p8240
+(lp8241
+S'int'
+p8242
+aS'int *'
+p8243
+aS'struct _CubeInfo *'
+p8244
+aS'struct _NodeInfo *'
+p8245
+asS'GetThresholdMapFile'
+p8246
+(lp8247
+S'int *'
+p8248
+aS'const char *'
+p8249
+aS'const char *'
+p8250
+aS'const char *'
+p8251
+aS'int *'
+p8252
+asS'dirfd'
+p8253
+(lp8254
+S'int'
+p8255
+aS'struct __dirstream *'
+p8256
+asS'__lroundl'
+p8257
+(lp8258
+S'long'
+p8259
+aS'long double'
+p8260
+asS'__stpncpy'
+p8261
+(lp8262
+S'char *'
+p8263
+aS'char *restrict'
+p8264
+aS'const char *restrict'
+p8265
+aS'int'
+p8266
+asS'__yn'
+p8267
+(lp8268
+S'double'
+p8269
+aS'int'
+p8270
+aS'double'
+p8271
+asS'getsubopt'
+p8272
+(lp8273
+S'int'
+p8274
+aS'char **restrict'
+p8275
+aS'char *const *restrict'
+p8276
+aS'char **restrict'
+p8277
+asS'WriteMGKImage'
+p8278
+(lp8279
+S'int'
+p8280
+aS'const int *'
+p8281
+aS'int *'
+p8282
+asS'IsPixelInfoGray'
+p8283
+(lp8284
+S'int'
+p8285
+aS'const int *'
+p8286
+asS'WriteMPRImage'
+p8287
+(lp8288
+S'int'
+p8289
+aS'const int *'
+p8290
+aS'int *'
+p8291
+aS'int *'
+p8292
+asS'CompositePixelOver'
+p8293
+(lp8294
+S'void'
+p8295
+aS'const int *'
+p8296
+aS'const int *'
+p8297
+aS'const double'
+p8298
+aS'const int *'
+p8299
+aS'const double'
+p8300
+aS'int *'
+p8301
+asS'SetPrimaryChromaticity'
+p8302
+(lp8303
+S'void'
+p8304
+aS'const DPXColorimetric'
+p8305
+aS'int *'
+p8306
+asS'WriteYCBCRImage'
+p8307
+(lp8308
+S'int'
+p8309
+aS'const int *'
+p8310
+aS'int *'
+p8311
+aS'int *'
+p8312
+asS'ReadOTBImage'
+p8313
+(lp8314
+S'int *'
+p8315
+aS'const int *'
+p8316
+aS'int *'
+p8317
+asS'CLISimpleOperatorImage'
+p8318
+(lp8319
+S'int'
+p8320
+aS'int *'
+p8321
+aS'const char *'
+p8322
+aS'const char *'
+p8323
+aS'const char *'
+p8324
+aS'int *'
+p8325
+asS'GetPixelRedTraits'
+p8326
+(lp8327
+S'int'
+p8328
+aS'const int *'
+p8329
+asS'siginterrupt'
+p8330
+(lp8331
+S'int'
+p8332
+aS'int'
+p8333
+aS'int'
+p8334
+asS'DrawStrokePolygon'
+p8335
+(lp8336
+S'int'
+p8337
+aS'int *'
+p8338
+aS'const int *'
+p8339
+aS'const int *'
+p8340
+aS'int *'
+p8341
+asS'strcpy'
+p8342
+(lp8343
+S'char *'
+p8344
+aS'char *restrict'
+p8345
+aS'const char *restrict'
+p8346
+asS'SetPixelCbTraits'
+p8347
+(lp8348
+S'void'
+p8349
+aS'int *'
+p8350
+aS'const int'
+p8351
+asS'ReadPSDChannelRaw'
+p8352
+(lp8353
+S'int'
+p8354
+aS'int *'
+p8355
+aS'const int'
+p8356
+aS'const int'
+p8357
+aS'int *'
+p8358
+asS'GetPixelLuminance'
+p8359
+(lp8360
+S'int'
+p8361
+aS'const int *'
+p8362
+asS'ReadMACImage'
+p8363
+(lp8364
+S'int *'
+p8365
+aS'const int *'
+p8366
+aS'int *'
+p8367
+asS'copysignf'
+p8368
+(lp8369
+S'float'
+p8370
+aS'float'
+p8371
+aS'float'
+p8372
+asS'Ascii85Tuple'
+p8373
+(lp8374
+S'char *'
+p8375
+aS'unsigned char *'
+p8376
+asS'IsAVI'
+p8377
+(lp8378
+S'int'
+p8379
+aS'const unsigned char *'
+p8380
+aS'const int'
+p8381
+asS'GetPixelChannels'
+p8382
+(lp8383
+S'int'
+p8384
+aS'const int *'
+p8385
+asS'fcvt'
+p8386
+(lp8387
+S'char *'
+p8388
+aS'double'
+p8389
+aS'int'
+p8390
+aS'int *restrict'
+p8391
+aS'int *restrict'
+p8392
+asS'IntensityCompare'
+p8393
+(lp8394
+S'int'
+p8395
+aS'const void *'
+p8396
+aS'const void *'
+p8397
+asS'ValidateConvertCommand'
+p8398
+(lp8399
+S'int'
+p8400
+aS'int *'
+p8401
+aS'const char *'
+p8402
+aS'const char *'
+p8403
+aS'int *'
+p8404
+aS'int *'
+p8405
+asS'ConvertUsage'
+p8406
+(lp8407
+S'int'
+p8408
+asS'WriteYUVImage'
+p8409
+(lp8410
+S'int'
+p8411
+aS'const int *'
+p8412
+aS'int *'
+p8413
+aS'int *'
+p8414
+asS'__llrintf'
+p8415
+(lp8416
+S'long long'
+p8417
+aS'float'
+p8418
+asS'GetPixelIndexTraits'
+p8419
+(lp8420
+S'int'
+p8421
+aS'const int *'
+p8422
+asS'__tan'
+p8423
+(lp8424
+S'double'
+p8425
+aS'double'
+p8426
+asS'isprint'
+p8427
+(lp8428
+S'int'
+p8429
+aS'int'
+p8430
+asS'expl'
+p8431
+(lp8432
+S'long double'
+p8433
+aS'long double'
+p8434
+asS'SetPixelRedTraits'
+p8435
+(lp8436
+S'void'
+p8437
+aS'int *'
+p8438
+aS'const int'
+p8439
+asS'sigemptyset'
+p8440
+(lp8441
+S'int'
+p8442
+aS'__sigset_t *'
+p8443
+asS'AcquireResampleFilterThreadSet'
+p8444
+(lp8445
+S'int **'
+p8446
+aS'const int *'
+p8447
+aS'const int'
+p8448
+aS'const int'
+p8449
+aS'int *'
+p8450
+asS'popen_utf8'
+p8451
+(lp8452
+S'int *'
+p8453
+aS'const char *'
+p8454
+aS'const char *'
+p8455
+asS'__expm1'
+p8456
+(lp8457
+S'double'
+p8458
+aS'double'
+p8459
+asS'readdir'
+p8460
+(lp8461
+S'struct dirent *'
+p8462
+aS'struct __dirstream *'
+p8463
+asS'IsTXT'
+p8464
+(lp8465
+S'int'
+p8466
+aS'const unsigned char *'
+p8467
+aS'const int'
+p8468
+asS'__ynl'
+p8469
+(lp8470
+S'long double'
+p8471
+aS'int'
+p8472
+aS'long double'
+p8473
+asS'ReadSCTImage'
+p8474
+(lp8475
+S'int *'
+p8476
+aS'const int *'
+p8477
+aS'int *'
+p8478
+asS'ConstrainColormapIndex'
+p8479
+(lp8480
+S'int'
+p8481
+aS'int *'
+p8482
+aS'const int'
+p8483
+aS'int *'
+p8484
+asS'GetPixelTraits'
+p8485
+(lp8486
+S'int'
+p8487
+aS'const int *'
+p8488
+asS'putenv'
+p8489
+(lp8490
+S'int'
+p8491
+aS'char *'
+p8492
+asS'CubicBC'
+p8493
+(lp8494
+S'double'
+p8495
+aS'const double'
+p8496
+aS'const int *'
+p8497
+asS'StringToInteger'
+p8498
+(lp8499
+S'int'
+p8500
+aS'const char *'
+p8501
+asS'getpwuid_r'
+p8502
+(lp8503
+S'int'
+p8504
+aS'unsigned int'
+p8505
+aS'struct passwd *restrict'
+p8506
+aS'char *restrict'
+p8507
+aS'int'
+p8508
+aS'struct passwd **restrict'
+p8509
+asS'IsFITS'
+p8510
+(lp8511
+S'int'
+p8512
+aS'const unsigned char *'
+p8513
+aS'const int'
+p8514
+asS'FixSignedValues'
+p8515
+(lp8516
+S'void'
+p8517
+aS'const int *'
+p8518
+aS'int *'
+p8519
+aS'int'
+p8520
+asS'ExpandMirrorKernelInfo'
+p8521
+(lp8522
+S'void'
+p8523
+aS'int *'
+p8524
+asS'__erfcf'
+p8525
+(lp8526
+S'float'
+p8527
+aS'float'
+p8528
+asS'PlasmaPixel'
+p8529
+(lp8530
+S'void'
+p8531
+aS'int *'
+p8532
+aS'int *'
+p8533
+aS'double'
+p8534
+aS'double'
+p8535
+aS'int *'
+p8536
+asS'GetPixelChannelOffset'
+p8537
+(lp8538
+S'int'
+p8539
+aS'const int *'
+p8540
+asS'__erfcl'
+p8541
+(lp8542
+S'long double'
+p8543
+aS'long double'
+p8544
+asS'TimeCodeToString'
+p8545
+(lp8546
+S'void'
+p8547
+aS'const int'
+p8548
+aS'char *'
+p8549
+asS'HalfToSinglePrecision'
+p8550
+(lp8551
+S'float'
+p8552
+aS'const unsigned short'
+p8553
+asS'ReadPSDChannelRLE'
+p8554
+(lp8555
+S'int'
+p8556
+aS'int *'
+p8557
+aS'const struct _PSDInfo *'
+p8558
+aS'const int'
+p8559
+aS'int *'
+p8560
+aS'int *'
+p8561
+asS'IsFLIF'
+p8562
+(lp8563
+S'int'
+p8564
+aS'const unsigned char *'
+p8565
+aS'const int'
+p8566
+asS'VectorNegativeMultiplySubtract'
+p8567
+(lp8568
+S'void'
+p8569
+aS'const struct _DDSVector4'
+p8570
+aS'const struct _DDSVector4'
+p8571
+aS'const struct _DDSVector4'
+p8572
+aS'struct _DDSVector4 *'
+p8573
+asS'access_utf8'
+p8574
+(lp8575
+S'int'
+p8576
+aS'const char *'
+p8577
+aS'int'
+p8578
+asS'WriteOTBImage'
+p8579
+(lp8580
+S'int'
+p8581
+aS'const int *'
+p8582
+aS'int *'
+p8583
+aS'int *'
+p8584
+asS'alphasort'
+p8585
+(lp8586
+S'int'
+p8587
+aS'const struct dirent **'
+p8588
+aS'const struct dirent **'
+p8589
+asS'ReadXPMImage'
+p8590
+(lp8591
+S'int *'
+p8592
+aS'const int *'
+p8593
+aS'int *'
+p8594
+asS'getenv'
+p8595
+(lp8596
+S'char *'
+p8597
+aS'const char *'
+p8598
+asS'ReversePSDString'
+p8599
+(lp8600
+S'void'
+p8601
+aS'int *'
+p8602
+aS'char *'
+p8603
+aS'int'
+p8604
+asS'AcquireLogCache'
+p8605
+(lp8606
+S'int *'
+p8607
+aS'const char *'
+p8608
+aS'int *'
+p8609
+asS'DestroyContributionThreadSet'
+p8610
+(lp8611
+S'int **'
+p8612
+aS'int **'
+p8613
+asS'TraceBezier'
+p8614
+(lp8615
+S'void'
+p8616
+aS'int *'
+p8617
+aS'const int'
+p8618
+asS'DecodePSDPixels'
+p8619
+(lp8620
+S'int'
+p8621
+aS'const int'
+p8622
+aS'const unsigned char *'
+p8623
+aS'const int'
+p8624
+aS'const int'
+p8625
+aS'unsigned char *'
+p8626
+asS'__y1'
+p8627
+(lp8628
+S'double'
+p8629
+aS'double'
+p8630
+asS'AddNodePixelList'
+p8631
+(lp8632
+S'void'
+p8633
+aS'struct _PixelList *'
+p8634
+aS'const int'
+p8635
+asS'ImportUsage'
+p8636
+(lp8637
+S'int'
+p8638
+asS'_IO_getc'
+p8639
+(lp8640
+S'int'
+p8641
+aS'struct _IO_FILE *'
+p8642
+asS'IsDCM'
+p8643
+(lp8644
+S'int'
+p8645
+aS'const unsigned char *'
+p8646
+aS'const int'
+p8647
+asS'TransformsRGBImage'
+p8648
+(lp8649
+S'int'
+p8650
+aS'int *'
+p8651
+aS'int *'
+p8652
+asS'__modf'
+p8653
+(lp8654
+S'double'
+p8655
+aS'double'
+p8656
+aS'double *'
+p8657
+asS'tolower_l'
+p8658
+(lp8659
+S'int'
+p8660
+aS'int'
+p8661
+aS'struct __locale_struct *'
+p8662
+asS'ConvertYIQToRGB'
+p8663
+(lp8664
+S'void'
+p8665
+aS'const double'
+p8666
+aS'const double'
+p8667
+aS'const double'
+p8668
+aS'double *'
+p8669
+aS'double *'
+p8670
+aS'double *'
+p8671
+asS'WriteAVSImage'
+p8672
+(lp8673
+S'int'
+p8674
+aS'const int *'
+p8675
+aS'int *'
+p8676
+aS'int *'
+p8677
+asS'IsPFA'
+p8678
+(lp8679
+S'int'
+p8680
+aS'const unsigned char *'
+p8681
+aS'const int'
+p8682
+asS'_IO_vfscanf'
+p8683
+(lp8684
+S'int'
+p8685
+aS'struct _IO_FILE *restrict'
+p8686
+aS'const char *restrict'
+p8687
+aS'int'
+p8688
+aS'int *restrict'
+p8689
+asS'__tanhf'
+p8690
+(lp8691
+S'float'
+p8692
+aS'float'
+p8693
+asS'ImportCMYKQuantum'
+p8694
+(lp8695
+S'void'
+p8696
+aS'const int *'
+p8697
+aS'int *'
+p8698
+aS'const int'
+p8699
+aS'const unsigned char *'
+p8700
+asS'log1p'
+p8701
+(lp8702
+S'double'
+p8703
+aS'double'
+p8704
+asS'difftime'
+p8705
+(lp8706
+S'double'
+p8707
+aS'long'
+p8708
+aS'long'
+p8709
+asS'ReadRLAImage'
+p8710
+(lp8711
+S'int *'
+p8712
+aS'const int *'
+p8713
+aS'int *'
+p8714
+asS'IsWPG'
+p8715
+(lp8716
+S'unsigned int'
+p8717
+aS'const unsigned char *'
+p8718
+aS'const int'
+p8719
+asS'__nexttowardf'
+p8720
+(lp8721
+S'float'
+p8722
+aS'float'
+p8723
+aS'long double'
+p8724
+asS'sscanf'
+p8725
+(lp8726
+S'int'
+p8727
+aS'const char *restrict'
+p8728
+aS'const char *restrict'
+p8729
+ag469
+asS'__isnanf'
+p8730
+(lp8731
+S'int'
+p8732
+aS'float'
+p8733
+asS'creat'
+p8734
+(lp8735
+S'int'
+p8736
+aS'const char *'
+p8737
+aS'unsigned int'
+p8738
+asS'__nexttowardl'
+p8739
+(lp8740
+S'long double'
+p8741
+aS'long double'
+p8742
+aS'long double'
+p8743
+asS'__sigdelset'
+p8744
+(lp8745
+S'int'
+p8746
+aS'__sigset_t *'
+p8747
+aS'int'
+p8748
+asS'remove'
+p8749
+(lp8750
+S'int'
+p8751
+aS'const char *'
+p8752
+asS'__isnanl'
+p8753
+(lp8754
+S'int'
+p8755
+aS'long double'
+p8756
+asS'jrand48_r'
+p8757
+(lp8758
+S'int'
+p8759
+aS'unsigned short [3]'
+p8760
+aS'struct drand48_data *restrict'
+p8761
+aS'long *restrict'
+p8762
+asS'SetPixelChannelAttributes'
+p8763
+(lp8764
+S'void'
+p8765
+aS'const int *'
+p8766
+asS'lgamma_r'
+p8767
+(lp8768
+S'double'
+p8769
+aS'double'
+p8770
+aS'int *'
+p8771
+asS'IsRLE'
+p8772
+(lp8773
+S'int'
+p8774
+aS'const unsigned char *'
+p8775
+aS'const int'
+p8776
+asS'__remainder'
+p8777
+(lp8778
+S'double'
+p8779
+aS'double'
+p8780
+aS'double'
+p8781
+asS'ispunct'
+p8782
+(lp8783
+S'int'
+p8784
+aS'int'
+p8785
+asS'WriteIPLImage'
+p8786
+(lp8787
+S'int'
+p8788
+aS'const int *'
+p8789
+aS'int *'
+p8790
+aS'int *'
+p8791
+asS'ConvertLCHabToRGB'
+p8792
+(lp8793
+S'void'
+p8794
+aS'const double'
+p8795
+aS'const double'
+p8796
+aS'const double'
+p8797
+aS'double *'
+p8798
+aS'double *'
+p8799
+aS'double *'
+p8800
+asS'CompositeOverImage'
+p8801
+(lp8802
+S'int'
+p8803
+aS'int *'
+p8804
+aS'const int *'
+p8805
+aS'const int'
+p8806
+aS'const int'
+p8807
+aS'const int'
+p8808
+aS'int *'
+p8809
+asS'fchmod'
+p8810
+(lp8811
+S'int'
+p8812
+aS'int'
+p8813
+aS'unsigned int'
+p8814
+asS'__expl'
+p8815
+(lp8816
+S'long double'
+p8817
+aS'long double'
+p8818
+asS'ReadDXT1'
+p8819
+(lp8820
+S'int'
+p8821
+aS'int *'
+p8822
+aS'struct _DDSInfo *'
+p8823
+aS'int *'
+p8824
+asS'__expf'
+p8825
+(lp8826
+S'float'
+p8827
+aS'float'
+p8828
+asS'modf'
+p8829
+(lp8830
+S'double'
+p8831
+aS'double'
+p8832
+aS'double *'
+p8833
+asS'modff'
+p8834
+(lp8835
+S'float'
+p8836
+aS'float'
+p8837
+aS'float *'
+p8838
+asS'pclose'
+p8839
+(lp8840
+S'int'
+p8841
+aS'struct _IO_FILE *'
+p8842
+asS'ReadFAXImage'
+p8843
+(lp8844
+S'int *'
+p8845
+aS'const int *'
+p8846
+aS'int *'
+p8847
+asS'mkstemp'
+p8848
+(lp8849
+S'int'
+p8850
+aS'char *'
+p8851
+asS'ValidateColormapValue'
+p8852
+(lp8853
+S'void'
+p8854
+aS'int *'
+p8855
+aS'const int'
+p8856
+aS'int *'
+p8857
+aS'int *'
+p8858
+asS'modfl'
+p8859
+(lp8860
+S'long double'
+p8861
+aS'long double'
+p8862
+aS'long double *'
+p8863
+asS'__truncl'
+p8864
+(lp8865
+S'long double'
+p8866
+aS'long double'
+p8867
+asS'stat'
+p8868
+(lp8869
+S'int'
+p8870
+aS'const char *restrict'
+p8871
+aS'struct stat *restrict'
+p8872
+asS'SyncBlob'
+p8873
+(lp8874
+S'int'
+p8875
+aS'int *'
+p8876
+asS'InvokePDFDelegate'
+p8877
+(lp8878
+S'int'
+p8879
+aS'const int'
+p8880
+aS'const char *'
+p8881
+aS'char *'
+p8882
+aS'int *'
+p8883
+asS'killpg'
+p8884
+(lp8885
+S'int'
+p8886
+aS'int'
+p8887
+aS'int'
+p8888
+asS'ConvertLCHabToXYZ'
+p8889
+(lp8890
+S'void'
+p8891
+aS'const double'
+p8892
+aS'const double'
+p8893
+aS'const double'
+p8894
+aS'double *'
+p8895
+aS'double *'
+p8896
+aS'double *'
+p8897
+asS'ConvertLMSToRGB'
+p8898
+(lp8899
+S'void'
+p8900
+aS'const double'
+p8901
+aS'const double'
+p8902
+aS'const double'
+p8903
+aS'double *'
+p8904
+aS'double *'
+p8905
+aS'double *'
+p8906
+asS'time'
+p8907
+(lp8908
+S'long'
+p8909
+aS'long *'
+p8910
+asS'ReadVIPSPixelsNONE'
+p8911
+(lp8912
+S'int'
+p8913
+aS'int *'
+p8914
+aS'const VIPSBandFormat'
+p8915
+aS'const VIPSType'
+p8916
+aS'const unsigned int'
+p8917
+aS'int *'
+p8918
+asS'isinf'
+p8919
+(lp8920
+S'int'
+p8921
+aS'double'
+p8922
+asS'ReadWPGImage'
+p8923
+(lp8924
+S'int *'
+p8925
+aS'const int *'
+p8926
+aS'int *'
+p8927
+asS'_toupper'
+p8928
+(lp8929
+S'int'
+p8930
+aS'int'
+p8931
+asS'remainderl'
+p8932
+(lp8933
+S'long double'
+p8934
+aS'long double'
+p8935
+aS'long double'
+p8936
+asS'OpenPixelCacheOnDisk'
+p8937
+(lp8938
+S'int'
+p8939
+aS'int *'
+p8940
+aS'const int'
+p8941
+asS'PrintChannelFeatures'
+p8942
+(lp8943
+S'int'
+p8944
+aS'int *'
+p8945
+aS'const int'
+p8946
+aS'const char *'
+p8947
+aS'const int *'
+p8948
+asS'IsPGX'
+p8949
+(lp8950
+S'unsigned int'
+p8951
+aS'const unsigned char *'
+p8952
+aS'const int'
+p8953
+asS'__powf'
+p8954
+(lp8955
+S'float'
+p8956
+aS'float'
+p8957
+aS'float'
+p8958
+asS'ValidateImportExportPixels'
+p8959
+(lp8960
+S'int'
+p8961
+aS'int *'
+p8962
+aS'const char *'
+p8963
+aS'const char *'
+p8964
+aS'int *'
+p8965
+aS'int *'
+p8966
+asS'GetPixelChannelTraits'
+p8967
+(lp8968
+S'int'
+p8969
+aS'const int *'
+p8970
+asS'__isinf'
+p8971
+(lp8972
+S'int'
+p8973
+aS'double'
+p8974
+asS'PushColormapIndex'
+p8975
+(lp8976
+S'int'
+p8977
+aS'const int *'
+p8978
+aS'const int'
+p8979
+aS'int *'
+p8980
+asS'endpwent'
+p8981
+(lp8982
+S'void'
+p8983
+asS'PrintChannelStatistics'
+p8984
+(lp8985
+S'int'
+p8986
+aS'int *'
+p8987
+aS'const int'
+p8988
+aS'const char *'
+p8989
+aS'const double'
+p8990
+aS'const int *'
+p8991
+asS'IsTTF'
+p8992
+(lp8993
+S'int'
+p8994
+aS'const unsigned char *'
+p8995
+aS'const int'
+p8996
+asS'ScaleColor6to8'
+p8997
+(lp8998
+S'unsigned char'
+p8999
+aS'const unsigned int'
+p9000
+asS'__exp2'
+p9001
+(lp9002
+S'double'
+p9003
+aS'double'
+p9004
+asS'ExportGrayAlphaQuantum'
+p9005
+(lp9006
+S'void'
+p9007
+aS'const int *'
+p9008
+aS'int *'
+p9009
+aS'const int'
+p9010
+aS'const int *'
+p9011
+asS'asinhl'
+p9012
+(lp9013
+S'long double'
+p9014
+aS'long double'
+p9015
+as.
