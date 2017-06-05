@@ -62,7 +62,7 @@ string read_part(char* c) {
     string str = "";
 
     ifile.read(&m, 1);
-    while (ifile && m != ':' && m != ',' && m != '\n') {
+    while (ifile && m != ':' && m != '\n') {
         str += m;
         ifile.read(&m, 1);
     }
@@ -338,41 +338,34 @@ VOID Commence() {
     if (ifile.is_open()) {
         while (ifile) {
             char m;
-            unsigned int nb_param = 0;
             vector<bool> type_param;
             string img_name = read_part(&m);
-
             if (img_name.empty()) {
                 continue;
             }
-
             ADDRINT img_addr = atol(read_part(&m).c_str());
             string name = read_part(&m);
-
-            /* Read parameters */
-            while (ifile && m != '\n') {
-                string part = read_part(&m);
-                switch (part[0]) {
-                case 'A':
-                    type_param.push_back(true);
-                    break;
-                case 'I':
-                case 'V':
-                    type_param.push_back(false);
-                    break;
-                case 'F':
-                    type_param.push_back(false);
-                    break;
-                default:
-                    type_param.push_back(false);
-                }
-                nb_param += 1;
-            }
-
+            type_param.push_back(true);
             FID fid = fn_register(img_name, img_addr, name);
             if (fid != FID_UNKNOWN) {
-                fn_registered(fid, nb_param - 1, type_param);
+                fn_registered(fid, 0, type_param);
             }
+
+            type_param.clear();
+            img_name = read_part(&m);
+            if (img_name.empty()) {
+                continue;
+            }
+            img_addr = atol(read_part(&m).c_str());
+            name = read_part(&m);
+            type_param.push_back(false);
+            type_param.push_back(true);
+            fid = fn_register(img_name, img_addr, name);
+            if (fid != FID_UNKNOWN) {
+                fn_registered(fid, 1, type_param);
+            }
+
+            read_part(&m);
         }
     }
 
