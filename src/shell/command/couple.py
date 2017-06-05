@@ -35,4 +35,4 @@ class CoupleCmd(ICommand):
         except IOError:
             self.stderr("Logs for binary \"{}\" not found".format(s[0]))
             return
-        Couple(logfile, s[0], self.stdout).run()
+        Couple(logfile, s[0]).run()

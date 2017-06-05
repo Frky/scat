@@ -206,6 +206,8 @@ VOID Commence() {
     if (ifile.is_open()) {
         /* Ignore first line (elapsed time) */
         read_line(ifile);
+        /* Ignore second line (params of inference) */
+        read_line(ifile);
         while (ifile) {
             /* Read the prototype of one function */
             fn_type_t *fn = read_one_type(ifile);
@@ -235,6 +237,8 @@ VOID Fini(INT32 code, VOID *v) {
     ofstream ofile;
     /* Open output log file (result of this inference */
     ofile.open(KnobOutputFile.Value().c_str());
+
+    ofile << "MAX_VALS=" << MAX_VALS << endl;
 
     /* First we log the table fid <-> name */
     log_ftable(ofile);
@@ -297,16 +301,19 @@ VOID Instruction(INS ins, VOID *v) {
         }
     }
 
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
-            INS_InsertCall(ins,
+    if (INS_IsIndirectBranchOrCall(ins) && !INS_IsFarCall(ins) && !INS_IsFarJump(ins) && !INS_IsFarRet(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins) 
+                /* This condition fixes runtime crash of pin on some programs
+                   (e.g. git) -- but I am not sure it is a correct answer, it 
+                   might have bad effects on the results of inference */
+                    && (INS_Category(ins) != XED_CATEGORY_COND_BR))
+                INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_indirect_call,
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
                     IARG_END);
-        }
     }
 
     if (INS_IsRet(ins)) {
@@ -328,6 +335,9 @@ int main(int argc, char * argv[])
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
+
+    /* Get parameters of analysis from command line */
+    MAX_VALS = std::atoi(KnobMaxVals.Value().c_str());
 
     /* Init function data structure */
     fn_data = (fn_data_t **) calloc(NB_FN_MAX, sizeof(fn_data_t*));

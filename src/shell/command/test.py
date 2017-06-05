@@ -3,6 +3,7 @@
 from .i_command import ICommand
 from src.shell.test.accuracy import TestAccuracy
 from src.shell.test.parameter import TestParameter
+from src.shell.test.couple import TestCouple
 from src.shell.utils import complete_bin, complete_path, checkpath
 
 class TestCmd(ICommand):
@@ -64,7 +65,8 @@ class TestCmd(ICommand):
                 else:
                     prev = self.__pintools["arity"]
                 test = TestParameter(
-                                        self.__conf_path, self.__pintools[analysis], 
+                                        self.__conf_path, 
+                                        self.__pintools[analysis], 
                                         resdir=self.__resdir, 
                                         prev_pintool=prev
                                     )
@@ -75,10 +77,34 @@ class TestCmd(ICommand):
                 return 
             param = split[1]
             if param == "general":
-                pass
+                TestCouple(
+                                self.__conf_path, 
+                                pintool=self.__pintools[analysis],
+                                logdir=self.__logdir, 
+                                resdir=self.__resdir, 
+                            ).run()
             else: 
-                self.stderr("unknown parameter: {} -- aborting".format(param))
-                raise Exception("not implemented yet")
+                if param in ["rho", "min_vals", "max_vals"]:
+                    vals = list()
+                    v = self.__param[analysis][param]["min"]
+                    step = self.__param[analysis][param]["step"]
+                    while v <= self.__param[analysis][param]["max"]: 
+                        vals.append(round(v, 2))
+                        v += step
+                    params = dict()
+                    params[param] = vals
+                    for p, v in self.__param[analysis][param].items():
+                        if p not in ["min", "max", "step"]:
+                            params[p] = v
+                    TestCouple(
+                                    self.__conf_path, 
+                                    pintool=self.__pintools[analysis],
+                                    logdir=self.__logdir, 
+                                    resdir=self.__resdir, 
+                                ).run_params(params, param)
+                else:
+                    self.stderr("unknown parameter: {} -- aborting".format(param))
+                    raise Exception("not implemented yet")
         else:
             self.stderr("unknown analysis: {} -- aborting".format(analysis))
         return

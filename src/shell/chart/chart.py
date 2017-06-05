@@ -13,6 +13,9 @@ class Chart(object):
                 "fn": "#bdc3c7",
                 "fp": "#7f8c8d",
                 "tot": "#c0392b",
+                "couples": "#2c3e50",
+                "left": "#7f8c8d",
+                "right": "#bdc3c7",
             }
 
     def __init__(self, logfile):

@@ -47,6 +47,11 @@ class CoupleLogParser(ILogParser):
 
     def get(self):
         with open(self.log_path, 'r') as f:
+            # Read parameters
+            line = f.readline()
+            for p in line[:-1].split(":"):
+                k, v = p.split("=")
+                self._params[k] = v
             # Read Function Table
             self.read_header(f);
             line = f.readline()
