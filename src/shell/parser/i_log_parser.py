@@ -17,6 +17,7 @@ class ILogParser(object):
         # Path to log file
         self.log_path = log_path
         self.fn_table = list()
+        self._params = dict()
         with open(self.log_path, "r") as log:
             self.elapsed_time = log.readline()[:-1]
 
@@ -46,4 +47,7 @@ class ILogParser(object):
                 lines += buf.count(b'\n')
                 buf = read_f(buf_size)
         return lines
+
+    def get_params(self):
+        return self._params
 

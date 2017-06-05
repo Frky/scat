@@ -25,9 +25,10 @@ class AccuracyRes(object):
         self.__out["falsepos"] += res[4]
         self.__out["falseneg"] += res[5]
         self.__out["tot"] += res[-1]
+        self.__last = (res, pgm)
         if verbose:
             try:
-                print "{}: {}/{} {:.2f}% ({} fn, {} fp) - {}/{} {:.2f}%".format(
+                print "{}: {}/{} {:.2f}% ({} fn, {} fp) - {}/{} {:.2f}% ({} fn, {} fp)".format(
                         pgm, 
                         res[0],
                         res[-2],
@@ -37,21 +38,23 @@ class AccuracyRes(object):
                         res[1],
                         res[-1],
                         res[1]*100./res[-1],
+                        res[5], 
+                        res[4], 
                             )
             except Exception:
                 print "{}: n.c.".format(pgm)
 
     def __str__(self):
-        return "{}: {}/{} {:.2f}% ({} fn, {} fp) - {}/{} {:.2f}%".format(
+        return "{}: {}/{} {:.2f}% ({} fn, {} fp) - {}/{} {:.2f}% ({} fn, {} fp)".format(
                     "TOTAL", 
                     self.__in["ok"], 
                     self.__in["tot"], 
-                    self.__in["ok"]*100./self.__in["tot"],
+                    self.__in["ok"]*100./self.__in["tot"] if self.__in["tot"] else 0.0,
                     self.__in["falseneg"],
                     self.__in["falsepos"],
                     self.__out["ok"], 
                     self.__out["tot"], 
-                    self.__out["ok"]*100./self.__out["tot"],
+                    self.__out["ok"]*100./self.__out["tot"] if self.__out["tot"] else 0.0,
+                    self.__out["falseneg"],
+                    self.__out["falsepos"], 
                 )
-
-

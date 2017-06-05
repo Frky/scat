@@ -13,7 +13,7 @@
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
 
-#define MIN_CALLS_DEFAULT       "20"
+#define MIN_CALLS_DEFAULT       "5"
 #define PARAM_THRESHOLD_DEFAULT "0.10"
 #define RET_THRESHOLD_DEFAULT   "0.10"
 
@@ -29,11 +29,11 @@
 
 /* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
 unsigned int MIN_CALLS;
-KNOB<string> KnobMinCalls(KNOB_MODE_WRITEONCE, "pintool", "mincalls", MIN_CALLS_DEFAULT, "Specify a number for MIN_CALLS");
+KNOB<string> KnobMinCalls(KNOB_MODE_WRITEONCE, "pintool", "min_calls", MIN_CALLS_DEFAULT, "Specify a number for MIN_CALLS");
 float PARAM_THRESHOLD; 
-KNOB<string> KnobParamThreshold(KNOB_MODE_WRITEONCE, "pintool", "paramthresh", PARAM_THRESHOLD_DEFAULT, "Specify a number for PARAM_THRESHOLD");
+KNOB<string> KnobParamThreshold(KNOB_MODE_WRITEONCE, "pintool", "param_threshold", PARAM_THRESHOLD_DEFAULT, "Specify a number for PARAM_THRESHOLD");
 float RET_THRESHOLD; 
-KNOB<string> KnobRetThreshold(KNOB_MODE_WRITEONCE, "pintool", "retthresh", RET_THRESHOLD_DEFAULT, "Specify a number for RET_THRESHOLD");
+KNOB<string> KnobRetThreshold(KNOB_MODE_WRITEONCE, "pintool", "ret_threshold", RET_THRESHOLD_DEFAULT, "Specify a number for RET_THRESHOLD");
 
 
 /* Out file to store analysis results */
@@ -170,18 +170,22 @@ VOID fn_ret() {
     if (!call_stack.is_top_forgotten()) {
         while (is_jump_stack.top()) {
             // std::cerr << "unjumping" << endl;
+#if 0
             if (reg_maybe_return[REGF_AX])
                 nb_ret_int[call_stack.top()]++;
             else if (reg_maybe_return[REGF_XMM0])
                 nb_ret_float[call_stack.top()]++;
+#endif
             call_stack.pop();
             is_jump_stack.pop();
             sp_stack.pop();
         }
+#if 0
         if (reg_maybe_return[REGF_AX])
             nb_ret_int[call_stack.top()]++;
         else if (reg_maybe_return[REGF_XMM0])
             nb_ret_float[call_stack.top()]++;
+#endif
         call_stack.pop();
         is_jump_stack.pop();
         sp_stack.pop();
@@ -544,6 +548,8 @@ VOID fini(INT32 code, VOID *v) {
 
     int inferred = 0;
     int dismissed = 0;
+
+    ofile << "MIN_CALLS=" << MIN_CALLS << ":PARAM_THRESHOLD=" << PARAM_THRESHOLD << ":RET_THRESHOLD=" << RET_THRESHOLD << endl;
 
     for (FID fid = 1; fid <= fn_nb(); fid++) {
         if (nb_call[fid] < MIN_CALLS) {

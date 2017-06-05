@@ -9,6 +9,7 @@ from src.shell.exceptions import PintoolFileNotFound
 # from src.shell.command.memcomb import MemComb
 # from src.shell.command.memuaf import MemUAF
 # from src.shell.command.couple import Couple
+from src.shell.command.chart import ChartCmd
 from src.shell.command.checkconfig import CheckConfigCmd
 from src.shell.command.make import MakeCmd
 from src.shell.command.display import DisplayCmd
@@ -103,8 +104,14 @@ class ScatShell(Cmd):
                                     )
         self.__cmds["test"] = TestCmd(
                                         test_conf=self.__config["test"]["desc"],
+                                        param=self.__config["test"]["param"],
                                         pintools=self.__pintools,
                                         logdir=self.__logdir,
+                                        resdir=self.__config["test"]["res"],
+                                    )
+        self.__cmds["chart"] = ChartCmd(
+                                        resdir=self.__config["test"]["res"],
+                                        conf=self.__config["test"]["param"],
                                     )
 
         # Link methods to scat shell

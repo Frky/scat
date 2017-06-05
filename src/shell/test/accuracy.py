@@ -7,13 +7,16 @@ import os
 
 from src.shell.analysis.arity import ArityAnalysis
 from src.shell.analysis.type import TypeAnalysis
+from src.shell.chart.arity import ArityChart
+from src.shell.chart.type import TypeChart
 from src.shell.data.data import Data
 from src.shell.test.res.accuracy import AccuracyRes
 from src.shell.pin.pintool import Pintool
 
 class TestAccuracy(object):
 
-    def __init__(self, test_conf, arity, typ, logdir, *args, **kwargs):
+    def __init__(self, test_conf, arity, typ, logdir, resdir, *args, **kwargs):
+        self.__resdir = resdir
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
         # Inlcude sub configuration files
         for k, v in self.__conf.items():
@@ -30,7 +33,10 @@ class TestAccuracy(object):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
+        prev_res = ArityChart(self.__resdir + "/accuracy_arity.res")
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
+            if prev_res.contains(pgm):
+                continue
             if "pre" in param.keys():
                 call(param["pre"], stdout=FNULL, shell=True)
             # launch program arity
@@ -51,7 +57,7 @@ class TestAccuracy(object):
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
             ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)
-            res.add(ar.accuracy(get=True, verbose=False), pgm=pgm, verbose=True)
+            res.add(ar.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "accuracy_arity.res"), pgm=pgm, verbose=True)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
 
@@ -62,7 +68,10 @@ class TestAccuracy(object):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
+        prev_res = TypeChart(self.__resdir + "/accuracy_type.res")
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
+            if prev_res.contains(pgm):
+                continue
             if "pre" in param.keys():
                 call(param["pre"], stdout=FNULL, shell=True)
             # launch program type
@@ -83,7 +92,7 @@ class TestAccuracy(object):
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
             ty = TypeAnalysis(pgm, self.__type.get_logfile(pgm, prev=False), data)
-            res.add(ty.accuracy(get=True, verbose=False), pgm=pgm)
+            res.add(ty.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "accuracy_type.res"), pgm=pgm)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
 

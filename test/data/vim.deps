@@ -1,0 +1,10 @@
+(lp0
+S'libm.so.6'
+p1
+aS'libtinfo.so.5'
+p2
+aS'libdl.so.2'
+p3
+aS'libc.so.6'
+p4
+a.

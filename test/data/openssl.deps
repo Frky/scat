@@ -1,0 +1,8 @@
+(lp0
+S'libdl.so.2'
+p1
+aS'libpthread.so.0'
+p2
+aS'libc.so.6'
+p3
+a.

@@ -1,0 +1,12 @@
+(lp0
+S'libopus.so.0'
+p1
+aS'libFLAC.so.8'
+p2
+aS'libogg.so.0'
+p3
+aS'libm.so.6'
+p4
+aS'libc.so.6'
+p5
+a.
