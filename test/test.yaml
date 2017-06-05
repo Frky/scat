@@ -62,6 +62,5 @@ opusenc:
     post: "rm test/tmp/output.opus"
 coreutils:
     config: "test/coreutils.yaml"
-
-8cc:
-    config: "test/8cc.yaml"
+# 8cc:
+#     config: "test/8cc.yaml"
