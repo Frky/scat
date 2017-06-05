@@ -15,15 +15,15 @@ class ArityEntry(Entry):
 
     @property
     def min_calls(self):
-        return int(self.__mincalls)
+        return int(self._mincalls)
         
     @property
     def param_threshold(self):
-        return float(self.__paramth)
+        return float(self._paramth)
 
     @property
     def ret_threshold(self):
-        return float(self.__retth)
+        return float(self._retth)
 
     def get(self, param):
         if param == "min_calls":

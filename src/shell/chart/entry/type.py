@@ -10,21 +10,21 @@ class TypeEntry(Entry):
         self._minvals = int(l[1])
         self._maxvals = int(l[2])
         self._addrth = float(l[3])
-        self._fn_in, self._fp_in, self._tot_in = map(lambda a: int(a), l[4:7])
-        self._fn_out, self._fp_out, self._tot_out = map(lambda a: int(a), l[7:])
+        self._fp_in, self._fn_in, self._tot_in = map(lambda a: int(a), l[4:7])
+        self._fp_out, self._fn_out, self._tot_out = map(lambda a: int(a), l[7:])
         super(TypeEntry, self).__init__(*args, **kwargs)
 
     @property
     def min_vals(self):
-        return int(self.__minvals)
+        return int(self._minvals)
         
     @property
     def max_vals(self):
-        return int(self.__maxvals)
+        return int(self._maxvals)
         
     @property
     def addr_threshold(self):
-        return float(self.__addrth)
+        return float(self._addrth)
 
     def get(self, param):
         if param == "min_vals":

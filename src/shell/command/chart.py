@@ -7,6 +7,18 @@ from src.shell.chart.type import TypeChart
 
 class ChartCmd(ICommand):
     """
+        usage: chart <analysis> <parameter> [program]
+
+        Non-optional arguments:
+            analysis: the analysis for which you want to get results (either arity or type)
+            parameter: the parameter to vary (e.g. min_calls)
+
+
+        Optional arguments:
+            program: program you want to analyse (by default, it gathers all available results)
+
+
+        Note that if param = "accuracy", it outputs data for every program with default parameter values.
 
     """
 
@@ -19,7 +31,7 @@ class ChartCmd(ICommand):
         if param == "accuracy":
             return "{}/{}_{}.res".format(self.__resdir, param, inf)
         else:
-            return "{}/{}_{}_{}.res".format(self.__resdir, pgm, param, inf)
+            return "{}/{}_{}.res".format(self.__resdir, pgm, inf)
 
     def run(self, s, *args, **kwargs):
         split = s.split(" ")
@@ -33,12 +45,16 @@ class ChartCmd(ICommand):
             for k, v in self.__conf[inf][param].items():
                 if k not in ["min", "max", "step"]:
                     defaults[k] = v
+            inp = param in ["min_calls", "param_threshold", "min_vals", "max_vals", "addr_threshold"]
+            outp = param in ["min_calls", "ret_threshold", "min_vals", "max_vals", "addr_threshold"]
         if inf == "arity":
             chart = ArityChart(self.__get_res(inf, param, pgm))
         else:
             chart = TypeChart(self.__get_res(inf, param, pgm))
         if param == "accuracy":
             chart.draw_accuracy(chart.get_accuracy(), "accuracy")
+        elif param == "variability":
+            chart.draw_var(chart.get_var(pgm, defaults), "{}_var".format(pgm))
         else:
-            chart.draw(chart.get(param, defaults), pgm + "_" + param)
+            chart.draw(chart.get(param, defaults, inp=inp, outp=outp), pgm + "_" + param)
 

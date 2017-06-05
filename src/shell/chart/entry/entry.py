@@ -55,9 +55,9 @@ class Entry(object):
             return self.acc_in
         elif param == "tot_in":
             return self.tot_in
-        elif param == "fp_in":
-            return self.fn_in
         elif param == "fn_in":
+            return self.fn_in
+        elif param == "fp_in":
             return self.fp_in
         elif param == "acc_out":
             return self.acc_out
