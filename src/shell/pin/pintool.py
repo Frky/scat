@@ -168,11 +168,7 @@ class Pintool(object):
             raise IOError
         return max(candidates, key=os.path.getmtime)
 
-<<<<<<< HEAD
-    def launch(self, binary, args, params=None, verbose=True):
-=======
-    def launch(self, binary, args, verbose=True, alt_prev=False):
->>>>>>> Integrate a new option in `launch` command (#15)
+    def launch(self, binary, args, params=None, verbose=True, alt_prev=False):
         """
             Launch specified inference on binary given in parameter
 
@@ -194,16 +190,12 @@ class Pintool(object):
             infile = self.get_logfile(binary, alt_prev=alt_prev)
         else:
             infile = None
-<<<<<<< HEAD
         if params is not None:
             pin_args = " ".join(["-{} {}".format(k, v) for k, v in params.items()])
         else:
             pin_args = ""
-        cmd = self.__cmd(binary, args, logfile, debugfile, infile, pin_args)
-=======
-        cmd = self.__cmd(binary, args, logfile, debugfile, infile,
+        cmd = self.__cmd(binary, args, logfile, debugfile, infile, pin_args,
                 alt_prev=alt_prev)
->>>>>>> Integrate a new option in `launch` command (#15)
         self.stdout(cmd, verbose)
         start = datetime.now()
         subprocess.call(cmd, shell=True)
