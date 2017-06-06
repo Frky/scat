@@ -17,6 +17,9 @@ class MemCombCmd(ICommand):
                 containig at least one of the keywords
             --libmatch=<keyword1,keyword2,..>: keep only the memory blocks
                 that matches at least one of the keywords
+            --couple: enable the filtering of free candidate. Only the functions
+                coupled with the infered allocator will be evaluated.
+                Requires `couple program` to be run before.
 
         memcomb must be used only after using succesfully `launch type` and
         `launch memalloc`
