@@ -57,16 +57,16 @@ class ScatShell(Cmd):
                 alt_prev_step = None
             # Create pintool object
             pintool_obj = Pintool(
-                                    name=pintool,
-                                    src_path=src,
-                                    obj_path=obj,
-                                    pinconf=self.__config["pin"],
-                                    # stdout=self.out,
-                                    # stderr=self.out,
-                                    log_dir=self.__logdir,
-                                    prev_step=prev_step,
-                                    alt_prev_step=alt_prev_step
-                                )
+                name=pintool,
+                src_path=src,
+                obj_path=obj,
+                pinconf=self.__config["pin"],
+                # stdout=self.out,
+                # stderr=self.out,
+                log_dir=self.__logdir,
+                prev_step=prev_step,
+                alt_prev_step=alt_prev_step
+            )
             self.__pintools[pintool] = pintool_obj
 
         # # Create a test object
@@ -79,48 +79,49 @@ class ScatShell(Cmd):
         # Enable commands
         self.__cmds = dict()
         self.__cmds["checkconfig"] = CheckConfigCmd(
-                                                        logdir=self.__logdir, 
-                                                        pinpath=self.__config["pin"]["bin"],
-                                                    )
+            logdir=self.__logdir,
+            pinpath=self.__config["pin"]["bin"],
+        )
         self.__cmds["make"] = MakeCmd(
-                                        pintools=self.__pintools,
-                                    )
+            pintools=self.__pintools,
+        )
 
         self.__cmds["display"] = DisplayCmd(
-                                        pintools=self.__pintools,
-                                        logdir=self.__logdir,
-                                    )
+            pintools=self.__pintools,
+            logdir=self.__logdir,
+        )
         self.__cmds["parsedata"] = ParseDataCmd()
         self.__cmds["accuracy"] = AccuracyCmd(
-                                        pintools=self.__pintools,
-                                        logdir=self.__logdir,
-                                    )
+            pintools=self.__pintools,
+            logdir=self.__logdir,
+        )
         self.__cmds["mismatch"] = MismatchCmd(
-                                        pintools=self.__pintools,
-                                        logdir=self.__logdir,
-                                    )
+            pintools=self.__pintools,
+            logdir=self.__logdir,
+        )
         self.__cmds["launch"] = LaunchCmd(
-                                        pintools=self.__pintools,
-                                    )
+            pintools=self.__pintools,
+        )
         self.__cmds["couple"] = CoupleCmd(
-                                        pintools=self.__pintools,
-                                    )
+            pintools=self.__pintools,
+        )
         self.__cmds["memcomb"] = MemCombCmd(
-                                        pintools=self.__pintools,
-                                    )
-        self.__cmds["test"] = TestCmd(
-                                        test_conf=self.__config["test"]["desc"],
-                                        param=self.__config["test"]["param"],
-                                        pintools=self.__pintools,
-                                        logdir=self.__logdir,
-                                        resdir=self.__config["test"]["res"],
-                                    )
-        self.__cmds["chart"] = ChartCmd(
-                                        resdir=self.__config["test"]["res"],
-                                        conf=self.__config["test"]["param"],
-                                    )
+            pintools=self.__pintools,
+        )
+        if "param" in self.__config["test"].keys():
+            self.__cmds["test"] = TestCmd(
+                test_conf=self.__config["test"]["desc"],
+                param=self.__config["test"]["param"],
+                pintools=self.__pintools,
+                logdir=self.__logdir,
+                resdir=self.__config["test"]["res"],
+            )
+            self.__cmds["chart"] = ChartCmd(
+                resdir=self.__config["test"]["res"],
+                conf=self.__config["test"]["param"],
+            )
 
-        # Link methods to scat shell
+            # Link methods to scat shell
         for cmd, obj in self.__cmds.items():
             setattr(self, "do_" + cmd, obj.run)
             setattr(self, "help_" + cmd, obj.help)
@@ -131,7 +132,7 @@ class ScatShell(Cmd):
 
     def emptyline(self):
         pass
- 
+
 #     #========== LOG functions ==========#
 # 
 # #     def out(self, msg, verbose=True, crlf=True):

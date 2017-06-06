@@ -310,8 +310,12 @@ class MemComb(object):
                 FREE_IMAGE, FREE_ADDR, FREE_NAME = FREES[0][0].split(":")
             except IndexError:
                 if self.__couples_file is not None:
-                    self.log("Liberator not found in couples, aborting")
+                    self.log("Liberator not found in couples ! Aborting.")
                     return
+                else:
+                    self.log("Liberator not found ! Aborting.")
+                    return
+
             FREE_ADDR = hex(int(FREE_ADDR))
             self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
             self.log("checking consistancy of blocks...")
