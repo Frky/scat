@@ -66,7 +66,7 @@ class Couple(object):
                             nb += 1
                             not_nb -= 1
                             break
-                    if float(not_nb) / float(len(param_in)) > 1 - 0.5:
+                    if float(not_nb) / float(len(param_in)) > 1 - min_rho:
                         break
                 rho = float(nb) / float(len(param_in))
                 if rho >= min_rho:

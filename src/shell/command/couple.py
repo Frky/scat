@@ -6,7 +6,11 @@ from src.shell.couple.couple import Couple
 
 class CoupleCmd(ICommand):
     """
-        usage: couple program
+        usage: couple program [--min_rho=<value>]
+
+        Optional argument:
+            --min_rho=<value>: minimum value of the rho coefficient for two
+                function to be considered coupled
 
         Non-optional argument:
             program: program you want to compute couples on
@@ -29,10 +33,14 @@ class CoupleCmd(ICommand):
             return
 
         s = s.split()
+        min_rho = 0.5
+        for i in s:
+            if "--min_rho" in i:
+                min_rho = float(i.replace("--min_rho=",""))
 
         try:
             logfile = self.__pintools["couple"].get_logfile(s[0], prev=False)
         except IOError:
             self.stderr("Logs for binary \"{}\" not found".format(s[0]))
             return
-        Couple(logfile, s[0]).run()
+        Couple(logfile, s[0]).run(min_rho=min_rho)
