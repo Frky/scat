@@ -50,6 +50,9 @@ class LaunchCmd(ICommand):
                 self.__options_dict["alt_prev"] = True
             index += 1
 
+        if not split:
+            self.stderr('Missing arguments')
+            return
         inf = split[index]
         index += 1
 
