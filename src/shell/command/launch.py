@@ -69,12 +69,16 @@ class LaunchCmd(ICommand):
 
 
     def complete(self, text, line, begidx, endidx):
-        if len(line.split(" ")) < 3:
+        trimmed_line = line.replace('  ', ' ')
+        while trimmed_line != line:
+            line = line.replace('  ', ' ')
+            trimmed_line = trimmed_line.replace('  ', ' ')
+        if len(line.split(' ')) < 3:
             return filter(
                             lambda x: x.startswith(text),
                             map(lambda x: str(x), self.__pintools),
                         )
-        elif len(line.split(" ")) < 4:
+        elif len(line.split(' ')) < 4:
             return complete_bin(text, line, begidx, endidx)
         else:
             return  complete_path(text, line, begidx, endidx)

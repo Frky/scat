@@ -128,7 +128,7 @@ class ScatShell(Cmd):
             setattr(self, "complete_" + cmd, obj.complete)
 
         # Init shell
-        Cmd.__init__(self, completekey='tab')
+        Cmd.__init__(self)
 
     def emptyline(self):
         pass

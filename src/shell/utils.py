@@ -52,6 +52,9 @@ def complete_bin(text, line, begidx, endidx):
         Autocompletion for executable files
 
     """
+    if line[begidx-1] == '/':
+        return complete_path(text, line, begidx, endidx)
+
     paths = list()
     for path in glob.glob("/usr/bin/" + text + "*"):
         if os.path.isdir(path):
