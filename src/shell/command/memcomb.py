@@ -5,7 +5,7 @@ import traceback
 from .i_command import ICommand
 
 from src.shell.memory.memcomb import MemComb
-from src.shell.utils import complete_bin, complete_path, checkpath, get_pgm_list
+from src.shell.utils import *
 
 class MemCombCmd(ICommand):
     """
@@ -78,8 +78,4 @@ class MemCombCmd(ICommand):
             raise e
 
     def complete(self, text, line, begidx, endidx):
-        pgm_inf  = get_pgm_list(self.__logdir)
-        for p, inf in pgm_inf.items():
-            if line.find(p) >= 0:
-                return [i for i in inf if i.startswith(text)]
-        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
+        return complete_pgm_inferred(text, line, begidx, endidx, self.__logdir)

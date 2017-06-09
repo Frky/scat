@@ -124,9 +124,10 @@ class ScatShell(Cmd):
 
             # Link methods to scat shell
         for cmd, obj in self.__cmds.items():
-            setattr(self, "do_" + cmd, obj.run)
-            setattr(self, "help_" + cmd, obj.help)
-            setattr(self, "complete_" + cmd, obj.complete)
+            setattr(self.__class__, "do_" + cmd, obj.run)
+            setattr(self.__class__, "help_" + cmd, obj.help)
+            setattr(self.__class__, "complete_" + cmd, obj.complete)
+
 
         # Init shell
         Cmd.__init__(self)

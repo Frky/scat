@@ -128,3 +128,10 @@ def list_split(l, e):
         res.append(curr)
     return res
 
+
+def complete_pgm_inferred(text, line, begidx, endidx, logdir):
+    pgm_inf  = get_pgm_list(logdir)
+    for p, inf in pgm_inf.items():
+        if line.find(p) >= 0:
+            return [i for i in inf if i.startswith(text)]
+    return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]

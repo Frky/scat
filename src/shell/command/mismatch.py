@@ -3,7 +3,7 @@
 from confiture import Confiture, ConfigFileError
 
 from src.shell.data.data import Data
-from src.shell.utils import get_pgm_and_inf, get_pgm_list
+from src.shell.utils import get_pgm_and_inf, get_pgm_list, complete_pgm_inferred
 from .i_command import ICommand
 
 class MismatchCmd(ICommand):
@@ -38,13 +38,9 @@ class MismatchCmd(ICommand):
             return
         pintool.get_analysis(pgm, data).mismatch()
 
-    def complete(self, text, line, begidx, endidx):
-        pgm_inf  = get_pgm_list(self.__logdir)
-        for p, inf in pgm_inf.items():
-            if line.find(p) >= 0:
-                return [i for i in inf if i.startswith(text)]
-        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
 
+    def complete(self, text, line, begidx, endidx):
+        return complete_pgm_inferred(text, line, begidx, endidx, self.__logdir)
 
 #     def do_mismatch(self, s):
 #         """

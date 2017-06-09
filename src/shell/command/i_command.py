@@ -39,5 +39,4 @@ class ICommand(object):
 
     @abstractmethod
     def complete(self, text, line, begidx, endidx):
-        return ""
-
+        return
