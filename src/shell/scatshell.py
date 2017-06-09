@@ -107,6 +107,7 @@ class ScatShell(Cmd):
         )
         self.__cmds["memcomb"] = MemCombCmd(
             pintools=self.__pintools,
+            logdir=self.__logdir
         )
         if "param" in self.__config["test"].keys():
             self.__cmds["test"] = TestCmd(

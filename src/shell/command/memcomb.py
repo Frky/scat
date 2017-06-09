@@ -5,7 +5,7 @@ import traceback
 from .i_command import ICommand
 
 from src.shell.memory.memcomb import MemComb
-from src.shell.utils import complete_bin, complete_path, checkpath
+from src.shell.utils import complete_bin, complete_path, checkpath, get_pgm_list
 
 class MemCombCmd(ICommand):
     """
@@ -25,8 +25,9 @@ class MemCombCmd(ICommand):
         `launch memalloc`
     """
 
-    def __init__(self, pintools, *args, **kwargs):
+    def __init__(self, pintools, logdir, *args, **kwargs):
         self.__pintools = pintools
+        self.__logdir = logdir
         super(MemCombCmd, self).__init__(*args, **kwargs)
         return
 
@@ -75,3 +76,10 @@ class MemCombCmd(ICommand):
         except Exception as e:
             traceback.print_exc()
             raise e
+
+    def complete(self, text, line, begidx, endidx):
+        pgm_inf  = get_pgm_list(self.__logdir)
+        for p, inf in pgm_inf.items():
+            if line.find(p) >= 0:
+                return [i for i in inf if i.startswith(text)]
+        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
