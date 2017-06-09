@@ -29,17 +29,21 @@ class Pintool(object):
 
         # LOG function provided?
         if "stdout" in kwargs.keys():
-            self.stdout = kwargs["stdout"]
+            stdout = kwargs["stdout"]
         else:
             # If not, use the local one
-            self.stdout = self.__log
+            def stdout(msg, verbose):
+                return self.__log(msg, "[*] ", verbose)
 
+        self.stdout = stdout
 
         if "stderr" in kwargs.keys():
-            self.stderr = kwargs["stderr"]
+            stderr = kwargs["stderr"]
         else:
             # If not, use the local one
-            self.stderr = self.__stderr
+            def stderr(msg):
+                return self.__log(msg, "*** ", True)
+        self.stderr = stderr
 
         # Previous step required?
         if "prev_step" in kwargs.keys():
@@ -64,12 +68,9 @@ class Pintool(object):
     def __str__(self):
         return self.__name
 
-    def __log(self, msg, *args, **kwargs):
-        if "verbose" in kwargs.keys() and kwargs["verbose"]:
-            print msg
-
-    def __stderr(self, msg, pattern="*** "):
-        print(pattern + msg)
+    def __log(self, msg, pattern, verbose):
+        if verbose:
+            print(pattern + msg)
 
     @property
     def prev_step(self):
