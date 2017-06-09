@@ -119,6 +119,7 @@ class LaunchCmd(ICommand):
         try:
             checkpath(binary, isdir=False, isexec=True)
         except ValueError:
+            self.stderr("Binary \"{}\" not found".format(binary))
             return
         except UnboundLocalError:
             self.stderr('Missing binary program name as argument')
