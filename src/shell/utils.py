@@ -94,7 +94,7 @@ def get_pgm_list(logdir, inf_code=None):
 
 
 def get_pgm_and_inf(s, pintools, logdir):
-    args = s.split(" ")
+    args = s.split()
     if len(args) == 0 or args[0] == '':
         for p, inf in get_pgm_list(logdir).items():
             print(p)

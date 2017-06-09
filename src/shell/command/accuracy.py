@@ -29,7 +29,7 @@ class AccuracyCmd(ICommand):
         except ValueError as e:
             raise e
         except KeyError:
-            self.stderr("Pintool \"{}\" not found".format(s.split(" ")[1]))
+            self.stderr("Pintool \"{}\" not found".format(s.split()[1]))
             return
         except TypeError:
             self.stderr('Wrong argument(s) detected')
