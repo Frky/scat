@@ -129,9 +129,35 @@ class ScatShell(Cmd):
             setattr(self.__class__, "help_" + cmd, obj.help)
             setattr(self.__class__, "complete_" + cmd, obj.complete)
 
-
         # Init shell
         Cmd.__init__(self)
+
+        # Read history from file
+        try:
+            with open(".history", "r+") as history_file:
+                line = history_file.readline()
+                while line != '':
+                    self.history.append(line[:-1])
+                    line = history_file.readline()
+        except IOError:
+            pass
+        print(self.history)
+
+    def do_exit(self, *args):
+        """
+            Redefine exit function to log the history of commands
+        """
+        # Write new commands in .history
+        with open(".history", "w") as history_file:
+            nb_del = max(0,len(self.history)-5)
+            print(self.history)
+            for line in self.history[nb_del:]:
+                history_file.write(line+'\n')
+
+        return True
+
+    do_q = do_exit
+    do_quit = do_exit
 
     def emptyline(self):
         pass
