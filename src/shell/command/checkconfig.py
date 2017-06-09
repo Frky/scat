@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from .i_command import ICommand
-from src.shell.utils import checkpath
+from src.shell.utils import checkpath, add_history
 
 class CheckConfigCmd(ICommand):
     """

@@ -129,9 +129,11 @@ def list_split(l, e):
     return res
 
 
-def complete_pgm_inferred(text, line, begidx, endidx, logdir):
-    pgm_inf  = get_pgm_list(logdir)
+def complete_pgm_pintool(text, line, logdir, complete_pintool):
+    pgm_inf = get_pgm_list(logdir)
     for p, inf in pgm_inf.items():
         if line.find(p) >= 0:
-            return [i for i in inf if i.startswith(text)]
+            if complete_pintool:
+                return [i for i in inf if i.startswith(text)]
+            return
     return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]

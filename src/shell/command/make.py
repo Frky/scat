@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from .i_command import ICommand
+from src.shell.utils import *
 
 class MakeCmd(ICommand):
     """
@@ -15,8 +16,9 @@ class MakeCmd(ICommand):
         If there is no pintool specified, compile all the pintools.
     """
 
-    def __init__(self, pintools, *args, **kwargs):
+    def __init__(self, pintools, logdir, *args, **kwargs):
         self.__pintools = pintools
+        self.__logdir = logdir
         super(MakeCmd, self).__init__(*args, **kwargs)
         return
 

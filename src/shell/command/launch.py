@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from .i_command import ICommand
-from src.shell.utils import complete_bin, complete_path, checkpath
+from src.shell.utils import *
 import os
 
 class LaunchCmd(ICommand):

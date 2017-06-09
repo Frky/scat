@@ -3,7 +3,7 @@
 from confiture import Confiture, ConfigFileError
 
 from src.shell.data.data import Data
-from src.shell.utils import get_pgm_and_inf, get_pgm_list, complete_pgm_inferred
+from src.shell.utils import get_pgm_and_inf, get_pgm_list, complete_pgm_pintool
 from .i_command import ICommand
 
 class MismatchCmd(ICommand):
@@ -40,7 +40,7 @@ class MismatchCmd(ICommand):
 
 
     def complete(self, text, line, begidx, endidx):
-        return complete_pgm_inferred(text, line, begidx, endidx, self.__logdir)
+        return complete_pgm_pintool(text, line, self.__logdir)
 
 #     def do_mismatch(self, s):
 #         """

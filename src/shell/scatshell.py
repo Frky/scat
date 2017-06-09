@@ -104,6 +104,7 @@ class ScatShell(Cmd):
         )
         self.__cmds["couple"] = CoupleCmd(
             pintools=self.__pintools,
+            logdir=self.__logdir,
         )
         self.__cmds["memcomb"] = MemCombCmd(
             pintools=self.__pintools,

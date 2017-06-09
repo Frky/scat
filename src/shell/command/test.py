@@ -20,7 +20,7 @@ class TestCmd(ICommand):
         super(TestCmd, self).__init__(*args, **kwargs)
 
     def run(self, s, *args, **kwargs):
-        split = s.split(" ")
+        split = s.split()
 
         # Watch for a particular test description file
         # if not specified, the one provided by the configuration file is used

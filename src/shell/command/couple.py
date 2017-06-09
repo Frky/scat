@@ -3,6 +3,7 @@
 from .i_command import ICommand
 
 from src.shell.couple.couple import Couple
+from src.shell.utils import *
 
 class CoupleCmd(ICommand):
     """
@@ -18,8 +19,9 @@ class CoupleCmd(ICommand):
         couple must be used only after using successfully `launch couple`
     """
 
-    def __init__(self, pintools, *args, **kwargs):
+    def __init__(self, pintools, logdir, *args, **kwargs):
         self.__pintools = pintools
+        self.__logdir = logdir
         super(CoupleCmd, self).__init__(*args, **kwargs)
         return
 
@@ -44,3 +46,6 @@ class CoupleCmd(ICommand):
             self.stderr("Logs for binary \"{}\" not found".format(s[0]))
             return
         Couple(logfile, s[0]).run(min_rho=min_rho)
+
+    def complete(self, text, line, begidx, endidx):
+        return complete_pgm_pintool(text, line, self.__logdir, complete_pintool=False)
