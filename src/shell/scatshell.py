@@ -141,7 +141,6 @@ class ScatShell(Cmd):
                     line = history_file.readline()
         except IOError:
             pass
-        print(self.history)
 
     def do_exit(self, *args):
         """
@@ -150,7 +149,6 @@ class ScatShell(Cmd):
         # Write new commands in .history
         with open(".history", "w") as history_file:
             nb_del = max(0,len(self.history)-5)
-            print(self.history)
             for line in self.history[nb_del:]:
                 history_file.write(line+'\n')
 
