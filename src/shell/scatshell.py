@@ -61,8 +61,6 @@ class ScatShell(Cmd):
                 src_path=src,
                 obj_path=obj,
                 pinconf=self.__config["pin"],
-                # stdout=self.out,
-                # stderr=self.out,
                 log_dir=self.__logdir,
                 prev_step=prev_step,
                 alt_prev_step=alt_prev_step
@@ -84,6 +82,7 @@ class ScatShell(Cmd):
         )
         self.__cmds["make"] = MakeCmd(
             pintools=self.__pintools,
+            logdir=self.__logdir,
         )
 
         self.__cmds["display"] = DisplayCmd(
