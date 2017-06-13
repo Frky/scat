@@ -30,10 +30,6 @@ void parse_memcomb() {
 
     ALLOC_fid = fn_lookup_by_address(ALLOC_addr);
     FREE_fid = fn_lookup_by_address(FREE_addr);
-    cout << ALLOC_fid << endl;
-    cout << FREE_fid << endl;
-    cout << ALLOC_addr << endl;
-    cout << FREE_addr << endl;
     return;
 }
 
