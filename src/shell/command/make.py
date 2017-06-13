@@ -16,9 +16,8 @@ class MakeCmd(ICommand):
         If there is no pintool specified, compile all the pintools.
     """
 
-    def __init__(self, pintools, logdir, *args, **kwargs):
+    def __init__(self, pintools, *args, **kwargs):
         self.__pintools = pintools
-        self.__logdir = logdir
         super(MakeCmd, self).__init__(*args, **kwargs)
         return
 
