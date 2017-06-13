@@ -82,7 +82,6 @@ class ScatShell(Cmd):
         )
         self.__cmds["make"] = MakeCmd(
             pintools=self.__pintools,
-            logdir=self.__logdir,
         )
 
         self.__cmds["display"] = DisplayCmd(
