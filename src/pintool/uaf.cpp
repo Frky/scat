@@ -1,7 +1,7 @@
 #include "utils/memory_default.h"
 
-FID ALLOC_fid = FID_UNKNOWN;
-FID FREE_fid = FID_UNKNOWN;
+ADDRINT ALLOC_addr;
+ADDRINT FREE_addr;
 
 ifstream memcomb_file;
 KNOB<string> KnobMemcombFile(KNOB_MODE_WRITEONCE, "pintool", "memcomb", "stdout",
@@ -12,7 +12,6 @@ HollowStack<MAX_DEPTH, ADDRINT> alloc_stack;
 HollowStack<MAX_DEPTH, ADDRINT> free_stack;
 
 void parse_memcomb() {
-    ADDRINT ALLOC_addr, FREE_addr;
     char m;
 
     // Skips img_name
@@ -27,22 +26,11 @@ void parse_memcomb() {
     // Skips fn_name
     read_part_from_file(&memcomb_file, &m);
 
-
-    ALLOC_fid = fn_lookup_by_address(ALLOC_addr);
-    FREE_fid = fn_lookup_by_address(FREE_addr);
-    return;
 }
 
 VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
 
     trace_enter();
-
-    if (ALLOC_fid == FID_UNKNOWN || FREE_fid == FID_UNKNOWN) {
-        // Sets the right values for FREE_fid and ALLOC_fid
-        PIN_LockClient();
-        parse_memcomb();
-        PIN_UnlockClient();
-    }
 
     FID caller = call_stack.top();
     call_stack.push(fid);
@@ -99,10 +87,11 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
         param->push_front(new_addr);
     }
 
-    if (FREE_fid == fid) {
+//    cout << fn_lookup_by_address(FREE_addr) << "   " << FREE_addr << endl;
+    if (fn_lookup_by_address(FREE_addr) == fid) {
         // The first paramater is guessed to be the size    
         free_stack.push(val_from_reg(ctxt, 1));
-    } else if (ALLOC_fid == fid) {
+    } else if (fn_lookup_by_address(ALLOC_addr) == fid) {
         // The first paramater is guessed to be the size    
         alloc_stack.push(val_from_reg(ctxt, 1));
     }
@@ -138,10 +127,10 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
         FID fid = call_stack.top();
         call_stack.pop();
 
-        if (fid == FREE_fid) {
+        if (fid == fn_lookup_by_address(FREE_addr)) {
             fake_free(free_stack.top());
             free_stack.pop();
-        } else if (fid == ALLOC_fid) {
+        } else if (fid == fn_lookup_by_address(ALLOC_addr)) {
             fake_alloc(val_from_reg(ctxt, 0), alloc_stack.top());
             alloc_stack.pop();
         } 
@@ -182,6 +171,7 @@ int main(int argc, char * argv[]) {
     ifile.open(KnobInputFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
     memcomb_file.open(KnobMemcombFile.Value().c_str());
+    parse_memcomb();
     
     // INS_AddInstrumentFunction(Instruction, 0);
     INS_AddInstrumentFunction(Instruction, 0);

@@ -6,7 +6,7 @@ std::map<ADDRINT, long> allocated;
 ADDRINT last_allocated = 0;
 
 int fake_alloc(ADDRINT addr, long size) {
-    std::cerr << "alloc(" << addr << "," << size << ")\n";
+    std::cerr << "alloc(" << size << "): " << addr << endl;
     allocated[addr] = size;
     last_allocated = addr;
     return 0;

@@ -90,6 +90,8 @@ class Pintool(object):
         additional_options = ""
         if alt_prev and self.__alt_prev_step == "coupleres":
             additional_options += "-couple "
+        if self.__name == "uaf":
+            additional_options += "-memcomb {} ".format(self.get_logfile(binary, alt_prev=True))
         if infile is not None:
             infile_opt = "-i {0}".format(infile)
         else:

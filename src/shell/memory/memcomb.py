@@ -2,6 +2,7 @@
 
 from numpy import mean 
 from random import randint
+from time import time
 
 from src.shell.callstack import CallStack
 from src.shell.parser.type import TypeLogParser
@@ -318,6 +319,11 @@ class MemComb(object):
 
             FREE_ADDR = hex(int(FREE_ADDR))
             self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
+
+            with open("log/{}_memcomb_{}.log".format(self.__pgm, int(time())), "w") as f:
+                f.write(ALLOC + '\n')
+                f.write(FREES[0][0])
+
             self.log("checking consistancy of blocks...")
             self.compute_blocks(ALLOC, *FREES[0])
 
