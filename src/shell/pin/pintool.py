@@ -205,6 +205,7 @@ class Pintool(object):
         cmd = self.__cmd(binary, args, logfile, debugfile, infile, pin_args,
                 alt_prev=alt_prev)
         self.stdout(cmd, verbose)
+        #stop = raw_input()
         start = datetime.now()
         subprocess.call(cmd, shell=True)
         duration = datetime.now() - start

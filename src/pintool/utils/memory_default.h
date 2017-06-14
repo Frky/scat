@@ -17,7 +17,6 @@
 #include "functions_registry.h"
 #include "hollow_stack.h"
 #include "../log/ftable.h"
-#include "memory.h"
 
 #define NB_FN_MAX               100000
 #define MAX_DEPTH               1000

@@ -1,4 +1,5 @@
 #include "utils/memory_default.h"
+#include "utils/memory.h"
 
 ADDRINT ALLOC_addr;
 ADDRINT FREE_addr;
@@ -25,6 +26,13 @@ void parse_memcomb() {
     FREE_addr = atol(read_part_from_file(&memcomb_file, &m).c_str());
     // Skips fn_name
     read_part_from_file(&memcomb_file, &m);
+
+    cout << ALLOC_addr << " " << FREE_addr << endl << endl;
+    if (ALLOC_addr == 0 || ALLOC_addr == 0) {
+        cout << "Error in parsing memcomb log file" << endl;
+        int *i = NULL;
+        *i = 1;
+    }
 
 }
 
