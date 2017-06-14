@@ -92,6 +92,8 @@ class Pintool(object):
             additional_options += "-couple "
         if self.__name == "uaf":
             additional_options += "-memcomb {} ".format(self.get_logfile(binary, alt_prev=True))
+        if self.__name == "follow":
+            additional_options += "-addr {} ".format(int(raw_input("Address to follow: ")))
         if infile is not None:
             infile_opt = "-i {0}".format(infile)
         else:
