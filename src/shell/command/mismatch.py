@@ -11,8 +11,8 @@ class MismatchCmd(ICommand):
 
     """
 
-    def __init__(self, pintools, logdir, *args, **kwargs):
-        self.__logdir = logdir
+    def __init__(self, pintools, log_manager, *args, **kwargs):
+        self.__logdir = log_manager._logdir
         self.__pintools = pintools
         super(MismatchCmd, self).__init__(*args, **kwargs)
         return

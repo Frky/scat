@@ -1,8 +1,5 @@
 #include "utils/memory_default.h"
 
-KNOB<string> KnobTypeFile(KNOB_MODE_WRITEONCE, "pintool", "type", "stdin",
-        "Specify the type log file");
-
 VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump, ADDRINT inst_addr) {
 
     trace_enter();
@@ -118,12 +115,14 @@ int main(int argc, char * argv[]) {
     PIN_InitSymbols();
     PIN_SetSyntaxIntel();
 
+    KNOB<string> KnobCoupleFile(KNOB_MODE_WRITEONCE, "pintool", "coupleres", 
+            "stdin", "Specify the coupleres log file");
 
     if (PIN_Init(argc, argv)) return 1;
 
-    ifile.open(KnobTypeFile.Value().c_str());
+    ifile.open(KnobCoupleFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
-    couple_mode = false;
+    couple_mode = true;
 
     // INS_AddInstrumentFunction(Instruction, 0);
     INS_AddInstrumentFunction(Instruction, 0);

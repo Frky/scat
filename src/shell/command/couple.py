@@ -19,9 +19,9 @@ class CoupleCmd(ICommand):
         couple must be used only after using successfully `launch couple`
     """
 
-    def __init__(self, pintools, logdir, *args, **kwargs):
+    def __init__(self, pintools, log_manager, *args, **kwargs):
         self.__pintools = pintools
-        self.__logdir = logdir
+        self.__log_manager = log_manager
         super(CoupleCmd, self).__init__(*args, **kwargs)
         return
 
@@ -41,11 +41,15 @@ class CoupleCmd(ICommand):
                 min_rho = float(i.replace("--min_rho=",""))
 
         try:
-            logfile = self.__pintools["couple"].get_logfile(s[0], prev=False)
+            couple_logfile = self.__log_manager.get_log("couple", s[0])
         except IOError:
             self.stderr("Logs for binary \"{}\" not found".format(s[0]))
             return
-        Couple(logfile, s[0]).run(min_rho=min_rho)
+        Couple(
+                s[0],
+                infile=couple_logfile,
+                outfile=self.__log_manager.gen_log("coupleres", s[0])
+                ).run(min_rho=min_rho)
 
     def complete(self, text, line, begidx, endidx):
-        return complete_pgm_pintool(text, line, self.__logdir, complete_pintool=False)
+        return complete_pgm_pintool(text, line, self.__log_manager.__logdir, complete_pintool=False)

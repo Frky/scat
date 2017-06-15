@@ -4,6 +4,8 @@ ADDRINT follow_addr;
 KNOB<string> KnobFollowAddr(KNOB_MODE_WRITEONCE, "pintool", "addr", "stdout",
         "Specify the address to follow");
 
+KNOB<string> KnobTypeFile(KNOB_MODE_WRITEONCE, "pintool", "type", "stdin",
+        "Specify the type log file");
 
 
 void log_memory_access(FID fid, unsigned int pos) {
@@ -86,11 +88,15 @@ int main(int argc, char * argv[]) {
     PIN_InitSymbols();
     PIN_SetSyntaxIntel();
 
+    
+
     if (PIN_Init(argc, argv)) return 1;
 
-    ifile.open(KnobInputFile.Value().c_str());
+    
+    ifile.open(KnobTypeFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
-    follow_addr = atol(KnobFollowAddr.Value().c_str());
+    cout << "What address do you want to follow ?" << endl;
+    cin >> follow_addr;
     
     // INS_AddInstrumentFunction(Instruction, 0);
     INS_AddInstrumentFunction(Instruction, 0);

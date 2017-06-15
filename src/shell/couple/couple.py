@@ -9,9 +9,10 @@ class Couple(object):
 
     """
 
-    def __init__(self, log_file, pgm, verbose=True):
+    def __init__(self, pgm, infile, outfile, verbose=True):
         super(Couple, self).__init__()
-        self.__parser = CoupleLogParser(log_file)
+        self.__parser = CoupleLogParser(infile)
+        self.__outfile = outfile
         self.__pgm = pgm
         self.__verbose = verbose
 
@@ -72,7 +73,7 @@ class Couple(object):
                 if rho >= min_rho:
                     param_pos = max(pos_couple.items(), key=lambda x: x[1])[0]
                     couples.append((f, g, rho, param_pos))
-        with open("log/{}_coupleres_{}.log".format(self.__pgm, int(time())), "w") as f:
+        with open(self.__outfile, "w") as f:
             for c in couples:
                 self.stdout("{} -- ({:.2f}) --> {}[{}]".format(c[0], c[2], c[1], c[3]))
                 f.write("{}:{}:{}:{}\n".format(*c))

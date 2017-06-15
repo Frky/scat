@@ -7,6 +7,8 @@ ADDRINT FREE_addr;
 ifstream memcomb_file;
 KNOB<string> KnobMemcombFile(KNOB_MODE_WRITEONCE, "pintool", "memcomb", "stdout",
         "Specify the memcomb file");
+KNOB<string> KnobTypeFile(KNOB_MODE_WRITEONCE, "pintool", "type", "stdin",
+        "Specify the type log file");
 
 
 HollowStack<MAX_DEPTH, ADDRINT> alloc_stack;
@@ -176,7 +178,8 @@ int main(int argc, char * argv[]) {
 
     if (PIN_Init(argc, argv)) return 1;
 
-    ifile.open(KnobInputFile.Value().c_str());
+
+    ifile.open(KnobTypeFile.Value().c_str());
     ofile.open(KnobOutputFile.Value().c_str());
     memcomb_file.open(KnobMemcombFile.Value().c_str());
     parse_memcomb();

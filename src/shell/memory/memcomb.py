@@ -17,7 +17,7 @@ class MemComb(object):
 
     """
 
-    def __init__(self, mem_log_file, type_log_file, log, pgm,
+    def __init__(self, mem_log_file, type_log_file, log, pgm, outfile=None,
             cli_ignore=None, cli_libmatch=None, coupleres_log_file=None):
         super(MemComb, self).__init__()
         self.__parser = MemallocParser(mem_log_file, cli_ignore, cli_libmatch)
@@ -28,6 +28,7 @@ class MemComb(object):
             self.__couples_file = None
         self.log = log
         self.__pgm = pgm
+        self.__outfile = outfile
         self.__free_candidates = dict()
 
     def __compute_callers(self):
@@ -193,7 +194,11 @@ class MemComb(object):
         # Number of calls
         nb_calls = dict()
 
+        wait_for_alloc = False
         for block in self.__parser.get():
+            if (wait_for_alloc and block.id != ALLOC):
+                continue
+
             if (self.__couples_file is not None
                     and self.block_not_in_couple(ALLOC, block)):
                 continue
@@ -209,7 +214,10 @@ class MemComb(object):
                         addr_alloc.add(block.val)
                     block_id = "{0}|{1}".format(block.id, block.pos)
                     addr_alloc.add_dic(block.val, block_id)
+                elif block.is_in() and block.id == ALLOC:
+                    wait_for_alloc = True
                 elif block.is_out() and block.id == ALLOC:
+                    wait_for_alloc = False
                     if not addr_alloc.contains(block.val):
                         addr_alloc.add(block.val)
                     addr_alloc.add_dic(block.val, block.id)
@@ -320,7 +328,7 @@ class MemComb(object):
             FREE_ADDR = hex(int(FREE_ADDR))
             self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
 
-            with open("log/{}_memcomb_{}.log".format(self.__pgm, int(time())), "w") as f:
+            with open(self.__outfile, "w") as f:
                 f.write(ALLOC + '\n')
                 f.write(FREES[0][0])
 

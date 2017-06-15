@@ -25,9 +25,10 @@ class MemCombCmd(ICommand):
         `launch memalloc`
     """
 
-    def __init__(self, pintools, logdir, *args, **kwargs):
+    def __init__(self, pintools, log_manager, *args, **kwargs):
         self.__pintools = pintools
-        self.__logdir = logdir
+        self.__log_manager = log_manager
+        self.__logdir = log_manager._logdir
         super(MemCombCmd, self).__init__(*args, **kwargs)
         return
 
@@ -59,20 +60,27 @@ class MemCombCmd(ICommand):
 
 
         try:
-            proto_logfile = self.__pintools["type"].get_logfile(s[0], prev=False)
-            mem_logfile = self.__pintools["memalloc"].get_logfile(s[0], prev=False)
+            proto_logfile = self.__log_manager.get_log("type", s[0])
+            mem_logfile = self.__log_manager.get_log("memalloc", s[0])
             if couple:
-                coupleres_logfile = self.__pintools["memalloc"].get_logfile(
-                        s[0], alt_prev=True)
+                coupleres_log_file = self.__log_manager.get_log("coupleres", s[0])
+                print(coupleres_log_file)
             else:
-                coupleres_logfile = None
+                coupleres_log_file = None
         except IOError:
             self.stderr("Logs for binary \"{}\" not found".format(s[0]))
             return
 
         try:
-            MemComb(mem_logfile, proto_logfile, self.stdout, s[0], cli_ignore,
-                    cli_libmatch, coupleres_logfile).run(libraries=libraries)
+            MemComb(mem_logfile,
+                    proto_logfile,
+                    self.stdout,
+                    s[0],
+                    outfile=self.__log_manager.gen_log("memcomb", s[0]),
+                    cli_ignore=cli_ignore,
+                    cli_libmatch=cli_libmatch,
+                    coupleres_log_file=coupleres_log_file
+                    ).run(libraries=libraries)
         except Exception as e:
             traceback.print_exc()
             raise e

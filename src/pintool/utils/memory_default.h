@@ -28,14 +28,10 @@
 
 
 ifstream ifile;
-KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin",
-        "Specify an intput file");
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout",
         "Specify an output file");
 bool couple_mode = false;
-KNOB<BOOL> KnobCoupleMode(KNOB_MODE_WRITEONCE, "pintool", "couple", "false",
-        "Base memalloc inference on couple results instead of types");
 
 
 /* Call stack */

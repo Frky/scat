@@ -19,8 +19,8 @@ unsigned int MAX_VALS;
 KNOB<string> KnobMaxVals(KNOB_MODE_WRITEONCE, "pintool", "max_vals", MAX_VALS_DEFAULT, "Specify a number for MAX_VALS_DEFAULT");
 
 /* In file to get results from previous analysis */
-ifstream ifile;
-KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+ifstream typefile;
+KNOB<string> KnobTypeFile(KNOB_MODE_WRITEONCE, "pintool", "type", "stdin", "Specify an intput file");
 /* Out file to store analysis results */
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
@@ -199,18 +199,18 @@ void fn_registered(FID fid, unsigned int nb_param, vector<bool> type_param) {
 VOID Commence() {
     trace_enter();
 
-    ifstream ifile;
+    ifstream typefile;
     /* Open input log file (result of previous inference) */
-    ifile.open(KnobInputFile.Value().c_str());
+    typefile.open(KnobTypeFile.Value().c_str());
 
-    if (ifile.is_open()) {
+    if (typefile.is_open()) {
         /* Ignore first line (elapsed time) */
-        read_line(ifile);
+        read_line(typefile);
         /* Ignore second line (params of inference) */
-        read_line(ifile);
-        while (ifile) {
+        read_line(typefile);
+        while (typefile) {
             /* Read the prototype of one function */
-            fn_type_t *fn = read_one_type(ifile);
+            fn_type_t *fn = read_one_type(typefile);
             /* Register the function */
             FID fid = fn_register(fn->img_name, fn->img_addr, fn->name);
             /* Init data structures for this function */
@@ -221,7 +221,7 @@ VOID Commence() {
     }
 
     /* Close the file */
-    ifile.close();
+    typefile.close();
 
     trace_leave();
 }

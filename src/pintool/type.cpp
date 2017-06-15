@@ -33,8 +33,8 @@ float ADDR_THRESHOLD;
 KNOB<string> KnobAddrThreshold(KNOB_MODE_WRITEONCE, "pintool", "addr_threshold", ADDR_THRESHOLD_DEFAULT, "Specify a number for ADDR_THRESHOLD");
 
 /* In file to get results from previous analysis */
-ifstream ifile;
-KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+ifstream arityfile;
+KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "arity", "stdin", "Specify an intput file");
 /* Out file to store analysis results */
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
@@ -114,14 +114,14 @@ void fn_registered(FID fid,
     }
 }
 
-string read_part(ifstream& ifile, char* c) {
+string read_part(ifstream& arityfile, char* c) {
     char m;
     string str = "";
 
-    ifile.read(&m, 1);
-    while (ifile && m != ':' && m != ',' && m != '\n') {
+    arityfile.read(&m, 1);
+    while (arityfile && m != ':' && m != ',' && m != '\n') {
         str += m;
-        ifile.read(&m, 1);
+        arityfile.read(&m, 1);
     }
 
     *c = m;
@@ -129,28 +129,28 @@ string read_part(ifstream& ifile, char* c) {
 }
 
 VOID register_functions_from_arity_log() {
-    ifile.open(KnobInputFile.Value().c_str());
+    arityfile.open(KnobInputFile.Value().c_str());
 
-    if (ifile.is_open()) {
-        while (ifile) {
+    if (arityfile.is_open()) {
+        while (arityfile) {
             char m;
-            string img_name = read_part(ifile, &m);
+            string img_name = read_part(arityfile, &m);
             if (img_name.empty()) {
                 continue;
             }
 
-            ADDRINT img_addr = atol(read_part(ifile, &m).c_str());
-            string name = read_part(ifile, &m);
+            ADDRINT img_addr = atol(read_part(arityfile, &m).c_str());
+            string name = read_part(arityfile, &m);
 
-            UINT64 int_arity = atol(read_part(ifile, &m).c_str());
-            UINT64 int_stack_arity = atol(read_part(ifile, &m).c_str());
-            UINT64 float_arity = atol(read_part(ifile, &m).c_str());
-            UINT64 float_stack_arity = atol(read_part(ifile, &m).c_str());
-            UINT64 has_return = atol(read_part(ifile, &m).c_str());
+            UINT64 int_arity = atol(read_part(arityfile, &m).c_str());
+            UINT64 int_stack_arity = atol(read_part(arityfile, &m).c_str());
+            UINT64 float_arity = atol(read_part(arityfile, &m).c_str());
+            UINT64 float_stack_arity = atol(read_part(arityfile, &m).c_str());
+            UINT64 has_return = atol(read_part(arityfile, &m).c_str());
 
             vector<UINT32> int_param_idx;
-            while (ifile && m != '\n') {
-                string part = read_part(ifile, &m);
+            while (arityfile && m != '\n') {
+                string part = read_part(arityfile, &m);
                 if (part.length() == 0) {
                     break;
                 }
@@ -169,7 +169,7 @@ VOID register_functions_from_arity_log() {
             }
         }
 
-        ifile.close();
+        arityfile.close();
     }
 }
 

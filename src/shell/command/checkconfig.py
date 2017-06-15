@@ -12,8 +12,8 @@ class CheckConfigCmd(ICommand):
             - pin (path, permissions)
     """
 
-    def __init__(self, logdir, pinpath, *args, **kwargs):
-        self.__logdir = logdir
+    def __init__(self, log_manager, pinpath, *args, **kwargs):
+        self.__logdir = log_manager._logdir
         self.__pin = pinpath
         super(CheckConfigCmd, self).__init__(*args, **kwargs)
         return

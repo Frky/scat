@@ -17,15 +17,16 @@ class AccuracyCmd(ICommand):
         If no argument is given, display all the eligible programs.
     """
 
-    def __init__(self, pintools, logdir, *args, **kwargs):
-        self.__logdir = logdir
+    def __init__(self, pintools, log_manager, *args, **kwargs):
+        self.__logdir = log_manager._logdir
         self.__pintools = pintools
         super(AccuracyCmd, self).__init__(*args, **kwargs)
         return
 
     def run(self, s, *args, **kwargs):
         try:
-            pgm, pintool = get_pgm_and_inf(s, self.__pintools, self.__logdir)
+            pgm, pintool = get_pgm_and_inf(s, self.__pintools, 
+                    self.__logdir)
         except ValueError as e:
             raise e
         except KeyError:

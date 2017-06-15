@@ -13,9 +13,9 @@ class DisplayCmd(ICommand):
         If no argument is given, display all the eligible programs.
     """
 
-    def __init__(self, pintools, logdir, *args, **kwargs):
+    def __init__(self, pintools, log_manager, *args, **kwargs):
         self.__pintools = pintools
-        self.__logdir = logdir
+        self.__logdir = log_manager._logdir
         super(DisplayCmd, self).__init__(*args, **kwargs)
         return
 
