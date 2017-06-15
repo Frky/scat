@@ -1,0 +1,9 @@
+{\tt git} & n.c./n.c. & n.c./n.c. & 5.18 & 5.48 & 0.731/8.64e+04 & 1.22/0.764 \\
+{\tt grep} & \checked/\texttimes & \checked/\checked & 2.26 & 1.85 & 0.195/0.107 & 2.63/2.65 \\
+{\tt mupdf-x11} & \checked/\checked & \checked/\checked & 17.5 & 22.3 & 29.6/19.6 & 199/83.1 \\
+{\tt objdump} & n.c./n.c. & n.c./n.c. & 2.24 & 2.56 & 0.96/0.794 & 4.89/3.7 \\
+{\tt opusenc} & \texttimes/n.c. & \texttimes/\texttimes & 3.26 & 4.02 & 1.99/1.62 & 12.1/9.93 \\
+{\tt readelf} & n.c./n.c. & n.c./n.c. & 2.06 & 2.23 & 0.294/8.64e+04 & 4.35/3.43 \\
+{\tt strings} & n.c./n.c. & n.c./n.c. & 0.929 & 0.887 & 0.432/8.64e+04 & 0.437/8.64e+04 \\
+{\tt tar} & \checked/\checked & \checked/\checked & 13.5 & 14.7 & 1.28/0.713 & 2.55/1.88 \\
+{\tt vim} & \checked/\checked & \checked/\texttimes & 46 & 53.5 & 3.19/1.96 & 7.45/6.21 \\
