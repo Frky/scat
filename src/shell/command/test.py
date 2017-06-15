@@ -4,6 +4,7 @@ from .i_command import ICommand
 from src.shell.test.accuracy import TestAccuracy
 from src.shell.test.parameter import TestParameter
 from src.shell.test.couple import TestCouple
+from src.shell.test.alloc import TestAlloc
 from src.shell.utils import complete_bin, complete_path, checkpath
 
 class TestCmd(ICommand):
@@ -105,6 +106,39 @@ class TestCmd(ICommand):
                 else:
                     self.stderr("unknown parameter: {} -- aborting".format(param))
                     raise Exception("not implemented yet")
+        elif analysis == "alloc":
+            if len(split) < 2:
+                self.help()
+                return
+            param = split[1]
+            if param == "type":
+                TestAlloc(
+                                self.__conf_path, 
+                                pintools=self.__pintools,
+                                logdir=self.__logdir, 
+                                resdir=self.__resdir, 
+                                alt_prev=False,
+                            ).run(logname="alloc_type_general.res")
+            elif param == "couple":
+                TestAlloc(
+                                self.__conf_path, 
+                                pintools=self.__pintools,
+                                logdir=self.__logdir, 
+                                resdir=self.__resdir, 
+                                alt_prev=True,
+                            ).run(logname="alloc_couple_general.res")
+            elif param == "consistency":
+                TestAlloc(
+                                self.__conf_path, 
+                                pintools=self.__pintools,
+                                logdir=self.__logdir, 
+                                resdir=self.__resdir, 
+                                alt_prev=True,
+                            ).run(logname="alloc_couple_consistency.res", consistency=True)
+            else:
+                self.stderr("unknown parameter: {} -- aborting".format(param))
+                raise Exception("not implemented yet")
         else:
             self.stderr("unknown analysis: {} -- aborting".format(analysis))
         return
+

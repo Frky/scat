@@ -17,6 +17,28 @@ class Chart(object):
                 "left": "#7f8c8d",
                 "right": "#bdc3c7",
             }
+    generic_colors = [
+                "#1abc9c", 
+                "#2ecc71", 
+                "#3498db", 
+                "#9b59b6", 
+                "#34495e", 
+                "#2c3e50", 
+                "#8e44ad",
+                "#2980b9", 
+                "#27ae60",
+                "#16a085",
+                "#f1c40f", 
+                "#e67e22", 
+                "#e74c3c",
+                "#ecf0f1", 
+                "#95a5a6", 
+                "#7f8c8d", 
+                "#bdc3c7", 
+                "#c0392b",
+                "#d35400",
+                "#f39c12",
+            ]
 
     def __init__(self, logfile):
         self._log = logfile

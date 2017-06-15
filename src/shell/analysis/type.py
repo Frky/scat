@@ -31,6 +31,12 @@ class TypeAnalysis(Analysis):
         ret_tot, param_tot = 1, 0
 
         real_ret = self.get_one(proto[0])
+
+        # Eliminate problems due to arity detection
+        # on retval
+        if (real_ret == "VOID" and args[0] != "VOID") or \
+                (real_ret != "VOID" and args[0] == "VOID"):
+            return (0,0,0,0,0,0)
         if self.check_one(proto[0], args[0], undef_as_int):
             return_ok = 1
         elif real_ret == 'ADDR':
@@ -170,7 +176,7 @@ class TypeAnalysis(Analysis):
             if self.is_variadic(proto):
                 variadic += 1
                 continue
-
+            
             pfp, pfn, ptot, rfp, rfn, rtot = self.check_function(fn, args, proto, undef_as_int = True)
             params_ok += (ptot - pfn - pfp)
             params_total += ptot
@@ -229,7 +235,7 @@ class TypeAnalysis(Analysis):
 
             res = self.check_function(fname, args, proto, True)
 
-            if res[0] == res[1] and res[2] == res[3]:
+            if res[0] + res[1] == 0 and res[3] + res[4] == 0:
                 continue
 
             print("[{}@{}] {}".format(img, hex(imgaddr), fname))

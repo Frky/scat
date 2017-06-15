@@ -57,6 +57,24 @@ class CoupleChart(Chart):
         data[val] = (tot, f, g, n)
         return data
 
+    def get_accuracy(self):
+        with open("test/coreutils.txt", "r") as f:
+            coreutils = [line[:-1] for line in f.readlines()]
+        data = list(self._data)
+        coreres = [d for d in data if d.pgm in coreutils]
+        data = [d for d in data if d.pgm not in coreutils]
+        nb_data = len(coreres)
+        data.append(reduce(lambda a, b: a.merge(b), coreres[1:], coreres[0]))
+        data[-1].set_pgm("coreutils")
+        data[-1].average(nb_data)
+        cc = [d for d in data if "8cc" in d.pgm]
+        data = [d for d in data if not "8cc" in d.pgm]
+        nb_data = len(cc)
+        data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
+        data[-1].set_pgm("8cc")
+        data[-1].average(nb_data)
+        return data
+
     def draw(self, data, name):
         plt.figure(figsize=(12, 9)) 
         ax = plt.subplot(111)    

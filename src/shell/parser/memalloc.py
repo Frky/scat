@@ -68,9 +68,16 @@ class MemallocParser(ILogParser):
         super(MemallocParser, self).__init__(log_file)
         self.__ignore = cli_ignore
         self.__libmatch = cli_libmatch
+        self.__time = None
+
+    @property
+    def time(self):
+        return self.__time
 
     def get(self, ret_only=False, param_only=False, ALLOC=""):
         with open(self.log_path, 'r') as f:
+            # Read time of execution
+            self.__time = float(f.readline()[:-1])
             # Read Function Table
             self.read_header(f);
             field_size = [int(s) for s in f.readline()[:-1].split(":")]
@@ -90,7 +97,8 @@ class MemallocParser(ILogParser):
                 if not buf:
                     break
                 block = Block(buf, fmt, self.fn_table)
-                if self.__ignore != None and any([i in block.id for i in self.__ignore]):
+                if self.__ignore is not None and any([i in block.id for i in self.__ignore]):
+                    print "continue"
                     continue
                 if self.__libmatch != None and not any([i in block.id.split(':')[0] for i in self.__libmatch]):
                     continue

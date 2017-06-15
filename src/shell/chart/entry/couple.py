@@ -21,6 +21,12 @@ class CoupleEntry(Entry):
         self._tot += e.tot
         return self
 
+    def average(self, tot):
+        self._f = int(float(self._f)/tot)
+        self._g = int(float(self._g)/tot)
+        self._n = int(float(self._n)/tot)
+        self._tot = int(float(self._tot)/tot)
+
     @property
     def min_vals(self):
         return int(self._minvals)

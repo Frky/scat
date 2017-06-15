@@ -71,7 +71,7 @@ class MemCombCmd(ICommand):
             return
 
         try:
-            MemComb(mem_logfile, proto_logfile, self.stdout, s[0], cli_ignore,
+            MemComb(mem_logfile, proto_logfile, s[0], cli_ignore,
                     cli_libmatch, coupleres_logfile).run(libraries=libraries)
         except Exception as e:
             traceback.print_exc()
