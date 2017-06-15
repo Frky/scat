@@ -220,18 +220,22 @@ VOID Instruction(INS ins, VOID *v) {
         }
     }
 
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if (!INS_IsCall(ins)) {
-            INS_InsertCall(ins,
+#if 1
+    if (INS_IsIndirectBranchOrCall(ins) && !INS_IsFarCall(ins) && !INS_IsFarJump(ins) && !INS_IsFarRet(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins) 
+                /* This condition fixes runtime crash of pin on some programs
+                   (e.g. git) -- but I am not sure it is a correct answer, it 
+                   might have bad effects on the results of inference */
+                    && (INS_Category(ins) != XED_CATEGORY_COND_BR))
+                INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_icall,
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
-                    IARG_ADDRINT, inst_addr,
                     IARG_END);
-        }
     }
+#endif
 
     if (INS_IsRet(ins)) {
         INS_InsertCall(ins,

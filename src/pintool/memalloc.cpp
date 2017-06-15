@@ -102,7 +102,6 @@ VOID fn_ret(CONTEXT *ctxt, UINT32 fid) {
     return;
 }
 
-
 int main(int argc, char * argv[]) {
 
     param_addr = (bool **) malloc(NB_FN_MAX * sizeof(bool *));
