@@ -1,0 +1,66 @@
+grep:
+    args: "-r def src/ 1>/dev/null"
+    bin: "test/bin/grep"
+    data: "test/data/grep.data"
+    deps: "test/data/grep.deps"
+mupdf-x11:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/mupdf-x11"
+    data: "test/data/mupdf-x11.data"
+    deps: "test/data/mupdf-x11.deps"
+vim:
+    args: "test/input/8cc/align.c"
+    bin: "test/bin/vim"
+    data: "test/data/vim.data"
+    deps: "test/data/vim.deps"
+tar:
+    args: "-czvf test/tmp/pgm.tar.gz test/bin"
+    bin: "test/bin/tar"
+    data: "test/data/tar.data"
+    deps: "test/data/tar.deps"
+    post: "rm test/tmp/pgm.tar.gz"
+# jasper:
+#     args: "
+# fun:
+#     args: " "
+#     bin: "test/bin/fun"
+#     data: "test/data/fun.data"
+#     deps: "test/data/fun.deps"
+git:
+    args: "clone https://github.com/Frky/fun.git test/tmp/scat"
+    bin: "test/bin/git"
+    data: "test/data/git.data"
+    deps: "test/data/git.deps"
+    post: "rm -vfr test/tmp/scat"
+bash:
+    args: "test/input/bash/example_17.sh test/input/bash/*.sh"
+    bin: "test/bin/bash/bash"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+# magick:
+#     args: "convert test/input/lena.pnm test/tmp/lena.png"
+#     bin: "test/bin/magick"
+#     data: "test/data/magick.data"
+#     deps: "test/data/magick.deps"
+#     post: "rm test/tmp/lena.png"
+# midori:
+#     args: "https://github.com/Frky/scat"
+#     bin: "test/bin/midori"
+#     data: "test/data/midori.data"
+#     deps: "test/data/midori.deps"
+openssl:
+    args: 'enc -e -aes-256-cbc -in test/input/poc.pdf -out test/tmp/scat.cipher -k "password"'
+    bin: "test/bin/openssl"
+    data: "test/data/openssl.data"
+    deps: "test/data/openssl.deps"
+    post: "rm test/tmp/scat.cipher"
+opusenc:
+    args: '"test/input/a simple song.mp3" test/tmp/output.opus'
+    bin: "test/bin/opusenc"
+    data: "test/data/opus.data"
+    deps: "test/data/opus.deps"
+    post: "rm test/tmp/output.opus"
+coreutils:
+    config: "test/coreutils.yaml"
+# 8cc:
+#     config: "test/8cc.yaml"
