@@ -358,8 +358,8 @@ class MemComb(object):
                 self.log("checking consistancy of blocks...")
 
                 with open("log/{}_memcomb_{}.log".format(self.__pgm, int(time())), "w") as f:
-                f.write(ALLOC + '\n')
-                f.write(FREES[0][0])
+                    f.write(ALLOC + '\n')
+                    f.write(FREES[0][0])
 
                 consistency = self.compute_blocks(ALLOC, *FREES[0])
                 FREE = FREES[0][0]
