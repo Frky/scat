@@ -11,12 +11,12 @@ class TestCmd(ICommand):
 
     """
 
-    def __init__(self, test_conf, param, pintools, logdir, resdir, *args, **kwargs):
+    def __init__(self, test_conf, param, pintools, resdir, log_manager, *args, **kwargs):
         self.__conf_path = test_conf
         self.__param = param
         self.__pintools = pintools
-        self.__logdir = logdir
         self.__resdir = resdir
+        self.__log_manager = log_manager
         super(TestCmd, self).__init__(*args, **kwargs)
 
     def run(self, s, *args, **kwargs):
@@ -44,8 +44,9 @@ class TestCmd(ICommand):
                                 self.__conf_path, 
                                 self.__pintools["arity"], 
                                 self.__pintools["type"], 
-                                self.__logdir, 
-                                resdir=self.__resdir).run()
+                                resdir=self.__resdir,
+                                log_manager=self.__log_manager
+                                ).run()
             else:
                 if param not in self.__param[analysis].keys():
                     self.stderr("unknown parameter: {} -- aborting".format(param))
@@ -68,7 +69,8 @@ class TestCmd(ICommand):
                                         self.__conf_path, 
                                         self.__pintools[analysis], 
                                         resdir=self.__resdir, 
-                                        prev_pintool=prev
+                                        prev_pintool=prev,
+                                        log_manager=self.__log_manager
                                     )
                 test.run(params)
         elif analysis == "couple":
@@ -80,8 +82,8 @@ class TestCmd(ICommand):
                 TestCouple(
                                 self.__conf_path, 
                                 pintool=self.__pintools[analysis],
-                                logdir=self.__logdir, 
                                 resdir=self.__resdir, 
+                                log_manager=self.__log_manager
                             ).run()
             else: 
                 if param in ["rho", "min_vals", "max_vals"]:
@@ -99,8 +101,8 @@ class TestCmd(ICommand):
                     TestCouple(
                                     self.__conf_path, 
                                     pintool=self.__pintools[analysis],
-                                    logdir=self.__logdir, 
                                     resdir=self.__resdir, 
+                                    log_manager=self.__log_manager
                                 ).run_params(params, param)
                 else:
                     self.stderr("unknown parameter: {} -- aborting".format(param))

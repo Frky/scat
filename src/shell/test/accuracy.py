@@ -15,7 +15,7 @@ from src.shell.pin.pintool import Pintool
 
 class TestAccuracy(object):
 
-    def __init__(self, test_conf, arity, typ, logdir, resdir, *args, **kwargs):
+    def __init__(self, test_conf, arity, typ, resdir, log_manager, *args, **kwargs):
         self.__resdir = resdir
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
         # Inlcude sub configuration files
@@ -24,9 +24,9 @@ class TestAccuracy(object):
                 subconf = Confiture("config/templates/empty.yaml").check_and_get(v["config"])
                 self.__conf.pop(k)
                 self.__conf.update(subconf)
+        self.__log_manager = log_manager
         self.__arity = arity
         self.__type = typ
-        self.__logdir = logdir
         super(TestAccuracy, self).__init__(*args, **kwargs)
 
     def __run_arity(self):
@@ -56,7 +56,7 @@ class TestAccuracy(object):
             except IOError:
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
-            ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)
+            ar = ArityAnalysis(pgm, self.__log_manager.get_log("arity", pgm), data)
             res.add(ar.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "accuracy_arity.res"), pgm=pgm, verbose=True)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
@@ -91,7 +91,7 @@ class TestAccuracy(object):
             except IOError:
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
-            ty = TypeAnalysis(pgm, self.__type.get_logfile(pgm, prev=False), data)
+            ty = TypeAnalysis(pgm, self.__log_manager.get_log("type", pgm), data)
             res.add(ty.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "accuracy_type.res"), pgm=pgm)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)

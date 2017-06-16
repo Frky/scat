@@ -15,7 +15,7 @@ from src.shell.pin.pintool import Pintool
 
 class TestParameter(object):
 
-    def __init__(self, test_conf, pintool, resdir, *args, **kwargs):
+    def __init__(self, test_conf, pintool, resdir, log_manager, *args, **kwargs):
         self.__resdir = resdir
         self.__testname = os.path.splitext(os.path.basename(test_conf))[0]
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
@@ -35,6 +35,7 @@ class TestParameter(object):
             self.__res = ArityChart(self.__resdir + "/{}_arity.res".format(self.__testname))
         else:
             self.__res = TypeChart(self.__resdir + "/{}_type.res".format(self.__testname))
+        self.__log_manager = log_manager
         super(TestParameter, self).__init__()
 
     def __run_one(self, params):
@@ -69,9 +70,9 @@ class TestParameter(object):
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
             if str(self.__pintool) == "arity":
-                an = ArityAnalysis(pgm, self.__pintool.get_logfile(pgm, prev=False), data)
+                an = ArityAnalysis(pgm, self.__log_manager.get_log("arity", pgm), data)
             else:
-                an = TypeAnalysis(pgm, self.__pintool.get_logfile(pgm, prev=False), data)
+                an = TypeAnalysis(pgm, self.__log_manager.get_log("type", pgm), data)
             res.add(an.accuracy(get=True, verbose=False, log=self.__resdir + "/" + str(self.__testname) + "_" + str(self.__pintool) + ".res"), pgm=pgm, verbose=True)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)

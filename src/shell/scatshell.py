@@ -30,7 +30,7 @@ class ScatShell(Cmd):
     prompt = 'scat > '
 
     def __init__(self, config_path="config/config.yaml"):
-        conf = Confiture("config/templates/general.yaml")
+        conf = Confiture("config/templates/general.yaml", list_sep=",")
         # Parse configuration file and get result
         self.__config = conf.check_and_get(config_path)
         self.__log_manager = LogManager(self.__config)
@@ -97,8 +97,8 @@ class ScatShell(Cmd):
                 test_conf=self.__config["test"]["desc"],
                 param=self.__config["test"]["param"],
                 pintools=self.__pintools,
-                logdir=self.__logdir,
                 resdir=self.__config["test"]["res"],
+                log_manager=self.__log_manager
             )
             self.__cmds["chart"] = ChartCmd(
                 resdir=self.__config["test"]["res"],
