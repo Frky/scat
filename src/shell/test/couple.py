@@ -46,8 +46,9 @@ class TestCouple(object):
             # launch program couple
             self.__couple.launch(param["bin"], [param["args"], "1>/dev/null"], params=params)#, verbose=False)
             logfile = self.__log_manager.get_log("couple", pgm)
+            outfile = self.__log_manager.gen_log("coupleres", pgm)
             # launch offline computation of couples
-            res = Couple(logfile, pgm, verbose=False).run(get=True, log=self.__resdir + "/" + logname, min_rho=min_rho, min_vals=min_vals)
+            res = Couple(pgm, logfile, outfile, verbose=False).run(get=True, log=self.__resdir + "/" + logname, min_rho=min_rho, min_vals=min_vals)
             print "{} | functions: {} - #f: {} - #g: {} - #couples: {}".format(pgm, *res)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
