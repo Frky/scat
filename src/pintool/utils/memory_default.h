@@ -17,6 +17,7 @@
 #include "functions_registry.h"
 #include "hollow_stack.h"
 #include "../log/ftable.h"
+#include "../log/read.h"
 
 #define NB_FN_MAX               100000
 #define MAX_DEPTH               1000
@@ -258,6 +259,11 @@ VOID Commence() {
     init = true;
     string _addr, _name;
     if (ifile.is_open()) {
+        if (!couple_mode) {
+            /* Skip two lines (one for time of exec, one for parameter values) */
+            skip_line(ifile);
+            skip_line(ifile);
+        }
         while (ifile) {
             char m;
             unsigned int nb_param = 0;
@@ -347,6 +353,8 @@ VOID Fini(INT32 code, VOID *v) {
     bool is_in = false;
 
     gettimeofday(&stop, NULL);
+
+    ofile << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << endl;
 
     /* First, we log the conversion table fid <-> name */
     log_ftable(ofile);

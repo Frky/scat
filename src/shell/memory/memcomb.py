@@ -3,7 +3,7 @@
 from datetime import datetime
 from numpy import mean 
 from random import randint
-from time import time
+from time import time as timestamp
 
 from src.shell.callstack import CallStack
 from src.shell.parser.type import TypeLogParser
@@ -357,7 +357,7 @@ class MemComb(object):
                 self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
                 self.log("checking consistancy of blocks...")
 
-                with open("log/{}_memcomb_{}.log".format(self.__pgm, int(time())), "w") as f:
+                with open("log/{}_memcomb_{}.log".format(self.__pgm, int(timestamp())), "w") as f:
                     f.write(ALLOC + '\n')
                     f.write(FREES[0][0])
 

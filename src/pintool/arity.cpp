@@ -542,7 +542,7 @@ VOID fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
-    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+    ofile << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << endl;
 
     debug("Hash table buckets mean size : %lf\n", fn_bucket_mean_size());
 

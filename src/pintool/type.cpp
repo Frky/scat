@@ -13,6 +13,7 @@
 
 #include "pin.H"
 
+#include "log/read.h"
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
@@ -132,6 +133,9 @@ VOID register_functions_from_arity_log() {
     ifile.open(KnobInputFile.Value().c_str());
 
     if (ifile.is_open()) {
+        /* Skip the first two lines (elapsed time + parameter values) */
+        skip_line(ifile);
+        skip_line(ifile);
         while (ifile) {
             char m;
             string img_name = read_part(ifile, &m);
@@ -463,7 +467,7 @@ VOID Fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
-    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+    ofile << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << endl;
 
     ofile << "MIN_VALS=" << MIN_VALS << ":MAX_VALS=" << MAX_VALS << ":ADDR_THRESHOLD=" << ADDR_THRESHOLD << endl;
 

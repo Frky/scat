@@ -116,7 +116,7 @@ class ArityAnalysis(Analysis):
         if log is not None:
             params = self.log.get_params()
             with open(log, "a") as f:
-                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
+                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
                         self.pgm,
                         params["MIN_CALLS"],
                         params["PARAM_THRESHOLD"],
@@ -127,6 +127,7 @@ class ArityAnalysis(Analysis):
                         out_less, 
                         out_more, 
                         total,
+                        self.log.time(),
                     ))
 
         if get:

@@ -132,12 +132,14 @@ class Chart(object):
         data = list(self._data)
         coreres = [d for d in data if d.pgm in coreutils]
         data = [d for d in data if d.pgm not in coreutils]
-        data.append(reduce(lambda a, b: a.merge(b), coreres[1:], coreres[0]))
-        data[-1].set_pgm("coreutils")
+        if len(coreres) > 1:
+            data.append(reduce(lambda a, b: a.merge(b), coreres[1:], coreres[0]))
+            data[-1].set_pgm("coreutils")
         cc = [d for d in data if "8cc" in d.pgm]
         data = [d for d in data if not "8cc" in d.pgm]
-        data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
-        data[-1].set_pgm("8cc")
+        if len(cc) > 1:
+            data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
+            data[-1].set_pgm("8cc")
         return data
 
     def draw_accuracy(self, data, name):
@@ -279,3 +281,35 @@ class Chart(object):
 
         P.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
         return
+
+    def draw_scalability(self, data, name):
+        tab = dict()
+        tab["online"] = dict()
+        order = ["online"]
+        for c, e in enumerate(data):
+            for k in tab.keys():
+                tab[k].setdefault(e.pgm, e.get(k))
+        for k in order:
+            sys.stdout.write("{} & ".format(k))
+        sys.stdout.write("\\\\\n")
+        for p in tab["online"].keys():
+            sys.stdout.write("{} & ".format(p))
+            for k in order:
+                if isinstance(tab[k][p], int):
+                    sys.stdout.write("{} & ".format(tab[k][p]))
+                else: 
+                    sys.stdout.write("{0:.2f} & ".format(tab[k][p]))
+            sys.stdout.write("\\\\\n")
+            # if isinstance(total, int):
+            #     sys.stdout.write("{} \\\\\n".format(total))
+            # else:
+            #     sys.stdout.write("{0:.2f} \\\\\n".format(total))
+        for k in order:
+            total = sum(tab[k].values())
+            if isinstance(total, int):
+                sys.stdout.write("{} & ".format(total))
+            else:
+                sys.stdout.write("{0:.2f} &".format(total))
+        sys.stdout.write("\\\\\n")
+        return
+

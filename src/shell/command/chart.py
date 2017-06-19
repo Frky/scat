@@ -32,8 +32,8 @@ class ChartCmd(ICommand):
         super(ChartCmd, self).__init__(*args, **kwargs)
 
     def __get_res(self, inf="", param="", pgm=""):
-        if param == "accuracy":
-            return "{}/{}_{}.res".format(self.__resdir, param, inf)
+        if param == "accuracy" or param == "scalability":
+            return "{}/{}_{}.res".format(self.__resdir, "accuracy", inf)
         elif inf == "couple":
             return "{}/{}_{}.res".format(self.__resdir, inf, "general")
         else:
@@ -52,7 +52,7 @@ class ChartCmd(ICommand):
         else:
             pgm = "test"
         if inf == "arity" or inf == "type":
-            if param != "accuracy":
+            if param != "accuracy" and param != "scalability":
                 defaults = dict()
                 for k, v in self.__conf[inf][param].items():
                     if k not in ["min", "max", "step"]:
@@ -67,6 +67,8 @@ class ChartCmd(ICommand):
                 chart.draw_accuracy(chart.get_accuracy(), "accuracy")
             elif param == "variability":
                 chart.draw_var(chart.get_var(pgm, defaults), "{}_var".format(pgm))
+            elif param == "scalability":
+                chart.draw_scalability(chart.get_accuracy(), "scalability")
             else:
                 chart.draw(chart.get(param, defaults, inp=inp, outp=outp), pgm + "_" + param)
         elif inf == "couple":
