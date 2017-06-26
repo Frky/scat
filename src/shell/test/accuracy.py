@@ -10,10 +10,11 @@ from src.shell.analysis.type import TypeAnalysis
 from src.shell.chart.arity import ArityChart
 from src.shell.chart.type import TypeChart
 from src.shell.data.data import Data
-from src.shell.test.res.accuracy import AccuracyRes
 from src.shell.pin.pintool import Pintool
+from src.shell.std import Std
+from src.shell.test.res.accuracy import AccuracyRes
 
-class TestAccuracy(object):
+class TestAccuracy(Std):
 
     def __init__(self, test_conf, arity, typ, logdir, resdir, *args, **kwargs):
         self.__resdir = resdir
@@ -53,7 +54,7 @@ class TestAccuracy(object):
                     pgmname = param["data"][param["data"].rfind("/")+1:param["data"].rfind(".")]
                     data = Data(datadir, pgmname)
                 data.load()
-            except IOError:
+            except IOError as e:
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
             ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)

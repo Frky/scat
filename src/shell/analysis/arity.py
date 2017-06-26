@@ -32,7 +32,7 @@ class ArityAnalysis(Analysis):
             return 0
 
     def check_one_ret(self, fname, ret, proto):
-        return (ret == 1) == (proto[0] != "void")
+        return (ret >= 1) == (proto[0] != "void")
 
     def print_general_info(self):
         if self.data is None:
@@ -91,7 +91,7 @@ class ArityAnalysis(Analysis):
             else:
                 more += 1
 
-            if ret == self.get_one_ret(proto):
+            if ret >= self.get_one_ret(proto):
                 ok_ret += 1
             else:
                 if ret:
@@ -132,6 +132,48 @@ class ArityAnalysis(Analysis):
 
         if get:
             return (ok_ar, ok_ret, more, less, out_more, out_less, total, total)
+
+    def result_per_function(self):
+        ari = { 
+                "ok": list(),
+                "fp": list(),
+                "fn": list(),
+                }
+        ret = { 
+                "ok": list(),
+                "fp": list(),
+                "fn": list(),
+                }
+        for function, arity in self.log.get():
+            fn = function.split(":")[-1]
+            int_ar, int_stack_ar, float_ar, float_stack_ar, iret = arity
+            ar = int_ar + int_stack_ar + float_ar + float_stack_ar
+            if fn == '':
+                continue
+            elif self.is_pseudo_function(fn):
+                continue
+            elif fn not in self.protos.keys():
+                continue
+            proto = self.protos[fn]
+            if self.is_variadic(proto):
+                continue
+            real_ar = self.get_one_arity(proto)
+            if real_ar == ar:
+                ari["ok"].append(function)
+            elif real_ar > ar:
+                ari["fn"].append(function)
+            else:
+                ari["fp"].append(function)
+
+            if iret >= self.get_one_ret(proto):
+                ret["ok"].append(function)
+            else:
+                if iret:
+                    ret["fp"].append(function)
+                else: 
+                    ret["fn"].append(function)
+        return ari, ret 
+
 
 
     def mismatch(self):
