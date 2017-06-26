@@ -69,3 +69,24 @@ class Entry(object):
             return self.fn_out
         else:
             return None
+
+    def _set(self, param, val):
+        if param == "acc_in":
+            self._acc_in = val
+        elif param == "tot_in":
+            self._tot_in = val
+        elif param == "fn_in":
+            self._fn_in = val
+        elif param == "fp_in":
+            self._fp_in = val
+        elif param == "acc_out":
+            self._acc_out = val
+        elif param == "tot_out":
+            self._tot_out = val
+        elif param == "fp_out":
+            self._fp_out = val
+        elif param == "fn_out":
+            self._fn_out = val
+        else:
+            pass
+
