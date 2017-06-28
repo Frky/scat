@@ -10,12 +10,20 @@
 
 #include "pin.H"
 
+#define RET_OPTIMIZATION        0
+
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
 
 #define MIN_CALLS_DEFAULT       "5"
+
+#if RET_OPTIMIZATION
+    #define RET_THRESHOLD_DEFAULT   "0.50"
+#else
+    #define RET_THRESHOLD_DEFAULT   "0.10"
+#endif
+
 #define PARAM_THRESHOLD_DEFAULT "0.10"
-#define RET_THRESHOLD_DEFAULT   "0.10"
 
 #define PARAM_INT_COUNT          6
 #define PARAM_INT_STACK_COUNT   10
@@ -167,10 +175,18 @@ void update_param_int_min_size(FID fid, UINT64 pid, REGF regf, UINT32 read_size)
 VOID fn_ret() {
     trace_enter();
 
+#if !RET_OPTIMIZATION
+     if (call_stack.height() == written[REGF_AX] &&
+             reg_maybe_return[REGF_AX])
+         nb_ret_int[call_stack.top()]++;
+     if (call_stack.height() == written[REGF_XMM0] &&
+             reg_maybe_return[REGF_XMM0])
+         nb_ret_float[call_stack.top()]++;
+#endif
     if (!call_stack.is_top_forgotten()) {
         while (is_jump_stack.top()) {
-            // std::cerr << "unjumping" << endl;
-#if 0
+
+#if RET_OPTIMIZATION
             if (reg_maybe_return[REGF_AX])
                 nb_ret_int[call_stack.top()]++;
             else if (reg_maybe_return[REGF_XMM0])
@@ -180,7 +196,7 @@ VOID fn_ret() {
             is_jump_stack.pop();
             sp_stack.pop();
         }
-#if 0
+#if RET_OPTIMIZATION
         if (reg_maybe_return[REGF_AX])
             nb_ret_int[call_stack.top()]++;
         else if (reg_maybe_return[REGF_XMM0])
@@ -191,8 +207,10 @@ VOID fn_ret() {
         sp_stack.pop();
     }
 
+#if RET_OPTIMIZATION
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
+#endif
 
     for (int regf = REGF_FIRST; regf <= REGF_LAST; regf++) {
         reg_ret_since_written[regf] = true;
@@ -259,6 +277,11 @@ VOID return_read(REGF regf, UINT32 reg_size) {
         return;
     }
 
+#if !RET_OPTIMIZATION
+    if (!reg_maybe_return[regf])
+        return;
+#endif
+
     // Discards the previous write as a potential
     // return value. Reading the value does not
     // necessarily mean the register cannot be a
@@ -272,6 +295,7 @@ VOID return_read(REGF regf, UINT32 reg_size) {
     UINT64 *nb_ret = regf == REGF_AX
             ? nb_ret_int
             : nb_ret_float;
+
     // Propagate the return value up the call stack
     for (int i = call_stack.height() + 1; i <= written[regf]; i++){
         if (!call_stack.is_forgotten(i)) {
@@ -279,7 +303,7 @@ VOID return_read(REGF regf, UINT32 reg_size) {
             nb_ret[fid] += 1;
             // Note : This is disable since it provides
             // worse type inference results :
-            //update_param_int_min_size(fid, 0, regf, reg_size);
+            // update_param_int_min_size(fid, 0, regf, reg_size);
         }
     }
 
