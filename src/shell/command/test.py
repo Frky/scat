@@ -43,6 +43,7 @@ class TestCmd(ICommand):
             if param == "accuracy":
                 TestAccuracy(
                                 self.__conf_path, 
+                                self.__pintools["empty"], 
                                 self.__pintools["arity"], 
                                 self.__pintools["type"], 
                                 self.__logdir, 

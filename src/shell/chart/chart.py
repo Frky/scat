@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import pylab as P
 import pandas as pd  
+import numpy
 
 class Chart(object):
 
@@ -57,6 +58,9 @@ class Chart(object):
                 if same:
                     return True
         return False
+
+    def get_one(self, pgm):
+        return filter(lambda e: e.pgm == pgm, self._data)[0]
 
     def get(self, param, defaults, inp=True, outp=True):
         self._data.sort(key=lambda a: a.get(param))
@@ -126,7 +130,7 @@ class Chart(object):
 
         plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 
-    def get_accuracy(self):
+    def get_accuracy(self, overhead=False):
         with open("test/coreutils.txt", "r") as f:
             coreutils = [line[:-1] for line in f.readlines()]
         data = list(self._data)
@@ -140,6 +144,11 @@ class Chart(object):
         if len(cc) > 1:
             data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
             data[-1].set_pgm("8cc")
+        ls = [d for d in data if "ls-" in d.pgm]
+        data = [d for d in data if not "ls-" in d.pgm]
+        if len(ls) > 1:
+            data.append(reduce(lambda a, b: a.merge(b), ls[1:], ls[0]))
+            data[-1].set_pgm("ls")
         return data
 
     def draw_accuracy(self, data, name):
@@ -167,10 +176,9 @@ class Chart(object):
                 else: 
                     sys.stdout.write("{0:.2f} & ".format(tab[k][p]))
             sys.stdout.write("\\\\\n")
-            # if isinstance(total, int):
-            #     sys.stdout.write("{} \\\\\n".format(total))
-            # else:
-            #     sys.stdout.write("{0:.2f} \\\\\n".format(total))
+        for k in tab.keys():
+            tab[k].pop("coreutils")
+            tab[k].pop("8cc")
         for k in order:
             if k == "acc_in":
                 total = map(lambda a: a[0] * a[1], zip(tab[k].values(), tab["tot_in"].values()))
@@ -240,6 +248,11 @@ class Chart(object):
         fp = map(lambda a: float(a.fp_in + a.fp_out)/(a.tot_in + a.tot_out), data)
         fn = map(lambda a: float(a.fn_in + a.fn_out)/(a.tot_in + a.tot_out), data)
 
+        print("average/standard deviation:")
+        print("| accuracy: {:.3g}/{:.3g}".format(numpy.mean(acc), numpy.std(acc)))
+        print("| false positive: {:.3g}/{:.3g}".format(numpy.mean(fp), numpy.std(fp)))
+        print("| false negative: {:.3g}/{:.3g}".format(numpy.mean(fn), numpy.std(fn)))
+
         ax.bar(bar_l, acc, width=bar_width, label="accuracy", 
                 alpha=1, color=Chart.colors["acc"])
         ax.bar(bar_l, fn, width=bar_width, label="false negatives", 
@@ -284,8 +297,11 @@ class Chart(object):
 
     def draw_scalability(self, data, name):
         tab = dict()
+        tab["size"] = dict()
         tab["online"] = dict()
-        order = ["online"]
+        tab["empty"] = dict()
+        tab["nopin"] = dict()
+        order = ["size", "online", "empty", "nopin"]
         for c, e in enumerate(data):
             for k in tab.keys():
                 tab[k].setdefault(e.pgm, e.get(k))
@@ -295,21 +311,61 @@ class Chart(object):
         for p in tab["online"].keys():
             sys.stdout.write("{} & ".format(p))
             for k in order:
-                if isinstance(tab[k][p], int):
+                if isinstance(tab[k][p], float): 
+                    sys.stdout.write("{0:.3f} & ".format(tab[k][p]))
+                else:
                     sys.stdout.write("{} & ".format(tab[k][p]))
-                else: 
-                    sys.stdout.write("{0:.2f} & ".format(tab[k][p]))
             sys.stdout.write("\\\\\n")
             # if isinstance(total, int):
             #     sys.stdout.write("{} \\\\\n".format(total))
             # else:
             #     sys.stdout.write("{0:.2f} \\\\\n".format(total))
-        for k in order:
-            total = sum(tab[k].values())
-            if isinstance(total, int):
-                sys.stdout.write("{} & ".format(total))
-            else:
-                sys.stdout.write("{0:.2f} &".format(total))
-        sys.stdout.write("\\\\\n")
+        # for k in order:
+        #     total = sum(tab[k].values())
+        #     if isinstance(total, int):
+        #         sys.stdout.write("{} & ".format(total))
+        #     else:
+        #         sys.stdout.write("{0:.2f} &".format(total))
+        # sys.stdout.write("\\\\\n")
+
+        plt.figure(figsize=(12, 9)) 
+        ax = plt.subplot(111)    
+        bar_width = 0.5
+        bar_l = [i + 1 for i in range(len(data))]
+        tick_pos = [ i + (bar_width/2) for i in bar_l ]
+
+        nopin = map(lambda a: a.nopin_time, data)
+        empty = map(lambda a: a.empty_time, data)
+        online = map(lambda a: a.time, data)
+
+        ax.bar(bar_l, nopin, width=bar_width, label="normal execution", 
+                alpha=1, color=Chart.colors["acc"])
+        ax.bar(bar_l, empty, width=bar_width, label="execution through Pin (but no instrumentation)",
+                alpha=1, bottom=nopin, color=Chart.colors["fn"])
+        ax.bar(bar_l, online, width=bar_width, label="execution with instrumentation",
+                alpha=1, bottom=map(lambda a: a[0] + a[1], zip(nopin, empty)), color=Chart.colors["fp"])
+                
+        # Limit the range of the plot to only where the data is.    
+        # Avoid unnecessary whitespace.    
+        plt.ylim(0.0, 60.00)    
+        plt.xlim(0, len(data) * 1.05)
+
+        ax.spines["top"].set_visible(False)    
+        ax.spines["bottom"].set_visible(False)
+        ax.spines["right"].set_visible(False)    
+        ax.spines["left"].set_visible(False)
+
+        # Ensure that the axis ticks only show up on the bottom and left of the plot.    
+        # Ticks on the right and top of the plot are generally unnecessary chartjunk.    
+        ax.get_xaxis().tick_bottom()    
+        ax.get_yaxis().tick_left()    
+
+        plt.xticks(tick_pos, map(lambda a: a.time, data), rotation="vertical")
+        plt.tick_params(axis="both", which="both", bottom="off", top="off",    
+                labelbottom="on", left="off", right="off", labelleft="on") 
+        plt.legend()
+
+        plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
+
         return
 

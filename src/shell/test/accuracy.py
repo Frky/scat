@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 
+from datetime import datetime
 from collections import OrderedDict
 from confiture import Confiture 
 from subprocess import call
@@ -16,7 +17,7 @@ from src.shell.test.res.accuracy import AccuracyRes
 
 class TestAccuracy(Std):
 
-    def __init__(self, test_conf, arity, typ, logdir, resdir, *args, **kwargs):
+    def __init__(self, test_conf, empty, arity, typ, logdir, resdir, *args, **kwargs):
         self.__resdir = resdir
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
         # Inlcude sub configuration files
@@ -25,6 +26,7 @@ class TestAccuracy(Std):
                 subconf = Confiture("config/templates/empty.yaml").check_and_get(v["config"])
                 self.__conf.pop(k)
                 self.__conf.update(subconf)
+        self.__empty = empty
         self.__arity = arity
         self.__type = typ
         self.__logdir = logdir
@@ -34,17 +36,34 @@ class TestAccuracy(Std):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
-        prev_res = ArityChart(self.__resdir + "/accuracy_arity.res")
+        prev_res = ArityChart(self.__resdir + "/arity.res", self.__conf)
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if prev_res.contains(pgm):
                 continue
-            if "pre" in param.keys():
-                call(param["pre"], stdout=FNULL, shell=True)
-            # launch program arity
             if param["args"] == "":
                 ignored += 1
                 continue
-            self.__arity.launch(param["bin"], [param["args"], "1>/dev/null"])#, verbose=False)
+            if "pre" in param.keys():
+                call(param["pre"], stdout=FNULL, shell=True)
+            # launch without PIN
+            start = datetime.now()
+            call(param["bin"] + " " + param["args"], stdout=FNULL, shell=True)
+            stop = datetime.now()
+            print stop - start
+            if "post" in param.keys():
+                call(param["post"], stdout=FNULL, shell=True)
+            if "pre" in param.keys():
+                call(param["pre"], stdout=FNULL, shell=True)
+            # launch empty
+            self.__empty.launch(param["bin"], [param["args"], "1>/dev/null"], verbose=False)
+            if "post" in param.keys():
+                call(param["post"], stdout=FNULL, shell=True)
+            if "pre" in param.keys():
+                call(param["pre"], stdout=FNULL, shell=True)
+            # launch program arity
+            self.__arity.launch(param["bin"], [param["args"], "1>/dev/null"], verbose=False)
+            if "post" in param.keys():
+                call(param["post"], stdout=FNULL, shell=True)
             # display arity accuracy
             try:
                 if param["data"].endswith("/"):
@@ -57,10 +76,11 @@ class TestAccuracy(Std):
             except IOError as e:
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
+            # Get time of execution with PIN and no instrumentation
+            with open(self.__empty.get_logfile(pgm, prev=False)) as f:
+                empty_time = float(f.read())
             ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)
-            res.add(ar.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "accuracy_arity.res"), pgm=pgm, verbose=True)
-            if "post" in param.keys():
-                call(param["post"], stdout=FNULL, shell=True)
+            res.add(ar.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "arity.res", empty_time=empty_time, no_pin_time=stop - start), pgm=pgm, verbose=True)
 
         print res
         print "IGNORED: {}".format(ignored)
@@ -69,18 +89,21 @@ class TestAccuracy(Std):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
-        prev_res = TypeChart(self.__resdir + "/accuracy_type.res")
+        prev_res = TypeChart(self.__resdir + "/type.res", self.__conf)
+        # used to get times of execution with no instrumentation
+        arity_res = ArityChart(self.__resdir + "/arity.res", self.__conf)
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if prev_res.contains(pgm):
                 continue
-            if "pre" in param.keys():
-                call(param["pre"], stdout=FNULL, shell=True)
             # launch program type
             if param["args"] == "":
                 ignored += 1
                 continue
+            if "pre" in param.keys():
+                call(param["pre"], stdout=FNULL, shell=True)
             self.__type.launch(param["bin"], [param["args"], "1>/dev/null"])#, verbose=False)
-            # display arity accuracy
+            if "post" in param.keys():
+                call(param["post"], stdout=FNULL, shell=True)
             try:
                 if param["data"].endswith("/"):
                     data = Data(param["data"], pgm)
@@ -92,10 +115,11 @@ class TestAccuracy(Std):
             except IOError:
                 self.stderr("error: you must parse source code of \"{0}\" first (use parsedata)".format(pgm))
                 continue
+            # Get times of execution with no instrumentation
+            empty_time = arity_res.get_one(pgm).empty_time
+            nopin_time = arity_res.get_one(pgm).nopin_time
             ty = TypeAnalysis(pgm, self.__type.get_logfile(pgm, prev=False), data)
-            res.add(ty.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "accuracy_type.res"), pgm=pgm)
-            if "post" in param.keys():
-                call(param["post"], stdout=FNULL, shell=True)
+            res.add(ty.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "type.res", empty_time=empty_time, nopin_time=nopin_time), pgm=pgm)
 
         print res
         print "IGNORED: {}".format(ignored)

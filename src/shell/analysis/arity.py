@@ -46,7 +46,7 @@ class ArityAnalysis(Analysis):
         print("")
         self.print_general_info()
 
-    def accuracy(self, get=False, verbose=True, log=None):
+    def accuracy(self, get=False, verbose=True, log=None, empty_time=0.0, no_pin_time=0.0):
         if verbose:
             self.print_general_info()
             print("")
@@ -116,7 +116,7 @@ class ArityAnalysis(Analysis):
         if log is not None:
             params = self.log.get_params()
             with open(log, "a") as f:
-                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
+                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
                         self.pgm,
                         params["MIN_CALLS"],
                         params["PARAM_THRESHOLD"],
@@ -128,6 +128,8 @@ class ArityAnalysis(Analysis):
                         out_more, 
                         total,
                         self.log.time(),
+                        empty_time,
+                        str(no_pin_time).split(":")[-1], 
                     ))
 
         if get:

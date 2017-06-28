@@ -32,8 +32,8 @@ class ChartCmd(ICommand):
         super(ChartCmd, self).__init__(*args, **kwargs)
 
     def __get_res(self, inf="", param="", pgm=""):
-        if param == "accuracy" or param == "scalability":
-            return "{}/{}_{}.res".format(self.__resdir, "accuracy", inf)
+        if inf == "arity" or inf == "type":
+            return "{}/{}.res".format(self.__resdir, inf)
         elif inf == "couple":
             return "{}/{}_{}.res".format(self.__resdir, inf, "general")
         else:
@@ -45,6 +45,11 @@ class ChartCmd(ICommand):
         # Watch for a particular test description file
         if "-t" in split:
             self.__testconf = Confiture("config/templates/empty.yaml").check_and_get(split.pop(split.index("-t") + 1))
+            for k, v in self.__testconf.items():
+                if "config" in v.keys():
+                    subconf = Confiture("config/templates/empty.yaml").check_and_get(v["config"])
+                    self.__testconf.pop(k)
+                    self.__testconf.update(subconf)
 
         inf, param = split[:2] 
         if len(split) > 2:
@@ -52,7 +57,7 @@ class ChartCmd(ICommand):
         else:
             pgm = "test"
         if inf == "arity" or inf == "type":
-            if param != "accuracy" and param != "scalability":
+            if param != "accuracy" and param != "scalability" and param != "overhead":
                 defaults = dict()
                 for k, v in self.__conf[inf][param].items():
                     if k not in ["min", "max", "step"]:
@@ -60,15 +65,17 @@ class ChartCmd(ICommand):
                 inp = param in ["min_calls", "param_threshold", "min_vals", "max_vals", "addr_threshold"]
                 outp = param in ["min_calls", "ret_threshold", "min_vals", "max_vals", "addr_threshold"]
             if inf == "arity":
-                chart = ArityChart(self.__get_res(inf, param, pgm))
+                chart = ArityChart(self.__get_res(inf, param, pgm), self.__testconf)
             else:
-                chart = TypeChart(self.__get_res(inf, param, pgm))
+                chart = TypeChart(self.__get_res(inf, param, pgm), self.__testconf)
             if param == "accuracy":
                 chart.draw_accuracy(chart.get_accuracy(), "accuracy")
             elif param == "variability":
                 chart.draw_var(chart.get_var(pgm, defaults), "{}_var".format(pgm))
             elif param == "scalability":
                 chart.draw_scalability(chart.get_accuracy(), "scalability")
+            elif param == "overhead":
+                chart.draw_overhead(chart.get_overhead(self.__testconf))
             else:
                 chart.draw(chart.get(param, defaults, inp=inp, outp=outp), pgm + "_" + param)
         elif inf == "couple":

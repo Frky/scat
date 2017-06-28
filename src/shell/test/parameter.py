@@ -32,9 +32,9 @@ class TestParameter(object):
             self.__prev_pintool = None
         self.__prev_treated = list()
         if str(pintool) == "arity":
-            self.__res = ArityChart(self.__resdir + "/{}_arity.res".format(self.__testname))
+            self.__res = ArityChart(self.__resdir + "/{}_arity.res".format(self.__testname), self.__conf)
         else:
-            self.__res = TypeChart(self.__resdir + "/{}_type.res".format(self.__testname))
+            self.__res = TypeChart(self.__resdir + "/{}_type.res".format(self.__testname), self.__conf)
         super(TestParameter, self).__init__()
 
     def __run_one(self, params):

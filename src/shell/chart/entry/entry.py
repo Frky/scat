@@ -50,6 +50,28 @@ class Entry(object):
     def acc_out(self):
         return float(self.tot_out - self.fp_out - self.fn_out)/self.tot_out
 
+    @property
+    def time(self):
+        return self._time
+
+    @property
+    def empty_time(self):
+        return self._empty_time
+
+    @property
+    def nopin_time(self):
+        return self._nopin_time
+
+    @property
+    def size(self):
+        if self._size > 1024:
+            if self._size > 1024*1024:
+                return "{} MB".format(self._size / (1024*1024))
+            else:
+                return "{} KB".format(self._size / (1024))
+        else:
+            return "{} B".format(self._size)
+
     def get(self, param):
         if param == "acc_in":
             return self.acc_in
@@ -67,6 +89,14 @@ class Entry(object):
             return self.fp_out
         elif param == "fn_out":
             return self.fn_out
+        elif param == "size":
+            return self.size
+        elif param == "online":
+            return self._time
+        elif param == "empty":
+            return self._empty_time
+        elif param == "nopin":
+            return self._nopin_time
         else:
             return None
 
@@ -87,6 +117,8 @@ class Entry(object):
             self._fp_out = val
         elif param == "fn_out":
             self._fn_out = val
+        elif param == "online":
+            self.__time = val
         else:
             pass
 
