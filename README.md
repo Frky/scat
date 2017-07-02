@@ -1,12 +1,12 @@
 
 # scat
 
-> «  Tell me! Everyone is picking up on that feline beat / 'Cause everything else is obsolete.
-
-> \- Strictly high-buttoned shoes. »
-
 
 **(01/07/17) WARNING: this documentation is out of date (but will be updated soon).**
+
+
+> «  Tell me! Everyone is picking up on that feline beat / 'Cause everything else is obsolete.
+> \- Strictly high-buttoned shoes. »
 
 
 [What is `scat`?](#what-is-scat)
