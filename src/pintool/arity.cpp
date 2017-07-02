@@ -10,11 +10,20 @@
 
 #include "pin.H"
 
-#define NB_CALLS_TO_CONCLUDE    20
+#define RET_OPTIMIZATION        0
+
 #define NB_FN_MAX               30000
 #define MAX_DEPTH               1000
-#define PARAM_THRESHOLD         0.10
-#define RETURN_THRESHOLD        0.10
+
+#define MIN_CALLS_DEFAULT       "5"
+
+#if RET_OPTIMIZATION
+    #define RET_THRESHOLD_DEFAULT   "0.50"
+#else
+    #define RET_THRESHOLD_DEFAULT   "0.10"
+#endif
+
+#define PARAM_THRESHOLD_DEFAULT "0.10"
 
 #define PARAM_INT_COUNT          6
 #define PARAM_INT_STACK_COUNT   10
@@ -26,12 +35,23 @@
 #include "utils/registers.h"
 #include "utils/hollow_stack.h"
 
-ofstream ofile;
-// TODO change "mouaha"
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "mouaha", "Specify an output file");
+/* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
+unsigned int MIN_CALLS;
+KNOB<string> KnobMinCalls(KNOB_MODE_WRITEONCE, "pintool", "min_calls", MIN_CALLS_DEFAULT, "Specify a number for MIN_CALLS");
+float PARAM_THRESHOLD; 
+KNOB<string> KnobParamThreshold(KNOB_MODE_WRITEONCE, "pintool", "param_threshold", PARAM_THRESHOLD_DEFAULT, "Specify a number for PARAM_THRESHOLD");
+float RET_THRESHOLD; 
+KNOB<string> KnobRetThreshold(KNOB_MODE_WRITEONCE, "pintool", "ret_threshold", RET_THRESHOLD_DEFAULT, "Specify a number for RET_THRESHOLD");
 
+
+/* Out file to store analysis results */
+ofstream ofile;
+KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "/dev/null", "Specify an output file");
+
+/* Time of instrumentation */
 struct timeval start, stop; 
 
+/* Address of the Global Offset Table */
 ADDRINT got_beg = 0;
 ADDRINT got_end = 0;
 
@@ -155,28 +175,42 @@ void update_param_int_min_size(FID fid, UINT64 pid, REGF regf, UINT32 read_size)
 VOID fn_ret() {
     trace_enter();
 
+#if !RET_OPTIMIZATION
+     if (call_stack.height() == written[REGF_AX] &&
+             reg_maybe_return[REGF_AX])
+         nb_ret_int[call_stack.top()]++;
+     if (call_stack.height() == written[REGF_XMM0] &&
+             reg_maybe_return[REGF_XMM0])
+         nb_ret_float[call_stack.top()]++;
+#endif
     if (!call_stack.is_top_forgotten()) {
         while (is_jump_stack.top()) {
-            // std::cerr << "unjumping" << endl;
+
+#if RET_OPTIMIZATION
             if (reg_maybe_return[REGF_AX])
                 nb_ret_int[call_stack.top()]++;
             else if (reg_maybe_return[REGF_XMM0])
                 nb_ret_float[call_stack.top()]++;
+#endif
             call_stack.pop();
             is_jump_stack.pop();
             sp_stack.pop();
         }
+#if RET_OPTIMIZATION
         if (reg_maybe_return[REGF_AX])
             nb_ret_int[call_stack.top()]++;
         else if (reg_maybe_return[REGF_XMM0])
             nb_ret_float[call_stack.top()]++;
+#endif
         call_stack.pop();
         is_jump_stack.pop();
         sp_stack.pop();
     }
 
+#if RET_OPTIMIZATION
     reg_maybe_return[REGF_AX] = false;
     reg_maybe_return[REGF_XMM0] = false;
+#endif
 
     for (int regf = REGF_FIRST; regf <= REGF_LAST; regf++) {
         reg_ret_since_written[regf] = true;
@@ -243,6 +277,11 @@ VOID return_read(REGF regf, UINT32 reg_size) {
         return;
     }
 
+#if !RET_OPTIMIZATION
+    if (!reg_maybe_return[regf])
+        return;
+#endif
+
     // Discards the previous write as a potential
     // return value. Reading the value does not
     // necessarily mean the register cannot be a
@@ -256,6 +295,7 @@ VOID return_read(REGF regf, UINT32 reg_size) {
     UINT64 *nb_ret = regf == REGF_AX
             ? nb_ret_int
             : nb_ret_float;
+
     // Propagate the return value up the call stack
     for (int i = call_stack.height() + 1; i <= written[regf]; i++){
         if (!call_stack.is_forgotten(i)) {
@@ -263,7 +303,7 @@ VOID return_read(REGF regf, UINT32 reg_size) {
             nb_ret[fid] += 1;
             // Note : This is disable since it provides
             // worse type inference results :
-            //update_param_int_min_size(fid, 0, regf, reg_size);
+            // update_param_int_min_size(fid, 0, regf, reg_size);
         }
     }
 
@@ -526,15 +566,17 @@ VOID fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
-    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+    ofile << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << endl;
 
     debug("Hash table buckets mean size : %lf\n", fn_bucket_mean_size());
 
     int inferred = 0;
     int dismissed = 0;
 
+    ofile << "MIN_CALLS=" << MIN_CALLS << ":PARAM_THRESHOLD=" << PARAM_THRESHOLD << ":RET_THRESHOLD=" << RET_THRESHOLD << endl;
+
     for (FID fid = 1; fid <= fn_nb(); fid++) {
-        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE) {
+        if (nb_call[fid] < MIN_CALLS) {
             dismissed++;
             continue;
         }
@@ -542,7 +584,7 @@ VOID fini(INT32 code, VOID *v) {
         inferred++;
 
         UINT64 param_threshold = (UINT64) ceil(nb_call[fid] * PARAM_THRESHOLD);
-        UINT64 return_threshold = (UINT64) ceil(nb_call[fid] * RETURN_THRESHOLD);
+        UINT64 return_threshold = (UINT64) ceil(nb_call[fid] * RET_THRESHOLD);
 
         UINT64 int_arity = detected_arity(param_threshold,
                 nb_param_int[fid], PARAM_INT_COUNT);
@@ -615,6 +657,11 @@ int main(int argc, char * argv[]) {
     PIN_InitSymbolsAlt(DEBUG_OR_EXPORT_SYMBOLS);
 
     if (PIN_Init(argc, argv)) return 1;
+
+    /* Get parameters of analysis from command line */
+    MIN_CALLS = std::atoi(KnobMinCalls.Value().c_str());
+    PARAM_THRESHOLD = std::atof(KnobParamThreshold.Value().c_str());
+    RET_THRESHOLD = std::atof(KnobRetThreshold.Value().c_str());
 
     // We need to open this file early (even though
     // it is only needed in the end) because PIN seems

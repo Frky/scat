@@ -18,6 +18,10 @@ class TypeLogParser(ILogParser):
             with open(self.log_path, "r") as log:
                 # Skip first line
                 log.readline()
+                # Read parameters
+                for p in log.readline()[:-1].split(":"):
+                    k, v = p.split("=")
+                    self._params[k] = v
                 for line in log.readlines():
                     l = line[:-1].split(":")
                     name = ":".join(l[:3])

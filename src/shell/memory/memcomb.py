@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
 from numpy import mean 
 from random import randint
+from time import time as timestamp
 
 from src.shell.callstack import CallStack
 from src.shell.parser.type import TypeLogParser
@@ -16,12 +18,22 @@ class MemComb(object):
 
     """
 
-    def __init__(self, mem_log_file, type_log_file, log, pgm):
+    def __init__(self, mem_log_file, type_log_file, pgm,
+            cli_ignore=None, cli_libmatch=None, coupleres_log_file=None, verbose=True):
         super(MemComb, self).__init__()
-        self.__parser = MemallocParser(mem_log_file)
+        self.__parser = MemallocParser(mem_log_file, cli_ignore, cli_libmatch)
         self.__protos = TypeLogParser(type_log_file)
-        self.log = log
+        if coupleres_log_file is not None:
+            self.__couples_file = coupleres_log_file
+        else:
+            self.__couples_file = None
         self.__pgm = pgm
+        self.__free_candidates = dict()
+        self.verbose = verbose
+
+    def log(self, msg):
+        if self.verbose:
+            print "[*] " + msg
 
     def __compute_callers(self):
         call_stack = CallStack(self.__pgm)
@@ -86,7 +98,6 @@ class MemComb(object):
                     nb_new_addr[block.id][1] += 1
                 call_stack.pop()
             ii += 1
-        print ii
         ll = sorted(nb_new_addr.items(), key=lambda a: -a[1][0])
         candidates = list()
         for f in ll:
@@ -151,6 +162,30 @@ class MemComb(object):
                 print "Elaged: {0}".format(wrapper[0])
         print WTREE.to_str(0)
 
+    def candidates_from_couples(self, alloc_id):
+        if self.__free_candidates.get(alloc_id) is None:
+        #Iter on  the coupleres file ton find function who are candidates
+        #to be the liberator
+            free_candidates = dict()
+            with open(self.__couples_file, 'r') as f:
+                line = f.readline().split(':')
+                while line != ['']:
+                    if line[1] == alloc_id:
+                        free_candidates[line[4]] = True
+                    line = f.readline().split(':')
+            self.__free_candidates[alloc_id] = free_candidates
+        return self.__free_candidates[alloc_id]
+
+    def block_not_in_couple(self, alloc, block):
+        """
+            Check that the block doesn't correspond to a couple between its
+            function and the guessed allocator
+        """
+        function_id = block.id.split(':')[1]
+        alloc_id = alloc.split(':')[1]
+        r = self.candidates_from_couples(alloc_id).get(function_id) is None
+        return r and (function_id != alloc_id)
+
     def __free(self, ALLOC, libraries):
         nb_alloc = 0
         # Number of new addresses outputted by each function
@@ -161,7 +196,12 @@ class MemComb(object):
         call_stack = CallStack(self.__pgm)
         # Number of calls
         nb_calls = dict()
+
         for block in self.__parser.get():
+            if (self.__couples_file is not None
+                    and self.block_not_in_couple(ALLOC, block)):
+                continue
+
             if block.is_out():
                 nb_calls.setdefault(block.id, 0)
                 nb_calls[block.id] += 1
@@ -205,6 +245,9 @@ class MemComb(object):
     def compute_blocks(self, ALLOC, FREE, POS):
         mem = Memory(debug=False)
         for i, block in enumerate(self.__parser.get()):
+            if (self.__couples_file is not None
+                    and self.block_not_in_couple(ALLOC, block)):
+                        continue
             if block.id == ALLOC and block.is_out():
                 mem.alloc(block.val, 1)
             elif block.id == FREE and block.is_in():
@@ -236,266 +279,100 @@ class MemComb(object):
         #         if not is_free and block.is_addr() and block.is_in() and not mem.is_allocated(block.val):
         #             print "UAF", block.id, block.val, block.date
 
-        print "[errors] ALLOC: {0} | FREE: {1}".format(mem.errors[0], mem.errors[1])
-        print "[allocs] CURR: {0} | TOTAL: {1}".format(*mem.allocated)
-        print "[nbcall] ALLOC: {0} | FREE: {1}".format(*mem.nb_calls)
-        print "{},{},{},{},{},{}".format(ALLOC, FREE, mem.nb_calls[0], mem.nb_calls[1], *mem.errors)
-        return
+        self.log("[errors] ALLOC: {0} | FREE: {1}".format(mem.errors[0], mem.errors[1]))
+        self.log("[allocs] CURR: {0} | TOTAL: {1}".format(*mem.allocated))
+        self.log("[nbcall] ALLOC: {0} | FREE: {1}".format(*mem.nb_calls))
+        return mem.errors, mem.nb_calls
 
-    def run(self, libraries=False, wrappers=True):
+    def __log_res(self, logfile, ALLOC, FREE, consistency, time):
+        with open(logfile, "a") as f:
+            f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}.{}:{}.{}\n".format(
+                    self.__pgm, 
+                    ALLOC,
+                    FREE,
+                    consistency[1][0],
+                    consistency[1][1],
+                    consistency[0][0],
+                    consistency[0][1],
+                    self.__parser.time,
+                    time[0].seconds,
+                    time[0].microseconds,
+                    time[1].seconds,
+                    time[1].microseconds,
+                ))
+
+    def run(self, libraries=False, wrappers=False, ignore=None,
+            cli_ignore=None, get=False, log=None, test_consistency=False):
+        time = list()
         if libraries:
             nb_callers = self.__compute_callers()
         else:
             nb_callers = None
+        FREE = None
+        consistency = [[0,0],[0,0]]
+        start = datetime.now()
         ALLOC = self.__alloc(nb_callers, libraries)
-        test_error_rate = False
-        if test_error_rate:
+        stop = datetime.now()
+        time.append(stop - start)
+        if test_consistency:
             ignore = list()
             while ALLOC is not None:
+                start = datetime.now()
                 FREES = self.__free(ALLOC, libraries)
+                stop = datetime.now()
+                time.append(stop - start)
                 for FREE, POS in FREES[:3]:
                     # self.log("checking consistancy of blocks for ({},{})...".format(ALLOC, FREE))
-                    self.compute_blocks(ALLOC, FREE, POS)
+                    consistency = self.compute_blocks(ALLOC, FREE, POS)
+                    self.__log_res(log, ALLOC, FREE, consistency, time)
                 ignore.append(ALLOC)
                 ALLOC = self.__alloc(nb_callers, libraries, ignore=ignore)
-
+            return
         else:
             if ALLOC is None:
                 self.log("allocator not found")
-                return None, None
-            ALLOC_IMAGE, ALLOC_ADDR, ALLOC_NAME = ALLOC.split(":")
-            ALLOC_ADDR = hex(int(ALLOC.split(":")[1]))
-            self.log("allocator found - {0}:{1}:{2}".format(ALLOC_IMAGE, ALLOC_ADDR, ALLOC_NAME))
-            FREES = self.__free(ALLOC, libraries)
-            FREE_IMAGE, FREE_ADDR, FREE_NAME = FREES[0][0].split(":")
-            FREE_ADDR = hex(int(FREE_ADDR))
-            self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
-            self.log("checking consistancy of blocks...")
-            self.compute_blocks(ALLOC, *FREES[0])
+                FREE = None
+            else:
+                ALLOC_IMAGE, ALLOC_ADDR, ALLOC_NAME = ALLOC.split(":")
+                ALLOC_ADDR = hex(int(ALLOC.split(":")[1]))
+                self.log("allocator found - {0}:{1}:{2}".format(ALLOC_IMAGE, ALLOC_ADDR, ALLOC_NAME))
+                start = datetime.now()
+                FREES = self.__free(ALLOC, libraries)
+                stop = datetime.now()
+                time.append(stop - start)
+                try:
+                    FREE_IMAGE, FREE_ADDR, FREE_NAME = FREES[0][0].split(":")
+                except IndexError:
+                    if self.__couples_file is not None:
+                        self.log("Liberator not found in couples! Aborting.")
+                        if log: 
+                            self.__log_res(log, ALLOC, FREE, consistency, time)
+                        return
+                    else:
+                        self.log("Liberator not found! Aborting.")
+                        if log: 
+                            self.__log_res(log, ALLOC, FREE, consistency, time)
+                        return
+                FREE_ADDR = hex(int(FREE_ADDR))
+                self.log("liberator found - {0}:{1}:{2}".format(FREE_IMAGE, FREE_ADDR, FREE_NAME))
+                self.log("checking consistancy of blocks...")
+
+                with open("log/{}_memcomb_{}.log".format(self.__pgm, int(timestamp())), "w") as f:
+                    f.write(ALLOC + '\n')
+                    f.write(FREES[0][0])
+
+                consistency = self.compute_blocks(ALLOC, *FREES[0])
+                FREE = FREES[0][0]
 
         # if wrappers:
         #     # Detecting suballocators
         #     SUBALLOC = self.__wrappers(ALLOC)
-        return ALLOC, FREES[0][0]
+        while len(time) < 2:
+            time.append(datetime.now() - datetime.now())
 
+        if log:
+            self.__log_res(log, ALLOC, FREE, consistency, time)
 
-# class CallStack(object):
-# 
-#     def __init__(self, pgm):
-#         self.__stack = list()
-#         self.__depth_in_lib = 0
-#         self.__pgm = pgm
-# 
-#     def pop(self):
-#         fid = self.__stack.pop(-1)
-#         if fid[0].id.split(":")[0] != self.__pgm:
-#             self.__depth_in_lib -= 1
-#         if self.depth < 0:
-#             raise Exception("Inconsistancy in call stack")
-#         return fid 
-# 
-#     def push(self, block):
-#         # Only push if fid and date are different from the top
-#         # of the stack
-#         if len(self.__stack) > 0 and self.__stack[-1][0].id == block.id and self.__stack[-1][0].date == block.date:
-#             self.__stack[-1].append(block)
-#             return
-#         if block.id.split(":")[0] != self.__pgm:
-#             self.__depth_in_lib += 1
-#         self.__stack.append([block])
-#         
-#     def expect(self, fid, date=None):
-#         if len(self.__stack) == 0 or self.__stack[-1][0].id != fid:
-#             print "ERROR IN CALL STACK"
-#             print "[{2}] Expecting {0}, top is {1}".format(fid, self.top()[0].id, date)
-#             print self.__stack
-#             raise Exception
-# 
-#     def top(self):
-#         if self.is_empty():
-#             return None
-#         return self.__stack[-1]
-# 
-#     def top_id(self):
-#         if self.is_empty():
-#             return None
-#         return self.__stack[-1][0].id
-# 
-#     def is_empty(self):
-#         return len(self.__stack) == 0
-# 
-#     def items(self):
-#         for blocks in reversed(self.__stack):
-#             yield blocks
-# 
-#     @property
-#     def depth(self):
-#         return self.__depth_in_lib
-# 
-#     @property
-#     def stack(self):
-#         return map(lambda a: a[0].id, self.__stack)
-# 
-# 
-# class AddrTable(object):
-# 
-#     TABLE_SIZE = 10000
-# 
-#     def __init__(self, dic=False):
-#         self.__addr = list()
-#         self.__dic = dic
-#         for i in xrange(AddrTable.TABLE_SIZE):
-#             if self.__dic:
-#                 self.__addr.append(dict())
-#             else:
-#                 self.__addr.append(list())
-#         self.__curr_key = None
-#         self.__curr_addr = None
-# 
-#     def contains(self, addr):
-#         key = addr % AddrTable.TABLE_SIZE
-#         if self.__dic:
-#             return addr in self.__addr[key].keys()
-#         else:
-#             return addr in self.__addr[key]
-# 
-#     def add(self, addr):
-#         key = addr % AddrTable.TABLE_SIZE
-#         if self.__dic:
-#             self.__addr[key][addr] = list()
-#         else:
-#             self.__addr[key].append(addr)
-# 
-#     def remove(self, addr):
-#         key = addr % AddrTable.TABLE_SIZE
-#         self.__addr[key].remove(addr)
-# 
-#     def add_dic(self, addr, fid):
-#         if not self.__dic:
-#             raise Exception
-#         key = addr % AddrTable.TABLE_SIZE
-#         self.__addr[key][addr].append(fid)
-# 
-#     def items(self):
-#         for key in self.__addr:
-#             if self.__dic:
-#                 for addr, call in key.items():
-#                     yield addr, call
-#             else:
-#                 for addr in key:
-#                     yield addr
-# 
-# 
-# class Wrapper(object):
-# 
-#     def __init__(self, wid, ratio):
-#         self.__id = wid
-#         self.__ratio = ratio
-#         self.__next = list()
-# 
-#     @property
-#     def id(self):
-#         return self.__id
-# 
-#     @property
-#     def ratio(self):
-#         return self.__ratio
-# 
-#     @property
-#     def next(self):
-#         return self.__next
-# 
-#     def add_child(self, wrap):
-#         self.__next.append(wrap)
-# 
-#     def get(self, wid, d):
-#         if d == 0:
-#             if wid == self.id:
-#                 return self
-#             else:
-#                 return None
-#         for n in self.next:
-#             nw = n.get(wid, d - 1)
-#             if nw:
-#                 return nw
-#         return None
-# 
-#     def to_str(self, d):
-#         s = ""
-#         for i in xrange(d):
-#             s += "**"
-#         s += "| " + str(self.id) + "\n"
-#         for n in self.next:
-#             s += n.to_str(d + 1)
-#         return s
-# 
-# 
-# class Memory(object):
-# 
-#     HASH_SIZE = 10
-#     KEY_MASK = 2**HASH_SIZE - 1
-#     VALUE_MASK = (2**(64 - HASH_SIZE) - 1) << HASH_SIZE
-# 
-#     def __init__(self, debug=False):
-#         self.__ALLOCATED = list()
-#         self.__size = dict()
-#         self.__err_alloc = 0
-#         self.__err_free = 0
-#         self.__nb_allocated = 0
-#         self.__nb_allocated_tot = 0
-#         self.__nb_alloc = 0
-#         self.__nb_free = 0
-#         self.DEBUG = debug
-#         for i in xrange(Memory.HASH_SIZE):
-#             self.__ALLOCATED.append(list())
-# 
-#     @property
-#     def errors(self):
-#         return self.__err_alloc, self.__err_free
-# 
-#     @property
-#     def allocated(self):
-#         return reduce(lambda a, b: a + len(b), self.__ALLOCATED, 0), self.__nb_allocated_tot
-# 
-#     @property
-#     def nb_calls(self):
-#         return self.__nb_alloc, self.__nb_free
-# 
-#     def alloc(self, addr, size):
-#         self.__nb_alloc += 1
-#         err = False
-#         # Check that each cell is free
-#         for i in xrange(size):
-#             if addr + i == 19095744 and size < 100:
-#                 print addr, size
-#             if self.is_allocated(addr + i):
-#                 if not err:
-#                     self.__err_alloc += 1
-#                     err = True
-#                 if self.DEBUG:
-#                     print "nballoc: {0}".format(self.__nb_alloc)
-#                     print("ALLOC({0}, {1}): cell {2} already allocated".format(addr, size, addr + i))
-#             else:
-#                 self.__ALLOCATED[(addr + i) % Memory.HASH_SIZE].append(addr + i)
-#         self.__nb_allocated_tot += size
-#         self.__size[addr] = size
-#     
-#     def free(self, addr):
-#         if addr == 0:
-#             return
-#         self.__nb_free += 1
-#         block = None
-#         size = None
-#         # Get size
-#         for p, s in self.__size.items():
-#             if addr == p: # >= p and addr < p + s:
-#                 block = p
-#                 size = s
-#                 if False and block == addr:
-#                     self.__size.pop(block)
-#                 self.__size.pop(block)
-#                 break
-#         if block is None:
-#             self.__err_free += 1
-#             if self.DEBUG:
-#                 print("FREE({0}): block not allocated".format(addr))
+        if get:
+            return ALLOC, FREE, consistency, time, self.__parser.time
+

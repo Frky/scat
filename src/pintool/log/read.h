@@ -24,3 +24,11 @@ string read_line(std::ifstream &ifile) {
     }
     return str;
 }
+
+void skip_line(std::ifstream &ifile) {
+    char m = '!';
+    while (ifile && m != '\n') {
+        ifile.read(&m, 1);
+    }
+    return;
+}

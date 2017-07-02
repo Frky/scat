@@ -26,10 +26,13 @@ class ArityAnalysis(Analysis):
         return ar == len(proto) - 1
 
     def get_one_ret(self, proto):
-        return (proto[0] != "void")
+        if (proto[0] != "void"):
+            return 1
+        else:
+            return 0
 
     def check_one_ret(self, fname, ret, proto):
-        return (ret > 0) == (proto[0] != "void")
+        return (ret >= 1) == (proto[0] != "void")
 
     def print_general_info(self):
         if self.data is None:
@@ -43,7 +46,7 @@ class ArityAnalysis(Analysis):
         print("")
         self.print_general_info()
 
-    def accuracy(self, get=False, verbose=True):
+    def accuracy(self, get=False, verbose=True, log=None, empty_time=0.0, no_pin_time=0.0):
         if verbose:
             self.print_general_info()
             print("")
@@ -88,12 +91,13 @@ class ArityAnalysis(Analysis):
             else:
                 more += 1
 
-            if ret and self.get_one_ret(proto):
+            if ret >= self.get_one_ret(proto):
                 ok_ret += 1
-            elif ret:
-                out_more += 1
-            else: 
-                out_less += 1
+            else:
+                if ret:
+                    out_more += 1
+                else: 
+                    out_less += 1
 
         if verbose:
             print("Ignored")
@@ -109,8 +113,70 @@ class ArityAnalysis(Analysis):
             print("| Ratio params:            {0:.2f}%".format(self.ratio(ok_ar, total)))
             print("- Ratio return:            {0:.2f}%".format(self.ratio(ok_ret, total)))
 
+        if log is not None:
+            params = self.log.get_params()
+            with open(log, "a") as f:
+                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
+                        self.pgm,
+                        params["MIN_CALLS"],
+                        params["PARAM_THRESHOLD"],
+                        params["RET_THRESHOLD"],
+                        less, 
+                        more, 
+                        total, 
+                        out_less, 
+                        out_more, 
+                        total,
+                        self.log.time(),
+                        empty_time,
+                        str(no_pin_time).split(":")[-1], 
+                    ))
+
         if get:
-            return (ok_ar, ok_ret, more, less, out_more, out_less, total)
+            return (ok_ar, ok_ret, more, less, out_more, out_less, total, total)
+
+    def result_per_function(self):
+        ari = { 
+                "ok": list(),
+                "fp": list(),
+                "fn": list(),
+                }
+        ret = { 
+                "ok": list(),
+                "fp": list(),
+                "fn": list(),
+                }
+        for function, arity in self.log.get():
+            fn = function.split(":")[-1]
+            int_ar, int_stack_ar, float_ar, float_stack_ar, iret = arity
+            ar = int_ar + int_stack_ar + float_ar + float_stack_ar
+            if fn == '':
+                continue
+            elif self.is_pseudo_function(fn):
+                continue
+            elif fn not in self.protos.keys():
+                continue
+            proto = self.protos[fn]
+            if self.is_variadic(proto):
+                continue
+            real_ar = self.get_one_arity(proto)
+            if real_ar == ar:
+                ari["ok"].append(function)
+            elif real_ar > ar:
+                ari["fn"].append(function)
+            else:
+                ari["fp"].append(function)
+
+            if iret >= self.get_one_ret(proto):
+                ret["ok"].append(function)
+            else:
+                if iret:
+                    ret["fp"].append(function)
+                else: 
+                    ret["fn"].append(function)
+        return ari, ret 
+
+
 
     def mismatch(self):
         self.print_general_info()
@@ -139,8 +205,5 @@ class ArityAnalysis(Analysis):
             if not arity_ok:
                 print("   Arity  : Expected {} got {}".format(len(proto) - 1, ar))
             if not return_ok:
-                if ret:
-                    print("   Return : Expected 0 got 1")
-                else:
-                    print("   Return : Expected 1 got 0")
+                print("   Return : Expected {} got {}".format(self.get_one_ret(proto), str(ret)))
 

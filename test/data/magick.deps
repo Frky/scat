@@ -1,0 +1,10 @@
+(lp0
+S'libMagickCore-7.Q16HDRI.so.2'
+p1
+aS'libMagickWand-7.Q16HDRI.so.0'
+p2
+aS'libpthread.so.0'
+p3
+aS'libc.so.6'
+p4
+a.

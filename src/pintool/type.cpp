@@ -13,20 +13,34 @@
 
 #include "pin.H"
 
+#include "log/read.h"
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
 #include "utils/hollow_stack.h"
 
 #define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
-#define MAX_VALS_TO_COLLECT     100
-#define NB_CALLS_TO_CONCLUDE    10
-#define THRESHOLD               0.75
 
+#define MIN_VALS_DEFAULT        "10"
+#define MAX_VALS_DEFAULT        "100"
+#define ADDR_THRESHOLD_DEFAULT  "0.5"
+
+/* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
+unsigned int MIN_VALS;
+KNOB<string> KnobMinVals(KNOB_MODE_WRITEONCE, "pintool", "min_vals", MIN_VALS_DEFAULT, "Specify a number for MIN_VALS_DEFAULT");
+unsigned int MAX_VALS;
+KNOB<string> KnobMaxVals(KNOB_MODE_WRITEONCE, "pintool", "max_vals", MAX_VALS_DEFAULT, "Specify a number for MAX_VALS_DEFAULT");
+float ADDR_THRESHOLD; 
+KNOB<string> KnobAddrThreshold(KNOB_MODE_WRITEONCE, "pintool", "addr_threshold", ADDR_THRESHOLD_DEFAULT, "Specify a number for ADDR_THRESHOLD");
+
+/* In file to get results from previous analysis */
+ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+/* Out file to store analysis results */
 ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
 
+/* Time of instrumentation */
 struct timeval start, stop; 
 
 /* Call stack */
@@ -116,10 +130,12 @@ string read_part(ifstream& ifile, char* c) {
 }
 
 VOID register_functions_from_arity_log() {
-    ifstream ifile;
     ifile.open(KnobInputFile.Value().c_str());
 
     if (ifile.is_open()) {
+        /* Skip the first two lines (elapsed time + parameter values) */
+        skip_line(ifile);
+        skip_line(ifile);
         while (ifile) {
             char m;
             string img_name = read_part(ifile, &m);
@@ -162,6 +178,7 @@ VOID register_functions_from_arity_log() {
 }
 
 REG param_reg(unsigned int pid) {
+    trace_enter();
     switch (pid) {
     case 0:
         return REG_RAX;
@@ -180,12 +197,13 @@ REG param_reg(unsigned int pid) {
     default:
         return REG_INVALID();
     }
+    trace_leave();
 }
 
 VOID add_val(unsigned int fid, CONTEXT *ctxt, unsigned int pid, UINT64 sp) {
     trace_enter();
 
-    if (param_val[fid][pid]->size() >= MAX_VALS_TO_COLLECT) {
+    if (param_val[fid][pid]->size() >= MAX_VALS) {
         trace_leave();
         return;
     }
@@ -284,6 +302,8 @@ VOID fn_ret(CONTEXT *ctxt) {
 }
 
 bool is_addr(UINT64 candidate) {
+    trace_enter();
+
     bool small = candidate <= 0xFF;
     bool small_negative32 = candidate >= 0xFFFFFFF0 && candidate <= 0xFFFFFFFF;
     if (small || small_negative32) {
@@ -298,6 +318,7 @@ bool is_addr(UINT64 candidate) {
             return true;
     }
 
+    trace_leave();
     return false;
 }
 
@@ -392,16 +413,19 @@ VOID Instruction(INS ins, VOID *v) {
     }
 
 #if 1
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
-            INS_InsertCall(ins,
+    if (INS_IsIndirectBranchOrCall(ins) && !INS_IsFarCall(ins) && !INS_IsFarJump(ins) && !INS_IsFarRet(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins) 
+                /* This condition fixes runtime crash of pin on some programs
+                   (e.g. git) -- but I am not sure it is a correct answer, it 
+                   might have bad effects on the results of inference */
+                    && (INS_Category(ins) != XED_CATEGORY_COND_BR))
+                INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_indirect_call,
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
                     IARG_END);
-        }
     }
 #endif
 
@@ -443,11 +467,14 @@ VOID Fini(INT32 code, VOID *v) {
 
     gettimeofday(&stop, NULL);
 
-    ofile << "Elapsed time ] Commence ; Fini [ : " << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << "s" << endl;
+    ofile << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << endl;
+
+    ofile << "MIN_VALS=" << MIN_VALS << ":MAX_VALS=" << MAX_VALS << ":ADDR_THRESHOLD=" << ADDR_THRESHOLD << endl;
 
     for(unsigned int fid = 1; fid <= fn_nb(); fid++) {
-        if (nb_call[fid] < NB_CALLS_TO_CONCLUDE)
+        if (nb_call[fid] < MIN_VALS) {
             continue;
+        }
 
         ofile << fn_img(fid) << ":" << fn_imgaddr(fid)
                 << ":" << fn_name(fid)
@@ -488,7 +515,7 @@ VOID Fini(INT32 code, VOID *v) {
                 }
 
                 float coef = ((float) param_addr) / ((float) param_val[fid][pid]->size());
-                append_type(coef > THRESHOLD ? "ADDR" : "INT");
+                append_type(coef > ADDR_THRESHOLD ? "ADDR" : "INT");
 
                 ofile << "(" << coef << ")";
             }
@@ -527,6 +554,11 @@ int main(int argc, char * argv[]) {
     PIN_SetSyntaxIntel();
 
     if (PIN_Init(argc, argv)) return 1;
+
+    /* Get parameters of analysis from command line */
+    MIN_VALS = std::atoi(KnobMinVals.Value().c_str());
+    MAX_VALS = std::atoi(KnobMaxVals.Value().c_str());
+    ADDR_THRESHOLD = std::atof(KnobAddrThreshold.Value().c_str());
 
     ofile.open(KnobOutputFile.Value().c_str());
 

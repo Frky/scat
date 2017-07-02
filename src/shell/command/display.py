@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-from src.shell.utils import get_pgm_and_inf, get_pgm_list
+from src.shell.utils import *
 from .i_command import ICommand
 
 class DisplayCmd(ICommand):
@@ -32,8 +32,4 @@ class DisplayCmd(ICommand):
         pintool.get_analysis(pgm).display()
 
     def complete(self, text, line, begidx, endidx):
-        pgm_inf  = get_pgm_list(self.__logdir)
-        for p, inf in pgm_inf.items():
-            if line.find(p) >= 0:
-                return [i for i in inf if i.startswith(text)]
-        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
+        return complete_pgm_pintool(text, line, self.__logdir)

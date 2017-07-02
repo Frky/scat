@@ -1,9 +1,9 @@
 #-*- coding: utf-8 -*-
 
-from confiture import Confiture, ConfigFileError
+from confiture import Confiture
 
 from src.shell.data.data import Data
-from src.shell.utils import get_pgm_and_inf, get_pgm_list
+from src.shell.utils import *
 from .i_command import ICommand
 
 class AccuracyCmd(ICommand):
@@ -29,7 +29,7 @@ class AccuracyCmd(ICommand):
         except ValueError as e:
             raise e
         except KeyError:
-            self.stderr("Pintool \"{}\" not found".format(s.split(" ")[1]))
+            self.stderr("Pintool \"{}\" not found".format(s.split()[1]))
             return
         except TypeError:
             self.stderr('Wrong argument(s) detected')
@@ -48,8 +48,4 @@ class AccuracyCmd(ICommand):
         pintool.get_analysis(pgm, data).accuracy()
 
     def complete(self, text, line, begidx, endidx):
-        pgm_inf  = get_pgm_list(self.__logdir)
-        for p, inf in pgm_inf.items():
-            if line.find(p) >= 0:
-                return [i for i in inf if i.startswith(text)]
-        return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]
+        return complete_pgm_pintool(text, line, self.__logdir)

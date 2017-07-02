@@ -1,0 +1,91 @@
+bash_1:
+    args: "test/input/bash/example_1.sh"
+    bin: "test/bin/bash/bash_1"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_2:
+    args: "test/input/bash/example_2.sh"
+    bin: "test/bin/bash/bash_2"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_3:
+    args: "test/input/bash/example_3.sh"
+    bin: "test/bin/bash/bash_3"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_4:
+    args: "test/input/bash/example_4.sh Hans"
+    bin: "test/bin/bash/bash_4"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_5:
+    args: "test/input/bash/example_5.sh test/input/poc.pdf test/tmp/poc.pdf"
+    bin: "test/bin/bash/bash_5"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+    post: "rm test/tmp/poc.pdf"
+bash_6:
+    args: "test/input/bash/example_6.sh mais ou est donc or ni car"
+    bin: "test/bin/bash/bash_6"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_7:
+    args: "test/input/bash/example_7.sh mais ou est donc or ni car"
+    bin: "test/bin/bash/bash_7"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_8:
+    args: "test/input/bash/example_8.sh mais ou est donc or ni car"
+    bin: "test/bin/bash/bash_8"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_9:
+    args: "test/input/bash/example_9.sh scat cat aristocats"
+    bin: "test/bin/bash/bash_9"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_10:
+    args: "test/input/bash/example_10.sh"
+    bin: "test/bin/bash/bash_10"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_11:
+    args: "test/input/bash/example_11.sh test/input/bash/example_11.sh"
+    bin: "test/bin/bash/bash_11"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_12:
+    args: "test/input/bash/example_12.sh test/input/bash/example_12.sh"
+    bin: "test/bin/bash/bash_12"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_13:
+    args: "test/input/bash/example_13.sh" # test/input/bash/example_13.sh"
+    bin: "test/bin/bash/bash_13"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_14:
+    args: "test/input/bash/example_14.sh test/input/bash/*.sh"
+    bin: "test/bin/bash/bash_14"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_15:
+    args: "test/input/bash/example_15.sh test/input/src/"
+    bin: "test/bin/bash/bash_15"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_16:
+    args: "test/input/bash/example_16.sh test/input/src/"
+    bin: "test/bin/bash/bash_16"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+bash_17:
+    args: "test/input/bash/example_17.sh test/input/bash/*.sh"
+    bin: "test/bin/bash/bash_17"
+    data: "test/data/bash.data"
+    deps: "test/data/bash.deps"
+# bash_18:
+#     args: "test/input/bash/example_18.sh test/input/bash/*.sh"
+#     bin: "test/bin/bash/bash_18"
+#     data: "test/data/bash.data"
+#     deps: "test/data/bash.deps"

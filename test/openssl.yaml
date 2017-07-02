@@ -1,0 +1,6 @@
+openssl:
+    args: 'enc -e -aes-256-cbc -in test/input/poc.pdf -out test/tmp/scat.cipher -k "password"'
+    bin: "test/bin/openssl"
+    data: "test/data/openssl.data"
+    deps: "test/data/openssl.deps"
+    post: "rm test/tmp/scat.cipher"

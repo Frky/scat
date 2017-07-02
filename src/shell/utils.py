@@ -52,6 +52,9 @@ def complete_bin(text, line, begidx, endidx):
         Autocompletion for executable files
 
     """
+    if line[begidx-1] == '/':
+        return complete_path(text, line, begidx, endidx)
+
     paths = list()
     for path in glob.glob("/usr/bin/" + text + "*"):
         if os.path.isdir(path):
@@ -91,7 +94,7 @@ def get_pgm_list(logdir, inf_code=None):
 
 
 def get_pgm_and_inf(s, pintools, logdir):
-    args = s.split(" ")
+    args = s.split()
     if len(args) == 0 or args[0] == '':
         for p, inf in get_pgm_list(logdir).items():
             print(p)
@@ -125,3 +128,12 @@ def list_split(l, e):
         res.append(curr)
     return res
 
+
+def complete_pgm_pintool(text, line, logdir, complete_pintool):
+    pgm_inf = get_pgm_list(logdir)
+    for p, inf in pgm_inf.items():
+        if line.find(p) >= 0:
+            if complete_pintool:
+                return [i for i in inf if i.startswith(text)]
+            return
+    return [pgm for pgm, inf in pgm_inf.items() if pgm.startswith(text)]

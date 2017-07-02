@@ -1,0 +1,8 @@
+coreutils:
+    config: "test/config/coreutils.yaml"
+8cc:
+    config: "test/config/8cc.yaml"
+common:
+    config: "test/config/common.yaml"
+ls:
+    config: "test/config/ls.yaml"

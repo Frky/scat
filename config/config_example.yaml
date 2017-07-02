@@ -1,0 +1,50 @@
+pin:
+    path:   /usr/bin/pin
+    bin: /usr/bin/pin/pin
+    function-mode: name
+    compile-flags: -std=c++11 -fabi-version=2 -D_GLIBCXX_USE_CXX11_ABI=0
+#    cli-options: "-ifeellucky"
+
+pintool:
+    arity:
+        src: ./src/pintool/arity.cpp
+        obj: ./bin/obj-intel64/arity.so
+    type: 
+        src: ./src/pintool/type.cpp
+        obj: ./bin/obj-intel64/type.so
+        prev_step: arity
+    couple: 
+        src: ./src/pintool/couple.cpp
+        obj: ./bin/obj-intel64/couple.so
+        prev_step: type
+    memblock: 
+        src: ./src/pintool/memblock.cpp
+        obj: ./bin/obj-intel64/memblock.so
+        prev_step: type
+    memalloc: 
+        src: ./src/pintool/memalloc.cpp
+        obj: ./bin/obj-intel64/memalloc.so
+        prev_step: couple_res
+    checkalloc: 
+        src: ./src/pintool/checkalloc.cpp
+        obj: ./bin/obj-intel64/checkalloc.so
+        prev_step: type
+
+res:
+    path: ./res
+
+log:
+    path: ./log
+
+clang:
+    lib-path: /usr/lib/x86_64-linux-gnu/libclang-3.8.so
+    data-path: ./data/
+
+test:
+    desc: test/test.yaml
+    proto:
+        root: ./test/proto
+        src: ./test/proto/src
+        bin: ./test/proto/bin
+        log: ./test/proto/log
+

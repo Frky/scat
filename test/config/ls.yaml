@@ -1,0 +1,4995 @@
+ls-1:
+    args: "-v -1 -i    -v"
+    bin : "test/bin/ls/ls-1"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-2:
+    args: "-s -p -g    -t"
+    bin : "test/bin/ls/ls-2"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-3:
+    args: "-U -F    -A   "
+    bin : "test/bin/ls/ls-3"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-4:
+    args: "-U -N -A -a -l"
+    bin : "test/bin/ls/ls-4"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-5:
+    args: "-S    -I -D   "
+    bin : "test/bin/ls/ls-5"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-6:
+    args: "-k -Q -i    -S"
+    bin : "test/bin/ls/ls-6"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-7:
+    args: "-h -D -D    -Q"
+    bin : "test/bin/ls/ls-7"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-8:
+    args: "-f -g -R -b -n"
+    bin : "test/bin/ls/ls-8"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-9:
+    args: "-p -L -a -L -w 40"
+    bin : "test/bin/ls/ls-9"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-10:
+    args: "-v -v    -b   "
+    bin : "test/bin/ls/ls-10"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-11:
+    args: "-D -x    -x -Z"
+    bin : "test/bin/ls/ls-11"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-12:
+    args: "-R -n -S    -C"
+    bin : "test/bin/ls/ls-12"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-13:
+    args: "-f -D -L    -g"
+    bin : "test/bin/ls/ls-13"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-14:
+    args: "-l -k -c -A -g"
+    bin : "test/bin/ls/ls-14"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-15:
+    args: "-d -k       -F"
+    bin : "test/bin/ls/ls-15"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-16:
+    args: "-m -r    -a -L"
+    bin : "test/bin/ls/ls-16"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-17:
+    args: "-c -v -1 -L   "
+    bin : "test/bin/ls/ls-17"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-18:
+    args: "-D -k -1 -h -1"
+    bin : "test/bin/ls/ls-18"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-19:
+    args: "      -H -1 -Q"
+    bin : "test/bin/ls/ls-19"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-20:
+    args: "-C    -X -Q -m"
+    bin : "test/bin/ls/ls-20"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-21:
+    args: "-1       -q -r"
+    bin : "test/bin/ls/ls-21"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-22:
+    args: "-I -Q -k -1 -Z"
+    bin : "test/bin/ls/ls-22"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-23:
+    args: "-v -o -S -T 7 -g"
+    bin : "test/bin/ls/ls-23"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-24:
+    args: "-U -x -R -o -n"
+    bin : "test/bin/ls/ls-24"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-25:
+    args: "   -N    -f -D"
+    bin : "test/bin/ls/ls-25"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-26:
+    args: "-s -D -w 40 -s -w 40"
+    bin : "test/bin/ls/ls-26"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-27:
+    args: "-m -T 7    -s -Z"
+    bin : "test/bin/ls/ls-27"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-28:
+    args: "-c -l -w 40 -h -n"
+    bin : "test/bin/ls/ls-28"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-29:
+    args: "   -u -L -R -T 7"
+    bin : "test/bin/ls/ls-29"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-30:
+    args: "-N -T 7 -Z -i -S"
+    bin : "test/bin/ls/ls-30"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-31:
+    args: "   -i -p -p   "
+    bin : "test/bin/ls/ls-31"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-32:
+    args: "-Q -r -Z -U   "
+    bin : "test/bin/ls/ls-32"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-33:
+    args: "-r    -b    -n"
+    bin : "test/bin/ls/ls-33"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-34:
+    args: "-Z -v -t -N   "
+    bin : "test/bin/ls/ls-34"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-35:
+    args: "-v -1 -k -A -f"
+    bin : "test/bin/ls/ls-35"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-36:
+    args: "-G -1 -B -1 -1"
+    bin : "test/bin/ls/ls-36"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-37:
+    args: "   -r -G -L -t"
+    bin : "test/bin/ls/ls-37"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-38:
+    args: "-p -x -r -s -a"
+    bin : "test/bin/ls/ls-38"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-39:
+    args: "-q -x -X -a -v"
+    bin : "test/bin/ls/ls-39"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-40:
+    args: "-T 7 -d -f -B -u"
+    bin : "test/bin/ls/ls-40"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-41:
+    args: "-T 7 -B -l -s -D"
+    bin : "test/bin/ls/ls-41"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-42:
+    args: "-h -d -A -N -l"
+    bin : "test/bin/ls/ls-42"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-43:
+    args: "-m    -Q -p -p"
+    bin : "test/bin/ls/ls-43"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-44:
+    args: "      -d -c -d"
+    bin : "test/bin/ls/ls-44"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-45:
+    args: "   -n -c -k -i"
+    bin : "test/bin/ls/ls-45"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-46:
+    args: "-R -F -R    -t"
+    bin : "test/bin/ls/ls-46"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-47:
+    args: "-I    -L -N -Z"
+    bin : "test/bin/ls/ls-47"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-48:
+    args: "-d    -t -d -o"
+    bin : "test/bin/ls/ls-48"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-49:
+    args: "-h -x -B -H -b"
+    bin : "test/bin/ls/ls-49"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-50:
+    args: "-R -x -a -r -i"
+    bin : "test/bin/ls/ls-50"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-51:
+    args: "   -G -D -x -S"
+    bin : "test/bin/ls/ls-51"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-52:
+    args: "-X -B -q -Z -A"
+    bin : "test/bin/ls/ls-52"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-53:
+    args: "-c    -t -n -r"
+    bin : "test/bin/ls/ls-53"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-54:
+    args: "-F -B -X -i -w 40"
+    bin : "test/bin/ls/ls-54"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-55:
+    args: "         -U -T 7"
+    bin : "test/bin/ls/ls-55"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-56:
+    args: "-Z -x -a -x -v"
+    bin : "test/bin/ls/ls-56"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-57:
+    args: "-Z       -U -U"
+    bin : "test/bin/ls/ls-57"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-58:
+    args: "-b -u -v      "
+    bin : "test/bin/ls/ls-58"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-59:
+    args: "   -u -p -h -D"
+    bin : "test/bin/ls/ls-59"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-60:
+    args: "-b -n -p -S -A"
+    bin : "test/bin/ls/ls-60"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-61:
+    args: "-l    -d -1 -d"
+    bin : "test/bin/ls/ls-61"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-62:
+    args: "   -l    -g -h"
+    bin : "test/bin/ls/ls-62"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-63:
+    args: "   -l -l    -s"
+    bin : "test/bin/ls/ls-63"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-64:
+    args: "-C -A -v      "
+    bin : "test/bin/ls/ls-64"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-65:
+    args: "-N -N -u -i -x"
+    bin : "test/bin/ls/ls-65"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-66:
+    args: "-o -Z       -A"
+    bin : "test/bin/ls/ls-66"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-67:
+    args: "-H -r       -T 7"
+    bin : "test/bin/ls/ls-67"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-68:
+    args: "-S -u -T 7    -n"
+    bin : "test/bin/ls/ls-68"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-69:
+    args: "-h    -n -r -C"
+    bin : "test/bin/ls/ls-69"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-70:
+    args: "-U -i    -f   "
+    bin : "test/bin/ls/ls-70"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-71:
+    args: "-d       -p -F"
+    bin : "test/bin/ls/ls-71"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-72:
+    args: "-Q          -x"
+    bin : "test/bin/ls/ls-72"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-73:
+    args: "-f -H -H -U   "
+    bin : "test/bin/ls/ls-73"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-74:
+    args: "-L       -H -F"
+    bin : "test/bin/ls/ls-74"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-75:
+    args: "-C -L -n -q -I"
+    bin : "test/bin/ls/ls-75"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-76:
+    args: "-Q -T 7 -g -T 7 -N"
+    bin : "test/bin/ls/ls-76"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-77:
+    args: "-C    -d -L -a"
+    bin : "test/bin/ls/ls-77"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-78:
+    args: "-C -X -Q -Q   "
+    bin : "test/bin/ls/ls-78"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-79:
+    args: "-S    -S -I -v"
+    bin : "test/bin/ls/ls-79"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-80:
+    args: "-T 7    -b -N   "
+    bin : "test/bin/ls/ls-80"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-81:
+    args: "-x -H -1 -h -m"
+    bin : "test/bin/ls/ls-81"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-82:
+    args: "-k -U       -c"
+    bin : "test/bin/ls/ls-82"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-83:
+    args: "-X -D       -t"
+    bin : "test/bin/ls/ls-83"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-84:
+    args: "-c -T 7 -X -L   "
+    bin : "test/bin/ls/ls-84"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-85:
+    args: "-k -C -m -c -I"
+    bin : "test/bin/ls/ls-85"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-86:
+    args: "-H -N    -Z -i"
+    bin : "test/bin/ls/ls-86"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-87:
+    args: "   -v -u -i -I"
+    bin : "test/bin/ls/ls-87"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-88:
+    args: "-G    -X -q -q"
+    bin : "test/bin/ls/ls-88"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-89:
+    args: "   -G -A -S -R"
+    bin : "test/bin/ls/ls-89"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-90:
+    args: "-D -m -B -k -Q"
+    bin : "test/bin/ls/ls-90"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-91:
+    args: "-p -1 -w 40 -f -n"
+    bin : "test/bin/ls/ls-91"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-92:
+    args: "-S -h -S -f -F"
+    bin : "test/bin/ls/ls-92"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-93:
+    args: "-q    -B -q -B"
+    bin : "test/bin/ls/ls-93"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-94:
+    args: "   -B -t -B -u"
+    bin : "test/bin/ls/ls-94"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-95:
+    args: "   -s -U -u -a"
+    bin : "test/bin/ls/ls-95"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-96:
+    args: "-S       -h -d"
+    bin : "test/bin/ls/ls-96"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-97:
+    args: "-X -S -L -s   "
+    bin : "test/bin/ls/ls-97"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-98:
+    args: "-g -g -k -n   "
+    bin : "test/bin/ls/ls-98"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-99:
+    args: "-I -I -t -h -B"
+    bin : "test/bin/ls/ls-99"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-100:
+    args: "   -R -F    -x"
+    bin : "test/bin/ls/ls-100"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-101:
+    args: "-c -h -a -C -p"
+    bin : "test/bin/ls/ls-101"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-102:
+    args: "-T 7    -X -v -B"
+    bin : "test/bin/ls/ls-102"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-103:
+    args: "-u -i -a -f -Z"
+    bin : "test/bin/ls/ls-103"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-104:
+    args: "-w 40 -x -g    -x"
+    bin : "test/bin/ls/ls-104"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-105:
+    args: "   -N    -v -1"
+    bin : "test/bin/ls/ls-105"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-106:
+    args: "-l -G -n -q -u"
+    bin : "test/bin/ls/ls-106"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-107:
+    args: "-l    -i -a -m"
+    bin : "test/bin/ls/ls-107"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-108:
+    args: "-Z    -D -G -u"
+    bin : "test/bin/ls/ls-108"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-109:
+    args: "   -l -i      "
+    bin : "test/bin/ls/ls-109"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-110:
+    args: "-t -i       -A"
+    bin : "test/bin/ls/ls-110"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-111:
+    args: "-A -p -C      "
+    bin : "test/bin/ls/ls-111"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-112:
+    args: "-C -l -g -k -A"
+    bin : "test/bin/ls/ls-112"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-113:
+    args: "-X -G -T 7 -Z -C"
+    bin : "test/bin/ls/ls-113"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-114:
+    args: "-w 40 -u -D -r -B"
+    bin : "test/bin/ls/ls-114"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-115:
+    args: "   -R -t -A   "
+    bin : "test/bin/ls/ls-115"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-116:
+    args: "   -R -G -n -Q"
+    bin : "test/bin/ls/ls-116"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-117:
+    args: "-H    -m -h -r"
+    bin : "test/bin/ls/ls-117"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-118:
+    args: "   -p -T 7 -G   "
+    bin : "test/bin/ls/ls-118"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-119:
+    args: "-c -k -s    -c"
+    bin : "test/bin/ls/ls-119"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-120:
+    args: "-Q    -w 40 -G -Z"
+    bin : "test/bin/ls/ls-120"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-121:
+    args: "-x -I -B -w 40   "
+    bin : "test/bin/ls/ls-121"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-122:
+    args: "-U -i -B -k -q"
+    bin : "test/bin/ls/ls-122"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-123:
+    args: "-p -D    -u -q"
+    bin : "test/bin/ls/ls-123"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-124:
+    args: "-k -1 -b -d -t"
+    bin : "test/bin/ls/ls-124"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-125:
+    args: "   -n -r -I -p"
+    bin : "test/bin/ls/ls-125"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-126:
+    args: "   -D -Z -t -S"
+    bin : "test/bin/ls/ls-126"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-127:
+    args: "-Z -d       -k"
+    bin : "test/bin/ls/ls-127"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-128:
+    args: "-R -t -w 40    -Q"
+    bin : "test/bin/ls/ls-128"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-129:
+    args: "-k -x -k -Z -w 40"
+    bin : "test/bin/ls/ls-129"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-130:
+    args: "-1 -1 -H -C -q"
+    bin : "test/bin/ls/ls-130"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-131:
+    args: "-C    -i -H   "
+    bin : "test/bin/ls/ls-131"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-132:
+    args: "-I -o -r -d -Q"
+    bin : "test/bin/ls/ls-132"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-133:
+    args: "-s -Z -A -U -Z"
+    bin : "test/bin/ls/ls-133"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-134:
+    args: "-S -I -H      "
+    bin : "test/bin/ls/ls-134"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-135:
+    args: "-G -c -i -U -r"
+    bin : "test/bin/ls/ls-135"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-136:
+    args: "-p -L -A -q -R"
+    bin : "test/bin/ls/ls-136"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-137:
+    args: "-w 40 -U -o -h -F"
+    bin : "test/bin/ls/ls-137"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-138:
+    args: "-v -U       -G"
+    bin : "test/bin/ls/ls-138"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-139:
+    args: "      -N -c -x"
+    bin : "test/bin/ls/ls-139"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-140:
+    args: "   -C -g    -H"
+    bin : "test/bin/ls/ls-140"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-141:
+    args: "-n -R -1 -g -b"
+    bin : "test/bin/ls/ls-141"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-142:
+    args: "-f -F -1 -I -v"
+    bin : "test/bin/ls/ls-142"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-143:
+    args: "-F -U -q -G -T 7"
+    bin : "test/bin/ls/ls-143"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-144:
+    args: "      -i -T 7 -H"
+    bin : "test/bin/ls/ls-144"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-145:
+    args: "-t -c -C -F -h"
+    bin : "test/bin/ls/ls-145"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-146:
+    args: "   -t -o    -H"
+    bin : "test/bin/ls/ls-146"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-147:
+    args: "-R -r    -H -G"
+    bin : "test/bin/ls/ls-147"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-148:
+    args: "-H -D -A    -s"
+    bin : "test/bin/ls/ls-148"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-149:
+    args: "-U    -Z -a -f"
+    bin : "test/bin/ls/ls-149"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-150:
+    args: "-R -A -x -t -D"
+    bin : "test/bin/ls/ls-150"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-151:
+    args: "-d -A -l -d -u"
+    bin : "test/bin/ls/ls-151"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-152:
+    args: "-l -L    -d -s"
+    bin : "test/bin/ls/ls-152"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-153:
+    args: "-B -R -o -i -I"
+    bin : "test/bin/ls/ls-153"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-154:
+    args: "-I -N -L -p -F"
+    bin : "test/bin/ls/ls-154"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-155:
+    args: "-s    -s -S -U"
+    bin : "test/bin/ls/ls-155"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-156:
+    args: "-q -A    -F -q"
+    bin : "test/bin/ls/ls-156"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-157:
+    args: "-q -C    -m -D"
+    bin : "test/bin/ls/ls-157"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-158:
+    args: "   -D -d -L -l"
+    bin : "test/bin/ls/ls-158"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-159:
+    args: "   -d -h -p -U"
+    bin : "test/bin/ls/ls-159"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-160:
+    args: "-f -T 7 -F -t -c"
+    bin : "test/bin/ls/ls-160"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-161:
+    args: "-a -r -X -Q -X"
+    bin : "test/bin/ls/ls-161"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-162:
+    args: "-m -U -p -c -C"
+    bin : "test/bin/ls/ls-162"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-163:
+    args: "   -X -R -A -f"
+    bin : "test/bin/ls/ls-163"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-164:
+    args: "-v    -g -b -L"
+    bin : "test/bin/ls/ls-164"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-165:
+    args: "-H -I -H -l -D"
+    bin : "test/bin/ls/ls-165"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-166:
+    args: "   -f    -x -D"
+    bin : "test/bin/ls/ls-166"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-167:
+    args: "-t -L -v -D -B"
+    bin : "test/bin/ls/ls-167"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-168:
+    args: "-C -d       -D"
+    bin : "test/bin/ls/ls-168"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-169:
+    args: "-d -B -q -F -a"
+    bin : "test/bin/ls/ls-169"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-170:
+    args: "-f -m -a -g -1"
+    bin : "test/bin/ls/ls-170"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-171:
+    args: "   -x    -t -R"
+    bin : "test/bin/ls/ls-171"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-172:
+    args: "   -N -H -X -o"
+    bin : "test/bin/ls/ls-172"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-173:
+    args: "-s -G    -C -s"
+    bin : "test/bin/ls/ls-173"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-174:
+    args: "-b       -v -B"
+    bin : "test/bin/ls/ls-174"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-175:
+    args: "-C -r -m -T 7 -B"
+    bin : "test/bin/ls/ls-175"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-176:
+    args: "-A -l -U -I -r"
+    bin : "test/bin/ls/ls-176"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-177:
+    args: "-r -x -Q -D   "
+    bin : "test/bin/ls/ls-177"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-178:
+    args: "-D -g -L -v -B"
+    bin : "test/bin/ls/ls-178"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-179:
+    args: "-b -t -R -B -A"
+    bin : "test/bin/ls/ls-179"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-180:
+    args: "-s -U -m -U -H"
+    bin : "test/bin/ls/ls-180"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-181:
+    args: "   -A -d -G -w 40"
+    bin : "test/bin/ls/ls-181"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-182:
+    args: "-p -o -v -q -u"
+    bin : "test/bin/ls/ls-182"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-183:
+    args: "-l -f -B -d   "
+    bin : "test/bin/ls/ls-183"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-184:
+    args: "-f -b -R -Q -w 40"
+    bin : "test/bin/ls/ls-184"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-185:
+    args: "-f       -l -l"
+    bin : "test/bin/ls/ls-185"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-186:
+    args: "-1    -f -r -l"
+    bin : "test/bin/ls/ls-186"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-187:
+    args: "   -b -H    -t"
+    bin : "test/bin/ls/ls-187"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-188:
+    args: "-f -L -l -S -d"
+    bin : "test/bin/ls/ls-188"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-189:
+    args: "-N -Q -m -c   "
+    bin : "test/bin/ls/ls-189"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-190:
+    args: "-o -x    -B   "
+    bin : "test/bin/ls/ls-190"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-191:
+    args: "-l -T 7    -f -r"
+    bin : "test/bin/ls/ls-191"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-192:
+    args: "-u -I -Q -D -I"
+    bin : "test/bin/ls/ls-192"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-193:
+    args: "-R -f -t -i -l"
+    bin : "test/bin/ls/ls-193"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-194:
+    args: "-h -A    -m -Z"
+    bin : "test/bin/ls/ls-194"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-195:
+    args: "-k -t    -o -f"
+    bin : "test/bin/ls/ls-195"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-196:
+    args: "-p    -b -v   "
+    bin : "test/bin/ls/ls-196"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-197:
+    args: "-l -D    -F -G"
+    bin : "test/bin/ls/ls-197"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-198:
+    args: "-N -U -l -h   "
+    bin : "test/bin/ls/ls-198"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-199:
+    args: "-o    -D -k -B"
+    bin : "test/bin/ls/ls-199"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-200:
+    args: "   -a -o -c   "
+    bin : "test/bin/ls/ls-200"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-201:
+    args: "      -n -R   "
+    bin : "test/bin/ls/ls-201"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-202:
+    args: "-m -u -r    -c"
+    bin : "test/bin/ls/ls-202"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-203:
+    args: "-U -H    -b -B"
+    bin : "test/bin/ls/ls-203"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-204:
+    args: "-a -h -x      "
+    bin : "test/bin/ls/ls-204"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-205:
+    args: "-T 7 -n -s -B -D"
+    bin : "test/bin/ls/ls-205"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-206:
+    args: "-L -Z -o -l -A"
+    bin : "test/bin/ls/ls-206"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-207:
+    args: "-c    -X -o   "
+    bin : "test/bin/ls/ls-207"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-208:
+    args: "-R       -m -L"
+    bin : "test/bin/ls/ls-208"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-209:
+    args: "-l -n -T 7 -q   "
+    bin : "test/bin/ls/ls-209"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-210:
+    args: "-h    -b -Z -m"
+    bin : "test/bin/ls/ls-210"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-211:
+    args: "-C -F -b    -w 40"
+    bin : "test/bin/ls/ls-211"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-212:
+    args: "   -Z -S -1   "
+    bin : "test/bin/ls/ls-212"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-213:
+    args: "-H -s -I    -F"
+    bin : "test/bin/ls/ls-213"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-214:
+    args: "-u       -Q -G"
+    bin : "test/bin/ls/ls-214"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-215:
+    args: "-Z -t -d    -l"
+    bin : "test/bin/ls/ls-215"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-216:
+    args: "-f    -D -I -C"
+    bin : "test/bin/ls/ls-216"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-217:
+    args: "-t -I       -o"
+    bin : "test/bin/ls/ls-217"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-218:
+    args: "-v -T 7 -R -s -X"
+    bin : "test/bin/ls/ls-218"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-219:
+    args: "-I -i       -N"
+    bin : "test/bin/ls/ls-219"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-220:
+    args: "      -q -s -r"
+    bin : "test/bin/ls/ls-220"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-221:
+    args: "-m -f    -v -A"
+    bin : "test/bin/ls/ls-221"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-222:
+    args: "-r -H -h -U -N"
+    bin : "test/bin/ls/ls-222"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-223:
+    args: "-1 -Q -r -F -X"
+    bin : "test/bin/ls/ls-223"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-224:
+    args: "-m    -B -x   "
+    bin : "test/bin/ls/ls-224"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-225:
+    args: "-F -A -H -C -S"
+    bin : "test/bin/ls/ls-225"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-226:
+    args: "-F -U -R    -N"
+    bin : "test/bin/ls/ls-226"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-227:
+    args: "-v -c -p -f -g"
+    bin : "test/bin/ls/ls-227"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-228:
+    args: "-I       -X   "
+    bin : "test/bin/ls/ls-228"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-229:
+    args: "-i    -h    -N"
+    bin : "test/bin/ls/ls-229"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-230:
+    args: "-q -a    -T 7 -x"
+    bin : "test/bin/ls/ls-230"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-231:
+    args: "-x -q    -g -l"
+    bin : "test/bin/ls/ls-231"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-232:
+    args: "-R -s -G -b -I"
+    bin : "test/bin/ls/ls-232"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-233:
+    args: "      -r -q   "
+    bin : "test/bin/ls/ls-233"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-234:
+    args: "            -q"
+    bin : "test/bin/ls/ls-234"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-235:
+    args: "-k -u -q -o -X"
+    bin : "test/bin/ls/ls-235"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-236:
+    args: "   -U -t -s -I"
+    bin : "test/bin/ls/ls-236"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-237:
+    args: "-t    -G -C   "
+    bin : "test/bin/ls/ls-237"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-238:
+    args: "-p -a       -k"
+    bin : "test/bin/ls/ls-238"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-239:
+    args: "-N -l -Z -B -Q"
+    bin : "test/bin/ls/ls-239"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-240:
+    args: "   -G -1 -r -d"
+    bin : "test/bin/ls/ls-240"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-241:
+    args: "-H -U -U      "
+    bin : "test/bin/ls/ls-241"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-242:
+    args: "-A -C    -S -S"
+    bin : "test/bin/ls/ls-242"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-243:
+    args: "   -T 7 -r -1 -d"
+    bin : "test/bin/ls/ls-243"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-244:
+    args: "-c          -B"
+    bin : "test/bin/ls/ls-244"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-245:
+    args: "-k -T 7    -c -l"
+    bin : "test/bin/ls/ls-245"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-246:
+    args: "   -A -k -v   "
+    bin : "test/bin/ls/ls-246"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-247:
+    args: "-p -C -o -t -r"
+    bin : "test/bin/ls/ls-247"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-248:
+    args: "-U -N -X -T 7   "
+    bin : "test/bin/ls/ls-248"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-249:
+    args: "-L -d -N -F -X"
+    bin : "test/bin/ls/ls-249"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-250:
+    args: "-c -l -T 7 -U -Z"
+    bin : "test/bin/ls/ls-250"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-251:
+    args: "-1    -u -v -L"
+    bin : "test/bin/ls/ls-251"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-252:
+    args: "   -1 -g -a -I"
+    bin : "test/bin/ls/ls-252"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-253:
+    args: "-A -v -u -F -T 7"
+    bin : "test/bin/ls/ls-253"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-254:
+    args: "-L -R -C      "
+    bin : "test/bin/ls/ls-254"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-255:
+    args: "   -d -1 -v -F"
+    bin : "test/bin/ls/ls-255"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-256:
+    args: "-s -h         "
+    bin : "test/bin/ls/ls-256"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-257:
+    args: "   -N -i -C -g"
+    bin : "test/bin/ls/ls-257"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-258:
+    args: "      -o -b   "
+    bin : "test/bin/ls/ls-258"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-259:
+    args: "         -L -Z"
+    bin : "test/bin/ls/ls-259"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-260:
+    args: "-c    -u -u -c"
+    bin : "test/bin/ls/ls-260"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-261:
+    args: "-p    -C -U -v"
+    bin : "test/bin/ls/ls-261"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-262:
+    args: "-Z -R    -u -r"
+    bin : "test/bin/ls/ls-262"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-263:
+    args: "-w 40    -p    -F"
+    bin : "test/bin/ls/ls-263"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-264:
+    args: "-f -T 7 -x -A   "
+    bin : "test/bin/ls/ls-264"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-265:
+    args: "-m -F -i -I -b"
+    bin : "test/bin/ls/ls-265"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-266:
+    args: "-1 -I -l -q -H"
+    bin : "test/bin/ls/ls-266"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-267:
+    args: "   -a -I -Z -g"
+    bin : "test/bin/ls/ls-267"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-268:
+    args: "      -Z    -G"
+    bin : "test/bin/ls/ls-268"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-269:
+    args: "   -c -D    -x"
+    bin : "test/bin/ls/ls-269"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-270:
+    args: "-D -X -Q -a -x"
+    bin : "test/bin/ls/ls-270"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-271:
+    args: "-r -S -T 7 -g -H"
+    bin : "test/bin/ls/ls-271"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-272:
+    args: "-f -A -q -Z   "
+    bin : "test/bin/ls/ls-272"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-273:
+    args: "-n -l       -x"
+    bin : "test/bin/ls/ls-273"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-274:
+    args: "-v -t -r -u -1"
+    bin : "test/bin/ls/ls-274"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-275:
+    args: "-T 7    -B -U -b"
+    bin : "test/bin/ls/ls-275"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-276:
+    args: "-s -o -N -n -w 40"
+    bin : "test/bin/ls/ls-276"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-277:
+    args: "-i    -A -g -u"
+    bin : "test/bin/ls/ls-277"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-278:
+    args: "-F          -I"
+    bin : "test/bin/ls/ls-278"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-279:
+    args: "-Q -A -h -p -F"
+    bin : "test/bin/ls/ls-279"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-280:
+    args: "-s -1 -1    -Q"
+    bin : "test/bin/ls/ls-280"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-281:
+    args: "   -A -a    -b"
+    bin : "test/bin/ls/ls-281"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-282:
+    args: "-t -m -H -f -f"
+    bin : "test/bin/ls/ls-282"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-283:
+    args: "   -a -f    -I"
+    bin : "test/bin/ls/ls-283"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-284:
+    args: "-p -t -a -b -N"
+    bin : "test/bin/ls/ls-284"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-285:
+    args: "-t -L -H -h -s"
+    bin : "test/bin/ls/ls-285"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-286:
+    args: "-k -c -h -H   "
+    bin : "test/bin/ls/ls-286"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-287:
+    args: "-h -Q    -Q -G"
+    bin : "test/bin/ls/ls-287"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-288:
+    args: "-L -x -v      "
+    bin : "test/bin/ls/ls-288"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-289:
+    args: "-G -H -v -w 40 -u"
+    bin : "test/bin/ls/ls-289"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-290:
+    args: "      -s    -t"
+    bin : "test/bin/ls/ls-290"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-291:
+    args: "   -1 -H -H   "
+    bin : "test/bin/ls/ls-291"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-292:
+    args: "-a -S -U -L -T 7"
+    bin : "test/bin/ls/ls-292"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-293:
+    args: "   -s       -H"
+    bin : "test/bin/ls/ls-293"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-294:
+    args: "-m -n -Z -h -c"
+    bin : "test/bin/ls/ls-294"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-295:
+    args: "-R -Z -L -N -v"
+    bin : "test/bin/ls/ls-295"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-296:
+    args: "-q    -h -c -q"
+    bin : "test/bin/ls/ls-296"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-297:
+    args: "-i       -D -N"
+    bin : "test/bin/ls/ls-297"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-298:
+    args: "-h -Z -G -U -Z"
+    bin : "test/bin/ls/ls-298"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-299:
+    args: "-G -x -B -a -c"
+    bin : "test/bin/ls/ls-299"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-300:
+    args: "-a -N    -s -q"
+    bin : "test/bin/ls/ls-300"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-301:
+    args: "-X -X    -R -R"
+    bin : "test/bin/ls/ls-301"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-302:
+    args: "-i -H -T 7 -t   "
+    bin : "test/bin/ls/ls-302"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-303:
+    args: "-B -U    -S -C"
+    bin : "test/bin/ls/ls-303"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-304:
+    args: "-H -Z -X -k -u"
+    bin : "test/bin/ls/ls-304"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-305:
+    args: "   -o -l -I -p"
+    bin : "test/bin/ls/ls-305"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-306:
+    args: "-U    -I -a   "
+    bin : "test/bin/ls/ls-306"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-307:
+    args: "-B -T 7    -w 40 -f"
+    bin : "test/bin/ls/ls-307"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-308:
+    args: "-Z -A -N    -S"
+    bin : "test/bin/ls/ls-308"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-309:
+    args: "-h -w 40 -T 7 -Q   "
+    bin : "test/bin/ls/ls-309"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-310:
+    args: "   -B -I -t -l"
+    bin : "test/bin/ls/ls-310"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-311:
+    args: "-v       -m -w 40"
+    bin : "test/bin/ls/ls-311"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-312:
+    args: "-I    -a      "
+    bin : "test/bin/ls/ls-312"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-313:
+    args: "-d -x -S -g -b"
+    bin : "test/bin/ls/ls-313"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-314:
+    args: "-s -S       -f"
+    bin : "test/bin/ls/ls-314"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-315:
+    args: "-H -Z -D -i   "
+    bin : "test/bin/ls/ls-315"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-316:
+    args: "      -H -r -t"
+    bin : "test/bin/ls/ls-316"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-317:
+    args: "-p    -T 7 -D -L"
+    bin : "test/bin/ls/ls-317"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-318:
+    args: "-X -n -L -x   "
+    bin : "test/bin/ls/ls-318"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-319:
+    args: "-d       -B -U"
+    bin : "test/bin/ls/ls-319"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-320:
+    args: "-f -g -v -H -I"
+    bin : "test/bin/ls/ls-320"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-321:
+    args: "-1 -i    -x -w 40"
+    bin : "test/bin/ls/ls-321"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-322:
+    args: "-T 7 -t    -X -p"
+    bin : "test/bin/ls/ls-322"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-323:
+    args: "-Q -i -G    -p"
+    bin : "test/bin/ls/ls-323"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-324:
+    args: "   -T 7 -1 -d   "
+    bin : "test/bin/ls/ls-324"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-325:
+    args: "   -A -q -R -C"
+    bin : "test/bin/ls/ls-325"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-326:
+    args: "   -i -N -H   "
+    bin : "test/bin/ls/ls-326"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-327:
+    args: "   -G -f    -h"
+    bin : "test/bin/ls/ls-327"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-328:
+    args: "-x -A -Q -o -n"
+    bin : "test/bin/ls/ls-328"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-329:
+    args: "-r -f -1 -Z -R"
+    bin : "test/bin/ls/ls-329"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-330:
+    args: "-w 40    -H -Z -r"
+    bin : "test/bin/ls/ls-330"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-331:
+    args: "-X -A -o -q -C"
+    bin : "test/bin/ls/ls-331"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-332:
+    args: "-B -1    -R -c"
+    bin : "test/bin/ls/ls-332"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-333:
+    args: "-c    -F -B -a"
+    bin : "test/bin/ls/ls-333"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-334:
+    args: "-a -A -H -F -p"
+    bin : "test/bin/ls/ls-334"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-335:
+    args: "-D    -R -v -q"
+    bin : "test/bin/ls/ls-335"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-336:
+    args: "-q -w 40 -B -c -Q"
+    bin : "test/bin/ls/ls-336"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-337:
+    args: "-C -R -F -B -X"
+    bin : "test/bin/ls/ls-337"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-338:
+    args: "-x    -T 7 -o -C"
+    bin : "test/bin/ls/ls-338"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-339:
+    args: "   -b -Z -I -q"
+    bin : "test/bin/ls/ls-339"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-340:
+    args: "-o -c -U -s -U"
+    bin : "test/bin/ls/ls-340"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-341:
+    args: "-k -r    -f -F"
+    bin : "test/bin/ls/ls-341"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-342:
+    args: "-r -a -H -k -h"
+    bin : "test/bin/ls/ls-342"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-343:
+    args: "      -f -Q -L"
+    bin : "test/bin/ls/ls-343"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-344:
+    args: "-D -l -Q -o -t"
+    bin : "test/bin/ls/ls-344"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-345:
+    args: "-l -B    -I -B"
+    bin : "test/bin/ls/ls-345"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-346:
+    args: "-B -i -C -f -T 7"
+    bin : "test/bin/ls/ls-346"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-347:
+    args: "-X -F -c -k -U"
+    bin : "test/bin/ls/ls-347"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-348:
+    args: "-D -G -r    -l"
+    bin : "test/bin/ls/ls-348"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-349:
+    args: "   -t -S -A -Z"
+    bin : "test/bin/ls/ls-349"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-350:
+    args: "-b -Q -D -f -A"
+    bin : "test/bin/ls/ls-350"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-351:
+    args: "-F    -X -s   "
+    bin : "test/bin/ls/ls-351"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-352:
+    args: "-t -B -d -I   "
+    bin : "test/bin/ls/ls-352"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-353:
+    args: "-u -t -b    -I"
+    bin : "test/bin/ls/ls-353"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-354:
+    args: "   -q -u -p -u"
+    bin : "test/bin/ls/ls-354"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-355:
+    args: "-l -l -n    -q"
+    bin : "test/bin/ls/ls-355"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-356:
+    args: "-s -h -p -l -U"
+    bin : "test/bin/ls/ls-356"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-357:
+    args: "-S -i -I -x -H"
+    bin : "test/bin/ls/ls-357"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-358:
+    args: "-s -m -C -v -X"
+    bin : "test/bin/ls/ls-358"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-359:
+    args: "-X    -t -u -X"
+    bin : "test/bin/ls/ls-359"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-360:
+    args: "-A -l -g -S -R"
+    bin : "test/bin/ls/ls-360"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-361:
+    args: "-d -Q -X -m -x"
+    bin : "test/bin/ls/ls-361"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-362:
+    args: "-d    -n -A -b"
+    bin : "test/bin/ls/ls-362"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-363:
+    args: "-C -C -Z -f -l"
+    bin : "test/bin/ls/ls-363"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-364:
+    args: "   -C -f -t   "
+    bin : "test/bin/ls/ls-364"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-365:
+    args: "-A -D -a -I -p"
+    bin : "test/bin/ls/ls-365"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-366:
+    args: "-b -A -Q -S   "
+    bin : "test/bin/ls/ls-366"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-367:
+    args: "-a -T 7    -Q -w 40"
+    bin : "test/bin/ls/ls-367"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-368:
+    args: "-d -C -u -R -T 7"
+    bin : "test/bin/ls/ls-368"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-369:
+    args: "-m    -o -G -u"
+    bin : "test/bin/ls/ls-369"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-370:
+    args: "-t -h -w 40 -Z -c"
+    bin : "test/bin/ls/ls-370"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-371:
+    args: "-k -t -G    -a"
+    bin : "test/bin/ls/ls-371"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-372:
+    args: "-X    -1 -U -s"
+    bin : "test/bin/ls/ls-372"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-373:
+    args: "   -T 7 -r    -c"
+    bin : "test/bin/ls/ls-373"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-374:
+    args: "   -S -G    -N"
+    bin : "test/bin/ls/ls-374"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-375:
+    args: "   -s -A -t -b"
+    bin : "test/bin/ls/ls-375"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-376:
+    args: "-L    -Q -o -Z"
+    bin : "test/bin/ls/ls-376"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-377:
+    args: "-b -k -T 7 -m -c"
+    bin : "test/bin/ls/ls-377"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-378:
+    args: "-w 40 -t -m -i -h"
+    bin : "test/bin/ls/ls-378"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-379:
+    args: "-p    -h -X -c"
+    bin : "test/bin/ls/ls-379"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-380:
+    args: "         -g -q"
+    bin : "test/bin/ls/ls-380"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-381:
+    args: "-m    -Z -Z -H"
+    bin : "test/bin/ls/ls-381"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-382:
+    args: "-1    -G -w 40 -S"
+    bin : "test/bin/ls/ls-382"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-383:
+    args: "-a -w 40 -a -u   "
+    bin : "test/bin/ls/ls-383"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-384:
+    args: "-C    -h    -C"
+    bin : "test/bin/ls/ls-384"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-385:
+    args: "-N       -C -x"
+    bin : "test/bin/ls/ls-385"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-386:
+    args: "-G -b -Q    -m"
+    bin : "test/bin/ls/ls-386"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-387:
+    args: "   -B -q -X   "
+    bin : "test/bin/ls/ls-387"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-388:
+    args: "-H    -p -s -s"
+    bin : "test/bin/ls/ls-388"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-389:
+    args: "-f -k -N -n -u"
+    bin : "test/bin/ls/ls-389"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-390:
+    args: "-G -a -d -Q -I"
+    bin : "test/bin/ls/ls-390"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-391:
+    args: "-l -s -q -i -k"
+    bin : "test/bin/ls/ls-391"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-392:
+    args: "-F -I -T 7 -o -c"
+    bin : "test/bin/ls/ls-392"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-393:
+    args: "-C -t -G    -h"
+    bin : "test/bin/ls/ls-393"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-394:
+    args: "-a -g -n -g -d"
+    bin : "test/bin/ls/ls-394"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-395:
+    args: "-L -A -L -n -s"
+    bin : "test/bin/ls/ls-395"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-396:
+    args: "      -T 7 -X   "
+    bin : "test/bin/ls/ls-396"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-397:
+    args: "   -u -s -c -q"
+    bin : "test/bin/ls/ls-397"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-398:
+    args: "-C -I -x -t -N"
+    bin : "test/bin/ls/ls-398"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-399:
+    args: "      -l -w 40 -T 7"
+    bin : "test/bin/ls/ls-399"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-400:
+    args: "-w 40 -Q -N -F -x"
+    bin : "test/bin/ls/ls-400"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-401:
+    args: "-c -f    -h -R"
+    bin : "test/bin/ls/ls-401"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-402:
+    args: "   -d -A -1 -s"
+    bin : "test/bin/ls/ls-402"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-403:
+    args: "-d       -l -Q"
+    bin : "test/bin/ls/ls-403"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-404:
+    args: "         -U -v"
+    bin : "test/bin/ls/ls-404"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-405:
+    args: "-Q -T 7 -b    -D"
+    bin : "test/bin/ls/ls-405"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-406:
+    args: "-m -H -g -r -o"
+    bin : "test/bin/ls/ls-406"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-407:
+    args: "-T 7 -b    -o   "
+    bin : "test/bin/ls/ls-407"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-408:
+    args: "-s -H -Z -U -B"
+    bin : "test/bin/ls/ls-408"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-409:
+    args: "-g -a -v -Q   "
+    bin : "test/bin/ls/ls-409"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-410:
+    args: "-x    -G -q -1"
+    bin : "test/bin/ls/ls-410"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-411:
+    args: "-H -T 7       -Z"
+    bin : "test/bin/ls/ls-411"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-412:
+    args: "-N -F -Z -b -p"
+    bin : "test/bin/ls/ls-412"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-413:
+    args: "   -x -l -f -G"
+    bin : "test/bin/ls/ls-413"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-414:
+    args: "   -d -C -I -Z"
+    bin : "test/bin/ls/ls-414"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-415:
+    args: "-U -u -l    -B"
+    bin : "test/bin/ls/ls-415"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-416:
+    args: "-F -o -I -g -G"
+    bin : "test/bin/ls/ls-416"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-417:
+    args: "-T 7 -C -U -c -Q"
+    bin : "test/bin/ls/ls-417"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-418:
+    args: "-l -g    -H -v"
+    bin : "test/bin/ls/ls-418"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-419:
+    args: "   -b -U -n -I"
+    bin : "test/bin/ls/ls-419"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-420:
+    args: "-B -G    -B   "
+    bin : "test/bin/ls/ls-420"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-421:
+    args: "-i       -h -F"
+    bin : "test/bin/ls/ls-421"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-422:
+    args: "   -s -F -D -H"
+    bin : "test/bin/ls/ls-422"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-423:
+    args: "-m -N    -L -I"
+    bin : "test/bin/ls/ls-423"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-424:
+    args: "-u    -a -h -R"
+    bin : "test/bin/ls/ls-424"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-425:
+    args: "-g -v -X      "
+    bin : "test/bin/ls/ls-425"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-426:
+    args: "-C    -d -u   "
+    bin : "test/bin/ls/ls-426"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-427:
+    args: "-H -c -C -s -B"
+    bin : "test/bin/ls/ls-427"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-428:
+    args: "-i -L -a -l -F"
+    bin : "test/bin/ls/ls-428"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-429:
+    args: "-p -I -L -D -u"
+    bin : "test/bin/ls/ls-429"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-430:
+    args: "-t -C -t -o -b"
+    bin : "test/bin/ls/ls-430"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-431:
+    args: "-1 -p -g -l   "
+    bin : "test/bin/ls/ls-431"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-432:
+    args: "-X -f -f -n -G"
+    bin : "test/bin/ls/ls-432"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-433:
+    args: "-x -B -Z    -s"
+    bin : "test/bin/ls/ls-433"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-434:
+    args: "-m    -U -B -x"
+    bin : "test/bin/ls/ls-434"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-435:
+    args: "-T 7    -b -F   "
+    bin : "test/bin/ls/ls-435"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-436:
+    args: "-N    -H    -D"
+    bin : "test/bin/ls/ls-436"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-437:
+    args: "-v -w 40 -m -l -d"
+    bin : "test/bin/ls/ls-437"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-438:
+    args: "-C -X -I -B -o"
+    bin : "test/bin/ls/ls-438"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-439:
+    args: "-U -Q -h -x   "
+    bin : "test/bin/ls/ls-439"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-440:
+    args: "-X -C -b -v -L"
+    bin : "test/bin/ls/ls-440"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-441:
+    args: "-h -1 -T 7 -H -S"
+    bin : "test/bin/ls/ls-441"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-442:
+    args: "-F -k -m -A -Q"
+    bin : "test/bin/ls/ls-442"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-443:
+    args: "-o -G -S -U -l"
+    bin : "test/bin/ls/ls-443"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-444:
+    args: "-f -s -L -G   "
+    bin : "test/bin/ls/ls-444"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-445:
+    args: "-k -c -a -I -i"
+    bin : "test/bin/ls/ls-445"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-446:
+    args: "-Z -r -N    -l"
+    bin : "test/bin/ls/ls-446"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-447:
+    args: "-t       -D -l"
+    bin : "test/bin/ls/ls-447"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-448:
+    args: "-x -X -u -s -p"
+    bin : "test/bin/ls/ls-448"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-449:
+    args: "-H -B -N -w 40 -g"
+    bin : "test/bin/ls/ls-449"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-450:
+    args: "-N -Z -q    -o"
+    bin : "test/bin/ls/ls-450"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-451:
+    args: "         -m   "
+    bin : "test/bin/ls/ls-451"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-452:
+    args: "-N -1 -t -L -k"
+    bin : "test/bin/ls/ls-452"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-453:
+    args: "-g -G -F -g -T 7"
+    bin : "test/bin/ls/ls-453"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-454:
+    args: "   -l -t    -R"
+    bin : "test/bin/ls/ls-454"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-455:
+    args: "   -R -s -C -B"
+    bin : "test/bin/ls/ls-455"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-456:
+    args: "-I -1    -c -w 40"
+    bin : "test/bin/ls/ls-456"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-457:
+    args: "-G -v -b -A -r"
+    bin : "test/bin/ls/ls-457"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-458:
+    args: "-p -G -s    -d"
+    bin : "test/bin/ls/ls-458"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-459:
+    args: "-n    -U -p -L"
+    bin : "test/bin/ls/ls-459"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-460:
+    args: "-r -B       -D"
+    bin : "test/bin/ls/ls-460"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-461:
+    args: "-H -q    -d -l"
+    bin : "test/bin/ls/ls-461"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-462:
+    args: "-b -m -1 -B   "
+    bin : "test/bin/ls/ls-462"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-463:
+    args: "-c -u -L -x -d"
+    bin : "test/bin/ls/ls-463"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-464:
+    args: "-G          -r"
+    bin : "test/bin/ls/ls-464"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-465:
+    args: "   -p -X -H -Q"
+    bin : "test/bin/ls/ls-465"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-466:
+    args: "-C -p -g -Z -D"
+    bin : "test/bin/ls/ls-466"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-467:
+    args: "-g -a -l -I -I"
+    bin : "test/bin/ls/ls-467"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-468:
+    args: "-D -k -Z -F -q"
+    bin : "test/bin/ls/ls-468"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-469:
+    args: "-1 -U -Z -n -t"
+    bin : "test/bin/ls/ls-469"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-470:
+    args: "-L -G -r -N -B"
+    bin : "test/bin/ls/ls-470"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-471:
+    args: "-u -w 40 -i -p -F"
+    bin : "test/bin/ls/ls-471"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-472:
+    args: "-o -h -G -X -k"
+    bin : "test/bin/ls/ls-472"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-473:
+    args: "-D -r -1 -D -n"
+    bin : "test/bin/ls/ls-473"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-474:
+    args: "         -x -w 40"
+    bin : "test/bin/ls/ls-474"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-475:
+    args: "-H -g -p -N -n"
+    bin : "test/bin/ls/ls-475"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-476:
+    args: "-l -t -L    -h"
+    bin : "test/bin/ls/ls-476"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-477:
+    args: "-h -m -d -g   "
+    bin : "test/bin/ls/ls-477"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-478:
+    args: "-b       -d -x"
+    bin : "test/bin/ls/ls-478"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-479:
+    args: "   -f    -a   "
+    bin : "test/bin/ls/ls-479"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-480:
+    args: "-F -Q -A -p -Z"
+    bin : "test/bin/ls/ls-480"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-481:
+    args: "-q -m -G    -Z"
+    bin : "test/bin/ls/ls-481"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-482:
+    args: "-C -L -H -1 -w 40"
+    bin : "test/bin/ls/ls-482"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-483:
+    args: "-Q    -C -S -B"
+    bin : "test/bin/ls/ls-483"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-484:
+    args: "-w 40    -T 7 -x -D"
+    bin : "test/bin/ls/ls-484"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-485:
+    args: "-v -Q -p -b -H"
+    bin : "test/bin/ls/ls-485"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-486:
+    args: "         -F -D"
+    bin : "test/bin/ls/ls-486"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-487:
+    args: "-U -n -1    -G"
+    bin : "test/bin/ls/ls-487"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-488:
+    args: "   -r -R -F -H"
+    bin : "test/bin/ls/ls-488"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-489:
+    args: "-Q -n -r -r   "
+    bin : "test/bin/ls/ls-489"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-490:
+    args: "-k -n -p -D -u"
+    bin : "test/bin/ls/ls-490"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-491:
+    args: "-s -a -T 7    -w 40"
+    bin : "test/bin/ls/ls-491"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-492:
+    args: "-l -G -u    -I"
+    bin : "test/bin/ls/ls-492"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-493:
+    args: "-k -G -m    -c"
+    bin : "test/bin/ls/ls-493"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-494:
+    args: "   -a    -1 -v"
+    bin : "test/bin/ls/ls-494"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-495:
+    args: "-f -x -s    -k"
+    bin : "test/bin/ls/ls-495"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-496:
+    args: "   -r -c -1 -w 40"
+    bin : "test/bin/ls/ls-496"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-497:
+    args: "-Z -w 40    -b -r"
+    bin : "test/bin/ls/ls-497"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-498:
+    args: "-I -f    -N -r"
+    bin : "test/bin/ls/ls-498"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-499:
+    args: "   -R -L -1   "
+    bin : "test/bin/ls/ls-499"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-500:
+    args: "-n -c -C -g   "
+    bin : "test/bin/ls/ls-500"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-501:
+    args: "-T 7 -S -S -T 7 -n"
+    bin : "test/bin/ls/ls-501"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-502:
+    args: "-I -k -F -s   "
+    bin : "test/bin/ls/ls-502"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-503:
+    args: "-h -h -n -S -v"
+    bin : "test/bin/ls/ls-503"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-504:
+    args: "-h -I -q -X   "
+    bin : "test/bin/ls/ls-504"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-505:
+    args: "-d -r -X -i -C"
+    bin : "test/bin/ls/ls-505"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-506:
+    args: "   -f       -L"
+    bin : "test/bin/ls/ls-506"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-507:
+    args: "-Z -D -Q -f -f"
+    bin : "test/bin/ls/ls-507"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-508:
+    args: "-R -f -g -p -Z"
+    bin : "test/bin/ls/ls-508"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-509:
+    args: "   -A -t -H -C"
+    bin : "test/bin/ls/ls-509"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-510:
+    args: "-c -t -S -w 40 -1"
+    bin : "test/bin/ls/ls-510"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-511:
+    args: "-R    -u -l   "
+    bin : "test/bin/ls/ls-511"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-512:
+    args: "-F -w 40         "
+    bin : "test/bin/ls/ls-512"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-513:
+    args: "-N    -F -D -g"
+    bin : "test/bin/ls/ls-513"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-514:
+    args: "-b -B -R -g   "
+    bin : "test/bin/ls/ls-514"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-515:
+    args: "-R -a -Z    -o"
+    bin : "test/bin/ls/ls-515"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-516:
+    args: "-k -N -C    -R"
+    bin : "test/bin/ls/ls-516"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-517:
+    args: "-l       -D   "
+    bin : "test/bin/ls/ls-517"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-518:
+    args: "-R -g -T 7 -q -h"
+    bin : "test/bin/ls/ls-518"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-519:
+    args: "-A -u -p -u -s"
+    bin : "test/bin/ls/ls-519"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-520:
+    args: "   -L    -G -R"
+    bin : "test/bin/ls/ls-520"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-521:
+    args: "      -p    -S"
+    bin : "test/bin/ls/ls-521"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-522:
+    args: "-Q -d -m -v -G"
+    bin : "test/bin/ls/ls-522"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-523:
+    args: "-a -v -R -R -p"
+    bin : "test/bin/ls/ls-523"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-524:
+    args: "-D    -C -h -c"
+    bin : "test/bin/ls/ls-524"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-525:
+    args: "-D -B    -F   "
+    bin : "test/bin/ls/ls-525"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-526:
+    args: "-m -u -D -S -Z"
+    bin : "test/bin/ls/ls-526"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-527:
+    args: "-X -p -f -d -B"
+    bin : "test/bin/ls/ls-527"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-528:
+    args: "   -p    -r   "
+    bin : "test/bin/ls/ls-528"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-529:
+    args: "-I -t -f -t   "
+    bin : "test/bin/ls/ls-529"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-530:
+    args: "-w 40    -n -d   "
+    bin : "test/bin/ls/ls-530"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-531:
+    args: "   -Q -o -B -I"
+    bin : "test/bin/ls/ls-531"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-532:
+    args: "-q    -u -r -F"
+    bin : "test/bin/ls/ls-532"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-533:
+    args: "      -v      "
+    bin : "test/bin/ls/ls-533"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-534:
+    args: "-C -n    -R -p"
+    bin : "test/bin/ls/ls-534"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-535:
+    args: "-d -L -h -1 -v"
+    bin : "test/bin/ls/ls-535"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-536:
+    args: "-D    -h -w 40 -X"
+    bin : "test/bin/ls/ls-536"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-537:
+    args: "-n -N    -n -a"
+    bin : "test/bin/ls/ls-537"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-538:
+    args: "-r -D -w 40    -o"
+    bin : "test/bin/ls/ls-538"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-539:
+    args: "-g    -o -s   "
+    bin : "test/bin/ls/ls-539"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-540:
+    args: "-t -d -f -X -Z"
+    bin : "test/bin/ls/ls-540"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-541:
+    args: "   -c -l      "
+    bin : "test/bin/ls/ls-541"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-542:
+    args: "-G    -N -T 7   "
+    bin : "test/bin/ls/ls-542"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-543:
+    args: "-X -D -S -o   "
+    bin : "test/bin/ls/ls-543"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-544:
+    args: "-v -C -R      "
+    bin : "test/bin/ls/ls-544"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-545:
+    args: "   -X       -l"
+    bin : "test/bin/ls/ls-545"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-546:
+    args: "-H -R -C -c -f"
+    bin : "test/bin/ls/ls-546"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-547:
+    args: "-A -F    -g -Q"
+    bin : "test/bin/ls/ls-547"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-548:
+    args: "-d -q -a -x   "
+    bin : "test/bin/ls/ls-548"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-549:
+    args: "-i -h -m -S -h"
+    bin : "test/bin/ls/ls-549"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-550:
+    args: "-x -o -x -F   "
+    bin : "test/bin/ls/ls-550"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-551:
+    args: "-d -B    -v -v"
+    bin : "test/bin/ls/ls-551"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-552:
+    args: "   -g -p -q -l"
+    bin : "test/bin/ls/ls-552"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-553:
+    args: "-I -R -w 40 -A   "
+    bin : "test/bin/ls/ls-553"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-554:
+    args: "-C -o -v -Q   "
+    bin : "test/bin/ls/ls-554"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-555:
+    args: "-n       -n -U"
+    bin : "test/bin/ls/ls-555"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-556:
+    args: "-q -f    -m -l"
+    bin : "test/bin/ls/ls-556"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-557:
+    args: "-a -p -D -Z -m"
+    bin : "test/bin/ls/ls-557"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-558:
+    args: "   -S -L    -i"
+    bin : "test/bin/ls/ls-558"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-559:
+    args: "-t -R    -H -w 40"
+    bin : "test/bin/ls/ls-559"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-560:
+    args: "-H    -X    -B"
+    bin : "test/bin/ls/ls-560"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-561:
+    args: "-X    -a -G   "
+    bin : "test/bin/ls/ls-561"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-562:
+    args: "-k -c -s -q -N"
+    bin : "test/bin/ls/ls-562"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-563:
+    args: "-u -H -r -o -L"
+    bin : "test/bin/ls/ls-563"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-564:
+    args: "-D -T 7 -C    -g"
+    bin : "test/bin/ls/ls-564"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-565:
+    args: "-u -Q    -k   "
+    bin : "test/bin/ls/ls-565"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-566:
+    args: "   -p -r -T 7 -m"
+    bin : "test/bin/ls/ls-566"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-567:
+    args: "-D    -w 40 -t -l"
+    bin : "test/bin/ls/ls-567"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-568:
+    args: "-v -D    -l -p"
+    bin : "test/bin/ls/ls-568"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-569:
+    args: "-S    -Z      "
+    bin : "test/bin/ls/ls-569"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-570:
+    args: "-B -F       -f"
+    bin : "test/bin/ls/ls-570"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-571:
+    args: "   -k -r    -s"
+    bin : "test/bin/ls/ls-571"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-572:
+    args: "-B -L -N -o -t"
+    bin : "test/bin/ls/ls-572"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-573:
+    args: "-F -q -f -x -F"
+    bin : "test/bin/ls/ls-573"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-574:
+    args: "-H       -X -Z"
+    bin : "test/bin/ls/ls-574"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-575:
+    args: "-Z -t -S -X -X"
+    bin : "test/bin/ls/ls-575"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-576:
+    args: "-L -v    -h -o"
+    bin : "test/bin/ls/ls-576"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-577:
+    args: "      -r -U -d"
+    bin : "test/bin/ls/ls-577"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-578:
+    args: "-G -i -N -k -m"
+    bin : "test/bin/ls/ls-578"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-579:
+    args: "-f -t -G -l -b"
+    bin : "test/bin/ls/ls-579"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-580:
+    args: "-n -a -r -w 40 -x"
+    bin : "test/bin/ls/ls-580"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-581:
+    args: "-U -R -X -c -s"
+    bin : "test/bin/ls/ls-581"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-582:
+    args: "   -r -1 -I -Q"
+    bin : "test/bin/ls/ls-582"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-583:
+    args: "-u -m -n    -G"
+    bin : "test/bin/ls/ls-583"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-584:
+    args: "-t -I -r -B -x"
+    bin : "test/bin/ls/ls-584"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-585:
+    args: "-R    -r -h -c"
+    bin : "test/bin/ls/ls-585"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-586:
+    args: "-B -L -1 -p   "
+    bin : "test/bin/ls/ls-586"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-587:
+    args: "   -w 40 -H -f -u"
+    bin : "test/bin/ls/ls-587"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-588:
+    args: "      -G -T 7 -o"
+    bin : "test/bin/ls/ls-588"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-589:
+    args: "-f -Z    -R -q"
+    bin : "test/bin/ls/ls-589"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-590:
+    args: "-R       -D -L"
+    bin : "test/bin/ls/ls-590"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-591:
+    args: "-b -A    -i -I"
+    bin : "test/bin/ls/ls-591"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-592:
+    args: "-r -m    -I -b"
+    bin : "test/bin/ls/ls-592"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-593:
+    args: "-x -c -H -m   "
+    bin : "test/bin/ls/ls-593"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-594:
+    args: "-s -R    -1 -r"
+    bin : "test/bin/ls/ls-594"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-595:
+    args: "   -o -d -G -N"
+    bin : "test/bin/ls/ls-595"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-596:
+    args: "-X    -m -g   "
+    bin : "test/bin/ls/ls-596"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-597:
+    args: "-l -f -q      "
+    bin : "test/bin/ls/ls-597"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-598:
+    args: "-T 7    -D    -f"
+    bin : "test/bin/ls/ls-598"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-599:
+    args: "-g -b -i -m -q"
+    bin : "test/bin/ls/ls-599"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-600:
+    args: "-U -n    -g   "
+    bin : "test/bin/ls/ls-600"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-601:
+    args: "-H -A    -T 7 -q"
+    bin : "test/bin/ls/ls-601"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-602:
+    args: "-s -A       -b"
+    bin : "test/bin/ls/ls-602"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-603:
+    args: "-1 -b -N -C   "
+    bin : "test/bin/ls/ls-603"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-604:
+    args: "-r -o -S -Q -Q"
+    bin : "test/bin/ls/ls-604"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-605:
+    args: "-x -G -a -q -S"
+    bin : "test/bin/ls/ls-605"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-606:
+    args: "-S -h -h -v -L"
+    bin : "test/bin/ls/ls-606"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-607:
+    args: "-w 40 -w 40 -G -C -l"
+    bin : "test/bin/ls/ls-607"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-608:
+    args: "-v -q -I -w 40 -B"
+    bin : "test/bin/ls/ls-608"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-609:
+    args: "-G -B -m -I -G"
+    bin : "test/bin/ls/ls-609"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-610:
+    args: "-x -w 40    -d -n"
+    bin : "test/bin/ls/ls-610"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-611:
+    args: "-1 -h         "
+    bin : "test/bin/ls/ls-611"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-612:
+    args: "-C -Q -m -L -Z"
+    bin : "test/bin/ls/ls-612"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-613:
+    args: "-T 7 -C -s -f -v"
+    bin : "test/bin/ls/ls-613"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-614:
+    args: "-q -C -R      "
+    bin : "test/bin/ls/ls-614"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-615:
+    args: "-n       -T 7 -F"
+    bin : "test/bin/ls/ls-615"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-616:
+    args: "-n    -I -N -G"
+    bin : "test/bin/ls/ls-616"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-617:
+    args: "-C -d -A      "
+    bin : "test/bin/ls/ls-617"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-618:
+    args: "-T 7 -p -g -Z -h"
+    bin : "test/bin/ls/ls-618"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-619:
+    args: "      -Q -l -1"
+    bin : "test/bin/ls/ls-619"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-620:
+    args: "   -S       -F"
+    bin : "test/bin/ls/ls-620"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-621:
+    args: "-o -q -p -r -F"
+    bin : "test/bin/ls/ls-621"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-622:
+    args: "-q       -I -i"
+    bin : "test/bin/ls/ls-622"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-623:
+    args: "-X -S -t -r -H"
+    bin : "test/bin/ls/ls-623"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-624:
+    args: "   -p -C -m -F"
+    bin : "test/bin/ls/ls-624"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-625:
+    args: "-t -r -s -T 7 -r"
+    bin : "test/bin/ls/ls-625"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-626:
+    args: "-s -h -Z -F -m"
+    bin : "test/bin/ls/ls-626"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-627:
+    args: "-v -Q -t -b -l"
+    bin : "test/bin/ls/ls-627"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-628:
+    args: "-R -g    -s -I"
+    bin : "test/bin/ls/ls-628"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-629:
+    args: "-A -T 7 -m -I -B"
+    bin : "test/bin/ls/ls-629"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-630:
+    args: "-B -w 40         "
+    bin : "test/bin/ls/ls-630"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-631:
+    args: "-m -n -b -N -R"
+    bin : "test/bin/ls/ls-631"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-632:
+    args: "      -q -B -T 7"
+    bin : "test/bin/ls/ls-632"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-633:
+    args: "-u -x -Q -b -a"
+    bin : "test/bin/ls/ls-633"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-634:
+    args: "-U    -C -A -F"
+    bin : "test/bin/ls/ls-634"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-635:
+    args: "-Q    -H -A -a"
+    bin : "test/bin/ls/ls-635"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-636:
+    args: "-I -a -k -v -A"
+    bin : "test/bin/ls/ls-636"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-637:
+    args: "-G    -m -N -l"
+    bin : "test/bin/ls/ls-637"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-638:
+    args: "-Z -i -D -F -o"
+    bin : "test/bin/ls/ls-638"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-639:
+    args: "-q -b -g -t -a"
+    bin : "test/bin/ls/ls-639"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-640:
+    args: "-A -k    -N   "
+    bin : "test/bin/ls/ls-640"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-641:
+    args: "-s -i -i -k   "
+    bin : "test/bin/ls/ls-641"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-642:
+    args: "-p -L -Z -T 7 -m"
+    bin : "test/bin/ls/ls-642"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-643:
+    args: "-l    -c -Z -1"
+    bin : "test/bin/ls/ls-643"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-644:
+    args: "-Z       -l -n"
+    bin : "test/bin/ls/ls-644"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-645:
+    args: "-Z -T 7    -X -N"
+    bin : "test/bin/ls/ls-645"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-646:
+    args: "-n -A -Z -F -x"
+    bin : "test/bin/ls/ls-646"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-647:
+    args: "-w 40 -w 40 -D -N   "
+    bin : "test/bin/ls/ls-647"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-648:
+    args: "-a    -v -n -d"
+    bin : "test/bin/ls/ls-648"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-649:
+    args: "-m -T 7 -v -G -H"
+    bin : "test/bin/ls/ls-649"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-650:
+    args: "-G -h -q -n -D"
+    bin : "test/bin/ls/ls-650"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-651:
+    args: "-n -T 7 -l -C -p"
+    bin : "test/bin/ls/ls-651"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-652:
+    args: "-L    -u -L -a"
+    bin : "test/bin/ls/ls-652"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-653:
+    args: "-b -q -d -i -R"
+    bin : "test/bin/ls/ls-653"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-654:
+    args: "-b    -g -B -q"
+    bin : "test/bin/ls/ls-654"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-655:
+    args: "-s -N -H -G -G"
+    bin : "test/bin/ls/ls-655"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-656:
+    args: "-w 40 -q -v    -k"
+    bin : "test/bin/ls/ls-656"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-657:
+    args: "-r       -f -T 7"
+    bin : "test/bin/ls/ls-657"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-658:
+    args: "-D -s -a    -v"
+    bin : "test/bin/ls/ls-658"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-659:
+    args: "-w 40 -A -m -S -T 7"
+    bin : "test/bin/ls/ls-659"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-660:
+    args: "      -F -i -I"
+    bin : "test/bin/ls/ls-660"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-661:
+    args: "-1 -c -B -l -H"
+    bin : "test/bin/ls/ls-661"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-662:
+    args: "-r    -k -b -o"
+    bin : "test/bin/ls/ls-662"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-663:
+    args: "-D -N -D -T 7 -p"
+    bin : "test/bin/ls/ls-663"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-664:
+    args: "-D -S -q -L -S"
+    bin : "test/bin/ls/ls-664"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-665:
+    args: "   -t -a -m -p"
+    bin : "test/bin/ls/ls-665"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-666:
+    args: "-g -w 40 -k -b -i"
+    bin : "test/bin/ls/ls-666"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-667:
+    args: "-n    -b -k -k"
+    bin : "test/bin/ls/ls-667"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-668:
+    args: "-d -N    -Z   "
+    bin : "test/bin/ls/ls-668"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-669:
+    args: "   -q -m -c -C"
+    bin : "test/bin/ls/ls-669"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-670:
+    args: "-d -R -k -H -d"
+    bin : "test/bin/ls/ls-670"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-671:
+    args: "-u    -I -C   "
+    bin : "test/bin/ls/ls-671"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-672:
+    args: "-i -s -n -R -A"
+    bin : "test/bin/ls/ls-672"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-673:
+    args: "-r -b -G -r -B"
+    bin : "test/bin/ls/ls-673"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-674:
+    args: "-Z -l -w 40 -F -R"
+    bin : "test/bin/ls/ls-674"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-675:
+    args: "-n -R -A -Q   "
+    bin : "test/bin/ls/ls-675"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-676:
+    args: "-v -h -1 -b -X"
+    bin : "test/bin/ls/ls-676"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-677:
+    args: "-T 7 -n -h    -o"
+    bin : "test/bin/ls/ls-677"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-678:
+    args: "-o -k -f -S   "
+    bin : "test/bin/ls/ls-678"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-679:
+    args: "-T 7    -I -U -Z"
+    bin : "test/bin/ls/ls-679"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-680:
+    args: "-Z -X -D -R -v"
+    bin : "test/bin/ls/ls-680"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-681:
+    args: "-S -i -v -Q -N"
+    bin : "test/bin/ls/ls-681"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-682:
+    args: "   -U    -D -v"
+    bin : "test/bin/ls/ls-682"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-683:
+    args: "-t -C -T 7 -I -C"
+    bin : "test/bin/ls/ls-683"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-684:
+    args: "-F -l -Z -S -U"
+    bin : "test/bin/ls/ls-684"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-685:
+    args: "   -Z -h -1 -Z"
+    bin : "test/bin/ls/ls-685"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-686:
+    args: "-x -l -h -c -F"
+    bin : "test/bin/ls/ls-686"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-687:
+    args: "-w 40    -Z -Q -p"
+    bin : "test/bin/ls/ls-687"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-688:
+    args: "-N -q -U -B   "
+    bin : "test/bin/ls/ls-688"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-689:
+    args: "-q       -u -Z"
+    bin : "test/bin/ls/ls-689"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-690:
+    args: "   -F -f -I -o"
+    bin : "test/bin/ls/ls-690"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-691:
+    args: "-x -x -C    -c"
+    bin : "test/bin/ls/ls-691"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-692:
+    args: "-f -S -S -n -B"
+    bin : "test/bin/ls/ls-692"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-693:
+    args: "-B -N -c -t -R"
+    bin : "test/bin/ls/ls-693"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-694:
+    args: "-C -m -U -U -q"
+    bin : "test/bin/ls/ls-694"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-695:
+    args: "   -w 40 -u -L -u"
+    bin : "test/bin/ls/ls-695"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-696:
+    args: "-f -n -w 40 -S -D"
+    bin : "test/bin/ls/ls-696"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-697:
+    args: "-T 7 -n -L -A -L"
+    bin : "test/bin/ls/ls-697"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-698:
+    args: "-G -Z -X -b -q"
+    bin : "test/bin/ls/ls-698"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-699:
+    args: "-a    -b -Q -c"
+    bin : "test/bin/ls/ls-699"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-700:
+    args: "-L -1 -p -d -l"
+    bin : "test/bin/ls/ls-700"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-701:
+    args: "-T 7 -b -I -a   "
+    bin : "test/bin/ls/ls-701"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-702:
+    args: "-k -G -G    -G"
+    bin : "test/bin/ls/ls-702"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-703:
+    args: "   -b    -F   "
+    bin : "test/bin/ls/ls-703"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-704:
+    args: "-T 7 -u -C -N -d"
+    bin : "test/bin/ls/ls-704"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-705:
+    args: "-N -a -t -g -D"
+    bin : "test/bin/ls/ls-705"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-706:
+    args: "-a -m -v -v -t"
+    bin : "test/bin/ls/ls-706"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-707:
+    args: "-1 -r -R -p -L"
+    bin : "test/bin/ls/ls-707"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-708:
+    args: "-T 7 -a -x -c -G"
+    bin : "test/bin/ls/ls-708"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-709:
+    args: "-R       -w 40   "
+    bin : "test/bin/ls/ls-709"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-710:
+    args: "-G    -I -a -v"
+    bin : "test/bin/ls/ls-710"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-711:
+    args: "-d -B    -m -D"
+    bin : "test/bin/ls/ls-711"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-712:
+    args: "   -R -L -T 7 -l"
+    bin : "test/bin/ls/ls-712"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-713:
+    args: "   -q -m -b -b"
+    bin : "test/bin/ls/ls-713"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-714:
+    args: "-X -d -X -C -o"
+    bin : "test/bin/ls/ls-714"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-715:
+    args: "-F -k -T 7 -L   "
+    bin : "test/bin/ls/ls-715"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-716:
+    args: "-H -A -i -w 40   "
+    bin : "test/bin/ls/ls-716"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-717:
+    args: "-u -i    -D -a"
+    bin : "test/bin/ls/ls-717"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-718:
+    args: "-F    -L -f   "
+    bin : "test/bin/ls/ls-718"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-719:
+    args: "-v -a    -1 -I"
+    bin : "test/bin/ls/ls-719"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-720:
+    args: "-o    -c -d -1"
+    bin : "test/bin/ls/ls-720"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-721:
+    args: "-C -R -B -d   "
+    bin : "test/bin/ls/ls-721"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-722:
+    args: "-n -c -b    -h"
+    bin : "test/bin/ls/ls-722"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-723:
+    args: "-x -S -b -w 40 -m"
+    bin : "test/bin/ls/ls-723"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-724:
+    args: "-o -i -1 -T 7 -b"
+    bin : "test/bin/ls/ls-724"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-725:
+    args: "   -v -k -k -S"
+    bin : "test/bin/ls/ls-725"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-726:
+    args: "   -s    -L -v"
+    bin : "test/bin/ls/ls-726"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-727:
+    args: "-l -I -L -1 -n"
+    bin : "test/bin/ls/ls-727"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-728:
+    args: "   -m -I -Q -i"
+    bin : "test/bin/ls/ls-728"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-729:
+    args: "-g -b -D -a -h"
+    bin : "test/bin/ls/ls-729"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-730:
+    args: "-B -o    -i -x"
+    bin : "test/bin/ls/ls-730"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-731:
+    args: "-N -U -Z -Q -t"
+    bin : "test/bin/ls/ls-731"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-732:
+    args: "   -r -x -r -f"
+    bin : "test/bin/ls/ls-732"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-733:
+    args: "-m -m -i -G   "
+    bin : "test/bin/ls/ls-733"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-734:
+    args: "-Q -c -b -Q -A"
+    bin : "test/bin/ls/ls-734"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-735:
+    args: "-l -l -p -t -N"
+    bin : "test/bin/ls/ls-735"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-736:
+    args: "-T 7 -i -i -F -T 7"
+    bin : "test/bin/ls/ls-736"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-737:
+    args: "-r -c -S      "
+    bin : "test/bin/ls/ls-737"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-738:
+    args: "-H       -p -l"
+    bin : "test/bin/ls/ls-738"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-739:
+    args: "-c -H    -r -N"
+    bin : "test/bin/ls/ls-739"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-740:
+    args: "-A -g -m -G -T 7"
+    bin : "test/bin/ls/ls-740"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-741:
+    args: "   -g    -U -o"
+    bin : "test/bin/ls/ls-741"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-742:
+    args: "-s    -u -D -x"
+    bin : "test/bin/ls/ls-742"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-743:
+    args: "-c -v -G -Q -r"
+    bin : "test/bin/ls/ls-743"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-744:
+    args: "-R    -u -U   "
+    bin : "test/bin/ls/ls-744"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-745:
+    args: "-n -a    -w 40 -s"
+    bin : "test/bin/ls/ls-745"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-746:
+    args: "   -s -m -G -r"
+    bin : "test/bin/ls/ls-746"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-747:
+    args: "-a    -l -X -v"
+    bin : "test/bin/ls/ls-747"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-748:
+    args: "      -F    -t"
+    bin : "test/bin/ls/ls-748"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-749:
+    args: "-i -o -N    -b"
+    bin : "test/bin/ls/ls-749"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-750:
+    args: "   -D -U    -u"
+    bin : "test/bin/ls/ls-750"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-751:
+    args: "   -s    -A -t"
+    bin : "test/bin/ls/ls-751"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-752:
+    args: "-q    -c -X -w 40"
+    bin : "test/bin/ls/ls-752"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-753:
+    args: "-D -R -h -T 7   "
+    bin : "test/bin/ls/ls-753"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-754:
+    args: "-k -S -I -w 40 -k"
+    bin : "test/bin/ls/ls-754"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-755:
+    args: "-g -T 7 -G -c   "
+    bin : "test/bin/ls/ls-755"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-756:
+    args: "-l -B -F -Q -s"
+    bin : "test/bin/ls/ls-756"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-757:
+    args: "   -b -u -S -c"
+    bin : "test/bin/ls/ls-757"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-758:
+    args: "   -C -g -C -h"
+    bin : "test/bin/ls/ls-758"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-759:
+    args: "-A -Q -N -X -u"
+    bin : "test/bin/ls/ls-759"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-760:
+    args: "-d -Z -U -Z -I"
+    bin : "test/bin/ls/ls-760"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-761:
+    args: "-b -U -q -s -S"
+    bin : "test/bin/ls/ls-761"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-762:
+    args: "      -N -d   "
+    bin : "test/bin/ls/ls-762"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-763:
+    args: "-T 7 -X -Z -s   "
+    bin : "test/bin/ls/ls-763"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-764:
+    args: "-g -T 7 -D -l -t"
+    bin : "test/bin/ls/ls-764"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-765:
+    args: "-G -h -X -n -p"
+    bin : "test/bin/ls/ls-765"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-766:
+    args: "-G    -R -s   "
+    bin : "test/bin/ls/ls-766"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-767:
+    args: "-X -B -t    -L"
+    bin : "test/bin/ls/ls-767"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-768:
+    args: "   -S -t -i -h"
+    bin : "test/bin/ls/ls-768"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-769:
+    args: "-D       -I -1"
+    bin : "test/bin/ls/ls-769"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-770:
+    args: "      -I -c -k"
+    bin : "test/bin/ls/ls-770"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-771:
+    args: "   -x -k -b -T 7"
+    bin : "test/bin/ls/ls-771"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-772:
+    args: "-l -x    -Z -U"
+    bin : "test/bin/ls/ls-772"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-773:
+    args: "-t -T 7 -I -1 -Z"
+    bin : "test/bin/ls/ls-773"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-774:
+    args: "-A -x -1 -x -q"
+    bin : "test/bin/ls/ls-774"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-775:
+    args: "-w 40 -k    -u -A"
+    bin : "test/bin/ls/ls-775"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-776:
+    args: "-D -g -B -m -i"
+    bin : "test/bin/ls/ls-776"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-777:
+    args: "   -g    -I -Z"
+    bin : "test/bin/ls/ls-777"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-778:
+    args: "-B    -b    -r"
+    bin : "test/bin/ls/ls-778"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-779:
+    args: "-o -m -Z    -N"
+    bin : "test/bin/ls/ls-779"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-780:
+    args: "-f -f -v -x -d"
+    bin : "test/bin/ls/ls-780"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-781:
+    args: "-i -H    -R -t"
+    bin : "test/bin/ls/ls-781"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-782:
+    args: "-n -t -u -Q -o"
+    bin : "test/bin/ls/ls-782"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-783:
+    args: "-i -t -o -B -X"
+    bin : "test/bin/ls/ls-783"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-784:
+    args: "-r -q -Q -l   "
+    bin : "test/bin/ls/ls-784"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-785:
+    args: "-n -t -U    -d"
+    bin : "test/bin/ls/ls-785"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-786:
+    args: "-1 -X -L -a   "
+    bin : "test/bin/ls/ls-786"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-787:
+    args: "-1       -S -w 40"
+    bin : "test/bin/ls/ls-787"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-788:
+    args: "-x -N -m -D -f"
+    bin : "test/bin/ls/ls-788"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-789:
+    args: "-s -B -R -n -S"
+    bin : "test/bin/ls/ls-789"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-790:
+    args: "-F -A -t -p -I"
+    bin : "test/bin/ls/ls-790"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-791:
+    args: "-q -s -x -R   "
+    bin : "test/bin/ls/ls-791"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-792:
+    args: "-b -S -u -b -Z"
+    bin : "test/bin/ls/ls-792"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-793:
+    args: "   -v -u -L -Z"
+    bin : "test/bin/ls/ls-793"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-794:
+    args: "-Q -f -F -u -c"
+    bin : "test/bin/ls/ls-794"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-795:
+    args: "   -l    -c -m"
+    bin : "test/bin/ls/ls-795"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-796:
+    args: "-D -h -q -a -C"
+    bin : "test/bin/ls/ls-796"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-797:
+    args: "-C -l    -N -s"
+    bin : "test/bin/ls/ls-797"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-798:
+    args: "-t -H -c -l -a"
+    bin : "test/bin/ls/ls-798"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-799:
+    args: "-k       -x -n"
+    bin : "test/bin/ls/ls-799"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-800:
+    args: "   -g -m -T 7 -s"
+    bin : "test/bin/ls/ls-800"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-801:
+    args: "-x -i    -D   "
+    bin : "test/bin/ls/ls-801"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-802:
+    args: "-l    -U -F -T 7"
+    bin : "test/bin/ls/ls-802"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-803:
+    args: "-h -R -1    -m"
+    bin : "test/bin/ls/ls-803"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-804:
+    args: "-A -q    -T 7 -m"
+    bin : "test/bin/ls/ls-804"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-805:
+    args: "-B -n -A -1 -A"
+    bin : "test/bin/ls/ls-805"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-806:
+    args: "-q -C -L -l   "
+    bin : "test/bin/ls/ls-806"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-807:
+    args: "-c -l    -p -S"
+    bin : "test/bin/ls/ls-807"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-808:
+    args: "-b -T 7 -C -Z -a"
+    bin : "test/bin/ls/ls-808"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-809:
+    args: "-b -c -i      "
+    bin : "test/bin/ls/ls-809"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-810:
+    args: "-C -u -L -X -q"
+    bin : "test/bin/ls/ls-810"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-811:
+    args: "-p -D -H -q -u"
+    bin : "test/bin/ls/ls-811"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-812:
+    args: "-R -n    -A -h"
+    bin : "test/bin/ls/ls-812"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-813:
+    args: "   -b -S -q -c"
+    bin : "test/bin/ls/ls-813"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-814:
+    args: "   -h -Q -v -r"
+    bin : "test/bin/ls/ls-814"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-815:
+    args: "   -r -R    -H"
+    bin : "test/bin/ls/ls-815"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-816:
+    args: "   -S -I -Z   "
+    bin : "test/bin/ls/ls-816"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-817:
+    args: "-X -i -H -l -H"
+    bin : "test/bin/ls/ls-817"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-818:
+    args: "   -N -m -F -t"
+    bin : "test/bin/ls/ls-818"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-819:
+    args: "-R -u -v -b -h"
+    bin : "test/bin/ls/ls-819"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-820:
+    args: "-B -r -w 40 -I -d"
+    bin : "test/bin/ls/ls-820"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-821:
+    args: "-c -L -D -l -c"
+    bin : "test/bin/ls/ls-821"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-822:
+    args: "-q -B -G -c -1"
+    bin : "test/bin/ls/ls-822"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-823:
+    args: "-g -S -R -s -t"
+    bin : "test/bin/ls/ls-823"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-824:
+    args: "-h -u -h    -C"
+    bin : "test/bin/ls/ls-824"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-825:
+    args: "-T 7 -T 7 -D -t -s"
+    bin : "test/bin/ls/ls-825"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-826:
+    args: "-w 40 -l -q    -f"
+    bin : "test/bin/ls/ls-826"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-827:
+    args: "-G -Z -s    -U"
+    bin : "test/bin/ls/ls-827"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-828:
+    args: "   -f       -k"
+    bin : "test/bin/ls/ls-828"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-829:
+    args: "-g -N -F    -C"
+    bin : "test/bin/ls/ls-829"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-830:
+    args: "-r    -S -Z -i"
+    bin : "test/bin/ls/ls-830"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-831:
+    args: "   -N -a    -w 40"
+    bin : "test/bin/ls/ls-831"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-832:
+    args: "-Q -o -x -s -Q"
+    bin : "test/bin/ls/ls-832"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-833:
+    args: "-N -f -U    -g"
+    bin : "test/bin/ls/ls-833"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-834:
+    args: "-k -p -Z    -k"
+    bin : "test/bin/ls/ls-834"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-835:
+    args: "-Z -S -L -t   "
+    bin : "test/bin/ls/ls-835"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-836:
+    args: "-R -U -i -r -C"
+    bin : "test/bin/ls/ls-836"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-837:
+    args: "-h -t -i    -X"
+    bin : "test/bin/ls/ls-837"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-838:
+    args: "-w 40 -U -p -t -S"
+    bin : "test/bin/ls/ls-838"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-839:
+    args: "-i -g -v -k -x"
+    bin : "test/bin/ls/ls-839"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-840:
+    args: "-X -d    -X -N"
+    bin : "test/bin/ls/ls-840"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-841:
+    args: "-A -R -b -k -m"
+    bin : "test/bin/ls/ls-841"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-842:
+    args: "-v -R -i -L   "
+    bin : "test/bin/ls/ls-842"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-843:
+    args: "   -B -d -n -T 7"
+    bin : "test/bin/ls/ls-843"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-844:
+    args: "-G -N -R -s -p"
+    bin : "test/bin/ls/ls-844"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-845:
+    args: "-I -H -f -o -T 7"
+    bin : "test/bin/ls/ls-845"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-846:
+    args: "-m -B -o -C -b"
+    bin : "test/bin/ls/ls-846"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-847:
+    args: "-D -1 -s -a -c"
+    bin : "test/bin/ls/ls-847"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-848:
+    args: "-g -f -q    -C"
+    bin : "test/bin/ls/ls-848"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-849:
+    args: "-s -r -I -f -C"
+    bin : "test/bin/ls/ls-849"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-850:
+    args: "-D -f -q -g   "
+    bin : "test/bin/ls/ls-850"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-851:
+    args: "-C -F -g -m -w 40"
+    bin : "test/bin/ls/ls-851"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-852:
+    args: "-i -v -I -b -H"
+    bin : "test/bin/ls/ls-852"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-853:
+    args: "-1 -c -v -r   "
+    bin : "test/bin/ls/ls-853"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-854:
+    args: "-U -w 40 -G -m -1"
+    bin : "test/bin/ls/ls-854"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-855:
+    args: "-Z -k         "
+    bin : "test/bin/ls/ls-855"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-856:
+    args: "-v -F -w 40 -Q -u"
+    bin : "test/bin/ls/ls-856"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-857:
+    args: "-S -f -r -w 40 -B"
+    bin : "test/bin/ls/ls-857"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-858:
+    args: "-x -A -B -l -1"
+    bin : "test/bin/ls/ls-858"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-859:
+    args: "-h -o -F -T 7   "
+    bin : "test/bin/ls/ls-859"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-860:
+    args: "-1 -Z -L -x -D"
+    bin : "test/bin/ls/ls-860"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-861:
+    args: "-R -T 7 -I -1 -g"
+    bin : "test/bin/ls/ls-861"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-862:
+    args: "-U -h -c -c -c"
+    bin : "test/bin/ls/ls-862"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-863:
+    args: "   -d -G    -x"
+    bin : "test/bin/ls/ls-863"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-864:
+    args: "-c -p -g -b -s"
+    bin : "test/bin/ls/ls-864"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-865:
+    args: "-s -a -w 40 -H   "
+    bin : "test/bin/ls/ls-865"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-866:
+    args: "-w 40 -L -r -l -f"
+    bin : "test/bin/ls/ls-866"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-867:
+    args: "-v -k -c -B -g"
+    bin : "test/bin/ls/ls-867"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-868:
+    args: "-B -s -R -F -I"
+    bin : "test/bin/ls/ls-868"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-869:
+    args: "-c -q -u -r -w 40"
+    bin : "test/bin/ls/ls-869"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-870:
+    args: "   -f    -U -q"
+    bin : "test/bin/ls/ls-870"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-871:
+    args: "-I -k -b -h -g"
+    bin : "test/bin/ls/ls-871"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-872:
+    args: "-k -L -a -h -o"
+    bin : "test/bin/ls/ls-872"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-873:
+    args: "-H -A -h -L   "
+    bin : "test/bin/ls/ls-873"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-874:
+    args: "-Q -B -i -o -r"
+    bin : "test/bin/ls/ls-874"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-875:
+    args: "-F    -C -t -f"
+    bin : "test/bin/ls/ls-875"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-876:
+    args: "-b -t -S -o -I"
+    bin : "test/bin/ls/ls-876"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-877:
+    args: "-B    -S -D -h"
+    bin : "test/bin/ls/ls-877"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-878:
+    args: "-p -I -S -p   "
+    bin : "test/bin/ls/ls-878"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-879:
+    args: "-w 40 -t -m -w 40 -l"
+    bin : "test/bin/ls/ls-879"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-880:
+    args: "-B -L -b -B -S"
+    bin : "test/bin/ls/ls-880"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-881:
+    args: "-v -d -D -w 40 -D"
+    bin : "test/bin/ls/ls-881"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-882:
+    args: "-f -w 40 -L -l -X"
+    bin : "test/bin/ls/ls-882"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-883:
+    args: "   -B -T 7 -l -X"
+    bin : "test/bin/ls/ls-883"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-884:
+    args: "-b    -X -i -a"
+    bin : "test/bin/ls/ls-884"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-885:
+    args: "-h       -p -k"
+    bin : "test/bin/ls/ls-885"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-886:
+    args: "-G    -G -n -l"
+    bin : "test/bin/ls/ls-886"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-887:
+    args: "-B    -q    -B"
+    bin : "test/bin/ls/ls-887"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-888:
+    args: "-d -r -m -u -d"
+    bin : "test/bin/ls/ls-888"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-889:
+    args: "-p -t -s -p -n"
+    bin : "test/bin/ls/ls-889"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-890:
+    args: "-S -1 -t -n -Z"
+    bin : "test/bin/ls/ls-890"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-891:
+    args: "-T 7 -m -H -q   "
+    bin : "test/bin/ls/ls-891"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-892:
+    args: "-w 40 -v -Z -C -a"
+    bin : "test/bin/ls/ls-892"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-893:
+    args: "-1 -u -T 7 -o   "
+    bin : "test/bin/ls/ls-893"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-894:
+    args: "-I -X -U -D -r"
+    bin : "test/bin/ls/ls-894"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-895:
+    args: "-D -c -l    -G"
+    bin : "test/bin/ls/ls-895"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-896:
+    args: "-h -N -U -r -Q"
+    bin : "test/bin/ls/ls-896"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-897:
+    args: "-l -x -c -c -u"
+    bin : "test/bin/ls/ls-897"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-898:
+    args: "-l -i    -f -H"
+    bin : "test/bin/ls/ls-898"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-899:
+    args: "-c -D -b -g -N"
+    bin : "test/bin/ls/ls-899"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-900:
+    args: "-U -Z -d -f -t"
+    bin : "test/bin/ls/ls-900"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-901:
+    args: "-Q -u -n -B   "
+    bin : "test/bin/ls/ls-901"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-902:
+    args: "-i -D    -U -o"
+    bin : "test/bin/ls/ls-902"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-903:
+    args: "-u -R -1 -k   "
+    bin : "test/bin/ls/ls-903"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-904:
+    args: "   -x -G -u   "
+    bin : "test/bin/ls/ls-904"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-905:
+    args: "-x       -C -d"
+    bin : "test/bin/ls/ls-905"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-906:
+    args: "-C -N -v -R -T 7"
+    bin : "test/bin/ls/ls-906"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-907:
+    args: "      -L -f -F"
+    bin : "test/bin/ls/ls-907"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-908:
+    args: "-L -k -c      "
+    bin : "test/bin/ls/ls-908"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-909:
+    args: "-g    -S    -k"
+    bin : "test/bin/ls/ls-909"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-910:
+    args: "-Q -A -G    -v"
+    bin : "test/bin/ls/ls-910"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-911:
+    args: "-v -d -Z -l -s"
+    bin : "test/bin/ls/ls-911"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-912:
+    args: "   -C    -X -X"
+    bin : "test/bin/ls/ls-912"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-913:
+    args: "   -g -d -h -g"
+    bin : "test/bin/ls/ls-913"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-914:
+    args: "-i -l    -L   "
+    bin : "test/bin/ls/ls-914"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-915:
+    args: "-n -I -N -b -A"
+    bin : "test/bin/ls/ls-915"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-916:
+    args: "-1 -c -d -Z -H"
+    bin : "test/bin/ls/ls-916"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-917:
+    args: "-v -C    -1 -q"
+    bin : "test/bin/ls/ls-917"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-918:
+    args: "-s -G    -S -a"
+    bin : "test/bin/ls/ls-918"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-919:
+    args: "   -Z -L -q -v"
+    bin : "test/bin/ls/ls-919"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-920:
+    args: "-p -d -h -X -C"
+    bin : "test/bin/ls/ls-920"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-921:
+    args: "-B -G    -r -o"
+    bin : "test/bin/ls/ls-921"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-922:
+    args: "-t -t    -Z   "
+    bin : "test/bin/ls/ls-922"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-923:
+    args: "-d    -B -G -t"
+    bin : "test/bin/ls/ls-923"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-924:
+    args: "-R    -d -o -I"
+    bin : "test/bin/ls/ls-924"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-925:
+    args: "-s -Z -m -a -p"
+    bin : "test/bin/ls/ls-925"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-926:
+    args: "   -q -n    -o"
+    bin : "test/bin/ls/ls-926"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-927:
+    args: "-C -x -o    -k"
+    bin : "test/bin/ls/ls-927"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-928:
+    args: "-Q    -k -L -r"
+    bin : "test/bin/ls/ls-928"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-929:
+    args: "-v -Z -D -D   "
+    bin : "test/bin/ls/ls-929"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-930:
+    args: "-h -U    -o -Z"
+    bin : "test/bin/ls/ls-930"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-931:
+    args: "   -f -A    -x"
+    bin : "test/bin/ls/ls-931"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-932:
+    args: "-d -b -p -S -b"
+    bin : "test/bin/ls/ls-932"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-933:
+    args: "   -B -p -f -w 40"
+    bin : "test/bin/ls/ls-933"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-934:
+    args: "   -r -B -1 -f"
+    bin : "test/bin/ls/ls-934"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-935:
+    args: "-u -u -F    -w 40"
+    bin : "test/bin/ls/ls-935"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-936:
+    args: "      -q -k -d"
+    bin : "test/bin/ls/ls-936"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-937:
+    args: "      -r -p   "
+    bin : "test/bin/ls/ls-937"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-938:
+    args: "-w 40    -s -X -i"
+    bin : "test/bin/ls/ls-938"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-939:
+    args: "   -g -n -g   "
+    bin : "test/bin/ls/ls-939"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-940:
+    args: "-n -D -u -T 7 -N"
+    bin : "test/bin/ls/ls-940"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-941:
+    args: "   -T 7 -S    -w 40"
+    bin : "test/bin/ls/ls-941"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-942:
+    args: "-S -Q -R -L -B"
+    bin : "test/bin/ls/ls-942"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-943:
+    args: "-n -C -D -D -b"
+    bin : "test/bin/ls/ls-943"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-944:
+    args: "-i -i -1 -D -U"
+    bin : "test/bin/ls/ls-944"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-945:
+    args: "-w 40 -B -n -l -R"
+    bin : "test/bin/ls/ls-945"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-946:
+    args: "-w 40 -w 40 -C -U   "
+    bin : "test/bin/ls/ls-946"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-947:
+    args: "-i -G -a -o   "
+    bin : "test/bin/ls/ls-947"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-948:
+    args: "-C -d -A    -b"
+    bin : "test/bin/ls/ls-948"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-949:
+    args: "-m -d -a -F -t"
+    bin : "test/bin/ls/ls-949"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-950:
+    args: "-A -F    -m -I"
+    bin : "test/bin/ls/ls-950"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-951:
+    args: "-p -H -i    -o"
+    bin : "test/bin/ls/ls-951"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-952:
+    args: "-k -s -x -n -t"
+    bin : "test/bin/ls/ls-952"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-953:
+    args: "-q -v    -l -G"
+    bin : "test/bin/ls/ls-953"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-954:
+    args: "-F -h -B    -b"
+    bin : "test/bin/ls/ls-954"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-955:
+    args: "-C    -L -d -t"
+    bin : "test/bin/ls/ls-955"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-956:
+    args: "-l -Q -q      "
+    bin : "test/bin/ls/ls-956"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-957:
+    args: "-X -o -R -g -D"
+    bin : "test/bin/ls/ls-957"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-958:
+    args: "-G    -I -m   "
+    bin : "test/bin/ls/ls-958"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-959:
+    args: "-X -n -h -S -U"
+    bin : "test/bin/ls/ls-959"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-960:
+    args: "-c -N -v -H   "
+    bin : "test/bin/ls/ls-960"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-961:
+    args: "-I -G -i -X -k"
+    bin : "test/bin/ls/ls-961"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-962:
+    args: "      -w 40 -t -q"
+    bin : "test/bin/ls/ls-962"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-963:
+    args: "-S -H -f -s -a"
+    bin : "test/bin/ls/ls-963"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-964:
+    args: "   -f    -d -L"
+    bin : "test/bin/ls/ls-964"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-965:
+    args: "   -r    -v   "
+    bin : "test/bin/ls/ls-965"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-966:
+    args: "-G    -m -r -v"
+    bin : "test/bin/ls/ls-966"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-967:
+    args: "-S -U -T 7 -T 7 -f"
+    bin : "test/bin/ls/ls-967"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-968:
+    args: "-1 -i -x -b   "
+    bin : "test/bin/ls/ls-968"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-969:
+    args: "-Q -q -f -c -m"
+    bin : "test/bin/ls/ls-969"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-970:
+    args: "-G -b -r -m   "
+    bin : "test/bin/ls/ls-970"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-971:
+    args: "-o -r -v -L -N"
+    bin : "test/bin/ls/ls-971"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-972:
+    args: "   -A -q -w 40 -D"
+    bin : "test/bin/ls/ls-972"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-973:
+    args: "-1    -L -T 7 -R"
+    bin : "test/bin/ls/ls-973"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-974:
+    args: "-c -b -I -m -H"
+    bin : "test/bin/ls/ls-974"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-975:
+    args: "-b -X -D -1 -s"
+    bin : "test/bin/ls/ls-975"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-976:
+    args: "-s    -c -i -a"
+    bin : "test/bin/ls/ls-976"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-977:
+    args: "-p -T 7 -T 7    -Z"
+    bin : "test/bin/ls/ls-977"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-978:
+    args: "-H -c         "
+    bin : "test/bin/ls/ls-978"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-979:
+    args: "-n -i -t -w 40 -N"
+    bin : "test/bin/ls/ls-979"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-980:
+    args: "-s       -v -p"
+    bin : "test/bin/ls/ls-980"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-981:
+    args: "-v -Q    -Z -X"
+    bin : "test/bin/ls/ls-981"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-982:
+    args: "-c       -R -Q"
+    bin : "test/bin/ls/ls-982"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-983:
+    args: "   -x -k    -w 40"
+    bin : "test/bin/ls/ls-983"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-984:
+    args: "   -b    -C -k"
+    bin : "test/bin/ls/ls-984"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-985:
+    args: "-i -G -p -f   "
+    bin : "test/bin/ls/ls-985"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-986:
+    args: "-R -p -k    -l"
+    bin : "test/bin/ls/ls-986"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-987:
+    args: "-C -h -1 -G -u"
+    bin : "test/bin/ls/ls-987"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-988:
+    args: "-k -t -t -c   "
+    bin : "test/bin/ls/ls-988"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-989:
+    args: "-N -X -G -1 -q"
+    bin : "test/bin/ls/ls-989"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-990:
+    args: "-U -F -b -G -b"
+    bin : "test/bin/ls/ls-990"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-991:
+    args: "   -p -L      "
+    bin : "test/bin/ls/ls-991"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-992:
+    args: "-1 -s -n      "
+    bin : "test/bin/ls/ls-992"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-993:
+    args: "-p -F -i -q -X"
+    bin : "test/bin/ls/ls-993"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-994:
+    args: "-G -q -s -q   "
+    bin : "test/bin/ls/ls-994"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-995:
+    args: "-k -s -G -g   "
+    bin : "test/bin/ls/ls-995"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-996:
+    args: "-t -t -u -c   "
+    bin : "test/bin/ls/ls-996"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-997:
+    args: "   -r -t    -Z"
+    bin : "test/bin/ls/ls-997"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-998:
+    args: "-X -X -c -D -h"
+    bin : "test/bin/ls/ls-998"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+ls-999:
+    args: "-R    -Z -t -u"
+    bin : "test/bin/ls/ls-999"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"

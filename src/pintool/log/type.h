@@ -22,9 +22,9 @@ void read_parameters(std::ifstream &ifile, fn_type_t *fn) {
     while (ifile && m != '\n') {
         ifile.read(&m, 1);
         if (m == 'A')
-            fn->type_param.push_back(1);
-        else if (m == 'I' || m == 'V')
-            fn->type_param.push_back(0);
+            fn->type_param.push_back(true);
+        else if (m == 'I' || m == 'V' || m == 'U')
+            fn->type_param.push_back(false);
         else
             continue;
         fn->nb_param += 1;

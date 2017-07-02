@@ -3,7 +3,9 @@
 import sys
 from abc import ABCMeta, abstractmethod
 
-class ICommand(object):
+from src.shell.std import Std
+
+class ICommand(Std):
     """
         Interface for a scat command
 
@@ -39,5 +41,4 @@ class ICommand(object):
 
     @abstractmethod
     def complete(self, text, line, begidx, endidx):
-        return ""
-
+        return

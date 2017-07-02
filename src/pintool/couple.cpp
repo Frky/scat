@@ -1,4 +1,3 @@
-
 #include <list>
 
 #include "utils/debug.h"
@@ -10,13 +9,24 @@
 
 #include "pin.H"
 
-#define NB_FN_MAX               5000
+#define NB_FN_MAX               10000
 #define MAX_DEPTH               1000
-#define NB_VALS_TO_CONCLUDE     100
-#define SEUIL                   0.8
 
+#define MAX_VALS_DEFAULT        "100"
+
+/* ANALYSIS PARAMETERS - default values can be overwritten by command line arguments */
+unsigned int MAX_VALS;
+KNOB<string> KnobMaxVals(KNOB_MODE_WRITEONCE, "pintool", "max_vals", MAX_VALS_DEFAULT, "Specify a number for MAX_VALS_DEFAULT");
+
+/* In file to get results from previous analysis */
+ifstream ifile;
 KNOB<string> KnobInputFile(KNOB_MODE_WRITEONCE, "pintool", "i", "stdin", "Specify an intput file");
+/* Out file to store analysis results */
+ofstream ofile;
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "stdout", "Specify an output file");
+
+/* Time of instrumentation */
+struct timeval start, stop; 
 
 /* Call stack */
 HollowStack<MAX_DEPTH, FID> call_stack;
@@ -26,7 +36,7 @@ HollowStack<MAX_DEPTH, bool> is_jump_stack;
 HollowStack<MAX_DEPTH, UINT64> sp_stack;
 
 /* Timecounter to have a chronology of parameter values */
-UINT64 timecounter;
+UINT64 event_counter;
 
 /* Structure for functions */
 typedef struct {
@@ -38,8 +48,8 @@ typedef struct {
     bool *is_addr;
     /* Accumulator of values */
     list<ADDRINT> **val;
-    /* Timecounter to know when a parameter occurrec */
-    list<UINT64> **val_timecounter;
+    /* Timecounter to know when a parameter occurred */
+    list<UINT64> **val_ec;
 } fn_data_t;
 
 /* Function data list */
@@ -55,7 +65,7 @@ fn_data_t **fn_data;
 VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
     trace_enter();
 
-    timecounter += 1;
+    event_counter += 1;
 
     call_stack.push(fid);
     is_jump_stack.push(is_jump);
@@ -68,11 +78,11 @@ VOID fn_call(CONTEXT *ctxt, FID fid, bool is_jump) {
 
     /* For each address parameter, accumulate a value */
     for (unsigned int i = 1; i < fn->nb_p; i++) {
-        if (fn->is_addr[i] && fn->val[i]->size() < NB_VALS_TO_CONCLUDE) {
+        if (fn->is_addr[i] && fn->val[i]->size() < MAX_VALS) {
             ADDRINT param_val = get_param_value(ctxt, i);
             if (param_val != 0) {
                 fn->val[i]->push_front(param_val);
-                fn->val_timecounter[i]->push_front(timecounter);
+                fn->val_ec[i]->push_front(event_counter);
             }
         }
     }
@@ -119,27 +129,27 @@ VOID fn_ret(CONTEXT *ctxt) {
 
     if (!call_stack.is_top_forgotten()) {
         while (is_jump_stack.top()) {
-            timecounter += 1;
+            event_counter += 1;
             FID fid = call_stack.top();
             if (fn_data[fid]->is_addr[0]) {
                 ADDRINT val = get_param_value(ctxt, 0);
                 if (val != 0) {
                     fn_data[fid]->val[0]->push_front(val);
-                    fn_data[fid]->val_timecounter[0]->push_front(timecounter);
+                    fn_data[fid]->val_ec[0]->push_front(event_counter);
                 }
             }
             call_stack.pop();
             is_jump_stack.pop();
         }
         
-        timecounter += 1;
+        event_counter += 1;
         FID fid = call_stack.top();
 
         if (fn_data[fid]->is_addr[0]) {
             ADDRINT val = get_param_value(ctxt, 0);
             if (val != 0) {
                 fn_data[fid]->val[0]->push_front(val);
-                fn_data[fid]->val_timecounter[0]->push_front(timecounter);
+                fn_data[fid]->val_ec[0]->push_front(event_counter);
             }
         }
 
@@ -170,11 +180,11 @@ void fn_registered(FID fid, unsigned int nb_param, vector<bool> type_param) {
 
     fn->is_addr = (bool *) calloc(nb_param, sizeof(bool));
     fn->val = (list<ADDRINT> **) calloc(nb_param, sizeof(list<ADDRINT> *));
-    fn->val_timecounter = (list<UINT64> **) calloc(nb_param, sizeof(list<UINT64> *));
+    fn->val_ec = (list<UINT64> **) calloc(nb_param, sizeof(list<UINT64> *));
     for (unsigned int i = 0; i < nb_param; i++) {
         fn->is_addr[i] = type_param[i];
         fn->val[i] = new list<ADDRINT>();
-        fn->val_timecounter[i] = new list<UINT64>();
+        fn->val_ec[i] = new list<UINT64>();
     }
 
     fn_data[fid] = fn;
@@ -195,6 +205,8 @@ VOID Commence() {
 
     if (ifile.is_open()) {
         /* Ignore first line (elapsed time) */
+        read_line(ifile);
+        /* Ignore second line (params of inference) */
         read_line(ifile);
         while (ifile) {
             /* Read the prototype of one function */
@@ -226,6 +238,8 @@ VOID Fini(INT32 code, VOID *v) {
     /* Open output log file (result of this inference */
     ofile.open(KnobOutputFile.Value().c_str());
 
+    ofile << "MAX_VALS=" << MAX_VALS << endl;
+
     /* First we log the table fid <-> name */
     log_ftable(ofile);
 
@@ -234,7 +248,7 @@ VOID Fini(INT32 code, VOID *v) {
         fn_data_t *fn = fn_data[fid];
         for (unsigned int pid = 0; pid < fn->nb_p; pid++) {
             list<ADDRINT>::iterator senti_val = fn->val[pid]->begin();
-            list<UINT64>::iterator senti_tc = fn->val_timecounter[pid]->begin();
+            list<UINT64>::iterator senti_tc = fn->val_ec[pid]->begin();
             while (senti_val != fn->val[pid]->end()) {
                 ofile << fid << ":" << pid << ":" << *senti_val << ":" << *senti_tc << endl;
                 senti_val++;
@@ -287,16 +301,19 @@ VOID Instruction(INS ins, VOID *v) {
         }
     }
 
-    if (INS_IsIndirectBranchOrCall(ins)) {
-        if (! INS_IsCall(ins)) {
-            INS_InsertCall(ins,
+    if (INS_IsIndirectBranchOrCall(ins) && !INS_IsFarCall(ins) && !INS_IsFarJump(ins) && !INS_IsFarRet(ins)) {
+        if ((!INS_IsCall(ins)) && INS_IsBranchOrCall(ins) 
+                /* This condition fixes runtime crash of pin on some programs
+                   (e.g. git) -- but I am not sure it is a correct answer, it 
+                   might have bad effects on the results of inference */
+                    && (INS_Category(ins) != XED_CATEGORY_COND_BR))
+                INS_InsertCall(ins,
                     IPOINT_BEFORE,
                     (AFUNPTR) fn_indirect_call,
                     IARG_CONST_CONTEXT,
                     IARG_BRANCH_TARGET_ADDR,
                     IARG_BOOL, true,
                     IARG_END);
-        }
     }
 
     if (INS_IsRet(ins)) {
@@ -319,6 +336,9 @@ int main(int argc, char * argv[])
 
     if (PIN_Init(argc, argv)) return 1;
 
+    /* Get parameters of analysis from command line */
+    MAX_VALS = std::atoi(KnobMaxVals.Value().c_str());
+
     /* Init function data structure */
     fn_data = (fn_data_t **) calloc(NB_FN_MAX, sizeof(fn_data_t*));
 
@@ -330,7 +350,7 @@ int main(int argc, char * argv[])
     debug_trace_init();
 
     /* Init timecounter */
-    timecounter = 0;
+    event_counter = 0;
 
     /* Parse input file and register functions
        seen in previous executions */
