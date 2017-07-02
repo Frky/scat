@@ -5,6 +5,10 @@
 
 > \- Strictly high-buttoned shoes. »
 
+
+**(01/07/17) WARNING: this documentation is out of date (but will be updated soon).**
+
+
 [What is `scat`?](#what-is-scat)
 
 [How does it work?](#how-does-scat-work)
