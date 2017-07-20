@@ -19,13 +19,6 @@ tar:
     data: "test/data/tar.data"
     deps: "test/data/tar.deps"
     post: "rm test/tmp/pgm.tar.gz"
-# jasper:
-#     args: "
-# fun:
-#     args: " "
-#     bin: "test/bin/fun"
-#     data: "test/data/fun.data"
-#     deps: "test/data/fun.deps"
 git:
     args: "clone https://github.com/Frky/fun.git test/tmp/scat"
     bin: "test/bin/git"
@@ -37,17 +30,6 @@ bash:
     bin: "test/bin/bash/bash"
     data: "test/data/bash.data"
     deps: "test/data/bash.deps"
-# magick:
-#     args: "convert test/input/lena.pnm test/tmp/lena.png"
-#     bin: "test/bin/magick"
-#     data: "test/data/magick.data"
-#     deps: "test/data/magick.deps"
-#     post: "rm test/tmp/lena.png"
-# midori:
-#     args: "https://github.com/Frky/scat"
-#     bin: "test/bin/midori"
-#     data: "test/data/midori.data"
-#     deps: "test/data/midori.deps"
 openssl:
     args: 'enc -e -aes-256-cbc -in test/input/poc.pdf -out test/tmp/scat.cipher -k "password"'
     bin: "test/bin/openssl"
@@ -62,5 +44,5 @@ opusenc:
     post: "rm test/tmp/output.opus"
 coreutils:
     config: "test/coreutils.yaml"
-# 8cc:
-#     config: "test/8cc.yaml"
+8cc:
+    config: "test/8cc.yaml"
