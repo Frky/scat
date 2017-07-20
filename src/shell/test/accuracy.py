@@ -17,7 +17,7 @@ from src.shell.test.res.accuracy import AccuracyRes
 
 class TestAccuracy(Std):
 
-    def __init__(self, test_conf, empty, arity, typ, logdir, resdir, *args, **kwargs):
+    def __init__(self, test_conf, empty, arity, typ, logpath, resdir, *args, **kwargs):
         self.__resdir = resdir
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
         # Inlcude sub configuration files
@@ -29,14 +29,15 @@ class TestAccuracy(Std):
         self.__empty = empty
         self.__arity = arity
         self.__type = typ
-        self.__logdir = logdir
+        self.__logpath = logpath
+        print logpath
         super(TestAccuracy, self).__init__(*args, **kwargs)
 
     def __run_arity(self):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
-        prev_res = ArityChart(self.__resdir + "/arity.res", self.__conf)
+        prev_res = ArityChart(self.__logpath, self.__conf)
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if prev_res.contains(pgm):
                 continue
@@ -79,8 +80,10 @@ class TestAccuracy(Std):
             # Get time of execution with PIN and no instrumentation
             with open(self.__empty.get_logfile(pgm, prev=False)) as f:
                 empty_time = float(f.read())
+            # Compute static size
+            size = os.path.getsize(param["bin"]) 
             ar = ArityAnalysis(pgm, self.__arity.get_logfile(pgm, prev=False), data)
-            res.add(ar.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "arity.res", empty_time=empty_time, no_pin_time=stop - start), pgm=pgm, verbose=True)
+            res.add(ar.accuracy(get=True, verbose=False, log=self.__logpath, empty_time=empty_time, no_pin_time=stop - start, size=size), pgm=pgm, verbose=True)
 
         print res
         print "IGNORED: {}".format(ignored)
@@ -89,9 +92,9 @@ class TestAccuracy(Std):
         res = AccuracyRes()
         ignored = 0
         FNULL = open(os.devnull, "w")
-        prev_res = TypeChart(self.__resdir + "/type.res", self.__conf)
+        prev_res = TypeChart(self.__logpath, self.__conf)
         # used to get times of execution with no instrumentation
-        arity_res = ArityChart(self.__resdir + "/arity.res", self.__conf)
+        arity_res = ArityChart(self.__logpath.replace("type", "arity"), self.__conf)
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if prev_res.contains(pgm):
                 continue
@@ -118,8 +121,9 @@ class TestAccuracy(Std):
             # Get times of execution with no instrumentation
             empty_time = arity_res.get_one(pgm).empty_time
             nopin_time = arity_res.get_one(pgm).nopin_time
+            size = arity_res.get_one(pgm).size
             ty = TypeAnalysis(pgm, self.__type.get_logfile(pgm, prev=False), data)
-            res.add(ty.accuracy(get=True, verbose=False, log=self.__resdir + "/" + "type.res", empty_time=empty_time, nopin_time=nopin_time), pgm=pgm)
+            res.add(ty.accuracy(get=True, verbose=False, log=self.__logpath, empty_time=empty_time, nopin_time=nopin_time), pgm=pgm)
 
         print res
         print "IGNORED: {}".format(ignored)

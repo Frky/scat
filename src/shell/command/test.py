@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+import os
+
 from .i_command import ICommand
 from src.shell.test.accuracy import TestAccuracy
 from src.shell.test.parameter import TestParameter
@@ -18,6 +20,10 @@ class TestCmd(ICommand):
         self.__pintools = pintools
         self.__logdir = logdir
         self.__resdir = resdir
+        for analysis in ["arity", "type", "couple", "alloc"]:
+            if not os.path.exists(self.__resdir + "/" + analysis):
+                os.mkdir(self.__resdir + "/" + analysis)
+
         super(TestCmd, self).__init__(*args, **kwargs)
 
     def run(self, s, *args, **kwargs):
@@ -28,6 +34,8 @@ class TestCmd(ICommand):
         if "-t" in split:
             self.__conf_path = split.pop(split.index("-t") + 1)
             split.pop(split.index("-t"))
+
+        test_name = os.path.basename(self.__conf_path).replace(".yaml", "")
 
         if len(split) < 1:
             self.help()
@@ -46,8 +54,8 @@ class TestCmd(ICommand):
                                 self.__pintools["empty"], 
                                 self.__pintools["arity"], 
                                 self.__pintools["type"], 
-                                self.__logdir, 
-                                resdir=self.__resdir).run()
+                                "{}/{}/{}.res".format(self.__resdir, analysis, test_name),
+                                resdir=self.__resdir).run(subcommand=analysis)
             else:
                 if param not in self.__param[analysis].keys():
                     self.stderr("unknown parameter: {} -- aborting".format(param))
@@ -69,7 +77,7 @@ class TestCmd(ICommand):
                 test = TestParameter(
                                         self.__conf_path, 
                                         self.__pintools[analysis], 
-                                        resdir=self.__resdir, 
+                                        "{}/{}/{}.res".format(self.__resdir, analysis, test_name),
                                         prev_pintool=prev
                                     )
                 test.run(params)
@@ -83,7 +91,7 @@ class TestCmd(ICommand):
                                 self.__conf_path, 
                                 pintool=self.__pintools[analysis],
                                 logdir=self.__logdir, 
-                                resdir=self.__resdir, 
+                                logpath="{}/{}/{}.res".format(self.__resdir, analysis, test_name),
                             ).run()
             else: 
                 if param in ["rho", "min_vals", "max_vals"]:
@@ -102,7 +110,7 @@ class TestCmd(ICommand):
                                     self.__conf_path, 
                                     pintool=self.__pintools[analysis],
                                     logdir=self.__logdir, 
-                                    resdir=self.__resdir, 
+                                    logpath="{}/{}/{}.res".format(self.__resdir, analysis, test_name),
                                 ).run_params(params, param)
                 else:
                     self.stderr("unknown parameter: {} -- aborting".format(param))

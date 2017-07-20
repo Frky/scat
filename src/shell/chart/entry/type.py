@@ -15,7 +15,7 @@ class TypeEntry(Entry):
         self._time = float(l[10])
         self._empty_time = float(l[11])
         self._nopin_time = float(l[12])
-        self._size = size
+        self._size = int(l[13])
         super(TypeEntry, self).__init__(*args, **kwargs)
 
     @property

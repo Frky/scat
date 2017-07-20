@@ -1,4 +1,5 @@
 #include <list>
+#include <sys/time.h>
 
 #include "utils/debug.h"
 #include "utils/functions_registry.h"
@@ -238,6 +239,10 @@ VOID Fini(INT32 code, VOID *v) {
     /* Open output log file (result of this inference */
     ofile.open(KnobOutputFile.Value().c_str());
 
+    gettimeofday(&stop, NULL);
+
+    ofile << (stop.tv_usec / 1000.0 + 1000 * stop.tv_sec - start.tv_sec * 1000 - start.tv_usec / 1000.0) / 1000.0 << endl;
+
     ofile << "MAX_VALS=" << MAX_VALS << endl;
 
     /* First we log the table fid <-> name */
@@ -362,6 +367,8 @@ int main(int argc, char * argv[])
     /* Register Fini to be called when the
        application exits */
     PIN_AddFiniFunction(Fini, 0);
+
+    gettimeofday(&start, NULL);
 
     /* Start the execution of the binary under analysis */
     PIN_StartProgram();

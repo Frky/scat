@@ -141,7 +141,7 @@ class TypeAnalysis(Analysis):
         print("")
         self.print_general_info()
 
-    def accuracy(self, get=False, verbose=True, log=None, empty_time=0.0, nopin_time=0.0):
+    def accuracy(self, get=False, verbose=True, log=None, empty_time=0.0, nopin_time=0.0, size=0):
         if verbose:
             self.print_general_info()
             print("")
@@ -204,7 +204,7 @@ class TypeAnalysis(Analysis):
         if log is not None:
             params = self.log.get_params()
             with open(log, "a") as f:
-                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
+                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}\n".format(
                         self.pgm,
                         params["MIN_VALS"],
                         params["MAX_VALS"],
@@ -218,6 +218,7 @@ class TypeAnalysis(Analysis):
                         self.log.time(),
                         empty_time, 
                         nopin_time, 
+                        size,
                     ))
         if get:
             return (params_ok, return_ok, param_fp, param_fn, return_fp, return_fn, params_total, return_total)

@@ -15,8 +15,8 @@ from src.shell.pin.pintool import Pintool
 
 class TestParameter(object):
 
-    def __init__(self, test_conf, pintool, resdir, *args, **kwargs):
-        self.__resdir = resdir
+    def __init__(self, test_conf, pintool, logpath, *args, **kwargs):
+        self.__logpath = logpath
         self.__testname = os.path.splitext(os.path.basename(test_conf))[0]
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
         # Include sub configuration files
@@ -31,10 +31,10 @@ class TestParameter(object):
         else:
             self.__prev_pintool = None
         self.__prev_treated = list()
-        if str(pintool) == "arity":
-            self.__res = ArityChart(self.__resdir + "/{}_arity.res".format(self.__testname), self.__conf)
+        if str(self.__pintool) == "arity":
+            self.__res = ArityChart(self.__logpath, self.__conf)
         else:
-            self.__res = TypeChart(self.__resdir + "/{}_type.res".format(self.__testname), self.__conf)
+            self.__res = TypeChart(self.__logpath, self.__conf)
         super(TestParameter, self).__init__()
 
     def __run_one(self, params):
@@ -43,6 +43,8 @@ class TestParameter(object):
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if self.__res.contains(pgm, params):
                 continue
+            else:
+                print pgm, params
             if self.__prev_pintool is not None and pgm not in self.__prev_treated:
                 if "pre" in param.keys():
                     call(param["pre"], stdout=FNULL, shell=True)
@@ -72,7 +74,7 @@ class TestParameter(object):
                 an = ArityAnalysis(pgm, self.__pintool.get_logfile(pgm, prev=False), data)
             else:
                 an = TypeAnalysis(pgm, self.__pintool.get_logfile(pgm, prev=False), data)
-            res.add(an.accuracy(get=True, verbose=False, log=self.__resdir + "/" + str(self.__testname) + "_" + str(self.__pintool) + ".res"), pgm=pgm, verbose=True)
+            res.add(an.accuracy(get=True, verbose=False, log=self.__logpath), pgm=pgm, verbose=True)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
 

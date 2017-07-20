@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import pylab as P
 import pandas as pd  
+import numpy
 
 from .chart import Chart
 from .entry.couple import CoupleEntry
@@ -124,7 +125,9 @@ class CoupleChart(Chart):
         tab["f"] = dict()
         tab["g"] = dict()
         tab["n"] = dict()
-        order = ["tot", "n", "f", "g"]
+        tab["online"] = dict()
+        tab["offline"] = dict()
+        order = ["tot", "n", "f", "g", "online", "offline"]
         for c, e in enumerate(data):
             for k in tab.keys():
                 tab[k].setdefault(e.pgm, e.get(k))
@@ -174,6 +177,11 @@ class CoupleChart(Chart):
         ax.bar(bar_l, g, width=bar_width, label="number of right operands", 
                 alpha=1, bottom=map(lambda a: a[0] + a[1], zip(couples, f)), color=Chart.colors["right"])
                 
+        print("average/standard deviation:")
+        print("| number of couples: {:.3g}/{:.3g}".format(numpy.mean(couples), numpy.std(couples)))
+        print("| left operands: {:.3g}/{:.3g}".format(numpy.mean(f), numpy.std(f)))
+        print("| right operands: {:.3g}/{:.3g}".format(numpy.mean(g), numpy.std(g)))
+
         # Limit the range of the plot to only where the data is.    
         # Avoid unnecessary whitespace.    
         # plt.ylim(0.9, 1.01)    

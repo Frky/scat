@@ -110,7 +110,7 @@ class ScatShell(Cmd):
         )
         if "param" in self.__config["test"].keys():
             self.__cmds["test"] = TestCmd(
-                test_conf=self.__config["test"]["desc"],
+                test_conf=self.__config["test"]["default-conf"],
                 param=self.__config["test"]["param"],
                 pintools=self.__pintools,
                 logdir=self.__logdir,

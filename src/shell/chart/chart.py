@@ -60,7 +60,11 @@ class Chart(object):
         return False
 
     def get_one(self, pgm):
-        return filter(lambda e: e.pgm == pgm, self._data)[0]
+        cand = filter(lambda e: e.pgm == pgm, self._data)
+        if len(cand) == 0:
+            return None
+        else:
+            return cand[0]
 
     def get(self, param, defaults, inp=True, outp=True):
         self._data.sort(key=lambda a: a.get(param))
@@ -126,7 +130,7 @@ class Chart(object):
             plt.plot(data.keys(), tot, 'o', lw=1, color=Chart.colors["tot"], label="number of functions (normalized)")
         plt.plot(data.keys(), fn, 'o', lw=1, color=Chart.colors["fn"], label="false negatives (% of total)")
         plt.plot(data.keys(), fp, 'o', lw=1, color=Chart.colors["fp"], label="false positives (% of total)")
-        plt.legend()
+        plt.legend(fontsize=12)
 
         plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 
@@ -139,16 +143,16 @@ class Chart(object):
         if len(coreres) > 1:
             data.append(reduce(lambda a, b: a.merge(b), coreres[1:], coreres[0]))
             data[-1].set_pgm("coreutils")
-        cc = [d for d in data if "8cc" in d.pgm]
-        data = [d for d in data if not "8cc" in d.pgm]
-        if len(cc) > 1:
-            data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
-            data[-1].set_pgm("8cc")
-        ls = [d for d in data if "ls-" in d.pgm]
-        data = [d for d in data if not "ls-" in d.pgm]
-        if len(ls) > 1:
-            data.append(reduce(lambda a, b: a.merge(b), ls[1:], ls[0]))
-            data[-1].set_pgm("ls")
+        # cc = [d for d in data if "8cc" in d.pgm]
+        # data = [d for d in data if not "8cc" in d.pgm]
+        # if len(cc) > 1:
+        #     data.append(reduce(lambda a, b: a.merge(b), cc[1:], cc[0]))
+        #     data[-1].set_pgm("8cc")
+        # ls = [d for d in data if "ls-" in d.pgm]
+        # data = [d for d in data if not "ls-" in d.pgm]
+        # if len(ls) > 1:
+        #     data.append(reduce(lambda a, b: a.merge(b), ls[1:], ls[0]))
+        #     data[-1].set_pgm("ls")
         return data
 
     def draw_accuracy(self, data, name):
@@ -168,7 +172,7 @@ class Chart(object):
         for k in order:
             sys.stdout.write("{} & ".format(k))
         sys.stdout.write("\\\\\n")
-        for p in tab["tot_in"].keys():
+        for p in sorted(tab["tot_in"].keys()):
             sys.stdout.write("{} & ".format(p))
             for k in order:
                 if isinstance(tab[k][p], int):
@@ -278,7 +282,7 @@ class Chart(object):
         plt.xticks(tick_pos, map(lambda a: a.tot_in + a.tot_out, data), rotation="vertical")
         plt.tick_params(axis="both", which="both", bottom="off", top="off",    
                 labelbottom="on", left="off", right="off", labelleft="on") 
-        plt.legend()
+        plt.legend(fontsize=12)
 
         plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 
@@ -301,20 +305,27 @@ class Chart(object):
         tab["online"] = dict()
         tab["empty"] = dict()
         tab["nopin"] = dict()
-        order = ["size", "online", "empty", "nopin"]
+        order = ["size", "nopin", "empty", "online"]
         for c, e in enumerate(data):
             for k in tab.keys():
                 tab[k].setdefault(e.pgm, e.get(k))
         for k in order:
-            sys.stdout.write("{} & ".format(k))
+            if k == "size":
+                sys.stdout.write("{} & ".format(k))
+            else:
+                sys.stdout.write("\multicolumn{{2}}{{c|}}{{{}}} & ".format(k))
         sys.stdout.write("\\\\\n")
-        for p in tab["online"].keys():
+        for p in sorted(tab["online"].keys()):
             sys.stdout.write("{} & ".format(p))
             for k in order:
-                if isinstance(tab[k][p], float): 
+                if k == "online" or k == "empty":
                     sys.stdout.write("{0:.3f} & ".format(tab[k][p]))
+                    sys.stdout.write("{}% & ".format(int(tab[k][p]*100.0/tab["nopin"][p])))
                 else:
-                    sys.stdout.write("{} & ".format(tab[k][p]))
+                    if isinstance(tab[k][p], float): 
+                        sys.stdout.write("{0:.3f} & ".format(tab[k][p]))
+                    else:
+                        sys.stdout.write("{} & ".format(tab[k][p]))
             sys.stdout.write("\\\\\n")
             # if isinstance(total, int):
             #     sys.stdout.write("{} \\\\\n".format(total))
@@ -337,6 +348,8 @@ class Chart(object):
         nopin = map(lambda a: a.nopin_time, data)
         empty = map(lambda a: a.empty_time, data)
         online = map(lambda a: a.time, data)
+
+        oh_empty = map(lambda a: (a[0]/a[1])*100, zip(online, empty))
 
         ax.bar(bar_l, nopin, width=bar_width, label="normal execution", 
                 alpha=1, color=Chart.colors["acc"])
@@ -363,7 +376,7 @@ class Chart(object):
         plt.xticks(tick_pos, map(lambda a: a.time, data), rotation="vertical")
         plt.tick_params(axis="both", which="both", bottom="off", top="off",    
                 labelbottom="on", left="off", right="off", labelleft="on") 
-        plt.legend()
+        plt.legend(fontsize=12)
 
         plt.savefig("test/chart/{}_{}.png".format(self._analysis, name), bbox_inches="tight") 
 

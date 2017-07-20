@@ -12,8 +12,8 @@ from .res.couple import CoupleRes
 
 class TestCouple(object):
 
-    def __init__(self, test_conf, pintool, logdir, resdir, *args, **kwargs):
-        self.__resdir = resdir
+    def __init__(self, test_conf, pintool, logdir, logpath, *args, **kwargs):
+        self.__logpath = logpath
         self.__conf = Confiture("config/templates/empty.yaml").check_and_get(test_conf)
         # Include sub configuration files
         for k, v in self.__conf.items():
@@ -25,9 +25,9 @@ class TestCouple(object):
         self.__logdir = logdir
         super(TestCouple, self).__init__(*args, **kwargs)
 
-    def run(self, params=None, logname="couple_general.res"):
+    def run(self, params=None):
         FNULL = open(os.devnull, "w")
-        prev_res = CoupleChart(self.__resdir + "/" + logname)
+        prev_res = CoupleChart(self.__logpath)
         for pgm, param in OrderedDict(sorted(self.__conf.items(), key=lambda a:a[0])).items():
             if prev_res.contains(pgm, params):
                 continue
@@ -47,7 +47,7 @@ class TestCouple(object):
             self.__couple.launch(param["bin"], [param["args"], "1>/dev/null"], params=params)#, verbose=False)
             logfile = self.__couple.get_logfile(pgm, prev=False)
             # launch offline computation of couples
-            res = Couple(logfile, pgm, verbose=False).run(get=True, log=self.__resdir + "/" + logname, min_rho=min_rho, min_vals=min_vals)
+            res = Couple(logfile, pgm, verbose=False).run(get=True, log=self.__logpath, min_rho=min_rho, min_vals=min_vals)
             print "{} | functions: {} - #f: {} - #g: {} - #couples: {}".format(pgm, *res)
             if "post" in param.keys():
                 call(param["post"], stdout=FNULL, shell=True)
@@ -60,5 +60,5 @@ class TestCouple(object):
             p = dict()
             p[param] = val
             p.update(params)
-            self.run(p, name)
+            self.run(p)
 

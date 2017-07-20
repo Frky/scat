@@ -15,7 +15,7 @@ class ArityEntry(Entry):
             self._time = float(l[10])
             self._empty_time = float(l[11])
             self._nopin_time = float(l[12])
-            self._size = size
+            self._size = int(l[13])
         for p, v in kwargs.items():
             self._set(p, v)
         super(ArityEntry, self).__init__()

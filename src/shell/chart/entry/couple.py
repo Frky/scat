@@ -11,7 +11,9 @@ class CoupleEntry(Entry):
         self._maxvals = int(l[2])
         self._rho = float(l[3])
         self._tot = int(l[4])
-        self._f, self._g, self._n = map(int, l[5:])
+        self._f, self._g, self._n = map(int, l[5:8])
+        self._online = float(l[8])
+        self._offline = float(l[9])
         super(CoupleEntry, self).__init__(*args, **kwargs)
 
     def merge(self, e):
@@ -55,6 +57,14 @@ class CoupleEntry(Entry):
     def tot(self):
         return self._tot
 
+    @property
+    def online(self):
+        return self._online
+
+    @property
+    def offline(self):
+        return self._offline
+
     def get(self, param):
         if param == "min_vals":
             return self.min_vals
@@ -70,3 +80,7 @@ class CoupleEntry(Entry):
             return self.n
         elif param == "tot":
             return self.tot
+        elif param == "online":
+            return self.online
+        elif param == "offline":
+            return self.offline

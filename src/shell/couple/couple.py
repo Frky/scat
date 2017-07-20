@@ -2,6 +2,7 @@
 
 from src.shell.parser.couple import CoupleLogParser
 from time import time
+from datetime import datetime
 
 class Couple(object):
     """
@@ -20,6 +21,7 @@ class Couple(object):
             print "[*] {}".format(m)
 
     def run(self, get=False, min_vals=50, min_rho=0.5, log=None):
+        start = datetime.now()
         inp = dict()
         out = dict()
         SIZE_LIMIT = 10000
@@ -72,6 +74,8 @@ class Couple(object):
                 if rho >= min_rho:
                     param_pos = max(pos_couple.items(), key=lambda x: x[1])[0]
                     couples.append((f, g, rho, param_pos))
+        stop = datetime.now()
+
         with open("log/{}_coupleres_{}.log".format(self.__pgm, int(time())), "w") as f:
             for c in couples:
                 self.stdout("{} -- ({:.2f}) --> {}[{}]".format(c[0], c[2], c[1], c[3]))
@@ -85,7 +89,7 @@ class Couple(object):
         if log is not None:
             params = self.__parser.get_params()
             with open(log, "a") as f:
-                f.write("{}:{}:{}:{}:{}:{}:{}:{}\n".format(
+                f.write("{}:{}:{}:{}:{}:{}:{}:{}:{}:{}.{}\n".format(
                         self.__pgm,
                         int(min_vals), 
                         int(params["MAX_VALS"]),
@@ -93,7 +97,10 @@ class Couple(object):
                         tot, 
                         n_f,
                         n_g, 
-                        n
+                        n, 
+                        self.__parser.time(),
+                        (stop - start).seconds, 
+                        (stop - start).microseconds, 
                     ))
 
         if get:
