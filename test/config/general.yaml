@@ -1,0 +1,10 @@
+common:
+    config: "test/config/common.yaml"
+coreutils:
+    config: "test/config/coreutils.yaml"
+8cc:
+    args: "-w -o test/tmp/a.out -c ./test/input/8cc/lex.c"
+    bin: "test/bin/8cc/8cc"
+    data: "test/data/8cc.data"
+    deps: "test/data/8cc.deps"
+    post: "rm test/tmp/a.out"

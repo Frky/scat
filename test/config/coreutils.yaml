@@ -111,7 +111,7 @@ cp:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got cp:4202608:"
         free: "libc.so.6:538944:__libc_free"
 csplit:
-    args: 'test/test.yaml --prefix=SCATSPLIT /\:/ {*}'
+    args: 'test/input/config.yaml --prefix=SCATSPLIT /\:/ {*}'
     bin: "test/bin/csplit"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -211,7 +211,7 @@ env:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 expand:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/expand"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -245,7 +245,7 @@ factor:
 #     data: "test/data/coreutils.data"
 #     deps: "test/data/coreutils.deps"
 fmt:
-    args: "-c -w 80 test/test.yaml"
+    args: "-c -w 80 test/input/config.yaml"
     bin: "test/bin/fmt"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -254,7 +254,7 @@ fmt:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 fold:
-    args: "-b -s -w 10 test/test.yaml"
+    args: "-b -s -w 10 test/input/config.yaml"
     bin: "test/bin/fold"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -368,7 +368,7 @@ logname:
         free: "libc.so.6:538944:__libc_free"
 ls:
     args: "-larth test/bin/"
-    bin: "test/bin/ls"
+    bin: "test/bin/ls/ls"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
     libraries: True
@@ -450,7 +450,7 @@ mv:
 #     data: "test/data/coreutils.data"
 #     deps: "test/data/coreutils.deps"
 nl:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/nl"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -482,7 +482,7 @@ numfmt:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 od:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/od"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -496,7 +496,7 @@ od:
 #     data: "test/data/coreutils.data"
 #     deps: "test/data/coreutils.deps"
 pathchk:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/pathchk"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -514,7 +514,7 @@ pinky:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 pr:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/pr"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -541,7 +541,7 @@ printf:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 ptx:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/ptx"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -570,7 +570,7 @@ readlink:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 realpath:
-    args: "test/test.yaml"
+    args: "test/input/config.yaml"
     bin: "test/bin/realpath"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -673,7 +673,7 @@ shuf:
     bin: "test/bin/shuf"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
-    pre: "cp test/test.yaml test/tmp/test.yaml.copy"
+    pre: "cp test/input/config.yaml test/tmp/test.yaml.copy"
     post: "rm test/tmp/test.yaml.copy"
     libraries: True
     oracle:
@@ -698,7 +698,7 @@ sort:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got sort:4204784:"
         free: "libc.so.6:538944:__libc_free"
 split:
-    args: "-b 1000 test/test.yaml SCATSPLIT"
+    args: "-b 1000 test/input/config.yaml SCATSPLIT"
     bin: "test/bin/split"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -772,7 +772,7 @@ tee:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 test:
-    args: "-b test/test.yaml -a -e test/test.yaml -a -x test/bin/cat"
+    args: "-b test/input/config.yaml -a -e test/input/config.yaml -a -x test/bin/cat"
     bin: "test/bin/test"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -851,7 +851,7 @@ uname:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
         free: "libc.so.6:538944:__libc_free"
 unexpand:
-    args: "-a -t 2 test/test.yaml"
+    args: "-a -t 2 test/input/config.yaml"
     bin: "test/bin/unexpand"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
@@ -906,7 +906,7 @@ vdir:
         alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got vdir:4203616:"
         free: "libc.so.6:538944:__libc_free"
 wc:
-    args: "-l -w test/test.yaml"
+    args: "-l -w test/input/config.yaml"
     bin: "test/bin/wc"
     data: "test/data/coreutils.data"
     deps: "test/data/coreutils.deps"
