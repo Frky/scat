@@ -2,10 +2,13 @@
 # scat
 
 
-**(01/07/17) WARNING: this documentation is out of date (but will be updated soon).**
+**(01/07/17) WARNING: this documentation is out of date (but will be updated soon).
+In particular, the results presented here are not the latest one obtained with scat
+and may be different from the recent papers.**
 
 
 > «  Tell me! Everyone is picking up on that feline beat / 'Cause everything else is obsolete.
+> 
 > \- Strictly high-buttoned shoes. »
 
 
@@ -21,28 +24,56 @@
 
 [Current limitations](#current-limitations-of-the-implementation)
 
+[Publications](#publications)
+
+
+In a few words, `scat` is a `python`/`C++` tool for **reverse-engineering** on
+binaries in a **single execution**. It embeds several analysis, such as arity
+detection, undertype recovery, etc. The philosophy is to perform each analysis
+in one **lightweight** intrumented execution of a given binary (plus possible
+offline analysis). Because `scat` works on a single execution, it can only
+recover parts of the binary that are actually executed: `scat` is not a tool for
+exhaustive analysis, it is a tool to analyze what we see.  
+
+For now, `scat` targets `x86_64` binaries on Linux using the `System V` ABI.
+However, `scat` is an implementation of a more general approach that can be
+extended to other architectures and/or ABI. This approach is described in a PhD
+thesis that will be available online soon. 
+
+
 ## What is `scat`?
 
 Originally, `scat` was a tool to recover high-level information about functions embedded in an executable
 using **dynamic analysis**. In particular, `scat` aimed to recover:
 
-* **arity** of functions
-* **type** of arguments
-* behavioral **coupling** between functions
+* **[arity](#arity)** of functions
+* **[type](#type)** of arguments
+* behavioral **[coupling](#coupling)** between functions
 
-Now, we've made `scat` more generic, and it handles several reverse-engineering functionalities, like allocator detection (WIP). 
+Now, we've made `scat` more generic, and it handles several reverse-engineering 
+functionalities:
+
+* **[allocator retrieving](#allocator-retrieving)**
+* (WIP) **simplified use-after-free detection**
+
 It is also easy to add your own pintools to `scat` to perform your own analysis.
+
+The following sections provide information about each feature of `scat`.
 
 ### Arity
 
-By **arity**, we mean two things: first the number of parameters that a function takes,
-and second if a function returns a value or not.
+`scat` embeds an analyzer to retrieve **arity** of functions.  
+By **arity**, we mean two things: first the number of parameters that a function 
+takes, and second if a function returns a value or not.
 
 ### Type
 
-`scat` infers a simplified notion of type. We indeed consider only three possible ones: `INT`, `ADDR` and `FLOAT`.
-We consider that they represent three different classes of variables that make sense semantically.
-For instance, the size of an integer (`char`, `short`, `int`, `long int`) and weither it is signed or not
+`scat` infers a simplified notion of type. We indeed consider only three 
+possible ones: `INT`, `ADDR` and `FLOAT`.
+We consider that they represent three different classes of variables that 
+make sense semantically.
+For instance, the size of an integer (`char`, `short`, `int`, `long int`) 
+and weither it is signed or not
 does not make a significant difference semantically.  
 
 ### Coupling
@@ -105,44 +136,47 @@ Information about inference
 | Unique left/right-side:   83/244
 ```
 
+### Allocator retrieving
+
+Memory management in a binary can be handled by a standard allocator (e.g. the `libc` allocator) 
+or by a custom one. For many security and safety analysis focused on memory, the knowledge of 
+the allocator is a requirement. `scat` implements an allocator detection that aim retrieve the two main functions
+(`ALLOC`, `FREE`) of the interface of the main allocator used by a program. 
+
+(WIP) We are also currently working on retrieving a third function that is often defined by an allocator: `REALLOC`. 
+
+
 ## How does `scat` work?
 
 ### General Idea
-`scat` uses `pin` to instrument dynamically an execution of the program. During the execution,
-we use heuristics on the use of registers and memory access to find arguments and retrieve types.
-More about heuristics can be found in our [paper](paper/lightweight_heuristics_to_retrieve_parameter_associations.pdf).
+`scat` uses `pin` to instrument dynamically an execution of the program. 
+This instrumentation aims to be scalable. Some analysis are performed on-the-fly, whereas
+others are a two-step process: an online step during which data is collected, and an offline step
+to conclude. 
+
+### Heuristic-based 
+`scat` performs heuristic-based analysis, meaning that from a theoretical point of view, we cannot ensure 
+the soundness nor the completeness of the results. However, experiments (see [relevant section](#some-results-obtained-with-scat))
+show that these heuristics are well-suited for our purposes. 
+
+For details about the heuristics, please refer to our [papers](#publications). 
 
 ### One execution (per recovery)
 The goal of `scat` is not to recover information about every function embedded on the binary, but
-to demonstrate the relevance of our heuristics in a lightweight way. for this reason, `scat` only
+to demonstrate the relevance of our heuristics in a lightweight way. For this reason, `scat` only
 requires on execution for each of the three steps (**arity**, **type** and **couple**).
 
 **Pros.** The inference is very lightweight.
 
 **Cons.** Only functions that are executed at least one can be infered.
 
-## Function identity
-
-Because scat is also meant to be used with stripped binaries (i.e. binaries without function name)
-A name-agnostic method is required to identify functions across all inferences. The solution choosen is to
-identify them using the name of the binary file where they are defined and the static address (offset) in
-this binary.
-
-**Note**: if the binary is not stripped, function names are still available as meta-informations.
-
 ## Some results obtained with `scat`
 
 Here are presented some results obtained with `scat` on several open-source libraries.
 First, note that each result is a consequence of one single execution with standard inputs.
 Second, the accuracy was obtained by comparison between results given by `scat` and the
-source code of the binary under inference.
-
-### Inputs used for test
-
-* For emacs, we open a `C` source file of about 500 lines.
-* For midori, we do not give any input (the browser automatically opens http://google.com/ when it starts).
-* For MuPDF, we open a pdf of 67 slides generated with Keynote.
-* For grep, we look for the expression "void" in a folder containing about 15000 files for a total of about 30 millions of lines.
+source code of the binary under inference. This comparison is also performed automatically by `scat` if the source 
+code can be provided (see commands `parsedata` and `accuracy` in the [relevant section](#list-of-commands).
 
 ### Arity inference
 
@@ -514,3 +548,9 @@ have not been studied yet.
 As mentioned previously, `scat` relies on the knowledge of the calling convention. The approach proposed can be easily adapted to
 any calling convention. However, the work has only been done for `x86-64 System V AMD64` calling convention. Therefore, only this kind
 of binaries can be analysed for now.
+
+## Publications
+
+* (arity, type, coupling) **PPREW 2015** [paper](paper/PPREW15.pdf) - [slides](paper/PPREW15_slides.pdf)
+* (arity, type, coupling, allocators) **SANER 2017** [paper](paper/SANER17.pdf) - [slides](paper/SANER17_slides.pdf)
+* (allocators) **CSET 2017** [paper](paper/CSET17.pdf) - [slides](paper/CSET17_slides.pdf)
