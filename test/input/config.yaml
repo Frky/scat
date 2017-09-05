@@ -1,0 +1,939 @@
+b2sum:
+    args: "-b -l 512 test/input/poc.pdf"
+    bin: "test/bin/b2sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+base32:
+    args: "-w 4 test/bin/base32"
+    bin: "test/bin/base32"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+base64:
+    args: "-w 4 test/bin/base64"
+    bin: "test/bin/base64"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+basename:
+    args: "test/bin/basename name"
+    bin: "test/bin/basename"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+cat:
+    args: "test/bin/*"
+    bin: "test/bin/cat"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got cat:4199568:"
+        free: "libc.so.6:538944:__libc_free cat:4199056:"
+# chcon:
+#     args: ""
+#     bin: "test/bin/chcon"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+chgrp:
+    args: "-hR adm test/bin"
+    bin: "test/bin/chgrp"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "chgrp -hR degoerdf test/bin"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got chgrp:4201136:"
+        free: "libc.so.6:538944:__libc_free"
+chmod:
+    args: "755 -R test/bin"
+    bin: "test/bin/chmod"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "chmod -R 777 test/bin"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got chmod:4200480:"
+        free: "libc.so.6:538944:__libc_free"
+chown:
+    args: "-vR degoerdf test/bin"
+    bin: "test/bin/chown"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# MUST BE ROOT
+# chroot:
+#     args: ""
+#     bin: "test/bin/chroot"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+cksum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/cksum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+comm:
+    args: "--nocheck-order test/bin/comm test/bin/cp"
+    bin: "test/bin/comm"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+cp:
+    args: "-vrf test/bin /tmp/test_bin"
+    bin: "test/bin/cp"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got cp:4202608:"
+        free: "libc.so.6:538944:__libc_free"
+csplit:
+    args: 'test/input/config.yaml --prefix=SCATSPLIT /\:/ {*}'
+    bin: "test/bin/csplit"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: 'rm ./SCATSPLIT*'
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+cut:
+    args: '-d "0" -f 1 test/input/poc.pdf'
+    bin: "test/bin/cut"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+date:
+    args: "-u"
+    bin: "test/bin/date"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+dd:
+    args: "if=/dev/urandom of=/dev/null count=100 bs=50K status=none"
+    bin: "test/bin/dd"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+df:
+    args: "-ahHi"
+    bin: "test/bin/df"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+dir:
+    args: "-a"
+    bin: "test/bin/dir"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got dir:4203616:"
+        free: "libc.so.6:538944:__libc_free"
+dircolors:
+    args: " "
+    bin: "test/bin/dircolors"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+dirname:
+    args: "test/bin/dirname"
+    bin: "test/bin/dirname"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+du:
+    args: "-l -a -c -h -d 1 test/"
+    bin: "test/bin/du"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got du:4203216:"
+        free: "libc.so.6:538944:__libc_free"
+echo:
+    args: "scat is a tool for dynamic analysis"
+    bin: "test/bin/echo"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+env:
+    args: " "
+    bin: "test/bin/env"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+expand:
+    args: "test/input/config.yaml"
+    bin: "test/bin/expand"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+expr:
+    args: '\(1 \> 2 \| 1 \!= 3\) \& \( "text" : "tes" \)'
+    bin: "test/bin/expr"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+factor:
+    args: "200560490130"
+    bin: "test/bin/factor"
+    data: "test/data/coreutils.data"
+    libraries: True
+    libraries: True
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# false:
+#     args: " "
+#     bin: "test/bin/false"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+fmt:
+    args: "-c -w 80 test/input/config.yaml"
+    bin: "test/bin/fmt"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+fold:
+    args: "-b -s -w 10 test/input/config.yaml"
+    bin: "test/bin/fold"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+getlimits:
+    args: " "
+    bin: "test/bin/getlimits"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+ginstall:
+    args: "-p -v -s test/bin/* test/tmp/bin/"
+    bin: "test/bin/ginstall"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "mkdir test/tmp/bin"
+    post: "rm -rf test/tmp/bin"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+groups:
+    args: " "
+    bin: "test/bin/groups"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+head:
+    args: "-n 150 test/bin/head"
+    bin: "test/bin/head"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+hostid:
+    args: " "
+    bin: "test/bin/hostid"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+id:
+    args: "-a -n -G -z"
+    bin: "test/bin/id"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+join:
+    args: "--nocheck-order test/bin/base32 test/bin/base64"
+    bin: "test/bin/join"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+kill:
+    args: "-s 9 `pidof nc`"
+    bin: "test/bin/kill"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "nc -l 5556 &"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+link:
+    args: "test/input/poc.pdf test/tmp/poc.link"
+    bin: "test/bin/link"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm test/tmp/poc.link"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+ln:
+    args: "test/input/poc.pdf test/tmp/poc.link"
+    bin: "test/bin/ln"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm test/tmp/poc.link"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+logname:
+    args: " "
+    bin: "test/bin/logname"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+ls:
+    args: "-larth test/bin/"
+    bin: "test/bin/ls/ls"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got ls:4203616:"
+        free: "libc.so.6:538944:__libc_free"
+make-prime-list:
+    args: "100000"
+    bin: "test/bin/make-prime-list"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+md5sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/md5sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+mkdir:
+    args: "test/tmp/dir"
+    bin: "test/bin/mkdir"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rmdir test/tmp/dir"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+mkfifo:
+    args: "test/tmp/scat"
+    bin: "test/bin/mkfifo"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm test/tmp/scat"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+mknod:
+    args: "test/tmp/fifo p"
+    bin: "test/bin/mknod"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm test/tmp/fifo"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+mktemp:
+    args: "-d test/tmp/dir.XXXXXX"
+    bin: "test/bin/mktemp"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm -rf test/tmp/dir.*"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+mv:
+    args: "test/tmp/bin test/tmp/binold"
+    bin: "test/bin/mv"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "cp -r test/bin test/tmp/bin"
+    post: "rm -rf test/tmp/binold"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# nice:
+#     args: "-n 5 test/input/fun"
+#     bin: "test/bin/nice"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+nl:
+    args: "test/input/config.yaml"
+    bin: "test/bin/nl"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# nohup:
+#     args: "test/bin/fun"
+#     bin: "test/bin/nohup"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+nproc:
+    args: "--all"
+    bin: "test/bin/nproc"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+numfmt:
+    args: "--from=iec 373875638563598K"
+    bin: "test/bin/numfmt"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+od:
+    args: "test/input/config.yaml"
+    bin: "test/bin/od"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# paste:
+#     args: " "
+#     bin: "test/bin/paste"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+pathchk:
+    args: "test/input/config.yaml"
+    bin: "test/bin/pathchk"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+pinky:
+    args: " "
+    bin: "test/bin/pinky"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+pr:
+    args: "test/input/config.yaml"
+    bin: "test/bin/pr"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+printenv:
+    args: " "
+    bin: "test/bin/printenv"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+printf:
+    args: "'scat %s\tcool!\n' 'is'"
+    bin: "test/bin/printf"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+ptx:
+    args: "test/input/config.yaml"
+    bin: "test/bin/ptx"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+pwd:
+    args: " "
+    bin: "test/bin/pwd"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+readlink:
+    args: "test/tmp/link"
+    bin: "test/bin/readlink"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "ln -s test/input/poc.pdf test/tmp/link"
+    post: "rm test/tmp/link"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+realpath:
+    args: "test/input/config.yaml"
+    bin: "test/bin/realpath"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+rm:
+    args: "-vrf /tmp/test_bin/*"
+    bin: "test/bin/rm"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "cp -vr test/bin /tmp/test_bin"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+rmdir:
+    args: "test/tmp/emptydir"
+    bin: "test/bin/rmdir"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "mkdir test/tmp/emptydir"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# runcon:
+#     args: ""
+#     bin: "test/bin/runcon"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+seq:
+    args: "1 7 100000"
+    bin: "test/bin/seq"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sha1sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/sha1sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sha224sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/sha224sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sha256sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/sha256sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sha384sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/sha384sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sha512sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/sha512sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+shred:
+    args: "-n 100 test/tmp/todel"
+    bin: "test/bin/shred"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "cp test/input/poc.pdf test/tmp/todel"
+    post: "rm test/tmp/todel"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got shred:4201392:"
+        free: "libc.so.6:538944:__libc_free shred:4200608:"
+shuf:
+    args: "test/tmp/test.yaml.copy"
+    bin: "test/bin/shuf"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "cp test/input/config.yaml test/tmp/test.yaml.copy"
+    post: "rm test/tmp/test.yaml.copy"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sleep:
+    args: "2"
+    bin: "test/bin/sleep"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sort:
+    args: "test/input/*"
+    bin: "test/bin/sort"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got sort:4204784:"
+        free: "libc.so.6:538944:__libc_free"
+split:
+    args: "-b 1000 test/input/config.yaml SCATSPLIT"
+    bin: "test/bin/split"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm ./SCATSPLIT*"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+stat:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/stat"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# stdbuf:
+#     args: "-o 0 sort test/input/*"
+#     bin: "test/bin/stdbuf"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+stty:
+    args: " "
+    bin: "test/bin/stty"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+sum:
+    args: "test/input/poc.pdf"
+    bin: "test/bin/sum"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+sync:
+    args: " "
+    bin: "test/bin/sync"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+tac:
+    args: "test/bin/cat"
+    bin: "test/bin/tac"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+tail:
+    args: "-n 150 test/bin/tail"
+    bin: "test/bin/tail"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+tee:
+    args: "< test/input/poc.pdf"
+    bin: "test/bin/tee"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+test:
+    args: "-b test/input/config.yaml -a -e test/input/config.yaml -a -x test/bin/cat"
+    bin: "test/bin/test"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+timeout:
+    args: "1 test/bin/tee"
+    bin: "test/bin/timeout"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+touch:
+    args: "test/tmp/scat.tmp"
+    bin: "test/bin/touch"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm test/tmp/scat.tmp"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+tr:
+    args: "-d [:digit:] < test/input/poc.pdf"
+    bin: "test/bin/tr"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# true:
+#     args: " "
+#     bin: "test/bin/true"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
+truncate:
+    args: "-s 1000000 test/tmp/scat.tmp"
+    bin: "test/bin/truncate"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    post: "rm test/tmp/scat.tmp"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+tsort:
+    args: "test/input/tosort"
+    bin: "test/bin/tsort"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got tsort:4199536:"
+        free: "libc.so.6:538944:__libc_free"
+tty:
+    args: " "
+    bin: "test/bin/tty"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+uname:
+    args: "-a"
+    bin: "test/bin/uname"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+unexpand:
+    args: "-a -t 2 test/input/config.yaml"
+    bin: "test/bin/unexpand"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+uniq:
+    args: "-c -u test/data/coreutils.data"
+    bin: "test/bin/uniq"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+unlink:
+    args: "test/tmp/link"
+    bin: "test/bin/unlink"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    pre: "ln -s test/input/poc.pdf test/tmp/link"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+uptime:
+    args: " "
+    bin: "test/bin/uptime"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+users:
+    args: " "
+    bin: "test/bin/users"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+vdir:
+    args: " "
+    bin: "test/bin/vdir"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got vdir:4203616:"
+        free: "libc.so.6:538944:__libc_free"
+wc:
+    args: "-l -w test/input/config.yaml"
+    bin: "test/bin/wc"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+who:
+    args: "-a -b -d -H"
+    bin: "test/bin/who"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+whoami:
+    args: " "
+    bin: "test/bin/whoami"
+    data: "test/data/coreutils.data"
+    deps: "test/data/coreutils.deps"
+    libraries: True
+    oracle:
+        alloc: "libc.so.6:537984:malloc libc.so.6:129184:.plt.got"
+        free: "libc.so.6:538944:__libc_free"
+# yes:
+#     args: ""
+#     bin: "test/bin/yes"
+#     data: "test/data/coreutils.data"
+#     deps: "test/data/coreutils.deps"
