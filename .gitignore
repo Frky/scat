@@ -36,6 +36,7 @@ asm/mupdf.asm
 
 # Vim temporary files
 *.swp
+*.swo
 
 # Python bytecode
 *.pyc
@@ -49,3 +50,9 @@ asm/*
 # Test files (bin & log)
 test/proto/bin/*
 test/proto/log/*
+
+# Scat history file
+.history
+
+# Scat temporary directory
+tmp/
