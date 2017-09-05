@@ -17,9 +17,9 @@ class AllocChart(Chart):
         with open("test/coreutils.txt", "r") as f:
             self.__coreutils = [line[:-1] for line in f.readlines()]
         self._analysis = "alloc"
+        self.__oracle = oracle
         self.__parse_log()
         self._data = sum(self._data.values(), list())
-        self.__oracle = oracle
  
     def __parse_log(self):
         if not os.path.exists(self._log):
@@ -29,7 +29,8 @@ class AllocChart(Chart):
                 pgm = line[:-1].split(":")[0]
                 self._data.setdefault(pgm, list())
                 entry = AllocEntry(line)
-                self._data[pgm].append(entry)
+                if self.__oracle is None or pgm in self.__oracle.keys():
+                    self._data[pgm].append(entry)
 
     def __ok_or_ko(self, pgm, res, entry):
         if res == "None":
@@ -94,10 +95,17 @@ class AllocChart(Chart):
 
 
     def table_cmp(self, other):
+        tot = [0] * 6
+        ok = [0] * 4
+        err = [0] * 4
+        nbc = 0
+        nbt = 0
         for c in sorted(self._data, key=lambda a:a.pgm):
             t = other.get(c.pgm)[0]
-            if c.pgm in self.__coreutils:
+            if (self.__ok_or_ko(t.pgm, t.alloc, "alloc") == "n.c." and 
+                    self.__ok_or_ko(t.pgm, t.free, "free") == "n.c."):
                 continue
+            nbt += 1
             print "{{\\tt {}}} & {}/{} & {}/{} & {:.3g} & {:.3g} & {:.3g}/{:.3g} & {:.3g}/{:.3g} \\\\".format(
                         c.pgm, 
                         self.__ok_or_ko(c.pgm, c.alloc, "alloc"), 
@@ -111,6 +119,25 @@ class AllocChart(Chart):
                         t.offline[0],
                         t.offline[1],
                     )
+            ok[0] += self.__ok_or_ko(c.pgm, c.alloc, "alloc") == "\\checked"
+            ok[1] += self.__ok_or_ko(c.pgm, c.free, "free") == "\\checked"
+            ok[2] += self.__ok_or_ko(t.pgm, t.alloc, "alloc") == "\\checked"
+            ok[3] += self.__ok_or_ko(t.pgm, t.free, "free") == "\\checked"
+            err[0] += self.__ok_or_ko(c.pgm, c.alloc, "alloc") == "\\texttimes"
+            err[1] += self.__ok_or_ko(c.pgm, c.free, "free") == "\\texttimes"
+            err[2] += self.__ok_or_ko(t.pgm, t.alloc, "alloc") == "\\texttimes"
+            err[3] += self.__ok_or_ko(t.pgm, t.free, "free") == "\\texttimes"
+            tot[0] += c.online
+            tot[1] += t.online
+            if (self.__ok_or_ko(c.pgm, c.alloc, "alloc") != "n.c." or 
+                    self.__ok_or_ko(c.pgm, c.free, "free") != "n.c."):
+                tot[2] += c.offline[0]
+                tot[3] += c.offline[1]
+                nbc += 1
+            tot[4] += t.offline[0]
+            tot[5] += t.offline[1]
+        print "AVERAGE & {}/{} & {}/{} & {} & {} & {}/{} & {}/{}".format(*(ok + map(lambda a: a/nbt, tot[:2]) + map(lambda a: a/nbc, tot[2:4]) + map(lambda a: a/nbt, tot[4:])))
+        print err
 
     def draw_consistency(self):
         data = dict()

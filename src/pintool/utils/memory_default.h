@@ -23,7 +23,7 @@
 #define MAX_DEPTH               1000
 #define NB_VALS_TO_CONCLUDE     500
 #define NB_CALLS_TO_CONCLUDE    500
-#define SEUIL                   0.8
+#define SEUIL                   0.5
 #define IGNORE_LIBRARIES        1
 #define COUPLE_THRESHOLD        0.9
 

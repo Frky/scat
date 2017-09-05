@@ -118,5 +118,5 @@ class ChartCmd(ICommand):
 			elif param == "consistency":
 			    chart = AllocChart(oracle, "{}/alloc_couple_consistency.res".format(self.__resdir))
 			    chart.draw_consistency()
-			
-			
+
+
